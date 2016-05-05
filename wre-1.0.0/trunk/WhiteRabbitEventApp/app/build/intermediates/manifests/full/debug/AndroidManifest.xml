@@ -8,20 +8,46 @@
         android:minSdkVersion="15"
         android:targetSdkVersion="23" />
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:supportsRtl="true"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.wre.yin.whiterabbiteventapp.MainActivity"
-            android:label="@string/app_name" >
+            android:name="com.wre.yin.whiterabbiteventapp.LoginActivity"
+            android:windowSoftInputMode="adjustResize" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.wre.yin.whiterabbiteventapp.EventDashboardActivity" />
+        <activity android:name="com.wre.yin.whiterabbiteventapp.HomeActivity" />
+        <activity android:name="com.wre.yin.whiterabbiteventapp.EventsHomeActivity" />
+        <activity android:name="com.wre.yin.whiterabbiteventapp.DetailsActivity" />
+        <activity android:name="com.wre.yin.whiterabbiteventapp.AgendaActivity" />
+        <activity android:name="com.wre.yin.whiterabbiteventapp.NewsFeedActivity" />
+        <activity android:name="com.wre.yin.whiterabbiteventapp.GalleryActivity" />
+        <activity android:name="com.wre.yin.whiterabbiteventapp.CrowdPicsActivity" />
+        <activity android:name="com.wre.yin.whiterabbiteventapp.VideosActivity" />
+        <activity android:name="com.wre.yin.whiterabbiteventapp.DocShareActivity" />
+        <activity android:name="com.wre.yin.whiterabbiteventapp.QAActivity" />
+        <activity android:name="com.wre.yin.whiterabbiteventapp.MessageActivity" />
+        <activity android:name="com.wre.yin.whiterabbiteventapp.SurveyActivity" />
+        <activity android:name="com.wre.yin.whiterabbiteventapp.QRCodeActivity" />
+        <activity android:name="com.wre.yin.whiterabbiteventapp.SocialMediaActivity" />
+        <activity android:name="com.wre.yin.whiterabbiteventapp.NetworkingActivity" />
+        <activity android:name="com.wre.yin.whiterabbiteventapp.VenueActivity" />
+        <activity android:name="com.wre.yin.whiterabbiteventapp.SponcersActivity" />
+        <activity android:name="com.wre.yin.whiterabbiteventapp.SpeakerProfileActivity" />
+        <activity android:name="com.wre.yin.whiterabbiteventapp.ProfDetailsActivity" />
+        <activity android:name="com.wre.yin.whiterabbiteventapp.SplashScreenActivity" />
+        <activity android:name="com.wre.yin.whiterabbiteventapp.OTPActivity" />
     </application>
 
 </manifest>
