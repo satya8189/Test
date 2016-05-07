@@ -120,7 +120,7 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
                 switch (position) {
                     case 0:
                         Intent detailsAct = new Intent(EventDashboardActivity.this, DetailsActivity.class);
-                        // detailsAct.putExtra("name", name);
+                        detailsAct.putExtra("name", name);
                         startActivity(detailsAct);
                         break;
                     case 1:
