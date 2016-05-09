@@ -20,11 +20,17 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile project(':library1')
     compile 'com.android.support:appcompat-v7:23.3.0'
     compile 'com.android.support:palette-v7:23.3.0'
     compile 'com.squareup.picasso:picasso:2.4.0'
     compile 'de.hdodenhof:circleimageview:2.0.0'
+    compile files('libs/apache-httpcomponents-httpcore.jar')
+    compile files('libs/gson-1.7.jar')
+    compile files('libs/httpclient-4.0.jar')
+    compile files('libs/jackson-all-1.9.0.jar')
+    compile files('libs/jackson-databind-2.0.5-sources.jar')
+    compile files('libs/jersey-client.jar')
 }
