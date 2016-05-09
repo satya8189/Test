@@ -20,7 +20,7 @@ public class QAActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(nameTxt);
 
 
-        text.setText(nameTxt);
+        text.setText("Enter Your Question :");
 
     }
 

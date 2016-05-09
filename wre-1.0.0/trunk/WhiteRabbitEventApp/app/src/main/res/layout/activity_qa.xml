@@ -3,18 +3,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:layout_margin="16dp"
     tools:context="com.wre.yin.whiterabbiteventapp.QAActivity">
 
     <TextView
         android:id="@+id/activity_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:gravity="center"
+        android:text="Enter Your Question"
         android:textColor="#000"
-        android:textSize="30sp" />
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/question_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/activity_text"
+        android:layout_marginTop="10dp"
+        android:textColor="#fff"
+        android:background="@drawable/rectangle_shape"
+        android:lines="7" />
+
+    <Button
+        android:id="@+id/question_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/question_edittext"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:background="#ff0000"
+        android:textColor="#fff"
+        android:text="SUBMIT" />
 </RelativeLayout>
