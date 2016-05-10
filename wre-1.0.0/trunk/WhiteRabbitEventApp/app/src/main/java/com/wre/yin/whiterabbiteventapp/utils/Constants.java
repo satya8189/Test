@@ -19,30 +19,12 @@ import com.wre.yin.whiterabbiteventapp.R;
 public class Constants {
 
     //url constants
-    public static String URL = "http://183.82.103.156:8080/PredictsAndWinServices/rest/user/";
-    public static String LOGIN_URL = URL + "userAuthentication";
+    public static String URL = "http://192.168.1.85:8080/Chatting/rest/chat/";
 
-    public static String GET_SCHEDULE_NAMES = URL + "getPredicts";
-    public static String GET_QUESTIONS = URL + "getQuestions";
-    public static String SAVE_USER = URL + "saveUser";
-    public static String FORGOT_PASSWORD = URL + "forgotPassword";
-    public static String UPDATE_USER = URL + "updateUser";
-    public static String SAVE_ANSWER = URL + "saveUserAnswer";
-    public static String GET_USER = URL + "getUser";
-    public static String CHANGE_PASSWORD = URL + "updatePassword";
-    public static String GET_RESULTS = URL + "getResults";
 
-    public static String GET_EARNINGS = URL + "getEarnings";
-
-    public static String SAVE_REDEEME_REQUEST = URL + "saveRedeemRequest";
-
-    public static String SUCCESS = "success";
-    public static String INVALID_PHONE = "inavlidphoneno";
-    public static String INVALID_PASSWORD = "invalidpassword";
-    public static String FAIL = "fail";
-    public static int CHECK_POINTS=300;
-    public static String SHARE_BODY = "Download Predict and win app you will get up to 1 crore.Here is the Link./n" + "https://play.google.com/store/apps/details?id=com.yinsol.sammakkasarakka&hl=en";
-    public static String REPORT_MAIL="k.prawins@gmail.com";
+    public static final String IMAGE_DIRECTORY_NAME = "Image File Upload";
+    public static final String VIDEO_DIRECTORY_NAME = "Video File Upload";
+    public static final String UPLOAD_IMAGE_VIDEO=URL+"imageUpload";
 
     public static boolean isNetworkAvailable(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
