@@ -1,6 +1,7 @@
 package com.wre.yin.whiterabbiteventapp;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -15,13 +16,17 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wre.yin.whiterabbiteventapp.beans.Result;
 import com.wre.yin.whiterabbiteventapp.beans.UploadImgVid;
+import com.wre.yin.whiterabbiteventapp.gridlibrary.DynamicGridView;
 import com.wre.yin.whiterabbiteventapp.utils.Callback;
 import com.wre.yin.whiterabbiteventapp.utils.Constants;
 import com.wre.yin.whiterabbiteventapp.utils.MyAsyncTask;
@@ -40,18 +45,22 @@ public class CrowdPicsActivity extends AppCompatActivity {
     private TextView text;
     private Button uploadImage;
     private LinearLayout camGalLayout;
-    private CircleImageView camPick,gallPick;
+    private CircleImageView camPick, gallPick;
 
     private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
     public static final int MEDIA_TYPE_IMAGE = 1;
     private Uri fileUri;
 
-    String layoutStatus="gone";
-    private String imgPath, fileName,fileTpe,encodedString;
+    String layoutStatus = "gone";
+    private String imgPath, fileName, fileTpe, encodedString;
     private static int RESULT_LOAD_IMG = 1;
 
     ProgressDialog prgDialog;
     Bitmap bitmap;
+
+    private DynamicGridView imageGridView;
+    private Cursor cursor;
+    private int columnIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,19 +71,19 @@ public class CrowdPicsActivity extends AppCompatActivity {
         prgDialog = new ProgressDialog(this);
         prgDialog.setCancelable(false);
 
-        uploadImage=(Button)findViewById(R.id.upload_image);
-        camGalLayout=(LinearLayout)findViewById(R.id.upload_image_view) ;
-        camPick=(CircleImageView)findViewById(R.id.camara_link);
-        gallPick=(CircleImageView)findViewById(R.id.gallery_link);
+        uploadImage = (Button) findViewById(R.id.upload_image);
+        camGalLayout = (LinearLayout) findViewById(R.id.upload_image_view);
+        camPick = (CircleImageView) findViewById(R.id.camara_link);
+        gallPick = (CircleImageView) findViewById(R.id.gallery_link);
         uploadImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(layoutStatus.equals("gone")){
+                if (layoutStatus.equals("gone")) {
                     camGalLayout.setVisibility(View.VISIBLE);
-                    layoutStatus="visible";
-                }else{
+                    layoutStatus = "visible";
+                } else {
                     camGalLayout.setVisibility(View.GONE);
-                    layoutStatus="gone";
+                    layoutStatus = "gone";
                 }
 
             }
@@ -84,7 +93,7 @@ public class CrowdPicsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 captureImage();
                 camGalLayout.setVisibility(View.GONE);
-                layoutStatus="gone";
+                layoutStatus = "gone";
             }
         });
         gallPick.setOnClickListener(new View.OnClickListener() {
@@ -92,16 +101,93 @@ public class CrowdPicsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 loadImagefromGallery();
                 camGalLayout.setVisibility(View.GONE);
-                layoutStatus="gone";
+                layoutStatus = "gone";
             }
         });
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(nameTxt);
 
+        String[] list = {MediaStore.Images.Media._ID};
+
+        //Retriving Images from Database(SD CARD) by Cursor.
+        cursor = getContentResolver().query(MediaStore.Images.Thumbnails.EXTERNAL_CONTENT_URI, list, null, null, MediaStore.Images.Thumbnails._ID);
+        columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Thumbnails._ID);
+
+        imageGridView = (DynamicGridView) findViewById(R.id.upload_image_grid);
+        ImageAdapter adapter = new ImageAdapter(this);
+        imageGridView.setAdapter(adapter);
 
 
+    }
+    public class ImageAdapter extends BaseAdapter {
 
+        private Context context;
+
+        public ImageAdapter(Context localContext) {
+
+            context = localContext;
+
+        }
+
+        public int getCount() {
+
+            return cursor.getCount();
+
+        }
+
+        public Object getItem(int position) {
+
+            return position;
+
+        }
+
+        public long getItemId(int position) {
+
+            return position;
+
+        }
+
+        public View getView(int position, View convertView, ViewGroup parent) {
+            ViewHolder holder = new ViewHolder();
+
+
+            if (convertView == null) {
+                holder.picturesView = new ImageView(context);
+                //Converting the Row Layout to be used in Grid View
+                convertView = getLayoutInflater().inflate(R.layout.row, parent, false);
+
+                //You can convert Layout in this Way with the Help of View Stub. View Stub is newer. Read about ViewStub.Inflate
+                // and its parameter.
+                //convertView= ViewStub.inflate(context,R.layout.row,null);
+
+                convertView.setTag(holder);
+
+            } else {
+                holder = (ViewHolder) convertView.getTag();
+            }
+            cursor.moveToPosition(position);
+            int imageID = cursor.getInt(columnIndex);
+
+            //In Uri "" + imageID is to convert int into String as it only take String Parameter and imageID is in Integer format.
+            //You can use String.valueOf(imageID) instead.
+            Uri uri = Uri.withAppendedPath(
+                    MediaStore.Images.Thumbnails.EXTERNAL_CONTENT_URI, "" + imageID);
+
+            //Setting Image to View Holder Image View.
+            holder.picturesView = (ImageView) convertView.findViewById(R.id.imageview);
+            holder.picturesView.setImageURI(uri);
+            holder.picturesView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+
+
+            return convertView;
+
+        }
+
+        // View Holder pattern used for Smooth Scrolling. As View Holder pattern recycle the findViewById() object.
+        class ViewHolder {
+            private ImageView picturesView;
+        }
     }
     public void loadImagefromGallery() {
         // Create intent to Open Image applications like Gallery, Google Photos
@@ -110,6 +196,7 @@ public class CrowdPicsActivity extends AppCompatActivity {
         // Start the Intent
         startActivityForResult(galleryIntent, RESULT_LOAD_IMG);
     }
+
     private void captureImage() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
@@ -149,7 +236,7 @@ public class CrowdPicsActivity extends AppCompatActivity {
         if (type == MEDIA_TYPE_IMAGE) {
             mediaFile = new File(mediaStorageDir.getPath() + File.separator
                     + "IMG_" + timeStamp + ".jpg");
-        }  else {
+        } else {
             return null;
         }
 
@@ -167,13 +254,13 @@ public class CrowdPicsActivity extends AppCompatActivity {
                     // successfully captured the image
                     // launching upload activity
                     //launchUploadActivity(true);
-                    imgPath=fileUri.getPath();
+                    imgPath = fileUri.getPath();
                     String fileNameSegments[] = imgPath.split("/");
                     fileName = fileNameSegments[fileNameSegments.length - 1];
                     // Put file name in Async Http Post Param which will used in Java web app
                     //params.put("filename", fileName);
                     uploadImageFromCam();
-                    System.out.println("Camara image path"+fileUri.getPath());
+                    System.out.println("Camara image path" + fileUri.getPath());
 
 
                 } else if (resultCode == RESULT_CANCELED) {
@@ -190,8 +277,7 @@ public class CrowdPicsActivity extends AppCompatActivity {
                             .show();
                 }
 
-            }
-            else {
+            } else {
                 // When an Image is picked
                 if (requestCode == RESULT_LOAD_IMG && resultCode == RESULT_OK
                         && null != data) {
@@ -218,9 +304,9 @@ public class CrowdPicsActivity extends AppCompatActivity {
                     fileName = fileNameSegments[fileNameSegments.length - 1];
                     uploadImageFromCam();
                     // Put file name in Async Http Post Param which will used in Java web app
-                   // params.put("filename", fileName);
+                    // params.put("filename", fileName);
 
-                }  else {
+                } else {
                     Toast.makeText(this, "You haven't picked Image",
                             Toast.LENGTH_LONG).show();
                 }
@@ -238,7 +324,7 @@ public class CrowdPicsActivity extends AppCompatActivity {
             prgDialog.setMessage("Converting Image to Binary Data");
             prgDialog.show();
             // Convert image to String using Base64
-            fileTpe="image";
+            fileTpe = "image";
             encodeImagetoString();
             // When Image is not selected from Gallery
         } else {
@@ -255,12 +341,14 @@ public class CrowdPicsActivity extends AppCompatActivity {
 
             protected void onPreExecute() {
 
-            };
+            }
+
+            ;
 
             @Override
             protected String doInBackground(Void... params) {
 
-                if(fileTpe.equals("image")) {
+                if (fileTpe.equals("image")) {
                     BitmapFactory.Options options = null;
                     options = new BitmapFactory.Options();
                     options.inSampleSize = 3;
@@ -284,7 +372,7 @@ public class CrowdPicsActivity extends AppCompatActivity {
                 // Trigger Image upload
                 //triggerImageUpload();
                 prgDialog.dismiss();
-                UploadImgVid uploadImgVid=new UploadImgVid();
+                UploadImgVid uploadImgVid = new UploadImgVid();
                 uploadImgVid.setEncodeString(encodedString);
                 uploadImgVid.setImageName(fileName);
                 uploadImgVid.setFileType(fileTpe);
@@ -294,7 +382,7 @@ public class CrowdPicsActivity extends AppCompatActivity {
 
                         Result res = Utils.getObject(result, Result.class);
                         if (res.getResult().equals("success")) {
-                            Toast.makeText(CrowdPicsActivity.this,"Image upload successfull..",Toast.LENGTH_LONG).show();
+                            Toast.makeText(CrowdPicsActivity.this, "Image upload successfull..", Toast.LENGTH_LONG).show();
                         }
                     }
                 }).execute();
@@ -303,6 +391,7 @@ public class CrowdPicsActivity extends AppCompatActivity {
             }
         }.execute(null, null, null);
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

@@ -40,4 +40,15 @@
 
     </LinearLayout>
 
+    <com.wre.yin.whiterabbiteventapp.gridlibrary.DynamicGridView
+        android:id="@+id/upload_image_grid"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:horizontalSpacing="5dp"
+        android:layout_below="@+id/upload_image_view"
+        android:numColumns="@integer/column_count"
+        android:verticalSpacing="5dp">
+
+    </com.wre.yin.whiterabbiteventapp.gridlibrary.DynamicGridView>
+
 </RelativeLayout>

@@ -1,6 +1,7 @@
 package com.wre.yin.whiterabbiteventapp;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -14,13 +15,17 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import com.wre.yin.whiterabbiteventapp.beans.Result;
 import com.wre.yin.whiterabbiteventapp.beans.UploadImgVid;
+import com.wre.yin.whiterabbiteventapp.gridlibrary.DynamicGridView;
 import com.wre.yin.whiterabbiteventapp.utils.Callback;
 import com.wre.yin.whiterabbiteventapp.utils.Constants;
 import com.wre.yin.whiterabbiteventapp.utils.MyAsyncTask;
@@ -55,6 +60,10 @@ public class VideosActivity extends AppCompatActivity {
     ProgressDialog prgDialog;
     Bitmap bitmap;
 
+
+    private DynamicGridView imageGridView;
+    private Cursor cursor;
+    private int columnIndex;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,12 +109,89 @@ public class VideosActivity extends AppCompatActivity {
                 layoutStatus="gone";
             }
         });
+        String[] list = {MediaStore.Video.Media._ID};
+
+        //Retriving Images from Database(SD CARD) by Cursor.
+        cursor = getContentResolver().query(MediaStore.Images.Thumbnails.EXTERNAL_CONTENT_URI, list, null, null, MediaStore.Video.Thumbnails._ID);
+        columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Video.Thumbnails._ID);
+
+        imageGridView = (DynamicGridView) findViewById(R.id.upload_video_grid);
+        ImageAdapter adapter = new ImageAdapter(this);
+        imageGridView.setAdapter(adapter);
 
 
 
 
     }
+    public class ImageAdapter extends BaseAdapter {
 
+        private Context context;
+
+        public ImageAdapter(Context localContext) {
+
+            context = localContext;
+
+        }
+
+        public int getCount() {
+
+            return cursor.getCount();
+
+        }
+
+        public Object getItem(int position) {
+
+            return position;
+
+        }
+
+        public long getItemId(int position) {
+
+            return position;
+
+        }
+
+        public View getView(int position, View convertView, ViewGroup parent) {
+            ViewHolder holder = new ViewHolder();
+
+
+            if (convertView == null) {
+                holder.picturesView = new VideoView(context);
+                //Converting the Row Layout to be used in Grid View
+                convertView = getLayoutInflater().inflate(R.layout.video_row, parent, false);
+
+                //You can convert Layout in this Way with the Help of View Stub. View Stub is newer. Read about ViewStub.Inflate
+                // and its parameter.
+                //convertView= ViewStub.inflate(context,R.layout.row,null);
+
+                convertView.setTag(holder);
+
+            } else {
+                holder = (ViewHolder) convertView.getTag();
+            }
+            cursor.moveToPosition(position);
+            int imageID = cursor.getInt(columnIndex);
+
+            //In Uri "" + imageID is to convert int into String as it only take String Parameter and imageID is in Integer format.
+            //You can use String.valueOf(imageID) instead.
+            Uri uri = Uri.withAppendedPath(
+                    MediaStore.Video.Thumbnails.EXTERNAL_CONTENT_URI, "" + imageID);
+
+            //Setting Image to View Holder Image View.
+            holder.picturesView = (VideoView) convertView.findViewById(R.id.videoview);
+            holder.picturesView.setVideoURI(uri);
+            //holder.picturesView.setScaleType(VideoView.ScaleType.CENTER_CROP);
+
+
+            return convertView;
+
+        }
+
+        // View Holder pattern used for Smooth Scrolling. As View Holder pattern recycle the findViewById() object.
+        class ViewHolder {
+            private VideoView picturesView;
+        }
+    }
 
     /**
      * Launching camera app to record video
