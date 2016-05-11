@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="whiterabbitevent">
 <head>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="firstName" value="${USER.firstName}" scope="session" />
+<c:set var="lastName" value="${USER.lastName}" scope="session" />
+<c:set var="userId" value="${USER.userId}" scope="session" />
   <title>WHITE RABBIT EVENT</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,9 +29,12 @@
     <script src="resources/js/admin/EventViewController.js"></script>
     <script src="resources/js/admin/EventCreateController.js"></script>
     <script src="resources/js/admin/EventEditController.js"></script>
-   
-   
-    
+    <script src="resources/js/admin/EventViewDetailsController.js"></script>
+    <script src="resources/js/admin/AgendoViewController.js"></script>
+    <script src="resources/js/admin/AgendoCreateController.js"></script>
+    <script src="resources/js/admin/AgendoEditController.js"></script>
+    <script src="resources/js/admin/NewsFeedViewController.js"></script>
+    <script src="resources/js/admin/NewsFeedEditController.js"></script>
   
   
  
@@ -60,8 +67,8 @@
            <li class="head-date"> <span class="glyphicon glyphicon-bell"></span></li>
            <li class="head-date"> <span class="glyphicon glyphicon-user"></span></li>
           </ul>
-        </li>
-      </ul>
+        
+      
     </div><!-- /.navbar-collapse -->
 </nav>
         
@@ -84,7 +91,7 @@
                 </ul>
             <ul class="ul ">
               <li class="li">Invite</li>
-              <li class="li" ><a class="navbar-links" href="#/eventView" id="event">Event</a></li>
+              <li class="li" ><a class="navbar-links" href="#/eventView/${userId}" id="event">Event</a></li>
               <li class="li">Polling</li>
               <li class="li">Schedule</li>
               <li class="li">News Feed</li>

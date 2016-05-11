@@ -16,36 +16,31 @@ margin-bottom:0px !important;
 <div class="container">
 	<form>
 	
-	<div class="header-none">Event List</div>
+	<div class="header-none">News List</div>
 	<div class="panel">
 		<div class="panel-body">
 		 <div class="col-md-2 col-md-offset-10 padding-0">
-		 <input ng-model="search"  ng-show="eventList.length!=0" class="form-control" placeholder="Search">
+		 <input ng-model="search"  ng-show="newsList.length!=0" class="form-control" placeholder="Search">
 			</div> 
 			<div class="col-md-12 space-hid">&nbsp;</div>
 			<table class="table" id="eventView">
 				<thead>
 					<tr>
-					     <th>EventAddress</th>
-					     <th>EventAgenda </th>
-						 <th>Event Name</th>
-						 <th> EventDesc</th>
-						 <th>EventDate</th>
-						 <th>Status</th>
-						 <th>Action</th>
+					     <th>NewsTitle</th>
+					     <th>NewsDesc </th>
+						 <th>NewsDate</th>
+						  <th>Action</th>
 						
 				   </tr>
 				</thead>
-				<tr ng-show="filteredSize!=0"ng-repeat="event in eventList ">
-				    <td >{{event.eventAddress}}</td>
-					<td >{{event.eventAgenda}}</td>
-					<td >{{event.eventName}}</td>
-					<td >{{event.eventDesc}}</td>
-				    <td >{{event.eventDate | date: 'yyyy-MM-dd'}}</td>
-					<td >{{event.status}}</td>
+				<tr ng-show="filteredSize!=0"ng-repeat="news in newsList ">
+				    <td >{{news.newsTitle}}</td>
+					<td >{{news.newsDesc}}</td>
+					<td >{{news.newsDate | date: 'yyyy-MM-dd'}}</td>
+					
 			<td>
 					
-				<a ng-click="eventViewDetails(event.eventId)"title="eventViewDetails">
+				<a ng-click="newsFeedEdit(news.newsFeedId)"title="newsFeedEdit">
 							<i class="fa fa-eye-slash icons"> </i>
 				</a>
 				

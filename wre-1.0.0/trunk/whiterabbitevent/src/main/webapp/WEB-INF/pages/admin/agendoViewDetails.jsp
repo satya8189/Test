@@ -14,45 +14,70 @@ margin-bottom:0px !important;
 <toaster-container></toaster-container>
 
 <div class="container">
-	<form>
+<form>
+		
+			
+			
+							
+			<a ng-click="navigateagendoCreate(eventId)"title="eventViewDetails">HI
+							<i class="fa fa-eye-slash icons"> </i>
+				</a>
+				
+				
+			<!-- 				 
+			<a href="#/agendoCreate"
+			class="btn btn-default pull-right button btn-color">Create
+			AgendoCreate</a>
+				</a>
+			 -->	
+
 	
 	<div class="header-none">Event List</div>
 	<div class="panel">
 		<div class="panel-body">
 		 <div class="col-md-2 col-md-offset-10 padding-0">
-		 <input ng-model="search"  ng-show="eventList.length!=0" class="form-control" placeholder="Search">
+		 <input ng-model="search"  ng-show="agendoList.length!=0" class="form-control" placeholder="Search">
 			</div> 
 			<div class="col-md-12 space-hid">&nbsp;</div>
 			<table class="table" id="eventView">
 				<thead>
 					<tr>
-					     <th>EventAddress</th>
-					     <th>EventAgenda </th>
-						 <th>Event Name</th>
-						 <th> EventDesc</th>
-						 <th>EventDate</th>
-						 <th>Status</th>
-						 <th>Action</th>
+					     <th>AgenTitle</th>
+					     <th>AgenDesc </th>
+						 <th>AgenStartTime</th>
+						  <th>AgenEndTime</th>
+						 <th>AgenBy</th>
+						  <th>Action</th>
+						
+						
+						 
 						
 				   </tr>
 				</thead>
-				<tr ng-show="filteredSize!=0"ng-repeat="event in eventList ">
-				    <td >{{event.eventAddress}}</td>
-					<td >{{event.eventAgenda}}</td>
-					<td >{{event.eventName}}</td>
-					<td >{{event.eventDesc}}</td>
-				    <td >{{event.eventDate | date: 'yyyy-MM-dd'}}</td>
-					<td >{{event.status}}</td>
-			<td>
+				<tr ng-show="filteredSize!=0"ng-repeat="event in agendoList ">
+				    <td >{{event.agenTitle}}</td>
+					<td >{{event.agenDesc}}</td>
+					<td >{{event.agenStartTime}}</td>
+					<td >{{event.agenEndTime}}</td>
+					<td >{{event.agenBy}}</td>
 					
-				<a ng-click="eventViewDetails(event.eventId)"title="eventViewDetails">
+					<td>
+					
+				<a ng-click="agendoEdit(event.agenId)"title="agendoEdit">
 							<i class="fa fa-eye-slash icons"> </i>
 				</a>
 				
 				
 						
 					</td>
-				</tr>
+					
+				</tr>	
+				  
+			
+					
+				
+			
+				
 				<tr ng-show="filteredSize==0">
 				<td colspan="6">
 				No records found..
