@@ -17,13 +17,13 @@ public class DetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_details);
 
         String nameTxt = getIntent().getExtras().getString("name");
-        text = (TextView) findViewById(R.id.activity_text);
+
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(nameTxt);
 
 
-        text.setText(nameTxt);
+
 
     }
 
