@@ -1,12 +1,14 @@
-var EventViewController = function($scope,filteredSize) {
+var EventViewController = function($scope,$routeParams,$http, $location) {
 	
 	
 	$scope.eventList={};
 	$scope.filteredSize;
 	$scope.$on("$routeChangeSuccess", function () {
+	$scope.userId=$routeParams.userId;
 	
 		
-		 $http.get('admin/eventList').success(function(eventList){
+		 $http.get('admin/eventList?userId='+$scope.userId).success(function(eventList){
+			
 			    $scope.eventList = eventList;
 			    
 			 // create empty search model (object) to trigger $watch on update
@@ -37,5 +39,8 @@ var EventViewController = function($scope,filteredSize) {
 			  	});
 			 });
 	
+	$scope.eventViewDetails = function(eventId){
+		location.href="#/eventViewDetails/"+eventId;
+	};
 	
 	 };
