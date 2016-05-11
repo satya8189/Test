@@ -1,18 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="whiterabbitevent">
 <head>
-  <title>TALHIRE</title>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="firstName" value="${USER.firstName}" scope="session" />
+<c:set var="lastName" value="${USER.lastName}" scope="session" />
+<c:set var="userId" value="${USER.userId}" scope="session" />
+  <title>WHITE RABBIT EVENT</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
  
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">    
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
-     <script src="../js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="resources/css/bootstrap.min.css">
+     <script src="resources/js/bootstrap.min.js"></script>
     
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css"/>
+    <link rel="stylesheet" href="resources/css/style.css"/>
+    
+    <script src="resources/js/angular/angular.js"></script>
+		<script src="resources/js/angular/angular.min.js"></script>
+		<script src="resources/js/angular/angular-route.js"></script>
+		<script src="resources/js/angular/angular-route.min.js"></script>
+		<script src="resources/js/angular/angular-messages.js"></script>
+		<script src="resources/js/angular/angular-messages.min.js"></script>
+     <script src="resources/js/navigationjs/adminNavigation.js"></script>
+    <!-- event -->
+    <script src="resources/js/admin/EventViewController.js"></script>
+    <script src="resources/js/admin/EventCreateController.js"></script>
+    <script src="resources/js/admin/EventEditController.js"></script>
+   
+   
+    
   
   
  
@@ -69,7 +88,7 @@
                 </ul>
             <ul class="ul ">
               <li class="li">Invite</li>
-              <li class="li">Events</li>
+              <li class="li" ><a class="navbar-links" href="#/eventView/${userId}" id="event">Event</a></li>
               <li class="li">Polling</li>
               <li class="li">Schedule</li>
               <li class="li">News Feed</li>
@@ -85,13 +104,13 @@
            <div class="body-content">
              <h3 style="text-align: -webkit-center;"> Invite people toEvents</h3>
        
- 
+  <ng-view></ng-view>
          </div>
               </div>
             </div>
             </div>
         
     
-    </div>
+    
 </body>
 </html>

@@ -47,6 +47,25 @@
 		<property name="annotatedClasses">
 			<list>
 				<!-- Here put your persistent annotated Classes -->
+	        <value>com.wre.model.Agenda</value>
+            <value>com.wre.model.AppIdentifier</value>
+			<value>com.wre.model.AppIdentifierGrp</value>
+		    <value>com.wre.model.Client</value>
+		    <value>com.wre.model.Event</value>
+			<value>com.wre.model.EventParticipant</value>
+			<value>com.wre.model.EventServices</value>
+			<value>com.wre.model.Galary</value>
+			<value>com.wre.model.Message</value>
+			<value>com.wre.model.Newsfeed</value>
+			<value>com.wre.model.Participants</value>
+			<value>com.wre.model.QuestionAnswer</value>
+			<value>com.wre.model.Services</value>
+			<value>com.wre.model.Speaker</value>
+			<value>com.wre.model.Sponcor</value>
+			<value>com.wre.model.SurveyQuestion</value>
+			<value>com.wre.model.SurveyQuestionAnswer</value>
+			<value>com.wre.model.User</value>
+			
 	
 
 
