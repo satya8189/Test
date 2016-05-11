@@ -9,12 +9,13 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.wre.yin.whiterabbiteventapp.SpeakerProfileActivity">
 
-    <TextView
-        android:id="@+id/activity_text"
+    <com.wre.yin.whiterabbiteventapp.gridlibrary.DynamicGridView
+        android:id="@+id/dynamic_grid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:gravity="center"
-        android:textColor="#000"
-        android:textSize="30sp" />
+        android:horizontalSpacing="16dp"
+        android:numColumns="@integer/column_count"
+        android:verticalSpacing="16dp">
+
+    </com.wre.yin.whiterabbiteventapp.gridlibrary.DynamicGridView>
 </RelativeLayout>

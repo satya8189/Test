@@ -8,11 +8,11 @@ import android.widget.ExpandableListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.wre.yin.whiterabbiteventapp.adapters.ExpandableListAdapter;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import com.wre.yin.whiterabbiteventapp.adapters.ExpandableListAdapter;
 
 
 public class AgendaActivity extends AppCompatActivity {

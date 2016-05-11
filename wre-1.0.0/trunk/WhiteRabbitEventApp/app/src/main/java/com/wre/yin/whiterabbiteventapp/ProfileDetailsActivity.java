@@ -5,24 +5,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-public class NetworkingActivity extends AppCompatActivity {
-    private TextView text;
+public class ProfileDetailsActivity extends AppCompatActivity {
+
+    TextView speakerName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_networking);
+        setContentView(R.layout.activity_profile_details);
+        String nameTxt = getIntent().getExtras().getString("speakerName");
 
-
-        String nameTxt = getIntent().getExtras().getString("name");
-        //  text = (TextView) findViewById(R.id.activity_text);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(nameTxt);
-        // text.setText(nameTxt);
-
+        speakerName = (TextView) findViewById(R.id.speaker_name);
+        speakerName.setText(nameTxt);
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
