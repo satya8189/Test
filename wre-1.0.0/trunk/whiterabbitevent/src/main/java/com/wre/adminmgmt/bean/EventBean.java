@@ -8,8 +8,13 @@ import com.wre.model.User;
 public class EventBean 
 {
 	private Long eventId;
-    private Client client;
-    private User user;
+    private Long clientId;
+    private Long userId;
+    
+    
+ 
+    private String clientName;
+    private String userName;
     private String eventName;
     private String eventDesc;
     private String eventAgenda;
@@ -17,24 +22,58 @@ public class EventBean
     private String eventTime;
     private String eventAddress;
     private String status;
+    private Long serviceId;
+    private String serviceName;
+    
+    
+    
+    
+    
+    
+	public Long getServiceId() {
+		return serviceId;
+	}
+	public void setServiceId(Long serviceId) {
+		this.serviceId = serviceId;
+	}
+	public String getServiceName() {
+		return serviceName;
+	}
+	public void setServiceName(String serviceName) {
+		this.serviceName = serviceName;
+	}
+	public Long getClientId() {
+		return clientId;
+	}
+	public void setClientId(Long clientId) {
+		this.clientId = clientId;
+	}
+	public Long getUserId() {
+		return userId;
+	}
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+	public String getClientName() {
+		return clientName;
+	}
+	public void setClientName(String clientName) {
+		this.clientName = clientName;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 	public Long getEventId() {
 		return eventId;
 	}
 	public void setEventId(Long eventId) {
 		this.eventId = eventId;
 	}
-	public Client getClient() {
-		return client;
-	}
-	public void setClient(Client client) {
-		this.client = client;
-	}
-	public User getUser() {
-		return user;
-	}
-	public void setUser(User user) {
-		this.user = user;
-	}
+	
+	
 	public String getEventName() {
 		return eventName;
 	}
