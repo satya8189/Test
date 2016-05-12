@@ -29,14 +29,10 @@ public class SponcersActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sponcers);
 
         String nameTxt = getIntent().getExtras().getString("name");
-        //  text = (TextView) findViewById(R.id.activity_text);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(nameTxt);
 
-
-        // text.setText(nameTxt);
-        //
         gridView = (DynamicGridView) findViewById(R.id.dynamic_grid_sponcers);
 
         gridView.setAdapter(new CheeseDynamicAdapter(this,
@@ -67,8 +63,8 @@ public class SponcersActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(SponcersActivity.this, parent.getAdapter().getItem(position).toString(),
                         Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(SponcersActivity.this, ProfileDetailsActivity.class);
-                i.putExtra("speakerName", parent.getAdapter().getItem(position).toString());
+                Intent i = new Intent(SponcersActivity.this, SponcersProfileActivity.class);
+                i.putExtra("sponcersName", parent.getAdapter().getItem(position).toString());
                 startActivity(i);
 
             }

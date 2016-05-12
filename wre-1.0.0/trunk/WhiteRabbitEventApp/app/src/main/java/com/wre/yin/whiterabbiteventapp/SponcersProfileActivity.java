@@ -3,26 +3,23 @@ package com.wre.yin.whiterabbiteventapp;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.widget.ImageView;
+import android.widget.TextView;
 
-public class VenueActivity extends AppCompatActivity {
-
-    private ImageView venueImage;
+public class SponcersProfileActivity extends AppCompatActivity {
+    TextView sponcersName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_venue);
+        setContentView(R.layout.activity_sponcers_profile);
 
-        String nameTxt = getIntent().getExtras().getString("name");
-        venueImage = (ImageView) findViewById(R.id.venue_image);
+        String nameTxt = getIntent().getExtras().getString("sponcersName");
+
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(nameTxt);
-
-
-        venueImage.setBackgroundResource(R.drawable.layout_pic);
-
+        sponcersName = (TextView) findViewById(R.id.sponcers_name_text);
+        sponcersName.setText(nameTxt);
     }
 
     @Override

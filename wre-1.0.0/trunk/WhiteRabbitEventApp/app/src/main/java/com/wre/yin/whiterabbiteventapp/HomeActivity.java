@@ -51,7 +51,7 @@ public class HomeActivity extends Activity implements BaseSliderView.OnSliderCli
         profDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent profDetailsAct = new Intent(HomeActivity.this, ProfDetailsActivity.class);
+                Intent profDetailsAct = new Intent(HomeActivity.this, EmpProfileActivity.class);
                 startActivity(profDetailsAct);
             }
         });

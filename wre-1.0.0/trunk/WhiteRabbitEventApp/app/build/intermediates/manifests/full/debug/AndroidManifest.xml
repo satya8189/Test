@@ -20,36 +20,89 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.wre.yin.whiterabbiteventapp.LoginActivity"
-            android:windowSoftInputMode="adjustResize" >
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.wre.yin.whiterabbiteventapp.EventDashboardActivity" />
-        <activity android:name="com.wre.yin.whiterabbiteventapp.HomeActivity" />
-        <activity android:name="com.wre.yin.whiterabbiteventapp.EventsHomeActivity" />
-        <activity android:name="com.wre.yin.whiterabbiteventapp.DetailsActivity" />
-        <activity android:name="com.wre.yin.whiterabbiteventapp.AgendaActivity" />
-        <activity android:name="com.wre.yin.whiterabbiteventapp.NewsFeedActivity" />
-        <activity android:name="com.wre.yin.whiterabbiteventapp.GalleryActivity" />
-        <activity android:name="com.wre.yin.whiterabbiteventapp.CrowdPicsActivity" />
-        <activity android:name="com.wre.yin.whiterabbiteventapp.VideosActivity" />
-        <activity android:name="com.wre.yin.whiterabbiteventapp.DocShareActivity" />
-        <activity android:name="com.wre.yin.whiterabbiteventapp.QAActivity" />
-        <activity android:name="com.wre.yin.whiterabbiteventapp.MessageActivity" />
-        <activity android:name="com.wre.yin.whiterabbiteventapp.SurveyActivity" />
-        <activity android:name="com.wre.yin.whiterabbiteventapp.QRCodeActivity" />
-        <activity android:name="com.wre.yin.whiterabbiteventapp.SocialMediaActivity" />
-        <activity android:name="com.wre.yin.whiterabbiteventapp.NetworkingActivity" />
-        <activity android:name="com.wre.yin.whiterabbiteventapp.VenueActivity" />
-        <activity android:name="com.wre.yin.whiterabbiteventapp.SponcersActivity" />
-        <activity android:name="com.wre.yin.whiterabbiteventapp.SpeakerProfileActivity" />
-        <activity android:name="com.wre.yin.whiterabbiteventapp.ProfDetailsActivity" />
-        <activity android:name="com.wre.yin.whiterabbiteventapp.SplashScreenActivity" />
-        <activity android:name="com.wre.yin.whiterabbiteventapp.OTPActivity" />
-        <activity android:name="com.wre.yin.whiterabbiteventapp.ProfileDetailsActivity" />
+        <activity
+            android:name="com.wre.yin.whiterabbiteventapp.EventDashboardActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.wre.yin.whiterabbiteventapp.HomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.wre.yin.whiterabbiteventapp.EventsHomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.wre.yin.whiterabbiteventapp.DetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.wre.yin.whiterabbiteventapp.AgendaActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.wre.yin.whiterabbiteventapp.NewsFeedActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.wre.yin.whiterabbiteventapp.GalleryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.wre.yin.whiterabbiteventapp.CrowdPicsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.wre.yin.whiterabbiteventapp.VideosActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.wre.yin.whiterabbiteventapp.DocShareActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.wre.yin.whiterabbiteventapp.QAActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.wre.yin.whiterabbiteventapp.MessageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.wre.yin.whiterabbiteventapp.SurveyActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.wre.yin.whiterabbiteventapp.QRCodeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.wre.yin.whiterabbiteventapp.SocialMediaActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.wre.yin.whiterabbiteventapp.NetworkingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.wre.yin.whiterabbiteventapp.VenueActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.wre.yin.whiterabbiteventapp.SponcersActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.wre.yin.whiterabbiteventapp.SpeakerProfileActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.wre.yin.whiterabbiteventapp.EmpProfileActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.wre.yin.whiterabbiteventapp.SplashScreenActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.wre.yin.whiterabbiteventapp.OTPActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.wre.yin.whiterabbiteventapp.ProfileDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.wre.yin.whiterabbiteventapp.AboutEventActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.wre.yin.whiterabbiteventapp.SponcersProfileActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

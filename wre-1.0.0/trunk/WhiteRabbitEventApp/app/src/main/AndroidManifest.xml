@@ -2,10 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.wre.yin.whiterabbiteventapp">
 
-
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
@@ -16,36 +14,89 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".LoginActivity"
-            android:windowSoftInputMode="adjustResize">
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".EventDashboardActivity" />
-        <activity android:name=".HomeActivity" />
-        <activity android:name=".EventsHomeActivity" />
-        <activity android:name=".DetailsActivity" />
-        <activity android:name=".AgendaActivity" />
-        <activity android:name=".NewsFeedActivity" />
-        <activity android:name=".GalleryActivity" />
-        <activity android:name=".CrowdPicsActivity" />
-        <activity android:name=".VideosActivity" />
-        <activity android:name=".DocShareActivity" />
-        <activity android:name=".QAActivity" />
-        <activity android:name=".MessageActivity" />
-        <activity android:name=".SurveyActivity" />
-        <activity android:name=".QRCodeActivity" />
-        <activity android:name=".SocialMediaActivity" />
-        <activity android:name=".NetworkingActivity" />
-        <activity android:name=".VenueActivity" />
-        <activity android:name=".SponcersActivity" />
-        <activity android:name=".SpeakerProfileActivity" />
-        <activity android:name=".ProfDetailsActivity" />
-        <activity android:name=".SplashScreenActivity" />
-        <activity android:name=".OTPActivity" />
-        <activity android:name=".ProfileDetailsActivity"></activity>
+        <activity
+            android:name=".EventDashboardActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".HomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".EventsHomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".AgendaActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".NewsFeedActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".GalleryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".CrowdPicsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".VideosActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DocShareActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".QAActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MessageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SurveyActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".QRCodeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SocialMediaActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".NetworkingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".VenueActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SponcersActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SpeakerProfileActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".EmpProfileActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SplashScreenActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".OTPActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ProfileDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".AboutEventActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SponcersProfileActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

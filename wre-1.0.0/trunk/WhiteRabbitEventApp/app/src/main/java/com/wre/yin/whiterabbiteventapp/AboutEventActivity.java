@@ -1,30 +1,26 @@
 package com.wre.yin.whiterabbiteventapp;
 
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.ImageView;
+import android.widget.TextView;
 
-public class VenueActivity extends AppCompatActivity {
-
-    private ImageView venueImage;
-
+public class AboutEventActivity extends AppCompatActivity {
+    TextView text;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_venue);
+        setContentView(R.layout.activity_about_event);
 
         String nameTxt = getIntent().getExtras().getString("name");
-        venueImage = (ImageView) findViewById(R.id.venue_image);
+        text = (TextView) findViewById(R.id.activity_text);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(nameTxt);
 
 
-        venueImage.setBackgroundResource(R.drawable.layout_pic);
-
+        text.setText(nameTxt);
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

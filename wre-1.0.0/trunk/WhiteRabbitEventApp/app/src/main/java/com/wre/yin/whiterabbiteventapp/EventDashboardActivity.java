@@ -88,6 +88,8 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
         Bitmap venueIcon = BitmapFactory.decodeResource(this.getResources(), R.drawable.venue_pic);
         Bitmap sponcersIcon = BitmapFactory.decodeResource(this.getResources(), R.drawable.sponcers_pic);
         Bitmap speakerIcon = BitmapFactory.decodeResource(this.getResources(), R.drawable.speaker_pic);
+        Bitmap aboutEvent = BitmapFactory.decodeResource(this.getResources(), R.drawable.about_pic);
+
 
         gridArray.add(new Item(deatailIcon, "Details"));
         gridArray.add(new Item(agendaIcon, "Agenda"));
@@ -105,6 +107,7 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
         gridArray.add(new Item(venueIcon, "Venue Layout"));
         gridArray.add(new Item(sponcersIcon, "Sponcers Page"));
         gridArray.add(new Item(speakerIcon, "Speaker Profile"));
+        gridArray.add(new Item(aboutEvent,"About Event"));
 
 
         gridView = (GridView) findViewById(R.id.grid);
@@ -201,6 +204,11 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
                         Intent speakerAct = new Intent(EventDashboardActivity.this, SpeakerProfileActivity.class);
                         speakerAct.putExtra("name", name);
                         startActivity(speakerAct);
+                        break;
+                    case 16:
+                        Intent aboutEventAct = new Intent(EventDashboardActivity.this, AboutEventActivity.class);
+                        aboutEventAct.putExtra("name", name);
+                        startActivity(aboutEventAct);
                         break;
                 }
 
