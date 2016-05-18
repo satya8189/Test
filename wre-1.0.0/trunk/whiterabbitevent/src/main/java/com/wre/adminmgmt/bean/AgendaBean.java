@@ -1,6 +1,5 @@
 package com.wre.adminmgmt.bean;
 
-import com.wre.model.Event;
 
 public class AgendaBean 
 {
@@ -13,16 +12,8 @@ public class AgendaBean
     private String agenStartTime;
     private String agenBy;
     private Long eventId;
-    private Long userId;
     
-    
-    
-	public Long getUserId() {
-		return userId;
-	}
-	public void setUserId(Long userId) {
-		this.userId = userId;
-	}
+	
 	public Long getAgenId() {
 		return agenId;
 	}
