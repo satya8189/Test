@@ -20,6 +20,7 @@ public class DocShareActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(nameTxt);
 
+        //hai
 
         text.setText(nameTxt);
 
