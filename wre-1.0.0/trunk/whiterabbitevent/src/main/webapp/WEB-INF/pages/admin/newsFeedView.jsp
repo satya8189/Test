@@ -15,7 +15,15 @@ margin-bottom:0px !important;
 
 <div class="container">
 	<form>
-	
+	--<!--  <a href="#/newsFeedCreate"
+			class="btn btn-default pull-right button btn-color">Create
+			NewsFeed</a>
+	  -->
+	 
+	 	 <a ng-click="newsFeedCreate(eventId)"title="newsFeedCreate">Create News
+							<i class="fa fa-eye-slash icons"> </i>
+				</a>
+				 
 	<div class="header-none">News List</div>
 	<div class="panel">
 		<div class="panel-body">

@@ -4,7 +4,7 @@
 
 <c:set var="userId" value="${USER.userId}" scope="session" />
 
-<form name="createEvent" ng-submit="saveAgendo(agendo,${userId})" novalidate>
+<form name="createEvent" ng-submit="saveAgendo(agendo)" novalidate>
 
 <div class="container">
 	<a href="#/agendoViewDetails"> <i class="fa fa-angle-left back"></i>

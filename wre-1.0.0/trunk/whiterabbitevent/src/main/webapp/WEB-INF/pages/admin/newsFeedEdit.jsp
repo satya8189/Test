@@ -12,28 +12,46 @@
 				ng-submit="updateNews(news)" novalidate>
 				
 				
-				<div class="row">
-					<div class="col-md-12">
-{{agendo.agenTitle}}
-						<div class="form-group col-md-6">
+
+					
+					
+					
+					<div class="form-group col-md-6">
 							<input type="hidden" ng-model="news.userId" value="${userId}"
-								ng-init="agendo.userId=${userId}"> <label class="flot-left">News
+								ng-init="news.userId=${userId}"> <label class="flot-left">News
 								name <span style="color:red;">*</span></label> <input type="text" class="input-text form-control " 
-								 id="orgName" ng-model="news.newsDesc" ng-maxlength="98" ng-minlength="3" 
-								placeholder="AgenTitle" name="agenTitle" required>
+								 id="orgName" ng-model="news.newsTitle" ng-maxlength="98" ng-minlength="3" 
+								placeholder="NewsTitle" name="newsTitle" required>
 							
 							<span ng-if="orgEditForm.$submitted" ng-messages="orgEditForm.orgName.$error" ng-messages-include="errors">
-								<p ng-message="minlength">AgenTitle name  contains atleast 3 letters.</p>
+								<p ng-message="minlength">NewsDesc name  contains atleast 3 letters.</p>
 							 </span>
 							  	
 
 						</div>
 						
 
-				</div>
-				<hr />
+						<div class="form-group col-md-6">
+							<input type="hidden" ng-model="news.userId" value="${userId}"
+								ng-init="agendo.userId=${userId}"> <label class="flot-left">News
+								name <span style="color:red;">*</span></label> <input type="text" class="input-text form-control " 
+								 id="orgName" ng-model="news.newsDesc" ng-maxlength="98" ng-minlength="3" 
+								placeholder="NewsDesc" name="newsDesc" required>
+							
+							<span ng-if="orgEditForm.$submitted" ng-messages="orgEditForm.orgName.$error" ng-messages-include="errors">
+								<p ng-message="minlength">NewsDesc name  contains atleast 3 letters.</p>
+							 </span>
+							  	
+
+						</div>
+						
+						
+						
+
 				
-				<div>&nbsp;</div>
+				
+				
+	
 
 				<button type="submit" class="btn button  save margin-2"
 					 ng-click="validateHiddenFields()">Update</button>

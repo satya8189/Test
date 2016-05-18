@@ -35,9 +35,20 @@
     <script src="resources/js/admin/AgendoEditController.js"></script>
     <script src="resources/js/admin/NewsFeedViewController.js"></script>
     <script src="resources/js/admin/NewsFeedEditController.js"></script>
-  
-  
- 
+    <script src="resources/js/admin/NewsFeedCreateController.js"></script>
+    <script src="resources/js/admin/GalleryViewController.js"></script>
+    <script src="resources/js/admin/DetailsViewController.js"></script>
+    <script src="resources/js/admin/EditDetailsViewController.js"></script>
+    <script src="resources/js/admin/GalleryCreateController.js"></script>
+    
+    
+    <!-- file upload -->
+	<script type="text/javascript" src="resources/js/ng-file-upload.js"></script>
+	<script type="text/javascript" src="resources/js/ng-file-upload-shim.js"></script>
+    
+    
+    
+     
 </head>
 <body>
         <!--Heading-->

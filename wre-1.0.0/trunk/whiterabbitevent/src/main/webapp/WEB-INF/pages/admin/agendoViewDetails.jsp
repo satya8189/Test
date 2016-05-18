@@ -14,12 +14,16 @@ margin-bottom:0px !important;
 <toaster-container></toaster-container>
 
 <div class="container">
+<a ng-click="cancelOrganization()"> <i
+		class="fa fa-angle-left back"></i>
+	</a>
+	
 <form>
-		
+	
 			
 			
 							
-			<a ng-click="navigateagendoCreate(eventId)"title="eventViewDetails">HI
+			<a ng-click="navigateagendoCreate(eventId)"title="eventViewDetails">agendoCreate
 							<i class="fa fa-eye-slash icons"> </i>
 				</a>
 				
