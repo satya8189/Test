@@ -66,7 +66,7 @@ App.config(['$routeProvider', function ($routeProvider,$Scope) {
     
     
    /* newsFeedView*/
-    $routeProvider.when('/newsFeedView/:newsFeedId', {
+    $routeProvider.when('/newsFeedView/:eventId', {
         templateUrl:'admin/newsFeedView',
         controller:NewsFeedViewController
     });
@@ -75,6 +75,41 @@ App.config(['$routeProvider', function ($routeProvider,$Scope) {
     $routeProvider.when('/newsFeedEdit/:newsFeedId', {
         templateUrl:'admin/newsFeedEdit',
         controller:NewsFeedEditController
+    });
+    
+   /* newsFeedCreate*/
+    $routeProvider.when('/newsFeedCreate/:eventId', {
+        templateUrl:'admin/newsFeedCreate',
+        controller:NewsFeedCreateController
+    });
+    
+    /* galleryView*/
+    $routeProvider.when('/galleryView/:eventId', {
+        templateUrl:'admin/galleryView',
+        controller:GalleryViewController
+    });
+    
+    
+    
+    /* galleryCreate*/
+    $routeProvider.when('/galleryCreate/:eventId', {
+        templateUrl:'admin/galleryCreate',
+        controller:GalleryCreateController
+    });
+    
+    
+    /* detailsView*/
+    $routeProvider.when('/detailsView/:eventId', {
+        templateUrl:'admin/detailsView',
+        controller:DetailsViewController
+    });
+    
+    
+    
+    /* editDetailsView*/
+    $routeProvider.when('/editDetailsView/:eventId', {
+        templateUrl:'admin/editDetailsView',
+        controller:EditDetailsViewController
     });
     
     
