@@ -9,10 +9,12 @@ import org.hibernate.FetchMode;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
+import com.wre.adminmgmt.bean.EventBean;
 import com.wre.common.dao.GenericDaoImpl;
 import com.wre.model.Agenda;
 import com.wre.model.Event;
 import com.wre.model.EventServices;
+import com.wre.model.Galary;
 import com.wre.model.Newsfeed;
 import com.wre.model.User;
 
@@ -38,9 +40,6 @@ AdminMgmtDao {
 
 
 
-
-
-
 //eventServicesList
 	public List<EventServices> getEventDetails(String eventId) {
 		Criteria criteria=sessionFactory.getCurrentSession().createCriteria(EventServices.class);
@@ -51,10 +50,6 @@ AdminMgmtDao {
 		 return eventServicesList;
 	}
 
-
-
-
-
 //event agendaList
 	public List<Agenda> getAgendoDetails(Long eventId) {
 		Criteria criteria=sessionFactory.getCurrentSession().createCriteria(Agenda.class);
@@ -64,11 +59,7 @@ AdminMgmtDao {
 		return agendaList;
 	}
 
-
-
-
-
-
+//agendoEditDetails
 	public Agenda agendoEditDetails(Long agenId) {
 		
 		Criteria criteria=sessionFactory.getCurrentSession().createCriteria(Agenda.class);
@@ -80,13 +71,10 @@ AdminMgmtDao {
 	}
 
 
-
-
-
 //newsList
-public List<Newsfeed> getNewsList(Long newsFeedId) {
+public List<Newsfeed> getNewsList(Long eventId) {
 Criteria criteria=sessionFactory.getCurrentSession().createCriteria(Newsfeed.class);
-criteria.add(Restrictions.eq("newsFeedId", newsFeedId));
+criteria.add(Restrictions.eq("event.eventId", eventId));
 criteria.setFetchMode("event", FetchMode.EAGER);
 List<Newsfeed> newsList=criteria.list();
 return newsList;
@@ -103,6 +91,31 @@ public Newsfeed newsEditDetails(Long newsFeedId) {
 	criteria.setFetchMode("event", FetchMode.EAGER);
 	return (Newsfeed)criteria.uniqueResult();
 
+	
+}
+
+//galaryList
+
+@Override
+public List<Galary> galaryList(Long eventId) {
+	Criteria criteria=sessionFactory.getCurrentSession().createCriteria(Galary.class);
+	criteria.add(Restrictions.eq("event.eventId",eventId));
+	criteria.setFetchMode("event", FetchMode.EAGER);
+	List<Galary>galaryList=criteria.list();
+	return galaryList;
+}
+
+
+
+@Override
+public Event detailsView(Long eventId) {
+	Criteria criteria=sessionFactory.getCurrentSession().createCriteria(Event.class);
+    criteria.add(Restrictions.eq("eventId",eventId));
+	criteria.setFetchMode("event", FetchMode.EAGER);
+	return (Event)criteria.uniqueResult();
+	
+	 
+	
 	
 }
 
