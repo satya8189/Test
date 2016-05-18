@@ -7,10 +7,10 @@ var AgendoViewController = function($scope,$routeParams,$http,$location) {
 		$scope.eventId=$routeParams.eventId;
 			
 		 $http.get('admin/agendoDetails?eventId='+$routeParams.eventId).success(function(agendoList){
-			 alert("agendoDetailsAgendoViewController");
+			
 				
 				    $scope.agendoList = agendoList;
-				    alert("size--"+agendoList.length);
+				    
 			
 				    
 				  	});
@@ -19,7 +19,7 @@ var AgendoViewController = function($scope,$routeParams,$http,$location) {
 	
 	
 	$scope.navigateagendoCreate = function(eventId) {
-		alert("hi--------"+eventId);
+		
 		$location.path("/agendoCreate/"+eventId);
 
 	};

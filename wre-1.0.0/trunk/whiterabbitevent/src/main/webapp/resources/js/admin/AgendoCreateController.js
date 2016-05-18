@@ -1,32 +1,36 @@
 var AgendoCreateController = function($scope, $http, $location, $routeParams) {
+	$scope.agendo = {};
+
+	//saveAgendo(agendo)
+	$scope.agendo.eventId=$routeParams.eventId;
 	
-		$scope.agendo = {};
-		$scope.agendo.eventId=$routeParams.eventId;
+	$scope.saveAgendo = function(agendo) {
 		
-		alert("huuu");
-		$scope.saveAgendo = function(agendo,userId) {
-			alert("hi)----"+userId);
-			$scope.agendo=agendo;
-			$scope.agendo.userId=userId;
-			alert("sdf");
 		
-		$http.post('admin/createAgendo',$scope.agendo).success(function(status) {
-			alert("jjj");
-		$location.path("/agendoDetails/"+$routeParams.eventId);
-
-
-					});
 		
+	$http.post('admin/createAgendo',agendo).success(function(success) {
+		alert("admin/createAgendo");
 
-	};
+	//$location.path("/agendoViewDetails/"+$routeParams.eventId);
+	$location.path("/agendoDetails/"+agendo.eventId);
+	
 
-	$scope.cancelEvent = function() {
-		$location.path("/agendoViewDetails");
 
-	};
+				});
+	
 
-	};	
+};
 
+$scope.cancelEvent = function() {
+	$location.path("/newsFeedView/");
+
+};
+
+};	
+
+
+	
+	
 
 
 		

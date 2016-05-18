@@ -19,9 +19,15 @@ var EventViewDetailsController = function($scope,$routeParams,$http,$location) {
 		else if(event.serviceId=="3"){
 			location.href="#/newsFeedView/"+event.eventId;	
 			
-		}
+		}else if(event.serviceId=="4"){
+			location.href="#/galleryView/"+event.eventId;	
+			
+		}else if(event.serviceId=="1"){
+			location.href="#/detailsView/"+event.eventId;	
+			
 			
 		
+	};
 	};
 	
 	
