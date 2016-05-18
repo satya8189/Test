@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wre.adminmgmt.bean.AgendaBean;
 import com.wre.adminmgmt.bean.EventBean;
+import com.wre.adminmgmt.bean.GalaryBean;
 import com.wre.adminmgmt.bean.NewsFeedBean;
 import com.wre.adminmgmt.service.AdminMgmtService;
 
@@ -96,10 +97,46 @@ public class AdminMgmtController {
 						 return "admin/newsFeedEdit";
 							}
 				
-				
-		    
-		
-		   //view event list
+			    //admin/newsFeedCreate
+			        @RequestMapping(value="admin/newsFeedCreate")
+					public String  newsFeedCreate(){
+						log.info("in side newsFeedCreate method");
+						 return "admin/newsFeedCreate";
+							}
+			        
+			       /* admin/galleryView*/
+			        
+			        @RequestMapping(value="admin/galleryView")
+			        public String galleryView(){
+			        	log.info("in side galleryView");
+			        	return "admin/galleryView";
+			        }
+			        
+			        //admin/galleryCreate
+			        
+			        @RequestMapping(value="admin/galleryCreate")
+			        public String galleryCreate(){
+			        	log.info("in side galleryCreate");
+			        	return "admin/galleryCreate";
+			        }
+			        
+			        // detailsView page
+				       @RequestMapping(value="admin/detailsView")
+					   public String detailsView(){
+						log.info("navigate to detailsView page");
+					    return "admin/detailsView";
+					   }
+				       
+				       //admin/editDetailsView
+				       
+				       @RequestMapping(value="admin/editDetailsView")
+					   public String editDetailsView(){
+						log.info("navigate to editDetailsView page");
+					    return "admin/editDetailsView";
+				       }
+				       
+
+			 //view event list
 			@RequestMapping(value="admin/eventList")
 			public @ResponseBody List<EventBean> getEventList(@RequestParam("userId") Long userId){
 				log.info("in side Eventlist method----"+userId);
@@ -108,31 +145,13 @@ public class AdminMgmtController {
 				
 			}
 			
-			
-			//News List
-			@RequestMapping(value="admin/newsList")
-			public @ResponseBody List<NewsFeedBean> getNewsList(@RequestParam("newsFeedId") Long newsFeedId){
-				log.info("in side newsList method----"+newsFeedId);
-				List<NewsFeedBean> newsList=adminMgmtService.getNewsList(newsFeedId);
-				return newsList;
-				
-			}
-			
-			
-	       //save event
+			 //save event
 		    @RequestMapping(value = "admin/saveEvent", method = RequestMethod.POST)
 		    public @ResponseBody void saveEvent(@RequestBody EventBean eventBean) {
 		    	log.info("in side saveEvent method");
 		    adminMgmtService.saveEvent(eventBean);
 		    }
-		    
-
-		    //create agendo
-			    @RequestMapping(value = "admin/createAgendo", method = RequestMethod.POST)
-			    public @ResponseBody void createAgendo(@RequestBody AgendaBean agendaBean) {
-			    	log.info("in side save method");
-			    adminMgmtService.createAgendo(agendaBean);
-			    }
+		   
 		    
 		    // event details
 		    @RequestMapping(value="admin/eventdetailsList",method=RequestMethod.GET)
@@ -148,6 +167,14 @@ public class AdminMgmtController {
 		    adminMgmtService.updateEvent(eventBean);
 		    }
 		    
+		    //create agendo
+		    @RequestMapping(value = "admin/createAgendo", method = RequestMethod.POST)
+		    public @ResponseBody void createAgendo(@RequestBody AgendaBean agendaBean) {
+		    	log.info("in side save method");
+		    adminMgmtService.createAgendo(agendaBean);
+		    }
+	    
+		    
 		    // admin/agendoDetails
 		    
 		    @RequestMapping(value="admin/agendoDetails")
@@ -160,8 +187,8 @@ public class AdminMgmtController {
 		    //agendo edit
 		    @RequestMapping(value="admin/agendoEditDetails",method=RequestMethod.GET)
 		    public @ResponseBody AgendaBean agendoEditDetails(@RequestParam("agenId") Long agenId){
-		  
-		    	return adminMgmtService.agendoEditDetails(agenId);
+		    	AgendaBean agendaBean=adminMgmtService.agendoEditDetails(agenId);
+		     return agendaBean;
 		  	    
 		    }
 
@@ -171,25 +198,76 @@ public class AdminMgmtController {
 		    	System.out.println("agendaBean update"+agendaBean.getAgenTitle());
 		    	adminMgmtService.updateAgendo(agendaBean);
 		    }
-		   
-		   
-		    //news edit
-		    @RequestMapping(value="admin/newsEditDetails",method=RequestMethod.GET)
-		    public @ResponseBody NewsFeedBean newsEditDetails(@RequestParam("newsFeedId") Long newsFeedId){
-		    	NewsFeedBean newsFeedBean= adminMgmtService.newsEditDetails(newsFeedId);
-		    	System.out.println("dafs---"+newsFeedBean.getNewsTitle());
-		    	return newsFeedBean;
 		    
-		  	  }
-		    //news/update
-		    
-		    @RequestMapping(value ="news/update", method = RequestMethod.POST)
-		    public @ResponseBody void updateNews(@RequestBody NewsFeedBean newsFeedBean) {
-		    	System.out.println("newsFeedBean update"+newsFeedBean.getNewsDesc());
-		    	adminMgmtService.updateNews(newsFeedBean);
+    
+		   //saveNews
+		     @RequestMapping(value = "admin/saveNews", method = RequestMethod.POST)
+		    public @ResponseBody void saveNews(@RequestBody NewsFeedBean newsFeedBean) {
+		    	log.info("in side saveNews method");
+		    adminMgmtService.saveNews(newsFeedBean);
+		   
 		    }
-		   
-		    
+		     
+		    //News List
+				@RequestMapping(value="admin/newsList")
+				public @ResponseBody List<NewsFeedBean> getNewsList(@RequestParam("eventId") Long eventId){
+					log.info("in side newsList method----"+eventId);
+					List<NewsFeedBean> newsList=adminMgmtService.getNewsList(eventId);
+					return newsList;
+					
+			}
+				
+		   //news edit
+			    @RequestMapping(value="admin/newsEditDetails",method=RequestMethod.GET,produces="application/json")
+			    public @ResponseBody NewsFeedBean newsEditDetails(@RequestParam("newsFeedId") Long newsFeedId){
+			    	NewsFeedBean newsFeedBean=adminMgmtService.newsEditDetails(newsFeedId);
+			    	return newsFeedBean;
+			    
+			  	  }
+			   
+				
+		    //news/update
+			    
+			    @RequestMapping(value ="news/update", method = RequestMethod.POST)
+			    public @ResponseBody void updateNews(@RequestBody NewsFeedBean newsFeedBean) {
+			    	System.out.println("newsFeedBean update"+newsFeedBean.getNewsDesc());
+			    	adminMgmtService.updateNews(newsFeedBean);
+			    }
+			   
+			
+	          //admin/galleryList
+				@RequestMapping(value="admin/galaryList")
+				public @ResponseBody List<GalaryBean> galaryList(@RequestParam("eventId") Long eventId){
+					log.info("in side galaryList method----"+eventId);
+					List<GalaryBean> galaryList=adminMgmtService.galaryList(eventId);
+			
+					return galaryList;
+				}
+				//admin/detailsView
+				
+				 @RequestMapping(value="admin/Viewdetails",method=RequestMethod.GET)
+				    public @ResponseBody EventBean detailsView(@RequestParam ("eventId")  Long eventId){
+					EventBean eventBean=adminMgmtService.detailsView(eventId);
+				     return eventBean;
+				  	    
+				    }
+				 
+				 //details/update
+				 
+				 @RequestMapping(value = "details/update", method = RequestMethod.POST)
+				    public @ResponseBody void updateDetails(@RequestBody EventBean eventBean) {
+				    adminMgmtService.updateDetails(eventBean);
+				    }
+				    
+				 //admin/createGallery
+			     
+			     @RequestMapping(value = "admin/createGallery", method = RequestMethod.POST)
+			    public @ResponseBody void createGallery(@RequestBody GalaryBean galaryBean) {
+			    	log.info("in side savegallery method");
+			    adminMgmtService.createGallery(galaryBean);
+			     }
+			   
+			     
 
 }
 
