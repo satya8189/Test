@@ -1,5 +1,9 @@
 package com.wre.adminmgmt.service;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -9,17 +13,23 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
 
 import com.wre.adminmgmt.bean.AgendaBean;
 import com.wre.adminmgmt.bean.EventBean;
 import com.wre.adminmgmt.bean.GalaryBean;
+import com.wre.adminmgmt.bean.InviteBean;
 import com.wre.adminmgmt.bean.NewsFeedBean;
 import com.wre.adminmgmt.dao.AdminMgmtDao;
+import com.wre.common.util.WREConstants;
 import com.wre.model.Agenda;
 import com.wre.model.Event;
+import com.wre.model.EventParticipant;
 import com.wre.model.EventServices;
 import com.wre.model.Galary;
 import com.wre.model.Newsfeed;
+import com.wre.model.Participants;
 
 
 @Service("AdminMgmtService")
@@ -242,8 +252,8 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 				
 	//====================================Galary Start===========================================			
 				//galaryList
-				public List<GalaryBean> galaryList(Long eventId) {
-					List<Galary> galaryList=AdminMgmtDaoImpl.galaryList(eventId);
+				public List<GalaryBean> galaryList(Long eventId,String type) {
+					List<Galary> galaryList=AdminMgmtDaoImpl.galaryList(eventId,type);
 					List<GalaryBean> galaryBeanList=new ArrayList<GalaryBean>();
 					for(Galary galaryOject:galaryList)
 					{
@@ -258,19 +268,31 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 					log.info("list size is --"+galaryBeanList.size());
 					return galaryBeanList;
 				}
+				
+				
 				//Create Galery
-				public void createGallery(GalaryBean galaryBean) {
-					Galary galary=new Galary();
-					galary.setName(galaryBean.getName());
-					galary.setType(galaryBean.getType());
-					Event event=new Event();
-					event.setEventId(galaryBean.getEventId());
-					galary.setEvent(event);
-					AdminMgmtDaoImpl.save(galary);
-					log.info("this is savenews successfully");
-					
-				}
-
+				 public void createGallery(MultipartFile file, Long eventId, String type,
+						  String name) {
+						     
+						         log.info("Enter into saveOrganizationApproveFile");
+						         String filePath=WREConstants.RESOURCE_PATH+File.separator +eventId
+						           +File.separator+type+File.separator;
+						         
+						        if(file!=null){
+						          saveFile(file,filePath);
+						          
+						         }
+						         
+						         Galary galary=new Galary();
+						         galary.setName(name);
+						         galary.setType(type);
+						         Event event=new Event();
+						         event.setEventId(eventId);
+						         galary.setEvent(event);
+						         AdminMgmtDaoImpl.save(galary);
+						         log.info("this is savenews successfully");
+				 }
+						      
 				//get detailsView
 				  public EventBean detailsView(Long eventId) {
 			        	 EventBean eventBeanOject=null;
@@ -301,7 +323,100 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 					
 					
 
+
+				 void saveFile(MultipartFile file, String filePath){
+						
+						log.info("Enter into saveFile(MultipartFile file, long practiceReqId,String filePath)"+file);
+						
+									
+										String name= file.getOriginalFilename();
+
+				            try {
+				                byte[] bytes = file.getBytes();
+				                // Creating the directory to store file
+				                File dir = new File(filePath);
+				                
+				                if (!dir.exists()){
+				                    dir.mkdirs();
+				                }
+				                // Create the file on server
+				                File serverFile = new File(dir.getAbsolutePath()
+				                		+File.separator+name);
+				                BufferedOutputStream stream = new BufferedOutputStream(
+				                        new FileOutputStream(serverFile));
+				                stream.write(bytes);
+				                stream.close();
+				 
+				             
+					           
+				 
+				            } catch (Exception e) {
+				            }
+				            log.info("Exited from saveFile(MultipartFile file, long practiceReqId,String filePath)");
+				        
+									}
+
 					
+			    public void invite(InviteBean inviteBean) {
+						
+				String[] numbers=inviteBean.getPhone().split(",");
+				for(String number:numbers)
+				{
+					Long participantId=AdminMgmtDaoImpl.checkMobileNumber(number);
+					EventParticipant eventParticipant=new EventParticipant();
+					Event eventObj=new Event();
+					eventObj.setEventId(inviteBean.getEventId());
+					eventParticipant.setEvent(eventObj);
+					
+					
+					Participants participantsOject=new Participants();
+					participantsOject.setParticipantId(participantId);
+					
+					eventParticipant.setParticipants(participantsOject);
+					AdminMgmtDaoImpl.save(eventParticipant);
+					
+				}	
+				
+			}
+			    
+			    
+			 
+//inviteList
+			    public List<InviteBean> inviteDetails(Long eventId) {
+					List<Object[]> inviteList=AdminMgmtDaoImpl.inviteDetails(eventId);
+					List<InviteBean> inviteBeanList=new ArrayList<InviteBean>();
+					for(Object[] inviteOject:inviteList)
+					{
+						InviteBean inviteBeanOject=new InviteBean();
+						inviteBeanOject.setParticipantId(((BigInteger)inviteOject[0]).longValue());
+						inviteBeanOject.setFirstName((String)inviteOject[1]);
+						inviteBeanOject.setLastName((String)inviteOject[2]);
+						inviteBeanOject.setPhone((String)inviteOject[3]);
+						inviteBeanOject.setStatus((String)inviteOject[4]);
+						inviteBeanOject.setEmail((String)inviteOject[5]);
+						inviteBeanList.add(inviteBeanOject);
+						
+						
+					}
+					log.info("list size is ---"+inviteBeanList.size());
+				
+					return inviteBeanList;
+				}
+			    
+			  
+
+				//deleteGallery
+				public void deleteGallery(Long glaryItemId) {
+					boolean status=false;
+					log.info("Entered into deleteGallery method");
+					Galary galary=new Galary();
+					galary.setGlaryItemId(glaryItemId);
+					AdminMgmtDaoImpl.delete(galary);
+					  
+				}
+						
+				
+							
 					
 }
 

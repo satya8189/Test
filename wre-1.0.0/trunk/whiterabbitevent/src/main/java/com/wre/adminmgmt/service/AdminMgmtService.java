@@ -2,11 +2,13 @@ package com.wre.adminmgmt.service;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.wre.adminmgmt.bean.AgendaBean;
 import com.wre.adminmgmt.bean.EventBean;
 import com.wre.adminmgmt.bean.GalaryBean;
+import com.wre.adminmgmt.bean.InviteBean;
 import com.wre.adminmgmt.bean.NewsFeedBean;
-import com.wre.model.Event;
 
 public interface AdminMgmtService {
 
@@ -34,12 +36,19 @@ public void updateNews(NewsFeedBean newsFeedBean);
 
 public void saveNews(NewsFeedBean newsFeedBean);
 
-public List<GalaryBean> galaryList(Long eventId);
+public List<GalaryBean> galaryList(Long eventId,String type);
 
 public EventBean detailsView(Long eventId);
 
 public void updateDetails(EventBean eventBean);
 
-public void createGallery(GalaryBean galaryBean);
+public void createGallery(MultipartFile file, Long eventId, String type,
+		  String name);
+
+public void invite(InviteBean inviteBean);
+
+public List<InviteBean> inviteDetails(Long eventId);
+
+public void deleteGallery(Long glaryItemId);
 
 }
