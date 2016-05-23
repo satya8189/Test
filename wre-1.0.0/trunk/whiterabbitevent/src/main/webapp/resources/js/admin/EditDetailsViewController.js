@@ -16,10 +16,7 @@ var EditDetailsViewController = function($scope, $http, $location, $routeParams)
 			
 			$http.post('details/update',event).success(function(status) {
 				
-				
-		
-			
-				location.href="#/detailsView/"+event.eventId;
+			location.href="#/detailsView/"+event.eventId;
 				
 				
 

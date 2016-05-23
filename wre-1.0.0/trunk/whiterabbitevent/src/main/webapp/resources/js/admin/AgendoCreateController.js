@@ -1,4 +1,4 @@
-var AgendoCreateController = function($scope, $http, $location, $routeParams) {
+var AgendoCreateController = function($scope, $http, $location, $routeParams,ngNotifier) {
 	$scope.agendo = {};
 
 	//saveAgendo(agendo)
@@ -9,22 +9,25 @@ var AgendoCreateController = function($scope, $http, $location, $routeParams) {
 		
 		
 	$http.post('admin/createAgendo',agendo).success(function(success) {
-		alert("admin/createAgendo");
+		
 
-	//$location.path("/agendoViewDetails/"+$routeParams.eventId);
+		ngNotifier.notify("Record Created Successfully !");
 	$location.path("/agendoDetails/"+agendo.eventId);
 	
-
+	
+	
 
 				});
 	
 
 };
 
-$scope.cancelEvent = function() {
-	$location.path("/newsFeedView/");
+$scope.cancelAgendoView = function() {
+	
+	$location.path("/agendoDetails/"+agendo.eventId);
+	};
+	
 
-};
 
 };	
 

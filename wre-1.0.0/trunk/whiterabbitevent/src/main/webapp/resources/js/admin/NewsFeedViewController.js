@@ -1,6 +1,6 @@
 
 var NewsFeedViewController = function($scope,$http,$routeParams) {
-	$scope.newsList = {};
+	$scope.inviteList = {};
 	
 	
 	$scope.$on("$routeChangeSuccess", function () {

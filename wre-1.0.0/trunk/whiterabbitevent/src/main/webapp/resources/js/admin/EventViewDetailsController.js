@@ -13,6 +13,7 @@ var EventViewDetailsController = function($scope,$routeParams,$http,$location) {
 				 });
 
 	$scope.serviceDetails = function(event){
+	
 		if(event.serviceId=="2"){
 	location.href="#/agendoDetails/"+event.eventId;
 		}
@@ -25,8 +26,21 @@ var EventViewDetailsController = function($scope,$routeParams,$http,$location) {
 		}else if(event.serviceId=="1"){
 			location.href="#/detailsView/"+event.eventId;	
 			
+		}else if(event.serviceId=="17"){
 			
-		
+			location.href="#/invite/"+event.eventId;	
+			
+			
+			
+		}else if(event.serviceId=="6"){
+			alert('document condiation');
+			location.href="#/videoView/"+event.eventId;	
+			
+			
+		}else if(event.serviceId=="7"){
+			alert('document condiation');
+			location.href="#/documentView/"+event.eventId;	
+			
 	};
 	};
 	

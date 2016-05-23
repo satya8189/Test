@@ -1,4 +1,4 @@
-var EventCreateController = function($scope, $http, $location) {
+var EventCreateController = function($scope, $http, $location,ngNotifier) {
 	$scope.event = {};
 	$scope.saveEvent = function(event,userId) {
 	event.userId=userId;
@@ -15,7 +15,7 @@ var EventCreateController = function($scope, $http, $location) {
 							}
 
 						}).error(function() {
-					ngNotifier.notifyError("Event not created !");
+							ngNotifier.notify("Record Created Successfully !");
 				});
 	
 

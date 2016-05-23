@@ -10,6 +10,9 @@ var AgendoViewController = function($scope,$routeParams,$http,$location) {
 			
 				
 				    $scope.agendoList = agendoList;
+				    // create empty search model (object) to trigger $watch on update
+					$scope.search =null;
+
 				    
 			
 				    
