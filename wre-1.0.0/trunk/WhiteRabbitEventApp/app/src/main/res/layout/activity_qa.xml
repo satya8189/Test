@@ -1,37 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="16dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:orientation="vertical"
     tools:context="com.wre.yin.whiterabbiteventapp.QAActivity">
 
-    <TextView
-        android:id="@+id/activity_text"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Enter Your Question"
-        android:textColor="#000"
-        android:textSize="20sp" />
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/question_edittext"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/activity_text"
-        android:layout_marginTop="10dp"
-        android:textColor="#fff"
-        android:background="@drawable/rectangle_shape"
-        android:lines="7" />
+        <TextView
+            android:id="@+id/activity_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Enter Your Question"
+            android:textColor="#000"
+            android:textSize="18sp" />
 
-    <Button
-        android:id="@+id/question_submit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/question_edittext"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:background="#ff0000"
-        android:textColor="#fff"
-        android:text="SUBMIT" />
-</RelativeLayout>
+        <EditText
+            android:id="@+id/question_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rectangle_shape_listgroup"
+            android:gravity="top|left"
+            android:inputType="textMultiLine"
+            android:lines="20"
+            android:minLines="5"
+            android:textSize="16sp"
+            android:padding="10dp"
+            android:textColor="#000" />
+
+        <Button
+            android:id="@+id/question_submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/question_edittext"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rectangle_shape_no"
+            android:gravity="center"
+            android:text="SUBMIT"
+            android:textColor="#fff" />
+    </LinearLayout>
+
+</ScrollView>

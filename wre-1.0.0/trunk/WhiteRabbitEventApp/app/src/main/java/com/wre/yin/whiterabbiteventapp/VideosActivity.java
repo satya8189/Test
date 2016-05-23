@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,7 +26,6 @@ import android.widget.VideoView;
 
 import com.wre.yin.whiterabbiteventapp.beans.Result;
 import com.wre.yin.whiterabbiteventapp.beans.UploadImgVid;
-import com.wre.yin.whiterabbiteventapp.gridlibrary.DynamicGridView;
 import com.wre.yin.whiterabbiteventapp.utils.Callback;
 import com.wre.yin.whiterabbiteventapp.utils.Constants;
 import com.wre.yin.whiterabbiteventapp.utils.MyAsyncTask;
@@ -61,7 +61,7 @@ public class VideosActivity extends AppCompatActivity {
     Bitmap bitmap;
 
 
-    private DynamicGridView videoGridView;
+    private GridView videoGridView;
     private Cursor cursor;
     private int columnIndex;
 
@@ -116,7 +116,7 @@ public class VideosActivity extends AppCompatActivity {
         cursor = getContentResolver().query(MediaStore.Images.Thumbnails.EXTERNAL_CONTENT_URI, list, null, null, MediaStore.Video.Thumbnails._ID);
         columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Video.Thumbnails._ID);
 
-        videoGridView = (DynamicGridView) findViewById(R.id.upload_video_grid);
+        videoGridView = (GridView) findViewById(R.id.upload_video_grid);
         VideoAdapter adapter = new VideoAdapter(this);
         videoGridView.setAdapter(adapter);
 

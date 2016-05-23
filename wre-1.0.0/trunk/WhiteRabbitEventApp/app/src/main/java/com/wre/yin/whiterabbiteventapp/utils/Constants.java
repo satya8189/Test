@@ -15,6 +15,9 @@ import android.widget.TextView;
 
 import com.wre.yin.whiterabbiteventapp.R;
 
+import java.util.Arrays;
+import java.util.List;
+
 
 public class Constants {
 
@@ -25,6 +28,24 @@ public class Constants {
     public static final String IMAGE_DIRECTORY_NAME = "Image File Upload";
     public static final String VIDEO_DIRECTORY_NAME = "Video File Upload";
     public static final String UPLOAD_IMAGE_VIDEO=URL+"imageUpload";
+
+
+    //Image Gallery file path constansts
+
+    // Number of columns of Grid View
+    public static final int NUM_OF_COLUMNS = 2;
+
+    // Gridview image padding
+    public static final int GRID_PADDING = 1; // in dp
+
+    // SD card image directory
+    public static final String PHOTO_ALBUM ="/DCIM/"+"/Camera/";
+
+    // supported file formats
+    public static final List<String> FILE_EXTN = Arrays.asList("jpg", "jpeg",
+            "png");
+
+
 
     public static boolean isNetworkAvailable(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);

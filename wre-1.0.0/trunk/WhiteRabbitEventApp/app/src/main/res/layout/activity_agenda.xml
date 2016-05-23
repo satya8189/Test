@@ -10,7 +10,9 @@
         android:id="@+id/lvExp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:childDivider="#fff"
         android:divider="#fff"
+        android:dividerHeight="10dp"
         android:groupIndicator="@null">
 
     </ExpandableListView>

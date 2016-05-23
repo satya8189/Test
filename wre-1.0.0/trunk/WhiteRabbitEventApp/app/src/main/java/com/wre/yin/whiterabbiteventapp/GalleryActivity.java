@@ -1,159 +1,68 @@
 package com.wre.yin.whiterabbiteventapp;
 
-import android.content.Context;
-import android.database.Cursor;
-import android.net.Uri;
+import android.content.res.Resources;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.util.TypedValue;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.GridView;
 
-import com.wre.yin.whiterabbiteventapp.gridlibrary.DynamicGridView;
+import com.wre.yin.whiterabbiteventapp.adapters.GridViewImageAdapter;
+import com.wre.yin.whiterabbiteventapp.utils.Constants;
+import com.wre.yin.whiterabbiteventapp.utils.GalleryUtils;
+
+import java.util.ArrayList;
 
 public class GalleryActivity extends AppCompatActivity {
-
-    private TextView text;
-    private DynamicGridView imageGridView;
-    private static final String TAG = GalleryActivity.class.getName();
-
-
-    //  Cursor used to access the results from querying for images on the SD card.
-
-    private Cursor cursor;
-
-    // Column index for the Thumbnails Image IDs.
-
-    private int columnIndex;
+    private GalleryUtils utils;
+    private ArrayList<String> imagePaths = new ArrayList<String>();
+    private GridViewImageAdapter adapter;
+    private GridView gridView;
+    private int columnWidth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gallery);
+
         String nameTxt = getIntent().getExtras().getString("name");
-        // text = (TextView) findViewById(R.id.activity_text);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(nameTxt);
 
+        gridView = (GridView) findViewById(R.id.image_grid_view);
+        utils = new GalleryUtils(this);
 
-        //Searching Images ID's from Gallery. _ID is the Default id code for all. You can retrive image,contacts,music id in the same way.
-        String[] list = {MediaStore.Images.Media._ID};
+        // Initilizing Grid View
+        InitilizeGridLayout();
 
-        //Retriving Images from Database(SD CARD) by Cursor.
-        cursor = getContentResolver().query(MediaStore.Images.Thumbnails.EXTERNAL_CONTENT_URI, list, null, null, MediaStore.Images.Thumbnails._ID);
-        columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Thumbnails._ID);
+        // loading all image paths from SD card
+        imagePaths = utils.getFilePaths();
 
-        imageGridView = (DynamicGridView) findViewById(R.id.image_grid);
-        ImageAdapter adapter = new ImageAdapter(this);
-        imageGridView.setAdapter(adapter);
+        // Gridview adapter
+        adapter = new GridViewImageAdapter(GalleryActivity.this, imagePaths,
+                columnWidth);
 
-        imageGridView.setOnDragListener(new DynamicGridView.OnDragListener() {
-            @Override
-            public void onDragStarted(int position) {
-                Log.d(TAG, "drag started at position " + position);
-            }
+        // setting grid view adapter
+        gridView.setAdapter(adapter);
 
-            @Override
-            public void onDragPositionsChanged(int oldPosition, int newPosition) {
-                Log.d(TAG, String.format("drag item position changed from %d to %d", oldPosition, newPosition));
-            }
-        });
-        imageGridView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                imageGridView.startEditMode(position);
-                return true;
-            }
-        });
-      /*  imageGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(GalleryActivity.this, parent.getAdapter().getItem(position).toString(),
-                        Toast.LENGTH_SHORT).show();
-                Intent i=new Intent(GalleryActivity.this,ProfileDetailsActivity.class);
-                i.putExtra("speakerName",parent.getAdapter().getItem(position).toString());
-                startActivity(i);
-
-            }
-        });*/
 
     }
 
-    public class ImageAdapter extends BaseAdapter {
+    private void InitilizeGridLayout() {
+        Resources r = getResources();
+        float padding = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                Constants.GRID_PADDING, r.getDisplayMetrics());
 
-        private Context context;
+        columnWidth = (int) ((utils.getScreenWidth() - ((Constants.NUM_OF_COLUMNS + 1) * padding)) / Constants.NUM_OF_COLUMNS);
 
-        public ImageAdapter(Context localContext) {
-
-            context = localContext;
-
-        }
-
-        public int getCount() {
-
-            return cursor.getCount();
-
-        }
-
-        public Object getItem(int position) {
-
-            return position;
-
-        }
-
-        public long getItemId(int position) {
-
-            return position;
-
-        }
-
-        public View getView(int position, View convertView, ViewGroup parent) {
-            ViewHolder holder = new ViewHolder();
-
-
-            if (convertView == null) {
-                holder.picturesView = new ImageView(context);
-                //Converting the Row Layout to be used in Grid View
-                convertView = getLayoutInflater().inflate(R.layout.row, parent, false);
-
-                //You can convert Layout in this Way with the Help of View Stub. View Stub is newer. Read about ViewStub.Inflate
-                // and its parameter.
-                //convertView= ViewStub.inflate(context,R.layout.row,null);
-
-                convertView.setTag(holder);
-
-            } else {
-                holder = (ViewHolder) convertView.getTag();
-            }
-            cursor.moveToPosition(position);
-            int imageID = cursor.getInt(columnIndex);
-
-            //In Uri "" + imageID is to convert int into String as it only take String Parameter and imageID is in Integer format.
-            //You can use String.valueOf(imageID) instead.
-            Uri uri = Uri.withAppendedPath(
-                    MediaStore.Images.Thumbnails.EXTERNAL_CONTENT_URI, "" + imageID);
-
-            //Setting Image to View Holder Image View.
-            holder.picturesView = (ImageView) convertView.findViewById(R.id.imageview);
-            holder.picturesView.setImageURI(uri);
-            holder.picturesView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-
-
-            return convertView;
-
-        }
-
-        // View Holder pattern used for Smooth Scrolling. As View Holder pattern recycle the findViewById() object.
-        class ViewHolder {
-            private ImageView picturesView;
-        }
+        gridView.setNumColumns(Constants.NUM_OF_COLUMNS);
+        gridView.setColumnWidth(columnWidth);
+        gridView.setStretchMode(GridView.NO_STRETCH);
+        gridView.setPadding((int) padding, (int) padding, (int) padding,
+                (int) padding);
+        gridView.setHorizontalSpacing((int) padding);
+        gridView.setVerticalSpacing((int) padding);
     }
 
     @Override

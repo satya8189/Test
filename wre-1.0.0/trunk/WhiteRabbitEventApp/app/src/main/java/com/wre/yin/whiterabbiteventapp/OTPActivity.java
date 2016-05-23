@@ -21,6 +21,7 @@ public class OTPActivity extends AppCompatActivity {
         otpTxt = (EditText) findViewById(R.id.otp_text);
         submitBtn = (Button) findViewById(R.id.submit_btn);
 
+
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

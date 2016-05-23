@@ -1,7 +1,6 @@
 package com.wre.yin.whiterabbiteventapp.adapters;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +13,7 @@ import com.wre.yin.whiterabbiteventapp.R;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
@@ -51,13 +51,19 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = infalInflater.inflate(R.layout.list_item, null);
         }
-        if (groupPosition % 2 == 0) {
-            convertView.setBackgroundColor(Color.parseColor("#90caf9"));
+       if (groupPosition % 2 == 0) {
+            convertView.setBackgroundResource(R.drawable.rectangle_shape_yes);
             // use this when you want to use hexa value of colors
         } else {
-            convertView.setBackgroundColor(Color.parseColor("#ffccbc"));
+            convertView.setBackgroundResource(R.drawable.rectangle_shape_no);
             // use this when you want to use hexa value of colors
         }
+       /* int[] androidColors = _context.getResources().getIntArray(R.array.androidcolors);
+        int randomAndroidColor = androidColors[new Random().nextInt(androidColors.length)];
+        convertView.setBackgroundColor(randomAndroidColor);
+       Random rnd = new Random();
+        int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+        convertView.setBackgroundColor(color);*/
 
         TextView txtListChild = (TextView) convertView
                 .findViewById(R.id.lblListItem);
@@ -99,12 +105,22 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
         }
         if (groupPosition % 2 == 0) {
-            convertView.setBackgroundColor(Color.parseColor("#90caf9"));
+            // convertView.setBackgroundColor(Color.parseColor("#67C2E1"));
+            convertView.setBackgroundResource(R.drawable.rectangle_shape_yes);
+
             // use this when you want to use hexa value of colors
         } else {
-            convertView.setBackgroundColor(Color.parseColor("#ffccbc"));
+            convertView.setBackgroundResource(R.drawable.rectangle_shape_no);
             // use this when you want to use hexa value of colors
         }
+     /* *//*  Random rnd = new Random();
+        int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+        convertView.setBackgroundColor(color);*//*
+        int[] androidColors = _context.getResources().getIntArray(R.array.androidcolors);
+        int randomAndroidColor = androidColors[new Random().nextInt(androidColors.length)];
+        convertView.setBackgroundColor(randomAndroidColor);*/
+
+
         TextView lblListHeader = (TextView) convertView
                 .findViewById(R.id.lblListHeader);
         lblListHeader.setTypeface(null, Typeface.BOLD);

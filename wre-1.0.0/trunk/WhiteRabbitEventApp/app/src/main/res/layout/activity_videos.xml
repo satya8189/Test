@@ -13,6 +13,8 @@
         android:id="@+id/upload_video"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/rectangle_shape_no"
+        android:textColor="#fff"
         android:text="UPLOAD VIDEO" />
 
     <LinearLayout
@@ -41,14 +43,13 @@
 
     </LinearLayout>
 
-    <com.wre.yin.whiterabbiteventapp.gridlibrary.DynamicGridView
+    <GridView
         android:id="@+id/upload_video_grid"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:horizontalSpacing="5dp"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#fff"
         android:layout_below="@+id/upload_video_view"
-        android:numColumns="@integer/column_count"
-        android:verticalSpacing="5dp">
-
-    </com.wre.yin.whiterabbiteventapp.gridlibrary.DynamicGridView>
+        android:gravity="center"
+        android:numColumns="auto_fit"
+        android:stretchMode="columnWidth"></GridView>
 </RelativeLayout>

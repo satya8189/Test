@@ -1,8 +1,8 @@
 package com.wre.yin.whiterabbiteventapp;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,27 +14,28 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.wre.yin.whiterabbiteventapp.adapters.GridViewImageAdapter;
 import com.wre.yin.whiterabbiteventapp.beans.Result;
 import com.wre.yin.whiterabbiteventapp.beans.UploadImgVid;
-import com.wre.yin.whiterabbiteventapp.gridlibrary.DynamicGridView;
 import com.wre.yin.whiterabbiteventapp.utils.Callback;
 import com.wre.yin.whiterabbiteventapp.utils.Constants;
+import com.wre.yin.whiterabbiteventapp.utils.GalleryUtils;
 import com.wre.yin.whiterabbiteventapp.utils.MyAsyncTask;
 import com.wre.yin.whiterabbiteventapp.utils.Utils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -58,9 +59,11 @@ public class CrowdPicsActivity extends AppCompatActivity {
     ProgressDialog prgDialog;
     Bitmap bitmap;
 
-    private DynamicGridView imageGridView;
-    private Cursor cursor;
-    private int columnIndex;
+    private GalleryUtils utils;
+    private ArrayList<String> imagePaths = new ArrayList<String>();
+    private GridViewImageAdapter adapter;
+    private GridView gridView;
+    private int columnWidth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,87 +111,40 @@ public class CrowdPicsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(nameTxt);
 
-        String[] list = {MediaStore.Images.Media._ID};
 
-        //Retriving Images from Database(SD CARD) by Cursor.
-        cursor = getContentResolver().query(MediaStore.Images.Thumbnails.EXTERNAL_CONTENT_URI, list, null, null, MediaStore.Images.Thumbnails._ID);
-        columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Thumbnails._ID);
+        gridView = (GridView) findViewById(R.id.upload_image_grid);
+        utils = new GalleryUtils(this);
 
-        imageGridView = (DynamicGridView) findViewById(R.id.upload_image_grid);
-        ImageAdapter adapter = new ImageAdapter(this);
-        imageGridView.setAdapter(adapter);
+        // Initilizing Grid View
+        InitilizeGridLayout();
 
+        // loading all image paths from SD card
+        imagePaths = utils.getFilePaths();
 
+        // Gridview adapter
+        adapter = new GridViewImageAdapter(CrowdPicsActivity.this, imagePaths,
+                columnWidth);
+
+        // setting grid view adapter
+        gridView.setAdapter(adapter);
     }
-    public class ImageAdapter extends BaseAdapter {
 
-        private Context context;
+    private void InitilizeGridLayout() {
+        Resources r = getResources();
+        float padding = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                Constants.GRID_PADDING, r.getDisplayMetrics());
 
-        public ImageAdapter(Context localContext) {
+        columnWidth = (int) ((utils.getScreenWidth() - ((Constants.NUM_OF_COLUMNS + 1) * padding)) / Constants.NUM_OF_COLUMNS);
 
-            context = localContext;
-
-        }
-
-        public int getCount() {
-
-            return cursor.getCount();
-
-        }
-
-        public Object getItem(int position) {
-
-            return position;
-
-        }
-
-        public long getItemId(int position) {
-
-            return position;
-
-        }
-
-        public View getView(int position, View convertView, ViewGroup parent) {
-            ViewHolder holder = new ViewHolder();
-
-
-            if (convertView == null) {
-                holder.picturesView = new ImageView(context);
-                //Converting the Row Layout to be used in Grid View
-                convertView = getLayoutInflater().inflate(R.layout.row, parent, false);
-
-                //You can convert Layout in this Way with the Help of View Stub. View Stub is newer. Read about ViewStub.Inflate
-                // and its parameter.
-                //convertView= ViewStub.inflate(context,R.layout.row,null);
-
-                convertView.setTag(holder);
-
-            } else {
-                holder = (ViewHolder) convertView.getTag();
-            }
-            cursor.moveToPosition(position);
-            int imageID = cursor.getInt(columnIndex);
-
-            //In Uri "" + imageID is to convert int into String as it only take String Parameter and imageID is in Integer format.
-            //You can use String.valueOf(imageID) instead.
-            Uri uri = Uri.withAppendedPath(
-                    MediaStore.Images.Thumbnails.EXTERNAL_CONTENT_URI, "" + imageID);
-
-            //Setting Image to View Holder Image View.
-            holder.picturesView = (ImageView) convertView.findViewById(R.id.imageview);
-            holder.picturesView.setImageURI(uri);
-            holder.picturesView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-
-
-            return convertView;
-
-        }
-
-        // View Holder pattern used for Smooth Scrolling. As View Holder pattern recycle the findViewById() object.
-        class ViewHolder {
-            private ImageView picturesView;
-        }
+        gridView.setNumColumns(Constants.NUM_OF_COLUMNS);
+        gridView.setColumnWidth(columnWidth);
+        gridView.setStretchMode(GridView.NO_STRETCH);
+        gridView.setPadding((int) padding, (int) padding, (int) padding,
+                (int) padding);
+        gridView.setHorizontalSpacing((int) padding);
+        gridView.setVerticalSpacing((int) padding);
     }
+
     public void loadImagefromGallery() {
         // Create intent to Open Image applications like Gallery, Google Photos
         Intent galleryIntent = new Intent(Intent.ACTION_PICK,
