@@ -3,7 +3,7 @@
 
 /* Services */
 
-var AppServices = angular.module('dentalconsult.services', []).value('ngToastr',toastr);
+var AppServices = angular.module('wre.services', []).value('ngToastr',toastr);
 
 
 AppServices.value('version', '0.1');
@@ -18,7 +18,7 @@ App.service('objectService', function() {
 		  if(savedData!=null){
 			    return savedData;
 			    }else{
-			     return null;
+			     return null;R
 			    }
 	  }
 
