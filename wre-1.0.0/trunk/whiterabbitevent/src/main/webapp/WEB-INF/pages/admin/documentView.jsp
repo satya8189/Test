@@ -17,37 +17,25 @@ margin-bottom:0px !important;
 	<form>
 	
 					
-			<a ng-click="galleryCreate(eventId)"title="eventViewDetails">GaleryCreate
+			<a ng-click="documentCreate(eventId)"title="eventViewDetails">DocumentCreate
 							<i class="fa fa-eye-slash icons"> </i>
 				</a>
-				
-				     
 	
-	<div class="header-none">Gallery List</div>
+	<div class="header-none">DocumentView</div>
 	<div class="tab-content">
               <div id="home" class="tab-pane fade in active">
                
                 <div class="col-md-12 padding-0">
 
-                  <a class="col-md-3"  ng-repeat="galary in galaryList  ">
+                  <a class="col-md-3"  ng-repeat="galary in galaryList">
                     <div class="content-div">
                       <div class="centerimg">
-                      <img src="http://hdwallpapershdpics.com/wp-content/uploads/2015/08/Cool-Tiger-Wallpaper-1920x1080-HD.jpg" 
-                      style="width: 20em;margin-left:-2em !important;">
+                      <img src="satya.png"  class="img-responsive" >
                         </div>
                       <div class="text-content" >
 
                         <label>Name : {{galary.name}}</label>
-                        
-                        
-                           <button ng-click="deleteGallery(galary)" title="deletgalary">DeleteGallery
-							<i class="fa fa-eye-slash icons"> </i>
-				</button>
-                        
-                    
                         <br/>
-                        
-                      
 
                         
 

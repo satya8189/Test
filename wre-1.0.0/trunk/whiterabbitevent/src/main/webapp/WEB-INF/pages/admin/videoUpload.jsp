@@ -4,20 +4,20 @@
 
 
 
-<form name="createEvent" ng-submit="createGallery(gallery)" enctype="multipart/form-data" >
+<form name="createEvent" ng-submit="uploadVideo(video)"  enctype="multipart/form-data" >
 
 <div class="container">
 	<a href="#/agendoViewDetails"> <i class="fa fa-angle-left back"></i>
 	</a>
 <div class="panel">
- <div class="panel-heading text-center font-size-20 padding-15">Create Gallery</div>
+ <div class="panel-heading text-center font-size-20 padding-15">Create Document</div>
   <div class="panel-body text-center">
   
     <div class="row">
 	<div class="col-md-12">
 	  <div class="form-group col-md-6" >
-          <label class="flot-left">Gallery_Name <span style="color:red;">*</span></label>
-      <input type="text" class="input-text form-control" id="agendo_Name" placeholder="Gallery_Name"  ng-model="gallery.name" 
+          <label class="flot-left">Video Name <span style="color:red;">*</span></label>
+      <input type="text" class="input-text form-control" id="agendo_Name" placeholder="Document"  ng-model="video.name" 
       name="gallery"   required>
       </div>
       </div>

@@ -16,7 +16,7 @@
     
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-    
+<!--     //ngNotifier -->
    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
   <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
    <link rel="stylesheet" href="resources/css/style.css"/>
@@ -28,8 +28,8 @@
 		<script src="resources/js/angular/angular-messages.js"></script>
 		<script src="resources/js/angular/angular-messages.min.js"></script>
      <script src="resources/js/navigationjs/adminNavigation.js"></script>
-     <script src="resources/js/services.js"></script>
-    <!-- event -->
+<script src="resources/js/services.js"></script>
+<!-- event -->
     <script src="resources/js/admin/EventViewController.js"></script>
     <script src="resources/js/admin/EventCreateController.js"></script>
     <script src="resources/js/admin/EventEditController.js"></script>

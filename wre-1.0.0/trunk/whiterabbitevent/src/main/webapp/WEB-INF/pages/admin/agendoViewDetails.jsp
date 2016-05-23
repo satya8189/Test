@@ -14,16 +14,16 @@ margin-bottom:0px !important;
 <toaster-container></toaster-container>
 
 <div class="container">
-<a ng-click="cancelOrganization()"> <i
+ <a ng-click="cancelAgendoView()"> <i
 		class="fa fa-angle-left back"></i>
-	</a>
+	</a> 
 	
 <form>
 	
 			
 			
 							
-			<a ng-click="navigateagendoCreate(eventId)"title="eventViewDetails">agendoCreate
+			<a ng-click="navigateagendoCreate(eventId)"title="eventViewDetails">agendaCreate
 							<i class="fa fa-eye-slash icons"> </i>
 				</a>
 				
@@ -36,11 +36,12 @@ margin-bottom:0px !important;
 			 -->	
 
 	
-	<div class="header-none">Event List</div>
+	<div class="header-none">agenda List</div>
 	<div class="panel">
 		<div class="panel-body">
 		 <div class="col-md-2 col-md-offset-10 padding-0">
-		 <input ng-model="search"  ng-show="agendoList.length!=0" class="form-control" placeholder="Search">
+		 <input ng-model="search"  ng-show="agendoList.length!=0" class="form-control" placeholder="Search"">
+		 
 			</div> 
 			<div class="col-md-12 space-hid">&nbsp;</div>
 			<table class="table" id="eventView">
@@ -94,6 +95,8 @@ margin-bottom:0px !important;
 					</td>
 				</tr>
 			</table>
+			
+		
 			
 			
 		</div>
