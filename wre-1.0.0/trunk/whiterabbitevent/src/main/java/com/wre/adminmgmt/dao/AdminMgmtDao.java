@@ -9,6 +9,7 @@ import com.wre.model.Event;
 import com.wre.model.EventServices;
 import com.wre.model.Galary;
 import com.wre.model.Newsfeed;
+import com.wre.model.Participants;
 
 public interface AdminMgmtDao  extends GenericDao<Object>{
 
@@ -26,9 +27,13 @@ public List<Newsfeed> getNewsList(Long eventId);
 
 public Newsfeed newsEditDetails(Long newsFeedId);
 
-public List<Galary> galaryList(Long eventId);
+public List<Galary> galaryList(Long eventId,String type);
 
 public Event detailsView(Long eventId);
+
+public Long checkMobileNumber(String number);
+
+public List<Object[]> inviteDetails(Long eventId);
 
 
 }

@@ -6,17 +6,17 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
+import org.hibernate.SQLQuery;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
-import com.wre.adminmgmt.bean.EventBean;
 import com.wre.common.dao.GenericDaoImpl;
 import com.wre.model.Agenda;
 import com.wre.model.Event;
 import com.wre.model.EventServices;
 import com.wre.model.Galary;
 import com.wre.model.Newsfeed;
-import com.wre.model.User;
+import com.wre.model.Participants;
 
 
 
@@ -97,9 +97,10 @@ public Newsfeed newsEditDetails(Long newsFeedId) {
 //galaryList
 
 @Override
-public List<Galary> galaryList(Long eventId) {
+public List<Galary> galaryList(Long eventId,String type) {
 	Criteria criteria=sessionFactory.getCurrentSession().createCriteria(Galary.class);
 	criteria.add(Restrictions.eq("event.eventId",eventId));
+	criteria.add(Restrictions.eq("type",type));
 	criteria.setFetchMode("event", FetchMode.EAGER);
 	List<Galary>galaryList=criteria.list();
 	return galaryList;
@@ -121,6 +122,53 @@ public Event detailsView(Long eventId) {
 
 
 
+public Long checkMobileNumber(String number) {
+	Long ParticipantId;
+	
+Criteria criteria=sessionFactory.getCurrentSession().createCriteria(Participants.class);
+criteria.add(Restrictions.eq("phone",number));
+Participants participants=(Participants)criteria.uniqueResult();
+
+	if(participants!=null){
+		ParticipantId=participants.getParticipantId();
+		
+	}else
+	{
+		Participants	participantsOject=new Participants();
+		participantsOject.setPhone(number);
+		participantsOject.setOtp("welcome");
+		sessionFactory.getCurrentSession().save(participantsOject);
+		ParticipantId= participantsOject.getParticipantId();
+		
+	}
+return ParticipantId;
+}
+
+
+/*public List<Object[]> getOrgList() {
+	String query = "select o.Org_ID,o.Org_Name,o.PC_First_Name,o.PC_Last_Name,o.Created_Date,u.First_Name,coalesce(oc.Count, 0) as practices "
+			+ " from organization o  join user u on o.Created_By=u.User_ID left join "
+			+ "(select Org_ID,count(*) as Count from practice  group by Org_ID ) oc on o.Org_ID = oc.Org_ID group by o.Org_ID ORDER BY o.Created_Date DESC";
+	SQLQuery sqlQuery = sessionFactory.getCurrentSession().createSQLQuery(
+			query);
+	List<Object[]> orgList = (List<Object[]>) sqlQuery.list();
+	return orgList;
+}*/
+
+
+//inviteList
+public List<Object[]> inviteDetails(Long eventId) {
+	
+	String query = "SELECT p.Participant_ID,p.FirstName,p.Last_Name,p.Phone,p.Status,p.Email FROM participants p LEFT JOIN event_participant ep ON ep.Participant_ID=p.Participant_ID"
+			+ " WHERE ep.Event_ID= :evtId";
+	SQLQuery sqlQuery = sessionFactory.getCurrentSession().createSQLQuery(
+			query);
+	sqlQuery.setParameter("evtId", eventId);
+	return (List<Object[]>) sqlQuery.list();
+}
+}
+
+
 
 
 
@@ -145,4 +193,4 @@ public Event detailsView(Long eventId) {
 	
 
 
-}
+
