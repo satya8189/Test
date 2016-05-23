@@ -12,10 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
 
 import com.wre.adminmgmt.bean.AgendaBean;
 import com.wre.adminmgmt.bean.EventBean;
 import com.wre.adminmgmt.bean.GalaryBean;
+import com.wre.adminmgmt.bean.InviteBean;
 import com.wre.adminmgmt.bean.NewsFeedBean;
 import com.wre.adminmgmt.service.AdminMgmtService;
 
@@ -128,13 +131,57 @@ public class AdminMgmtController {
 					   }
 				       
 				       //admin/editDetailsView
-				       
-				       @RequestMapping(value="admin/editDetailsView")
+				        @RequestMapping(value="admin/editDetailsView")
 					   public String editDetailsView(){
 						log.info("navigate to editDetailsView page");
 					    return "admin/editDetailsView";
 				       }
 				       
+				       //admin/invite
+				        
+				        @RequestMapping(value="admin/invite")
+						   public String invite(){
+							log.info("navigate to invite page");
+						    return "admin/invite";
+					       }
+				        
+				         //admin/inviteList
+				        @RequestMapping(value="admin/inviteList")
+						   public String inviteList(){
+							log.info("navigate inviteList page");
+						    return "admin/inviteList";
+					       }
+				        
+				        
+				       //admin/videoView
+				        @RequestMapping(value="admin/videoView")
+						   public String videoView(){
+							log.info("navigate videoView page");
+						    return "admin/videoView";
+					       }
+				        
+				        //admin/documentView
+				        
+				        @RequestMapping(value="admin/documentView")
+						   public String documentView(){
+							log.info("navigate documentView page");
+						    return "admin/documentView";
+					       }
+				        
+				        //admin/documetnCreate
+				         @RequestMapping(value="admin/documentCreate")
+						   public String documentCreate(){
+							log.info("navigate documentCreate page");
+						    return "admin/documentCreate";
+					       }
+				        
+				        //admin/videoUploadView
+				        
+				        @RequestMapping(value="admin/videoUpload")
+						   public String videoUpload(){
+							log.info("navigate videoUpload page");
+						    return "admin/videoUpload";
+					       }
 
 			 //view event list
 			@RequestMapping(value="admin/eventList")
@@ -173,6 +220,16 @@ public class AdminMgmtController {
 		    	log.info("in side save method");
 		    adminMgmtService.createAgendo(agendaBean);
 		    }
+		    
+		    @RequestMapping(value = "admin/createGallery", method = RequestMethod.POST)
+		       public @ResponseBody void createGallery(@RequestParam(value="file", required=true) MultipartFile file,
+		                        @RequestParam("eventId") Long eventId,@RequestParam("name") String name,@RequestParam("type") String type) {
+		        log.info("in side savegallery method");
+		        log.info("id--"+eventId);
+		        log.info("file name---"+file.getOriginalFilename());
+		       adminMgmtService.createGallery(file,eventId,type,name);
+		        }
+		    
 	    
 		    
 		    // admin/agendoDetails
@@ -237,9 +294,9 @@ public class AdminMgmtController {
 			
 	          //admin/galleryList
 				@RequestMapping(value="admin/galaryList")
-				public @ResponseBody List<GalaryBean> galaryList(@RequestParam("eventId") Long eventId){
+				public @ResponseBody List<GalaryBean> galaryList(@RequestParam("eventId") Long eventId,@RequestParam("type") String type){
 					log.info("in side galaryList method----"+eventId);
-					List<GalaryBean> galaryList=adminMgmtService.galaryList(eventId);
+					List<GalaryBean> galaryList=adminMgmtService.galaryList(eventId,type);
 			
 					return galaryList;
 				}
@@ -261,13 +318,36 @@ public class AdminMgmtController {
 				    
 				 //admin/createGallery
 			     
-			     @RequestMapping(value = "admin/createGallery", method = RequestMethod.POST)
-			    public @ResponseBody void createGallery(@RequestBody GalaryBean galaryBean) {
-			    	log.info("in side savegallery method");
-			    adminMgmtService.createGallery(galaryBean);
-			     }
-			   
+			    
 			     
-
+			    
+			   
+			   //admin/invite 
+			     
+			    @RequestMapping(value = "admin/invite", method = RequestMethod.POST)
+			    public @ResponseBody void invite(@RequestBody InviteBean inviteBean) {
+			    	log.info("in side invite method");
+			    adminMgmtService.invite(inviteBean);
+			   
+			    }
+			    
+			   //admin/inviteDetails
+				@RequestMapping(value="admin/inviteDetails")
+				public @ResponseBody List<InviteBean> inviteDetails(@RequestParam("eventId") Long eventId){
+					log.info("in side inviteDetails method----"+eventId);
+					List<InviteBean> inviteList=adminMgmtService.inviteDetails(eventId);
+			
+					return inviteList;
+			    
+			}
+				
+				 //for deleteGallery
+				@RequestMapping(value = "admin/deleteGallery", method = RequestMethod.POST)
+				 public @ResponseBody void  deleteGallery(@RequestBody GalaryBean galaryBean) {
+				  log.info("Entered into delete  galary  method----------"+galaryBean.getGlaryItemId());
+					adminMgmtService.deleteGallery(galaryBean.getGlaryItemId());
+			
+				 }
 }
+
 
