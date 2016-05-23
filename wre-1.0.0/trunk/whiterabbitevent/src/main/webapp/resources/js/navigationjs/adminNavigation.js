@@ -7,7 +7,7 @@
 var whiterabbitevent = {};
 
 
-var App = angular.module('whiterabbitevent',  ['ngRoute']);
+var App = angular.module('whiterabbitevent',  ['ngRoute','wre.services']);
 
 /// Declare app level module which depends on filters, and services
 App.config(['$routeProvider', function ($routeProvider,$Scope) {
@@ -112,7 +112,49 @@ App.config(['$routeProvider', function ($routeProvider,$Scope) {
         controller:EditDetailsViewController
     });
     
+    //InviteController
     
+    $routeProvider.when('/invite/:eventId', {
+        templateUrl:'admin/invite',
+        controller:InviteController
+    });
+    
+    //InviteListController
+    
+   $routeProvider.when('/inviteList/:eventId', {
+        templateUrl:'admin/inviteList',
+        controller:InviteListController
+    });
+   
+   
+    //VideoViewController
+   
+   $routeProvider.when('/videoView/:eventId', {
+       templateUrl:'admin/videoView',
+       controller:VideoViewController
+   });
+   
+   
+   
+   //DocumentViewController
+   
+   $routeProvider.when('/documentView/:eventId', {
+       templateUrl:'admin/documentView',
+       controller:DocumentViewController
+   });
+   //DocumetnCreateController
+   
+   $routeProvider.when('/documentCreate/:eventId', {
+       templateUrl:'admin/documentCreate',
+       controller:DocumetnCreateController
+   });
+   
+   //VideoUploadController
+   $routeProvider.when('/videoUpload/:eventId', {
+       templateUrl:'admin/videoUpload',
+       controller:VideoUploadController
+   });
+   
     
     $routeProvider.otherwise({redirectTo: '/eventView'});
 }]);
