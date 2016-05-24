@@ -19,9 +19,6 @@ var NewsFeedViewController = function($scope,$http,$routeParams) {
 	
 });
 	
-	
-	
-	
 	  $scope.newsFeedEdit = function(newsFeedId){
 		  
 		location.href="#/newsFeedEdit/"+newsFeedId;
@@ -29,8 +26,14 @@ var NewsFeedViewController = function($scope,$http,$routeParams) {
 	
 
 	  $scope.newsFeedCreate = function(eventId){
-		  alert("--"+eventId);
-		location.href="#/newsFeedCreate/"+eventId;
+		 // alert("--"+eventId);
+		  location.href="#/newsFeedCreate/"+eventId;
+	};
+	
+	$scope.cancelNewsFeedView = function(eventId)
+	{
+		location.href="#/eventViewDetails/"+eventId;
+		
 	};
 	
 };

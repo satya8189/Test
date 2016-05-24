@@ -1,6 +1,6 @@
 var DocumentViewController = function($scope,$routeParams,$http,$location) {
 $scope.galaryList = {};
-alert("galaryList");
+//alert("galaryList");
 	
 	$scope.eventId={};
 	
@@ -11,12 +11,7 @@ alert("galaryList");
 		
 			
 		 $http.get('admin/galaryList?eventId='+$routeParams.eventId+"&type=document").success(function(galaryList){
-			 alert("admin/galaryList");
-			
-				
-				    $scope.galaryList = galaryList;
-				    
-			
+			 	    $scope.galaryList = galaryList;
 				    
 				  	});
 				 });
@@ -27,12 +22,16 @@ alert("galaryList");
 	//galleryCreate(eventId)
 	
 	$scope.documentCreate = function(eventId) {
-	$location.path("/documentCreate/"+eventId);
+		$location.path("/documentCreate/"+eventId);
 
 	};
 
 
-	
+	$scope.goToEventsView = function(eventId)
+	{
+		//alert("Getting Back to SponsorPageViewView"+eventId);
+		location.href="#/eventViewDetails/"+eventId;
+	};
 	
 	
 	

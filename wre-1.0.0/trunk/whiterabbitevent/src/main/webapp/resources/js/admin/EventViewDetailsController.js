@@ -30,18 +30,25 @@ var EventViewDetailsController = function($scope,$routeParams,$http,$location) {
 			
 			location.href="#/invite/"+event.eventId;	
 			
-			
-			
 		}else if(event.serviceId=="6"){
-			alert('document condiation');
 			location.href="#/videoView/"+event.eventId;	
 			
 			
 		}else if(event.serviceId=="7"){
-			alert('document condiation');
 			location.href="#/documentView/"+event.eventId;	
+		
+		}else if(event.serviceId=="15"){
+			location.href="#/sponsorPageView/"+event.eventId;
 			
-	};
+		}else if(event.serviceId=="14"){
+			//alert("kk");
+			location.href="#/speakerProfileView/"+event.eventId;
+		}else if(event.serviceId=="13"){
+			//alert("kk");
+			location.href="#/venueLayout/"+event.eventId;
+		
+			
+		};
 	};
 	
 	

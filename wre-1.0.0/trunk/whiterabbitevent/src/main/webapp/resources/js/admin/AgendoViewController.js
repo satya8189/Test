@@ -12,8 +12,6 @@ var AgendoViewController = function($scope,$routeParams,$http,$location) {
 				    $scope.agendoList = agendoList;
 				    // create empty search model (object) to trigger $watch on update
 					$scope.search =null;
-
-				    
 			
 				    
 				  	});
@@ -32,6 +30,11 @@ var AgendoViewController = function($scope,$routeParams,$http,$location) {
 		location.href="#/agendoEdit/"+agenId;
 	};
 	
+	$scope.cancelAgendoView = function(eventId)
+	{
+		//alert("getting back to eventViewDetails");
+		$location.path("/eventViewDetails/"+eventId);
+	};
 	
 	
 };

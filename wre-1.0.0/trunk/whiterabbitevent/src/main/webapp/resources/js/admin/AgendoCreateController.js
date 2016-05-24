@@ -9,17 +9,11 @@ var AgendoCreateController = function($scope, $http, $location, $routeParams,ngN
 		
 		
 	$http.post('admin/createAgendo',agendo).success(function(success) {
-		
-
-		ngNotifier.notify("Record Created Successfully !");
+				ngNotifier.notify("Record Created Successfully !");
 	$location.path("/agendoDetails/"+agendo.eventId);
 	
+					});
 	
-	
-
-				});
-	
-
 };
 
 $scope.cancelAgendoView = function() {
@@ -28,6 +22,10 @@ $scope.cancelAgendoView = function() {
 	};
 	
 
+	$scope.cancelCreateAgenda = function(eventId){
+		
+		$location.path("/agendoDetails/"+eventId);
+	};
 
 };	
 

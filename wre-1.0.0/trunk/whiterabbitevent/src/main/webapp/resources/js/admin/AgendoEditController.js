@@ -1,4 +1,4 @@
-var AgendoEditController = function($scope, $http, $routeParams,$location) {
+var AgendoEditController = function($scope, $http, $routeParams,$location,ngNotifier) {
 	$scope.agendo={};
 
 	$scope.$on('$routeChangeSuccess', function() {
@@ -14,14 +14,14 @@ var AgendoEditController = function($scope, $http, $routeParams,$location) {
 		$http.post('agendo/update',agendo).success(function(status) {
 			
 			$location.path("/agendoDetails/"+agendo.eventId);
-			
-
-
+			ngNotifier.notify("Agenda Updated Successfully.!");
 					});
-		
-
-	};
+			};
         
+		$scope.cancelAgendaEdit = function(eventId){
+			$location.path("/agendoDetails/"+eventId);
+			
+		};
 
 };
 

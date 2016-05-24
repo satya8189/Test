@@ -3,12 +3,12 @@ var VideoUploadController = function($scope, $http, $location, $routeParams,ngNo
 		$scope.video={};
 		
 		$scope.video.eventId=$routeParams.eventId;
-		alert("adfasf-------"+$routeParams.eventId);
+		//alert("adfasf-------"+$routeParams.eventId);
 		
 $scope.uploadVideo = function(video) {
 			
 			var fd = new FormData();
-			alert("video");
+			//alert("video");
 
 			  // Take the first selected file
 			    fd.append("file", file.files[0]);
@@ -22,49 +22,29 @@ $scope.uploadVideo = function(video) {
 			     },
 			     transformRequest : angular.identity
 			    }).success(function(data) {
-			    	alert("video success");
-			    	ngNotifier.notify("Record Created Successfully !");
+			    	//alert("video success");
+			    	ngNotifier.notify("video Uploaded Successfully !");
 			     $location.path("/videoView/"+video.eventId);
 			    }).error(function(data) {
-			     alert("dsfsfds");
+			    // alert("dsfsfds");
 			    });
 		
 
 	};
 
-
-	$scope.cancelEvent = function() {
-		$location.path("/newsFeedView/");
-
+	$scope.cancelUploadVideo = function(eventId)
+	{
+		//alert("getting back=="+eventId);
+		location.href="#/videoView/"+eventId;
 	};
 
-	};	
-
-
-		
-
-		
-
-
-		
-		
-
-
-			
-
-			
-			
-
-		
-
+	/*$scope.navigateToEventsView = function(eventId)
+	{
+		alert("Getting Back eventId"+eventId);
+		location.href="#/eventViewDetails/"+eventId;
+	};*/
 
 	
-	
+};	
 
 
-		
-
-		
-		
-
-	

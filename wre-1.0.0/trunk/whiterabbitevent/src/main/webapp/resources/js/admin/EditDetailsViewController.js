@@ -12,20 +12,20 @@ var EditDetailsViewController = function($scope, $http, $location, $routeParams)
 	});
 		
 		$scope.updateEvent = function(event) {
-			
-			
-			$http.post('details/update',event).success(function(status) {
-				
-			location.href="#/detailsView/"+event.eventId;
-				
-				
-
-
-						});
-			
-
-		};
+			$http.post('details/update',event).success(
+					function() {
+						location.href="#/detailsView/"+event.eventId;
+						ngNotifier.notify("Event Updated Successfully.!");
+				}).error(function(){
+					ngNotifier.error("Error in updating.!");
+				});
+			};
 	      
 	  
+			$scope.navigateToDetailsView = function(eventId)
+			{
+				//alert("Getting back to detailsView."+eventId);
+				$location.path("/detailsView/"+eventId);
+			};
 
 };

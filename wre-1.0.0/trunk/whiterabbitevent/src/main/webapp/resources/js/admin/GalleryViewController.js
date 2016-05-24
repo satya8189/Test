@@ -41,5 +41,12 @@ var GalleryViewController = function($scope, $routeParams, $http, $location) {
 		$location.path("/galleryCreate/" + eventId);
 
 	};
+	
+	$scope.cancelGalleryView = function(eventId)
+	{
+		//alert("Getting Back to SponsorPageViewView"+eventId);
+		location.href="#/eventViewDetails/"+eventId;
+	};
+	
 
 };

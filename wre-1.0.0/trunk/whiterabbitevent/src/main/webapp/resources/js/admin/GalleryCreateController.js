@@ -30,8 +30,8 @@ var GalleryCreateController = function($scope, $http, $location, $routeParams,ng
 
 };
 
-$scope.cancelEvent = function() {
-	$location.path("/newsFeedView/");
+$scope.cancelGalleryCreate= function(eventId) {
+	$location.path("/galleryView/"+eventId);
 
 };
 

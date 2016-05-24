@@ -1,6 +1,6 @@
 
 
-var NewsFeedEditController = function($scope,$routeParams,$http,$location) {
+var NewsFeedEditController = function($scope,$routeParams,$http,$location,ngNotifier) {
 	
 	$scope.news={};
 
@@ -17,15 +17,16 @@ var NewsFeedEditController = function($scope,$routeParams,$http,$location) {
 		$http.post('news/update',news).success(function(status) {
 			
 			$location.path("/newsFeedView/"+news.eventId);
-			
-			
-			
-
+			ngNotifier.notify("NewsFeed Updated.!");
 
 					});
-		
-
 	};
-        
+  
+	
+	$scope.navigateToNewsFeedView= function(eventId)
+	{
+		//alert("news feed view.."+eventId);
+		$location.path("/newsFeedView/"+eventId);
+	};
 
 };

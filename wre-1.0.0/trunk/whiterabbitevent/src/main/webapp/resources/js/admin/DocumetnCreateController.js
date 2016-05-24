@@ -31,8 +31,8 @@ var DocumetnCreateController = function($scope, $http, $location, $routeParams,n
 
 	};
 
-	$scope.cancelEvent = function() {
-		$location.path("/newsFeedView/");
+	$scope.cancelDocumentCreate = function(eventId) {
+		$location.path("/documentView/"+eventId);
 
 	};
 
