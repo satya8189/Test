@@ -27,18 +27,18 @@ public class Speaker  implements java.io.Serializable {
      private String speakerName;
      private String location;
      private String title;
-     private String desc;
+     private String description;
      private String rating;
 
     public Speaker() {
     }
 
-    public Speaker(Event event, String speakerName, String location, String title, String desc, String rating) {
+    public Speaker(Event event, String speakerName, String location, String title, String description, String rating) {
        this.event = event;
        this.speakerName = speakerName;
        this.location = location;
        this.title = title;
-       this.desc = desc;
+       this.description = description;
        this.rating = rating;
     }
    
@@ -95,13 +95,13 @@ public class Speaker  implements java.io.Serializable {
     }
 
     
-    @Column(name="Desc", length=65535)
-    public String getDesc() {
-        return this.desc;
+    @Column(name="Description", length=65535)
+    public String getDescription() {
+        return this.description;
     }
     
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     
@@ -113,9 +113,6 @@ public class Speaker  implements java.io.Serializable {
     public void setRating(String rating) {
         this.rating = rating;
     }
-
-
-
 
 }
 
