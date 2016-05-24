@@ -52,10 +52,14 @@ public class DetailsActivity extends FragmentActivity {
 
         markerPoints = new ArrayList<LatLng>();
 
-        /*getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(nameTxt);*/
+        // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        // getSupportActionBar().setTitle(nameTxt);
+        // ActionBar mActionBar = ((ActionBarActivity)getApplicationContext()).getSupportActionBar();
+        // mActionBar.setDisplayHomeAsUpEnabled(true);
+        // mActionBar.setTitle(nameTxt);
 
         SupportMapFragment fm = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map_fragment);
+
 
         gpsTracker = new GPSTracker(DetailsActivity.this);
         if (gpsTracker.isGPSEnabled) {
@@ -101,8 +105,8 @@ public class DetailsActivity extends FragmentActivity {
         }
 
 
-
     }
+
     private String getDirectionsUrl(LatLng origin, LatLng dest) {
 
         // Origin of route

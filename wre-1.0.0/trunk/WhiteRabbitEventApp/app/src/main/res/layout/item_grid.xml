@@ -13,7 +13,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/bigbang" />
+        android:src="@drawable/user_icon" />
 
     <TextView
         android:id="@+id/item_title1"

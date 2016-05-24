@@ -47,8 +47,7 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.wre.yin.whiterabbiteventapp.LoginActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" >
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -252,7 +251,8 @@ Service handling Google Sign-In user revocation. For apps that do not integrate 
 
         <activity
             android:name="com.google.android.gms.tagmanager.TagManagerPreviewActivity"
-            android:noHistory="true" > <!-- optional, removes the previewActivity from the activity stack. -->
+            android:noHistory="true" >
+ <!-- optional, removes the previewActivity from the activity stack. -->
             <intent-filter>
                 <data android:scheme="tagmanager.c.com.wre.yin.whiterabbiteventapp" />
 

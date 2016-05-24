@@ -80,16 +80,13 @@ public class HomeActivity extends Activity implements BaseSliderView.OnSliderCli
             }
         };
         Picasso.with(getApplicationContext())
-                .load(R.drawable.nature3)
+                .load(R.drawable.user_icon)
                 .into(target);
 
         HashMap<String, Integer> file_maps = new HashMap<String, Integer>();
-        file_maps.put("Nature1", R.drawable.nature1);
-        file_maps.put("Nature 2", R.drawable.nature2);
-        file_maps.put("Nature 3", R.drawable.nature3);
-        file_maps.put("Image 1", R.drawable.image1);
-        file_maps.put("Hannibal", R.drawable.game_of_thrones);
-        file_maps.put("BigBang", R.drawable.bigbang);
+        file_maps.put("Event 1", R.drawable.event_image1);
+        file_maps.put("Event 2", R.drawable.event_image2);
+        file_maps.put("Event 3", R.drawable.event_image3);
 
         for (String name : file_maps.keySet()) {
             TextSliderView textSliderView = new TextSliderView(this);

@@ -47,12 +47,10 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
 
         // mDemoSlider.setCustomIndicator((PagerIndicator) findViewById(R.id.custom_indicator));
         HashMap<String, Integer> file_maps = new HashMap<String, Integer>();
-        file_maps.put("Nature1", R.drawable.nature1);
-        file_maps.put("Nature 2", R.drawable.nature2);
-        file_maps.put("Nature 3", R.drawable.nature3);
-        file_maps.put("Image 1", R.drawable.image1);
-        file_maps.put("Hannibal", R.drawable.game_of_thrones);
-        file_maps.put("BigBang", R.drawable.bigbang);
+        file_maps.put("Event 1", R.drawable.event_image1);
+        file_maps.put("Event 2", R.drawable.event_image2);
+        file_maps.put("Event 3", R.drawable.event_image3);
+
 
         for (String name : file_maps.keySet()) {
             TextSliderViewDashboard textSliderView = new TextSliderViewDashboard(this);
@@ -90,8 +88,8 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
         Bitmap speakerIcon = BitmapFactory.decodeResource(this.getResources(), R.drawable.speaker_pic);
         Bitmap aboutEvent = BitmapFactory.decodeResource(this.getResources(), R.drawable.about_pic);
 
-
-        gridArray.add(new Item(deatailIcon, "Details"));
+        gridArray.add(new Item(aboutEvent,"Details"));
+        gridArray.add(new Item(deatailIcon, "Invite"));
         gridArray.add(new Item(agendaIcon, "Agenda"));
         gridArray.add(new Item(newsIcon, "News Feed"));
         gridArray.add(new Item(galleryIcon, "Gallery"));
@@ -107,7 +105,6 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
         gridArray.add(new Item(venueIcon, "Venue Layout"));
         gridArray.add(new Item(sponcersIcon, "Sponcers Page"));
         gridArray.add(new Item(speakerIcon, "Speaker Profile"));
-        gridArray.add(new Item(aboutEvent,"About Event"));
 
 
         gridView = (GridView) findViewById(R.id.grid);
@@ -122,94 +119,96 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
 
                 switch (position) {
                     case 0:
+                        Intent aboutEventAct = new Intent(EventDashboardActivity.this, AboutEventActivity.class);
+                        aboutEventAct.putExtra("name", name);
+                        startActivity(aboutEventAct);
+                        break;
+                    case 1:
                         Intent detailsAct = new Intent(EventDashboardActivity.this, DetailsActivity.class);
                         detailsAct.putExtra("name", name);
                         startActivity(detailsAct);
                         break;
-                    case 1:
+
+                    case 2:
                         Intent agendaAct = new Intent(EventDashboardActivity.this, AgendaActivity.class);
                         agendaAct.putExtra("name", name);
                         startActivity(agendaAct);
                         break;
 
-                    case 2:
+                    case 3:
                         Intent newsaAct = new Intent(EventDashboardActivity.this, NewsFeedActivity.class);
                         newsaAct.putExtra("name", name);
                         startActivity(newsaAct);
                         break;
-                    case 3:
+                    case 4:
                         Intent galleryAct = new Intent(EventDashboardActivity.this, GalleryActivity.class);
                         galleryAct.putExtra("name", name);
                         startActivity(galleryAct);
                         break;
-                    case 4:
+                    case 5:
                         Intent crowdAct = new Intent(EventDashboardActivity.this, CrowdPicsActivity.class);
                         crowdAct.putExtra("name", name);
                         startActivity(crowdAct);
                         break;
-                    case 5:
+                    case 6:
                         Intent videosAct = new Intent(EventDashboardActivity.this, VideosActivity.class);
                         videosAct.putExtra("name", name);
                         startActivity(videosAct);
                         break;
 
-                    case 6:
+                    case 7:
                         Intent docShareAct = new Intent(EventDashboardActivity.this, DocShareActivity.class);
                         docShareAct.putExtra("name", name);
                         startActivity(docShareAct);
                         break;
-                    case 7:
+                    case 8:
                         Intent qaAct = new Intent(EventDashboardActivity.this, QAActivity.class);
                         qaAct.putExtra("name", name);
                         startActivity(qaAct);
                         break;
-                    case 8:
+                    case 9:
                         Intent messageAct = new Intent(EventDashboardActivity.this, MessageActivity.class);
                         messageAct.putExtra("name", name);
                         startActivity(messageAct);
                         break;
-                    case 9:
+                    case 10:
                         Intent surveyAct = new Intent(EventDashboardActivity.this, SurveyActivity.class);
                         surveyAct.putExtra("name", name);
                         startActivity(surveyAct);
                         break;
 
-                    case 10:
+                    case 11:
                         Intent qrCodeAct = new Intent(EventDashboardActivity.this, QRCodeActivity.class);
                         qrCodeAct.putExtra("name", name);
                         startActivity(qrCodeAct);
                         break;
-                    case 11:
+                    case 12:
                         Intent socialAct = new Intent(EventDashboardActivity.this, SocialMediaActivity.class);
                         socialAct.putExtra("name", name);
                         startActivity(socialAct);
                         break;
-                    case 12:
+                    case 13:
                         Intent networkAct = new Intent(EventDashboardActivity.this, NetworkingActivity.class);
                         networkAct.putExtra("name", name);
                         startActivity(networkAct);
                         break;
-                    case 13:
+                    case 14:
                         Intent venueAct = new Intent(EventDashboardActivity.this, VenueActivity.class);
                         venueAct.putExtra("name", name);
                         startActivity(venueAct);
                         break;
 
-                    case 14:
+                    case 15:
                         Intent sponcersAct = new Intent(EventDashboardActivity.this, SponcersActivity.class);
                         sponcersAct.putExtra("name", name);
                         startActivity(sponcersAct);
                         break;
-                    case 15:
+                    case 16:
                         Intent speakerAct = new Intent(EventDashboardActivity.this, SpeakerProfileActivity.class);
                         speakerAct.putExtra("name", name);
                         startActivity(speakerAct);
                         break;
-                    case 16:
-                        Intent aboutEventAct = new Intent(EventDashboardActivity.this, AboutEventActivity.class);
-                        aboutEventAct.putExtra("name", name);
-                        startActivity(aboutEventAct);
-                        break;
+
                 }
 
             }

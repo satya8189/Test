@@ -13,7 +13,6 @@ import com.wre.yin.whiterabbiteventapp.R;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
 
 public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
@@ -25,6 +24,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     public ExpandableListAdapter(Context context, List<String> listDataHeader,
                                  HashMap<String, List<String>> listChildData) {
         this._context = context;
+
         this._listDataHeader = listDataHeader;
         this._listDataChild = listChildData;
     }

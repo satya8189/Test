@@ -7,7 +7,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:scaleType="fitXY"
-        android:src="@drawable/image1"></ImageView>
+        android:src="@drawable/event_image1"></ImageView>
 
     <RelativeLayout
         android:id="@+id/background_relative"

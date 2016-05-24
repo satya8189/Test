@@ -76,11 +76,10 @@ public class EventsHomeActivity extends Activity {
         viewPager = (ViewPager) findViewById(R.id.viewPager);
 
         listOfItems = new ArrayList<Integer>();
-        listOfItems.add(R.drawable.image1);
-        listOfItems.add(R.drawable.image2);
-        listOfItems.add(R.drawable.nature1);
-        listOfItems.add(R.drawable.nature2);
-        listOfItems.add(R.drawable.nature3);
+        listOfItems.add(R.drawable.event_image1);
+        listOfItems.add(R.drawable.event_image2);
+        listOfItems.add(R.drawable.event_image3);
+
     }
 
     private void setViewPagerItemsWithAdapter() {
@@ -159,7 +158,7 @@ public class EventsHomeActivity extends Activity {
 
             final ImageView pFic = (ImageView) findViewById(R.id.profilepic);
 
-            pFic.setImageResource(R.drawable.nature3);
+            pFic.setImageResource(R.drawable.user_icon);
 
 
             target = new Target() {
@@ -186,7 +185,7 @@ public class EventsHomeActivity extends Activity {
                 }
             };
             Picasso.with(getApplicationContext())
-                    .load(R.drawable.nature3)
+                    .load(R.drawable.user_icon)
                     .into(target);
 
             tView.setText(listOfItems.get(position).toString());
