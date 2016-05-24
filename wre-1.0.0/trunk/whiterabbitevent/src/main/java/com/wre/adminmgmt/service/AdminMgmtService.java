@@ -9,6 +9,8 @@ import com.wre.adminmgmt.bean.EventBean;
 import com.wre.adminmgmt.bean.GalaryBean;
 import com.wre.adminmgmt.bean.InviteBean;
 import com.wre.adminmgmt.bean.NewsFeedBean;
+import com.wre.adminmgmt.bean.SpeakerBean;
+import com.wre.adminmgmt.bean.SponsorBean;
 
 public interface AdminMgmtService {
 
@@ -50,5 +52,25 @@ public void invite(InviteBean inviteBean);
 public List<InviteBean> inviteDetails(Long eventId);
 
 public void deleteGallery(Long glaryItemId);
+
+public List<SponsorBean> getSponsorsList(Long eventId);
+
+public void createSponsor(SponsorBean sponsorBean);
+
+public SponsorBean getSponsorForEdit(Long sponcorId);
+
+public void updateSponsor(SponsorBean spBean);
+
+public List<SpeakerBean> getSpeakersList(Long eventId);
+
+public void createSpeaker(SpeakerBean spk);
+
+public SpeakerBean getSpeakerBySpeakerId(Long speakerId);
+
+public void udpateSpeaker(SpeakerBean spk);
+
+
+
+
 
 }

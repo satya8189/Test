@@ -16,11 +16,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 
+
+
+
+
 import com.wre.adminmgmt.bean.AgendaBean;
 import com.wre.adminmgmt.bean.EventBean;
 import com.wre.adminmgmt.bean.GalaryBean;
 import com.wre.adminmgmt.bean.InviteBean;
 import com.wre.adminmgmt.bean.NewsFeedBean;
+import com.wre.adminmgmt.bean.SpeakerBean;
+import com.wre.adminmgmt.bean.SponsorBean;
 import com.wre.adminmgmt.dao.AdminMgmtDao;
 import com.wre.common.util.WREConstants;
 import com.wre.model.Agenda;
@@ -30,6 +36,8 @@ import com.wre.model.EventServices;
 import com.wre.model.Galary;
 import com.wre.model.Newsfeed;
 import com.wre.model.Participants;
+import com.wre.model.Speaker;
+import com.wre.model.Sponcor;
 
 
 @Service("AdminMgmtService")
@@ -415,6 +423,176 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 					  
 				}
 						
+			
+				
+				//=======================sponsor start=========================
+				/***********By Taraq*************/
+				
+			
+				@Override
+				public List<SponsorBean> getSponsorsList(Long eventId) {
+				// Get the Sponsors list based on the event id passed
+					log.info("In getSponsorsList===="+eventId);
+					List<Sponcor> sponcorList=AdminMgmtDaoImpl.getSponcorsList(eventId);
+					//we are getting the list as Sponcor which is entity
+					List<SponsorBean> sponsorBeanList=new ArrayList<SponsorBean>();
+					log.info("sponcorlist size is --"+sponcorList.size());
+					log.info("before for each");
+					for(Sponcor sponcorObject:sponcorList)
+					{
+						SponsorBean sponsorBean=new SponsorBean();
+						sponsorBean.setEventId(sponcorObject.getEvent().getEventId());
+						sponsorBean.setEventName(sponcorObject.getEvent().getEventName());
+						sponsorBean.setSponcorId(sponcorObject.getSponcorId());
+						sponsorBean.setSponcorDesc(sponcorObject.getSponcorDesc());
+						sponsorBean.setSponcorName(sponcorObject.getSponcorName());
+						sponsorBeanList.add(sponsorBean);
+					}
+				   
+					log.info("sponcorBeanlist size is --"+sponsorBeanList);
+							
+					return sponsorBeanList;
+				}
+
+				@Override
+				public void createSponsor(SponsorBean sponsorBean) {
+					// TODO Auto-generated method stub
+					Sponcor sb=new Sponcor();
+					sb.setSponcorName(sponsorBean.getSponcorName());
+		            sb.setSponcorDesc(sponsorBean.getSponcorDesc());
+		            	Event e=new Event();
+		            	e.setEventId(sponsorBean.getEventId());
+		            sb.setEvent(e);
+		            
+		            AdminMgmtDaoImpl.save(sb);
+		            	
+				}
+
+				@Override
+				public SponsorBean getSponsorForEdit(Long sponcorId) {
+					// TODO Auto-generated method stub
+					SponsorBean sponsorBeanObject=null;
+		        	 Sponcor sponsorObject=AdminMgmtDaoImpl.getSponsorBySponsorId(sponcorId);
+		        	 
+		        	 if(sponsorObject!=null){
+		        		 sponsorBeanObject=new SponsorBean();
+		        		 sponsorBeanObject.setEventId(sponsorObject.getEvent().getEventId());
+		        		 sponsorBeanObject.setSponcorName(sponsorObject.getSponcorName());
+		        		 sponsorBeanObject.setSponcorId(sponsorObject.getSponcorId());
+		        		 sponsorBeanObject.setSponcorDesc(sponsorObject.getSponcorDesc());
+		        		}
+
+		        	 	return sponsorBeanObject;
+
+						
+					//return null;
+				}
+
+				/*Update the Sponsor Data*/
+				public void updateSponsor(SponsorBean spBean) {
+					Sponcor spObj=new Sponcor();
+					Event event=new Event();
+					event.setEventId(spBean.getEventId());
+					spObj.setEvent(event);
+					spObj.setSponcorId(spBean.getSponcorId());
+					spObj.setSponcorName(spBean.getSponcorName());
+					spObj.setSponcorDesc(spBean.getSponcorDesc());
+					
+					AdminMgmtDaoImpl.update(spObj);
+		            
+				}
+
+				@Override
+				public List<SpeakerBean> getSpeakersList(Long eventId) {
+					// TODO Auto-generated method stub
+					
+					List<Speaker> sl=AdminMgmtDaoImpl.getSpeakersList(eventId);
+					log.info("----getSpeakersList servImpl---"+sl.size());
+					SpeakerBean sb=new SpeakerBean();
+					List<SpeakerBean> speakerBeanList=new ArrayList<SpeakerBean>();
+					
+					for(Speaker s:sl)
+					{
+						//log.info(s.getEvent().getEventId()+"="
+							/*	+ "=="+s.getSpeakerId()+"=="+s.getSpeakerName()+"=="+s.getDesc()+"="
+										+ "="+s.getLocation()+"=="+s.getTitle());*/
+						sb.setEventId(s.getEvent().getEventId());
+						sb.setSpeakerId(s.getSpeakerId());
+						sb.setSpeakerName(s.getSpeakerName());
+						sb.setDesc(s.getDescription());
+						sb.setLocation(s.getLocation());
+						sb.setRating(s.getRating());
+						sb.setTitle(s.getTitle());
+						
+						log.info(s.getDescription()+"speaker bean--"+sb.toString());
+						speakerBeanList.add(sb);
+					}
+					log.info("sp bean list size==="+speakerBeanList.size());
+					return speakerBeanList;
+				}
+
+				@Override
+				public void createSpeaker(SpeakerBean spk) {
+					// TODO Auto-generated method stub
+					log.info("in adminmgmtserImpl----"+spk.getDescription());
+					
+					Speaker speaker=new Speaker();
+						Event event=new Event();
+							event.setEventId(spk.getEventId());
+							
+					speaker.setEvent(event);
+					speaker.setSpeakerName(spk.getSpeakerName());
+					speaker.setLocation(spk.getLocation());
+					speaker.setTitle(spk.getTitle());
+					speaker.setDescription(spk.getDescription());
+					speaker.setRating(spk.getRating());
+					
+					log.info("SerImpl...speaker bean saving....."+speaker.getDescription());
+					AdminMgmtDaoImpl.save(speaker);
+				}
+
+				//get speaker for edit by id
+				@Override
+				public SpeakerBean getSpeakerBySpeakerId(Long speakerId) {
+					log.info("in getSpeBySpId=servc=="+speakerId);
+					SpeakerBean sp=new SpeakerBean();
+						Speaker speakerObject=AdminMgmtDaoImpl.getSpeakerBySpeakerId(speakerId);
+						log.info("desc......."+speakerObject.getDescription());
+						if(speakerObject!=null)
+							{
+								sp.setEventId(speakerObject.getEvent().getEventId());
+								sp.setSpeakerId(speakerObject.getSpeakerId());
+								sp.setSpeakerName(speakerObject.getSpeakerName());
+								sp.setDesc(speakerObject.getDescription());
+								sp.setLocation(speakerObject.getLocation());
+								sp.setRating(speakerObject.getRating());
+								sp.setTitle(speakerObject.getTitle());
+							
+								}
+						log.info(speakerObject.getDescription()+"speaker for edit....."+sp.toString());
+					return sp;
+				}
+
+				@Override
+				public void udpateSpeaker(SpeakerBean spk) {
+					// TODO Auto-generated method stub
+					log.info("udateSpeaker....."+spk.getDescription());
+					
+					Speaker spentity=new Speaker();
+					Event e=new Event();
+						e.setEventId(spk.getEventId());
+					spentity.setEvent(e);
+					spentity.setSpeakerId(spk.getSpeakerId());
+					spentity.setSpeakerName(spk.getSpeakerName());
+					spentity.setTitle(spk.getTitle());
+					spentity.setDescription(spk.getDescription());
+					spentity.setLocation(spk.getLocation());
+					spentity.setRating(spk.getRating());
+					
+					AdminMgmtDaoImpl.update(spentity);
+				}
+				
+
 				
 							
 					
