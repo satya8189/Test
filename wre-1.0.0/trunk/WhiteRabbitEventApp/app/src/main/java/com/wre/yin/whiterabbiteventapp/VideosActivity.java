@@ -20,6 +20,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.LinearLayout;
+import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -110,85 +111,10 @@ public class VideosActivity extends AppCompatActivity {
                 layoutStatus = "gone";
             }
         });
-        String[] list = {MediaStore.Video.Media._ID};
-
-        //Retriving Images from Database(SD CARD) by Cursor.
-        cursor = getContentResolver().query(MediaStore.Images.Thumbnails.EXTERNAL_CONTENT_URI, list, null, null, MediaStore.Video.Thumbnails._ID);
-        columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Video.Thumbnails._ID);
-
-        videoGridView = (GridView) findViewById(R.id.upload_video_grid);
-        VideoAdapter adapter = new VideoAdapter(this);
-        videoGridView.setAdapter(adapter);
 
 
-    }
-
-    public class VideoAdapter extends BaseAdapter {
-
-        private Context context;
-
-        public VideoAdapter(Context localContext) {
-
-            context = localContext;
-
-        }
-
-        public int getCount() {
-
-            return cursor.getCount();
-
-        }
-
-        public Object getItem(int position) {
-
-            return position;
-
-        }
-
-        public long getItemId(int position) {
-
-            return position;
-
-        }
-
-        public View getView(int position, View convertView, ViewGroup parent) {
-            ViewHolder holder = new ViewHolder();
-
-
-            if (convertView == null) {
-                holder.videosView = new VideoView(context);
-                //Converting the Row Layout to be used in Grid View
-                convertView = getLayoutInflater().inflate(R.layout.video_row, parent, false);
-
-                //You can convert Layout in this Way with the Help of View Stub. View Stub is newer. Read about ViewStub.Inflate
-                // and its parameter.
-                //convertView= ViewStub.inflate(context,R.layout.row,null);
-
-                convertView.setTag(holder);
-
-            } else {
-                holder = (ViewHolder) convertView.getTag();
             }
-            cursor.moveToPosition(position);
-            int videoID = cursor.getInt(columnIndex);
 
-            //In Uri "" + imageID is to convert int into String as it only take String Parameter and imageID is in Integer format.
-            //You can use String.valueOf(imageID) instead.
-            Uri uri = Uri.withAppendedPath(
-                    MediaStore.Video.Thumbnails.EXTERNAL_CONTENT_URI, "" + videoID);
-
-            //Setting Image to View Holder Image View.
-            holder.videosView = (VideoView) convertView.findViewById(R.id.videoview);
-            holder.videosView.setVideoURI(uri);
-
-            return convertView;
-        }
-
-        // View Holder pattern used for Smooth Scrolling. As View Holder pattern recycle the findViewById() object.
-        class ViewHolder {
-            private VideoView videosView;
-        }
-    }
 
     /**
      * Launching camera app to record video
