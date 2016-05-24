@@ -10,6 +10,8 @@ import com.wre.model.EventServices;
 import com.wre.model.Galary;
 import com.wre.model.Newsfeed;
 import com.wre.model.Participants;
+import com.wre.model.Speaker;
+import com.wre.model.Sponcor;
 
 public interface AdminMgmtDao  extends GenericDao<Object>{
 
@@ -34,6 +36,15 @@ public Event detailsView(Long eventId);
 public Long checkMobileNumber(String number);
 
 public List<Object[]> inviteDetails(Long eventId);
+
+
+public List<Sponcor> getSponcorsList(Long eventId);
+
+public Sponcor getSponsorBySponsorId(Long sponcorId);
+
+public List<Speaker> getSpeakersList(Long eventId);
+
+public Speaker getSpeakerBySpeakerId(Long speakerId);
 
 
 }

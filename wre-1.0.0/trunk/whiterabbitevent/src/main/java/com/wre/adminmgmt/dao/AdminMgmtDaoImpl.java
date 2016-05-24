@@ -17,6 +17,8 @@ import com.wre.model.EventServices;
 import com.wre.model.Galary;
 import com.wre.model.Newsfeed;
 import com.wre.model.Participants;
+import com.wre.model.Speaker;
+import com.wre.model.Sponcor;
 
 
 
@@ -145,17 +147,6 @@ return ParticipantId;
 }
 
 
-/*public List<Object[]> getOrgList() {
-	String query = "select o.Org_ID,o.Org_Name,o.PC_First_Name,o.PC_Last_Name,o.Created_Date,u.First_Name,coalesce(oc.Count, 0) as practices "
-			+ " from organization o  join user u on o.Created_By=u.User_ID left join "
-			+ "(select Org_ID,count(*) as Count from practice  group by Org_ID ) oc on o.Org_ID = oc.Org_ID group by o.Org_ID ORDER BY o.Created_Date DESC";
-	SQLQuery sqlQuery = sessionFactory.getCurrentSession().createSQLQuery(
-			query);
-	List<Object[]> orgList = (List<Object[]>) sqlQuery.list();
-	return orgList;
-}*/
-
-
 //inviteList
 public List<Object[]> inviteDetails(Long eventId) {
 	
@@ -166,6 +157,67 @@ public List<Object[]> inviteDetails(Long eventId) {
 	sqlQuery.setParameter("evtId", eventId);
 	return (List<Object[]>) sqlQuery.list();
 }
+
+
+//to get the sponsorsList by passing the event Id
+
+@Override
+public List<Sponcor> getSponcorsList(Long eventId)
+{
+	Criteria criteria=sessionFactory.getCurrentSession().createCriteria(Sponcor.class);
+	criteria.setFetchMode("event",FetchMode.EAGER);
+	criteria.add(Restrictions.eq("event.eventId",eventId)); //eventId
+	List<Sponcor> spList=criteria.list();
+	log.info("in getSponcorsList--daoImpl----"+spList.size());
+	return spList;
+}
+
+
+
+@Override
+public Sponcor getSponsorBySponsorId(Long sponcorId) {
+	// TODO Auto-generated method stub
+	
+	Criteria criteria=sessionFactory.getCurrentSession().createCriteria(Sponcor.class);
+  criteria.add(Restrictions.eq("sponcorId",sponcorId));
+	criteria.setFetchMode("sponcor", FetchMode.EAGER);
+	
+	return (Sponcor)criteria.uniqueResult();
+	
+	//return null;
+}
+
+
+
+@Override
+public List<Speaker> getSpeakersList(Long eventId) {
+	// TODO Auto-generated method stub
+	Criteria c=sessionFactory.getCurrentSession().createCriteria(Speaker.class);
+	c.add(Restrictions.eq("event.eventId",eventId));
+	c.setFetchMode("speaker",FetchMode.EAGER);
+	List<Speaker> speakers=c.list();
+	return speakers;
+}
+
+
+
+@Override
+public Speaker getSpeakerBySpeakerId(Long speakerId) {
+	// TODO Auto-generated method stub
+	Criteria c=sessionFactory.getCurrentSession().createCriteria(Speaker.class);
+	c.add(Restrictions.eq("speakerId",speakerId));
+	c.setFetchMode("speaker",FetchMode.EAGER);
+	
+	return (Speaker)c.uniqueResult();
+}
+
+
+
+
+
+
+
+
 }
 
 
