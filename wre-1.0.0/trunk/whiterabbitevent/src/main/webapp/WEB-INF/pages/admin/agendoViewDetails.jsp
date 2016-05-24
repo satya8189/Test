@@ -13,36 +13,25 @@ margin-bottom:0px !important;
 </style>
 <toaster-container></toaster-container>
 
-<div class="container">
- <a ng-click="cancelAgendoView()"> <i
-		class="fa fa-angle-left back"></i>
+<div class="container-fluid">
+ <a ng-click="cancelAgendoView(eventId)"> <i
+		class="glyphicon glyphicon-chevron-left"></i>
 	</a> 
 	
 <form>
-	
-			
-			
-							
-			<a ng-click="navigateagendoCreate(eventId)"title="eventViewDetails">agendaCreate
-							<i class="fa fa-eye-slash icons"> </i>
-				</a>
-				
-				
-			<!-- 				 
-			<a href="#/agendoCreate"
-			class="btn btn-default pull-right button btn-color">Create
-			AgendoCreate</a>
-				</a>
-			 -->	
 
+	<a ng-click="navigateagendoCreate(eventId)" class="btn btn-default pull-left button btn-color">Add Agenda</a>
 	
-	<div class="header-none">agenda List</div>
+	<!-- <a ng-click="navigateagendoCreate(eventId)" title="eventViewDetails">agendaCreate
+			<i class="fa fa-eye-slash icons"> </i>
+	</a>
+	 -->			
+	<div class="header-center">Agendas List</div>
 	<div class="panel">
 		<div class="panel-body">
 		 <div class="col-md-2 col-md-offset-10 padding-0">
 		 <input ng-model="search"  ng-show="agendoList.length!=0" class="form-control" placeholder="Search"">
-		 
-			</div> 
+		 	</div> 
 			<div class="col-md-12 space-hid">&nbsp;</div>
 			<table class="table" id="eventView">
 				<thead>
@@ -59,7 +48,7 @@ margin-bottom:0px !important;
 						
 				   </tr>
 				</thead>
-				<tr ng-show="filteredSize!=0"ng-repeat="event in agendoList ">
+				<tr ng-show="filteredSize!=0"ng-repeat="event in agendoList | filter:search">
 				    <td >{{event.agenTitle}}</td>
 					<td >{{event.agenDesc}}</td>
 					<td >{{event.agenStartTime}}</td>
@@ -69,25 +58,17 @@ margin-bottom:0px !important;
 					<td>
 					
 				<a ng-click="agendoEdit(event.agenId)"title="agendoEdit">
-							<i class="fa fa-eye-slash icons"> </i>
+							<i class="glyphicon glyphicon-pencil"> </i>
 				</a>
-				
-				
-						
 					</td>
 					
 				</tr>	
-				  
-			
-					
-				
-			
-				
-				<tr ng-show="filteredSize==0">
+					<tr ng-show="filteredSize==0">
 				<td colspan="6">
 				No records found..
 				</td>
 				</tr>
+				
 				<tr ng-show="filteredSize!=0">
 					<td colspan="6" align="center">
 						<pagination page="currentPage" max-size="noOfPages" total-items="totalItems" 
@@ -95,10 +76,7 @@ margin-bottom:0px !important;
 					</td>
 				</tr>
 			</table>
-			
-		
-			
-			
+				
 		</div>
 	</div>
 	</form>

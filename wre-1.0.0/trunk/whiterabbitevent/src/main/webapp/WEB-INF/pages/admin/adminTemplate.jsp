@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="whiterabbitevent">
 <head>
+
+<jsp:include page="../error-messages.jsp"></jsp:include>
+<style>
+	span{
+		color: red;
+	}
+</style>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="firstName" value="${USER.firstName}" scope="session" />
 <c:set var="lastName" value="${USER.lastName}" scope="session" />
@@ -56,9 +64,18 @@
 	<script type="text/javascript" src="resources/js/ng-file-upload.js"></script>
 	<script type="text/javascript" src="resources/js/ng-file-upload-shim.js"></script>
     
+    <!-- Sponsor Page -->
+    <script type="text/javascript" src="resources/js/admin/SponsorPageViewController.js"></script>
+    <script type="text/javascript" src="resources/js/admin/SponsorCreateController.js"></script>
+    <script type="text/javascript" src="resources/js/admin/SponsorEditController.js"></script>
     
+    <!-- Speaker scripts -->
+    <script type="text/javascript" src="resources/js/admin/SpeakerProfileViewController.js"></script>
+    <script type="text/javascript" src="resources/js/admin/SpeakerCreateController.js"></script>
+	<script type="text/javascript" src="resources/js/admin/SpeakerEditController.js"></script>
     
-     
+    <!-- VenueLayout -->
+     <script type="text/javascript" src="resources/js/admin/VenueLayoutController.js"></script>
 </head>
 <body>
         <!--Heading-->

@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <div class="container">
-	<a ng-click="cancelEvent()"> <i class="fa fa-angle-left back"></i>
+	<a ng-click="navigateToDetailsView(event.eventId)"> <i class="glyphicon glyphicon-chevron-left"></i>
 	</a>
 
 	<c:set var="eventId" value="${event.eventId}" scope="session" />
@@ -61,8 +61,6 @@
 						</div>
 					</div>
 			
-				
-
 				<button type="submit" class="btn button  save margin-2"
 					ng-click="validateHiddenFields()">update</button>
 

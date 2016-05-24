@@ -26,7 +26,7 @@ padding: 10px 0px 0px;
 
 </head>
 <body>
-
+<div class="container-fluid">
 <div class="row">
 <div ng-repeat=" event in eventList">
 
@@ -41,7 +41,7 @@ padding: 10px 0px 0px;
 							<div class="bottom"></div>
 							</a>
 						</div>
-						
+				</div>		
 						
 					
 

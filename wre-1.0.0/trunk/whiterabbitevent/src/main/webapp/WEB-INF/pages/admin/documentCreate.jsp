@@ -7,7 +7,8 @@
 <form name="createEvent" ng-submit="createDocument(document)" enctype="multipart/form-data">
 
 <div class="container">
-	<a href="#/agendoViewDetails"> <i class="fa fa-angle-left back"></i>
+	<a ng-click="cancelDocumentCreate(document.eventId)">
+		 <i class="glyphicon glyphicon-chevron-left"></i>
 	</a>
 <div class="panel">
  <div class="panel-heading text-center font-size-20 padding-15">Create Document</div>
@@ -32,15 +33,7 @@
 							<!--  <input type="file" name="file" class="form-control form-group" onchange="angular.element(this).scope().uploadFile(this.files)"/> -->
 						</div>
 					</div>
-	
-	 
-	
-	 
-	
-	 
-	 
-
-</div>
+	</div>
     <div>&nbsp;</div>
 <input type="submit" value="Save" class="btn button save margin-2" ng-click="submitted=true"/>
 </div>

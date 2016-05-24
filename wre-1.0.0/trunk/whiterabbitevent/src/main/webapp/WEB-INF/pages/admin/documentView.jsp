@@ -16,15 +16,12 @@ margin-bottom:0px !important;
 <div class="container">
 	<form>
 	
-					
-			<a ng-click="documentCreate(eventId)"title="eventViewDetails">DocumentCreate
-							<i class="fa fa-eye-slash icons"> </i>
-				</a>
-	
-	<div class="header-none">DocumentView</div>
-	<div class="tab-content">
+	<a ng-click="goToEventsView(eventId)">
+		 <i class="glyphicon glyphicon-chevron-left"></i>
+	</a>
+	<div class="tab-content"><div class="header-none" align="center">DocumentView</div>
               <div id="home" class="tab-pane fade in active">
-               
+               <a ng-click="documentCreate(eventId)" class="btn btn-default pull-left button btn-color">Add Document</a>
                 <div class="col-md-12 padding-0">
 
                   <a class="col-md-3"  ng-repeat="galary in galaryList">
@@ -47,6 +44,7 @@ margin-bottom:0px !important;
                   </a>
 
                 </div>
+              </div>
               </div>
 	</form>
 </div>

@@ -2,12 +2,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <toaster-container></toaster-container>
 
-
-
-<form name="createEvent" ng-submit="uploadVideo(video)"  enctype="multipart/form-data" >
+<form name="createEvent" ng-submit="createEvent.$valid && uploadVideo(video)"  enctype="multipart/form-data" >
 
 <div class="container">
-	<a href="#/agendoViewDetails"> <i class="fa fa-angle-left back"></i>
+	<a ng-click="cancelUploadVideo(video.eventId)">
+		 <i class="glyphicon glyphicon-chevron-left"></i>
 	</a>
 <div class="panel">
  <div class="panel-heading text-center font-size-20 padding-15">Create Document</div>
@@ -20,6 +19,7 @@
       <input type="text" class="input-text form-control" id="agendo_Name" placeholder="Document"  ng-model="video.name" 
       name="gallery"   required>
       </div>
+      <span ng-if="createEvent.$submitted" ng-messages="createEvent.gallery.$error" ng-messages-include="errors"></span>
       </div>
 	 </div>
 	 
@@ -34,12 +34,6 @@
 					</div>
 	
 	 
-	
-	 
-	
-	 
-	 
-
 </div>
     <div>&nbsp;</div>
 <input type="submit" value="Save" class="btn button save margin-2" ng-click="submitted=true"/>

@@ -15,18 +15,14 @@ margin-bottom:0px !important;
 
 <div class="container">
 	<form>
+	<a ng-click="cancelGalleryView(eventId)">
+		 <i class="glyphicon glyphicon-chevron-left"></i>
+	</a>
 	
-					
-			<a ng-click="galleryCreate(eventId)"title="eventViewDetails">GaleryCreate
-							<i class="fa fa-eye-slash icons"> </i>
-				</a>
-				
-				     
-	
-	<div class="header-none">Gallery List</div>
 	<div class="tab-content">
-              <div id="home" class="tab-pane fade in active">
-               
+		<a ng-click="galleryCreate(eventId)" class="btn btn-default pull-left button btn-color">Add Gallary</a>
+	          <div id="home" class="tab-pane fade in active">
+    <div class="header-none">Gallery List</div>			           
                 <div class="col-md-12 padding-0">
 
                   <a class="col-md-3"  ng-repeat="galary in galaryList  ">

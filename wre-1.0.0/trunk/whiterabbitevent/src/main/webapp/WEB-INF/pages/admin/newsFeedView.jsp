@@ -13,20 +13,17 @@ margin-bottom:0px !important;
 </style>
 <toaster-container></toaster-container>
 
-<div class="container">
-	<form>
-	--<!--  <a href="#/newsFeedCreate"
-			class="btn btn-default pull-right button btn-color">Create
-			NewsFeed</a>
-	  -->
+<div class="container-fluid">
+	
+	<a ng-click="cancelNewsFeedView(eventId)">
+		 <i class="glyphicon glyphicon-chevron-left"></i>
+	</a>
 	 
-	 	 <a ng-click="newsFeedCreate(eventId)"title="newsFeedCreate">Create News
-							<i class="fa fa-eye-slash icons"> </i>
-				</a>
-				 
-	<div class="header-none">News List</div>
+	<form>
 	<div class="panel">
+	<a ng-click="newsFeedCreate(eventId)" class="btn btn-default pull-left button btn-color">Create NewsFeed</a>
 		<div class="panel-body">
+			<div class="header-none" align="center">News List</div>
 		 <div class="col-md-2 col-md-offset-10 padding-0">
 		 <input ng-model="search"  ng-show="newsList.length!=0" class="form-control" placeholder="Search">
 			</div> 
@@ -41,7 +38,7 @@ margin-bottom:0px !important;
 						
 				   </tr>
 				</thead>
-				<tr ng-show="filteredSize!=0"ng-repeat="news in newsList ">
+				<tr ng-show="filteredSize!=0"ng-repeat="news in newsList | filter : search">
 				    <td >{{news.newsTitle}}</td>
 					<td >{{news.newsDesc}}</td>
 					<td >{{news.newsDate | date: 'yyyy-MM-dd'}}</td>
@@ -49,7 +46,7 @@ margin-bottom:0px !important;
 			<td>
 					
 				<a ng-click="newsFeedEdit(news.newsFeedId)"title="newsFeedEdit">
-							<i class="fa fa-eye-slash icons"> </i>
+							<i class="glyphicon glyphicon-pencil"> </i>
 				</a>
 				
 				

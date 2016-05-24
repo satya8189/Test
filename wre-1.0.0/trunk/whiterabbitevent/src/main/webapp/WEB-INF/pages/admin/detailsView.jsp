@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <div class="container">
-	<a ng-click="cancelEvent()"> <i class="fa fa-angle-left back"></i>
+	<a ng-click="navigateToEventViewDetails(eventId)"> <i class="glyphicon glyphicon-chevron-left"></i>
 	</a>
 
 	<c:set var="eventId" value="${event.eventId}" scope="session" />
@@ -13,48 +13,36 @@
 				ng-submit="updateEvent(event)"
 				novalidate>
 				<div class="row">
-					<div class="col-md-8">
+					<table class="col-md-8 padding-35">
 
-						<div class="col-md-2">
+					<tr>		
+						<td class="col-md-2">
 							<label>Event Name: {{event.eventName}}</label>
-						</div>
-						
-						<div class="col-md-2">
+						</td>
+						</tr><tr>
+						<td class="col-md-2">
 							<label>EventDesc: {{event.eventDesc}}</label>
-						</div>
-						
-						
-						<div class="col-md-2">
+						</td>
+						</tr>
+						<tr>
+						<td class="col-md-2">
 							<label>EventAgenda: {{event.eventAgenda}}</label>
-						</div>
-						
-						<div class="col-md-2">
+						</td>
+						</tr><tr>
+						<td class="col-md-2">
 							<label>EventAddress: {{event.eventAddress}}</label>
-						</div>
-						
+						</td>
+						</tr>
+						</table>
 						
 					</div>
 
 				</div>
-				
-
-				
-
-				
-				
-				
-						
-
-				</div>
+				</form>
+			</div>
 				<div>&nbsp;</div>
-
 				<button type="submit" class="btn button  save margin-2"
 					ng-click="editDetailsView(eventId)">Edit</button>
-					
-					
-
-			</form>
-
 		</div>
 	</div>
 </div>
