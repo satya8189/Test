@@ -19,22 +19,24 @@ var GalleryViewController = function($scope, $routeParams, $http, $location) {
 	});
 
 	$scope.deleteGallery = function(galary) {
-
 		alert("deleteGallery");
-		$http.post('admin/deleteGallery', galary).success(
+
+		alert("deleteGallery"+galary.glaryItemId);
+		$http.get('admin/deleteGallery?glaryItemId='+galary.glaryItemId).success(
 				function() {
 
-					alert("deleteGallery-------------");
+					alert("deleteGallery-------------"+galary.eventId);
 					$http.get(
-							'admin/galaryList?eventId=' + $routeParams.eventId
+							'admin/galaryList?eventId=' +galary.eventId
 									+ "&type=image").success(
 							function(galaryList) {
 								$scope.galaryList = galaryList;
 
 							});
 				});
+					
+				
 	};
-
 	//galleryCreate(eventId)
 
 	$scope.galleryCreate = function(eventId) {
