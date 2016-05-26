@@ -48,6 +48,7 @@
         android:background="#fff"
         android:gravity="center"
         android:numColumns="auto_fit"
+        android:fastScrollEnabled="true"
         android:stretchMode="columnWidth"></GridView>
 
 </RelativeLayout>

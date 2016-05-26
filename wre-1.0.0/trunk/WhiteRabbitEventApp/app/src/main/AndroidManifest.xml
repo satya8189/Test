@@ -25,6 +25,8 @@
 
     <application
         android:allowBackup="true"
+        android:largeHeap="true"
+        android:hardwareAccelerated="false"
         android:icon="@drawable/wre_logo"
         android:label="@string/app_name"
         android:supportsRtl="true"

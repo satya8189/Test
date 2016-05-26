@@ -36,7 +36,7 @@ public class Constants {
     public static final int NUM_OF_COLUMNS = 2;
 
     // Gridview image padding
-    public static final int GRID_PADDING = 1; // in dp
+    public static final int GRID_PADDING = 10; // in dp
 
     // SD card image directory
     public static final String PHOTO_ALBUM ="/DCIM/"+"/Camera/";
