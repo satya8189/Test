@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import com.wre.common.dao.GenericDaoImpl;
 import com.wre.model.Agenda;
+import com.wre.model.AppIdentifier;
 import com.wre.model.Event;
 import com.wre.model.EventServices;
 import com.wre.model.Galary;
@@ -19,6 +20,7 @@ import com.wre.model.Newsfeed;
 import com.wre.model.Participants;
 import com.wre.model.Speaker;
 import com.wre.model.Sponcor;
+import com.wre.model.SurveyQuestion;
 
 
 
@@ -83,9 +85,6 @@ return newsList;
 	}
 
 
-
-
-
 //newsEdit
 public Newsfeed newsEditDetails(Long newsFeedId) {
 	Criteria criteria=sessionFactory.getCurrentSession().createCriteria(Newsfeed.class);
@@ -147,6 +146,17 @@ return ParticipantId;
 }
 
 
+/*public List<Object[]> getOrgList() {
+	String query = "select o.Org_ID,o.Org_Name,o.PC_First_Name,o.PC_Last_Name,o.Created_Date,u.First_Name,coalesce(oc.Count, 0) as practices "
+			+ " from organization o  join user u on o.Created_By=u.User_ID left join "
+			+ "(select Org_ID,count(*) as Count from practice  group by Org_ID ) oc on o.Org_ID = oc.Org_ID group by o.Org_ID ORDER BY o.Created_Date DESC";
+	SQLQuery sqlQuery = sessionFactory.getCurrentSession().createSQLQuery(
+			query);
+	List<Object[]> orgList = (List<Object[]>) sqlQuery.list();
+	return orgList;
+}*/
+
+
 //inviteList
 public List<Object[]> inviteDetails(Long eventId) {
 	
@@ -156,6 +166,46 @@ public List<Object[]> inviteDetails(Long eventId) {
 			query);
 	sqlQuery.setParameter("evtId", eventId);
 	return (List<Object[]>) sqlQuery.list();
+}
+//surveyList
+
+public List<SurveyQuestion> questionList(Long eventId) {
+	
+	Criteria criteria=sessionFactory.getCurrentSession().createCriteria(SurveyQuestion.class);
+	criteria.add(Restrictions.eq("event.eventId", eventId));
+	criteria.setFetchMode("event", FetchMode.EAGER);
+	criteria.setFetchMode("appIdentifier", FetchMode.EAGER);
+	List<SurveyQuestion> surveyList=criteria.list();
+	return surveyList;
+	
+
+}
+
+
+
+@Override
+public List<AppIdentifier> appList(Long appId) {
+	
+	Criteria criteria=sessionFactory.getCurrentSession().createCriteria(AppIdentifier.class);
+	criteria.add(Restrictions.eq("appIdentifierGrp.appIdentifierGrpId", appId));
+	criteria.setFetchMode("appIdentifierGrp", FetchMode.EAGER);
+	List<AppIdentifier> appIdentifierBeanList=criteria.list();
+	return appIdentifierBeanList;
+
+}
+
+
+
+@Override
+public SurveyQuestion questionEdit(Long questionId) {
+	
+	Criteria criteria=sessionFactory.getCurrentSession().createCriteria(SurveyQuestion.class);
+	criteria.add(Restrictions.eq("questionId",questionId));
+	criteria.setFetchMode("event", FetchMode.EAGER);
+	criteria.setFetchMode("appIdentifier", FetchMode.EAGER);
+   return (SurveyQuestion)criteria.uniqueResult();
+
+	
 }
 
 
@@ -179,10 +229,9 @@ public Sponcor getSponsorBySponsorId(Long sponcorId) {
 	// TODO Auto-generated method stub
 	
 	Criteria criteria=sessionFactory.getCurrentSession().createCriteria(Sponcor.class);
-  criteria.add(Restrictions.eq("sponcorId",sponcorId));
+    criteria.add(Restrictions.eq("sponcorId",sponcorId));
 	criteria.setFetchMode("sponcor", FetchMode.EAGER);
-	
-	return (Sponcor)criteria.uniqueResult();
+  return (Sponcor)criteria.uniqueResult();
 	
 	//return null;
 }
@@ -210,12 +259,6 @@ public Speaker getSpeakerBySpeakerId(Long speakerId) {
 	
 	return (Speaker)c.uniqueResult();
 }
-
-
-
-
-
-
 
 
 }
