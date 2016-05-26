@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.wre.yin.whiterabbiteventapp.adapters.ExpandableListAdapter;
 
@@ -196,7 +195,7 @@ public class AgendaActivity extends AppCompatActivity {
                     vholder.minus.setVisibility(View.GONE);
                     layoutStatus = "gone";
                 }
-                Toast.makeText(context,"This is position "+position,Toast.LENGTH_LONG ).show();
+              //  Toast.makeText(context,"This is position "+position,Toast.LENGTH_LONG ).show();
 
             }
         };

@@ -10,7 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class NetworkingActivity extends AppCompatActivity {
     private TextView text;
@@ -63,7 +62,7 @@ public class NetworkingActivity extends AppCompatActivity {
 
                 RecyclerViewHolder vholder = (RecyclerViewHolder) v.getTag();
                 int position = vholder.getPosition();
-                Toast.makeText(context,"This is position "+position,Toast.LENGTH_LONG ).show();
+               // Toast.makeText(context,"This is position "+position,Toast.LENGTH_LONG ).show();
 
             }
         };

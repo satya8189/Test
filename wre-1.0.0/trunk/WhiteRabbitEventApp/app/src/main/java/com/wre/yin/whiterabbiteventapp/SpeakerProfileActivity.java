@@ -8,7 +8,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.wre.yin.whiterabbiteventapp.adapters.CheeseDynamicAdapter;
 import com.wre.yin.whiterabbiteventapp.beans.Cheeses;
@@ -64,8 +63,7 @@ public class SpeakerProfileActivity extends AppCompatActivity {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(SpeakerProfileActivity.this, parent.getAdapter().getItem(position).toString(),
-                        Toast.LENGTH_SHORT).show();
+               // Toast.makeText(SpeakerProfileActivity.this, parent.getAdapter().getItem(position).toString(),                        Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(SpeakerProfileActivity.this, ProfileDetailsActivity.class);
                 i.putExtra("speakerName", parent.getAdapter().getItem(position).toString());
                 startActivity(i);

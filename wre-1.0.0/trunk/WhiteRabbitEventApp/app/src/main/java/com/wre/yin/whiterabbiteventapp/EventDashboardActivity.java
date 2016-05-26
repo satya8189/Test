@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
@@ -115,7 +114,7 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String name = gridArray.get(position).getTitle().toString();
-                Toast.makeText(getApplicationContext(), gridArray.get(position).getTitle(), Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(getApplicationContext(), gridArray.get(position).getTitle(), Toast.LENGTH_SHORT).show();
 
                 switch (position) {
                     case 0:

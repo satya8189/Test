@@ -17,7 +17,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
@@ -198,7 +197,7 @@ public class EventsHomeActivity extends Activity {
             iView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(getApplicationContext(), "Click Image is  " + backgroundImageName + " position:" + listOfItems.get(position), Toast.LENGTH_LONG).show();
+                   // Toast.makeText(getApplicationContext(), "Click Image is  " + backgroundImageName + " position:" + listOfItems.get(position), Toast.LENGTH_LONG).show();
                     Intent singleEvent = new Intent(getApplicationContext(), EventDashboardActivity.class);
                     singleEvent.putExtra(listOfItems.get(position).toString(), "position");
                     startActivity(singleEvent);
