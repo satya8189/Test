@@ -13,7 +13,7 @@ margin-bottom:0px !important;
 </style>
 <toaster-container></toaster-container>
 
-<div class="container">
+<div class="cal-md-12">
 	<form>
 	
 	<div class="header-none">Event List</div>

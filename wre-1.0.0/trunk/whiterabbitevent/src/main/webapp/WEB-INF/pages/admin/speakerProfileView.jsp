@@ -1,4 +1,4 @@
-<h3>SpeakerProfile View List the Speaker</h3>
+
 	
 <script>
 	$(".link-active").removeClass("link-active");
@@ -24,7 +24,7 @@ margin-bottom:0px !important;
 	
 	<div class="panel">
 	<form>
-	<a ng-click="navigateToSpeakerrCreate(eventId)" class="btn btn-default pull-left button btn-color">Add Speaker</a>
+	<a ng-click="navigateToSpeakerrCreate(eventId)" class="btn btn-default pull-left button btn-color">Create Speaker</a>
 	</form>
 		<div class="panel-body ">
 		 <div class="col-md-2 col-md-offset-10 padding-0">
@@ -34,8 +34,7 @@ margin-bottom:0px !important;
 			<table class="table" id="viewSponsors">
 				<thead>
 					<tr>
-						<th>Event Id</th>
-						<th>Speaker ID</th>
+					
 						<th>Speaker Name</th>
 						<th>Location</th>
 						<th>Title</th>
@@ -46,8 +45,7 @@ margin-bottom:0px !important;
 				</thead>
 				<tr ng-show="filteredSize!=0" ng-repeat="sp in filtered = speakersList | filter: search ">
 				<!-- | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit -->
-					<td>{{sp.eventId}}</td>
-					<td>{{sp.speakerId}}</td>
+					
 					<td>{{sp.speakerName}}</td>
 					<td>{{sp.location}}</td>
 					<td>{{sp.title}}</td>

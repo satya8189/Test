@@ -20,7 +20,7 @@ margin-bottom:0px !important;
 	</a>
 	
 	<div class="tab-content">
-		<a ng-click="galleryCreate(eventId)" class="btn btn-default pull-left button btn-color">Add Gallary</a>
+		<a ng-click="galleryCreate(eventId)" class="btn btn-default pull-left button btn-color"> Create Gallary</a>
 	          <div id="home" class="tab-pane fade in active">
     <div class="header-none">Gallery List</div>			           
                 <div class="col-md-12 padding-0">

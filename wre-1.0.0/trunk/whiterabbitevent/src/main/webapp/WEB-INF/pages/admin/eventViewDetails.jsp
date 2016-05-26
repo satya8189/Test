@@ -39,7 +39,7 @@ padding: 10px 0px 0px;
                              </div>
 							</div>
 							<div class="bottom"></div>
-							</a>
+							
 						</div>
 				</div>		
 						

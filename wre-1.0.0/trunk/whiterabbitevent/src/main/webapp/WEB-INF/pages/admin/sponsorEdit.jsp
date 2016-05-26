@@ -12,28 +12,8 @@
 		<div class="panel-body text-center">
 			<form name="sponcorEditForm" ng-submit="updateSponsor(sponcor)"	novalidate>
 				
-				<div class="col-md-12">
-
-						<div class="col-md-2">
-							<label>Event Id</label>
-						</div>
-						<div class="col-md-2">
-							<input type="text" class="input-text form-control" id="eventId" ng-model="sponcor.eventId" name="EventName"
-								readonly>
-						</div>
-					</div>
 					
-					<div class="col-md-12">
-						<div class="col-md-2">
-							<label>Sponsor Id</label>
-						</div>
-						<div class="col-md-2">
-							<input type="text" class="input-text form-control" id="sponcorId"
-								placeholder="Sponsor Id" ng-model="sponcor.sponcorId" name="sponcorId"
-								required>
-						</div>
-					</div>
-					
+						
 					<div class="col-md-12">
 						<div class="col-md-2">
 							<label>Sponsor Name</label>

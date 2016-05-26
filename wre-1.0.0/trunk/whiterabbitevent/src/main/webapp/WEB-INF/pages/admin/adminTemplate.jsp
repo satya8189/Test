@@ -2,12 +2,8 @@
 <html lang="en" ng-app="whiterabbitevent">
 <head>
 
-<jsp:include page="../error-messages.jsp"></jsp:include>
-<style>
-	span{
-		color: red;
-	}
-</style>
+
+
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="firstName" value="${USER.firstName}" scope="session" />
@@ -54,12 +50,16 @@
     <script src="resources/js/admin/GalleryCreateController.js"></script>
     <script src="resources/js/admin/InviteController.js"></script>
     <script src="resources/js/admin/InviteListController.js"></script>
+    <script src="resources/js/admin/QuestionViewController.js"></script>
     
     <script src="resources/js/admin/DocumentViewController.js"></script>
     <script src="resources/js/admin/VideoViewController.js"></script>
-   <script src="resources/js/admin/VideoUploadController.js"></script>
+    <script src="resources/js/admin/VideoUploadController.js"></script>
     <script src="resources/js/admin/DocumetnCreateController.js"></script>
-      
+    <script src="resources/js/admin/QuestionCreateController.js"></script>
+    <script src="resources/js/admin/QuestionEditController.js"></script>
+    <script src="resources/js/admin/QuationAndAnswersViewController.js"></script>
+    
     <!-- file upload -->
 	<script type="text/javascript" src="resources/js/ng-file-upload.js"></script>
 	<script type="text/javascript" src="resources/js/ng-file-upload-shim.js"></script>

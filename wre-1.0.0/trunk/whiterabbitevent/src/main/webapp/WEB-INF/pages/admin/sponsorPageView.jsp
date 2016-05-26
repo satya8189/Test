@@ -32,8 +32,7 @@ margin-bottom:0px !important;
 			<table class="table" id="viewSponsors">
 				<thead>
 					<tr>
-						<th>Sponsor ID</th>
-						<th>EventId</th>
+						
 						<th>Sponsor Name</th>
 						<th>SponsorDescription</th>
 						<th>Action</th>
@@ -42,8 +41,7 @@ margin-bottom:0px !important;
 				 <tr ng-show="filteredSize!=0" ng-repeat="sp in filtered = sponsorsList | filter:search ">
 				<!-- <tr ng-show="filteredSize!=0" dir-paginate="sp in sponsorsList |orderBy:sortKey:reverse | filter:search | itemsPerPage:5"> -->
 				<!-- | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit -->
-					<td>{{sp.sponcorId}}</td>
-					<td>{{sp.eventId}}</td>
+				
 					<td>{{sp.sponcorName}}</td>
 					<td>{{sp.sponcorDesc}}</td>
 					<td>

@@ -20,7 +20,7 @@ margin-bottom:0px !important;
 	
 <form>
 
-	<a ng-click="navigateagendoCreate(eventId)" class="btn btn-default pull-left button btn-color">Add Agenda</a>
+	<a ng-click="navigateagendoCreate(eventId)" class="btn btn-default pull-left button btn-color">Create Agenda</a>
 	
 	<!-- <a ng-click="navigateagendoCreate(eventId)" title="eventViewDetails">agendaCreate
 			<i class="fa fa-eye-slash icons"> </i>
