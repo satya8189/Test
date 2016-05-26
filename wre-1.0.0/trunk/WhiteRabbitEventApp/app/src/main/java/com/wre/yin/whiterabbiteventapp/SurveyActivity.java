@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -110,9 +111,9 @@ public class SurveyActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                RecyclerViewHolder vholder = (RecyclerViewHolder) v.getTag();
+                SurveyViewHolder vholder = (SurveyViewHolder) v.getTag();
                 int position = vholder.getPosition();
-              //  Toast.makeText(context,"This is position "+position,Toast.LENGTH_LONG ).show();
+                Toast.makeText(context,"This is position "+position,Toast.LENGTH_LONG ).show();
 
             }
         };

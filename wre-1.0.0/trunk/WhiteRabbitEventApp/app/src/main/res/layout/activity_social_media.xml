@@ -3,21 +3,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+
     tools:context="com.wre.yin.whiterabbiteventapp.NetworkingActivity">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:orientation="vertical"
-        android:padding="10dp">
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_margin="4dp">
 
-
-        <Button
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/btnGplus"
+            android:layout_margin="10dp"
+            android:src="@drawable/social_g_plus"/>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/btnFb"
+            android:layout_margin="10dp"
+            android:src="@drawable/social_f"/>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="10dp"
+            android:id="@+id/btnTwitter"
+            android:src="@drawable/social_twitter"/>
+        <!--<Button
             android:id="@+id/btnGplus"
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -58,6 +73,6 @@
             android:paddingTop="10dp"
             android:text="Connect with Twitter"
             android:textColor="#fff"
-            android:textSize="12sp" />
+            android:textSize="12sp" />-->
     </LinearLayout>
 </RelativeLayout>

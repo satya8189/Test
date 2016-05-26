@@ -6,7 +6,7 @@
     android:layout_marginTop="10dp"
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
-    android:background="#90CAF9"
+    android:background="@color/survey_item"
     android:foreground="?attr/selectableItemBackground"
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
@@ -14,7 +14,7 @@
         android:id="@+id/networl_re_layout"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:background="#90CAF9"
+        android:background="@color/survey_item"
 
         android:layout_height="wrap_content"
         android:paddingTop="4dp">
@@ -36,8 +36,11 @@
             android:id="@+id/survey_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_margin="4dp"
             android:visibility="gone"
+            android:textColor="@color/black"
+            android:padding="4dp"
+            android:background="@drawable/survery_item_edittext"
             android:lines="2" />
         <RadioGroup
             android:layout_width="match_parent"

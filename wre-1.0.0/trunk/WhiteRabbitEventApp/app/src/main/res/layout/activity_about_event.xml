@@ -14,10 +14,16 @@
         android:layout_height="100dp"
         android:src="@drawable/event_image2" />
 
-    <TextView
+    <!--<TextView
         android:id="@+id/event_details_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp" />
+        android:layout_margin="10dp" />-->
+    <WebView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/detail_webview">
+
+    </WebView>
 
 </LinearLayout>
