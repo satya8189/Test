@@ -5,10 +5,12 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.wre.adminmgmt.bean.AgendaBean;
+import com.wre.adminmgmt.bean.AppIdentifierBean;
 import com.wre.adminmgmt.bean.EventBean;
 import com.wre.adminmgmt.bean.GalaryBean;
 import com.wre.adminmgmt.bean.InviteBean;
 import com.wre.adminmgmt.bean.NewsFeedBean;
+import com.wre.adminmgmt.bean.QuestionBean;
 import com.wre.adminmgmt.bean.SpeakerBean;
 import com.wre.adminmgmt.bean.SponsorBean;
 
@@ -53,6 +55,14 @@ public List<InviteBean> inviteDetails(Long eventId);
 
 public void deleteGallery(Long glaryItemId);
 
+public List<QuestionBean> questionList(Long eventId);
+
+public void questionCreate(QuestionBean questionBean);
+
+public List<AppIdentifierBean> appList(Long appId);
+
+public QuestionBean questionEdit(Long questionId);
+
 public List<SponsorBean> getSponsorsList(Long eventId);
 
 public void createSponsor(SponsorBean sponsorBean);
@@ -69,7 +79,9 @@ public SpeakerBean getSpeakerBySpeakerId(Long speakerId);
 
 public void udpateSpeaker(SpeakerBean spk);
 
+public void updateQuestionDetails(QuestionBean questionBean);
 
+public void uploadVenuLayout(MultipartFile file, Long eventId, String type);
 
 
 

@@ -15,21 +15,19 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-
-
-
-
-
 import com.wre.adminmgmt.bean.AgendaBean;
+import com.wre.adminmgmt.bean.AppIdentifierBean;
 import com.wre.adminmgmt.bean.EventBean;
 import com.wre.adminmgmt.bean.GalaryBean;
 import com.wre.adminmgmt.bean.InviteBean;
 import com.wre.adminmgmt.bean.NewsFeedBean;
+import com.wre.adminmgmt.bean.QuestionBean;
 import com.wre.adminmgmt.bean.SpeakerBean;
 import com.wre.adminmgmt.bean.SponsorBean;
 import com.wre.adminmgmt.dao.AdminMgmtDao;
 import com.wre.common.util.WREConstants;
 import com.wre.model.Agenda;
+import com.wre.model.AppIdentifier;
 import com.wre.model.Event;
 import com.wre.model.EventParticipant;
 import com.wre.model.EventServices;
@@ -38,6 +36,7 @@ import com.wre.model.Newsfeed;
 import com.wre.model.Participants;
 import com.wre.model.Speaker;
 import com.wre.model.Sponcor;
+import com.wre.model.SurveyQuestion;
 
 
 @Service("AdminMgmtService")
@@ -211,6 +210,8 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 			return newsBeanList;
 		}
 		
+		
+			
 		 //NewsEdit
 				public NewsFeedBean newsEditDetails(Long newsFeedId) {
 					NewsFeedBean newsFeedBean=null;
@@ -227,8 +228,8 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 					return newsFeedBean;
 				}
 				
-				
-      //saveNews
+
+			//saveNews
 				public void saveNews(NewsFeedBean newsFeedBean) {
 					Newsfeed newsfeed=new Newsfeed();
 					newsfeed.setNewsFeedId(newsFeedBean.getNewsFeedId());
@@ -241,6 +242,8 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 		             AdminMgmtDaoImpl.save(newsfeed);
 		             log.info("this is savenews successfully");
 				}
+				
+           
 				
 				//news update	
 				public void updateNews(NewsFeedBean newsFeedBean) {
@@ -269,6 +272,7 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 						galaryBeanOject.setGlaryItemId(galaryOject.getGlaryItemId());
 						galaryBeanOject.setName(galaryOject.getName());
 						galaryBeanOject.setType(galaryOject.getType());
+						galaryBeanOject.setEventId(galaryOject.getEvent().getEventId());
 					
 						galaryBeanList.add(galaryBeanOject);
 			
@@ -329,9 +333,7 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 			            
 					}
 					
-					
-
-
+				
 				 void saveFile(MultipartFile file, String filePath){
 						
 						log.info("Enter into saveFile(MultipartFile file, long practiceReqId,String filePath)"+file);
@@ -422,181 +424,305 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 					AdminMgmtDaoImpl.delete(galary);
 					  
 				}
-						
-			
-				
-				//=======================sponsor start=========================
-				/***********By Taraq*************/
-				
-			
-				@Override
-				public List<SponsorBean> getSponsorsList(Long eventId) {
-				// Get the Sponsors list based on the event id passed
-					log.info("In getSponsorsList===="+eventId);
-					List<Sponcor> sponcorList=AdminMgmtDaoImpl.getSponcorsList(eventId);
-					//we are getting the list as Sponcor which is entity
-					List<SponsorBean> sponsorBeanList=new ArrayList<SponsorBean>();
-					log.info("sponcorlist size is --"+sponcorList.size());
-					log.info("before for each");
-					for(Sponcor sponcorObject:sponcorList)
+
+				//questionBeanList
+				public List<QuestionBean> questionList(Long eventId) {
+					List<SurveyQuestion> surveyList=AdminMgmtDaoImpl.questionList(eventId);
+					List<QuestionBean> questionBeanList=new ArrayList<QuestionBean>();
+					for(SurveyQuestion surveyOject:surveyList)
 					{
-						SponsorBean sponsorBean=new SponsorBean();
-						sponsorBean.setEventId(sponcorObject.getEvent().getEventId());
-						sponsorBean.setEventName(sponcorObject.getEvent().getEventName());
-						sponsorBean.setSponcorId(sponcorObject.getSponcorId());
-						sponsorBean.setSponcorDesc(sponcorObject.getSponcorDesc());
-						sponsorBean.setSponcorName(sponcorObject.getSponcorName());
-						sponsorBeanList.add(sponsorBean);
+						QuestionBean questionBeanOject=new QuestionBean();
+						questionBeanOject.setQuestionId(surveyOject.getQuestionId());
+						questionBeanOject.setOptionA(surveyOject.getOptionA());
+						questionBeanOject.setOptionB(surveyOject.getOptionB());
+						questionBeanOject.setOptionC(surveyOject.getOptionC());
+						questionBeanOject.setOptionD(surveyOject.getOptionD());
+						questionBeanOject.setAnswer(surveyOject.getAnswer());
+						questionBeanOject.setQuestion(surveyOject.getQuestion());
+						questionBeanOject.setAppIdentifierId(surveyOject.getAppIdentifier().getAppIdentifierId());
+						questionBeanOject.setAppIdentifierName(surveyOject.getAppIdentifier().getIdentifierName());
+					    questionBeanList.add(questionBeanOject);
 					}
-				   
-					log.info("sponcorBeanlist size is --"+sponsorBeanList);
+					   log.info("list size is --"+questionBeanList.size());
+					return questionBeanList;
+				}
+				
+				@Override
+				public List<AppIdentifierBean> appList(Long appId) {
+					List<AppIdentifier> applist=AdminMgmtDaoImpl.appList(appId);
+					List<AppIdentifierBean> appIdentifierBeanList=new ArrayList<AppIdentifierBean>();
+					for(AppIdentifier appIdentifierObj:applist)
+					{
+						AppIdentifierBean appIdentifierBeanObj=new AppIdentifierBean();
+						appIdentifierBeanObj.setAppIdentifierId(appIdentifierObj.getAppIdentifierId());
+						appIdentifierBeanObj.setIdentifierName(appIdentifierObj.getIdentifierName());
+						appIdentifierBeanList.add(appIdentifierBeanObj);
+					}
+					return appIdentifierBeanList;
+				}
+				
+
+				//questionCreate
+				   public void questionCreate(QuestionBean questionBean) {
+		            	  SurveyQuestion surveyQuestion=new SurveyQuestion();
+		            	  surveyQuestion.setQuestionId(questionBean.getQuestionId());
+		            	  surveyQuestion.setOptionA(questionBean.getAnswer());
+		            	  surveyQuestion.setOptionB(questionBean.getOptionB());
+		            	  surveyQuestion.setOptionC(questionBean.getOptionC());
+		            	  surveyQuestion.setOptionD(questionBean.getOptionD());
+		            	  surveyQuestion.setAnswer(questionBean.getAnswer());
+		            	  
+		            	  Event event= new Event();
+		            	  event.setEventId(questionBean.getEventId());
+		            	  surveyQuestion.setEvent(event);
+		            	  
+		            	  AppIdentifier appIdentifierObj=new AppIdentifier();
+		            	  appIdentifierObj.setAppIdentifierId(questionBean.getAppIdentifierId());
+		            	  surveyQuestion.setAppIdentifier(appIdentifierObj);
+		            	 
+		            	  AdminMgmtDaoImpl.save(surveyQuestion);
+				          log.info("this is savequestion successfully");
+		            	  
+		            	 
+							}
+				 //questionEdit
+					public QuestionBean questionEdit(Long questionId) {
+						QuestionBean questionBeanOject=null;
+						SurveyQuestion surveyQuestion=AdminMgmtDaoImpl.questionEdit(questionId);
+						if(surveyQuestion!=null){
 							
-					return sponsorBeanList;
-				}
-
-				@Override
-				public void createSponsor(SponsorBean sponsorBean) {
-					// TODO Auto-generated method stub
-					Sponcor sb=new Sponcor();
-					sb.setSponcorName(sponsorBean.getSponcorName());
-		            sb.setSponcorDesc(sponsorBean.getSponcorDesc());
-		            	Event e=new Event();
-		            	e.setEventId(sponsorBean.getEventId());
-		            sb.setEvent(e);
-		            
-		            AdminMgmtDaoImpl.save(sb);
-		            	
-				}
-
-				@Override
-				public SponsorBean getSponsorForEdit(Long sponcorId) {
-					// TODO Auto-generated method stub
-					SponsorBean sponsorBeanObject=null;
-		        	 Sponcor sponsorObject=AdminMgmtDaoImpl.getSponsorBySponsorId(sponcorId);
-		        	 
-		        	 if(sponsorObject!=null){
-		        		 sponsorBeanObject=new SponsorBean();
-		        		 sponsorBeanObject.setEventId(sponsorObject.getEvent().getEventId());
-		        		 sponsorBeanObject.setSponcorName(sponsorObject.getSponcorName());
-		        		 sponsorBeanObject.setSponcorId(sponsorObject.getSponcorId());
-		        		 sponsorBeanObject.setSponcorDesc(sponsorObject.getSponcorDesc());
-		        		}
-
-		        	 	return sponsorBeanObject;
-
-						
-					//return null;
-				}
-
-				/*Update the Sponsor Data*/
-				public void updateSponsor(SponsorBean spBean) {
-					Sponcor spObj=new Sponcor();
-					Event event=new Event();
-					event.setEventId(spBean.getEventId());
-					spObj.setEvent(event);
-					spObj.setSponcorId(spBean.getSponcorId());
-					spObj.setSponcorName(spBean.getSponcorName());
-					spObj.setSponcorDesc(spBean.getSponcorDesc());
-					
-					AdminMgmtDaoImpl.update(spObj);
-		            
-				}
-
-				@Override
-				public List<SpeakerBean> getSpeakersList(Long eventId) {
-					// TODO Auto-generated method stub
-					
-					List<Speaker> sl=AdminMgmtDaoImpl.getSpeakersList(eventId);
-					log.info("----getSpeakersList servImpl---"+sl.size());
-					SpeakerBean sb=new SpeakerBean();
-					List<SpeakerBean> speakerBeanList=new ArrayList<SpeakerBean>();
-					
-					for(Speaker s:sl)
-					{
-						//log.info(s.getEvent().getEventId()+"="
-							/*	+ "=="+s.getSpeakerId()+"=="+s.getSpeakerName()+"=="+s.getDesc()+"="
-										+ "="+s.getLocation()+"=="+s.getTitle());*/
-						sb.setEventId(s.getEvent().getEventId());
-						sb.setSpeakerId(s.getSpeakerId());
-						sb.setSpeakerName(s.getSpeakerName());
-						sb.setDesc(s.getDescription());
-						sb.setLocation(s.getLocation());
-						sb.setRating(s.getRating());
-						sb.setTitle(s.getTitle());
-						
-						log.info(s.getDescription()+"speaker bean--"+sb.toString());
-						speakerBeanList.add(sb);
+							questionBeanOject=new QuestionBean();
+							questionBeanOject.setQuestionId(surveyQuestion.getQuestionId());
+							questionBeanOject.setOptionA(surveyQuestion.getOptionA());
+							questionBeanOject.setOptionB(surveyQuestion.getOptionB());
+							questionBeanOject.setOptionC(surveyQuestion.getOptionC());
+							questionBeanOject.setOptionD(surveyQuestion.getOptionD());
+							questionBeanOject.setAnswer(surveyQuestion.getAnswer());
+							questionBeanOject.setQuestion(surveyQuestion.getQuestion());
+							questionBeanOject.setEventId(surveyQuestion.getEvent().getEventId());
+							questionBeanOject.setAppIdentifierId(surveyQuestion.getAppIdentifier().getAppIdentifierId());
+							questionBeanOject.setAppIdentifierName(surveyQuestion.getAppIdentifier().getIdentifierName());  
+			            	  
+						}
+						log.info("OptionA---"+questionBeanOject.getOptionA());
+						return questionBeanOject;
 					}
-					log.info("sp bean list size==="+speakerBeanList.size());
-					return speakerBeanList;
-				}
-
-				@Override
-				public void createSpeaker(SpeakerBean spk) {
-					// TODO Auto-generated method stub
-					log.info("in adminmgmtserImpl----"+spk.getDescription());
 					
-					Speaker speaker=new Speaker();
+					//updateQuestionDetails
+					public void updateQuestionDetails(QuestionBean questionBean) {
+						SurveyQuestion surveyQuestionOject=AdminMgmtDaoImpl.questionEdit(questionBean.getQuestionId());
+						
+						surveyQuestionOject.setOptionA(questionBean.getOptionA());
+						surveyQuestionOject.setOptionB(questionBean.getOptionB());
+						surveyQuestionOject.setOptionC(questionBean.getOptionC());
+						surveyQuestionOject.setOptionD(questionBean.getOptionD());
+						surveyQuestionOject.setAnswer(questionBean.getAnswer());
+						surveyQuestionOject.setQuestion(questionBean.getQuestion());
+						
+						AdminMgmtDaoImpl.update(surveyQuestionOject);
+					}
+					
+
+					
+			
+							
+					
+					
+					//=======================sponsor start=========================
+					/***********By Taraq*************/
+					
+				
+					@Override
+					public List<SponsorBean> getSponsorsList(Long eventId) {
+					// Get the Sponsors list based on the event id passed
+						log.info("In getSponsorsList===="+eventId);
+						List<Sponcor> sponcorList=AdminMgmtDaoImpl.getSponcorsList(eventId);
+						//we are getting the list as Sponcor which is entity
+						List<SponsorBean> sponsorBeanList=new ArrayList<SponsorBean>();
+						log.info("sponcorlist size is --"+sponcorList.size());
+						log.info("before for each");
+						for(Sponcor sponcorObject:sponcorList)
+						{
+							SponsorBean sponsorBean=new SponsorBean();
+							sponsorBean.setEventId(sponcorObject.getEvent().getEventId());
+							sponsorBean.setEventName(sponcorObject.getEvent().getEventName());
+							sponsorBean.setSponcorId(sponcorObject.getSponcorId());
+							sponsorBean.setSponcorDesc(sponcorObject.getSponcorDesc());
+							sponsorBean.setSponcorName(sponcorObject.getSponcorName());
+							sponsorBeanList.add(sponsorBean);
+						}
+					   
+						log.info("sponcorBeanlist size is --"+sponsorBeanList);
+								
+						return sponsorBeanList;
+					}
+
+					@Override
+					public void createSponsor(SponsorBean sponsorBean) {
+						
+						Sponcor sb=new Sponcor();
+						sb.setSponcorName(sponsorBean.getSponcorName());
+			            sb.setSponcorDesc(sponsorBean.getSponcorDesc());
+			            	Event e=new Event();
+			            	e.setEventId(sponsorBean.getEventId());
+			            sb.setEvent(e);
+			            
+			            AdminMgmtDaoImpl.save(sb);
+			            	
+					}
+
+					@Override
+					public SponsorBean getSponsorForEdit(Long sponcorId) {
+						
+						SponsorBean sponsorBeanObject=null;
+			        	 Sponcor sponsorObject=AdminMgmtDaoImpl.getSponsorBySponsorId(sponcorId);
+			        	 
+			        	 if(sponsorObject!=null){
+			        		 sponsorBeanObject=new SponsorBean();
+			        		 sponsorBeanObject.setEventId(sponsorObject.getEvent().getEventId());
+			        		 sponsorBeanObject.setSponcorName(sponsorObject.getSponcorName());
+			        		 sponsorBeanObject.setSponcorId(sponsorObject.getSponcorId());
+			        		 sponsorBeanObject.setSponcorDesc(sponsorObject.getSponcorDesc());
+			        		}
+
+			        	 	return sponsorBeanObject;
+
+							
+						//return null;
+					}
+
+					/*Update the Sponsor Data*/
+					public void updateSponsor(SponsorBean spBean) {
+						Sponcor spObj=new Sponcor();
 						Event event=new Event();
-							event.setEventId(spk.getEventId());
-							
-					speaker.setEvent(event);
-					speaker.setSpeakerName(spk.getSpeakerName());
-					speaker.setLocation(spk.getLocation());
-					speaker.setTitle(spk.getTitle());
-					speaker.setDescription(spk.getDescription());
-					speaker.setRating(spk.getRating());
-					
-					log.info("SerImpl...speaker bean saving....."+speaker.getDescription());
-					AdminMgmtDaoImpl.save(speaker);
-				}
+						event.setEventId(spBean.getEventId());
+						spObj.setEvent(event);
+						spObj.setSponcorId(spBean.getSponcorId());
+						spObj.setSponcorName(spBean.getSponcorName());
+						spObj.setSponcorDesc(spBean.getSponcorDesc());
+						
+						AdminMgmtDaoImpl.update(spObj);
+			            
+					}
 
-				//get speaker for edit by id
-				@Override
-				public SpeakerBean getSpeakerBySpeakerId(Long speakerId) {
-					log.info("in getSpeBySpId=servc=="+speakerId);
-					SpeakerBean sp=new SpeakerBean();
-						Speaker speakerObject=AdminMgmtDaoImpl.getSpeakerBySpeakerId(speakerId);
-						log.info("desc......."+speakerObject.getDescription());
-						if(speakerObject!=null)
-							{
-								sp.setEventId(speakerObject.getEvent().getEventId());
-								sp.setSpeakerId(speakerObject.getSpeakerId());
-								sp.setSpeakerName(speakerObject.getSpeakerName());
-								sp.setDesc(speakerObject.getDescription());
-								sp.setLocation(speakerObject.getLocation());
-								sp.setRating(speakerObject.getRating());
-								sp.setTitle(speakerObject.getTitle());
+					@Override
+					public List<SpeakerBean> getSpeakersList(Long eventId) {
+						
+						
+						List<Speaker> sl=AdminMgmtDaoImpl.getSpeakersList(eventId);
+						log.info("----getSpeakersList servImpl---"+sl.size());
+						SpeakerBean sb=new SpeakerBean();
+						List<SpeakerBean> speakerBeanList=new ArrayList<SpeakerBean>();
+						
+						for(Speaker s:sl)
+						{
+							//log.info(s.getEvent().getEventId()+"="
+								/*	+ "=="+s.getSpeakerId()+"=="+s.getSpeakerName()+"=="+s.getDesc()+"="
+											+ "="+s.getLocation()+"=="+s.getTitle());*/
+							sb.setEventId(s.getEvent().getEventId());
+							sb.setSpeakerId(s.getSpeakerId());
+							sb.setSpeakerName(s.getSpeakerName());
+							sb.setDesc(s.getDescription());
+							sb.setLocation(s.getLocation());
+							sb.setRating(s.getRating());
+							sb.setTitle(s.getTitle());
 							
-								}
-						log.info(speakerObject.getDescription()+"speaker for edit....."+sp.toString());
-					return sp;
-				}
+							log.info(s.getDescription()+"speaker bean--"+sb.toString());
+							speakerBeanList.add(sb);
+						}
+						log.info("sp bean list size==="+speakerBeanList.size());
+						return speakerBeanList;
+					}
 
-				@Override
-				public void udpateSpeaker(SpeakerBean spk) {
-					// TODO Auto-generated method stub
-					log.info("udateSpeaker....."+spk.getDescription());
-					
-					Speaker spentity=new Speaker();
-					Event e=new Event();
-						e.setEventId(spk.getEventId());
-					spentity.setEvent(e);
-					spentity.setSpeakerId(spk.getSpeakerId());
-					spentity.setSpeakerName(spk.getSpeakerName());
-					spentity.setTitle(spk.getTitle());
-					spentity.setDescription(spk.getDescription());
-					spentity.setLocation(spk.getLocation());
-					spentity.setRating(spk.getRating());
-					
-					AdminMgmtDaoImpl.update(spentity);
-				}
-				
+					@Override
+					public void createSpeaker(SpeakerBean spk) {
+						
+						log.info("in adminmgmtserImpl----"+spk.getDescription());
+						
+						Speaker speaker=new Speaker();
+							Event event=new Event();
+								event.setEventId(spk.getEventId());
+								
+						speaker.setEvent(event);
+						speaker.setSpeakerName(spk.getSpeakerName());
+						speaker.setLocation(spk.getLocation());
+						speaker.setTitle(spk.getTitle());
+						speaker.setDescription(spk.getDescription());
+						speaker.setRating(spk.getRating());
+						
+						log.info("SerImpl...speaker bean saving....."+speaker.getDescription());
+						AdminMgmtDaoImpl.save(speaker);
+					}
 
-				
-							
+					//get speaker for edit by id
+					@Override
+					public SpeakerBean getSpeakerBySpeakerId(Long speakerId) {
+						log.info("in getSpeBySpId=servc=="+speakerId);
+						SpeakerBean sp=new SpeakerBean();
+							Speaker speakerObject=AdminMgmtDaoImpl.getSpeakerBySpeakerId(speakerId);
+							log.info("desc......."+speakerObject.getDescription());
+							if(speakerObject!=null)
+								{
+									sp.setEventId(speakerObject.getEvent().getEventId());
+									sp.setSpeakerId(speakerObject.getSpeakerId());
+									sp.setSpeakerName(speakerObject.getSpeakerName());
+									sp.setDesc(speakerObject.getDescription());
+									sp.setLocation(speakerObject.getLocation());
+									sp.setRating(speakerObject.getRating());
+									sp.setTitle(speakerObject.getTitle());
+								
+									}
+							log.info(speakerObject.getDescription()+"speaker for edit....."+sp.toString());
+						return sp;
+					}
+
+					@Override
+					public void udpateSpeaker(SpeakerBean spk) {
+						
+						log.info("udateSpeaker....."+spk.getDescription());
+						
+						Speaker spentity=new Speaker();
+						Event e=new Event();
+							e.setEventId(spk.getEventId());
+						spentity.setEvent(e);
+						spentity.setSpeakerId(spk.getSpeakerId());
+						spentity.setSpeakerName(spk.getSpeakerName());
+						spentity.setTitle(spk.getTitle());
+						spentity.setDescription(spk.getDescription());
+						spentity.setLocation(spk.getLocation());
+						spentity.setRating(spk.getRating());
+						
+						AdminMgmtDaoImpl.update(spentity);
+					}
+
+					//uploadVenuLayout
+					public void uploadVenuLayout(MultipartFile file,
+							Long eventId, String type) {
+						
 					
-}
+								         log.info("Enter into saveOrganizationApproveFile");
+								         String filePath=WREConstants.RESOURCE_PATH+File.separator +eventId
+								           +File.separator+type+File.separator;
+								         
+								        if(file!=null){
+								          saveFile(file,filePath);
+								          log.info("file uploud successfully");
+								          
+								         }
+								         
+								  }
+						
+					}
+					
+					
+					
+					
+
+					
+								
+						
+	
+
 
 			
 
