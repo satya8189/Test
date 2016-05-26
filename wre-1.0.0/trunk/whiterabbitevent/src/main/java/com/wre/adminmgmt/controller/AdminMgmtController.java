@@ -14,14 +14,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-
-
-
 import com.wre.adminmgmt.bean.AgendaBean;
+import com.wre.adminmgmt.bean.AppIdentifierBean;
 import com.wre.adminmgmt.bean.EventBean;
 import com.wre.adminmgmt.bean.GalaryBean;
 import com.wre.adminmgmt.bean.InviteBean;
 import com.wre.adminmgmt.bean.NewsFeedBean;
+import com.wre.adminmgmt.bean.QuestionBean;
 import com.wre.adminmgmt.bean.SpeakerBean;
 import com.wre.adminmgmt.bean.SponsorBean;
 import com.wre.adminmgmt.service.AdminMgmtService;
@@ -186,7 +185,45 @@ public class AdminMgmtController {
 							log.info("navigate videoUpload page");
 						    return "admin/videoUpload";
 					       }
-
+				        
+				        //admin/questionView
+				        
+				        @RequestMapping(value="admin/questionView")
+						   public String questionView(){
+							log.info("navigate questionView page");
+						    return "admin/questionView";
+					       }
+				        
+				        //admin/questionCreate
+				        
+				        @RequestMapping(value="admin/questionCreate")
+						   public String questionCreate(){
+							log.info("navigate questionCreate page");
+						    return "admin/questionCreate";
+					       }
+				        
+                     //admin/questionEdit
+				         @RequestMapping(value="admin/questionEdit")
+						   public String questionEdit(){
+							log.info("navigate questionEdit page");
+						    return "admin/questionEdit";
+					       }
+				         
+				         //admin/venueLayout
+				         @RequestMapping(value="admin/venueLayoutView")
+						   public String venueLayoutView(){
+							log.info("navigate venueLayout page");
+						    return "admin/venueLayoutView";
+					       }
+				         //admin/quationAndAnswersView
+				         
+				         @RequestMapping(value="admin/quationAndAnswersView")
+						   public String quationAndAnswersView(){
+							log.info("navigate quationAndAnswersView page");
+						    return "admin/quationAndAnswersView";
+					       }
+				         
+				        
 			 //view event list
 			@RequestMapping(value="admin/eventList")
 			public @ResponseBody List<EventBean> getEventList(@RequestParam("userId") Long userId){
@@ -346,163 +383,217 @@ public class AdminMgmtController {
 			}
 				
 				 //for deleteGallery
-				@RequestMapping(value = "admin/deleteGallery", method = RequestMethod.POST)
-				 public @ResponseBody void  deleteGallery(@RequestBody GalaryBean galaryBean) {
-				  log.info("Entered into delete  galary  method----------"+galaryBean.getGlaryItemId());
-					adminMgmtService.deleteGallery(galaryBean.getGlaryItemId());
+				@RequestMapping(value = "admin/deleteGallery", method = RequestMethod.GET)
+				 public @ResponseBody void  deleteGallery( @RequestParam("glaryItemId") Long glaryItemId) {
+				  log.info("Entered into delete  galary  method----------"+glaryItemId);
+					adminMgmtService.deleteGallery(glaryItemId);
 			
 				 }
+				//admin/deleteGallery
 				
+				 // admin/questionList
+				@RequestMapping(value="admin/questionList")
+				public @ResponseBody List<QuestionBean> questionList(@RequestParam("eventId") Long eventId){
+					log.info("in side questionList method----"+eventId);
+					List<QuestionBean> questionList=adminMgmtService.questionList(eventId);
+					return questionList;
+					
+			}
 				
-				
-				  
-			     /*============Sponsor Page Module==============*/
-			     /*By Taraq*/
-			     //admin/sponsorPageView
-			     @RequestMapping(value="admin/sponsorPageView")
-			 	   public String sponsorPageView(){
-			 		log.info("navigate to sponsorPage");
-			 	    return "admin/sponsorPageView";
-			 	   }
+				 // admin/questionCreate
 			     
-			     /*get the list of sponsorors*/
+			     @RequestMapping(value = "admin/questionCreate", method = RequestMethod.POST)
+				    public @ResponseBody void questionCreate(@RequestBody QuestionBean questionBean) {
+				    	log.info("in side questionCreate method");
+				    adminMgmtService.questionCreate(questionBean);
+				   
+				    }
 			     
-			     //admin/getSponsorDetails
-			     @RequestMapping(value="admin/sponsorsList")
-			 	public @ResponseBody List<SponsorBean> getSponsorsList(@RequestParam("eventId") Long eventId){
-			 		log.info("in side getSponsorList method----"+eventId);
-			 			
-			 		List<SponsorBean> sponsorsList=adminMgmtService.getSponsorsList(eventId);
-			 		//return eventList;
-			 		log.info("sponsors List........."+sponsorsList);
-			 		return sponsorsList;
-			 		
-			 	}
-			     
-			     //crete new sponsor
-			     /*admin/sponsorCreate*/
-			     @RequestMapping(value="admin/sponsorCreate")
-			 	   public String sponsorCreate(){
-			 			log.info("navigate to sponsorCreate");
-			 	    return "admin/sponsorCreate";
-			 	   }
-				 
-			     
-			     /*saveSponsor*///admin/sponsorSave
-			     @RequestMapping(value ="admin/sponsorSave",method = RequestMethod.POST)
-				    public @ResponseBody void saveSponsor(@RequestBody SponsorBean sponsorBean) {
-				    	log.info("in side sponsorSave method");
-				    	log.info("checking......"+sponsorBean.getSponcorName()+"=="+sponsorBean.getEventId()+"--"+sponsorBean.getSponcorDesc());
-				    	
-				    	adminMgmtService.createSponsor(sponsorBean);
-				     }
+			     //admin/appList
+			       @RequestMapping(value="admin/appList")
+					public @ResponseBody List<AppIdentifierBean> appList(@RequestParam("appId") Long appId){
+						log.info("in side appList method----"+appId);
+						List<AppIdentifierBean> appList=adminMgmtService.appList(appId);
+						return appList;
+						
+				}
+			       //admin/questionEdit
+			       
+			        @RequestMapping(value="admin/questionEditDetails",method=RequestMethod.GET)
+				    public @ResponseBody QuestionBean questionEdit(@RequestParam("questionId") Long questionId){
+			        	QuestionBean questionBean=adminMgmtService.questionEdit(questionId);
+			        	log.info("in side questionEdit method----"+questionBean.getAppIdentifierName());
+				     return questionBean;
+				  	    
+				    }
+			        
+			        //
+			        @RequestMapping(value = "question/update", method = RequestMethod.POST)
+				    public @ResponseBody void updateQuestion(@RequestBody QuestionBean questionBean) {
+				    adminMgmtService.updateQuestionDetails(questionBean);
+				    }
+			       
+			        //admin/createVenuLayout
+			        
+			        @RequestMapping(value = "admin/uploadVenuLayout", method = RequestMethod.POST)
+				       public @ResponseBody void uploadVenuLayout(@RequestParam(value="file", required=true) MultipartFile file,
+				                        @RequestParam("eventId") Long eventId,@RequestParam("type") String type) {
+				        log.info("in side uploadVenu method");
+				        log.info("id--"+eventId);
+				        log.info("file name---"+file.getOriginalFilename());
+				       adminMgmtService.uploadVenuLayout(file,eventId,type);
+				        }
+				    
 
-			     //admin/editSponsor
-			     //go to edit sponsor
-			     @RequestMapping(value ="admin/editSponsor")
-				    public String editSponsor() 
-			     {
-				    	log.info("navigating to editSponsor page");
-				    	return "admin/sponsorEdit";
-			     }
 
-			     
-			    /*get sponsor data for update*/
-			     @RequestMapping(value ="admin/getSponsorDataonSponsorId",method=RequestMethod.GET)
-				 public @ResponseBody SponsorBean getSponsorDataForEdit(@RequestParam ("sponcorId") Long sponcorId) 
-			     {
-				    	log.info("sponsor Id for Edit"+sponcorId);
-				    	SponsorBean sb=adminMgmtService.getSponsorForEdit(sponcorId);
-				    	
-				    	log.info("sponcor for edit......"+sb);
-				    	return sb;
-			     }
-			     
-			     
-			     
-			     @RequestMapping(value ="admin/updateSponsor",method = RequestMethod.POST)
-				    public @ResponseBody void updateSponsor(@RequestBody SponsorBean sb) {
-				    	log.info("in side updateSponsor method"+sb.getSponcorName()+"--"+sb.getEventId());
-				    	
-				    	adminMgmtService.updateSponsor(sb);
-				     }
-
-			     
-			     
-			     /*============End of Sponsor========*/
-			     
-			     
-			     /*==========starting speaker ===========*/
-			     //admin/speakerProfileView
-			     @RequestMapping("admin/speakerProfileView")
-			     public String goToSpeakersList()
-			     {
-			    	 
-			    	 return "admin/speakerProfileView";
-			     }
-			     
-			     @RequestMapping("admin/speakersList")
-			     public @ResponseBody List<SpeakerBean> getSpeakersList(Long eventId)
-			     {
-			    	log.info("in getSpeakersList---");
-			    	 List<SpeakerBean> sl=adminMgmtService.getSpeakersList(eventId);
-			    	 log.info("---eventId----"+eventId);
-			    	 log.info("--speakerlist size---"+sl.size());
-			    	 //return null;
-			    	 return sl;
-			     }
-			     
-			     //create speaker
-			     //admin/speakerCreate
-			     @RequestMapping(value="admin/speakerCreate")
-			     public String goToCreateSpeaker()
-			     {
-			    	 log.info("in goToCreateSpeaker..");
-			    	 
-			    	 return "admin/speakerCreate";
-			     }
-			     
-			      @RequestMapping(value ="admin/speakerSave",method = RequestMethod.POST)
-				    public @ResponseBody void saveSpeaker(@RequestBody SpeakerBean spk) {
-				    	log.info("in side speakerSave method");
-				    	log.info("checking......"+spk.getDescription());
-				    	adminMgmtService.createSpeaker(spk);
-				     }
-			     			   
-			      //admin/speakerEdit
-			      @RequestMapping(value ="admin/editSpeaker")
-				    public String editSpeaker() {
-				    	log.info("in side speakerEdit method");
-				    	return "admin/speakerEdit";
-				     }
-			     
+			        /*============Sponsor Page Module==============*/
+			        /*By Taraq*/
+			        //admin/sponsorPageView
+			        @RequestMapping(value="admin/sponsorPageView")
+			        public String sponsorPageView(){
+			      log.info("navigate to sponsorPage");
+			         return "admin/sponsorPageView";
+			        }
+			        
+			        /*get the list of sponsorors*/
+			        
+			        //admin/getSponsorDetails
+			        @RequestMapping(value="admin/sponsorsList")
+			     public @ResponseBody List<SponsorBean> getSponsorsList(@RequestParam("eventId") Long eventId){
+			      log.info("in side getSponsorList method----"+eventId);
+			       
+			      List<SponsorBean> sponsorsList=adminMgmtService.getSponsorsList(eventId);
+			      //return eventList;
+			      log.info("sponsors List........."+sponsorsList);
+			      return sponsorsList;
 			      
-			      //  admin/getSpeakerBySpeakerId
-			      @RequestMapping(value ="admin/getSpeakerBySpeakerId")
-				   public @ResponseBody SpeakerBean getSpeakerBySpeakerId(@RequestParam("speakerId") Long speakerId) {
-				    	log.info("in side getspeaker method"+speakerId);
-				    	return adminMgmtService.getSpeakerBySpeakerId(speakerId);
-				    	
-			      }
+			     }
+			        
+			        //crete new sponsor
+			        /*admin/sponsorCreate*/
+			        @RequestMapping(value="admin/sponsorCreate")
+			        public String sponsorCreate(){
+			       log.info("navigate to sponsorCreate");
+			         return "admin/sponsorCreate";
+			        }
+			     
+			        
+			        /*saveSponsor*///admin/sponsorSave
+			        @RequestMapping(value ="admin/sponsorSave",method = RequestMethod.POST)
+			        public @ResponseBody void saveSponsor(@RequestBody SponsorBean sponsorBean) {
+			         log.info("in side sponsorSave method");
+			         log.info("checking......"+sponsorBean.getSponcorName()+"=="+sponsorBean.getEventId()+"--"+sponsorBean.getSponcorDesc());
+			         
+			         adminMgmtService.createSponsor(sponsorBean);
+			         }
 
-			      //udpate speaker......admin/updateSpeaker
-			      @RequestMapping(value ="admin/updateSpeaker",method = RequestMethod.POST)
-				    public @ResponseBody void updateSpeaker(@RequestBody SpeakerBean spk) {
-				    	log.info("in side updatespeaker method");
-				    		log.info("checking......"+spk.getDescription());
-				    	adminMgmtService.udpateSpeaker(spk);
-				     }
-			     
-			      /*Speaker Ends Here**/
-			      
-			      /*venue Layout Starts here*/
-			      //admin/venueLayout
-			      @RequestMapping(value ="admin/venueLayout")
-				    public String goToVenueLayoutView() {
-				    	log.info("in side venueLayoutView method");
-				    	return "admin/venueLayoutView";
-				     }
-			     
+			        //admin/editSponsor
+			        //go to edit sponsor
+			        @RequestMapping(value ="admin/editSponsor")
+			        public String editSponsor() 
+			        {
+			         log.info("navigating to editSponsor page");
+			         return "admin/sponsorEdit";
+			        }
+
+			        
+			       /*get sponsor data for update*/
+			        @RequestMapping(value ="admin/getSponsorDataonSponsorId",method=RequestMethod.GET)
+			     public @ResponseBody SponsorBean getSponsorDataForEdit(@RequestParam ("sponcorId") Long sponcorId) 
+			        {
+			         log.info("sponsor Id for Edit"+sponcorId);
+			         SponsorBean sb=adminMgmtService.getSponsorForEdit(sponcorId);
+			         
+			         log.info("sponcor for edit......"+sb);
+			         return sb;
+			        }
+			        
+			        
+			        
+			        @RequestMapping(value ="admin/updateSponsor",method = RequestMethod.POST)
+			        public @ResponseBody void updateSponsor(@RequestBody SponsorBean sb) {
+			         log.info("in side updateSponsor method"+sb.getSponcorName()+"--"+sb.getEventId());
+			         
+			         adminMgmtService.updateSponsor(sb);
+			         }
+
+			        
+			        
+			        /*============End of Sponsor========*/
+			        
+			        
+			        /*==========starting speaker ===========*/
+			        //admin/speakerProfileView
+			        @RequestMapping("admin/speakerProfileView")
+			        public String goToSpeakersList()
+			        {
+			         
+			         return "admin/speakerProfileView";
+			        }
+			        
+			        @RequestMapping("admin/speakersList")
+			        public @ResponseBody List<SpeakerBean> getSpeakersList(Long eventId)
+			        {
+			        log.info("in getSpeakersList---");
+			         List<SpeakerBean> sl=adminMgmtService.getSpeakersList(eventId);
+			         log.info("---eventId----"+eventId);
+			         log.info("--speakerlist size---"+sl.size());
+			         //return null;
+			         return sl;
+			        }
+			        
+			        //create speaker
+			        //admin/speakerCreate
+			        @RequestMapping(value="admin/speakerCreate")
+			        public String goToCreateSpeaker()
+			        {
+			         log.info("in goToCreateSpeaker..");
+			         
+			         return "admin/speakerCreate";
+			        }
+			        
+			         @RequestMapping(value ="admin/speakerSave",method = RequestMethod.POST)
+			        public @ResponseBody void saveSpeaker(@RequestBody SpeakerBean spk) {
+			         log.info("in side speakerSave method");
+			         log.info("checking......"+spk.getDescription());
+			         adminMgmtService.createSpeaker(spk);
+			         }
+			              
+			         //admin/speakerEdit
+			         @RequestMapping(value ="admin/editSpeaker")
+			        public String editSpeaker() {
+			         log.info("in side speakerEdit method");
+			         return "admin/speakerEdit";
+			         }
+			        
+			         
+			         //  admin/getSpeakerBySpeakerId
+			         @RequestMapping(value ="admin/getSpeakerBySpeakerId")
+			       public @ResponseBody SpeakerBean getSpeakerBySpeakerId(@RequestParam("speakerId") Long speakerId) {
+			         log.info("in side getspeaker method"+speakerId);
+			         return adminMgmtService.getSpeakerBySpeakerId(speakerId);
+			         
+			         }
+
+			         //udpate speaker......admin/updateSpeaker
+			         @RequestMapping(value ="admin/updateSpeaker",method = RequestMethod.POST)
+			        public @ResponseBody void updateSpeaker(@RequestBody SpeakerBean spk) {
+			         log.info("in side updatespeaker method");
+			          log.info("checking......"+spk.getDescription());
+			         adminMgmtService.udpateSpeaker(spk);
+			         }
+			        
+			         /*Speaker Ends Here**/
+			         
+			         /*venue Layout Starts here*/
+			         //admin/venueLayout
+			         @RequestMapping(value ="admin/venueLayout")
+			        public String goToVenueLayoutView() {
+			         log.info("in side venueLayoutView method");
+			         return "admin/venueLayoutView";
+			         }
+			       
+					
 }
 
 
