@@ -4,8 +4,8 @@
         android:drawable="@drawable/button_fb_bg"
         android:id="@+id/t_bg" />
     <item
-        android:top="0dp" android:left="0dp">
-        <bitmap android:src="@drawable/fb_24"
+        android:right="10dp" android:left="10dp">
+        <bitmap android:src="@drawable/facebook"
             android:gravity="left" />
     </item>
 </layer-list>

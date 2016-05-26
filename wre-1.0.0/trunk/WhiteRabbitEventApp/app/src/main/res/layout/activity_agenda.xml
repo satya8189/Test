@@ -3,18 +3,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="10dp"
+    android:padding="5dp"
     tools:context="com.wre.yin.whiterabbiteventapp.AgendaActivity">
-
+<!--
     <ExpandableListView
         android:id="@+id/lvExp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:childDivider="#fff"
         android:divider="#fff"
         android:dividerHeight="10dp"
-        android:groupIndicator="@null">
+        android:groupIndicator="@null"
+        android:visibility="gone">
 
-    </ExpandableListView>
+    </ExpandableListView>-->
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/agenda_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingBottom="5dp"
+        android:scrollbars="vertical" />
 
 </RelativeLayout>

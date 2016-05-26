@@ -13,8 +13,13 @@
         android:id="@+id/activity_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:gravity="center"
         android:textColor="#000"
+        android:text="Scan QR Code"
         android:textSize="30sp" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:src="@drawable/wre_qr_code"/>
 </RelativeLayout>

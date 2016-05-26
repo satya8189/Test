@@ -5,14 +5,14 @@
     android:layout_height="match_parent"
 
     tools:context="com.wre.yin.whiterabbiteventapp.NetworkingActivity">
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/my_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
-        android:paddingBottom="16dp"
-        android:paddingTop="16dp"
-        android:scrollbars="vertical"
-        />
+        android:paddingBottom="5dp"
+
+        android:scrollbars="vertical" />
 
 </RelativeLayout>

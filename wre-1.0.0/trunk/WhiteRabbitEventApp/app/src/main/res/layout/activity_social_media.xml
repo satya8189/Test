@@ -21,43 +21,43 @@
             android:id="@+id/btnGplus"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_margin="4dp"
+            android:layout_margin="5dp"
             android:background="@drawable/layers_gplus_button_bg"
             android:paddingBottom="10dp"
-            android:paddingLeft="50dp"
-            android:paddingRight="5dp"
+            android:paddingLeft="40dp"
+            android:paddingRight="10dp"
             android:paddingTop="10dp"
             android:text="Connect with Google+"
             android:textColor="#fff"
-            android:textSize="14sp" />
+            android:textSize="12sp" />
 
         <Button
             android:id="@+id/btnFb"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_margin="4dp"
+            android:layout_margin="5dp"
             android:background="@drawable/layers_fb_button_bg"
             android:paddingBottom="10dp"
-            android:paddingLeft="50dp"
-            android:paddingRight="5dp"
+            android:paddingLeft="40dp"
+            android:paddingRight="10dp"
             android:paddingTop="10dp"
             android:text="Connect with Facebook"
 
             android:textColor="#fff"
-            android:textSize="14sp" />
+            android:textSize="12sp" />
 
         <Button
             android:id="@+id/btnTwitter"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_margin="4dp"
+            android:layout_margin="5dp"
             android:background="@drawable/layers_twitter_button_bg"
             android:paddingBottom="10dp"
             android:paddingLeft="50dp"
-            android:paddingRight="5dp"
+            android:paddingRight="10dp"
             android:paddingTop="10dp"
             android:text="Connect with Twitter"
             android:textColor="#fff"
-            android:textSize="14sp" />
+            android:textSize="12sp" />
     </LinearLayout>
 </RelativeLayout>

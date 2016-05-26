@@ -88,7 +88,7 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
         Bitmap speakerIcon = BitmapFactory.decodeResource(this.getResources(), R.drawable.speaker_pic);
         Bitmap aboutEvent = BitmapFactory.decodeResource(this.getResources(), R.drawable.about_pic);
 
-        gridArray.add(new Item(aboutEvent,"Details"));
+        gridArray.add(new Item(aboutEvent, "Details"));
         gridArray.add(new Item(deatailIcon, "Invite"));
         gridArray.add(new Item(agendaIcon, "Agenda"));
         gridArray.add(new Item(newsIcon, "News Feed"));

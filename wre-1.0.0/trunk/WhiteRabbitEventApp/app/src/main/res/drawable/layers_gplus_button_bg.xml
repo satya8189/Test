@@ -4,10 +4,11 @@
         android:id="@+id/t_bg"
         android:drawable="@drawable/button_gplus_bg" />
     <item
-        android:left="3dp"
-        android:top="0dp">
+
+        android:left="10dp"
+        android:right="10dp">
         <bitmap
             android:gravity="left"
-            android:src="@drawable/icon_gplus" />
+            android:src="@drawable/google_plus" />
     </item>
 </layer-list>

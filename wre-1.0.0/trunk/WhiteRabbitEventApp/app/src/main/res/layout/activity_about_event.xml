@@ -12,7 +12,7 @@
         android:id="@+id/about_event_image"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:src="@drawable/user_icon" />
+        android:src="@drawable/event_image2" />
 
     <TextView
         android:id="@+id/event_details_text"
