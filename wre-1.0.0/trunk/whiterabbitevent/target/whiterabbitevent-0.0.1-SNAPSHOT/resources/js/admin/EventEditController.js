@@ -3,12 +3,8 @@ var EventEditController = function($scope, $http, $routeParams, stringService,$l
 	$scope.$on("$routeChangeSuccess", function() {
 		$scope.eventId=$routeParams.eventId;
 		$http.get('admin/eventdetails?eventId='+$scope.eventId).success(function(event){
-		   
-
-	
-	
-	
-	$scope.updateEvent = function(event,isValid,eventId) {
+			
+		$scope.updateEvent = function(event,isValid,eventId) {
 		if(isValid){
 		$scope.eventList = {};
 			

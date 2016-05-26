@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="whiterabbitevent">
 <head>
+
+<jsp:include page="../error-messages.jsp"></jsp:include>
+<style>
+	span{
+		color: red;
+	}
+</style>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="firstName" value="${USER.firstName}" scope="session" />
 <c:set var="lastName" value="${USER.lastName}" scope="session" />
@@ -16,7 +24,10 @@
     
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="resources/css/style.css"/>
+<!--     //ngNotifier -->
+   <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+   <link rel="stylesheet" href="resources/css/style.css"/>
     
     <script src="resources/js/angular/angular.js"></script>
 		<script src="resources/js/angular/angular.min.js"></script>
@@ -25,16 +36,48 @@
 		<script src="resources/js/angular/angular-messages.js"></script>
 		<script src="resources/js/angular/angular-messages.min.js"></script>
      <script src="resources/js/navigationjs/adminNavigation.js"></script>
-    <!-- event -->
+<script src="resources/js/services.js"></script>
+<!-- event -->
     <script src="resources/js/admin/EventViewController.js"></script>
     <script src="resources/js/admin/EventCreateController.js"></script>
     <script src="resources/js/admin/EventEditController.js"></script>
-   
-   
+    <script src="resources/js/admin/EventViewDetailsController.js"></script>
+    <script src="resources/js/admin/AgendoViewController.js"></script>
+    <script src="resources/js/admin/AgendoCreateController.js"></script>
+    <script src="resources/js/admin/AgendoEditController.js"></script>
+    <script src="resources/js/admin/NewsFeedViewController.js"></script>
+    <script src="resources/js/admin/NewsFeedEditController.js"></script>
+    <script src="resources/js/admin/NewsFeedCreateController.js"></script>
+    <script src="resources/js/admin/GalleryViewController.js"></script>
+    <script src="resources/js/admin/DetailsViewController.js"></script>
+    <script src="resources/js/admin/EditDetailsViewController.js"></script>
+    <script src="resources/js/admin/GalleryCreateController.js"></script>
+    <script src="resources/js/admin/InviteController.js"></script>
+    <script src="resources/js/admin/InviteListController.js"></script>
+    <script src="resources/js/admin/QuestionViewController.js"></script>
     
-  
-  
- 
+    <script src="resources/js/admin/DocumentViewController.js"></script>
+    <script src="resources/js/admin/VideoViewController.js"></script>
+    <script src="resources/js/admin/VideoUploadController.js"></script>
+    <script src="resources/js/admin/DocumetnCreateController.js"></script>
+    <script src="resources/js/admin/QuestionCreateController.js"></script>
+    <script src="resources/js/admin/QuestionEditController.js"></script>
+    <!-- file upload -->
+	<script type="text/javascript" src="resources/js/ng-file-upload.js"></script>
+	<script type="text/javascript" src="resources/js/ng-file-upload-shim.js"></script>
+    
+    <!-- Sponsor Page -->
+    <script type="text/javascript" src="resources/js/admin/SponsorPageViewController.js"></script>
+    <script type="text/javascript" src="resources/js/admin/SponsorCreateController.js"></script>
+    <script type="text/javascript" src="resources/js/admin/SponsorEditController.js"></script>
+    
+    <!-- Speaker scripts -->
+    <script type="text/javascript" src="resources/js/admin/SpeakerProfileViewController.js"></script>
+    <script type="text/javascript" src="resources/js/admin/SpeakerCreateController.js"></script>
+	<script type="text/javascript" src="resources/js/admin/SpeakerEditController.js"></script>
+    
+    <!-- VenueLayout -->
+     <script type="text/javascript" src="resources/js/admin/VenueLayoutController.js"></script>
 </head>
 <body>
         <!--Heading-->
@@ -64,8 +107,8 @@
            <li class="head-date"> <span class="glyphicon glyphicon-bell"></span></li>
            <li class="head-date"> <span class="glyphicon glyphicon-user"></span></li>
           </ul>
-        </li>
-      </ul>
+        
+      
     </div><!-- /.navbar-collapse -->
 </nav>
         

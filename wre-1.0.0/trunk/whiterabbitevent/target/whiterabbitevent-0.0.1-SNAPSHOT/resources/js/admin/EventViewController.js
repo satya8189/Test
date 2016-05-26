@@ -1,4 +1,5 @@
-var EventViewController = function($scope,$routeParams,$http) {
+var EventViewController = function($scope,$routeParams,$http, $location) {
+	
 	
 	
 	$scope.eventList={};
@@ -6,7 +7,7 @@ var EventViewController = function($scope,$routeParams,$http) {
 	$scope.$on("$routeChangeSuccess", function () {
 	$scope.userId=$routeParams.userId;
 	
-		
+	
 		 $http.get('admin/eventList?userId='+$scope.userId).success(function(eventList){
 			
 			    $scope.eventList = eventList;
@@ -39,5 +40,8 @@ var EventViewController = function($scope,$routeParams,$http) {
 			  	});
 			 });
 	
+	$scope.eventViewDetails = function(eventId){
+		location.href="#/eventViewDetails/"+eventId;
+	};
 	
 	 };

@@ -13,12 +13,9 @@ margin-bottom:0px !important;
 </style>
 <toaster-container></toaster-container>
 
-<div class="container">
+<div class="cal-md-12">
 	<form>
-		<a href="#/eventCreate"
-			class="btn btn-default pull-right button btn-color">Create
-			Event</a>
-	</form>
+	
 	<div class="header-none">Event List</div>
 	<div class="panel">
 		<div class="panel-body">
@@ -33,8 +30,9 @@ margin-bottom:0px !important;
 					     <th>EventAgenda </th>
 						 <th>Event Name</th>
 						 <th> EventDesc</th>
-						  <th>EventDate</th>
+						 <th>EventDate</th>
 						 <th>Status</th>
+						 <th>Action</th>
 						
 				   </tr>
 				</thead>
@@ -47,13 +45,11 @@ margin-bottom:0px !important;
 					<td >{{event.status}}</td>
 			<td>
 					
-				<a ng-click="editEvent(event.eventId)" title="Edit Event">
-							<span class="glyphicon glyphicon-pencil icons"> </span>
-						</a>
-							
-						<a ng-click="navigateToEventViewDetails(event.eventId)"title="eventViewDetails">
+				<a ng-click="eventViewDetails(event.eventId)"title="eventViewDetails">
 							<i class="fa fa-eye-slash icons"> </i>
-						</a>
+				</a>
+				
+				
 						
 					</td>
 				</tr>
@@ -73,4 +69,5 @@ margin-bottom:0px !important;
 			
 		</div>
 	</div>
+	</form>
 </div>
