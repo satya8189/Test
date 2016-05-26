@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/survey_card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:background="#90CAF9"
+    android:foreground="?attr/selectableItemBackground"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+    <LinearLayout
+        android:id="@+id/networl_re_layout"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:background="#90CAF9"
+
+        android:layout_height="wrap_content"
+        android:paddingTop="4dp">
+
+
+        <TextView
+            android:id="@+id/survey_qtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="16dp"
+            android:layout_toRightOf="@+id/list_avatar"
+            android:text="Android "
+            android:textAppearance="?attr/textAppearanceListItem"
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/survey_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:visibility="gone"
+            android:lines="2" />
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/sur_radio_grp"
+            android:visibility="gone"
+            android:orientation="vertical">
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/sur_radio1"
+                android:text="True"
+                android:textColor="#000"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/sur_radio2"
+                android:text="False"
+                android:textColor="#000"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/sur_radio3"
+                android:text="Other"
+                android:textColor="#000"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/sur_radio4"
+                android:text="Other"
+                android:textColor="#000"/>
+        </RadioGroup>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/survey_submit_btn"
+            android:text="Submit"
+            />
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>
