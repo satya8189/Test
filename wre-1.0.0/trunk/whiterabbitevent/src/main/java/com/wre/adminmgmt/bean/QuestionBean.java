@@ -13,6 +13,16 @@ public class QuestionBean
     private String optionC;
     private String optionD;
     private String answer;
+    private String appIdentifierName;
+    
+    
+    
+	public String getAppIdentifierName() {
+		return appIdentifierName;
+	}
+	public void setAppIdentifierName(String appIdentifierName) {
+		this.appIdentifierName = appIdentifierName;
+	}
 	public Long getQuestionId() {
 		return questionId;
 	}
