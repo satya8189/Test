@@ -14,4 +14,39 @@
 
     <color name="survey_layout">#EFEBE9</color>
     <color name="survey_item">#D7CCC8</color>
+
+
+
+    <color name="bright_pink">#FF007F</color>
+    <color name="red">#FF8A65</color>
+    <color name="orange">#FF7F00</color>
+    <color name="spring_green">#A1887F</color>
+    <color name="azure">#FFB74D</color>
+    <color name="violet">#DCE775</color>
+    <color name="a">#AED581</color>
+    <color name="b">#81C784</color>
+    <color name="c">#4DB6AC</color>
+    <color name="d">#4DD0E1</color>
+    <color name="e">#4FC3F7</color>
+    <color name="f">#E57373</color>
+    <color name="g">#BA68C8</color>
+
+
+
+
+    <array name="rainbow">
+        <item>@color/bright_pink</item>
+        <item>@color/red</item>
+        <item>@color/orange</item>
+        <item>@color/spring_green</item>
+        <item>@color/azure</item>
+        <item>@color/violet</item>
+        <item>@color/a</item>
+        <item>@color/b</item>
+        <item>@color/c</item>
+        <item>@color/d</item>
+        <item>@color/e</item>
+        <item>@color/f</item>
+        <item>@color/g</item>
+    </array>
 </resources>

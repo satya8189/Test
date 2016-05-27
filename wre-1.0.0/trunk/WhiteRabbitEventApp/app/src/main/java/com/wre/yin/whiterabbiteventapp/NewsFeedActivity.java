@@ -18,6 +18,7 @@ import com.wre.yin.whiterabbiteventapp.adapters.ExpandableListAdapter;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 public class NewsFeedActivity extends AppCompatActivity {
     private TextView text;
@@ -168,12 +169,17 @@ public class NewsFeedActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(AgendaRecyclerViewHolder holder, int position) {
-            if (position == 1)
+            /*if (position == 1)
                 holder.agendaLayout.setBackgroundColor(Color.parseColor("#C9C935"));
             else if (position == 2)
                 holder.agendaLayout.setBackgroundColor(Color.parseColor("#F9B083"));
             else if (position == 3)
-                holder.agendaLayout.setBackgroundColor(Color.parseColor("#67C2E1"));
+                holder.agendaLayout.setBackgroundColor(Color.parseColor("#67C2E1"));*/
+
+            int[] androidColors = getResources().getIntArray(R.array.rainbow);
+            int randomAndroidColor = androidColors[new Random().nextInt(androidColors.length)];
+
+            holder.agendaLayout.setBackgroundColor(randomAndroidColor);
             holder.tv1.setText(name[position]);
             holder.cardView.setOnClickListener(clickListener);
             holder.cardView.setTag(holder);

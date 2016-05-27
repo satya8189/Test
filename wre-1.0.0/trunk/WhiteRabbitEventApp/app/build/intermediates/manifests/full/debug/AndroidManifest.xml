@@ -136,7 +136,7 @@
             android:screenOrientation="portrait" />
 
         <meta-data
-            android:name="com.google.android.geo.API_KEY"
+            android:name="com.google.android.maps.v2.API_KEY"
             android:value="@string/google_maps_key" />
 
         <!-- Include the AdActivity and InAppPurchaseActivity configChanges and themes. -->
@@ -253,8 +253,7 @@ Service handling Google Sign-In user revocation. For apps that do not integrate 
 
         <activity
             android:name="com.google.android.gms.tagmanager.TagManagerPreviewActivity"
-            android:noHistory="true" >
- <!-- optional, removes the previewActivity from the activity stack. -->
+            android:noHistory="true" > <!-- optional, removes the previewActivity from the activity stack. -->
             <intent-filter>
                 <data android:scheme="tagmanager.c.com.wre.yin.whiterabbiteventapp" />
 

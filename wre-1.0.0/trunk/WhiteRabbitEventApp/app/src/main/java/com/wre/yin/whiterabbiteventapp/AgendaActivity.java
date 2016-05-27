@@ -3,6 +3,7 @@ package com.wre.yin.whiterabbiteventapp;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.graphics.ColorUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,6 +19,7 @@ import com.wre.yin.whiterabbiteventapp.adapters.ExpandableListAdapter;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 
 public class AgendaActivity extends AppCompatActivity {
@@ -168,12 +170,18 @@ public class AgendaActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(AgendaRecyclerViewHolder holder, int position) {
-            if(position==1)
+            /*if(position==1)
                 holder.agendaLayout.setBackgroundColor(Color.parseColor("#67C2E1"));
             else if(position==2)
                 holder.agendaLayout.setBackgroundColor(Color.parseColor("#F9B083"));
             else if(position==3)
-                holder.agendaLayout.setBackgroundColor(Color.parseColor("#C9C935"));
+                holder.agendaLayout.setBackgroundColor(Color.parseColor("#C9C935"));*/
+
+            int[] androidColors = getResources().getIntArray(R.array.rainbow);
+            int randomAndroidColor = androidColors[new Random().nextInt(androidColors.length)];
+
+            holder.agendaLayout.setBackgroundColor(randomAndroidColor);
+
             holder.tv1.setText(name[position]);
             holder.cardView.setOnClickListener(clickListener);
             holder.cardView.setTag(holder);
@@ -205,6 +213,7 @@ public class AgendaActivity extends AppCompatActivity {
             return name.length;
         }
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
