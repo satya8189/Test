@@ -30,7 +30,10 @@ public class Participants  implements java.io.Serializable {
      private String email;
      private String phone;
      private String status;
-     private Set<Galary> galaries = new HashSet(0);
+     private String regId;
+    
+
+	private Set<Galary> galaries = new HashSet(0);
      private Set<EventParticipant> eventParticipants = new HashSet(0);
      private Set<SurveyQuestionAnswer> surveyQuestionAnswers = new HashSet(0);
      private Set<QuestionAnswer> questionAnswers = new HashSet(0);
@@ -170,8 +173,14 @@ public class Participants  implements java.io.Serializable {
         this.messages = messages;
     }
 
+    @Column(name="Reg_ID", length=65535)
+    public String getRegId() {
+		return regId;
+	}
 
-
+	public void setRegId(String regId) {
+		this.regId = regId;
+	}
 
 }
 
