@@ -3,7 +3,7 @@ var QuestionCreateController = function($scope,$http, $location, $routeParams,ng
 	$scope.appList = {};
 
 	$scope.question.eventId=$routeParams.eventId;
-	alert("sdfsa----------"+$routeParams.eventId);
+	//alert("sdfsa----------"+$routeParams.eventId);
 	$scope.$on('$routeChangeSuccess', function() {
 		$http.get('admin/appList?appId=1001').success(function(appList) {
 			$scope.appList=appList;
@@ -14,25 +14,17 @@ var QuestionCreateController = function($scope,$http, $location, $routeParams,ng
 	
 	$scope.questionCreate = function(question) {
 		
-		
-		
 	$http.post('admin/questionCreate',question).success(function(success) {
-		
-
-	ngNotifier.notify("Record Created Successfully !");
+			ngNotifier.notify("Record Created Successfully !");
 	$location.path("/questionView/"+question.eventId);
 	
-	
 	});
-	
-
-	
 };
 
 $scope.cancelQuestionCreate = function(eventId)
 {
-	alert("getting back to eventViewDetails---------"+eventId);
-	$location.path("/questionView/"+question.eventId);
+	//alert("getting back to eventViewDetails---------"+eventId);
+	$location.path("/questionView/"+eventId);
 };
 
 

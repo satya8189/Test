@@ -1,41 +1,38 @@
-var VideoViewController = function($scope,$routeParams,$http,$location) {
+var VideoViewController = function($scope,$routeParams,$http,$location,ngNotifier) {
 $scope.videoList = {};
 $scope.eventId={};
 
 	
 	$scope.$on("$routeChangeSuccess", function () {
-		//alert("1111111111");
 		$scope.eventId=$routeParams.eventId;
 		
 			
 		 $http.get('admin/galaryList?eventId='+$routeParams.eventId+"&type=video").success(function(videoList){
-			// alert("admin/galaryList");
 				    $scope.videoList = videoList;
 				    
 				  	});
 				 });
 	
 	$scope.deleteGallery = function(video) {
-		alert("deleteGallery");
-
-		alert("deleteGallery"+video.glaryItemId);
+		
+		//alert("deleteGallery"+video.glaryItemId);
 		$http.get('admin/deleteGallery?glaryItemId='+video.glaryItemId).success(
 				function() {
 
-					alert("deleteGallery-------------"+video.eventId);
+				//	alert("deleteGallery-------------"+video.eventId);
 					$http.get(
 							'admin/galaryList?eventId=' +video.eventId
 									+ "&type=video").success(
-							function(galaryList) {
-								$scope.galaryList = galaryList;
-
+							function(videoList) {
+								ngNotifier.notify("Video Deleted Successfully.!");
+								$scope.videoList = videoList;
+								
 							});
 				});
 					
 				
 	};
 	//videoUpload(eventId)
-	
 	$scope.videoUpload = function(eventId) {
 		$location.path("/videoUpload/"+eventId);
 
@@ -43,7 +40,7 @@ $scope.eventId={};
 
 	$scope.navigateToEventsView = function(eventId)
 	{
-		alert("Getting Back eventId"+eventId);
+		
 		location.href="#/eventViewDetails/"+eventId;
 	};
 	

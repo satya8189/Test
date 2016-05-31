@@ -23,7 +23,8 @@ var SponsorCreateController = function($scope, $http, $location, $routeParams,ng
 					$location.path("/sponsorPageView/"+sponsor.eventId);
 						ngNotifier.notify("sponsor saved successfully....!");
 			}).error(function() {
-				alert("error in ading sponsor");
+				//alert("error in ading sponsor");
+				ngNotifier.error("sponsor saving error....!");
 			});
 		};
 		

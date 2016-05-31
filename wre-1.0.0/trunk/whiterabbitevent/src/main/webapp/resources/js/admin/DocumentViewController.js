@@ -1,4 +1,4 @@
-var DocumentViewController = function($scope,$routeParams,$http,$location) {
+var DocumentViewController = function($scope,$routeParams,$http,$location,ngNotifier) {
 $scope.galaryList = {};
 //alert("galaryList");
 	
@@ -8,7 +8,7 @@ $scope.galaryList = {};
 	$scope.$on("$routeChangeSuccess", function () {
 		
 		$scope.eventId=$routeParams.eventId;
-		alert("sdfsaf---------------"+$routeParams.eventId);
+		//alert("sdfsaf---------------"+$routeParams.eventId);
 			
 		 $http.get('admin/galaryList?eventId='+$routeParams.eventId+"&type=document").success(function(galaryList){
 			 	    $scope.galaryList = galaryList;
@@ -18,19 +18,18 @@ $scope.galaryList = {};
 	
 	
 	$scope.deleteGallery = function(document) {
-		alert("deleteGallery");
+		//alert("deleteGallery");
 
-		alert("deleteGallery"+document.glaryItemId);
+		//alert("deleteGallery"+document.glaryItemId);
 		$http.get('admin/deleteGallery?glaryItemId='+document.glaryItemId).success(
 				function() {
 
-					alert("deleteGallery-------------"+document.eventId);
-					$http.get(
-							'admin/galaryList?eventId=' +document.eventId
+					//alert("deleteGallery-------------"+document.eventId);
+					$http.get('admin/galaryList?eventId=' +document.eventId
 									+ "&type=document").success(
 							function(galaryList) {
 								$scope.galaryList = galaryList;
-
+								ngNotifier.notify("Document Deleted Successfylly.!");
 							});
 				});
 					
@@ -42,7 +41,7 @@ $scope.galaryList = {};
 	//galleryCreate(eventId)
 	
 	$scope.documentCreate = function(eventId) {
-		alert("fsadfasd--------------------------"+eventId);
+		//alert("fsadfasd--------------------------"+eventId);
 		$location.path("/documentCreate/"+eventId);
 
 	};
@@ -50,7 +49,7 @@ $scope.galaryList = {};
 
 	$scope.goToEventsView = function(eventId)
 	{
-		alert("fsadfasd--------------------------"+eventId);
+		//alert("fsadfasd--------------------------"+eventId);
 		location.href="#/eventViewDetails/"+eventId;
 	};
 	

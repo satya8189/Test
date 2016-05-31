@@ -29,9 +29,9 @@ $scope.$on("$routeChangeSuccess", function() {
 				//alert("sponsor updated successfully....!");
 				$location.path("/sponsorPageView/"+sponcor.eventId);
 				/*			}).success(function() {*/
-				ngNotifier.notify("Sponsor updated successfully.!");
+					ngNotifier.notify("Sponsor updated successfully.!");
 			}).error(function() {
-			ngNotifier.error("error in updating sponsor.!");
+				ngNotifier.error("error in updating sponsor.!");
 		});
 			
 	};

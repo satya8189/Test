@@ -1,4 +1,4 @@
-var DocumetnCreateController = function($scope, $http, $location, $routeParams,ngNotifier) {
+var DocumentCreateController = function($scope, $http, $location, $routeParams,ngNotifier) {
 	$scope.file={};
 	$scope.document={};
 	$scope.document.eventId=$routeParams.eventId;
@@ -7,7 +7,7 @@ var DocumetnCreateController = function($scope, $http, $location, $routeParams,n
 		$scope.createDocument = function(document) {
 			
 			var fd = new FormData();
-			alert("hi");
+			//alert("hi");
 
 			  // Take the first selected file
 			    fd.append("file", file.files[0]);
@@ -21,11 +21,12 @@ var DocumetnCreateController = function($scope, $http, $location, $routeParams,n
 			     },
 			     transformRequest : angular.identity
 			    }).success(function(data) {
-			    	alert("success");
+			  //  	alert("success");
 			    	ngNotifier.notify("Record Created Successfully !");
 			     $location.path("/documentView/"+document.eventId);
 			    }).error(function(data) {
-			     alert("dsfsfds");
+			     //alert("dsfsfds");
+			    	ngNotifier.notify("Error in uploading.!");
 			    });
 		
 
