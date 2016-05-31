@@ -2,14 +2,11 @@
 <h3>sponsor create <!-- {{5+4}} --></h3>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<div class="container">
+<div class="col-md-12">
 	<a ng-click="cancelCreateSponcor(eventId)">
 		 <i class="glyphicon glyphicon-chevron-left"></i>
 	</a>
 	
-	<!-- <a ng-click="sponsorPageView/{{eventId}}"> <i class="glyphicon glyphicon-chevron-left"></i>
-	</a>
-	 -->
 	<c:set var="userId" value="${user.userId}" scope="session" />
 	<div class="panel">
 		<div class="panel-heading text-center font-size-20 padding-5">Create Sponsor</div>

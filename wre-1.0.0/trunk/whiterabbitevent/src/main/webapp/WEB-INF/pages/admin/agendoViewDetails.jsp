@@ -8,7 +8,7 @@
 margin-bottom:0px !important;
 }
 .panel-body {
-  padding: 13px 50px ;
+  /* padding: 13px 50px ; */
 }
 </style>
 <toaster-container></toaster-container>
@@ -26,7 +26,7 @@ margin-bottom:0px !important;
 			<i class="fa fa-eye-slash icons"> </i>
 	</a>
 	 -->			
-	<div class="header-center">Agendas List</div>
+	<div class="header-center" align="center">Agendas List</div>
 	<div class="panel">
 		<div class="panel-body">
 		 <div class="col-md-2 col-md-offset-10 padding-0">
@@ -43,12 +43,9 @@ margin-bottom:0px !important;
 						 <th>AgenBy</th>
 						  <th>Action</th>
 						
-						
-						 
-						
 				   </tr>
 				</thead>
-				<tr ng-show="filteredSize!=0"ng-repeat="event in agendoList | filter:search">
+				<tr ng-show="filteredSize!=0"ng-repeat="event in agendoList | filter:search | startFrom : (currentPage-1)*entryLimit | limitTo : entryLimit">
 				    <td >{{event.agenTitle}}</td>
 					<td >{{event.agenDesc}}</td>
 					<td >{{event.agenStartTime}}</td>

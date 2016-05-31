@@ -9,11 +9,11 @@
 margin-bottom:0px !important;
 }
 .panel-body {
-  padding: 10px 30px ;
+  /* padding: 10px 30px ; */
 }
 </style>
 <toaster-container></toaster-container>
-<!-- {{4+5}} -->
+<!-- {{4+5}} --> 
 <body>
 
 <div class="row">
@@ -43,8 +43,7 @@ margin-bottom:0px !important;
 						<th>Action</th>
 					</tr>
 				</thead>
-				<tr ng-show="filteredSize!=0" ng-repeat="sp in filtered = speakersList | filter: search ">
-				<!-- | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit -->
+				<tr ng-show="filteredSize!=0" ng-repeat="sp in filtered = speakersList | filter: search | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
 					
 					<td>{{sp.speakerName}}</td>
 					<td>{{sp.location}}</td>

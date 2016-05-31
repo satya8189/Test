@@ -14,7 +14,7 @@ margin-bottom:0px !important;
 <toaster-container></toaster-container>
 
 <div class="container">
-	  <a ng-click="cancelQuestionView(question.eventId)"> <i
+	  <a ng-click="cancelQuestionsView(eventId)"> <i
 		class="glyphicon glyphicon-chevron-left"></i>
 	</a> 
 	<form>

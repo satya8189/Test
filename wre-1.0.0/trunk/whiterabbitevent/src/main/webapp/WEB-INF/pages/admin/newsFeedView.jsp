@@ -38,7 +38,7 @@ margin-bottom:0px !important;
 						
 				   </tr>
 				</thead>
-				<tr ng-show="filteredSize!=0"ng-repeat="news in newsList | filter : search">
+				<tr ng-show="filteredSize!=0"ng-repeat="news in newsList | filter : search | startFrom: (currentPage-1)*entryLimit | limitTo:entryLimit">
 				    <td >{{news.newsTitle}}</td>
 					<td >{{news.newsDesc}}</td>
 					<td >{{news.newsDate | date: 'yyyy-MM-dd'}}</td>
@@ -48,8 +48,6 @@ margin-bottom:0px !important;
 				<a ng-click="newsFeedEdit(news.newsFeedId)"title="newsFeedEdit">
 							<i class="glyphicon glyphicon-pencil"> </i>
 				</a>
-				
-				
 						
 					</td>
 				</tr>

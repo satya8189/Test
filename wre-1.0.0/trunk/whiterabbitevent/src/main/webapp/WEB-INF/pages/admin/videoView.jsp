@@ -8,7 +8,7 @@
 margin-bottom:0px !important;
 }
 .panel-body {
-  padding: 13px 50px ;
+  /* padding: 13px 50px ; */
 }
 </style>
 <toaster-container></toaster-container>
@@ -32,8 +32,8 @@ margin-bottom:0px !important;
 
                         <label>Name : {{video.name}}</label>
                            
-                           <button ng-click="deleteGallery(video)" title="deletgalary">Delete Document
-							<i class="fa fa-eye-slash icons"> </i>
+                           <button ng-click="deleteGallery(video)" title="deletgalary">Delete Video
+							<!-- <i class="fa fa-eye-slash icons"> </i> -->
 				</button>
                         
                     

@@ -8,14 +8,13 @@
 margin-bottom:0px !important;
 }
 .panel-body {
-  padding: 13px 50px ;
+  /* padding: 13px 50px ; */
 }
 </style>
 <toaster-container></toaster-container>
 
 <div class="container">
 	<form>
-	
 	<a ng-click="goToEventsView(eventId)">
 		 <i class="glyphicon glyphicon-chevron-left"></i>
 	</a>

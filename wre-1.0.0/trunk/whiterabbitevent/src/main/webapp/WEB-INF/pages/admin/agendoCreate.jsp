@@ -1,12 +1,12 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <toaster-container></toaster-container>
-
+<jsp:include page="error-messages.jsp"></jsp:include>
 <c:set var="userId" value="${USER.userId}" scope="session" />
 
 <form name="agendaForm" ng-submit="agendaForm.$valid && saveAgendo(agendo)" novalidate>
 
-<div class="container">
+<div class="col-md-12">
 	<a ng-click="cancelCreateAgenda(agendo.eventId)">
 		 <i class="glyphicon glyphicon-chevron-left"></i>
 	</a>

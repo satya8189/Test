@@ -6,7 +6,7 @@
 
 <form name="createEvent" ng-submit="createDocument(document)" enctype="multipart/form-data">
 
-<div class="container">
+<div class="col-md-12">
 	<a ng-click="cancelDocumentCreate(document.eventId)">
 		 <i class="glyphicon glyphicon-chevron-left"></i>
 	</a>
