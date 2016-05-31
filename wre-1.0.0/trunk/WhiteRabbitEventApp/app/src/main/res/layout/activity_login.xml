@@ -77,6 +77,7 @@
                     android:background="@drawable/rectangle_shape"
                     android:gravity="center"
                     android:hint="Employee ID"
+                    android:inputType="phone"
                     android:singleLine="true"
                     android:textColor="#fff"
                     android:textColorHint="#fff"
