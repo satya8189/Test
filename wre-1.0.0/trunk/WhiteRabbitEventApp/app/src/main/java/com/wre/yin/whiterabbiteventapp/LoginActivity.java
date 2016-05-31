@@ -31,11 +31,11 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String mobileNum=employeeId.getText().toString();
-
+                editor.putString("mobile",mobileNum);
                 Intent otpAct = new Intent(LoginActivity.this, OTPActivity.class);
                 startActivity(otpAct);
                 finish();
-                editor.putString("mobile",mobileNum);
+
             }
         });
 
