@@ -235,12 +235,12 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 					newsfeed.setNewsFeedId(newsFeedBean.getNewsFeedId());
 		            newsfeed.setNewsTitle(newsFeedBean.getNewsTitle());
 		            newsfeed.setNewsDesc(newsFeedBean.getNewsDesc());
-		            
+		            newsfeed.setNewsDate(new Date());
 		             Event event=new Event();
 		             event.setEventId(newsFeedBean.getEventId());
 		             newsfeed.setEvent(event);
 		             AdminMgmtDaoImpl.save(newsfeed);
-		             log.info("this is savenews successfully");
+		             log.info("saved news successfully");
 				}
 				
            
@@ -480,7 +480,8 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 		            	  appIdentifierObj.setAppIdentifierId(questionBean.getAppIdentifierId());
 		            	  surveyQuestion.setAppIdentifier(appIdentifierObj);
 		            	 
-		            	  AdminMgmtDaoImpl.save(surveyQuestion);
+		            	  //AdminMgmtDaoImpl.save(surveyQuestion);
+		            	  AdminMgmtDaoImpl.saveOrUpdate(surveyQuestion);
 				          log.info("this is savequestion successfully");
 		            	  
 		            	 
@@ -611,14 +612,12 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 						
 						List<Speaker> sl=AdminMgmtDaoImpl.getSpeakersList(eventId);
 						log.info("----getSpeakersList servImpl---"+sl.size());
-						SpeakerBean sb=new SpeakerBean();
+						//SpeakerBean sb=new SpeakerBean();
 						List<SpeakerBean> speakerBeanList=new ArrayList<SpeakerBean>();
 						
 						for(Speaker s:sl)
 						{
-							//log.info(s.getEvent().getEventId()+"="
-								/*	+ "=="+s.getSpeakerId()+"=="+s.getSpeakerName()+"=="+s.getDesc()+"="
-											+ "="+s.getLocation()+"=="+s.getTitle());*/
+							SpeakerBean sb=new SpeakerBean();
 							sb.setEventId(s.getEvent().getEventId());
 							sb.setSpeakerId(s.getSpeakerId());
 							sb.setSpeakerName(s.getSpeakerName());
@@ -634,6 +633,8 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 						return speakerBeanList;
 					}
 
+					
+					
 					@Override
 					public void createSpeaker(SpeakerBean spk) {
 						
