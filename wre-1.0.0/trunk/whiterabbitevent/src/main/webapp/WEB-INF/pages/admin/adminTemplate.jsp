@@ -2,9 +2,6 @@
 <html lang="en" ng-app="whiterabbitevent">
 <head>
 
-
-
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="firstName" value="${USER.firstName}" scope="session" />
 <c:set var="lastName" value="${USER.lastName}" scope="session" />
@@ -12,27 +9,39 @@
   <title>WHITE RABBIT EVENT</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  
+  <!-- For Pagination -->
+  	<script src="resources/js/angular/angular.min.js" type="text/javascript"></script>
+  	<!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.9/angular.min.js" type="text/javascript"></script> --> 
+  	<script src="resources/js/angular/ui-bootstrap-tpls-0.10.0.js" type="text/javascript"></script>
+  	<!-- <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.10.0.js" type="text/javascript"></script> -->
+	<link rel="stylesheet" type="text/css" href="resources/css/bootstrap.min.css" />
+	<!-- <link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" /> --> 
+		
+  <!-- Pagination Links end -->
+  
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script> 
  
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">    
-  <link rel="stylesheet" href="resources/css/bootstrap.min.css">
+   <!-- <link rel="stylesheet" href="resources/css/bootstrap.min.css"> --> 
      <script src="resources/js/bootstrap.min.js"></script>
     
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-<!--     //ngNotifier -->
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        
+	<!--     //ngNotifier -->
    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
   <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
    <link rel="stylesheet" href="resources/css/style.css"/>
     
-    <script src="resources/js/angular/angular.js"></script>
-		<script src="resources/js/angular/angular.min.js"></script>
+    	<script src="resources/js/angular/angular.js"></script> 
+	 <!-- <script src="resources/js/angular/angular.min.js"></script> --> 
 		<script src="resources/js/angular/angular-route.js"></script>
 		<script src="resources/js/angular/angular-route.min.js"></script>
 		<script src="resources/js/angular/angular-messages.js"></script>
 		<script src="resources/js/angular/angular-messages.min.js"></script>
-     <script src="resources/js/navigationjs/adminNavigation.js"></script>
-<script src="resources/js/services.js"></script>
+     	<script src="resources/js/navigationjs/adminNavigation.js"></script>
+		<script src="resources/js/services.js"></script>
 <!-- event -->
     <script src="resources/js/admin/EventViewController.js"></script>
     <script src="resources/js/admin/EventCreateController.js"></script>
@@ -55,7 +64,7 @@
     <script src="resources/js/admin/DocumentViewController.js"></script>
     <script src="resources/js/admin/VideoViewController.js"></script>
     <script src="resources/js/admin/VideoUploadController.js"></script>
-    <script src="resources/js/admin/DocumetnCreateController.js"></script>
+    <script src="resources/js/admin/DocumentCreateController.js"></script>
     <script src="resources/js/admin/QuestionCreateController.js"></script>
     <script src="resources/js/admin/QuestionEditController.js"></script>
     <script src="resources/js/admin/QuationAndAnswersViewController.js"></script>
@@ -101,9 +110,9 @@
         
       </ul>
       <ul class="nav navbar-nav navbar-right">
-       <li class="head-date"> <span class="glyphicon glyphicon-search"></span></li>
-           <li class="head-date"> <span class="glyphicon glyphicon-bell"></span></li>
-           <li class="head-date"> <span class="glyphicon glyphicon-user"></span></li>
+       <li class="head-date"> <i class="glyphicon glyphicon-search"></i></li>
+           <li class="head-date"> <i class="glyphicon glyphicon-bell"></i></li>
+           <li class="head-date"> <i class="glyphicon glyphicon-user"></i></li>
           </ul>
         
       
@@ -123,7 +132,7 @@
               <ul class="ul">
                   <div class="name">
                 <img src="${pageContext.request.contextPath}/resources/images/attractmen.org-libra-men.jpg" width="70px" height="70px" style="border-radius: 50%;">
-                      <span style="margin-left: 30px;">Naveen</span>
+                      <span style="margin-left: 30px;color: white;">Naveen</span>
                       </div>
                   
                 </ul>
@@ -145,13 +154,11 @@
            <div class="body-content">
              <h3 style="text-align: -webkit-center;"> Invite people toEvents</h3>
        
-  <ng-view></ng-view>
+ 			 <ng-view></ng-view>
          </div>
               </div>
             </div>
             </div>
-        
-    
     
 </body>
 </html>
