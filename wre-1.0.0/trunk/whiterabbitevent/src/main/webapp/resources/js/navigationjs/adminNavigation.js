@@ -2,7 +2,7 @@
 
 var whiterabbitevent = {};
 
-var App = angular.module('whiterabbitevent', [ 'ngRoute', 'wre.services' ]);
+var App = angular.module('whiterabbitevent', [ 'ngRoute', 'wre.services','ui.bootstrap','ngMessages']);
 
 // / Declare app level module which depends on filters, and services
 App.config([ '$routeProvider', function($routeProvider, $Scope) {
@@ -129,7 +129,7 @@ App.config([ '$routeProvider', function($routeProvider, $Scope) {
 
 	$routeProvider.when('/documentCreate/:eventId', {
 		templateUrl : 'admin/documentCreate',
-		controller : DocumetnCreateController
+		controller : DocumentCreateController
 	});
 
 	// VideoUploadController
@@ -215,3 +215,15 @@ App.config([ '$routeProvider', function($routeProvider, $Scope) {
 		redirectTo : '/eventView'
 	});
 } ]);
+
+
+App.filter('startFrom', function () {
+	return function (input, start) {
+		if (input) {
+			start = +start;
+			return input.slice(start);
+		}
+		return [];
+	};
+});
+
