@@ -69,7 +69,8 @@ public class AppIdentifier  implements java.io.Serializable {
         this.appIdentifierId = appIdentifierId;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch=FetchType.LAZY)
+    //@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)//changed
     @JoinColumn(name="AppIdentifier_Grp_ID")
     public AppIdentifierGrp getAppIdentifierGrp() {
         return this.appIdentifierGrp;
@@ -129,7 +130,8 @@ public class AppIdentifier  implements java.io.Serializable {
         this.updatedOn = updatedOn;
     }
 
-@OneToMany(fetch=FetchType.LAZY, mappedBy="appIdentifier")
+    @OneToMany(fetch=FetchType.LAZY, mappedBy="appIdentifier")
+    //@OneToMany(fetch=FetchType.LAZY, mappedBy="appIdentifier",cascade = CascadeType.ALL)
     public Set<SurveyQuestion> getSurveyQuestions() {
         return this.surveyQuestions;
     }
@@ -138,7 +140,8 @@ public class AppIdentifier  implements java.io.Serializable {
         this.surveyQuestions = surveyQuestions;
     }
 
-@OneToMany(fetch=FetchType.LAZY, mappedBy="appIdentifier")
+    @OneToMany(fetch=FetchType.LAZY, mappedBy="appIdentifier")
+    //@OneToMany(fetch=FetchType.LAZY, mappedBy="appIdentifier",cascade = CascadeType.ALL)
     public Set<User> getUsers() {
         return this.users;
     }
@@ -146,9 +149,6 @@ public class AppIdentifier  implements java.io.Serializable {
     public void setUsers(Set<User> users) {
         this.users = users;
     }
-
-
-
 
 }
 
