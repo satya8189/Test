@@ -144,7 +144,7 @@ ng-submit="ipForm.$valid && saveEvent(event)"
 							<label class="flot-left">Services Provided </label> 
 								<select class="form-control js-example-basic-multiple"
 								data-ng-model="event.services" multiple
-								name="serviceProvided" id="service" required>
+								name="serviceProvided" id="service" required >
 								<option ng-repeat="event in servicesList"
 									value={{event.serviceId}}>{{event.serviceName}}</option>
 									
@@ -157,8 +157,8 @@ ng-submit="ipForm.$valid && saveEvent(event)"
 		  <div class="form-group col-md-4 col-md-offset-4">
    <label style="visibility: hidden;" >User </label> 
    <div class="form-control text-center transprant">
-	 ExistingUser<input type="radio"  name="rdboption" ng-model="rdboption" ng-value="demo" ng-checked="rdboption==demo" required />
-    NewUser<input type="radio" ng-model="rdboption"  value="demoone" name="rdboption" required>
+	 ExistingUser<input type="radio"  name="rdboption" ng-model="rdboption" ng-value="demo" ng-checked="rdboption==demo"  />
+    NewUser<input type="radio" ng-model="rdboption"  value="demoone" name="rdboption" >
     </div>
     </div>				
 
