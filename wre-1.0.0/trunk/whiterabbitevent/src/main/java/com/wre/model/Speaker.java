@@ -6,7 +6,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+
 import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -29,17 +31,19 @@ public class Speaker  implements java.io.Serializable {
      private String title;
      private String description;
      private String rating;
+     private String fileName;
 
     public Speaker() {
     }
 
-    public Speaker(Event event, String speakerName, String location, String title, String description, String rating) {
+    public Speaker(Event event, String speakerName, String location, String title, String description, String rating,String fileName) {
        this.event = event;
        this.speakerName = speakerName;
        this.location = location;
        this.title = title;
        this.description = description;
        this.rating = rating;
+       this.fileName=fileName;
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
@@ -113,6 +117,17 @@ public class Speaker  implements java.io.Serializable {
     public void setRating(String rating) {
         this.rating = rating;
     }
+    @Column(name="FileName", length=200)
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+
+
 
 }
 
