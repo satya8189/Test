@@ -2,18 +2,15 @@ package com.wre.adminmgmt.bean;
 
 import java.util.Date;
 
-import com.wre.model.Client;
-import com.wre.model.User;
-
 public class EventBean 
 {
 	private Long eventId;
     private Long clientId;
     private Long userId;
-    
-    
- 
-    private String clientName;
+    private String userFristName;
+    private String userLastName;
+    private String userEmail;
+    private String phoneNumber;
     private String userName;
     private String eventName;
     private String eventDesc;
@@ -24,12 +21,26 @@ public class EventBean
     private String status;
     private Long serviceId;
     private String serviceName;
+    private String other;
+    
+	private String[] services;
     
     
     
+	public String getOther() {
+		return other;
+	}
+	public void setOther(String other) {
+		this.other = other;
+	}
     
     
-    
+	public String[] getServices() {
+		return services;
+	}
+	public void setServices(String[] services) {
+		this.services = services;
+	}
 	public Long getServiceId() {
 		return serviceId;
 	}
@@ -42,24 +53,21 @@ public class EventBean
 	public void setServiceName(String serviceName) {
 		this.serviceName = serviceName;
 	}
-	public Long getClientId() {
-		return clientId;
-	}
-	public void setClientId(Long clientId) {
-		this.clientId = clientId;
-	}
+	
 	public Long getUserId() {
 		return userId;
 	}
 	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
-	public String getClientName() {
-		return clientName;
+	
+	public Long getClientId() {
+		return clientId;
 	}
-	public void setClientName(String clientName) {
-		this.clientName = clientName;
+	public void setClientId(Long clientId) {
+		this.clientId = clientId;
 	}
+	
 	public String getUserName() {
 		return userName;
 	}
@@ -116,6 +124,32 @@ public class EventBean
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	public String getUserFristName() {
+		return userFristName;
+	}
+	public void setUserFristName(String userFristName) {
+		this.userFristName = userFristName;
+	}
+	public String getUserLastName() {
+		return userLastName;
+	}
+	public void setUserLastName(String userLastName) {
+		this.userLastName = userLastName;
+	}
+	public String getUserEmail() {
+		return userEmail;
+	}
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
+	}
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+	
+	
     
     
     
