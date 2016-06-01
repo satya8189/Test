@@ -1,9 +1,22 @@
 package com.wre.adminmgmt.controller;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.List;
+
+import net.minidev.json.JSONArray;
+import net.minidev.json.JSONObject;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -16,6 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.wre.adminmgmt.bean.AgendaBean;
 import com.wre.adminmgmt.bean.AppIdentifierBean;
+import com.wre.adminmgmt.bean.ChatBean;
 import com.wre.adminmgmt.bean.EventBean;
 import com.wre.adminmgmt.bean.GalaryBean;
 import com.wre.adminmgmt.bean.InviteBean;
@@ -611,5 +625,77 @@ public class AdminMgmtController {
 		log.info("in side venueLayoutView method");
 		return "admin/venueLayoutView";
 	}
+
+
+   
+    @RequestMapping(value ="getuser",method = RequestMethod.POST)
+	    public  @ResponseBody List<ChatBean> getuser(@RequestBody ChatBean chatBean) {
+	    	log.info("in side updatespeaker method");
+	    		log.info("checking......"+chatBean.getMobno());
+	    		return adminMgmtService.getUser(chatBean.getMobno());
+    }
+
+
+   
+    
+    
+    @RequestMapping(value ="send",method = RequestMethod.POST)
+	    public @ResponseBody String send(@RequestBody ChatBean chatBean) {
+	    	
+String result="success";
+HttpResponse httpResponse = null;
+HttpClient httpclient = null;
+HttpEntity httpEntity = null;
+String url="https://android.googleapis.com/gcm/send";
+JSONArray array = new JSONArray();
+//array.add("APA91bEe6q1iMfeEviUi5h6mz4JDGt8_U2FUkip_m6umlgEwfmBAjYGygYVTaqfN60ibhGkIaXh8x3L1Oj3hb0eLbTpuj-oQJmgByw53nPrBjRoqsdIeNQU3-YUrkH9zDXYwmGT7bkSE");
+List<ChatBean> chatBeanList=adminMgmtService.getUser(chatBean.getFrom());
+for(ChatBean chatBeanObj:chatBeanList){
+array.add(chatBeanObj.getReg_id());
+}
+
+JSONObject obj = new JSONObject();
+JSONObject data = new JSONObject();
+data.put("msg", chatBean.getMsg());
+data.put("fromu", chatBean.getFrom());
+data.put("name",chatBean.getFromn());
+
+
+obj.put("registration_ids",array);
+obj.put("data", data);
+obj.put("time_to_live", 4444);
+System.out.println("final string ---"+obj.toString());
+try {
+HttpPost post = new HttpPost(url);
+post.setEntity(new StringEntity(obj.toString()));
+httpclient = new DefaultHttpClient();
+post.setHeader("Accept", "application/json");
+post.setHeader("Content-type", "application/json");
+post.setHeader("Authorization","key=AIzaSyB0jpk-YqaD6UsG5IppdjGLEM0ozNCNHSk");
+httpResponse = httpclient.execute(post);
+httpEntity = httpResponse.getEntity();
+String jsonResult = inputStreamToString(httpResponse.getEntity().getContent()).toString();
+System.out.println("Result " + jsonResult);
+result="Success";
+}catch(Exception e){
+e.printStackTrace();
+}
+	    	return "{\"response\":\"" + result + "\"}";
+	     }
+
+private StringBuilder inputStreamToString(InputStream is) {
+String rLine = "";
+StringBuilder answer = new StringBuilder();
+InputStreamReader isr = new InputStreamReader(is);
+BufferedReader rd = new BufferedReader(isr);
+try {
+while ((rLine = rd.readLine()) != null) {
+answer.append(rLine);
+}
+} catch (IOException e) {
+e.printStackTrace();
+}
+return answer;
+}
 
 }
