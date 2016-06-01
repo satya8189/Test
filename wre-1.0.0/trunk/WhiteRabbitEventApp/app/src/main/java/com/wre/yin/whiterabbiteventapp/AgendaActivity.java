@@ -1,9 +1,7 @@
 package com.wre.yin.whiterabbiteventapp;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.graphics.ColorUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -46,10 +44,10 @@ public class AgendaActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(nameTxt);
 
-        recyclerView= (RecyclerView) findViewById(R.id.agenda_recycler_view);
+        recyclerView = (RecyclerView) findViewById(R.id.agenda_recycler_view);
 
 
-        RecylerAdapter adapter=new RecylerAdapter(this);
+        RecylerAdapter adapter = new RecylerAdapter(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -153,18 +151,21 @@ public class AgendaActivity extends AppCompatActivity {
         listDataChild.put(listDataHeader.get(1), nowShowing);
         listDataChild.put(listDataHeader.get(2), comingSoon);*/
     }
+
     private class RecylerAdapter extends RecyclerView.Adapter<AgendaRecyclerViewHolder> {
         LayoutInflater inflater;
         Context context;
-        String [] name={"Androidwarriors","Stackoverflow","Developer Android","AndroidHive"};
+        String[] name = {"Androidwarriors", "Stackoverflow", "Developer Android", "AndroidHive"};
+
         public RecylerAdapter(Context context) {
-            this.context=context;
-            inflater=LayoutInflater.from(context);
+            this.context = context;
+            inflater = LayoutInflater.from(context);
         }
+
         @Override
         public AgendaRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view=inflater.inflate(R.layout.agenda_list_item,parent,false);
-            AgendaRecyclerViewHolder viewHolder=new AgendaRecyclerViewHolder(view);
+            View view = inflater.inflate(R.layout.agenda_list_item, parent, false);
+            AgendaRecyclerViewHolder viewHolder = new AgendaRecyclerViewHolder(view);
             return viewHolder;
         }
 
@@ -186,7 +187,8 @@ public class AgendaActivity extends AppCompatActivity {
             holder.cardView.setOnClickListener(clickListener);
             holder.cardView.setTag(holder);
         }
-        View.OnClickListener clickListener=new View.OnClickListener() {
+
+        View.OnClickListener clickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -203,7 +205,7 @@ public class AgendaActivity extends AppCompatActivity {
                     vholder.minus.setVisibility(View.GONE);
                     layoutStatus = "gone";
                 }
-              //  Toast.makeText(context,"This is position "+position,Toast.LENGTH_LONG ).show();
+                //  Toast.makeText(context,"This is position "+position,Toast.LENGTH_LONG ).show();
 
             }
         };

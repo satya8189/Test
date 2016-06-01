@@ -1,10 +1,10 @@
 package com.wre.yin.whiterabbiteventapp;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.util.Log;
 import android.view.View;
@@ -18,10 +18,11 @@ import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
+import com.wre.yin.whiterabbiteventapp.utils.Constants;
 
 import java.util.HashMap;
 
-public class HomeActivity extends Activity implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener {
+public class HomeActivity extends AppCompatActivity implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener {
 
     private SliderLayout mDemoSlider;
 
@@ -37,6 +38,8 @@ public class HomeActivity extends Activity implements BaseSliderView.OnSliderCli
 
         setContentView(R.layout.activity_home);
 
+        getSupportActionBar().hide();
+
         mDemoSlider = (SliderLayout) findViewById(R.id.slider);
 
         mDemoSlider.setCustomIndicator((PagerIndicator) findViewById(R.id.custom_indicator));
@@ -46,6 +49,9 @@ public class HomeActivity extends Activity implements BaseSliderView.OnSliderCli
         proFic = (ImageView) findViewById(R.id.profilepic);
 
         rl1 = (RelativeLayout) findViewById(R.id.rl1);
+
+        if (Constants.checkAndRequestPermissions(HomeActivity.this)) ;
+
 
         profDetails.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,6 +108,8 @@ public class HomeActivity extends Activity implements BaseSliderView.OnSliderCli
                     .putString("extra", name);
 
             mDemoSlider.addSlider(textSliderView);
+            mDemoSlider.setPresetTransformer(SliderLayout.Transformer.ZoomIn);
+
         }
     }
 
@@ -123,7 +131,7 @@ public class HomeActivity extends Activity implements BaseSliderView.OnSliderCli
 
     @Override
     public void onSliderClick(BaseSliderView slider) {
-       // Toast.makeText(this, slider.getBundle().get("extra") + "", Toast.LENGTH_SHORT).show();
+        // Toast.makeText(this, slider.getBundle().get("extra") + "", Toast.LENGTH_SHORT).show();
         String eventName = slider.getBundle().get("extra").toString();
         Intent i = new Intent(HomeActivity.this, EventDashboardActivity.class);
         i.putExtra("eventName", eventName);

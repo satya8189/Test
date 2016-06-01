@@ -9,18 +9,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/rectangle_shape_no"
-        android:textColor="#fff"
-        android:text="UPLOAD" />
+        android:text="UPLOAD"
+        android:textColor="#fff" />
 
     <LinearLayout
         android:id="@+id/upload_image_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/upload_image"
+        android:layout_marginBottom="5dp"
         android:background="@android:color/transparent"
         android:gravity="center"
         android:orientation="horizontal"
-
         android:visibility="gone">
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -46,9 +46,9 @@
         android:layout_below="@+id/upload_image_view"
         android:layout_marginTop="10dp"
         android:background="#fff"
+        android:fastScrollEnabled="true"
         android:gravity="center"
         android:numColumns="auto_fit"
-        android:fastScrollEnabled="true"
         android:stretchMode="columnWidth"></GridView>
 
 </RelativeLayout>

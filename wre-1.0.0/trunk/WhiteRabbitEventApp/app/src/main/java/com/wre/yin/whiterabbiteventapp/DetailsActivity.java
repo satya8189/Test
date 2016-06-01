@@ -1,10 +1,11 @@
 package com.wre.yin.whiterabbiteventapp;
 
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
@@ -43,6 +44,9 @@ public class DetailsActivity extends AppCompatActivity {
     double sourceLatitude, sourceLongitude;
     GPSTracker gpsTracker;
 
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
+    private boolean mPermissionDenied = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,11 +57,8 @@ public class DetailsActivity extends AppCompatActivity {
 
         markerPoints = new ArrayList<LatLng>();
 
-        // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        // getSupportActionBar().setTitle(nameTxt);
-        // ActionBar mActionBar = ((ActionBarActivity)getApplicationContext()).getSupportActionBar();
-        // mActionBar.setDisplayHomeAsUpEnabled(true);
-        // mActionBar.setTitle(nameTxt);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(nameTxt);
 
         SupportMapFragment fm = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map_fragment);
 
@@ -71,13 +72,25 @@ public class DetailsActivity extends AppCompatActivity {
         } else {
             gpsTracker.showSettingsAlert();
         }
-        // Getting Map for the SupportMapFragment
-        map = fm.getMap();
 
+        map = fm.getMap();
         if (map != null) {
+
+            // Getting Map for the SupportMapFragment
+
 
             // Enable MyLocation Button in the Map
 
+            if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }
             map.setMyLocationEnabled(true);
             LatLng latLan = new LatLng(destLatitude, destLongitude);
             MarkerOptions option = new MarkerOptions();
@@ -265,7 +278,7 @@ public class DetailsActivity extends AppCompatActivity {
 
                 // Drawing polyline in the Google Map for the i-th route
                 // map.addPolyline(lineOptions);
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }

@@ -5,7 +5,8 @@
     android:orientation="vertical"
     android:padding="3dp">
 
-    <com.wre.yin.whiterabbiteventapp.chatview.ChatMessageView xmlns:app="http://schemas.android.com/apk/res-auto"
+    <com.wre.yin.whiterabbiteventapp.chatview.ChatMessageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/chatMessageView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

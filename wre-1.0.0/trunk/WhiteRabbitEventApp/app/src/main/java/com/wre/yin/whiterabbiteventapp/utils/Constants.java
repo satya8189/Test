@@ -2,8 +2,12 @@ package com.wre.yin.whiterabbiteventapp.utils;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +17,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.wre.yin.whiterabbiteventapp.Manifest;
 import com.wre.yin.whiterabbiteventapp.R;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -27,7 +33,7 @@ public class Constants {
 
     public static final String IMAGE_DIRECTORY_NAME = "Image File Upload";
     public static final String VIDEO_DIRECTORY_NAME = "Video File Upload";
-    public static final String UPLOAD_IMAGE_VIDEO=URL+"imageUpload";
+    public static final String UPLOAD_IMAGE_VIDEO = URL + "imageUpload";
 
 
     //Image Gallery file path constansts
@@ -39,12 +45,14 @@ public class Constants {
     public static final int GRID_PADDING = 10; // in dp
 
     // SD card image directory
-    public static final String PHOTO_ALBUM ="/DCIM/"+"/Camera/";
+    public static final String PHOTO_ALBUM = "/DCIM/" + "/Camera/";
 
     // supported file formats
     public static final List<String> FILE_EXTN = Arrays.asList("jpg", "jpeg",
             "png");
 
+    // Permissions for Marshmallow
+    public static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 1;
 
 
     public static boolean isNetworkAvailable(Context context) {
@@ -83,6 +91,29 @@ public class Constants {
         alertD.getWindow().setAttributes(lp);
         alertD.show();
     }
+
+    // Check Permissions for Marshmallow start
+
+    public static boolean checkAndRequestPermissions(AppCompatActivity activity) {
+        int storagePermission = ContextCompat.checkSelfPermission(activity,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        int locationPermission = ContextCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION);
+        List<String> listPermissionsNeeded = new ArrayList<>();
+        if (locationPermission != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.ACCESS_FINE_LOCATION);
+        }
+        if (storagePermission != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        }
+        if (!listPermissionsNeeded.isEmpty()) {
+            ActivityCompat.requestPermissions(activity, listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]), REQUEST_ID_MULTIPLE_PERMISSIONS);
+            return false;
+        }
+        return true;
+
+    }
+    // *** Check Permissions for Marshmallow end ***//
+
 
 }
 

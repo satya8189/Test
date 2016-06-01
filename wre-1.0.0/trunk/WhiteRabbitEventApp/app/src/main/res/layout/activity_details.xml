@@ -7,109 +7,125 @@
     tools:context="com.wre.yin.whiterabbiteventapp.DetailsActivity">
 
     <LinearLayout
+        android:id="@+id/time_date_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:weightSum="2"
-        android:id="@+id/time_date_layout"
         android:layout_margin="4dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:weightSum="2">
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
+
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/details_date"/>
+                android:src="@drawable/details_date" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="11-05-2016"/>
+                android:text="11-05-2016" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
+
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/details_time"/>
+                android:src="@drawable/details_time" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="11.30 Am"/>
+                android:text="11.30 Am" />
         </LinearLayout>
     </LinearLayout>
+
     <fragment
+        android:id="@+id/map_fragment"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="170dp"
         android:layout_below="@+id/time_date_layout"
         android:layout_margin="4dp"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:id="@+id/map_fragment"/>
+        tools:layout="@layout/activity_maps" />
+
     <TextView
+        android:id="@+id/address_text"
         android:layout_width="match_parent"
-        android:gravity="center"
         android:layout_height="wrap_content"
         android:layout_below="@+id/map_fragment"
-        android:text="Address"/>
+        android:gravity="center"
+        android:text="Address" />
 
-<ImageView
-    android:id="@+id/qr_image"
-    android:layout_width="match_parent"
-    android:layout_height="150dp"
-    android:layout_above="@+id/linear_attend"
-    android:src="@drawable/wre_qr_code"/>
+    <ImageView
+        android:id="@+id/qr_image"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_above="@+id/linear_attend"
+        android:layout_below="@+id/address_text"
+        android:src="@drawable/wre_qr_code" />
+
     <LinearLayout
         android:id="@+id/linear_attend"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="4"
         android:layout_alignParentBottom="true"
-        android:layout_margin="4dp">
+        android:layout_margin="4dp"
+        android:orientation="horizontal"
+        android:weightSum="4">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="12dp"
-            android:layout_weight="1"
-            android:textStyle="bold"
             android:layout_gravity="center_vertical"
-            android:text="Will you attend the event ?"/>
+            android:layout_weight="1"
+            android:text="Will you attend the event ?"
+            android:textSize="12dp"
+            android:textStyle="bold" />
+
         <Button
             android:layout_width="40dp"
             android:layout_height="30dp"
-            android:layout_weight="1"
-            android:textSize="12dp"
             android:layout_margin="2dp"
-            android:textColor="#fff"
-            android:textStyle="bold"
+            android:layout_weight="1"
             android:background="@drawable/rectangle_shape_yes"
-            android:text="Yes"/>
+            android:text="Yes"
+            android:textColor="#fff"
+            android:textSize="12dp"
+            android:textStyle="bold" />
+
         <Button
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_weight="1"
-            android:textSize="12dp"
-            android:textColor="#fff"
-            android:textStyle="bold"
             android:layout_margin="2dp"
+            android:layout_weight="1"
             android:background="@drawable/rectangle_shape_no"
-            android:text="No"/>
+            android:text="No"
+            android:textColor="#fff"
+            android:textSize="12dp"
+            android:textStyle="bold" />
+
         <Button
             android:layout_width="60dp"
             android:layout_height="30dp"
-            android:layout_weight="1"
-            android:textSize="12dp"
-            android:textColor="#fff"
-            android:textStyle="bold"
             android:layout_margin="2dp"
+            android:layout_weight="1"
             android:background="@drawable/rectangle_shape_maybe"
-            android:text="May be"/>
+            android:text="May be"
+            android:textColor="#fff"
+            android:textSize="12dp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 

@@ -1,15 +1,20 @@
 package com.wre.yin.whiterabbiteventapp;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
@@ -17,9 +22,11 @@ import com.daimajia.slider.library.SliderTypes.TextSliderViewDashboard;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
 import com.wre.yin.whiterabbiteventapp.adapters.CustomGridViewAdapter;
 import com.wre.yin.whiterabbiteventapp.beans.Item;
+import com.wre.yin.whiterabbiteventapp.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class EventDashboardActivity extends AppCompatActivity implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener {
 
@@ -29,6 +36,9 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
     private SliderLayout mDemoSlider;
     private TextView eventNameTxt;
     private String eventName;
+    private boolean mPermissionDenied = false;
+    public static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +50,9 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
         // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().hide();
 
+        if (Constants.checkAndRequestPermissions(this)) {
+
+        }
         eventName = getIntent().getExtras().getString("eventName");
         eventNameTxt = (TextView) findViewById(R.id.event_name);
         eventNameTxt.setText(eventName + " Event");
@@ -69,7 +82,7 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
         }
 
         //set grid view item
-        Bitmap deatailIcon = BitmapFactory.decodeResource(this.getResources(), R.drawable.details);
+        Bitmap deatailIcon = BitmapFactory.decodeResource(this.getResources(), R.drawable.details_pic);
         Bitmap agendaIcon = BitmapFactory.decodeResource(this.getResources(), R.drawable.agenda_pic);
         Bitmap newsIcon = BitmapFactory.decodeResource(this.getResources(), R.drawable.news_feed_pic);
         Bitmap galleryIcon = BitmapFactory.decodeResource(this.getResources(), R.drawable.gallery_pic);
@@ -83,12 +96,12 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
         Bitmap socialIcon = BitmapFactory.decodeResource(this.getResources(), R.drawable.social_pic);
         Bitmap networkIcon = BitmapFactory.decodeResource(this.getResources(), R.drawable.net_pic);
         Bitmap venueIcon = BitmapFactory.decodeResource(this.getResources(), R.drawable.venue_pic);
-        Bitmap sponcersIcon = BitmapFactory.decodeResource(this.getResources(), R.drawable.sponcers_pic);
+        Bitmap sponsorsIcon = BitmapFactory.decodeResource(this.getResources(), R.drawable.sponsors_pic);
         Bitmap speakerIcon = BitmapFactory.decodeResource(this.getResources(), R.drawable.speaker_pic);
-        Bitmap aboutEvent = BitmapFactory.decodeResource(this.getResources(), R.drawable.about_pic);
+        Bitmap inviteIcon = BitmapFactory.decodeResource(this.getResources(), R.drawable.invite_pic);
 
-        gridArray.add(new Item(aboutEvent, "Details"));
-        gridArray.add(new Item(deatailIcon, "Invite"));
+        gridArray.add(new Item(deatailIcon, "Details"));
+        gridArray.add(new Item(inviteIcon, "Invite"));
         gridArray.add(new Item(agendaIcon, "Agenda"));
         gridArray.add(new Item(newsIcon, "News Feed"));
         gridArray.add(new Item(galleryIcon, "Gallery"));
@@ -102,7 +115,7 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
         gridArray.add(new Item(socialIcon, "Social Media"));
         gridArray.add(new Item(networkIcon, "Networking"));
         gridArray.add(new Item(venueIcon, "Venue Layout"));
-        gridArray.add(new Item(sponcersIcon, "Sponcers Page"));
+        gridArray.add(new Item(sponsorsIcon, "Sponsors"));
         gridArray.add(new Item(speakerIcon, "Speaker Profile"));
 
 
@@ -114,7 +127,7 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String name = gridArray.get(position).getTitle().toString();
-              //  Toast.makeText(getApplicationContext(), gridArray.get(position).getTitle(), Toast.LENGTH_SHORT).show();
+                //  Toast.makeText(getApplicationContext(), gridArray.get(position).getTitle(), Toast.LENGTH_SHORT).show();
 
                 switch (position) {
                     case 0:
@@ -123,9 +136,11 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
                         startActivity(aboutEventAct);
                         break;
                     case 1:
-                        Intent detailsAct = new Intent(EventDashboardActivity.this, DetailsActivity.class);
-                        detailsAct.putExtra("name", name);
-                        startActivity(detailsAct);
+                        if (Constants.checkAndRequestPermissions(EventDashboardActivity.this)) {
+                            Intent detailsAct = new Intent(EventDashboardActivity.this, DetailsActivity.class);
+                            detailsAct.putExtra("name", name);
+                            startActivity(detailsAct);
+                        }
                         break;
 
                     case 2:
@@ -140,19 +155,30 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
                         startActivity(newsaAct);
                         break;
                     case 4:
-                        Intent galleryAct = new Intent(EventDashboardActivity.this, GalleryActivity.class);
-                        galleryAct.putExtra("name", name);
-                        startActivity(galleryAct);
+                        if (Constants.checkAndRequestPermissions(EventDashboardActivity.this)) {
+                            Intent galleryAct = new Intent(EventDashboardActivity.this, GalleryActivity.class);
+                            galleryAct.putExtra("name", name);
+                            startActivity(galleryAct);
+                        }
+                        /*if (isStoragePermissionGranted()) {
+                            Intent galleryAct = new Intent(EventDashboardActivity.this, GalleryActivity.class);
+                            galleryAct.putExtra("name", name);
+                            startActivity(galleryAct);
+                        }*/
                         break;
                     case 5:
-                        Intent crowdAct = new Intent(EventDashboardActivity.this, CrowdPicsActivity.class);
-                        crowdAct.putExtra("name", name);
-                        startActivity(crowdAct);
+                        if (Constants.checkAndRequestPermissions(EventDashboardActivity.this)) {
+                            Intent crowdAct = new Intent(EventDashboardActivity.this, CrowdPicsActivity.class);
+                            crowdAct.putExtra("name", name);
+                            startActivity(crowdAct);
+                        }
                         break;
                     case 6:
-                        Intent videosAct = new Intent(EventDashboardActivity.this, VideosActivity.class);
-                        videosAct.putExtra("name", name);
-                        startActivity(videosAct);
+                        if (Constants.checkAndRequestPermissions(EventDashboardActivity.this)) {
+                            Intent videosAct = new Intent(EventDashboardActivity.this, VideosActivity.class);
+                            videosAct.putExtra("name", name);
+                            startActivity(videosAct);
+                        }
                         break;
 
                     case 7:
@@ -212,6 +238,7 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
 
             }
         });
+
     }
 
     @Override
@@ -233,6 +260,78 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
     public void onSliderClick(BaseSliderView slider) {
 
     }
+
+    /*****
+     * Never ask again  permissions call back code start
+     ****/
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        // Log.d(TAG, "Permission callback called-------");
+        switch (requestCode) {
+            case REQUEST_ID_MULTIPLE_PERMISSIONS: {
+
+                Map<String, Integer> perms = new HashMap<>();
+                // Initialize the map with both permissions
+                perms.put(Manifest.permission.WRITE_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED);
+                perms.put(Manifest.permission.ACCESS_FINE_LOCATION, PackageManager.PERMISSION_GRANTED);
+                // Fill with actual results from user
+                if (grantResults.length > 0) {
+                    for (int i = 0; i < permissions.length; i++)
+                        perms.put(permissions[i], grantResults[i]);
+                    // Check for both permissions
+                    if (perms.get(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+                            && perms.get(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                        // Log.d(TAG, "sms & location services permission granted");
+                        // process the normal flow
+                        //else any one or both the permissions are not granted
+                    } else {
+                        // Log.d(TAG, "Some permissions are not granted ask again ");
+                        //permission is denied (this is the first time, when "never ask again" is not checked) so ask again explaining the usage of permission
+//                        // shouldShowRequestPermissionRationale will return true
+                        //show the dialog or snackbar saying its necessary and try again otherwise proceed with setup.
+                        if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) || ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
+                            showDialogOK("Storage and Location Services Permission required for this app",
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            switch (which) {
+                                                case DialogInterface.BUTTON_POSITIVE:
+                                                    Constants.checkAndRequestPermissions(EventDashboardActivity.this);
+                                                    break;
+                                                case DialogInterface.BUTTON_NEGATIVE:
+                                                    // proceed with logic by disabling the related features or quit the app.
+                                                    break;
+                                            }
+                                        }
+                                    });
+                        }
+                        //permission is denied (and never ask again is  checked)
+                        //shouldShowRequestPermissionRationale will return false
+                        else {
+                            Toast.makeText(this, "Go to settings and enable app permissions", Toast.LENGTH_LONG)
+                                    .show();
+                            //proceed with logic by disabling the related features or quit the app.
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+//   Show dialog permissions Again
+
+    private void showDialogOK(String message, DialogInterface.OnClickListener okListener) {
+        new AlertDialog.Builder(this)
+                .setMessage(message)
+                .setPositiveButton("OK", okListener)
+                .setNegativeButton("Cancel", okListener)
+                .create()
+                .show();
+    }
+
+    /***
+     * Never ask again  permissions call back code end
+     ***/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
