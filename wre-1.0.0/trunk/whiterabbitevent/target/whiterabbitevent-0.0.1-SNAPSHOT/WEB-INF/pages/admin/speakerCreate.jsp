@@ -4,7 +4,7 @@
 <!-- <h3>speaker create {{5+4}}</h3> -->
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<div class="container">
+<div class="col-md-12">
 	<a ng-click="cancelCreateSpeaker(eventId)">
 		 <i class="glyphicon glyphicon-chevron-left"></i>
 	</a>

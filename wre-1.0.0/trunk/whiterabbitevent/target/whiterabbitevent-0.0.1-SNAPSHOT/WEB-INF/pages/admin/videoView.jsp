@@ -8,7 +8,7 @@
 margin-bottom:0px !important;
 }
 .panel-body {
-  padding: 13px 50px ;
+  /* padding: 13px 50px ; */
 }
 </style>
 <toaster-container></toaster-container>
@@ -23,17 +23,21 @@ margin-bottom:0px !important;
             	<a ng-click="videoUpload(eventId)" class="btn btn-default pull-left button btn-color">Upload Video</a>   	
                 <div class="col-md-12 padding-0">
 			
-                  <a class="col-md-3"  ng-repeat="upload in videoList">
+                  <a class="col-md-3"  ng-repeat="video in videoList">
                     <div class="content-div">
                       <div class="centerimg">
                       <img src="satya.png"  class="img-responsive" >
                         </div>
                       <div class="text-content" >
 
-                        <label>Name : {{upload.name}}</label>
-                        <br/>
-                        <!-- <div class="text-right">{{video.duration}}</div>
-                       </div>-->
+                        <label>Name : {{video.name}}</label>
+                           
+                           <button ng-click="deleteGallery(video)" title="deletgalary">Delete Video
+							<!-- <i class="fa fa-eye-slash icons"> </i> -->
+				</button>
+                        
+                    
+                        
                       </div>
                     </div>
                   </a>

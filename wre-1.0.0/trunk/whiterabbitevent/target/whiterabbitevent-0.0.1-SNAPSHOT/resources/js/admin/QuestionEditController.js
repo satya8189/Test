@@ -1,24 +1,31 @@
 var QuestionEditController = function($scope, $http, $routeParams,$location) {
-	
+	alert("QuestionEditController");
 	$scope.question={};
 
 	$scope.$on('$routeChangeSuccess', function() {
-		$http.get('admin/questionEdit?questionEdit='+$routeParams.questionEdit).success(function(question) {
+		alert("question Id "+$routeParams.questionId);
+		alert("eventID "+$routeParams.eventId);
+		$http.get('admin/questionEditDetails?questionId='+$routeParams.questionId).success(function(question) {
+			
 			$scope.question=question;
+			alert("hggj-----"+$scope.question.appIdentifierName);
 					
 				});
 	});
         
         
-    	$scope.updateQuestion = function(agendo) {
+    	$scope.updateQuestion = function(question) {
+    		alert("updateQuestion");
 		
-		$http.post('agendo/update',agendo).success(function(status) {
-			
-			$location.path("/agendoDetails/"+agendo.eventId);
+		$http.post('question/update',question).success(function(status) {
+		alert("	updateQuestion");
+			$location.path("/questionView/"+question.eventId);
 			
 
 
 					});
+		
+		
 		
 
 	};

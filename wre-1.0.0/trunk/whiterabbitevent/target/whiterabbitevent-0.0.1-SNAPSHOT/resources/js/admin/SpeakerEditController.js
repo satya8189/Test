@@ -28,7 +28,7 @@ var SpeakerEditController=function($scope,$http,$routeParams,$location,ngNotifie
 		$http.post('admin/updateSpeaker',speaker).success(function(){
 			//alert("updated.....");
 			$location.path("/speakerProfileView/"+speaker.eventId);
-				ngNotifier.notify("speaker updated.!");
+				ngNotifier.notify("speaker updated successfully.!");
 		}).error(function(){
 				ngNotifier.error("error updating speaker.!");
 		});

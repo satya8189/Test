@@ -125,7 +125,6 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 		//this is Createagndo
        public void createAgendo(AgendaBean agendaBean) {
     	   Agenda agenda=new Agenda();
-    	   agenda.setAgenId(agendaBean.getAgenId());
     	   agenda.setAgenStartTime(agendaBean.getAgenStartTime());
     	   agenda.setAgenDesc(agendaBean.getAgenDesc());
     	   agenda.setAgenTitle(agendaBean.getAgenTitle());
@@ -232,7 +231,6 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 			//saveNews
 				public void saveNews(NewsFeedBean newsFeedBean) {
 					Newsfeed newsfeed=new Newsfeed();
-					newsfeed.setNewsFeedId(newsFeedBean.getNewsFeedId());
 		            newsfeed.setNewsTitle(newsFeedBean.getNewsTitle());
 		            newsfeed.setNewsDesc(newsFeedBean.getNewsDesc());
 		            newsfeed.setNewsDate(new Date());
@@ -465,7 +463,6 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 				//questionCreate
 				   public void questionCreate(QuestionBean questionBean) {
 		            	  SurveyQuestion surveyQuestion=new SurveyQuestion();
-		            	  surveyQuestion.setQuestionId(questionBean.getQuestionId());
 		            	  surveyQuestion.setOptionA(questionBean.getAnswer());
 		            	  surveyQuestion.setOptionB(questionBean.getOptionB());
 		            	  surveyQuestion.setOptionC(questionBean.getOptionC());

@@ -11,12 +11,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
   <!-- For Pagination -->
-  	<script src="resources/js/angular/angular.min.js" type="text/javascript"></script>
-  	<!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.9/angular.min.js" type="text/javascript"></script> --> 
-  	<script src="resources/js/angular/ui-bootstrap-tpls-0.10.0.js" type="text/javascript"></script>
-  	<!-- <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.10.0.js" type="text/javascript"></script> -->
-	<link rel="stylesheet" type="text/css" href="resources/css/bootstrap.min.css" />
-	<!-- <link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" /> --> 
+  	<!-- <script src="resources/js/angular/angular.min.js" type="text/javascript"></script> -->
+  	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.9/angular.min.js" type="text/javascript"></script> 
+  	<!-- <script src="resources/js/angular/ui-bootstrap-tpls-0.10.0.js" type="text/javascript"></script> -->
+  	<script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.10.0.js" type="text/javascript"></script>
+	<!-- <link rel="stylesheet" type="text/css" href="resources/css/bootstrap.min.css" /> -->
+	<link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" /> 
 		
   <!-- Pagination Links end -->
   

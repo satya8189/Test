@@ -12,6 +12,32 @@ var QuestionViewController = function($scope,$routeParams,$http, $location) {
 				//alert("admin/questionList");
 				    $scope.questionList = questionList;
 				  //  alert("admin/questionList-------------------------");
+				    
+
+					  //=================================
+						// create empty search model (object) to trigger $watch on update
+							$scope.search = null;
+
+							/*$scope.resetFilters = function () {
+							// needs to be a function or it won't trigger a $watch
+							$scope.search = {};
+							};*/
+
+							// 	pagination controls
+							$scope.currentPage = 1;
+							$scope.totalItems = $scope.questionList.length;
+							$scope.entryLimit = 5; // items per page
+							$scope.noOfPages = Math.ceil($scope.totalItems / $scope.entryLimit);
+
+							// $watch search to update pagination
+							$scope.$watch('search', function (newVal, oldVal) {
+							$scope.filtered = filterFilter($scope.questionList, newVal);
+							$scope.totalItems = $scope.filtered.length;
+							$scope.noOfPages = Math.ceil($scope.totalItems / $scope.entryLimit);
+							$scope.currentPage = 1;
+							}, true);
+					    //===================================*/
+					    
 			
 				    
 				  	});

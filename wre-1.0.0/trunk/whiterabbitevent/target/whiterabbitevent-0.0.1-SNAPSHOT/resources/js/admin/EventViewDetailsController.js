@@ -37,6 +37,9 @@ var EventViewDetailsController = function($scope,$routeParams,$http,$location) {
 		}else if(event.serviceId=="7"){
 			location.href="#/documentView/"+event.eventId;	
 		
+		}else if(event.serviceId=="16"){
+			location.href="#/questionView/"+event.eventId;	
+		
 		}else if(event.serviceId=="15"){
 			location.href="#/sponsorPageView/"+event.eventId;
 			
@@ -46,7 +49,10 @@ var EventViewDetailsController = function($scope,$routeParams,$http,$location) {
 		}else if(event.serviceId=="13"){
 			//alert("kk");
 			location.href="#/venueLayout/"+event.eventId;
-		
+			
+		}else if(event.serviceId=="8"){
+			//alert("kk");
+			location.href="#/quationAndAnswersView/"+event.eventId;
 			
 		};
 	};

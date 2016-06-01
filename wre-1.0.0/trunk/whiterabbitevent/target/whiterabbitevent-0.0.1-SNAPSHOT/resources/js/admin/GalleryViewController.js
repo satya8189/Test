@@ -1,4 +1,4 @@
-var GalleryViewController = function($scope, $routeParams, $http, $location) {
+var GalleryViewController = function($scope, $routeParams, $http, $location,ngNotifier) {
 	$scope.galaryList = {};
 
 	$scope.eventId = {};
@@ -19,24 +19,24 @@ var GalleryViewController = function($scope, $routeParams, $http, $location) {
 	});
 
 	$scope.deleteGallery = function(galary) {
-
-		alert("deleteGallery");
-		$http.post('admin/deleteGallery', galary).success(
+		//		alert("deleteGallery"+galary.glaryItemId);
+		$http.get('admin/deleteGallery?glaryItemId='+galary.glaryItemId).success(
 				function() {
 
-					alert("deleteGallery-------------");
-					$http.get(
-							'admin/galaryList?eventId=' + $routeParams.eventId
+			//		alert("deleteGallery-------------"+galary.eventId);
+					$http.get('admin/galaryList?eventId=' +galary.eventId
 									+ "&type=image").success(
 							function(galaryList) {
+								ngNotifier.notify("Gallery deleted successfully.!");
 								$scope.galaryList = galaryList;
 
 							});
 				});
+					
+				
 	};
-
+	
 	//galleryCreate(eventId)
-
 	$scope.galleryCreate = function(eventId) {
 		$location.path("/galleryCreate/" + eventId);
 

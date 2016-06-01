@@ -14,6 +14,9 @@ margin-bottom:0px !important;
 <toaster-container></toaster-container>
 
 <div class="container">
+	  <a ng-click="cancelQuestionsView(eventId)"> <i
+		class="glyphicon glyphicon-chevron-left"></i>
+	</a> 
 	<form>
 	
 		<a ng-click="questionCreate(eventId)"title="eventViewDetails">Question Create
@@ -50,7 +53,7 @@ margin-bottom:0px !important;
 				    <td >{{question.answer}}</td>
 			<td>
 					
-				<a ng-click="questionEdit(event.eventId)"title="eventViewDetails">
+				<a ng-click="questionEdit(question.questionId)"title="eventViewDetails">
 							<i class="fa fa-eye-slash icons"> </i>
 				</a>
 				

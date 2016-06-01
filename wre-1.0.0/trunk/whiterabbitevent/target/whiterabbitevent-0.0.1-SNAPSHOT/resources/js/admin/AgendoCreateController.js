@@ -27,6 +27,7 @@ $scope.cancelAgendoView = function() {
 		$location.path("/agendoDetails/"+eventId);
 	};
 
+	
 };	
 
 

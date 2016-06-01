@@ -1,4 +1,4 @@
-var EditDetailsViewController = function($scope, $http, $location, $routeParams) {
+var EditDetailsViewController = function($scope, $http, $location, $routeParams,ngNotifier) {
 	
 	$scope.event={};
 

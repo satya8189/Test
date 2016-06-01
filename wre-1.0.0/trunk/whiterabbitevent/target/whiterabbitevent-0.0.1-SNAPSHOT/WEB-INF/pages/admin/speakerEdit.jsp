@@ -13,26 +13,6 @@
 		<div class="panel-body text-center">
 			<form name="speakerEditForm" ng-submit="updateSpeaker(speaker)"	novalidate>
 				
-					<div class="col-md-12">
-						<div class="col-md-2">
-							<label>Event Id</label>
-						</div>
-						<div class="col-md-2">
-							<input type="text" class="input-text form-control" id="eventId" ng-model="speaker.eventId" name="EventId"
-								readonly>
-						</div>
-					</div>
-					
-					<div class="col-md-6">
-						<div class="col-md-3">
-							<label>Speaker Id</label>
-						</div>
-						<div class="col-md-5">
-							<input type="text" class="input-text form-control" id="speakerId"
-								placeholder="Speaker Id" ng-model="speaker.speakerId" name="speakerId"
-								required>
-						</div>
-					</div>
 					
 					<div class="col-md-6">
 						<div class="col-md-3">

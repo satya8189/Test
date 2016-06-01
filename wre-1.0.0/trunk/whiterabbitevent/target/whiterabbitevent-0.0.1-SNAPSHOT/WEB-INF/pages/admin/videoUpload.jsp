@@ -1,10 +1,10 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <toaster-container></toaster-container>
+<jsp:include page="error-messages.jsp"></jsp:include>
 
-<form name="createEvent" ng-submit="createEvent.$valid && uploadVideo(video)"  enctype="multipart/form-data" >
-
-<div class="container">
+<form name="createEvent" ng-submit="createEvent.$valid && uploadVideo(video)"  enctype="multipart/form-data" novalidate>
+<div class="col-md-12">
 	<a ng-click="cancelUploadVideo(video.eventId)">
 		 <i class="glyphicon glyphicon-chevron-left"></i>
 	</a>
@@ -16,10 +16,14 @@
 	<div class="col-md-12">
 	  <div class="form-group col-md-6" >
           <label class="flot-left">Video Name <span style="color:red;">*</span></label>
-      <input type="text" class="input-text form-control" id="agendo_Name" placeholder="Document"  ng-model="video.name" 
-      name="gallery"   required>
+     	
+     	 <input type="text" class="input-text form-control" id="gallery" placeholder="Document"  ng-model="video.name" 
+      			name="gallery"   required>
+      
+      	<span ng-if="createEvent.$submitted" ng-messages="createEvent.gallery.$error" ng-messages-include="errors">
+		  </span>
+      
       </div>
-      <span ng-if="createEvent.$submitted" ng-messages="createEvent.gallery.$error" ng-messages-include="errors"></span>
       </div>
 	 </div>
 	 

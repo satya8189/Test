@@ -43,7 +43,7 @@ margin-bottom:0px !important;
 						 
 				   </tr>
 				</thead>
-				<tr ng-show="filteredSize!=0"ng-repeat="question in questionList ">
+				<tr ng-show="filteredSize!=0" ng-repeat="question in questionList  | filter: search | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
 				    <td >{{question.question}}</td>
 				    <td >{{question.appIdentifierName}}</td>
 					<td >{{question.optionA}}</td>

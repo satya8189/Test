@@ -16,7 +16,7 @@ margin-bottom:0px !important;
 <div class="cal-md-12">
 	<form>
 	
-	<div class="header-none">Event List</div>
+	<div class="header-none" align="center">Events List</div>
 	<div class="panel">
 		<div class="panel-body">
 		 <div class="col-md-2 col-md-offset-10 padding-0">
@@ -36,7 +36,7 @@ margin-bottom:0px !important;
 						
 				   </tr>
 				</thead>
-				<tr ng-show="filteredSize!=0"ng-repeat="event in eventList ">
+				<tr ng-show="filteredSize!=0" ng-repeat="event in eventList | filter: search | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit ">
 				    <td >{{event.eventAddress}}</td>
 					<td >{{event.eventAgenda}}</td>
 					<td >{{event.eventName}}</td>

@@ -26,25 +26,20 @@ padding: 10px 0px 0px;
 
 </head>
 <body>
-<div class="container-fluid">
+
 <div class="row">
 <div ng-repeat=" event in eventList">
 
 						<div class="col-md-3" style="padding-top: 10px"><a ng-click="serviceDetails(event)">
 							<div class="padashboard">
-					<i class="fa fa-calendar" aria-hidden="true"></i>
+										<i class="fa fa-calendar" aria-hidden="true"></i>
 									<h4 class="f18" style="text-transform: capitalize;">{{event.serviceName}}</h4>
-							
-								
-                             </div>
+							 </div>
 							</div>
 							<div class="bottom"></div>
-							</a>
+							
 						</div>
 				</div>		
-						
-					
 
-</div>
 </body>
 </html>

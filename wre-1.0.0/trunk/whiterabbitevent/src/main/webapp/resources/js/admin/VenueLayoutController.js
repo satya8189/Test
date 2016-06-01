@@ -2,7 +2,7 @@ var VenueLayoutController=function($scope,$location,$http,$routeParams,ngNotifie
 	$scope.upload={};
 	
 	$scope.$on("$routeChangeSuccess",function(){
-		alert("venuelayoutController..."+$routeParams.eventId);
+		
 		
 		$scope.upload.eventId=$routeParams.eventId;
 		
@@ -12,7 +12,7 @@ var VenueLayoutController=function($scope,$location,$http,$routeParams,ngNotifie
 	});
 	
 	$scope.uploadLayout = function() {
-		alert("uploadLayout");
+		
 		
 		var fd = new FormData();
 

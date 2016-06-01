@@ -2,7 +2,7 @@
 
 var whiterabbitevent = {};
 
-var App = angular.module('whiterabbitevent', [ 'ngRoute', 'wre.services','ngMessages','wre.filters', 'wre.services', 'wre.directives' ]);
+var App = angular.module('whiterabbitevent', [ 'ngRoute', 'wre.services','ui.bootstrap','ngMessages']);
 
 // / Declare app level module which depends on filters, and services
 App.config([ '$routeProvider', function($routeProvider, $Scope) {
@@ -129,7 +129,7 @@ App.config([ '$routeProvider', function($routeProvider, $Scope) {
 
 	$routeProvider.when('/documentCreate/:eventId', {
 		templateUrl : 'admin/documentCreate',
-		controller : DocumetnCreateController
+		controller : DocumentCreateController
 	});
 
 	// VideoUploadController
@@ -137,7 +137,31 @@ App.config([ '$routeProvider', function($routeProvider, $Scope) {
 		templateUrl : 'admin/videoUpload',
 		controller : VideoUploadController
 	});
-
+	//questionView
+	$routeProvider.when('/questionView/:eventId', {
+		templateUrl : 'admin/questionView',
+		controller : QuestionViewController
+	});
+	
+	//questionCreate.
+	$routeProvider.when('/questionCreate/:eventId', {
+		templateUrl : 'admin/questionCreate',
+		controller : QuestionCreateController
+	});
+	
+	//questionEdit
+	$routeProvider.when('/questionEdit/:eventId/:questionId', {
+		templateUrl : 'admin/questionEdit',
+		controller : QuestionEditController
+	});
+	
+	//QuationAndAnswersViewController
+	$routeProvider.when('/quationAndAnswersView/:eventId/', {
+		templateUrl : 'admin/quationAndAnswersView',
+		controller : QuationAndAnswersViewController
+	});
+	
+	QuationAndAnswersViewController.js
 	/* By Taraq */
 	// sponsorPageView
 	$routeProvider.when('/sponsorPageView/:eventId', {
@@ -183,7 +207,7 @@ App.config([ '$routeProvider', function($routeProvider, $Scope) {
 
 	// #/venueLayout/
 	$routeProvider.when('/venueLayout/:eventId', {
-		templateUrl : 'admin/venueLayout',
+		templateUrl : 'admin/venueLayoutView',
 		controller : VenueLayoutController
 	});
 
@@ -191,3 +215,15 @@ App.config([ '$routeProvider', function($routeProvider, $Scope) {
 		redirectTo : '/eventView'
 	});
 } ]);
+
+
+App.filter('startFrom', function () {
+	return function (input, start) {
+		if (input) {
+			start = +start;
+			return input.slice(start);
+		}
+		return [];
+	};
+});
+

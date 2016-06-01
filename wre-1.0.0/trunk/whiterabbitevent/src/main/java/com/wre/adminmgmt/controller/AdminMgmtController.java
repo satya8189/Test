@@ -273,7 +273,7 @@ public class AdminMgmtController {
 
 	// admin/agendoDetails
 
-	@RequestMapping(value = "admin/agendoDetails")
+	@RequestMapping(value = "admin/agendoDetails",method = RequestMethod.GET)
 	public @ResponseBody
 	List<AgendaBean> getAgendoDetails(@RequestParam("eventId") Long eventId) {
 		log.info("in side AgendoDetails method----" + eventId);
