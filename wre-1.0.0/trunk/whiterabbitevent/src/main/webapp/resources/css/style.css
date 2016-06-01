@@ -168,3 +168,22 @@ line-height: 22px;
     font-size: 18px;
     padding-right: 15px;
 }
+.back{
+font-size: 25px;
+    background-color:#265a88;
+    padding: 7px 15px;
+    border-radius: 50%;
+    color:#fff;
+        margin-bottom: 4px;
+}
+.tablehead{
+	background-color: #265a88;
+    color: #fff;
+}
+table,td{
+	text-align:center;
+	background: #fff !important;
+}
+.padding-0 {
+	padding: 0px;
+}
