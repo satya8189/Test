@@ -1,20 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="whiterabbitevent">
 <head>
-  <title>TALHIRE</title>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="firstName" value="${USER.firstName}" scope="session" />
+<c:set var="lastName" value="${USER.lastName}" scope="session" />
+<c:set var="userId" value="${USER.userId}" scope="session" />
+  <title>WHITE RABBIT EVENT</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
- 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">    
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
-     <script src="../js/bootstrap.min.js"></script>
-    
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+  <link rel="stylesheet" href="resources/css/style.css"/>
   
-  
+  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+  <script src="resources/js/angular/angular.js"></script>
+  <script src="resources/js/angular/angular.min.js"></script> 
+  <script src="resources/js/angular/angular-route.js"></script>
+  <script src="resources/js/angular/angular-route.min.js"></script>
+  <script src="resources/js/angular/angular-messages.js"></script>
+  <script src="resources/js/angular/angular-messages.min.js"></script>
+  <script src="resources/js/ui-bootstrap-angularjs.js"></script> 
+   
+     <script src="resources/js/navigationjs/systemAdminNavigation.js"></script>
+     <script src="resources/js/services.js"></script>
+      <script src="resources/js/filters.js"></script>
+ 
+     
+    <!-- Client -->
+    <script src="resources/js/systemadmin/ClientsViewController.js"></script>
+    <script src="resources/js/systemadmin/ClientCreateController.js"></script>
+    <script src="resources/js/systemadmin/ClientEventViewController.js"></script>
+     <script src="resources/js/systemadmin/ClientEventCreateController.js"></script>
+     <script src="resources/js/systemadmin/ClientEventEditController.js"></script>
+     
+      
+  	<script type="text/javascript" src="resources/js/multiselect/select2.js"></script>
+	<script type="text/javascript"  src="resources/js/multiselect/select2.min.js"></script>
+	 <link rel="stylesheet" href="resources/js/multiselect/select2.min.css">
  
 </head>
 <body>
@@ -45,8 +70,7 @@
            <li class="head-date"> <span class="glyphicon glyphicon-bell"></span></li>
            <li class="head-date"> <span class="glyphicon glyphicon-user"></span></li>
           </ul>
-        </li>
-      </ul>
+       
     </div><!-- /.navbar-collapse -->
 </nav>
         
@@ -69,7 +93,7 @@
                 </ul>
             <ul class="ul ">
               <li class="li">Invite</li>
-              <li class="li">Events</li>
+              <li class="li" ><a class="navbar-links" href="#/clientsView" id="client">Clients</a></li>
               <li class="li">Polling</li>
               <li class="li">Schedule</li>
               <li class="li">News Feed</li>
@@ -85,13 +109,13 @@
            <div class="body-content">
              <h3 style="text-align: -webkit-center;"> Invite people toEvents</h3>
        
- 
+  <ng-view></ng-view>
          </div>
               </div>
             </div>
             </div>
         
     
-    </div>
+      <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> 
 </body>
 </html>
