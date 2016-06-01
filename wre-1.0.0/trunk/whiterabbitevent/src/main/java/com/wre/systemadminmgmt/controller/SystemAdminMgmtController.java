@@ -100,9 +100,11 @@ public class SystemAdminMgmtController{
 			 modelAndView=new ModelAndView("systemadmin/systemAdminTemplate");
 			 log.info("systemadmin login success....");
 			   }else{
+				   if(userBean.getRoleId().equals(WREConstants.ADMIN_ROLE))
+				   {
 				   modelAndView=new ModelAndView("admin/adminTemplate"); 
 			   }
-			
+			   }
 			  log.info("adminAuthenticationSuccess-------------");
 			
 			return modelAndView;
