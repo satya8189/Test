@@ -2,7 +2,7 @@
 
 /* Filters */
 
-var AppFilters = angular.module('dentalconsult.filters', []);
+var AppFilters = angular.module('wre.filters', []);
 
 AppFilters.filter('interpolate', ['version', function (version) {
     return function (text) {
