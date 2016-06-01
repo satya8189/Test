@@ -6,7 +6,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+
 import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -26,14 +28,16 @@ public class Sponcor  implements java.io.Serializable {
      private Event event;
      private String sponcorDesc;
      private String sponcorName;
+     private String fileName;
 
     public Sponcor() {
     }
 
-    public Sponcor(Event event, String sponcorDesc, String sponcorName) {
+    public Sponcor(Event event, String sponcorDesc, String sponcorName, String fileName) {
        this.event = event;
        this.sponcorDesc = sponcorDesc;
        this.sponcorName = sponcorName;
+       this.fileName=fileName;
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
@@ -78,6 +82,16 @@ public class Sponcor  implements java.io.Serializable {
         this.sponcorName = sponcorName;
     }
 
+
+
+    @Column(name="FileName", length=200)
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
 
 
 
