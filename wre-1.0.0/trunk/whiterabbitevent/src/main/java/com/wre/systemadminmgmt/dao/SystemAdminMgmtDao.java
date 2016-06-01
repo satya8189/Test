@@ -6,8 +6,10 @@ import com.wre.common.dao.GenericDao;
 import com.wre.model.Client;
 import com.wre.model.Event;
 import com.wre.model.EventServices;
+import com.wre.model.Participants;
 import com.wre.model.Services;
 import com.wre.model.User;
+import com.wre.systemadminmgmt.bean.ParticipantBean;
 import com.wre.systemadminmgmt.bean.UserBean;
 
 
@@ -30,6 +32,8 @@ public interface SystemAdminMgmtDao  extends GenericDao<Object>{
 	void deleteServices(Long eventId);
 
 	List<EventServices> getEventServicesList(Long eventId);
+
+	Participants getParticipantDetails(ParticipantBean participantBean);
 
 	
 

@@ -14,8 +14,10 @@ import com.wre.common.dao.GenericDaoImpl;
 import com.wre.model.Client;
 import com.wre.model.Event;
 import com.wre.model.EventServices;
+import com.wre.model.Participants;
 import com.wre.model.Services;
 import com.wre.model.User;
+import com.wre.systemadminmgmt.bean.ParticipantBean;
 import com.wre.systemadminmgmt.bean.UserBean;
 
 
@@ -90,6 +92,13 @@ public List<EventServices> getEventServicesList(Long eventId) {
 	criteria.add(Restrictions.eq("event.eventId", eventId));
 	criteria.setFetchMode("services", FetchMode.EAGER);
 	return (List<EventServices>)criteria.list();
+}
+
+@Override
+public Participants getParticipantDetails(ParticipantBean participantBean) {
+	Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Participants.class);
+	criteria.add(Restrictions.eq("phone",participantBean.getPhoneNumber()));
+	return (Participants)criteria.uniqueResult();
 }
 
 
