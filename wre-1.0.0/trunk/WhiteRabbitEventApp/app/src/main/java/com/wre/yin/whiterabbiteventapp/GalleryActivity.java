@@ -40,8 +40,7 @@ public class GalleryActivity extends AppCompatActivity {
         imagePaths = utils.getFilePaths();
 
         // Gridview adapter
-        adapter = new GridViewImageAdapter(GalleryActivity.this, imagePaths,
-                columnWidth);
+        adapter = new GridViewImageAdapter(GalleryActivity.this, imagePaths,columnWidth);
 
         // setting grid view adapter
         gridView.setAdapter(adapter);

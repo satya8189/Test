@@ -79,6 +79,8 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
                     .putString("extra", name);
 
             mDemoSlider.addSlider(textSliderView);
+            mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Stack);
+
         }
 
         //set grid view item

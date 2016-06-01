@@ -108,8 +108,9 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
                     .putString("extra", name);
 
             mDemoSlider.addSlider(textSliderView);
+            mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Fade);
             mDemoSlider.setPresetTransformer(SliderLayout.Transformer.ZoomIn);
-
+            mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Stack);
         }
     }
 

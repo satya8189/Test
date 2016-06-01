@@ -25,8 +25,7 @@ public class GridViewImageAdapter extends BaseAdapter {
 	private ArrayList<String> _filePaths = new ArrayList<String>();
 	private int imageWidth;
 
-	public GridViewImageAdapter(Activity activity, ArrayList<String> filePaths,
-								int imageWidth) {
+	public GridViewImageAdapter(Activity activity, ArrayList<String> filePaths,	int imageWidth) {
 		this._activity = activity;
 		this._filePaths = filePaths;
 		this.imageWidth = imageWidth;

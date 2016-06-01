@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -31,11 +30,12 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String mobileNum=employeeId.getText().toString();
-                editor.putString("mobile",mobileNum);
+
                 Intent otpAct = new Intent(LoginActivity.this, OTPActivity.class);
+                editor.putString("mobile",mobileNum);
+
                 startActivity(otpAct);
                 finish();
-
             }
         });
 
