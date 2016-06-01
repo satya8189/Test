@@ -6,6 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.wre.adminmgmt.bean.AgendaBean;
 import com.wre.adminmgmt.bean.AppIdentifierBean;
+import com.wre.adminmgmt.bean.ChatBean;
 import com.wre.adminmgmt.bean.EventBean;
 import com.wre.adminmgmt.bean.GalaryBean;
 import com.wre.adminmgmt.bean.InviteBean;
@@ -82,6 +83,8 @@ public void udpateSpeaker(SpeakerBean spk);
 public void updateQuestionDetails(QuestionBean questionBean);
 
 public void uploadVenuLayout(MultipartFile file, Long eventId, String type);
+
+public List<ChatBean> getUser(String mobno);
 
 
 

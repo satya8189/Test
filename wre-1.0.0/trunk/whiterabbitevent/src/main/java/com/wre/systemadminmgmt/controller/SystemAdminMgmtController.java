@@ -216,7 +216,7 @@ public class SystemAdminMgmtController{
 			}
 			
 			//get participants Details
-			@RequestMapping(value="systemadmin/getParticipantDetails",method=RequestMethod.GET)
+			@RequestMapping(value="/participantlogin",method=RequestMethod.POST)
 			public @ResponseBody ParticipantBean getParticipantDetails(@RequestBody ParticipantBean participantBean){
 				return systemAdminMgmtService.getParticipantDetails(participantBean);
 				

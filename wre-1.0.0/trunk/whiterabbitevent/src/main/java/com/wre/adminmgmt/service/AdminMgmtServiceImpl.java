@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.wre.adminmgmt.bean.AgendaBean;
 import com.wre.adminmgmt.bean.AppIdentifierBean;
+import com.wre.adminmgmt.bean.ChatBean;
 import com.wre.adminmgmt.bean.EventBean;
 import com.wre.adminmgmt.bean.GalaryBean;
 import com.wre.adminmgmt.bean.InviteBean;
@@ -285,7 +286,7 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 						  String name) {
 						     
 						         log.info("Enter into saveOrganizationApproveFile");
-						         String filePath=WREConstants.RESOURCE_PATH+File.separator +eventId
+						         String filePath=WREConstants.RESOURCE_PATH+eventId
 						           +File.separator+type+File.separator;
 						         
 						        if(file!=null){
@@ -296,6 +297,7 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 						         Galary galary=new Galary();
 						         galary.setName(name);
 						         galary.setType(type);
+						         galary.setFileName(file.getOriginalFilename());
 						         Event event=new Event();
 						         event.setEventId(eventId);
 						         galary.setEvent(event);
@@ -699,16 +701,54 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 						
 					
 								         log.info("Enter into saveOrganizationApproveFile");
-								         String filePath=WREConstants.RESOURCE_PATH+File.separator +eventId
-								           +File.separator+type+File.separator;
+								         String filePath=WREConstants.RESOURCE_PATH+eventId
+								           +File.separator+type;
 								         
 								        if(file!=null){
-								          saveFile(file,filePath);
-								          log.info("file uploud successfully");
+
+								            try {
+								                byte[] bytes = file.getBytes();
+								                // Creating the directory to store file
+								                File dir = new File(filePath);
+								                
+								                if (!dir.exists()){
+								                    dir.mkdirs();
+								                }
+								                // Create the file on server
+								                File serverFile = new File(dir.getAbsolutePath()
+								                		+File.separator+"layout.png");
+								                BufferedOutputStream stream = new BufferedOutputStream(
+								                        new FileOutputStream(serverFile));
+								                stream.write(bytes);
+								                stream.close();
+								 
+								             
+									           
+								 
+								            } catch (Exception e) {
+								            }
 								          
 								         }
 								         
 								  }
+					
+				
+					public List<ChatBean> getUser(String mobno) {
+	List<Participants> participantsList=	AdminMgmtDaoImpl.getUser(mobno);
+	List<ChatBean> chatBeanList=new ArrayList<ChatBean>();
+
+	for(Participants  participants:participantsList){
+		ChatBean chatBean= new ChatBean();
+		chatBean.setMobno(participants.getPhone());
+		chatBean.setName(participants.getFirstName());
+		chatBean.setReg_id(participants.getRegId());
+		chatBeanList.add(chatBean);
+	}
+
+			return chatBeanList;
+					}
+					
+					
 						
 					}
 					

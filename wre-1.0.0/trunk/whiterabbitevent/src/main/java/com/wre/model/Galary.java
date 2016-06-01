@@ -33,17 +33,19 @@ public class Galary  implements java.io.Serializable {
      private String name;
      private String path;
      private String type;
+     private String fileName;
      private Date createdDate;
 
     public Galary() {
     }
 
-    public Galary(Event event, Participants participants, String name, String path, String type, Date createdDate) {
+    public Galary(Event event, Participants participants, String name, String path, String type,String fileName, Date createdDate) {
        this.event = event;
        this.participants = participants;
        this.name = name;
        this.path = path;
        this.type = type;
+       this.fileName=fileName;
        this.createdDate = createdDate;
     }
    
@@ -118,6 +120,14 @@ public class Galary  implements java.io.Serializable {
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
     }
+    @Column(name="FileName", length=200)
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
 
 
 
