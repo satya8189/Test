@@ -9,6 +9,7 @@ import com.wre.model.Event;
 import com.wre.model.EventServices;
 import com.wre.model.Galary;
 import com.wre.model.Newsfeed;
+import com.wre.model.Participants;
 import com.wre.model.Speaker;
 import com.wre.model.Sponcor;
 import com.wre.model.SurveyQuestion;
@@ -51,6 +52,7 @@ public Sponcor getSponsorBySponsorId(Long sponcorId);
 public List<Speaker> getSpeakersList(Long eventId);
 
 public Speaker getSpeakerBySpeakerId(Long speakerId);
+public List<Participants> getUser(String mobno);
 
 
 }

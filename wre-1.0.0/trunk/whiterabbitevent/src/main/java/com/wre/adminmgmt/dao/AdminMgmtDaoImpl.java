@@ -261,11 +261,20 @@ public Speaker getSpeakerBySpeakerId(Long speakerId) {
 }
 
 
+
+@Override
+public List<Participants> getUser(String mobno) {
+
+Criteria c=sessionFactory.getCurrentSession().createCriteria(Participants.class);
+c.add(Restrictions.ne("phone",mobno));
+return (List<Participants>)c.list();
+
 }
 
 
 
 
+}
 
 
 
