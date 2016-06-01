@@ -17,10 +17,12 @@ import com.wre.model.AppIdentifier;
 import com.wre.model.Client;
 import com.wre.model.Event;
 import com.wre.model.EventServices;
+import com.wre.model.Participants;
 import com.wre.model.Services;
 import com.wre.model.User;
 import com.wre.systemadminmgmt.bean.ClientBean;
 import com.wre.systemadminmgmt.bean.EventServicesBean;
+import com.wre.systemadminmgmt.bean.ParticipantBean;
 import com.wre.systemadminmgmt.bean.UserBean;
 import com.wre.systemadminmgmt.dao.SystemAdminMgmtDao;
 
@@ -272,6 +274,21 @@ public class SystemAdminMgmtServiceImpl implements SystemAdminMgmtService{
 			systemAdminMgmtDaoImpl.save(eventServices);
 			
 		}
+	}
+
+
+	@Override
+	public ParticipantBean getParticipantDetails(ParticipantBean participantBean) {
+		Participants participantObj = systemAdminMgmtDaoImpl.getParticipantDetails(participantBean);
+		participantBean.setParticipantId(participantObj.getParticipantId());
+		participantBean.setFirstName(participantObj.getFirstName());
+		participantBean.setLastName(participantObj.getLastName());
+		participantBean.setEmailId(participantObj.getEmail());
+		participantBean.setOTP(participantObj.getOtp());
+		participantBean.setPhoneNumber(participantObj.getPhone());
+		participantBean.setStatus(participantObj.getStatus());
+		participantBean.setRegisterId(participantObj.getRegId());
+		return participantBean;
 	}
 
 	
