@@ -15,172 +15,99 @@ import android.widget.ExpandableListView;
 import android.widget.TextView;
 
 import com.wre.yin.whiterabbiteventapp.adapters.ExpandableListAdapter;
+import com.wre.yin.whiterabbiteventapp.beans.AgendaBean;
+import com.wre.yin.whiterabbiteventapp.beans.NewsFeedBean;
+import com.wre.yin.whiterabbiteventapp.utils.Callback;
+import com.wre.yin.whiterabbiteventapp.utils.Constants;
+import com.wre.yin.whiterabbiteventapp.utils.MyAsyncTask;
+import com.wre.yin.whiterabbiteventapp.utils.Utils;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
 public class NewsFeedActivity extends AppCompatActivity {
-    private TextView text;
-
-
-    ExpandableListAdapter listAdapter;
-    ExpandableListView expListView;
-    List<String> listDataHeader;
-    HashMap<String, List<String>> listDataChild;
-
     private RecyclerView recyclerView;
-    private CardView cardView;
     String layoutStatus = "gone";
+    private List<HashMap<String, String>> newsList;
+    Format formatter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news_feed);
         String nameTxt = getIntent().getExtras().getString("name");
-        //   text = (TextView) findViewById(R.id.activity_text);
-
+        formatter= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(nameTxt);
 
 
         recyclerView = (RecyclerView) findViewById(R.id.newsfeed_recycler_view);
 
-
-        RecyclerAdapter adapter = new RecyclerAdapter(this);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-/*//        text.setText(nameTxt);
-        // get the listview
-        expListView = (ExpandableListView) findViewById(R.id.lvExpandable);
-        // preparing list data
-        prepareListData();
-
-        listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
-
-        // setting list adapter
-        expListView.setAdapter(listAdapter);
-
-        // Listview Group click listener
-        expListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-
+        new MyAsyncTask(Constants.NEWS_LIST + "?eventId=9", null, NewsFeedActivity.this, new Callback() {
             @Override
-            public boolean onGroupClick(ExpandableListView parent, View v,
-                                        int groupPosition, long id) {
-                // Toast.makeText(getApplicationContext(),
-                // "Group Clicked " + listDataHeader.get(groupPosition),
-                // Toast.LENGTH_SHORT).show();
-                return false;
+            public void onResult(String result) {
+                newsList = new ArrayList<HashMap<String, String>>();
+                List<NewsFeedBean> newsBeanList = Utils.getList(result, NewsFeedBean.class);
+
+                for (NewsFeedBean bean : newsBeanList) {
+                    HashMap<String, String> map = new HashMap<String, String>();
+                    map.put("newsTitle", bean.getNewsTitle());
+                    map.put("newsDesc", bean.getNewsDesc());
+
+
+
+                    String newsDate = formatter.format(bean.getNewsDate());
+                    map.put("newsDate", newsDate);
+
+
+                    newsList.add(map);
+
+                }
+                RecyclerAdapter adapter = new RecyclerAdapter(NewsFeedActivity.this, (ArrayList<HashMap<String, String>>) newsList);
+                recyclerView.setAdapter(adapter);
+                recyclerView.setHasFixedSize(true);
+                recyclerView.setLayoutManager(new LinearLayoutManager(NewsFeedActivity.this));
             }
-        });
-
-        // Listview Group expanded listener
-        expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-
-            @Override
-            public void onGroupExpand(int groupPosition) {
-                Toast.makeText(getApplicationContext(),
-                        listDataHeader.get(groupPosition) + " Expanded",
-                        Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        // Listview Group collasped listener
-        expListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
-
-            @Override
-            public void onGroupCollapse(int groupPosition) {
-                Toast.makeText(getApplicationContext(),
-                        listDataHeader.get(groupPosition) + " Collapsed",
-                        Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-        // Listview on child click listener
-        expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-
-            @Override
-            public boolean onChildClick(ExpandableListView parent, View v,
-                                        int groupPosition, int childPosition, long id) {
-                // TODO Auto-generated method stub
-                Toast.makeText(
-                        getApplicationContext(),
-                        listDataHeader.get(groupPosition)
-                                + " : "
-                                + listDataChild.get(
-                                listDataHeader.get(groupPosition)).get(
-                                childPosition), Toast.LENGTH_SHORT)
-                        .show();
-                return false;
-            }
-        });
+        }).execute();
     }
 
-    *//*
-     * Preparing the list data
-     *//*
-    private void prepareListData() {
-        listDataHeader = new ArrayList<String>();
-        listDataChild = new HashMap<String, List<String>>();
-
-        // Adding child data
-        listDataHeader.add("Top 250");
-        listDataHeader.add("Now Showing");
-        listDataHeader.add("Coming Soon..");
-
-        // Adding child data
-        List<String> top250 = new ArrayList<String>();
-        top250.add("Expandable list view is used to group list data by categories. It has the capability of expanding and collapsing the groups when user touches header.");
-
-
-        List<String> nowShowing = new ArrayList<String>();
-        nowShowing.add("Expandable list view is used to group list data by categories. It has the capability of expanding and collapsing the groups when user touches header.");
-        //  nowShowing.add("Expandable list view is used to group list data by categories. It has the capability of expanding and collapsing the groups when user touches header.");
-
-
-        List<String> comingSoon = new ArrayList<String>();
-        comingSoon.add("Expandable list view is used to group list data by categories. It has the capability of expanding and collapsing the groups when user touches header.");
-
-
-        listDataChild.put(listDataHeader.get(0), top250); // Header, Child data
-        listDataChild.put(listDataHeader.get(1), nowShowing);
-        listDataChild.put(listDataHeader.get(2), comingSoon);*/
-    }
-
-    private class RecyclerAdapter extends RecyclerView.Adapter<AgendaRecyclerViewHolder> {
+    private class RecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerViewHolder> {
         LayoutInflater inflater;
         Context context;
-        String[] name = {"Androidwarriors", "Stackoverflow", "Developer Android", "AndroidHive"};
+        List<HashMap<String, String>> mapsList;
+        HashMap<String, String> maps;
 
-        public RecyclerAdapter(Context context) {
+        public RecyclerAdapter(Context context, ArrayList<HashMap<String, String>> list) {
             this.context = context;
+            mapsList = list;
             inflater = LayoutInflater.from(context);
         }
 
         @Override
-        public AgendaRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = inflater.inflate(R.layout.agenda_list_item, parent, false);
-            AgendaRecyclerViewHolder viewHolder = new AgendaRecyclerViewHolder(view);
+        public NewsRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View view = inflater.inflate(R.layout.news_list_item, parent, false);
+            NewsRecyclerViewHolder viewHolder = new NewsRecyclerViewHolder(view);
             return viewHolder;
         }
 
         @Override
-        public void onBindViewHolder(AgendaRecyclerViewHolder holder, int position) {
-            /*if (position == 1)
-                holder.agendaLayout.setBackgroundColor(Color.parseColor("#C9C935"));
-            else if (position == 2)
-                holder.agendaLayout.setBackgroundColor(Color.parseColor("#F9B083"));
-            else if (position == 3)
-                holder.agendaLayout.setBackgroundColor(Color.parseColor("#67C2E1"));*/
+        public void onBindViewHolder(NewsRecyclerViewHolder holder, int position) {
 
             int[] androidColors = getResources().getIntArray(R.array.rainbow);
             int randomAndroidColor = androidColors[new Random().nextInt(androidColors.length)];
 
+            maps = mapsList.get(position);
+
             holder.agendaLayout.setBackgroundColor(randomAndroidColor);
-            holder.tv1.setText(name[position]);
+
+            holder.newsTitle.setText(maps.get("newsTitle"));
+            holder.dateTime.setText(maps.get("newsDate"));
+            holder.newsDesc.setText(maps.get("newsDesc"));
+
             holder.cardView.setOnClickListener(clickListener);
             holder.cardView.setTag(holder);
         }
@@ -189,7 +116,7 @@ public class NewsFeedActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                AgendaRecyclerViewHolder vholder = (AgendaRecyclerViewHolder) v.getTag();
+                NewsRecyclerViewHolder vholder = (NewsRecyclerViewHolder) v.getTag();
                 int position = vholder.getPosition();
                 if (layoutStatus.equals("gone")) {
                     vholder.expandLayout.setVisibility(View.VISIBLE);
@@ -202,14 +129,13 @@ public class NewsFeedActivity extends AppCompatActivity {
                     vholder.minus.setVisibility(View.GONE);
                     layoutStatus = "gone";
                 }
-              //  Toast.makeText(context, "This is position " + position, Toast.LENGTH_LONG).show();
 
             }
         };
 
         @Override
         public int getItemCount() {
-            return name.length;
+            return mapsList.size();
         }
     }
 

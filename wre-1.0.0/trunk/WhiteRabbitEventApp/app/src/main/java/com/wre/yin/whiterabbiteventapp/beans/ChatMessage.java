@@ -1,8 +1,5 @@
 package com.wre.yin.whiterabbiteventapp.beans;
 
-/**
- * Created by himanshusoni on 06/09/15.
- */
 public class ChatMessage {
     private boolean isImage, isMine;
     private String content;

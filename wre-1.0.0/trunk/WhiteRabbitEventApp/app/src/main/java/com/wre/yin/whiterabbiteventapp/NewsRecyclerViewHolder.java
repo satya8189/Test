@@ -5,22 +5,21 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class AgendaRecyclerViewHolder extends RecyclerView.ViewHolder {
+public class NewsRecyclerViewHolder extends RecyclerView.ViewHolder {
 
-    TextView agendaTitle, agendaDesc, agendaTime;
+    TextView newsTitle, dateTime, newsDesc;
     LinearLayout expandLayout,agendaLayout;
     CardView cardView;
     ImageView plus,minus;
 
-    public AgendaRecyclerViewHolder(View itemView) {
+    public NewsRecyclerViewHolder(View itemView) {
         super(itemView);
 
-        agendaTitle = (TextView) itemView.findViewById(R.id.list_title);
-        agendaDesc = (TextView) itemView.findViewById(R.id.expanded_text);
-        agendaTime = (TextView) itemView.findViewById(R.id.time_duration);
+        newsTitle = (TextView) itemView.findViewById(R.id.news_title);
+        dateTime = (TextView) itemView.findViewById(R.id.date_time);
+        newsDesc = (TextView) itemView.findViewById(R.id.news_desc);
         plus = (ImageView) itemView.findViewById(R.id.plus_img);
         minus = (ImageView) itemView.findViewById(R.id.minus_img);
 

@@ -3,7 +3,7 @@
     android:id="@+id/llover"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/errormsg"
+    android:background="@drawable/rectangle_shape_alert_box"
     android:gravity="center_vertical"
     android:orientation="horizontal">
 

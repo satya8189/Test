@@ -35,7 +35,7 @@
                 android:paddingLeft="10dp">
 
                 <TextView
-                    android:id="@+id/list_title"
+                    android:id="@+id/news_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="3dp"
@@ -45,21 +45,16 @@
                     android:textSize="16sp" />
 
 
-
-
-
-                    <TextView
-                        android:id="@+id/time_duration"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="end"
-                        android:layout_weight="1"
-                        android:gravity="end"
-                        android:text="Time"
-                        android:textColor="#fff" />
-                </LinearLayout>
-
-
+                <TextView
+                    android:id="@+id/date_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:text="Time"
+                    android:textColor="#fff" />
+            </LinearLayout>
 
 
             <RelativeLayout
@@ -102,7 +97,7 @@
                 android:background="#fff" />
 
             <TextView
-                android:id="@+id/expanded_text"
+                android:id="@+id/news_desc"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"

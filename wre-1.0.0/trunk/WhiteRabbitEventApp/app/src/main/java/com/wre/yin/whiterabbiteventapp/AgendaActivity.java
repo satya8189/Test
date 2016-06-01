@@ -14,25 +14,23 @@ import android.widget.ExpandableListView;
 import android.widget.TextView;
 
 import com.wre.yin.whiterabbiteventapp.adapters.ExpandableListAdapter;
+import com.wre.yin.whiterabbiteventapp.beans.AgendaBean;
+import com.wre.yin.whiterabbiteventapp.utils.Callback;
+import com.wre.yin.whiterabbiteventapp.utils.Constants;
+import com.wre.yin.whiterabbiteventapp.utils.MyAsyncTask;
+import com.wre.yin.whiterabbiteventapp.utils.Utils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
 
 public class AgendaActivity extends AppCompatActivity {
-    private TextView text;
-
-    ExpandableListAdapter listAdapter;
-    ExpandableListView expListView;
-    List<String> listDataHeader;
-    HashMap<String, List<String>> listDataChild;
-
-
     private RecyclerView recyclerView;
-    private CardView cardView;
     String layoutStatus = "gone";
 
+    private List<HashMap<String,String>> agendaList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,119 +44,44 @@ public class AgendaActivity extends AppCompatActivity {
 
         recyclerView = (RecyclerView) findViewById(R.id.agenda_recycler_view);
 
-
-        RecylerAdapter adapter = new RecylerAdapter(this);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-
-
-
-       /* // get the listview
-        expListView = (ExpandableListView) findViewById(R.id.lvExp);
-        // preparing list data
-        prepareListData();
-
-        listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
-
-        // setting list adapter
-        expListView.setAdapter(listAdapter);
-
-        // Listview Group click listener
-        expListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-
+        new MyAsyncTask(Constants.AGENDA+"?eventId=9", null, AgendaActivity.this, new Callback() {
             @Override
-            public boolean onGroupClick(ExpandableListView parent, View v,
-                                        int groupPosition, long id) {
-                // Toast.makeText(getApplicationContext(),
-                // "Group Clicked " + listDataHeader.get(groupPosition),
-                // Toast.LENGTH_SHORT).show();
-                return false;
-            }
-        });
+            public void onResult(String result) {
+                agendaList=new ArrayList<HashMap<String, String>>();
+                List<AgendaBean> agendaBeanList= Utils.getList(result,AgendaBean.class);
 
-        // Listview Group expanded listener
-        expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+                for(AgendaBean bean:agendaBeanList){
+                    HashMap<String,String> map=new HashMap<String, String>();
+                    map.put("agenTitle",bean.getAgenTitle());
+                    map.put("agenDesc",bean.getAgenDesc());
+                    map.put("agenStartTime",bean.getAgenStartTime());
+                    map.put("agenEndTime",bean.getAgenEndTime());
 
-            @Override
-            public void onGroupExpand(int groupPosition) {
-                Toast.makeText(getApplicationContext(),
-                        listDataHeader.get(groupPosition) + " Expanded",
-                        Toast.LENGTH_SHORT).show();
-            }
-        });
+                    agendaList.add(map);
 
-        // Listview Group collasped listener
-        expListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
+                }
+                RecylerAdapter adapter = new RecylerAdapter(AgendaActivity.this, (ArrayList<HashMap<String, String>>) agendaList);
+                recyclerView.setAdapter(adapter);
+                recyclerView.setHasFixedSize(true);
+                recyclerView.setLayoutManager(new LinearLayoutManager(AgendaActivity.this));
 
-            @Override
-            public void onGroupCollapse(int groupPosition) {
-                Toast.makeText(getApplicationContext(),
-                        listDataHeader.get(groupPosition) + " Collapsed",
-                        Toast.LENGTH_SHORT).show();
 
             }
-        });
+        }).execute();
 
-        // Listview on child click listener
-        expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-
-            @Override
-            public boolean onChildClick(ExpandableListView parent, View v,
-                                        int groupPosition, int childPosition, long id) {
-                // TODO Auto-generated method stub
-                Toast.makeText(
-                        getApplicationContext(),
-                        listDataHeader.get(groupPosition)
-                                + " : "
-                                + listDataChild.get(
-                                listDataHeader.get(groupPosition)).get(
-                                childPosition), Toast.LENGTH_SHORT)
-                        .show();
-                return false;
-            }
-        });
-    }
-
-    *//*
-     * Preparing the list data
-     *//*
-    private void prepareListData() {
-        listDataHeader = new ArrayList<String>();
-        listDataChild = new HashMap<String, List<String>>();
-
-        // Adding child data
-        listDataHeader.add("Top 250");
-        listDataHeader.add("Now Showing");
-        listDataHeader.add("Coming Soon..");
-
-        // Adding child data
-        List<String> top250 = new ArrayList<String>();
-        top250.add("Expandable list view is used to group list data by categories. It has the capability of expanding and collapsing the groups when user touches header.");
-
-
-        List<String> nowShowing = new ArrayList<String>();
-        nowShowing.add("Expandable list view is used to group list data by categories. It has the capability of expanding and collapsing the groups when user touches header.");
-        //  nowShowing.add("Expandable list view is used to group list data by categories. It has the capability of expanding and collapsing the groups when user touches header.");
-
-
-        List<String> comingSoon = new ArrayList<String>();
-        comingSoon.add("Expandable list view is used to group list data by categories. It has the capability of expanding and collapsing the groups when user touches header.");
-
-
-        listDataChild.put(listDataHeader.get(0), top250); // Header, Child data
-        listDataChild.put(listDataHeader.get(1), nowShowing);
-        listDataChild.put(listDataHeader.get(2), comingSoon);*/
     }
 
     private class RecylerAdapter extends RecyclerView.Adapter<AgendaRecyclerViewHolder> {
         LayoutInflater inflater;
         Context context;
-        String[] name = {"Androidwarriors", "Stackoverflow", "Developer Android", "AndroidHive"};
+        List<HashMap<String,String>> mapsList;
+        HashMap<String,String> maps;
 
-        public RecylerAdapter(Context context) {
+        //String[] name = {"Androidwarriors", "Stackoverflow", "Developer Android", "AndroidHive"};
+
+        public RecylerAdapter(Context context,ArrayList<HashMap<String,String>> list) {
             this.context = context;
+            mapsList=list;
             inflater = LayoutInflater.from(context);
         }
 
@@ -171,19 +94,18 @@ public class AgendaActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(AgendaRecyclerViewHolder holder, int position) {
-            /*if(position==1)
-                holder.agendaLayout.setBackgroundColor(Color.parseColor("#67C2E1"));
-            else if(position==2)
-                holder.agendaLayout.setBackgroundColor(Color.parseColor("#F9B083"));
-            else if(position==3)
-                holder.agendaLayout.setBackgroundColor(Color.parseColor("#C9C935"));*/
+
 
             int[] androidColors = getResources().getIntArray(R.array.rainbow);
             int randomAndroidColor = androidColors[new Random().nextInt(androidColors.length)];
 
             holder.agendaLayout.setBackgroundColor(randomAndroidColor);
 
-            holder.tv1.setText(name[position]);
+            maps=mapsList.get(position);
+
+            holder.agendaTitle.setText(maps.get("agenTitle"));
+            holder.agendaDesc.setText(maps.get("agenDesc"));
+            holder.agendaTime.setText(maps.get("agenStartTime")+"-"+maps.get("agenEndTime"));
             holder.cardView.setOnClickListener(clickListener);
             holder.cardView.setTag(holder);
         }
@@ -212,7 +134,7 @@ public class AgendaActivity extends AppCompatActivity {
 
         @Override
         public int getItemCount() {
-            return name.length;
+            return mapsList.size();
         }
     }
 

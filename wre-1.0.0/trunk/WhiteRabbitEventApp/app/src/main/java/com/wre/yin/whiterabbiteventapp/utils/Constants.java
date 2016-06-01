@@ -28,12 +28,18 @@ import java.util.List;
 public class Constants {
 
     //url constants
-    public static String URL = "http://192.168.1.85:8080/Chatting/rest/chat/";
+    public static String URL1 = "http://192.168.1.85:8080/Chatting/rest/chat/";
+
+    public static String URL = "http://183.82.103.156:8080/whiterabbitevent/admin/";
+
 
 
     public static final String IMAGE_DIRECTORY_NAME = "Image File Upload";
     public static final String VIDEO_DIRECTORY_NAME = "Video File Upload";
-    public static final String UPLOAD_IMAGE_VIDEO = URL + "imageUpload";
+    public static final String UPLOAD_IMAGE_VIDEO = URL1 + "imageUpload";
+
+    public static final String AGENDA=URL+"agendoDetails";
+    public static final String NEWS_LIST=URL+"newsList";
 
 
     //Image Gallery file path constansts
@@ -68,7 +74,7 @@ public class Constants {
         final AlertDialog alertD = new AlertDialog.Builder(context).create();
         alertD.requestWindowFeature(Window.FEATURE_NO_TITLE);
         WindowManager.LayoutParams wmlp = alertD.getWindow().getAttributes();
-        wmlp.gravity = Gravity.TOP | Gravity.CENTER_HORIZONTAL;
+        wmlp.gravity = Gravity.CENTER | Gravity.CENTER_HORIZONTAL;
 
 
         LinearLayout llover = (LinearLayout) promptView.findViewById(R.id.llover);
@@ -79,7 +85,7 @@ public class Constants {
             llover.setBackgroundColor(context.getResources().getColor(R.color.successmsg));
         } else {
             matter.setImageResource(R.drawable.cross_red);
-            llover.setBackgroundColor(context.getResources().getColor(R.color.errormsg));
+            llover.setBackgroundResource(R.drawable.rectangle_shape_alert_box);
         }
         alertmsg.setText(text);
         alertD.setView(promptView);

@@ -7,9 +7,11 @@ import org.codehaus.jackson.map.type.TypeFactory;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.security.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 
@@ -78,5 +80,10 @@ public class Utils {
         return proportion * 100;
     }
 
+   /* public static Date getDateFromJson(String dateString) {
+        Timestamp stamp = new Timestamp(dateString);
+        Date date = new Date(stamp.getTime());
+        return date;
+    }*/
 
 }
