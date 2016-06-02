@@ -35,24 +35,17 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_home);
 
         getSupportActionBar().hide();
 
         mDemoSlider = (SliderLayout) findViewById(R.id.slider);
-
         mDemoSlider.setCustomIndicator((PagerIndicator) findViewById(R.id.custom_indicator));
-
         profDetails = (ImageView) findViewById(R.id.profile_details);
-
         proFic = (ImageView) findViewById(R.id.profilepic);
-
         rl1 = (RelativeLayout) findViewById(R.id.rl1);
 
         if (Constants.checkAndRequestPermissions(HomeActivity.this)) ;
-
-
         profDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
