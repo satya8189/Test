@@ -1,5 +1,7 @@
 package com.wre.adminmgmt.bean;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.wre.model.Event;
 
 public class SpeakerBean {
@@ -12,6 +14,9 @@ public class SpeakerBean {
     private String title;
     private String description;
     private String rating;
+    private String type;
+   private String fileName;
+
     
 	public Long getSpeakerId() {
 		return speakerId;
@@ -61,14 +66,25 @@ public class SpeakerBean {
 	public void setRating(String rating) {
 		this.rating = rating;
 	}
-	@Override
-	public String toString() {
-		return "SpeakerBean [speakerId=" + speakerId + ", eventId=" + eventId
-				+ ", eventName=" + eventName + ", speakerName=" + speakerName
-				+ ", location=" + location + ", title=" + title + ", description="
-				+ description + ", rating=" + rating + "]";
-	}
-    
 	
-    
+	
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public String getFileName() {
+		return fileName;
+	}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+	
+
 }

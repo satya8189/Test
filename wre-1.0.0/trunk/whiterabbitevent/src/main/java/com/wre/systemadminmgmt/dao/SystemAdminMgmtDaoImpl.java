@@ -94,12 +94,17 @@ public List<EventServices> getEventServicesList(Long eventId) {
 	return (List<EventServices>)criteria.list();
 }
 
+
+
 @Override
 public Participants getParticipantDetails(ParticipantBean participantBean) {
 	Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Participants.class);
 	criteria.add(Restrictions.eq("phone",participantBean.getPhoneNumber()));
 	return (Participants)criteria.uniqueResult();
 }
+
+
+
 
 
 

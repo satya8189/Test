@@ -20,7 +20,7 @@ public interface AdminMgmtDao  extends GenericDao<Object>{
 
 public List<Event> getEventList(Long userId);
 
-public List<EventServices> getEventDetails(String eventId);
+public List<EventServices> getEventDetails(Long eventId);
 
 public List<Agenda> getAgendoDetails(Long eventId);
 

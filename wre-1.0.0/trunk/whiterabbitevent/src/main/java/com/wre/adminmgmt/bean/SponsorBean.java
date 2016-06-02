@@ -7,6 +7,7 @@ public class SponsorBean {
     private String eventName;
     private String sponcorDesc;
     private String sponcorName;
+    private String fileName;
 	public Long getSponcorId() {
 		return sponcorId;
 	}
@@ -39,11 +40,12 @@ public class SponsorBean {
 	public void setEventName(String eventName) {
 		this.eventName = eventName;
 	}
-	@Override
-	public String toString() {
-		return "SponsorBean [sponcorId=" + sponcorId + ", eventId=" + eventId
-				+ ",Event name="+ eventName +", sponcorDesc=" + sponcorDesc + ", sponcorName="
-				+ sponcorName + "]";
+	public String getFileName() {
+		return fileName;
 	}
-    
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+	
+
 }

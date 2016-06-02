@@ -45,9 +45,9 @@ AdminMgmtDao {
 
 
 //eventServicesList
-	public List<EventServices> getEventDetails(String eventId) {
+	public List<EventServices> getEventDetails(Long eventId) {
 		Criteria criteria=sessionFactory.getCurrentSession().createCriteria(EventServices.class);
-		
+		criteria.add(Restrictions.eq("event.eventId",eventId));
 		criteria.setFetchMode("event", FetchMode.EAGER);
 		criteria.setFetchMode("services", FetchMode.EAGER);
 		List<EventServices> eventServicesList=criteria.list();

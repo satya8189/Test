@@ -16,8 +16,15 @@ public class GalaryBean
     private String type;
     private Date createdDate;
     private Long eventId;
+    private String url;
     
     
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
+	}
 	public Long getEventId() {
 		return eventId;
 	}

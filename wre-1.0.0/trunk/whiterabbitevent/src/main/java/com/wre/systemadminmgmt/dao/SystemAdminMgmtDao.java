@@ -33,6 +33,7 @@ public interface SystemAdminMgmtDao  extends GenericDao<Object>{
 
 	List<EventServices> getEventServicesList(Long eventId);
 
+	
 	Participants getParticipantDetails(ParticipantBean participantBean);
 
 	

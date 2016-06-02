@@ -23,7 +23,7 @@ public 	void  saveEvent(EventBean eventBean);
 
 public void updateEvent(EventBean eventBean);
 
-public List<EventBean> getEventDetailsList(String eventId);
+public List<EventBean> getEventDetailsList(Long eventId);
 
 public List<AgendaBean> getAgendoDetails(Long eventId);
 
@@ -66,15 +66,13 @@ public QuestionBean questionEdit(Long questionId);
 
 public List<SponsorBean> getSponsorsList(Long eventId);
 
-public void createSponsor(SponsorBean sponsorBean);
-
 public SponsorBean getSponsorForEdit(Long sponcorId);
 
 public void updateSponsor(SponsorBean spBean);
 
 public List<SpeakerBean> getSpeakersList(Long eventId);
 
-public void createSpeaker(SpeakerBean spk);
+public void createSpeaker(MultipartFile file,Long eventId,String type,String speakerName, String location,String title,String description,String rating);
 
 public SpeakerBean getSpeakerBySpeakerId(Long speakerId);
 
@@ -85,6 +83,11 @@ public void updateQuestionDetails(QuestionBean questionBean);
 public void uploadVenuLayout(MultipartFile file, Long eventId, String type);
 
 public List<ChatBean> getUser(String mobno);
+
+public void uploadEventImage(MultipartFile file, Long eventId, String type);
+
+public void createSponsor(MultipartFile file, Long eventId, String type,
+		String sponcorDesc, String speakerName);
 
 
 

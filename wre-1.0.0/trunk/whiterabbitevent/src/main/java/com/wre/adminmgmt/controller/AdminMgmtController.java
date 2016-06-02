@@ -1,9 +1,11 @@
 package com.wre.adminmgmt.controller;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.List;
 
 import net.minidev.json.JSONArray;
@@ -38,6 +40,7 @@ import com.wre.adminmgmt.bean.QuestionBean;
 import com.wre.adminmgmt.bean.SpeakerBean;
 import com.wre.adminmgmt.bean.SponsorBean;
 import com.wre.adminmgmt.service.AdminMgmtService;
+import com.wre.common.util.WREConstants;
 
 @Controller
 public class AdminMgmtController {
@@ -251,7 +254,7 @@ public class AdminMgmtController {
 	// event details
 	@RequestMapping(value = "admin/eventdetailsList", method = RequestMethod.GET)
 	public @ResponseBody
-	List<EventBean> getEventDetails(@RequestParam("eventId") String eventId) {
+	List<EventBean> getEventDetails(@RequestParam("eventId") Long eventId) {
 		List<EventBean> eventList = adminMgmtService
 				.getEventDetailsList(eventId);
 		return eventList;
@@ -516,13 +519,13 @@ public class AdminMgmtController {
 	/* saveSponsor */// admin/sponsorSave
 	@RequestMapping(value = "admin/sponsorSave", method = RequestMethod.POST)
 	public @ResponseBody
-	void saveSponsor(@RequestBody SponsorBean sponsorBean) {
-		log.info("in side sponsorSave method");
-		log.info("checking......" + sponsorBean.getSponcorName() + "=="
-				+ sponsorBean.getEventId() + "--"
-				+ sponsorBean.getSponcorDesc());
+	void saveSponsor(@RequestParam(value = "file", required = true) MultipartFile file,
+			@RequestParam("eventId") Long eventId,
+			 @RequestParam("type") String type, @RequestParam("sponcorDesc") String sponcorDesc ,
+			 @RequestParam("sponcorName") String sponcorName)  {
 
-		adminMgmtService.createSponsor(sponsorBean);
+        log.info(" in side sponsorSave method");
+		adminMgmtService.createSponsor(file,eventId,type,sponcorDesc,sponcorName);
 	}
 
 	// admin/editSponsor
@@ -585,10 +588,17 @@ public class AdminMgmtController {
 
 	@RequestMapping(value = "admin/speakerSave", method = RequestMethod.POST)
 	public @ResponseBody
-	void saveSpeaker(@RequestBody SpeakerBean spk) {
+	void saveSpeaker(@RequestParam(value = "file", required = true) MultipartFile file,
+			@RequestParam("eventId") Long eventId,	
+			@RequestParam("type") String type,
+			@RequestParam("speakerName") String speakerName, 
+	        @RequestParam("location") String location,
+	        @RequestParam("title") String title,
+	        @RequestParam("description") String description,
+	        @RequestParam("rating") String rating){
 		log.info("in side speakerSave method");
-		log.info("checking......" + spk.getDescription());
-		adminMgmtService.createSpeaker(spk);
+		
+		adminMgmtService.createSpeaker(file,eventId,type,speakerName,location,title,description,rating);
 	}
 
 	// admin/speakerEdit
@@ -696,6 +706,36 @@ answer.append(rLine);
 e.printStackTrace();
 }
 return answer;
+}
+//admin/uploadEventImage
+
+@RequestMapping(value = "admin/uploadEventImage", method = RequestMethod.POST)
+public @ResponseBody
+void uploadEventImage(
+		@RequestParam(value = "file", required = true) MultipartFile file,
+		@RequestParam("eventId") Long eventId,
+		@RequestParam("type") String type) {
+	log.info("in side uploadVenu method");
+	log.info("id--" + eventId);
+	log.info("file name---" + file.getOriginalFilename());
+	adminMgmtService.uploadEventImage(file, eventId, type);
+}
+
+@RequestMapping(value="admin/getEventImages",method = RequestMethod.GET)
+public @ResponseBody List<GalaryBean> getEventImages(@RequestParam("eventId") Long eventId,@RequestParam("type") String type){
+	List<GalaryBean> eventImages=new ArrayList<GalaryBean>();
+	//String path="/Resources/wre/"+eventId+"/"+type;
+	String path=WREConstants.RESOURCE_PATH+eventId+"/"+type;
+	File folder = new File(path);
+	File[] listOfFiles = folder.listFiles();
+	for (File file : listOfFiles) {
+		GalaryBean galaryBean = new GalaryBean();
+		galaryBean.setName(file.getName());
+		galaryBean.setUrl("/Resources/wre/"+eventId+"/"+type+"/"+file.getName());
+		eventImages.add(galaryBean);
+	}
+	log.info(eventImages.size());
+	return eventImages;
 }
 
 }

@@ -277,13 +277,11 @@ public class SystemAdminMgmtServiceImpl implements SystemAdminMgmtService{
 	}
 
 
+	
+	
 	@Override
-	public ParticipantBean getParticipantDetails(ParticipantBean participantBeanObject) {
-		Participants participantObj = systemAdminMgmtDaoImpl.getParticipantDetails(participantBeanObject);
-		ParticipantBean participantBean=null;
-		
-		if(participantObj!=null){
-			participantBean=new ParticipantBean();
+	public ParticipantBean getParticipantDetails(ParticipantBean participantBean) {
+		Participants participantObj = systemAdminMgmtDaoImpl.getParticipantDetails(participantBean);
 		participantBean.setParticipantId(participantObj.getParticipantId());
 		participantBean.setFirstName(participantObj.getFirstName());
 		participantBean.setLastName(participantObj.getLastName());
@@ -292,15 +290,7 @@ public class SystemAdminMgmtServiceImpl implements SystemAdminMgmtService{
 		participantBean.setPhoneNumber(participantObj.getPhone());
 		participantBean.setStatus(participantObj.getStatus());
 		participantBean.setRegisterId(participantObj.getRegId());
-		
-		}
 		return participantBean;
-		
 	}
-
-	
-	
-	
-
 	
 }

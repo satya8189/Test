@@ -19,9 +19,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.wre.adminmgmt.bean.EventBean;
 import com.wre.adminmgmt.bean.ServicesBean;
+import com.wre.adminmgmt.service.AdminMgmtService;
 import com.wre.common.util.WREConstants;
 import com.wre.common.util.WREUtil;
-import com.wre.model.EventServices;
 import com.wre.systemadminmgmt.bean.ClientBean;
 import com.wre.systemadminmgmt.bean.EventServicesBean;
 import com.wre.systemadminmgmt.bean.ParticipantBean;
@@ -33,6 +33,10 @@ public class SystemAdminMgmtController{
 	@Autowired
 	@Qualifier(value="systemAdminMgmtService")
 	private SystemAdminMgmtService systemAdminMgmtService;
+	
+	@Autowired
+	@Qualifier(value = "AdminMgmtService")
+	private AdminMgmtService adminMgmtService;
    
 	
 	private static final Log log = LogFactory.getLog(SystemAdminMgmtController.class);
@@ -215,8 +219,25 @@ public class SystemAdminMgmtController{
 				return systemAdminMgmtService.getEventServicesList(eventId);
 			}
 			
+			//systemadmin/eventView
+			
+			@RequestMapping(value="systemadmin/eventView")
+			public String eventView(){
+				log.info("we are in systemAdmin eventView");
+				return "systemadmin/eventView";
+				
+			}
+			
+			//systemadmin/imageUpload
+			
+			@RequestMapping(value="systemadmin/imageUpload")
+			public String imageUpload(){
+				log.info("we are in systemAdmin imageUpload");
+				return "systemadmin/imageUpload";
+				
+			}
 			//get participants Details
-			@RequestMapping(value="/participantlogin",method=RequestMethod.POST)
+			@RequestMapping(value="systemadmin/getParticipantDetails",method=RequestMethod.GET)
 			public @ResponseBody ParticipantBean getParticipantDetails(@RequestBody ParticipantBean participantBean){
 				return systemAdminMgmtService.getParticipantDetails(participantBean);
 				
