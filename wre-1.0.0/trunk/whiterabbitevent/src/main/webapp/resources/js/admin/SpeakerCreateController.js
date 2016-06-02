@@ -1,7 +1,7 @@
 var SpeakerCreateController=function($scope, $http, $routeParams,$location,ngNotifier){
-	
+	$scope.speaker={};
 	$scope.$on("$routeChangeSuccess", function(){
-		$scope.eventId=$routeParams.eventId;
+		$scope.speaker.eventId=$routeParams.eventId;
 			//alert("working in speaker create..."+$routeParams.eventId);
 		
 	});
@@ -12,19 +12,39 @@ var SpeakerCreateController=function($scope, $http, $routeParams,$location,ngNot
 	};
 	
 	 $scope.saveSpeaker= function(speaker){
-			//$scope.userId=userId;
-			$scope.speaker.eventId=$routeParams.eventId;
-			
-			//alert("speakerdata===="+speaker.eventId+"=="+speaker.speakerName+"==="+speaker.desc);
-			
-			$http.post('admin/speakerSave',speaker).success(function() {
-					$location.path("/speakerProfileView/"+speaker.eventId);
-				}).success(function(){
-					 ngNotifier.notify("speaker created successfully.!");
-				}).error(function() {
-					ngNotifier.error("error in adding speaker");
-			});
-		};
-	
-	
+		 alert("dfdsf");
+		 var fd = new FormData();
+			//alert("video");
+
+			  // Take the first selected file
+			    fd.append("file", file.files[0]);
+			   
+
+			    fd.append("eventId",speaker.eventId);
+			    fd.append("type","speaker");
+			    fd.append("speakerName",speaker.speakerName);
+			    fd.append("location",speaker.location);
+			    
+			    fd.append("title",speaker.title);
+			    fd.append("description",speaker.description);
+			    
+			    fd.append("rating",speaker.rating);
+			    
+			    alert("data--"+fd);
+			    $http.post('admin/speakerSave',fd, {
+			     withCredentials : true,
+			     headers : {
+			      'Content-Type' : undefined
+			     },
+			     transformRequest : angular.identity
+			    }).success(function(data) {
+			    	//alert("video success");
+			    	ngNotifier.notify("Created  Successfully !");
+			    	$location.path("/speakerProfileView/"+speaker.eventId);
+			    }).error(function(data) {
+			    // alert("dsfsfds");
+			    });
+		
+	 };
+
 };

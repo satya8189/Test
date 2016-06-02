@@ -18,6 +18,12 @@ var InviteListController = function($scope,$routeParams,$http, $location) {
 		
 		 });
 		  
+		  $scope.cancelInviteList = function(eventId){
+				
+				$location.path("/invite/"+eventId);
+				
+			};
+		  
 		
 	});
 		

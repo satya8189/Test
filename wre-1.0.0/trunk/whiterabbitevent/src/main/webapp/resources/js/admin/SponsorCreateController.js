@@ -1,32 +1,52 @@
 var SponsorCreateController = function($scope, $http, $location, $routeParams,ngNotifier) {
+	$scope.sponsor={};
 			    
 		$scope.$on("$routeChangeSuccess", function() {
 		
 			//alert("navigated...");
 				
-			$scope.eventId=$routeParams.eventId;
+			$scope.sponsor.eventId=$routeParams.eventId;
 		
 			//alert("event ID--------"+$routeParams.eventId);
 		
 	});
 
 		
+		
 		$scope.saveSponsor= function(sponsor){
-			//$scope.userId=userId;
-			$scope.sponsor.eventId=$routeParams.eventId;
+			alert("save sponsor");
 			
-			//alert("sponsordata===="+sponsor.eventId+"=="+sponsor.sponcorName+"==="+sponsor.sponcorDesc);
+			var fd = new FormData();
+			//alert("video");
+
+			  // Take the first selected file
+			    fd.append("file", file.files[0]);
+			    fd.append("eventId",sponsor.eventId);
+			    fd.append("type","sponsor");
+			    fd.append("sponcorDesc",sponsor.sponcorDesc);
+			    fd.append("sponcorName",sponsor.sponcorName);
+			    
+			    alert("data--"+fd);
+			    $http.post('admin/sponsorSave',fd, {
+			     withCredentials : true,
+			     headers : {
+			      'Content-Type' : undefined
+			     },
+			     transformRequest : angular.identity
+			    }).success(function(data) {
+			    	//alert("video success");
+			    	ngNotifier.notify("Created  Successfully !");
+			    	$location.path("/sponsorPageView/"+sponsor.eventId);
+			    }).error(function(data) {
+			    // alert("dsfsfds");
+			    });
+		
+
+	};
+
 			
-			$http.post('admin/sponsorSave',sponsor).success(function() {
-					
-				}).success(function() {
-					$location.path("/sponsorPageView/"+sponsor.eventId);
-						ngNotifier.notify("sponsor saved successfully....!");
-			}).error(function() {
-				//alert("error in ading sponsor");
-				ngNotifier.error("sponsor saving error....!");
-			});
-		};
+			
+
 		
 		$scope.cancelCreateSponcor= function(eventId){
 			$scope.eventId=eventId;
@@ -34,7 +54,7 @@ var SponsorCreateController = function($scope, $http, $location, $routeParams,ng
 			$location.path("/sponsorPageView/"+eventId);
 		};
 
-};	
+}
 
 
 	

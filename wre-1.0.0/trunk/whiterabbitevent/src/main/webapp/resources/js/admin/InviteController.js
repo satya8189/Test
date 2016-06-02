@@ -30,7 +30,8 @@ var InviteController = function($scope, $http, $location, $routeParams,ngNotifie
 		};
 
 	$scope.cancelInviteView = function(eventId){
-		alert("cancelInviteView---"+eventId);
+		
+		$location.path("/eventViewDetails/"+eventId);
 		
 	};
 		
