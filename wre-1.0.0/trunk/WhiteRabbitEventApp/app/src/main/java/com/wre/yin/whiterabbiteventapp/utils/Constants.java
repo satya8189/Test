@@ -31,6 +31,8 @@ public class Constants {
     public static String URL1 = "http://192.168.1.85:8080/Chatting/rest/chat/";
 
     public static String URL = "http://183.82.103.156:8080/whiterabbitevent/admin/";
+    public static String PARTICIPENT_URL = "http://183.82.103.156:8080/whiterabbitevent/";
+
 
 
 
@@ -40,6 +42,7 @@ public class Constants {
 
     public static final String AGENDA=URL+"agendoDetails";
     public static final String NEWS_LIST=URL+"newsList";
+    public static final String PARTICIPENT_LOGIN=PARTICIPENT_URL+"participantlogin";
 
 
     //Image Gallery file path constansts

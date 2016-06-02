@@ -7,6 +7,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+
+import com.wre.yin.whiterabbiteventapp.beans.ParticipantBean;
+import com.wre.yin.whiterabbiteventapp.utils.Callback;
+import com.wre.yin.whiterabbiteventapp.utils.Constants;
+import com.wre.yin.whiterabbiteventapp.utils.MyAsyncTask;
+import com.wre.yin.whiterabbiteventapp.utils.Utils;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -30,12 +37,30 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String mobileNum=employeeId.getText().toString();
+                if(Utils.checkMobile(mobileNum)) {
 
-                Intent otpAct = new Intent(LoginActivity.this, OTPActivity.class);
-                editor.putString("mobile",mobileNum);
+                    editor.putString("mobile",mobileNum);
+                    ParticipantBean participantBean = new ParticipantBean();
+                    participantBean.setPhoneNumber(mobileNum);
 
-                startActivity(otpAct);
-                finish();
+                    new MyAsyncTask(Constants.PARTICIPENT_LOGIN, Utils.getJson(participantBean), LoginActivity.this, new Callback() {
+                        @Override
+                        public void onResult(String result) {
+                            ParticipantBean pBean=Utils.getObject(result,ParticipantBean.class);
+                            if(pBean.getParticipantId()!=null){
+                                editor.putString("partName",pBean.getFirstName());
+                                Intent otpAct = new Intent(LoginActivity.this, OTPActivity.class);
+                                startActivity(otpAct);
+                                finish();
+                            }
+                        }
+                    }).execute();
+                }else{
+                    employeeId.setError("Please enter a valid mobile number");
+                }
+
+
+
             }
         });
 
