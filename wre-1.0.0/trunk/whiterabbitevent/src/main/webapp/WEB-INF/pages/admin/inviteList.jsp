@@ -14,6 +14,9 @@ margin-bottom:0px !important;
 <toaster-container></toaster-container>
 
 <div class="container">
+<a ng-click="cancelInviteList()">
+		 <i class="glyphicon glyphicon-chevron-left"></i>
+	</a>
 	<form>
 	
 	<div class="header-none">Invite List</div>

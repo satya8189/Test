@@ -57,6 +57,11 @@ margin-bottom:0px !important;
 					<td>
 					<a ng-click="navigatetoEventEdit(event.eventId)"title="eventEdit"> <span
 							class="glyphicon glyphicon-pencil margin-2 icons"> </span></a>
+							
+							<a ng-click="eventView(event.eventId)"title="eventViewDetails">
+							<i class="fa fa-eye-slash icons"> </i>
+				</a>
+				
 					
 					</td>
 				</tr>

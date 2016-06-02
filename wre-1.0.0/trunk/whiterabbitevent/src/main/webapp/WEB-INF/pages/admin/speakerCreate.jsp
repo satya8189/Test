@@ -12,7 +12,7 @@
 	<div class="panel">
 		<div class="panel-heading text-center font-size-20 padding-5">Create Speaker</div>
 		<div class="panel-body text-center">
-			<form name="spCreateForm" ng-submit="spCreateForm.$valid && saveSpeaker(speaker)" novalidate>
+			<form name="spCreateForm" ng-submit="spCreateForm.$valid && saveSpeaker(speaker)"  enctype="multipart/form-data">
 				<div class="row">
 					
 					<div class="col-md-12">
@@ -61,6 +61,17 @@
 					</div>
 				</div>
 				<div>&nbsp;</div>
+				
+				
+				
+				<div class="col-md-6">
+					<div class="form-group col-md-6" id="uploadDiv">
+						<label class="flot-left">Upload File </label> <input type="file"
+							class="form-control form-group" name="file" id="file"
+							onchange="angular.element(this).scope().setFiles(this)">
+						
+					</div>
+				</div>
 
 				<button type="submit" class="btn button  save margin-2">Save</button>
 

@@ -35,7 +35,9 @@
     <script src="resources/js/systemadmin/ClientEventViewController.js"></script>
      <script src="resources/js/systemadmin/ClientEventCreateController.js"></script>
      <script src="resources/js/systemadmin/ClientEventEditController.js"></script>
-     
+   <!--   EventViewController -->
+    <script src="resources/js/systemadmin/EventViewController.js"></script>
+     <script src="resources/js/systemadmin/ImageUploadController.js"></script>
       
   	<script type="text/javascript" src="resources/js/multiselect/select2.js"></script>
 	<script type="text/javascript"  src="resources/js/multiselect/select2.min.js"></script>

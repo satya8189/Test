@@ -11,7 +11,7 @@
 	<div class="panel">
 		<div class="panel-heading text-center font-size-20 padding-5">Create Sponsor</div>
 		<div class="panel-body text-center">
-			<form name="orgCreateForm"	ng-submit="saveSponsor(sponsor)" novalidate>
+			<form name="orgCreateForm"	ng-submit="saveSponsor(sponsor)"  enctype="multipart/form-data">
 				<div class="row">
 					<div class="col-md-12">
 						<div class=" form-group col-md-6">
@@ -31,6 +31,18 @@
                          		<span ng-if="orgCreateForm.$submitted" ng-messages="orgCreateForm.sponcorDesc.$error" ng-messages-include="errors">
 						</div>
 					</div>
+					
+					
+
+				<div class="col-md-6">
+					<div class="form-group col-md-6" id="uploadDiv">
+						<label class="flot-left">Upload File </label> <input type="file"
+							class="form-control form-group" name="file" id="file"
+							onchange="angular.element(this).scope().setFiles(this)">
+						
+					</div>
+				</div>
+					
 				</div>
 				<div>&nbsp;</div>
 
