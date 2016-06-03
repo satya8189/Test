@@ -140,7 +140,7 @@ public class SystemAdminMgmtServiceImpl implements SystemAdminMgmtService{
 	}
 
 
-	public void saveEvent(EventBean eventBean) {
+	public EventBean saveEvent(EventBean eventBean) {
 		Client client=null;
 		User userObj =null;
 		client=new Client();
@@ -176,10 +176,8 @@ public class SystemAdminMgmtServiceImpl implements SystemAdminMgmtService{
 		eventObj.setEventDate(eventBean.getEventDate());
 		eventObj.setUser(userObj);
 		eventObj.setClient(client);
-		systemAdminMgmtDaoImpl.save(eventObj);
-		
-		
-		
+		Long eventId=(Long)systemAdminMgmtDaoImpl.save(eventObj);
+		 eventBean.setEventId(eventId);
 		for(String serid:eventBean.getServices()){
 			
 			Services service=new Services();
@@ -192,6 +190,7 @@ public class SystemAdminMgmtServiceImpl implements SystemAdminMgmtService{
 			systemAdminMgmtDaoImpl.save(eventServices);
 			
 		}
+		return eventBean;
 	}
 
 
