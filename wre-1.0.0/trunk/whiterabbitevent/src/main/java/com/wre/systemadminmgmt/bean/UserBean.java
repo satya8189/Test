@@ -1,9 +1,11 @@
 package com.wre.systemadminmgmt.bean;
 
+import java.io.Serializable;
+
 import com.wre.model.AppIdentifier;
 import com.wre.model.Client;
 
-public class UserBean 
+public class UserBean  implements Serializable
 {
 	private Long userId;
     private String firstName;
