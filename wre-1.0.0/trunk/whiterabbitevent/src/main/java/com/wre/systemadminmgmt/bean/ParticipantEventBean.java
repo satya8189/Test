@@ -1,12 +1,22 @@
 package com.wre.systemadminmgmt.bean;
 
+import java.util.Date;
+
 public class ParticipantEventBean {
 	private Long participateEventId ;
 	private String status ;
 	private Long eventId;
 	private Long participateId;
 	private String eventname ;
+	private Date eventDate;
 	
+	
+	public Date getEventDate() {
+		return eventDate;
+	}
+	public void setEventDate(Date eventDate) {
+		this.eventDate = eventDate;
+	}
 	public String getEventname() {
 		return eventname;
 	}
