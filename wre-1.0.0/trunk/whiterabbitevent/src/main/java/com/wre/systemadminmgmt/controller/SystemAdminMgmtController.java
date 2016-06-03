@@ -1,4 +1,8 @@
 package com.wre.systemadminmgmt.controller;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -14,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -182,10 +187,36 @@ public class SystemAdminMgmtController{
 			@RequestMapping(value="systemadmin/saveEvent",method=RequestMethod.POST)
 			public @ResponseBody EventBean saveEvent(@RequestBody EventBean eventBean){
 				log.info("we are in save method of systemadminClient ");
-				systemAdminMgmtService.saveEvent(eventBean);
+				eventBean=systemAdminMgmtService.saveEvent(eventBean);
 				return eventBean;
 				
 			}
+			
+			
+	@RequestMapping(value = "systemadmin/uploadEventHomeLogo", method = RequestMethod.POST)
+	public @ResponseBody
+	void uploadPracticeLogo(
+			@RequestParam(value = "file", required = true) MultipartFile file,
+			@RequestParam("eventId") Long eventId,
+			@RequestParam("type") String type) {
+
+		try {
+			byte[] bytes = file.getBytes();
+			File dir = new File(WREConstants.RESOURCE_PATH + File.separator
+					+ eventId + File.separator + type);
+			if (!dir.exists())
+				dir.mkdirs();
+			File serverFile = new File(dir.getAbsolutePath() + File.separator
+					+ WREConstants.EVENT_HOME_LOGO);
+			BufferedOutputStream stream = new BufferedOutputStream(
+					new FileOutputStream(serverFile));
+			stream.write(bytes);
+			stream.close();
+		} catch (IOException e) {
+			log.error(e);
+		}
+	}
+			
 			
 			@RequestMapping(value="systemadmin/servicesList",method=RequestMethod.GET)
 			public  @ResponseBody List<ServicesBean> getServicesList(){
@@ -250,11 +281,12 @@ public class SystemAdminMgmtController{
 			}
 			
 			//get participantEventServicesList
-			//get participants Details
+			
 			@RequestMapping(value="/participantlogin",method=RequestMethod.POST)
 			public @ResponseBody ParticipantBean participantLogin(@RequestBody ParticipantBean participantBean){
 				return systemAdminMgmtService.getParticipantDetails(participantBean);
 				
 			}
+			
 			
 }
