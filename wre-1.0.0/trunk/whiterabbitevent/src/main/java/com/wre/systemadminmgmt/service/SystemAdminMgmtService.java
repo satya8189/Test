@@ -23,7 +23,7 @@ public interface SystemAdminMgmtService {
 
 	List<UserBean> getUsersList(Long clientId);
 
-	void saveEvent(EventBean eventBean);
+	EventBean saveEvent(EventBean eventBean);
 
 	List<ServicesBean> getServicesList();
 
