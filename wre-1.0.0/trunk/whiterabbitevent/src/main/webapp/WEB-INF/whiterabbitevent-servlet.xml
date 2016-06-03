@@ -67,6 +67,7 @@
 			<value>com.wre.model.SurveyQuestion</value>
 			<value>com.wre.model.SurveyQuestionAnswer</value>
 			<value>com.wre.model.User</value>
+			<value>com.wre.model.Rating</value>
 			
 	
 
