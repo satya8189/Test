@@ -16,6 +16,7 @@ import com.wre.common.util.WREUtil;
 import com.wre.model.AppIdentifier;
 import com.wre.model.Client;
 import com.wre.model.Event;
+import com.wre.model.EventParticipant;
 import com.wre.model.EventServices;
 import com.wre.model.Participants;
 import com.wre.model.Services;
@@ -23,6 +24,7 @@ import com.wre.model.User;
 import com.wre.systemadminmgmt.bean.ClientBean;
 import com.wre.systemadminmgmt.bean.EventServicesBean;
 import com.wre.systemadminmgmt.bean.ParticipantBean;
+import com.wre.systemadminmgmt.bean.ParticipantEventBean;
 import com.wre.systemadminmgmt.bean.UserBean;
 import com.wre.systemadminmgmt.dao.SystemAdminMgmtDao;
 
@@ -280,8 +282,10 @@ public class SystemAdminMgmtServiceImpl implements SystemAdminMgmtService{
 	
 	
 	@Override
-	public ParticipantBean getParticipantDetails(ParticipantBean participantBean) {
-		Participants participantObj = systemAdminMgmtDaoImpl.getParticipantDetails(participantBean);
+	public ParticipantBean getParticipantDetails(ParticipantBean participantBeanObj) {
+		Participants participantObj = systemAdminMgmtDaoImpl.getParticipantDetails(participantBeanObj);
+		ParticipantBean participantBean = new ParticipantBean();
+		if(participantObj!=null){
 		participantBean.setParticipantId(participantObj.getParticipantId());
 		participantBean.setFirstName(participantObj.getFirstName());
 		participantBean.setLastName(participantObj.getLastName());
@@ -290,7 +294,25 @@ public class SystemAdminMgmtServiceImpl implements SystemAdminMgmtService{
 		participantBean.setPhoneNumber(participantObj.getPhone());
 		participantBean.setStatus(participantObj.getStatus());
 		participantBean.setRegisterId(participantObj.getRegId());
+		}
 		return participantBean;
+	
+	}
+
+
+	@Override
+	public List<ParticipantEventBean> getParticipantEventList(Long participantId) {
+		List<EventParticipant> eventParticipants = systemAdminMgmtDaoImpl.getParticipantEventList(participantId);
+		List<ParticipantEventBean> participantEventBeans = new ArrayList<ParticipantEventBean>();
+		for(EventParticipant eventParticipant :eventParticipants){
+			ParticipantEventBean participantEventBean = new ParticipantEventBean();
+			participantEventBean.setEventId(eventParticipant.getEvent().getEventId());
+			participantEventBean.setEventname(eventParticipant.getEvent().getEventName());
+			participantEventBean.setParticipateId(eventParticipant.getParticipants().getParticipantId());
+			participantEventBean.setStatus(eventParticipant.getStatus());
+			participantEventBeans.add(participantEventBean);
+		}
+		return participantEventBeans;
 	}
 	
 }

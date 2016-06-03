@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import com.wre.common.dao.GenericDaoImpl;
 import com.wre.model.Client;
 import com.wre.model.Event;
+import com.wre.model.EventParticipant;
 import com.wre.model.EventServices;
 import com.wre.model.Participants;
 import com.wre.model.Services;
@@ -101,6 +102,15 @@ public Participants getParticipantDetails(ParticipantBean participantBean) {
 	Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Participants.class);
 	criteria.add(Restrictions.eq("phone",participantBean.getPhoneNumber()));
 	return (Participants)criteria.uniqueResult();
+}
+
+@Override
+public List<EventParticipant> getParticipantEventList(Long participantId) {
+	Criteria criteria = sessionFactory.getCurrentSession().createCriteria(EventParticipant.class);
+	criteria.add(Restrictions.eq("participants.participantId", participantId));
+	criteria.setFetchMode("event", FetchMode.EAGER);
+	criteria.setFetchMode("participants", FetchMode.EAGER);
+	return (List<EventParticipant>)criteria.list();
 }
 
 

@@ -8,6 +8,7 @@ import com.wre.model.EventServices;
 import com.wre.systemadminmgmt.bean.ClientBean;
 import com.wre.systemadminmgmt.bean.EventServicesBean;
 import com.wre.systemadminmgmt.bean.ParticipantBean;
+import com.wre.systemadminmgmt.bean.ParticipantEventBean;
 import com.wre.systemadminmgmt.bean.UserBean;
 
 public interface SystemAdminMgmtService {
@@ -34,6 +35,8 @@ public interface SystemAdminMgmtService {
 	List<EventServicesBean> getEventServicesList(Long eventId);
 
 	ParticipantBean getParticipantDetails(ParticipantBean participantBean);
+
+	List<ParticipantEventBean> getParticipantEventList(Long participantId);
 
 	
 

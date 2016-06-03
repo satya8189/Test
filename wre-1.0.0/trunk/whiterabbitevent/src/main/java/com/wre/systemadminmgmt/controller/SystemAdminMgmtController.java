@@ -25,6 +25,7 @@ import com.wre.common.util.WREUtil;
 import com.wre.systemadminmgmt.bean.ClientBean;
 import com.wre.systemadminmgmt.bean.EventServicesBean;
 import com.wre.systemadminmgmt.bean.ParticipantBean;
+import com.wre.systemadminmgmt.bean.ParticipantEventBean;
 import com.wre.systemadminmgmt.bean.UserBean;
 import com.wre.systemadminmgmt.service.SystemAdminMgmtService;
 @Controller
@@ -237,11 +238,17 @@ public class SystemAdminMgmtController{
 				
 			}
 			//get participants Details
-			@RequestMapping(value="systemadmin/getParticipantDetails",method=RequestMethod.GET)
+			@RequestMapping(value="systemadmin/getParticipantDetails",method=RequestMethod.POST)
 			public @ResponseBody ParticipantBean getParticipantDetails(@RequestBody ParticipantBean participantBean){
 				return systemAdminMgmtService.getParticipantDetails(participantBean);
 				
 			}
+			//get participantsEventList 
+			@RequestMapping(value="systemadmin/getParticipantEventList",method=RequestMethod.GET)
+			public @ResponseBody List<ParticipantEventBean> getParticipantEventList(@RequestParam("participantId") Long participantId){
+				return systemAdminMgmtService.getParticipantEventList(participantId);
+			}
 			
+			//get participantEventServicesList
 			
 }

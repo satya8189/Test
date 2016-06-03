@@ -5,6 +5,7 @@ import java.util.List;
 import com.wre.common.dao.GenericDao;
 import com.wre.model.Client;
 import com.wre.model.Event;
+import com.wre.model.EventParticipant;
 import com.wre.model.EventServices;
 import com.wre.model.Participants;
 import com.wre.model.Services;
@@ -35,6 +36,8 @@ public interface SystemAdminMgmtDao  extends GenericDao<Object>{
 
 	
 	Participants getParticipantDetails(ParticipantBean participantBean);
+
+	List<EventParticipant> getParticipantEventList(Long participantId);
 
 	
 
