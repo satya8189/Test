@@ -309,6 +309,7 @@ public class SystemAdminMgmtServiceImpl implements SystemAdminMgmtService{
 			participantEventBean.setParticipateId(eventParticipant.getEveParticipantId());
 			participantEventBean.setEventId(eventParticipant.getEvent().getEventId());
 			participantEventBean.setEventname(eventParticipant.getEvent().getEventName());
+			participantEventBean.setEventDate(eventParticipant.getEvent().getEventDate());
 			participantEventBean.setParticipateId(eventParticipant.getParticipants().getParticipantId());
 			participantEventBean.setStatus(eventParticipant.getStatus());
 			participantEventBeans.add(participantEventBean);
