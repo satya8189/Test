@@ -10,6 +10,15 @@ public class NewsFeedBean {
     private String newsDesc;
     private Date newsDate;
     private Long eventId;
+    private String jsonDate;
+
+    public String getJsonDate() {
+        return jsonDate;
+    }
+
+    public void setJsonDate(String jsonDate) {
+        this.jsonDate = jsonDate;
+    }
 
     public Long getNewsFeedId() {
         return newsFeedId;
