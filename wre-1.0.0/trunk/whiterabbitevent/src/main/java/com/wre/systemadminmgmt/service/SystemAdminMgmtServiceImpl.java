@@ -306,6 +306,7 @@ public class SystemAdminMgmtServiceImpl implements SystemAdminMgmtService{
 		List<ParticipantEventBean> participantEventBeans = new ArrayList<ParticipantEventBean>();
 		for(EventParticipant eventParticipant :eventParticipants){
 			ParticipantEventBean participantEventBean = new ParticipantEventBean();
+			participantEventBean.setParticipateId(eventParticipant.getEveParticipantId());
 			participantEventBean.setEventId(eventParticipant.getEvent().getEventId());
 			participantEventBean.setEventname(eventParticipant.getEvent().getEventName());
 			participantEventBean.setParticipateId(eventParticipant.getParticipants().getParticipantId());
