@@ -68,8 +68,8 @@
 			<value>com.wre.model.SurveyQuestionAnswer</value>
 			<value>com.wre.model.User</value>
 			<value>com.wre.model.Rating</value>
-			
-	
+			<value>com.wre.model.ChatTopic</value>
+	        <value>com.wre.model.ContactDetails</value>
 
 
 			</list>
