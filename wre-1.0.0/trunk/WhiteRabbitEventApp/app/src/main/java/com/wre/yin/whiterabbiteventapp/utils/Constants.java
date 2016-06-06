@@ -43,6 +43,7 @@ public class Constants {
     public static final String AGENDA=URL+"agendoDetails";
     public static final String NEWS_LIST=URL+"newsList";
     public static final String PARTICIPENT_LOGIN=PARTICIPENT_URL+"participantlogin";
+    public static final String PARTICIPENT_REG_UPDATE=PARTICIPENT_URL+"participantRegUpdate";
 
 
     //Image Gallery file path constansts
