@@ -14,6 +14,7 @@ import com.wre.adminmgmt.bean.NewsFeedBean;
 import com.wre.adminmgmt.bean.QuestionBean;
 import com.wre.adminmgmt.bean.SpeakerBean;
 import com.wre.adminmgmt.bean.SponsorBean;
+import com.wre.systemadminmgmt.bean.ParticipantBean;
 
 public interface AdminMgmtService {
 
@@ -90,6 +91,10 @@ public void createSponsor(MultipartFile file, Long eventId, String type,
 		String sponcorDesc, String speakerName);
 
 public List<EventBean> geteventServicesList(Long eventId);
+public String participantRegUpdate(ParticipantBean participantBean);
+
+
+
 
 
 

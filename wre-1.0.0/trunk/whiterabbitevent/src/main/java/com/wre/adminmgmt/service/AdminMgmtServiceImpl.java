@@ -38,6 +38,7 @@ import com.wre.model.Participants;
 import com.wre.model.Speaker;
 import com.wre.model.Sponcor;
 import com.wre.model.SurveyQuestion;
+import com.wre.systemadminmgmt.bean.ParticipantBean;
 
 @Service("AdminMgmtService")
 public class AdminMgmtServiceImpl implements AdminMgmtService {
@@ -871,7 +872,9 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 
 		
 	}
-
+	public String participantRegUpdate(ParticipantBean participantBean){
+		return AdminMgmtDaoImpl.participantRegUpdate(participantBean);
+	}
 	@Override
 	public List<EventBean> geteventServicesList(Long eventId) {
 		
