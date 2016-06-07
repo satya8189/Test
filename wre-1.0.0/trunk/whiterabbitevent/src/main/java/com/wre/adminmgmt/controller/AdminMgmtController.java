@@ -41,6 +41,7 @@ import com.wre.adminmgmt.bean.SpeakerBean;
 import com.wre.adminmgmt.bean.SponsorBean;
 import com.wre.adminmgmt.service.AdminMgmtService;
 import com.wre.common.util.WREConstants;
+import com.wre.systemadminmgmt.bean.ParticipantBean;
 
 @Controller
 public class AdminMgmtController {
@@ -762,5 +763,15 @@ List<EventBean> eventServicesList(@RequestParam("eventId") Long eventId) {
 	return eventList;
 
 }
+
+@RequestMapping(value ="/participantRegUpdate",method = RequestMethod.POST)
+    public  @ResponseBody String participantRegUpdate(@RequestBody ParticipantBean participantBean) {
+    	log.info("in side updatespeaker method");
+    		log.info("checking......"+participantBean.getPhoneNumber());
+    		String result=adminMgmtService.participantRegUpdate(participantBean);
+    		return "{\"response\":\"" + result + "\"}";
+}
+
+
 
 }
