@@ -10,9 +10,9 @@ import android.widget.TextView;
 public class NewsRecyclerViewHolder extends RecyclerView.ViewHolder {
 
     TextView newsTitle, dateTime, newsDesc;
-    LinearLayout expandLayout,agendaLayout;
+    LinearLayout expandLayout, newsLayout;
     CardView cardView;
-    ImageView plus,minus;
+    ImageView plus, minus;
 
     public NewsRecyclerViewHolder(View itemView) {
         super(itemView);
@@ -25,7 +25,7 @@ public class NewsRecyclerViewHolder extends RecyclerView.ViewHolder {
 
         expandLayout = (LinearLayout) itemView.findViewById(R.id.expanded_layout);
 
-        agendaLayout = (LinearLayout) itemView.findViewById(R.id.agenda_re_layout);
+        newsLayout = (LinearLayout) itemView.findViewById(R.id.news_re_layout);
 
         cardView = (CardView) itemView.findViewById(R.id.card_view);
 

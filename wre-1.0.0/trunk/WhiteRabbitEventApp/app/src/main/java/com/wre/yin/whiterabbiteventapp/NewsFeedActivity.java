@@ -1,29 +1,21 @@
 package com.wre.yin.whiterabbiteventapp;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ExpandableListView;
-import android.widget.TextView;
 
-import com.wre.yin.whiterabbiteventapp.adapters.ExpandableListAdapter;
-import com.wre.yin.whiterabbiteventapp.beans.AgendaBean;
 import com.wre.yin.whiterabbiteventapp.beans.NewsFeedBean;
 import com.wre.yin.whiterabbiteventapp.utils.Callback;
 import com.wre.yin.whiterabbiteventapp.utils.Constants;
 import com.wre.yin.whiterabbiteventapp.utils.MyAsyncTask;
 import com.wre.yin.whiterabbiteventapp.utils.Utils;
 
-import java.text.Format;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -57,7 +49,6 @@ public class NewsFeedActivity extends AppCompatActivity {
                     HashMap<String, String> map = new HashMap<String, String>();
                     map.put("newsTitle", bean.getNewsTitle());
                     map.put("newsDesc", bean.getNewsDesc());
-
 
 
                     String newsDate = Utils.getDateFromJson(bean.getNewsDate(),"full");
@@ -102,7 +93,7 @@ public class NewsFeedActivity extends AppCompatActivity {
 
             maps = mapsList.get(position);
 
-            holder.agendaLayout.setBackgroundColor(randomAndroidColor);
+            holder.newsLayout.setBackgroundColor(randomAndroidColor);
 
             holder.newsTitle.setText(maps.get("newsTitle"));
             holder.dateTime.setText(maps.get("newsDate"));

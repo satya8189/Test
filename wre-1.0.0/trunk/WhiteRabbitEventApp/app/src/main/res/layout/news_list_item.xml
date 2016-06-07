@@ -14,7 +14,7 @@
     card_view:cardCornerRadius="5dp">
 
     <LinearLayout
-        android:id="@+id/agenda_re_layout"
+        android:id="@+id/news_re_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#06B89E"
@@ -24,7 +24,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingTop="5dp"
             android:weightSum="4">
 
             <LinearLayout
@@ -32,13 +31,12 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:orientation="vertical"
-                android:paddingLeft="10dp">
+                android:padding="10dp">
 
                 <TextView
                     android:id="@+id/news_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="3dp"
                     android:text="Android "
                     android:textAppearance="?attr/textAppearanceListItem"
                     android:textColor="#fff"
@@ -50,8 +48,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:layout_weight="1"
                     android:gravity="end"
+                    android:paddingBottom="5dp"
                     android:text="Time"
                     android:textColor="#fff" />
             </LinearLayout>
@@ -83,7 +81,6 @@
             android:id="@+id/expanded_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
             android:orientation="vertical"
             android:visibility="gone">
 
@@ -100,7 +97,6 @@
                 android:id="@+id/news_desc"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="10dp"
                 android:padding="10dp"
                 android:text="sdlkgjsdlkgjslkghjdghlkjalkdhglkhkshslkdhgshlkshmdfdjfhdjh"
                 android:textColor="#fff" />

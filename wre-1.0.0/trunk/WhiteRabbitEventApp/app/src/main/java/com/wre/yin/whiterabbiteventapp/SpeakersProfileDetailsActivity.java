@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-public class ProfileDetailsActivity extends AppCompatActivity {
+public class SpeakersProfileDetailsActivity extends AppCompatActivity {
 
     TextView speakerName;
 
@@ -21,6 +21,7 @@ public class ProfileDetailsActivity extends AppCompatActivity {
         speakerName = (TextView) findViewById(R.id.speaker_name);
         speakerName.setText(nameTxt);
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

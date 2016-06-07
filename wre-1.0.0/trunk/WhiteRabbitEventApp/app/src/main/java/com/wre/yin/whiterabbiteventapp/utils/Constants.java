@@ -46,6 +46,10 @@ public class Constants {
     public static final String EVENT_SERVICES_LIST=URL+"eventServicesList?eventId=";
     public static final String AGENDA=URL+"agendoDetails";
     public static final String NEWS_LIST=URL+"newsList";
+    public static final String SPONSORS_LIST=URL+"sponsorsList";
+    public static final String SPEAKERS_LIST=URL+"speakersList";
+
+
     public static final String PARTICIPENT_LOGIN=PARTICIPENT_URL+"participantlogin";
     public static final String PARTICIPENT_REG_UPDATE=PARTICIPENT_URL+"participantRegUpdate";
     public static final String INDIVIDUAL_SPEAKER=URL+"getSpeakerBySpeakerId?speakerId=";

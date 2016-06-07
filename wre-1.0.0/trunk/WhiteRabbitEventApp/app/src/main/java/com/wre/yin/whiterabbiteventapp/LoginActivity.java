@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.wre.yin.whiterabbiteventapp.beans.ParticipantBean;

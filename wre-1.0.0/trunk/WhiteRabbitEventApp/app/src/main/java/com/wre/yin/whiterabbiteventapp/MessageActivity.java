@@ -69,6 +69,7 @@ public class MessageActivity extends AppCompatActivity {
         });
 
     }
+
     private void sendMessage(String message) {
         ChatMessage chatMessage = new ChatMessage(message, true, false);
         mAdapter.add(chatMessage);
@@ -92,6 +93,7 @@ public class MessageActivity extends AppCompatActivity {
         ChatMessage chatMessage = new ChatMessage(null, false, true);
         mAdapter.add(chatMessage);
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

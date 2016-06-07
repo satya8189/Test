@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.wre.yin.whiterabbiteventapp.R;
 import com.wre.yin.whiterabbiteventapp.beans.ChatMessage;
 

@@ -5,17 +5,6 @@
     android:layout_height="match_parent"
     android:padding="5dp"
     tools:context="com.wre.yin.whiterabbiteventapp.AgendaActivity">
-<!--
-    <ExpandableListView
-        android:id="@+id/lvExp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:divider="#fff"
-        android:dividerHeight="10dp"
-        android:groupIndicator="@null"
-        android:visibility="gone">
-
-    </ExpandableListView>-->
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/agenda_recycler_view"

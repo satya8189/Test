@@ -10,17 +10,15 @@ import com.wre.yin.whiterabbiteventapp.adapters.CustomAdapter;
 
 public class DocShareActivity extends AppCompatActivity {
 
+    public static String[] wordDocsNameList = {"Event Details 1.doc", "Event Details 2.doc", "Event Details 3.doc", "Event Details 4.doc"};
+    public static int[] wordDocImage = {R.drawable.word_icon, R.drawable.word_icon, R.drawable.word_icon, R.drawable.word_icon};
+    public static String[] pdfDocsNameList = {"Event Details 1.pdf", "Event Details 2.pdf", "Event Details 3.pdf", "Event Details 4.pdf"};
+    public static int[] pdfDocImage = {R.drawable.pdf_icon, R.drawable.pdf_icon, R.drawable.pdf_icon, R.drawable.pdf_icon};
+    public static String[] excelDocsNameList = {"Event Details 1.xlsx", "Event Details 2.xlsx", "Event Details 3.xlsx", "Event Details 4.xlsx"};
+    public static int[] excelDocImage = {R.drawable.excel_icon, R.drawable.excel_icon, R.drawable.excel_icon, R.drawable.excel_icon};
     private TextView text;
     private GridView wordGrid, pdfGrid, excelGrid;
 
-    public static String[] wordDocsNameList = {"Event Details 1.doc", "Event Details 2.doc", "Event Details 3.doc", "Event Details 4.doc"};
-    public static int[] wordDocImage = {R.drawable.word_icon,R.drawable.word_icon,R.drawable.word_icon,R.drawable.word_icon};
-
-    public static String[] pdfDocsNameList = {"Event Details 1.pdf", "Event Details 2.pdf", "Event Details 3.pdf", "Event Details 4.pdf"};
-    public static int[] pdfDocImage = {R.drawable.pdf_icon,R.drawable.pdf_icon,R.drawable.pdf_icon,R.drawable.pdf_icon};
-
-    public static String[] excelDocsNameList = {"Event Details 1.xlsx", "Event Details 2.xlsx", "Event Details 3.xlsx", "Event Details 4.xlsx"};
-    public static int[] excelDocImage = {R.drawable.excel_icon,R.drawable.excel_icon,R.drawable.excel_icon,R.drawable.excel_icon};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

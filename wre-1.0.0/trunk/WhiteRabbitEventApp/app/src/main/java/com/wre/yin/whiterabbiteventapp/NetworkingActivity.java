@@ -25,53 +25,15 @@ public class NetworkingActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(nameTxt);
 
-        recyclerView= (RecyclerView) findViewById(R.id.my_recycler_view);
+        recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
 
 
-        RecylerAdapter adapter=new RecylerAdapter(this);
+        RecylerAdapter adapter = new RecylerAdapter(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    private class RecylerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
-        LayoutInflater inflater;
-        Context context;
-        String [] name={"Androidwarriors","Stackoverflow","Developer Android","AndroidHive",
-                "Slidenerd","TheNewBoston","Truiton","HmkCode","JavaTpoint","Javapeper"};
-        public RecylerAdapter(Context context) {
-            this.context=context;
-            inflater=LayoutInflater.from(context);
-        }
-        @Override
-        public RecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view=inflater.inflate(R.layout.network_list_item,parent,false);
-            RecyclerViewHolder viewHolder=new RecyclerViewHolder(view);
-            return viewHolder;
-        }
-
-        @Override
-        public void onBindViewHolder(RecyclerViewHolder holder, int position) {
-            holder.tv1.setText(name[position]);
-            holder.cardView.setOnClickListener(clickListener);
-            holder.cardView.setTag(holder);
-        }
-        View.OnClickListener clickListener=new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                RecyclerViewHolder vholder = (RecyclerViewHolder) v.getTag();
-                int position = vholder.getPosition();
-               // Toast.makeText(context,"This is position "+position,Toast.LENGTH_LONG ).show();
-
-            }
-        };
-
-        @Override
-        public int getItemCount() {
-            return name.length;
-        }
-    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -82,5 +44,46 @@ public class NetworkingActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private class RecylerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
+        LayoutInflater inflater;
+        Context context;
+        String[] name = {"Androidwarriors", "Stackoverflow", "Developer Android", "AndroidHive",
+                "Slidenerd", "TheNewBoston", "Truiton", "HmkCode", "JavaTpoint", "Javapeper"};
+        View.OnClickListener clickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                RecyclerViewHolder vholder = (RecyclerViewHolder) v.getTag();
+                int position = vholder.getPosition();
+                // Toast.makeText(context,"This is position "+position,Toast.LENGTH_LONG ).show();
+
+            }
+        };
+
+        public RecylerAdapter(Context context) {
+            this.context = context;
+            inflater = LayoutInflater.from(context);
+        }
+
+        @Override
+        public RecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View view = inflater.inflate(R.layout.network_list_item, parent, false);
+            RecyclerViewHolder viewHolder = new RecyclerViewHolder(view);
+            return viewHolder;
+        }
+
+        @Override
+        public void onBindViewHolder(RecyclerViewHolder holder, int position) {
+            holder.tv1.setText(name[position]);
+            holder.cardView.setOnClickListener(clickListener);
+            holder.cardView.setTag(holder);
+        }
+
+        @Override
+        public int getItemCount() {
+            return name.length;
+        }
     }
 }

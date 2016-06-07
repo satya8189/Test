@@ -24,11 +24,9 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.MediaController;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.VideoView;
 
 import com.wre.yin.whiterabbiteventapp.beans.Result;
 import com.wre.yin.whiterabbiteventapp.beans.UploadImgVid;
@@ -50,33 +48,95 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class VideosActivity extends AppCompatActivity {
 
+    public static final int MEDIA_TYPE_VIDEO = 1;
+    private static final int CAMERA_CAPTURE_VIDEO_REQUEST_CODE = 100;
+    private final static Uri MEDIA_EXTERNAL_CONTENT_URI = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
+    private final static String _ID = MediaStore.Video.Media._ID;
+    private final static String MEDIA_DATA = MediaStore.Video.Media.DATA;
+    private static int RESULT_LOAD_VID = 1;
+    protected Context _context;
+    String layoutStatus = "gone";
+    ProgressDialog prgDialog;
     private TextView text;
     private Button uploadVideo;
     private LinearLayout camGalLayout;
     private CircleImageView camPick, gallPick;
-
-    private static final int CAMERA_CAPTURE_VIDEO_REQUEST_CODE = 100;
-    public static final int MEDIA_TYPE_VIDEO = 1;
     private Uri fileUri;
-
-    String layoutStatus = "gone";
     private String vidPath, fileName, fileTpe, encodedString;
-    private static int RESULT_LOAD_VID = 1;
-
-    ProgressDialog prgDialog;
-    private final static Uri MEDIA_EXTERNAL_CONTENT_URI = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
-    private final static String _ID = MediaStore.Video.Media._ID;
-    private final static String MEDIA_DATA = MediaStore.Video.Media.DATA;
     //flag for which one is used for images selection
     private GridView _gallery;
     private Cursor _cursor;
     private int _columnIndex;
     private int[] _videosId;
     private Uri _contentUri;
+    private AdapterView.OnItemClickListener _itemClickLis = new AdapterView.OnItemClickListener() {
+        public void onItemClick(AdapterView parent, View v, int position, long id) {
+            // Now we want to actually get the data location of the file
+            MediaPlayer mPlayer = new MediaPlayer();
+            String[] proj = {MEDIA_DATA};
+            // We request our cursor again
+            _cursor = managedQuery(_contentUri,
+                    proj, // Which columns to return
+                    null,       // WHERE clause; which rows to return (all rows)
+                    null,       // WHERE clause selection arguments (none)
+                    null); // Order-by clause (ascending by name)
+            // We want to get the column index for the data uri
+            int count = _cursor.getCount();
+            //
+            _cursor.moveToFirst();
+            //
+            _columnIndex = _cursor.getColumnIndex(MEDIA_DATA);
+            // Lets move to the selected item in the cursor
+            _cursor.moveToPosition(position);
+            // And here we get the filename
+            String filename = _cursor.getString(_columnIndex);
+            //*********** You can do anything when you know the file path :-)
 
 
-    protected Context _context;
+            Uri intentUri = Uri.parse(filename);
 
+            Intent intent = new Intent();
+            intent.setAction(android.content.Intent.ACTION_VIEW);
+            intent.setDataAndType(intentUri, "video/*");
+            startActivity(intent);
+            System.out.println("file path:" + filename);
+
+
+            //showToast(filename);
+            //
+        }
+    };
+
+    private static File getOutputMediaFile(int type) {
+
+        // External sdcard location
+        File mediaStorageDir = new File(
+                Environment
+                        .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
+                Constants.VIDEO_DIRECTORY_NAME);
+
+        // Create the storage directory if it does not exist
+        if (!mediaStorageDir.exists()) {
+            if (!mediaStorageDir.mkdirs()) {
+                Log.d("Acc", "Oops! Failed create "
+                        + Constants.VIDEO_DIRECTORY_NAME + " directory");
+                return null;
+            }
+        }
+
+        // Create a media file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss",
+                Locale.getDefault()).format(new Date());
+        File mediaFile;
+        if (type == MEDIA_TYPE_VIDEO) {
+            mediaFile = new File(mediaStorageDir.getPath() + File.separator
+                    + "VID_" + timeStamp + ".mp4");
+        } else {
+            return null;
+        }
+
+        return mediaFile;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -175,135 +235,6 @@ public class VideosActivity extends AppCompatActivity {
 
     }
 
-    private AdapterView.OnItemClickListener _itemClickLis = new AdapterView.OnItemClickListener()
-    {
-        public void onItemClick(AdapterView parent, View v, int position, long id)
-        {
-            // Now we want to actually get the data location of the file
-            MediaPlayer mPlayer=new MediaPlayer();
-            String [] proj={MEDIA_DATA};
-            // We request our cursor again
-            _cursor = managedQuery(_contentUri,
-                    proj, // Which columns to return
-                    null,       // WHERE clause; which rows to return (all rows)
-                    null,       // WHERE clause selection arguments (none)
-                    null); // Order-by clause (ascending by name)
-            // We want to get the column index for the data uri
-            int count = _cursor.getCount();
-            //
-            _cursor.moveToFirst();
-            //
-            _columnIndex = _cursor.getColumnIndex(MEDIA_DATA);
-            // Lets move to the selected item in the cursor
-            _cursor.moveToPosition(position);
-            // And here we get the filename
-            String filename = _cursor.getString(_columnIndex);
-            //*********** You can do anything when you know the file path :-)
-
-
-
-            Uri intentUri = Uri.parse(filename);
-
-            Intent intent = new Intent();
-            intent.setAction(android.content.Intent.ACTION_VIEW);
-            intent.setDataAndType(intentUri, "video/*");
-            startActivity(intent);
-            System.out.println("file path:"+filename);
-
-
-            //showToast(filename);
-            //
-        }
-    };
-
-    private class VideoGalleryAdapter extends BaseAdapter{
-        LayoutInflater inflater;
-        public VideoGalleryAdapter(Context c)
-        {
-            _context = c;
-        }
-        public int getCount()
-        {
-            return _videosId.length;
-        }
-        public Object getItem(int position)
-        {
-            return position;
-        }
-        public long getItemId(int position)
-        {
-            return position;
-        }
-        public View getView(int position, View convertView, ViewGroup parent){
-
-
-            RelativeLayout relativeLayout = new RelativeLayout(_context);
-            try{
-                if(convertView!=null){
-                    relativeLayout=(RelativeLayout)convertView;
-                }
-
-                ImageView imgVw= new ImageView(_context);
-                imgVw.setImageBitmap(getImage(_videosId[position]));
-                imgVw.setLayoutParams(new GridView.LayoutParams(196, 196));
-                imgVw.setPadding(8, 8, 8, 8);
-                RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
-                        196,196);
-                lp.addRule(RelativeLayout.CENTER_IN_PARENT);
-                imgVw.setLayoutParams(lp);
-
-                RelativeLayout.LayoutParams lp1 = new RelativeLayout.LayoutParams(
-                        66,66);
-                lp1.addRule(RelativeLayout.CENTER_IN_PARENT);
-                ImageView imgVw1= new ImageView(_context);
-                imgVw1.setBackgroundResource(R.drawable.play);
-
-                imgVw1.setLayoutParams(lp1);
-
-
-                relativeLayout.addView(imgVw);
-                relativeLayout.addView(imgVw1);
-
-
-            }catch(Exception ex)
-            {
-                System.out.println("StartActivity:getView()-135: ex " + ex.getClass() +", "+ ex.getMessage());
-            }
-            return relativeLayout;
-
-            /*ImageView imgVw= new ImageView(_context);
-            try
-            {
-                if(convertView!=null)
-                {
-                    imgVw= (ImageView) convertView;
-                }
-                imgVw.setImageBitmap(getImage(_videosId[position]));
-                imgVw.setLayoutParams(new GridView.LayoutParams(196, 196));
-                //imgVw.setBackgroundResource(R.drawable.play_ico);
-
-                imgVw.setForeground();
-                imgVw.setPadding(8, 8, 8, 8);
-            }
-            catch(Exception ex)
-            {
-                System.out.println("StartActivity:getView()-135: ex " + ex.getClass() +", "+ ex.getMessage());
-            }
-            return imgVw;*/
-
-
-        }
-
-        // Create the thumbnail on the fly
-        private Bitmap getImage(int id) {
-            Bitmap thumb = MediaStore.Video.Thumbnails.getThumbnail(
-                    getContentResolver(),
-                    id, MediaStore.Video.Thumbnails.MICRO_KIND, null);
-            return thumb;
-        }
-
-    }
-
     /**
      * Launching camera app to record video
      */
@@ -332,37 +263,6 @@ public class VideosActivity extends AppCompatActivity {
 
     public Uri getOutputMediaFileUri(int type) {
         return Uri.fromFile(getOutputMediaFile(type));
-    }
-
-    private static File getOutputMediaFile(int type) {
-
-        // External sdcard location
-        File mediaStorageDir = new File(
-                Environment
-                        .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
-                Constants.VIDEO_DIRECTORY_NAME);
-
-        // Create the storage directory if it does not exist
-        if (!mediaStorageDir.exists()) {
-            if (!mediaStorageDir.mkdirs()) {
-                Log.d("Acc", "Oops! Failed create "
-                        + Constants.VIDEO_DIRECTORY_NAME + " directory");
-                return null;
-            }
-        }
-
-        // Create a media file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss",
-                Locale.getDefault()).format(new Date());
-        File mediaFile;
-        if (type == MEDIA_TYPE_VIDEO) {
-            mediaFile = new File(mediaStorageDir.getPath() + File.separator
-                    + "VID_" + timeStamp + ".mp4");
-        } else {
-            return null;
-        }
-
-        return mediaFile;
     }
 
     @Override
@@ -515,5 +415,93 @@ public class VideosActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private class VideoGalleryAdapter extends BaseAdapter {
+        LayoutInflater inflater;
+
+        public VideoGalleryAdapter(Context c) {
+            _context = c;
+        }
+
+        public int getCount() {
+            return _videosId.length;
+        }
+
+        public Object getItem(int position) {
+            return position;
+        }
+
+        public long getItemId(int position) {
+            return position;
+        }
+
+        public View getView(int position, View convertView, ViewGroup parent) {
+
+
+            RelativeLayout relativeLayout = new RelativeLayout(_context);
+            try {
+                if (convertView != null) {
+                    relativeLayout = (RelativeLayout) convertView;
+                }
+
+                ImageView imgVw = new ImageView(_context);
+                imgVw.setImageBitmap(getImage(_videosId[position]));
+                imgVw.setLayoutParams(new GridView.LayoutParams(196, 196));
+                imgVw.setPadding(8, 8, 8, 8);
+                RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
+                        196, 196);
+                lp.addRule(RelativeLayout.CENTER_IN_PARENT);
+                imgVw.setLayoutParams(lp);
+
+                RelativeLayout.LayoutParams lp1 = new RelativeLayout.LayoutParams(
+                        66, 66);
+                lp1.addRule(RelativeLayout.CENTER_IN_PARENT);
+                ImageView imgVw1 = new ImageView(_context);
+                imgVw1.setBackgroundResource(R.drawable.play);
+
+                imgVw1.setLayoutParams(lp1);
+
+
+                relativeLayout.addView(imgVw);
+                relativeLayout.addView(imgVw1);
+
+
+            } catch (Exception ex) {
+                System.out.println("StartActivity:getView()-135: ex " + ex.getClass() + ", " + ex.getMessage());
+            }
+            return relativeLayout;
+
+            /*ImageView imgVw= new ImageView(_context);
+            try
+            {
+                if(convertView!=null)
+                {
+                    imgVw= (ImageView) convertView;
+                }
+                imgVw.setImageBitmap(getImage(_videosId[position]));
+                imgVw.setLayoutParams(new GridView.LayoutParams(196, 196));
+                //imgVw.setBackgroundResource(R.drawable.play_ico);
+
+                imgVw.setForeground();
+                imgVw.setPadding(8, 8, 8, 8);
+            }
+            catch(Exception ex)
+            {
+                System.out.println("StartActivity:getView()-135: ex " + ex.getClass() +", "+ ex.getMessage());
+            }
+            return imgVw;*/
+
+
+        }
+
+        // Create the thumbnail on the fly
+        private Bitmap getImage(int id) {
+            Bitmap thumb = MediaStore.Video.Thumbnails.getThumbnail(
+                    getContentResolver(),
+                    id, MediaStore.Video.Thumbnails.MICRO_KIND, null);
+            return thumb;
+        }
+
     }
 }

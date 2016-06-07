@@ -21,101 +21,101 @@ import java.util.ArrayList;
 
 public class GridViewImageAdapter extends BaseAdapter {
 
-	private Activity _activity;
-	private ArrayList<String> _filePaths = new ArrayList<String>();
-	private int imageWidth;
+    private Activity _activity;
+    private ArrayList<String> _filePaths = new ArrayList<String>();
+    private int imageWidth;
 
-	public GridViewImageAdapter(Activity activity, ArrayList<String> filePaths,	int imageWidth) {
-		this._activity = activity;
-		this._filePaths = filePaths;
-		this.imageWidth = imageWidth;
-	}
+    public GridViewImageAdapter(Activity activity, ArrayList<String> filePaths, int imageWidth) {
+        this._activity = activity;
+        this._filePaths = filePaths;
+        this.imageWidth = imageWidth;
+    }
 
-	@Override
-	public int getCount() {
-		return this._filePaths.size();
-	}
+    /*
+     * Resizing image size
+     */
+    public static Bitmap decodeFile(String filePath, int WIDTH, int HIGHT) {
+        try {
 
-	@Override
-	public Object getItem(int position) {
-		return this._filePaths.get(position);
-	}
+            File f = new File(filePath);
 
-	@Override
-	public long getItemId(int position) {
-		return position;
-	}
+            BitmapFactory.Options o = new BitmapFactory.Options();
+            o.inJustDecodeBounds = true;
+            BitmapFactory.decodeStream(new FileInputStream(f), null, o);
 
-	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
-		ImageView imageView;
-		if (convertView == null) {
-			imageView = new ImageView(_activity);
-		} else {
-			imageView = (ImageView) convertView;
-		}
+            final int REQUIRED_WIDTH = WIDTH;
+            final int REQUIRED_HIGHT = HIGHT;
+            int scale = 1;
+            while (o.outWidth / scale / 2 >= REQUIRED_WIDTH
+                    && o.outHeight / scale / 2 >= REQUIRED_HIGHT)
+                scale *= 2;
 
-		// get screen dimensions
-		Bitmap image = decodeFile(_filePaths.get(position), imageWidth,
-				imageWidth);
+            BitmapFactory.Options o2 = new BitmapFactory.Options();
+            o2.inSampleSize = scale;
+            return BitmapFactory.decodeStream(new FileInputStream(f), null, o2);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
-		imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-		imageView.setLayoutParams(new GridView.LayoutParams(imageWidth,
-				imageWidth));
-		imageView.setImageBitmap(image);
+    @Override
+    public int getCount() {
+        return this._filePaths.size();
+    }
 
-		// image view click listener
-		imageView.setOnClickListener(new OnImageClickListener(position));
+    @Override
+    public Object getItem(int position) {
+        return this._filePaths.get(position);
+    }
 
-		return imageView;
-	}
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
 
-	class OnImageClickListener implements OnClickListener {
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        ImageView imageView;
+        if (convertView == null) {
+            imageView = new ImageView(_activity);
+        } else {
+            imageView = (ImageView) convertView;
+        }
 
-		int _postion;
+        // get screen dimensions
+        Bitmap image = decodeFile(_filePaths.get(position), imageWidth,
+                imageWidth);
 
-		// constructor
-		public OnImageClickListener(int position) {
-			this._postion = position;
-		}
+        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        imageView.setLayoutParams(new GridView.LayoutParams(imageWidth,
+                imageWidth));
+        imageView.setImageBitmap(image);
 
-		@Override
-		public void onClick(View v) {
-			// on selecting grid view image
-			// launch full screen activity
-			Intent i = new Intent(_activity, FullScreenViewActivity.class);
-			i.putExtra("position", _postion);
-			_activity.startActivity(i);
-		}
+        // image view click listener
+        imageView.setOnClickListener(new OnImageClickListener(position));
 
-	}
+        return imageView;
+    }
 
-	/*
-	 * Resizing image size
-	 */
-	public static Bitmap decodeFile(String filePath, int WIDTH, int HIGHT) {
-		try {
+    class OnImageClickListener implements OnClickListener {
 
-			File f = new File(filePath);
+        int _postion;
 
-			BitmapFactory.Options o = new BitmapFactory.Options();
-			o.inJustDecodeBounds = true;
-			BitmapFactory.decodeStream(new FileInputStream(f), null, o);
+        // constructor
+        public OnImageClickListener(int position) {
+            this._postion = position;
+        }
 
-			final int REQUIRED_WIDTH = WIDTH;
-			final int REQUIRED_HIGHT = HIGHT;
-			int scale = 1;
-			while (o.outWidth / scale / 2 >= REQUIRED_WIDTH
-					&& o.outHeight / scale / 2 >= REQUIRED_HIGHT)
-				scale *= 2;
+        @Override
+        public void onClick(View v) {
+            // on selecting grid view image
+            // launch full screen activity
+            Intent i = new Intent(_activity, FullScreenViewActivity.class);
+            i.putExtra("position", _postion);
+            _activity.startActivity(i);
+        }
 
-			BitmapFactory.Options o2 = new BitmapFactory.Options();
-			o2.inSampleSize = scale;
-			return BitmapFactory.decodeStream(new FileInputStream(f), null, o2);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
+    }
 
 }

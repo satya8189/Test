@@ -53,7 +53,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".LoginActivity"
+            android:name=".SplashScreenActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -63,7 +63,7 @@
         </activity>
         <receiver
             android:name=".MSGReceiver"
-            android:permission="com.google.android.c2dm.permission.SEND" >
+            android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
 
@@ -72,6 +72,7 @@
         </receiver>
 
         <service android:name=".MSGService" />
+
         <activity
             android:name=".EventDashboardActivity"
             android:screenOrientation="portrait" />
@@ -130,13 +131,13 @@
             android:name=".EmpProfileActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".SplashScreenActivity"
+            android:name=".LoginActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".OTPActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ProfileDetailsActivity"
+            android:name=".SpeakersProfileDetailsActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".AboutEventActivity"
@@ -146,6 +147,7 @@
             android:screenOrientation="portrait"></activity>
         <activity
             android:name=".FullScreenViewActivity"
+            android:largeHeap="true"
             android:screenOrientation="portrait"></activity>
         <activity
             android:name=".ChatActivity"

@@ -1,7 +1,7 @@
 package com.wre.yin.whiterabbiteventapp;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.webkit.WebView;
 import android.widget.TextView;
@@ -9,6 +9,7 @@ import android.widget.TextView;
 public class AboutEventActivity extends AppCompatActivity {
     private TextView text;
     private WebView webView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,7 +21,7 @@ public class AboutEventActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(nameTxt);
 
-        webView=(WebView)findViewById(R.id.detail_webview);
+        webView = (WebView) findViewById(R.id.detail_webview);
 
         String htmlText = " %s ";
         String myData = "HBook or buy tickets online for the popular upcoming events in Hyderabad, live concerts and events happening in and around Hyderabad at Eventsnow.com.";
@@ -30,6 +31,7 @@ public class AboutEventActivity extends AppCompatActivity {
                 "\n" +"\t\t"+
                 "A strong and clear event description excites punters: tell them what will happen at the event, who will be speaking, and what they might get out of attending. Your event may be brilliant, but no one else will know without you telling and convincing them.");*/
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

@@ -9,13 +9,20 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.wre.yin.whiterabbiteventapp.SponcersActivity">
 
-    <com.wre.yin.whiterabbiteventapp.gridlibrary.DynamicGridView
-        android:id="@+id/dynamic_grid_sponcers"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:horizontalSpacing="16dp"
-        android:numColumns="@integer/column_count"
-        android:verticalSpacing="16dp">
+    <!--    <com.wre.yin.whiterabbiteventapp.gridlibrary.DynamicGridView
+            android:id="@+id/dynamic_grid_sponcers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:horizontalSpacing="16dp"
+            android:numColumns="@integer/column_count"
+            android:verticalSpacing="16dp">
 
-    </com.wre.yin.whiterabbiteventapp.gridlibrary.DynamicGridView>
+        </com.wre.yin.whiterabbiteventapp.gridlibrary.DynamicGridView>-->
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/sponsors_grid_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
 </RelativeLayout>

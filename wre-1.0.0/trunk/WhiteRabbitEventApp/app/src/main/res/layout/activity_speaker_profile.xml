@@ -8,7 +8,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.wre.yin.whiterabbiteventapp.SpeakerProfileActivity">
-
+<!--
     <com.wre.yin.whiterabbiteventapp.gridlibrary.DynamicGridView
         android:id="@+id/dynamic_grid"
         android:layout_width="match_parent"
@@ -17,5 +17,11 @@
         android:numColumns="@integer/column_count"
         android:verticalSpacing="16dp">
 
-    </com.wre.yin.whiterabbiteventapp.gridlibrary.DynamicGridView>
+    </com.wre.yin.whiterabbiteventapp.gridlibrary.DynamicGridView>-->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/speakers_grid_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
 </RelativeLayout>

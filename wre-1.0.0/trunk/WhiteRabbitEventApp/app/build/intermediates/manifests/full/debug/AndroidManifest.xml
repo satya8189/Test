@@ -63,7 +63,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.wre.yin.whiterabbiteventapp.LoginActivity"
+            android:name="com.wre.yin.whiterabbiteventapp.SplashScreenActivity"
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -142,13 +142,13 @@
             android:name="com.wre.yin.whiterabbiteventapp.EmpProfileActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.wre.yin.whiterabbiteventapp.SplashScreenActivity"
+            android:name="com.wre.yin.whiterabbiteventapp.LoginActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.wre.yin.whiterabbiteventapp.OTPActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.wre.yin.whiterabbiteventapp.ProfileDetailsActivity"
+            android:name="com.wre.yin.whiterabbiteventapp.SpeakersProfileDetailsActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.wre.yin.whiterabbiteventapp.AboutEventActivity"
@@ -158,6 +158,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="com.wre.yin.whiterabbiteventapp.FullScreenViewActivity"
+            android:largeHeap="true"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.wre.yin.whiterabbiteventapp.ChatActivity"
@@ -166,6 +167,13 @@
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="@string/google_maps_key" />
+        <!--
+ ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
+        -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
 
         <!-- Include the AdActivity and InAppPurchaseActivity configChanges and themes. -->
         <activity
@@ -175,11 +183,6 @@
         <activity
             android:name="com.google.android.gms.ads.purchase.InAppPurchaseActivity"
             android:theme="@style/Theme.IAPTheme" />
-
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
-
         <activity
             android:name="com.google.android.gms.common.api.GoogleApiActivity"
             android:exported="false"
@@ -281,7 +284,8 @@ Service handling Google Sign-In user revocation. For apps that do not integrate 
 
         <activity
             android:name="com.google.android.gms.tagmanager.TagManagerPreviewActivity"
-            android:noHistory="true" > <!-- optional, removes the previewActivity from the activity stack. -->
+            android:noHistory="true" >
+ <!-- optional, removes the previewActivity from the activity stack. -->
             <intent-filter>
                 <data android:scheme="tagmanager.c.com.wre.yin.whiterabbiteventapp" />
 

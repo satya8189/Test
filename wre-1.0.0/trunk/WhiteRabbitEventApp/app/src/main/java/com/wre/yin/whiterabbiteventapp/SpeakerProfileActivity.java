@@ -1,26 +1,39 @@
 package com.wre.yin.whiterabbiteventapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.wre.yin.whiterabbiteventapp.adapters.CheeseDynamicAdapter;
-import com.wre.yin.whiterabbiteventapp.beans.Cheeses;
-import com.wre.yin.whiterabbiteventapp.gridlibrary.DynamicGridView;
+import com.wre.yin.whiterabbiteventapp.beans.SpeakerBean;
+import com.wre.yin.whiterabbiteventapp.utils.Callback;
+import com.wre.yin.whiterabbiteventapp.utils.Constants;
+import com.wre.yin.whiterabbiteventapp.utils.MyAsyncTask;
+import com.wre.yin.whiterabbiteventapp.utils.Utils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
 
 public class SpeakerProfileActivity extends AppCompatActivity {
 
-    private TextView text;
-    private DynamicGridView gridView;
     private static final String TAG = SpeakerProfileActivity.class.getName();
+    private TextView text;
+    private GridLayoutManager gridLayout;
+
+    private RecyclerViewAdapter rcAdapter;
+    private List<HashMap<String, String>> speakersList;
+    private RecyclerView rView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,58 +41,90 @@ public class SpeakerProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_speaker_profile);
 
         String nameTxt = getIntent().getExtras().getString("name");
-        gridView = (DynamicGridView) findViewById(R.id.dynamic_grid);
-
-        gridView.setAdapter(new CheeseDynamicAdapter(this,
-                new ArrayList<String>(Arrays.asList(Cheeses.sCheeseStrings)),
-                getResources().getInteger(R.integer.column_count)));
-
-        // text = (TextView) findViewById(R.id.activity_text);
+        String eventId = getIntent().getExtras().getString("eventId");
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(nameTxt);
 
+        gridLayout = new GridLayoutManager(SpeakerProfileActivity.this, 2);
 
-        //  text.setText(nameTxt);
-        gridView.setOnDragListener(new DynamicGridView.OnDragListener() {
-            @Override
-            public void onDragStarted(int position) {
-                Log.d(TAG, "drag started at position " + position);
-            }
 
-            @Override
-            public void onDragPositionsChanged(int oldPosition, int newPosition) {
-                Log.d(TAG, String.format("drag item position changed from %d to %d", oldPosition, newPosition));
-            }
-        });
-        gridView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                gridView.startEditMode(position);
-                return true;
-            }
-        });
+        rView = (RecyclerView) findViewById(R.id.speakers_grid_recycler_view);
+        rView.setHasFixedSize(true);
+        rView.setLayoutManager(gridLayout);
 
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-               // Toast.makeText(SpeakerProfileActivity.this, parent.getAdapter().getItem(position).toString(),                        Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(SpeakerProfileActivity.this, ProfileDetailsActivity.class);
-                i.putExtra("speakerName", parent.getAdapter().getItem(position).toString());
-                startActivity(i);
+        ItemTouchHelper ith = new ItemTouchHelper(_ithCallback);
+        ith.attachToRecyclerView(rView);
 
+        new MyAsyncTask(Constants.SPEAKERS_LIST + "?eventId="+eventId, null, SpeakerProfileActivity.this, new Callback() {
+            @Override
+            public void onResult(String result) {
+                speakersList = new ArrayList<HashMap<String, String>>();
+                List<SpeakerBean> speakerBeenList = Utils.getList(result, SpeakerBean.class);
+
+                for (SpeakerBean bean : speakerBeenList) {
+                    HashMap<String, String> map = new HashMap<String, String>();
+                    map.put("speakersName", bean.getSpeakerName());
+                    //    map.put("sponsorDesc", bean.getSponcorDesc());
+
+                    speakersList.add(map);
+
+                }
+                rcAdapter = new RecyclerViewAdapter(SpeakerProfileActivity.this, (ArrayList<HashMap<String, String>>) speakersList);
+
+                rView.setAdapter(rcAdapter);
             }
-        });
+        }).execute();
     }
 
-    @Override
-    public void onBackPressed() {
-        if (gridView.isEditMode()) {
-            gridView.stopEditMode();
-        } else {
-            super.onBackPressed();
+    private class RecyclerViewAdapter extends RecyclerView.Adapter<SpeakersRecyclerViewHolders> {
+
+        List<HashMap<String, String>> mapsList;
+        HashMap<String, String> maps;
+
+        private Context context;
+
+        public RecyclerViewAdapter(Context context, ArrayList<HashMap<String, String>> list) {
+            mapsList = list;
+            this.context = context;
+        }
+
+
+        @Override
+        public SpeakersRecyclerViewHolders onCreateViewHolder(ViewGroup parent, int viewType) {
+
+            View layoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.sponsor_card_view_list, null);
+            SpeakersRecyclerViewHolders rcv = new SpeakersRecyclerViewHolders(layoutView);
+            return rcv;
+        }
+
+        @Override
+        public void onBindViewHolder(SpeakersRecyclerViewHolders holder, int position) {
+            maps = mapsList.get(position);
+            holder.speakerName.setText(maps.get("speakersName"));
+            // holder.speakerPhoto.setImageResource(maps.get(position).getPhoto());
+            holder.speakerPhoto.setOnClickListener(clickListener);
+            holder.speakerPhoto.setTag(holder);
+        }
+
+        View.OnClickListener clickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SpeakersRecyclerViewHolders vHoder = (SpeakersRecyclerViewHolders) v.getTag();
+                int position = vHoder.getPosition();
+                System.out.println("Speaker Name:" + mapsList.get(position));
+                Intent i = new Intent(SpeakerProfileActivity.this, SpeakersProfileDetailsActivity.class);
+                i.putExtra("speakerName", maps.get("speakersName"));
+                startActivity(i);
+            }
+        };
+
+        @Override
+        public int getItemCount() {
+            return this.mapsList.size();
         }
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -91,4 +136,27 @@ public class SpeakerProfileActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    ItemTouchHelper.Callback _ithCallback = new ItemTouchHelper.Callback() {
+        //and in your imlpementaion of
+        public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+            // get the viewHolder's and target's positions in your adapter data, swap them
+            Collections.swap(speakersList, viewHolder.getAdapterPosition(), target.getAdapterPosition());
+            // and notify the adapter that its dataset has changed
+            rcAdapter.notifyItemMoved(viewHolder.getAdapterPosition(), target.getAdapterPosition());
+            return true;
+        }
+
+        @Override
+        public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+            //TODO
+        }
+
+        //defines the enabled move directions in each state (idle, swiping, dragging).
+        @Override
+        public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+            return makeFlag(ItemTouchHelper.ACTION_STATE_DRAG,
+                    ItemTouchHelper.DOWN | ItemTouchHelper.UP | ItemTouchHelper.START | ItemTouchHelper.END);
+        }
+    };
 }

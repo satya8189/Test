@@ -253,10 +253,6 @@ public class ChatMessageView extends RelativeLayout {
             this.value = value;
         }
 
-        public int getValue() {
-            return value;
-        }
-
         public static ArrowPosition getEnum(int value) {
             switch (value) {
                 case 0:
@@ -271,6 +267,10 @@ public class ChatMessageView extends RelativeLayout {
                     return LEFT;
             }
         }
+
+        public int getValue() {
+            return value;
+        }
     }
 
     public enum ArrowGravity {
@@ -280,10 +280,6 @@ public class ChatMessageView extends RelativeLayout {
 
         ArrowGravity(int value) {
             this.value = value;
-        }
-
-        public int getValue() {
-            return value;
         }
 
         public static ArrowGravity getEnum(int value) {
@@ -297,6 +293,10 @@ public class ChatMessageView extends RelativeLayout {
                 default:
                     return START;
             }
+        }
+
+        public int getValue() {
+            return value;
         }
 
     }

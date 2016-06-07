@@ -18,10 +18,10 @@ import com.wre.yin.whiterabbiteventapp.R;
  * Created by YINSOL on 5/24/2016.
  */
 public class CustomAdapter extends BaseAdapter {
+    private static LayoutInflater inflater = null;
     String[] result;
     Context context;
     int[] imageId;
-    private static LayoutInflater inflater = null;
 
     public CustomAdapter(DocShareActivity docShareActivity, String[] wordDocsNameList, int[] wordDocImage) {
         result = wordDocsNameList;
@@ -44,11 +44,6 @@ public class CustomAdapter extends BaseAdapter {
     @Override
     public long getItemId(int position) {
         return position;
-    }
-
-    public class Holder {
-        TextView docsName;
-        ImageView docsTypeImage;
     }
 
     @Override
@@ -93,5 +88,10 @@ public class CustomAdapter extends BaseAdapter {
             }
         });
         return rowView;
+    }
+
+    public class Holder {
+        TextView docsName;
+        ImageView docsTypeImage;
     }
 }

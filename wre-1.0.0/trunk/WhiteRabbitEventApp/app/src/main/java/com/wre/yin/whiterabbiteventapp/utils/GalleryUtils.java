@@ -29,7 +29,7 @@ public class GalleryUtils {
     public ArrayList<String> getFilePaths() {
         ArrayList<String> filePaths = new ArrayList<String>();
 
-        File directory = new File(Environment.getExternalStorageDirectory()+ File.separator + Constants.PHOTO_ALBUM);
+        File directory = new File(Environment.getExternalStorageDirectory() + File.separator + Constants.PHOTO_ALBUM);
 
         // check for directory
         if (directory.isDirectory()) {

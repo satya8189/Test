@@ -11,28 +11,28 @@ import com.wre.yin.whiterabbiteventapp.utils.GalleryUtils;
 
 public class FullScreenViewActivity extends Activity {
 
-	private GalleryUtils utils;
-	private FullScreenImageAdapter adapter;
-	private ViewPager viewPager;
+    private GalleryUtils utils;
+    private FullScreenImageAdapter adapter;
+    private ViewPager viewPager;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_fullscreen_view);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_fullscreen_view);
 
-		viewPager = (ViewPager) findViewById(R.id.pager);
+        viewPager = (ViewPager) findViewById(R.id.pager);
 
-		utils = new GalleryUtils(getApplicationContext());
+        utils = new GalleryUtils(getApplicationContext());
 
-		Intent i = getIntent();
-		int position = i.getIntExtra("position", 0);
+        Intent i = getIntent();
+        int position = i.getIntExtra("position", 0);
 
-		adapter = new FullScreenImageAdapter(FullScreenViewActivity.this,
-				utils.getFilePaths());
+        adapter = new FullScreenImageAdapter(FullScreenViewActivity.this,
+                utils.getFilePaths());
 
-		viewPager.setAdapter(adapter);
+        viewPager.setAdapter(adapter);
 
-		// displaying selected image first
-		viewPager.setCurrentItem(position);
-	}
+        // displaying selected image first
+        viewPager.setCurrentItem(position);
+    }
 }

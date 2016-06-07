@@ -5,15 +5,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class AgendaRecyclerViewHolder extends RecyclerView.ViewHolder {
 
     TextView agendaTitle, agendaDesc, agendaTime;
-    LinearLayout expandLayout,agendaLayout;
+    LinearLayout expandLayout, agendaLayout;
     CardView cardView;
-    ImageView plus,minus;
+    ImageView plus, minus;
 
     public AgendaRecyclerViewHolder(View itemView) {
         super(itemView);
@@ -26,7 +25,7 @@ public class AgendaRecyclerViewHolder extends RecyclerView.ViewHolder {
 
         expandLayout = (LinearLayout) itemView.findViewById(R.id.expanded_layout);
 
-        agendaLayout = (LinearLayout) itemView.findViewById(R.id.agenda_re_layout);
+         agendaLayout = (LinearLayout) itemView.findViewById(R.id.agenda_re_layout);
 
         cardView = (CardView) itemView.findViewById(R.id.card_view);
 

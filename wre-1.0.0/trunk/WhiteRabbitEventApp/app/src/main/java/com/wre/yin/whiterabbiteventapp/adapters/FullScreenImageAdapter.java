@@ -20,62 +20,62 @@ import java.util.ArrayList;
 
 public class FullScreenImageAdapter extends PagerAdapter {
 
-	private Activity _activity;
-	private ArrayList<String> _imagePaths;
-	private LayoutInflater inflater;
+    private Activity _activity;
+    private ArrayList<String> _imagePaths;
+    private LayoutInflater inflater;
 
-	// constructor
-	public FullScreenImageAdapter(Activity activity,
-								  ArrayList<String> imagePaths) {
-		this._activity = activity;
-		this._imagePaths = imagePaths;
-	}
+    // constructor
+    public FullScreenImageAdapter(Activity activity,
+                                  ArrayList<String> imagePaths) {
+        this._activity = activity;
+        this._imagePaths = imagePaths;
+    }
 
-	@Override
-	public int getCount() {
-		return this._imagePaths.size();
-	}
+    @Override
+    public int getCount() {
+        return this._imagePaths.size();
+    }
 
-	@Override
+    @Override
     public boolean isViewFromObject(View view, Object object) {
         return view == ((RelativeLayout) object);
     }
-	
-	@Override
+
+    @Override
     public Object instantiateItem(ViewGroup container, int position) {
         TouchImageView imgDisplay;
         Button btnClose;
- 
+
         inflater = (LayoutInflater) _activity
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View viewLayout = inflater.inflate(R.layout.layout_fullscreen_image, container,
                 false);
- 
+
         imgDisplay = (TouchImageView) viewLayout.findViewById(R.id.imgDisplay);
         btnClose = (Button) viewLayout.findViewById(R.id.btnClose);
-        
+
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inPreferredConfig = Bitmap.Config.ARGB_8888;
         Bitmap bitmap = BitmapFactory.decodeFile(_imagePaths.get(position), options);
         imgDisplay.setImageBitmap(bitmap);
-        
+
         // close button click event
         btnClose.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				_activity.finish();
-			}
-		}); 
+            @Override
+            public void onClick(View v) {
+                _activity.finish();
+            }
+        });
 
         ((ViewPager) container).addView(viewLayout);
- 
+
         return viewLayout;
-	}
-	
-	@Override
+    }
+
+    @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
         ((ViewPager) container).removeView((RelativeLayout) object);
- 
+
     }
 
 }
