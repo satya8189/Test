@@ -36,6 +36,16 @@
 								required>
 						</div>
 					</div>
+					
+					
+						<div class="col-md-6">
+					<div class="form-group col-md-6" id="uploadDiv">
+						<label class="flot-left">Upload File </label> <input type="file"
+							class="form-control form-group" name="file" id="file"
+							onchange="angular.element(this).scope().setFiles(this)">
+						
+					</div>
+				</div>
 				<button type="submit" class="btn button  save margin-2">Update</button>
 			</form>
 

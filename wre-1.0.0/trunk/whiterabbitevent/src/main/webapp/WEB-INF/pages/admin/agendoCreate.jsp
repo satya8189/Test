@@ -11,14 +11,14 @@
 		 <i class="glyphicon glyphicon-chevron-left"></i>
 	</a>
 <div class="panel">
- <div class="panel-heading text-center font-size-20 padding-15">Create Agendo</div>
+ <div class="panel-heading text-center font-size-20 padding-15">Create Agenda</div>
   <div class="panel-body text-center">
   
     <div class="row">
 	<div class="col-md-12">
 	  <div class="form-group col-md-6" >
-          <label class="flot-left">Agendo_Name <span style="color:red;">*</span></label>
-      <input type="text" class="input-text form-control" id="agendo_Name" placeholder="Agendo_Name"  ng-model="agendo.agenTitle" 
+          <label class="flot-left">Agenda_Name <span style="color:red;">*</span></label>
+      <input type="text" class="input-text form-control" id="agenda_Name" placeholder="Agenda_Name"  ng-model="agendo.agenTitle" 
       name="AgendaTitle"   required>
       <span ng-if="agendaForm.$submitted" ng-messages="agendaForm.AgendaTitle.$error" ng-messages-include="errors">
 		  </span>
