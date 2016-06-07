@@ -41,7 +41,7 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
 
     private String partiName, partId;
     private TextView partName;
-    private List<HashMap<String,String>> list;
+    private List<HashMap<String, String>> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,36 +107,36 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
                 List<ParticipantEventBean> eventList = Utils.getList(result, ParticipantEventBean.class);
 
 
-                list=new ArrayList<HashMap<String,String>>();
+                list = new ArrayList<HashMap<String, String>>();
                 for (ParticipantEventBean bean : eventList) {
                     HashMap<String, String> file_maps = new HashMap<String, String>();
-                    file_maps.put("eventName",bean.getEventname());
-                    file_maps.put("eventId",bean.getEventId().toString());
-                    file_maps.put("date",Utils.getDateFromJson(bean.getEventDate(),"d"));
-                    file_maps.put("eventImage",Constants.IMAGE_URL+bean.getEventId()+"/event_images/Screenshot%20from%202015-04-27%2014:20:13.png");
+                    file_maps.put("eventName", bean.getEventname());
+                    file_maps.put("eventId", bean.getEventId().toString());
+                    file_maps.put("date", Utils.getDateFromJson(bean.getEventDate(), "d"));
+                    file_maps.put("eventImage", Constants.IMAGE_URL + bean.getEventId() + "/event_images/Screenshot%20from%202015-04-27%2014:20:13.png");
                     list.add(file_maps);
                 }
-                for(HashMap<String,String> map:list) {
-                        TextSliderView textSliderView = new TextSliderView(HomeActivity.this);
-                        // initialize a SliderLayout
-                        textSliderView.description(map.get("eventName"))
-                                .image(map.get("eventImage"))
-                                .setScaleType(BaseSliderView.ScaleType.Fit).dateTime(map.get("date"))
-                                .setOnSliderClickListener(HomeActivity.this);
+                for (HashMap<String, String> map : list) {
+                    TextSliderView textSliderView = new TextSliderView(HomeActivity.this);
+                    // initialize a SliderLayout
+                    textSliderView.description(map.get("eventName"))
+                            .image(map.get("eventImage"))
+                            .setScaleType(BaseSliderView.ScaleType.Fit).dateTime(map.get("date"))
+                            .setOnSliderClickListener(HomeActivity.this);
 
 
-                        //add your extra information
-                        textSliderView.bundle(new Bundle());
-                        textSliderView.getBundle()
-                                .putString("extra", map.get("eventId"));
+                    //add your extra information
+                    textSliderView.bundle(new Bundle());
+                    textSliderView.getBundle()
+                            .putString("extra", map.get("eventId"));
                     textSliderView.getBundle()
                             .putString("date", map.get("date"));
 
-                        mDemoSlider.addSlider(textSliderView);
-                        mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Fade);
-                        mDemoSlider.setPresetTransformer(SliderLayout.Transformer.ZoomIn);
-                        mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Stack);
-                    }
+                    mDemoSlider.addSlider(textSliderView);
+                    mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Fade);
+                    mDemoSlider.setPresetTransformer(SliderLayout.Transformer.ZoomIn);
+                    mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Stack);
+                }
 
             }
         }).execute();
