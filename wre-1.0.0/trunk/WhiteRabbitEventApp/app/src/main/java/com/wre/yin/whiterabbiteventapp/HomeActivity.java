@@ -60,7 +60,7 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
 
         partName = (TextView) findViewById(R.id.profile_name);
 
-        partiName = prefs.getString("partName", null);
+        partiName = prefs.getString("name", null);
         partId = prefs.getString("partId", null);
 
         partName.setText(partiName);
@@ -112,7 +112,7 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
                     HashMap<String, String> file_maps = new HashMap<String, String>();
                     file_maps.put("eventName",bean.getEventname());
                     file_maps.put("eventId",bean.getEventId().toString());
-                    file_maps.put("date",Utils.getDateFromJson(bean.getEventDate()));
+                    file_maps.put("date",Utils.getDateFromJson(bean.getEventDate(),"d"));
                     file_maps.put("eventImage",Constants.IMAGE_URL+bean.getEventId()+"/event_images/Screenshot%20from%202015-04-27%2014:20:13.png");
                     list.add(file_maps);
                 }

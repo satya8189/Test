@@ -60,7 +60,7 @@ public class NewsFeedActivity extends AppCompatActivity {
 
 
 
-                    String newsDate = Utils.getDateFromJson(bean.getNewsDate());
+                    String newsDate = Utils.getDateFromJson(bean.getNewsDate(),"full");
                     map.put("newsDate", newsDate);
 
 

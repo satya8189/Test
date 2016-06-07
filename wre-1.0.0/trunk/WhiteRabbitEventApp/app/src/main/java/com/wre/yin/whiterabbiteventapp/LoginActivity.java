@@ -77,6 +77,7 @@ public class LoginActivity extends AppCompatActivity {
                             prefs = getSharedPreferences("Chat", 0);
                             editor=prefs.edit();
                             editor.putString("name",pBean.getFirstName());
+                            editor.putString("partId",pBean.getParticipantId().toString());
                             editor.commit();
                             String strPref = prefs.getString("mobile",null);
                             if(strPref==null) {
