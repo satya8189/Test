@@ -21,7 +21,9 @@ public class TextSliderView extends BaseSliderView{
         View v = LayoutInflater.from(getContext()).inflate(R.layout.render_type_text,null);
         ImageView target = (ImageView)v.findViewById(R.id.daimajia_slider_image);
         TextView description = (TextView)v.findViewById(R.id.description);
+        TextView dateTime=(TextView)v.findViewById(R.id.home_date_time);
         description.setText(getDescription());
+        dateTime.setText(getDateTime());
         bindEventAndShow(v, target);
         return v;
     }

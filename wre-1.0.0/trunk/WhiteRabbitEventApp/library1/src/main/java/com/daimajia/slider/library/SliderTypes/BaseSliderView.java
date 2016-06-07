@@ -46,6 +46,7 @@ public abstract class BaseSliderView {
     private ImageLoadListener mLoadListener;
 
     private String mDescription;
+    private String mDateTime;
 
     private Picasso mPicasso;
 
@@ -99,6 +100,11 @@ public abstract class BaseSliderView {
      */
     public BaseSliderView description(String description){
         mDescription = description;
+        return this;
+    }
+
+    public BaseSliderView dateTime(String mDateTimea){
+        mDateTime = mDateTimea;
         return this;
     }
 
@@ -167,6 +173,10 @@ public abstract class BaseSliderView {
 
     public String getDescription(){
         return mDescription;
+    }
+
+    public String getDateTime(){
+        return mDateTime;
     }
 
     public Context getContext(){
