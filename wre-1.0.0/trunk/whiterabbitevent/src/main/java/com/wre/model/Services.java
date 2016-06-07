@@ -26,18 +26,21 @@ public class Services  implements java.io.Serializable {
      private Long serviceId;
      private String serviceName;
      private String serviceDesc;
+     private int order;
      private Set<EventServices> eventServiceses = new HashSet(0);
 
     public Services() {
     }
 
-    public Services(String serviceName, String serviceDesc, Set<EventServices> eventServiceses) {
+    public Services(String serviceName, String serviceDesc, int order,Set<EventServices> eventServiceses) {
        this.serviceName = serviceName;
        this.serviceDesc = serviceDesc;
+       this.order=order;
        this.eventServiceses = eventServiceses;
     }
    
-     @Id @GeneratedValue(strategy=IDENTITY)
+     
+	@Id @GeneratedValue(strategy=IDENTITY)
 
     
     @Column(name="Service_ID", unique=true, nullable=false)
@@ -54,6 +57,16 @@ public class Services  implements java.io.Serializable {
     public String getServiceName() {
         return this.serviceName;
     }
+    
+    @Column(name="Order")
+    public int getOrder() {
+		return order;
+	}
+
+	public void setOrder(int order) {
+		this.order = order;
+	}
+
     
     public void setServiceName(String serviceName) {
         this.serviceName = serviceName;
