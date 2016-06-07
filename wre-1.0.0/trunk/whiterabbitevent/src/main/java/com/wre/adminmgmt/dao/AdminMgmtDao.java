@@ -13,6 +13,7 @@ import com.wre.model.Participants;
 import com.wre.model.Speaker;
 import com.wre.model.Sponcor;
 import com.wre.model.SurveyQuestion;
+import com.wre.systemadminmgmt.bean.ParticipantBean;
 
 public interface AdminMgmtDao  extends GenericDao<Object>{
 
@@ -55,6 +56,8 @@ public Speaker getSpeakerBySpeakerId(Long speakerId);
 public List<Participants> getUser(String mobno);
 
 public List<EventServices> geteventServicesList(Long eventId);
+public String participantRegUpdate(ParticipantBean participantBean);
+
 
 
 }

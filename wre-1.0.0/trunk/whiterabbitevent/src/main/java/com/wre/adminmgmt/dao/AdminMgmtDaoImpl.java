@@ -22,6 +22,7 @@ import com.wre.model.Participants;
 import com.wre.model.Speaker;
 import com.wre.model.Sponcor;
 import com.wre.model.SurveyQuestion;
+import com.wre.systemadminmgmt.bean.ParticipantBean;
 
 
 
@@ -272,7 +273,17 @@ return (List<Participants>)c.list();
 
 }
 
-
+public String participantRegUpdate(ParticipantBean participantBean){
+	String query = "Update participants set Reg_ID=:regId where Phone=:phone";
+		
+	SQLQuery sqlQuery = sessionFactory.getCurrentSession().createSQLQuery(
+			query);
+	sqlQuery.setParameter("regId", participantBean.getRegisterId());
+	sqlQuery.setParameter("phone", participantBean.getPhoneNumber());
+	sqlQuery.executeUpdate();
+	return "sucsess";
+		
+}
 //Services
 @Override
 public List<EventServices> geteventServicesList(Long eventId) {
