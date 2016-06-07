@@ -1,6 +1,7 @@
 package com.wre.yin.whiterabbiteventapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.daimajia.slider.library.Indicators.PagerIndicator;
 import com.daimajia.slider.library.SliderLayout;
@@ -18,19 +20,28 @@ import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
+import com.wre.yin.whiterabbiteventapp.beans.ParticipantBean;
+import com.wre.yin.whiterabbiteventapp.beans.ParticipantEventBean;
+import com.wre.yin.whiterabbiteventapp.utils.Callback;
 import com.wre.yin.whiterabbiteventapp.utils.Constants;
+import com.wre.yin.whiterabbiteventapp.utils.MyAsyncTask;
+import com.wre.yin.whiterabbiteventapp.utils.Utils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class HomeActivity extends AppCompatActivity implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener {
 
     private SliderLayout mDemoSlider;
-
     private Target target;
-
     private ImageView proFic, profDetails;
-
     private RelativeLayout rl1;
+    private SharedPreferences prefs;
+
+    private String partiName, partId;
+    private TextView partName;
+    private List<HashMap<String,String>> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +50,20 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
 
         getSupportActionBar().hide();
 
+        prefs = getSharedPreferences("Chat", 0);
+
         mDemoSlider = (SliderLayout) findViewById(R.id.slider);
         mDemoSlider.setCustomIndicator((PagerIndicator) findViewById(R.id.custom_indicator));
         profDetails = (ImageView) findViewById(R.id.profile_details);
         proFic = (ImageView) findViewById(R.id.profilepic);
         rl1 = (RelativeLayout) findViewById(R.id.rl1);
+
+        partName = (TextView) findViewById(R.id.profile_name);
+
+        partiName = prefs.getString("partName", null);
+        partId = prefs.getString("partId", null);
+
+        partName.setText(partiName);
 
         if (Constants.checkAndRequestPermissions(HomeActivity.this)) ;
         profDetails.setOnClickListener(new View.OnClickListener() {
@@ -81,30 +101,45 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
                 .load(R.drawable.user_icon)
                 .into(target);
 
-        HashMap<String, Integer> file_maps = new HashMap<String, Integer>();
-        file_maps.put("Event 1", R.drawable.event_image1);
-        file_maps.put("Event 2", R.drawable.event_image2);
-        file_maps.put("Event 3", R.drawable.event_image3);
+        new MyAsyncTask(Constants.EVENT_LIST + "?participantId=" + partId, null, HomeActivity.this, new Callback() {
+            @Override
+            public void onResult(String result) {
+                List<ParticipantEventBean> eventList = Utils.getList(result, ParticipantEventBean.class);
 
-        for (String name : file_maps.keySet()) {
-            TextSliderView textSliderView = new TextSliderView(this);
-            // initialize a SliderLayout
-            textSliderView
-                    .description(name)
-                    .image(file_maps.get(name))
-                    .setScaleType(BaseSliderView.ScaleType.Fit)
-                    .setOnSliderClickListener(this);
 
-            //add your extra information
-            textSliderView.bundle(new Bundle());
-            textSliderView.getBundle()
-                    .putString("extra", name);
+                list=new ArrayList<HashMap<String,String>>();
+                for (ParticipantEventBean bean : eventList) {
+                    HashMap<String, String> file_maps = new HashMap<String, String>();
+                    file_maps.put("eventName",bean.getEventname());
+                    file_maps.put("eventId",bean.getEventId().toString());
+                    file_maps.put("date",Utils.getDateFromJson(bean.getEventDate()));
+                    file_maps.put("eventImage",Constants.IMAGE_URL+bean.getEventId()+"/event_images/Screenshot%20from%202015-04-27%2014:20:13.png");
+                    list.add(file_maps);
+                }
+                for(HashMap<String,String> map:list) {
+                        TextSliderView textSliderView = new TextSliderView(HomeActivity.this);
+                        // initialize a SliderLayout
+                        textSliderView.description(map.get("eventName"))
+                                .image(map.get("eventImage"))
+                                .setScaleType(BaseSliderView.ScaleType.Fit).dateTime(map.get("date"))
+                                .setOnSliderClickListener(HomeActivity.this);
 
-            mDemoSlider.addSlider(textSliderView);
-            mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Fade);
-            mDemoSlider.setPresetTransformer(SliderLayout.Transformer.ZoomIn);
-            mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Stack);
-        }
+
+                        //add your extra information
+                        textSliderView.bundle(new Bundle());
+                        textSliderView.getBundle()
+                                .putString("extra", map.get("eventId"));
+                    textSliderView.getBundle()
+                            .putString("date", map.get("date"));
+
+                        mDemoSlider.addSlider(textSliderView);
+                        mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Fade);
+                        mDemoSlider.setPresetTransformer(SliderLayout.Transformer.ZoomIn);
+                        mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Stack);
+                    }
+
+            }
+        }).execute();
     }
 
 
@@ -127,8 +162,10 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
     public void onSliderClick(BaseSliderView slider) {
         // Toast.makeText(this, slider.getBundle().get("extra") + "", Toast.LENGTH_SHORT).show();
         String eventName = slider.getBundle().get("extra").toString();
+        String date = slider.getBundle().get("date").toString();
         Intent i = new Intent(HomeActivity.this, EventDashboardActivity.class);
-        i.putExtra("eventName", eventName);
+        i.putExtra("eventId", eventName);
+        i.putExtra("date", date);
         startActivity(i);
 
     }

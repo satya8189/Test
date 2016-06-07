@@ -41,7 +41,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/time_date"
+            android:id="@+id/event_time_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/event_name"

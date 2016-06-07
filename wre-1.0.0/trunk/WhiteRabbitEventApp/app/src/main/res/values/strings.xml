@@ -20,4 +20,47 @@
 
     <string name="title_activity_maps">Map</string>
 
+    <drawable name="service_1">@drawable/details_pic</drawable>
+    <drawable name="service_2">@drawable/agenda_pic</drawable>
+    <drawable name="service_3">@drawable/news_feed_pic</drawable>
+    <drawable name="service_4">@drawable/gallery_pic</drawable>
+    <drawable name="service_5">@drawable/crowd_pic</drawable>
+    <drawable name="service_6">@drawable/videos_pic</drawable>
+    <drawable name="service_7">@drawable/doc_pic</drawable>
+    <drawable name="service_8">@drawable/qa_pic</drawable>
+    <drawable name="service_9">@drawable/message_pic</drawable>
+    <drawable name="service_10">@drawable/survey_pic</drawable>
+    <drawable name="service_11">@drawable/qr_pic</drawable>
+    <drawable name="service_12">@drawable/social_pic</drawable>
+    <drawable name="service_13">@drawable/net_pic</drawable>
+    <drawable name="service_14">@drawable/venue_pic</drawable>
+    <drawable name="service_15">@drawable/sponsors_pic</drawable>
+    <drawable name="service_16">@drawable/speaker_pic</drawable>
+    <drawable name="service_17">@drawable/invite_pic</drawable>
+    <drawable name="service_18">@drawable/invite_pic</drawable>
+    <drawable name="service_19">@drawable/invite_pic</drawable>
+
+    <integer-array name="services">
+        <item>@drawable/service_1</item>
+        <item>@drawable/service_2</item>
+        <item>@drawable/service_3</item>
+        <item>@drawable/service_4</item>
+        <item>@drawable/service_5</item>
+        <item>@drawable/service_6</item>
+        <item>@drawable/service_7</item>
+        <item>@drawable/service_8</item>
+        <item>@drawable/service_9</item>
+        <item>@drawable/service_10</item>
+        <item>@drawable/service_11</item>
+        <item>@drawable/service_12</item>
+        <item>@drawable/service_13</item>
+        <item>@drawable/service_14</item>
+        <item>@drawable/service_15</item>
+        <item>@drawable/service_16</item>
+        <item>@drawable/service_17</item>
+        <item>@drawable/service_18</item>
+        <item>@drawable/service_19</item>
+
+    </integer-array>
+
 </resources>

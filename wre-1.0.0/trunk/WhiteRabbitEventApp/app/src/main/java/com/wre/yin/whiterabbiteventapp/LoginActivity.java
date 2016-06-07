@@ -82,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
                             if(strPref==null) {
                                 new Register().execute(pBean.getPhoneNumber());
                             }
-System.out.println("with out register");
+
                             editor.putString("mobile",pBean.getPhoneNumber());
                             editor.commit();
                             Intent otpAct = new Intent(LoginActivity.this, OTPActivity.class);
@@ -125,7 +125,7 @@ System.out.println("with out register");
                 if (gcm == null) {
                     gcm = GoogleCloudMessaging.getInstance(context);
                     regid = gcm.register(SENDER_ID);
-                    Log.e("RegId",regid);
+                    //Log.e("RegId",regid);
                     ParticipantBean p=new ParticipantBean();
                     p.setPhoneNumber(phone);
                     p.setRegisterId(regid);

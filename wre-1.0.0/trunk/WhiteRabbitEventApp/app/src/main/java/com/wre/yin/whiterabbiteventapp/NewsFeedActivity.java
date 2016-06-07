@@ -33,21 +33,21 @@ public class NewsFeedActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     String layoutStatus = "gone";
     private List<HashMap<String, String>> newsList;
-    Format formatter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news_feed);
         String nameTxt = getIntent().getExtras().getString("name");
-        formatter= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(nameTxt);
 
 
         recyclerView = (RecyclerView) findViewById(R.id.newsfeed_recycler_view);
 
-        new MyAsyncTask(Constants.NEWS_LIST + "?eventId=9", null, NewsFeedActivity.this, new Callback() {
+        new MyAsyncTask(Constants.NEWS_LIST + "?eventId=16", null, NewsFeedActivity.this, new Callback() {
             @Override
             public void onResult(String result) {
                 newsList = new ArrayList<HashMap<String, String>>();
@@ -60,7 +60,7 @@ public class NewsFeedActivity extends AppCompatActivity {
 
 
 
-                    String newsDate = formatter.format(bean.getNewsDate());
+                    String newsDate = Utils.getDateFromJson(bean.getNewsDate());
                     map.put("newsDate", newsDate);
 
 

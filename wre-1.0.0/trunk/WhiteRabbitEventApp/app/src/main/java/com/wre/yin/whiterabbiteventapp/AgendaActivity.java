@@ -44,7 +44,7 @@ public class AgendaActivity extends AppCompatActivity {
 
         recyclerView = (RecyclerView) findViewById(R.id.agenda_recycler_view);
 
-        new MyAsyncTask(Constants.AGENDA+"?eventId=9", null, AgendaActivity.this, new Callback() {
+        new MyAsyncTask(Constants.AGENDA+"?eventId=16", null, AgendaActivity.this, new Callback() {
             @Override
             public void onResult(String result) {
                 agendaList=new ArrayList<HashMap<String, String>>();

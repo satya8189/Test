@@ -9,6 +9,7 @@ import org.json.JSONObject;
 
 import java.security.Timestamp;
 import java.text.DateFormat;
+import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -16,6 +17,7 @@ import java.util.List;
 
 
 public class Utils {
+    private static Format formatter;
     private Utils() {
     }
 
@@ -27,7 +29,7 @@ public class Utils {
     public static String getJson(final Object object) {
         Gson gson = new Gson();
         String res = gson.toJson(object);
-        System.out.println("Json :" + res);
+        //System.out.println("Json :" + res);
         return res;
     }
 
@@ -79,11 +81,11 @@ public class Utils {
         float proportion = ((float) count) / ((float) total);
         return proportion * 100;
     }
+    public static String getDateFromJson(Date date){
+        formatter= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return formatter.format(date);
+    }
 
-   /* public static Date getDateFromJson(String dateString) {
-        Timestamp stamp = new Timestamp(dateString);
-        Date date = new Date(stamp.getTime());
-        return date;
-    }*/
+
 
 }

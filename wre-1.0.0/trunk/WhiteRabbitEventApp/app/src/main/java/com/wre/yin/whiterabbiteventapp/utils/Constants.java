@@ -29,17 +29,21 @@ public class Constants {
 
     //url constants
     public static String URL1 = "http://192.168.1.85:8080/Chatting/rest/chat/";
+    public static String IMAGE_URL="http://183.82.103.156:8080/Resources/wre/";
 
     public static String URL = "http://183.82.103.156:8080/whiterabbitevent/admin/";
     public static String PARTICIPENT_URL = "http://183.82.103.156:8080/whiterabbitevent/";
 
 
+    public static String SYSTEM_URL = "http://183.82.103.156:8080/whiterabbitevent/systemadmin/";
 
 
     public static final String IMAGE_DIRECTORY_NAME = "Image File Upload";
     public static final String VIDEO_DIRECTORY_NAME = "Video File Upload";
     public static final String UPLOAD_IMAGE_VIDEO = URL1 + "imageUpload";
 
+    public static final String EVENT_LIST = SYSTEM_URL + "getParticipantEventList";
+    public static final String EVENT_SERVICES_LIST=URL+"eventdetailsList?eventId=";
     public static final String AGENDA=URL+"agendoDetails";
     public static final String NEWS_LIST=URL+"newsList";
     public static final String PARTICIPENT_LOGIN=PARTICIPENT_URL+"participantlogin";

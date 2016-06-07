@@ -4,24 +4,22 @@ package com.wre.yin.whiterabbiteventapp.beans;
  * Created by YINSOL on 5/2/2016.
  */
 
-import android.graphics.Bitmap;
-
 public class Item {
-    Bitmap image;
+    int id;
     String title;
 
-    public Item(Bitmap image, String title) {
+    public Item(int id, String title) {
         super();
-        this.image = image;
+        this.id = id;
         this.title = title;
     }
 
-    public Bitmap getImage() {
-        return image;
+    public int getId() {
+        return id;
     }
 
-    public void setImage(Bitmap image) {
-        this.image = image;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -31,6 +29,4 @@ public class Item {
     public void setTitle(String title) {
         this.title = title;
     }
-
-
 }

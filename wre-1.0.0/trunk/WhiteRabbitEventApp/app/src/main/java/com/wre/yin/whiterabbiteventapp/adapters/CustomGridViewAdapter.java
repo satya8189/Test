@@ -2,6 +2,7 @@ package com.wre.yin.whiterabbiteventapp.adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,8 +49,13 @@ public class CustomGridViewAdapter extends ArrayAdapter<Item> {
         }
 
         Item item = data.get(position);
+
         holder.txtTitle.setText(item.getTitle());
-        holder.imageItem.setImageBitmap(item.getImage());
+
+        int idIndex=item.getId();
+        TypedArray img;
+        img = context.getResources().obtainTypedArray(R.array.services);
+        holder.imageItem.setImageResource(img.getResourceId(idIndex-1, 1));
         return row;
 
     }

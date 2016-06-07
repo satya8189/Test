@@ -1,5 +1,7 @@
 package com.wre.yin.whiterabbiteventapp.beans;
 
+import java.util.Date;
+
 /**
  * Created by root on 3/6/16.
  */
@@ -9,6 +11,15 @@ public class ParticipantEventBean {
     private Long eventId;
     private Long participateId;
     private String eventname ;
+    private Date eventDate;
+
+    public Date getEventDate() {
+        return eventDate;
+    }
+
+    public void setEventDate(Date eventDate) {
+        this.eventDate = eventDate;
+    }
 
     public Long getParticipateEventId() {
         return participateEventId;
