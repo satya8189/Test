@@ -54,5 +54,7 @@ public List<Speaker> getSpeakersList(Long eventId);
 public Speaker getSpeakerBySpeakerId(Long speakerId);
 public List<Participants> getUser(String mobno);
 
+public List<EventServices> geteventServicesList(Long eventId);
+
 
 }

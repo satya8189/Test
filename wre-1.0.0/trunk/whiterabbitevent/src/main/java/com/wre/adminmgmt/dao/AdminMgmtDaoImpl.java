@@ -7,6 +7,7 @@ import org.apache.commons.logging.LogFactory;
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.SQLQuery;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -231,7 +232,7 @@ public Sponcor getSponsorBySponsorId(Long sponcorId) {
 	Criteria criteria=sessionFactory.getCurrentSession().createCriteria(Sponcor.class);
     criteria.add(Restrictions.eq("sponcorId",sponcorId));
 	criteria.setFetchMode("sponcor", FetchMode.EAGER);
-  return (Sponcor)criteria.uniqueResult();
+  return (Sponcor) criteria.uniqueResult();
 	
 	//return null;
 }
@@ -269,6 +270,26 @@ Criteria c=sessionFactory.getCurrentSession().createCriteria(Participants.class)
 c.add(Restrictions.ne("phone",mobno));
 return (List<Participants>)c.list();
 
+}
+
+
+//Services
+@Override
+public List<EventServices> geteventServicesList(Long eventId) {
+	
+
+		Criteria criteria=sessionFactory.getCurrentSession().createCriteria(EventServices.class);
+		
+		criteria.setFetchMode("event", FetchMode.EAGER);
+		criteria.setFetchMode("services", FetchMode.EAGER);
+		criteria.add(Restrictions.eq("event.eventId",eventId));
+		criteria.add(Restrictions.ne("services.serviceId",new Long(18)));
+		criteria.add(Restrictions.ne("services.serviceId",new Long(19)));
+		//criteria.addOrder(Order.asc("services.order"));
+		
+		List<EventServices> eventServicesList=criteria.list();
+		 return eventServicesList;
+	
 }
 
 
