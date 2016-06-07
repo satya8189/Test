@@ -81,8 +81,12 @@ public class Utils {
         float proportion = ((float) count) / ((float) total);
         return proportion * 100;
     }
-    public static String getDateFromJson(Date date){
-        formatter= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    public static String getDateFromJson(Date date,String type){
+        if(type.equals("full")) {
+            formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        }else{
+            formatter = new SimpleDateFormat("yyyy-MM-dd");
+        }
         return formatter.format(date);
     }
 
