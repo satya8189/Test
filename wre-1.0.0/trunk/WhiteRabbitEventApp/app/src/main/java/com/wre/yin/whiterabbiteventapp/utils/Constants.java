@@ -43,11 +43,15 @@ public class Constants {
     public static final String UPLOAD_IMAGE_VIDEO = URL1 + "imageUpload";
 
     public static final String EVENT_LIST = SYSTEM_URL + "getParticipantEventList";
-    public static final String EVENT_SERVICES_LIST=URL+"eventdetailsList?eventId=";
+    public static final String EVENT_SERVICES_LIST=URL+"eventServicesList?eventId=";
     public static final String AGENDA=URL+"agendoDetails";
     public static final String NEWS_LIST=URL+"newsList";
     public static final String PARTICIPENT_LOGIN=PARTICIPENT_URL+"participantlogin";
     public static final String PARTICIPENT_REG_UPDATE=PARTICIPENT_URL+"participantRegUpdate";
+    public static final String INDIVIDUAL_SPEAKER=URL+"getSpeakerBySpeakerId?speakerId=";
+    public static final String INDIVIDUAL_SPONSOR=URL+"getSponsorDataonSponsorId?sponcorId=";
+
+
 
 
     //Image Gallery file path constansts
