@@ -456,11 +456,13 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 	// questionCreate
 	public void questionCreate(QuestionBean questionBean) {
 		SurveyQuestion surveyQuestion = new SurveyQuestion();
+		surveyQuestion.setQuestion(questionBean.getQuestion());
 		surveyQuestion.setOptionA(questionBean.getAnswer());
 		surveyQuestion.setOptionB(questionBean.getOptionB());
 		surveyQuestion.setOptionC(questionBean.getOptionC());
 		surveyQuestion.setOptionD(questionBean.getOptionD());
 		surveyQuestion.setAnswer(questionBean.getAnswer());
+		
 
 		Event event = new Event();
 		event.setEventId(questionBean.getEventId());
@@ -597,16 +599,51 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 	}
 
 	/* Update the Sponsor Data */
-	public void updateSponsor(SponsorBean spBean) {
-		Sponcor spObj = new Sponcor();
-		Event event = new Event();
-		event.setEventId(spBean.getEventId());
-		spObj.setEvent(event);
-		spObj.setSponcorId(spBean.getSponcorId());
-		spObj.setSponcorName(spBean.getSponcorName());
-		spObj.setSponcorDesc(spBean.getSponcorDesc());
+	public void updateSponsor(MultipartFile file,Long eventId,String type,String sponcorName,String sponcorDesc,Long sponcorId) {
+		
+		 log.info("Entered into createSponsor method");
+			
+			String filePath = WREConstants.RESOURCE_PATH + eventId + File.separator
+					+type+File.separator;
 
-		AdminMgmtDaoImpl.update(spObj);
+			if (file != null) {
+
+				try {
+					byte[] bytes = file.getBytes();
+					// Creating the directory to store file
+					File dir = new File(filePath);
+
+					if (!dir.exists()) {
+						dir.mkdirs();
+					}
+					// Create the file on server
+					File serverFile = new File(dir.getAbsolutePath() + File.separator
+							+"sponcor.png");
+					BufferedOutputStream stream = new BufferedOutputStream(
+							new FileOutputStream(serverFile));
+					stream.write(bytes);
+					stream.close();
+
+				} catch (Exception e) {
+				}
+
+			}
+
+			Sponcor sponcor = AdminMgmtDaoImpl.getSponsorBySponsorId(sponcorId);
+
+
+			
+			sponcor.setSponcorName(sponcorName);
+			sponcor.setSponcorDesc(sponcorDesc);
+	
+			if(file!=null){
+				sponcor.setFileName(file.getOriginalFilename());
+			}
+			log.info("SerImpl...sponcor bean saving....."
+					+ sponcor.getSponcorName());
+			AdminMgmtDaoImpl.update(sponcor);
+			
+		
 
 	}
 
@@ -642,11 +679,29 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 		
 		log.info("Entered into createSponsor method");
 		
-		String filePath = WREConstants.RESOURCE_PATH + eventId + File.separator
-				+type+File.separator;
+		String filePath = WREConstants.RESOURCE_PATH + eventId + WREConstants.FILE_SEPARATER
+				+type+WREConstants.FILE_SEPARATER;
 
 		if (file != null) {
-			saveFile(file, filePath);
+			try {
+				String name = file.getOriginalFilename();
+				byte[] bytes = file.getBytes();
+				// Creating the directory to store file
+				File dir = new File(filePath);
+
+				if (!dir.exists()) {
+					dir.mkdirs();
+				}
+				// Create the file on server
+				File serverFile = new File(dir.getAbsolutePath() + WREConstants.FILE_SEPARATER
+						+name);
+				BufferedOutputStream stream = new BufferedOutputStream(
+						new FileOutputStream(serverFile));
+				stream.write(bytes);
+				stream.close();
+
+			} catch (Exception e) {
+			}
 
 		}
 
@@ -691,22 +746,51 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 	}
 
 	@Override
-	public void udpateSpeaker(SpeakerBean spk) {
+	public void udpateSpeaker(MultipartFile file,Long eventId,String type,String speakerName, String location,String title,String description,String rating,Long speakerId) {
 
-		log.info("udateSpeaker....." + spk.getDescription());
+      log.info("Entered into createSponsor method");
+		
+		String filePath = WREConstants.RESOURCE_PATH + eventId + File.separator
+				+type+File.separator;
 
-		Speaker spentity = new Speaker();
-		Event e = new Event();
-		e.setEventId(spk.getEventId());
-		spentity.setEvent(e);
-		spentity.setSpeakerId(spk.getSpeakerId());
-		spentity.setSpeakerName(spk.getSpeakerName());
-		spentity.setTitle(spk.getTitle());
-		spentity.setDescription(spk.getDescription());
-		spentity.setLocation(spk.getLocation());
-		spentity.setRating(spk.getRating());
+		if (file != null) {
 
-		AdminMgmtDaoImpl.update(spentity);
+			try {
+				byte[] bytes = file.getBytes();
+				// Creating the directory to store file
+				File dir = new File(filePath);
+
+				if (!dir.exists()) {
+					dir.mkdirs();
+				}
+				// Create the file on server
+				File serverFile = new File(dir.getAbsolutePath() + File.separator
+						+"speaker.png");
+				BufferedOutputStream stream = new BufferedOutputStream(
+						new FileOutputStream(serverFile));
+				stream.write(bytes);
+				stream.close();
+
+			} catch (Exception e) {
+			}
+
+		}
+
+        Speaker speaker = AdminMgmtDaoImpl.getSpeakerBySpeakerId(speakerId);
+
+
+		speaker.setSpeakerName(speakerName);
+		speaker.setLocation(location);
+		speaker.setTitle(title);
+		speaker.setDescription(description);
+		speaker.setRating(rating);
+		if(file!=null){
+		speaker.setFileName(file.getOriginalFilename());
+		}
+		log.info("SerImpl...speaker bean saving....."
+				+ speaker.getDescription());
+		AdminMgmtDaoImpl.update(speaker);
+		
 	}
 
 	// uploadVenuLayout
@@ -788,5 +872,35 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 		
 	}
 
+	@Override
+	public List<EventBean> geteventServicesList(Long eventId) {
+		
+
+			List<EventServices> eventServicesList = AdminMgmtDaoImpl
+					.geteventServicesList(eventId);
+			List<EventBean> eventbeanList = new ArrayList<EventBean>();
+
+			for (EventServices eventServicesObj : eventServicesList) {
+				EventBean eventOjectBean = new EventBean();
+				eventOjectBean.setEventId(eventServicesObj.getEvent().getEventId());
+				eventOjectBean.setServiceId(eventServicesObj.getEvent()
+						.getEventId());
+				eventOjectBean.setEventName(eventServicesObj.getEvent()
+						.getEventName());
+				eventOjectBean.setEventAddress(eventServicesObj.getEvent()
+						.getEventAddress());
+				eventOjectBean.setEventAddress(eventServicesObj.getStatus());
+				eventOjectBean.setServiceId(eventServicesObj.getServices()
+						.getServiceId());
+				eventOjectBean.setServiceName(eventServicesObj.getServices()
+						.getServiceName());
+				eventOjectBean.setOrder(eventServicesObj.getServices().getOrder());
+				eventbeanList.add(eventOjectBean);
+			}
+			log.info("list size is --+" + eventbeanList.size());
+			return eventbeanList;
+		}
+	}
+
 	
-}
+

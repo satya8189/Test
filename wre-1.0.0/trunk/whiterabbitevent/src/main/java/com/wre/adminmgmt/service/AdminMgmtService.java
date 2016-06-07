@@ -68,7 +68,7 @@ public List<SponsorBean> getSponsorsList(Long eventId);
 
 public SponsorBean getSponsorForEdit(Long sponcorId);
 
-public void updateSponsor(SponsorBean spBean);
+public void updateSponsor(MultipartFile file,Long eventId,String type,String sponcorName,String sponcorDesc,Long sponcorId);
 
 public List<SpeakerBean> getSpeakersList(Long eventId);
 
@@ -76,7 +76,7 @@ public void createSpeaker(MultipartFile file,Long eventId,String type,String spe
 
 public SpeakerBean getSpeakerBySpeakerId(Long speakerId);
 
-public void udpateSpeaker(SpeakerBean spk);
+public void udpateSpeaker(MultipartFile file,Long eventId,String type,String speakerName, String location,String title,String description,String rating,Long speakerId);
 
 public void updateQuestionDetails(QuestionBean questionBean);
 
@@ -88,6 +88,8 @@ public void uploadEventImage(MultipartFile file, Long eventId, String type);
 
 public void createSponsor(MultipartFile file, Long eventId, String type,
 		String sponcorDesc, String speakerName);
+
+public List<EventBean> geteventServicesList(Long eventId);
 
 
 
