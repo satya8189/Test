@@ -24,6 +24,15 @@ public class EventBean {
     private Long serviceId;
     private String serviceName;
     private String other;
+    private int order;
+
+    public int getOrder() {
+        return order;
+    }
+
+    public void setOrder(int order) {
+        this.order = order;
+    }
 
     private String[] services;
 
