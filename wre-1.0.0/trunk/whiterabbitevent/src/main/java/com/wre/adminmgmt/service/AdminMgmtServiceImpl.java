@@ -559,10 +559,31 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 		String filePath = WREConstants.RESOURCE_PATH + eventId + File.separator
 				+type+File.separator;
 
-		if (file != null) {
-			saveFile(file, filePath);
+			
+			if (file != null) {
+				try {
+					String name = file.getOriginalFilename();
+					byte[] bytes = file.getBytes();
+					// Creating the directory to store file
+					File dir = new File(filePath);
 
-		}
+					if (!dir.exists()) {
+						dir.mkdirs();
+					}
+					// Create the file on server
+					File serverFile = new File(dir.getAbsolutePath() + WREConstants.FILE_SEPARATER
+							+name);
+					BufferedOutputStream stream = new BufferedOutputStream(
+							new FileOutputStream(serverFile));
+					stream.write(bytes);
+					stream.close();
+
+				} catch (Exception e) {
+					
+				}
+				}
+
+		
 
 		Sponcor sponcor = new Sponcor();
 		
@@ -757,6 +778,7 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 		if (file != null) {
 
 			try {
+				String name = file.getOriginalFilename();
 				byte[] bytes = file.getBytes();
 				// Creating the directory to store file
 				File dir = new File(filePath);
@@ -766,7 +788,7 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 				}
 				// Create the file on server
 				File serverFile = new File(dir.getAbsolutePath() + File.separator
-						+"speaker.png");
+						+name);
 				BufferedOutputStream stream = new BufferedOutputStream(
 						new FileOutputStream(serverFile));
 				stream.write(bytes);
