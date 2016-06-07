@@ -613,6 +613,7 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 			sponsorBeanObject.setSponcorName(sponsorObject.getSponcorName());
 			sponsorBeanObject.setSponcorId(sponsorObject.getSponcorId());
 			sponsorBeanObject.setSponcorDesc(sponsorObject.getSponcorDesc());
+			sponsorBeanObject.setFileName(sponsorObject.getFileName());
 		}
 
 		return sponsorBeanObject;
@@ -760,6 +761,7 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 			sp.setLocation(speakerObject.getLocation());
 			sp.setRating(speakerObject.getRating());
 			sp.setTitle(speakerObject.getTitle());
+			sp.setFileName(speakerObject.getFileName());
 
 		}
 		log.info(speakerObject.getDescription() + "speaker for edit....."
