@@ -546,15 +546,23 @@ public class AdminMgmtController {
 		log.info("sponcor for edit......" + sb);
 		return sb;
 	}
-
+//updateSponsor
 	@RequestMapping(value = "admin/updateSponsor", method = RequestMethod.POST)
 	public @ResponseBody
-	void updateSponsor(@RequestBody SponsorBean sb) {
-		log.info("in side updateSponsor method" + sb.getSponcorName() + "--"
-				+ sb.getEventId());
-
-		adminMgmtService.updateSponsor(sb);
+	void updateSponsor(@RequestParam(value = "file", required = true) MultipartFile file,
+			@RequestParam("eventId") Long eventId,
+			@RequestParam("sponcorId") Long sponcorId,
+			@RequestParam("type") String type,
+			@RequestParam("sponcorName") String sponcorName, 
+	        @RequestParam("sponcorDesc") String sponcorDesc)
+	        {
+	   
+		log.info("in side speakerSave method");
+		
+		adminMgmtService.updateSponsor(file,eventId,type,sponcorName,sponcorDesc,sponcorId);
 	}
+
+	
 
 	/* ============End of Sponsor======== */
 
@@ -617,13 +625,21 @@ public class AdminMgmtController {
 
 	}
 
-	// udpate speaker......admin/updateSpeaker
+	// udpateSpeaker
 	@RequestMapping(value = "admin/updateSpeaker", method = RequestMethod.POST)
 	public @ResponseBody
-	void updateSpeaker(@RequestBody SpeakerBean spk) {
-		log.info("in side updatespeaker method");
-		log.info("checking......" + spk.getDescription());
-		adminMgmtService.udpateSpeaker(spk);
+	void udpateSpeaker(@RequestParam(value = "file", required = true) MultipartFile file,
+			@RequestParam("eventId") Long eventId,
+			@RequestParam("speakerId") Long speakerId,
+			@RequestParam("type") String type,
+			@RequestParam("speakerName") String speakerName, 
+	        @RequestParam("location") String location,
+	        @RequestParam("title") String title,
+	        @RequestParam("description") String description,
+	        @RequestParam("rating") String rating){
+		log.info("in side speakerSave method");
+		
+		adminMgmtService.udpateSpeaker(file,eventId,type,speakerName,location,title,description,rating,speakerId);
 	}
 
 	/* Speaker Ends Here* */
@@ -736,6 +752,15 @@ public @ResponseBody List<GalaryBean> getEventImages(@RequestParam("eventId") Lo
 	}
 	log.info(eventImages.size());
 	return eventImages;
+}
+
+@RequestMapping(value = "admin/eventServicesList", method = RequestMethod.GET)
+public @ResponseBody
+List<EventBean> eventServicesList(@RequestParam("eventId") Long eventId) {
+	List<EventBean> eventList = adminMgmtService
+			.geteventServicesList(eventId);
+	return eventList;
+
 }
 
 }
