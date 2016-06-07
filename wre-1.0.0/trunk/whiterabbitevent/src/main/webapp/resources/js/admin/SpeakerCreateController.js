@@ -12,7 +12,7 @@ var SpeakerCreateController=function($scope, $http, $routeParams,$location,ngNot
 	};
 	
 	 $scope.saveSpeaker= function(speaker){
-		 alert("dfdsf");
+		 //alert("dfdsf");
 		 var fd = new FormData();
 			//alert("video");
 
@@ -30,7 +30,7 @@ var SpeakerCreateController=function($scope, $http, $routeParams,$location,ngNot
 			    
 			    fd.append("rating",speaker.rating);
 			    
-			    alert("data--"+fd);
+			   // alert("data--"+fd);
 			    $http.post('admin/speakerSave',fd, {
 			     withCredentials : true,
 			     headers : {

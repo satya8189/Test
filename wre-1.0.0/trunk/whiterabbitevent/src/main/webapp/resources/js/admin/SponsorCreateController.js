@@ -14,7 +14,7 @@ var SponsorCreateController = function($scope, $http, $location, $routeParams,ng
 		
 		
 		$scope.saveSponsor= function(sponsor){
-			alert("save sponsor");
+			//ssalert("save sponsor");
 			
 			var fd = new FormData();
 			//alert("video");
@@ -26,7 +26,7 @@ var SponsorCreateController = function($scope, $http, $location, $routeParams,ng
 			    fd.append("sponcorDesc",sponsor.sponcorDesc);
 			    fd.append("sponcorName",sponsor.sponcorName);
 			    
-			    alert("data--"+fd);
+			    //alert("data--"+fd);
 			    $http.post('admin/sponsorSave',fd, {
 			     withCredentials : true,
 			     headers : {

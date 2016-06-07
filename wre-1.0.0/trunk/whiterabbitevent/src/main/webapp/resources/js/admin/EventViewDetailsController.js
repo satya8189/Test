@@ -8,7 +8,7 @@ var EventViewDetailsController = function($scope,$routeParams,$http,$location) {
 			 $http.get('admin/eventdetailsList?eventId='+$scope.eventId).success(function(serviceList){
 				
 				    $scope.serviceList = serviceList;
-				    alert("sdfsa"+$scope.serviceList.length);
+				    
 				   
 				    });
 				 });
@@ -19,6 +19,7 @@ var EventViewDetailsController = function($scope,$routeParams,$http,$location) {
 	location.href="#/agendoDetails/"+event.eventId;
 		}
 		else if(event.sereviceId=="3"){
+			alert("newsFeedView-----"+event.eventId);
 			location.href="#/newsFeedView/"+event.eventId;	
 			
 		}else if(event.serviceId=="4"){

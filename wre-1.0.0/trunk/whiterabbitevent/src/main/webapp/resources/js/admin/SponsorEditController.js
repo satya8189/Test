@@ -23,16 +23,35 @@ $scope.$on("$routeChangeSuccess", function() {
 	
 	/*updateSponsor(sponcor)*/
 	$scope.updateSponsor = function(sponcor){
-		//alert("update sponsordata===="+sponcor.eventId+"=="+sponcor.sponcorId+"=="+sponcor.sponcorName+"==="+sponcor.sponcorDesc);
-		
-		$http.post('admin/updateSponsor',sponcor).success(function() {
-				//alert("sponsor updated successfully....!");
-				$location.path("/sponsorPageView/"+sponcor.eventId);
-				/*			}).success(function() {*/
-					ngNotifier.notify("Sponsor updated successfully.!");
-			}).error(function() {
-				ngNotifier.error("error in updating sponsor.!");
-		});
+		//alert("dfdsf");
+		 var fd = new FormData();
+			//alert("video");
+
+			  // Take the first selected file
+			    fd.append("file", file.files[0]);
+			   
+
+			    fd.append("eventId",sponcor.eventId);
+			    fd.append("sponcorId",sponcor.sponcorId);
+			    fd.append("type","sponcor");
+			    fd.append("sponcorName",sponcor.sponcorName);
+			    fd.append("sponcorDesc",sponcor.sponcorDesc);
+			    
+			    
+			    //alert("data--"+fd);
+			    $http.post('admin/updateSponsor',fd, {
+			     withCredentials : true,
+			     headers : {
+			      'Content-Type' : undefined
+			     },
+			     transformRequest : angular.identity
+			    }).success(function(data) {
+			    	//alert("video success");
+			    	ngNotifier.notify("Created  Successfully !");
+			     $location.path("/sponsorPageView/"+sponcor.eventId);
+			    }).error(function(data) {
+			    // alert("dsfsfds");
+			    });
 			
 	};
 
