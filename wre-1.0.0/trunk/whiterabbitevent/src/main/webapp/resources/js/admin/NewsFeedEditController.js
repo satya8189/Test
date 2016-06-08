@@ -17,7 +17,7 @@ var NewsFeedEditController = function($scope,$routeParams,$http,$location,ngNoti
 		$http.post('news/update',news).success(function(status) {
 			
 			$location.path("/newsFeedView/"+news.eventId);
-			ngNotifier.notify("NewsFeed Updated.!");
+			ngNotifier.notify("NewsFeed Updated Successfully.!");
 
 					});
 	};
