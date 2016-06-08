@@ -39,6 +39,19 @@
       </div>
       </div>
 	 </div>
+	 
+	 
+	  <div class="row">
+	<div class="col-md-12">
+	  <div class="form-group col-md-6" >
+          <label class="flot-left">NewsFeed Date <span style="color:red;">*</span></label>
+      <input type="date" class="input-text form-control" id="newsDate" placeholder="NewsDate"  ng-model="news.newsDate" 
+      name="NewsDate"   required>
+      <span ng-if="createEvent.$submitted" ng-messages="createEvent.NewsDate.$error" ng-messages-include="errors">
+		  </span>
+      </div>
+      </div>
+	 </div>
 
 </div>
     <div>&nbsp;</div>
