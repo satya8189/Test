@@ -36,8 +36,7 @@ margin-bottom:0px !important;
 						<th>Action</th>
 					</tr>
 				</thead>
-				 <tr ng-show="filteredSize!=0"
-				ng-repeat="sp in filtered = sponsorsList | filter: search | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit ">  
+				 <tr ng-show="filteredSize!=0" ng-repeat="sp in filtered = sponsorsList | filter: search | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit ">  
 				
 					<td>{{sp.sponcorName}}</td>
 					<td>{{sp.sponcorDesc}}</td>
@@ -52,35 +51,6 @@ margin-bottom:0px !important;
 						No records found..
 					</td>
 				</tr>
-				
-				<!-- <tr  ng-show="filteredSize!=0">
-					<td colspan="6" align="center">
-					<pagination page="currentPage" max-size="noOfPages" total-items="totalItems" items-per-page="entryLimit"></pagination>
-					</td>
-				</tr> -->
-				<!-- 
-				<tr>
-					<td colspan="6" align="center">
-					
-					
-					<ul class="pagination">
- 						  <li class="pull-left">
-  					<button type="button" class="btn btn-primary" ng-disabled="currentPage == 0"
- 									ng-click="currentPage=currentPage-1">PREV</button>
-						</li>
- 						<li>
- 							<span>Page {{currentPage}} of {{ noOfPages }}</span>
- 						</li>
- 						 <li class="pull-right">
- 						<button  class="btn btn-primary" type="button"
- 								ng-disabled="currentPage >= noOfPages"
- 									ng-click="currentPage = currentPage+1">NEXT </button>
-						</li> 
-					</ul>
-						</td>
-					
-				</tr> -->
-				
 				<tr>
 					<td  colspan="6" align="center">
 						<pagination page="currentPage" max-size="noOfPages" total-items="totalItems" 
