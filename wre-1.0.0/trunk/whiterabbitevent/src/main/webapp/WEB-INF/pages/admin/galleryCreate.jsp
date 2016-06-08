@@ -27,7 +27,7 @@
 						<div class="form-group col-md-6" 
 							id="uploadDiv">
 							<label class="flot-left">Upload File </label> 
-							<input type="file" class="form-control form-group" name="file" id="file" onchange="angular.element(this).scope().setFiles(this)">
+							<input type="file" class="form-control form-group" name="file" id="file" onchange="angular.element(this).scope().setFiles(this)" required>
 							<span ng-if="createEvent.$submitted" ng-messages="createEvent.file.$error" ng-messages-include="errors"></span>
 							<!--  <input type="file" name="file" class="form-control form-group" onchange="angular.element(this).scope().uploadFile(this.files)"/> -->
 						</div>
