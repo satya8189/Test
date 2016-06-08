@@ -1,18 +1,15 @@
-<!-- <h3>create speaker here</h3> -->
-
-
-<!-- <h3>speaker create {{5+4}}</h3> -->
+<%@include file="error-messages.jsp"%>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <div class="col-md-12">
-	<a ng-click="cancelCreateSpeaker(eventId)">
+	<a ng-click="cancelCreateSpeaker(speaker.eventId)">
 		 <i class="glyphicon glyphicon-chevron-left"></i>
 	</a>
 	<c:set var="userId" value="${user.userId}" scope="session" />
 	<div class="panel">
 		<div class="panel-heading text-center font-size-20 padding-5">Create Speaker</div>
 		<div class="panel-body text-center">
-			<form name="spCreateForm" ng-submit="spCreateForm.$valid && saveSpeaker(speaker)"  enctype="multipart/form-data">
+			<form name="spCreateForm" ng-submit="spCreateForm.$valid && saveSpeaker(speaker)"  enctype="multipart/form-data" novalidate>
 				<div class="row">
 					
 					<div class="col-md-12">
@@ -69,12 +66,11 @@
 						<label class="flot-left">Upload File </label> <input type="file"
 							class="form-control form-group" name="file" id="file"
 							onchange="angular.element(this).scope().setFiles(this)">
-						
 					</div>
 				</div>
-
-				<button type="submit" class="btn button  save margin-2">Save</button>
-
+				<div>
+					<button type="submit" class="btn button  save margin-2">Save</button>
+				</div>
 			</form>
 
 		</div>
