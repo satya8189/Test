@@ -32,6 +32,7 @@ public class NewsFeedActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news_feed);
         String nameTxt = getIntent().getExtras().getString("name");
+        String eventId = getIntent().getExtras().getString("eventId");
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(nameTxt);
@@ -39,7 +40,7 @@ public class NewsFeedActivity extends AppCompatActivity {
 
         recyclerView = (RecyclerView) findViewById(R.id.newsfeed_recycler_view);
 
-        new MyAsyncTask(Constants.NEWS_LIST + "?eventId=16", null, NewsFeedActivity.this, new Callback() {
+        new MyAsyncTask(Constants.NEWS_LIST + "?eventId="+eventId, null, NewsFeedActivity.this, new Callback() {
             @Override
             public void onResult(String result) {
                 newsList = new ArrayList<HashMap<String, String>>();

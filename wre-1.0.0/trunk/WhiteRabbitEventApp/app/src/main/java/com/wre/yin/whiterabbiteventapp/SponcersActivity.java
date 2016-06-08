@@ -72,7 +72,7 @@ public class SponcersActivity extends AppCompatActivity {
                 for (SponsorBean bean : sponsorBeanList) {
                     HashMap<String, String> map = new HashMap<String, String>();
                     map.put("sponsorName", bean.getSponcorName());
-                    map.put("sponsorId",bean.getSponcorId().toString());
+                    map.put("sponsorId", bean.getSponcorId().toString());
                     //    map.put("sponsorDesc", bean.getSponcorDesc());
 
                     sponsorList.add(map);
@@ -110,6 +110,7 @@ public class SponcersActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(SponcersRecyclerViewHolders holder, int position) {
             maps = mapsList.get(position);
+
             holder.sponsorName.setText(maps.get("sponsorName"));
             // holder.sponsorPhoto.setImageResource(maps.get(position).getPhoto());
             holder.sponsorPhoto.setOnClickListener(clickListener);
@@ -121,7 +122,8 @@ public class SponcersActivity extends AppCompatActivity {
             public void onClick(View v) {
                 SponcersRecyclerViewHolders vHoder = (SponcersRecyclerViewHolders) v.getTag();
                 int position = vHoder.getPosition();
-                HashMap<String, String> maps1=mapsList.get(position);
+                System.out.println("position id" + maps.get("sponsorId"));
+                HashMap<String, String> maps1 = mapsList.get(position);
                 Intent i = new Intent(SponcersActivity.this, SponcersProfileActivity.class);
                 i.putExtra("sponsorId", maps1.get("sponsorId"));
                 startActivity(i);

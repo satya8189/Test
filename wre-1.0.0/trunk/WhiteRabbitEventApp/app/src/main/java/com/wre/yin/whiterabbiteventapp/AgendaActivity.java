@@ -33,6 +33,7 @@ public class AgendaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agenda);
         String nameTxt = getIntent().getExtras().getString("name");
+        String eventId = getIntent().getExtras().getString("eventId");
         // text = (TextView) findViewById(R.id.activity_text);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -40,7 +41,7 @@ public class AgendaActivity extends AppCompatActivity {
 
         recyclerView = (RecyclerView) findViewById(R.id.agenda_recycler_view);
 
-        new MyAsyncTask(Constants.AGENDA+"?eventId=16", null, AgendaActivity.this, new Callback() {
+        new MyAsyncTask(Constants.AGENDA+"?eventId="+eventId, null, AgendaActivity.this, new Callback() {
             @Override
             public void onResult(String result) {
                 agendaList=new ArrayList<HashMap<String, String>>();
