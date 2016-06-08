@@ -11,14 +11,17 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
+import com.wre.adminmgmt.bean.RatingBean;
 import com.wre.common.dao.GenericDaoImpl;
 import com.wre.model.Agenda;
 import com.wre.model.AppIdentifier;
+import com.wre.model.ContactDetails;
 import com.wre.model.Event;
 import com.wre.model.EventServices;
 import com.wre.model.Galary;
 import com.wre.model.Newsfeed;
 import com.wre.model.Participants;
+import com.wre.model.Rating;
 import com.wre.model.Speaker;
 import com.wre.model.Sponcor;
 import com.wre.model.SurveyQuestion;
@@ -302,6 +305,46 @@ public List<EventServices> geteventServicesList(Long eventId) {
 		 return eventServicesList;
 	
 }
+
+@Override
+public List<Rating> getUserRatingList(RatingBean ratingBean) {
+
+Criteria criteria=sessionFactory.getCurrentSession().createCriteria(Rating.class);
+//criteria.add(Restrictions.ne("phone",mobno));
+return (List<Rating>)criteria.list();
+}
+
+
+
+@Override
+public List<Rating> getUserRatingList(Long eventId) {
+	Criteria criteria=sessionFactory.getCurrentSession().createCriteria(Rating.class);
+	criteria.add(Restrictions.eq("eventId", eventId));
+	return (List<Rating>)criteria.list();
+}
+
+//===============Help-Contact
+
+@Override
+public List<ContactDetails> adminViewContactDetails(Long eventId) {
+	log.info("adminViewContactDetails daoImpl.."+eventId);
+	Criteria criteria=sessionFactory.getCurrentSession().createCriteria(ContactDetails.class);
+	criteria.setFetchMode("event",FetchMode.EAGER);
+	criteria.add(Restrictions.eq("event.eventId", eventId));
+	return (List<ContactDetails>)criteria.list();
+	}
+
+
+@Override
+//public List<ContactDetails> getContactDetailsForEdit(Long contactId) {
+public ContactDetails getContactDetailsForEdit(Long contactId) {
+	log.info("admingetContactDetailsForEdit daoImpl.."+contactId);
+	Criteria criteria=sessionFactory.getCurrentSession().createCriteria(ContactDetails.class);
+	criteria.add(Restrictions.eq("contactId", contactId));
+	//return (List<ContactDetails>)criteria.list();
+	return (ContactDetails)criteria.uniqueResult();
+}
+
 
 
 
