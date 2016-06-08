@@ -19,6 +19,7 @@
           <label class="flot-left">Event_Name <span style="color:red;">*</span></label>
       <input type="text" class="input-text form-control" id="event_Name" placeholder="Event_Name"  ng-model="event.eventName" 
       name="insurenceOrgName"   required>
+      
       </div>
       </div>
 	 </div>
