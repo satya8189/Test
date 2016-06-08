@@ -1,9 +1,9 @@
+<%@include file="error-messages.jsp" %>
 
-<h3>sponsor create <!-- {{5+4}} --></h3>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <div class="col-md-12">
-	<a ng-click="cancelCreateSponcor(eventId)">
+	<a ng-click="cancelCreateSponcor(sponsor.eventId)">
 		 <i class="glyphicon glyphicon-chevron-left"></i>
 	</a>
 	
@@ -11,7 +11,7 @@
 	<div class="panel">
 		<div class="panel-heading text-center font-size-20 padding-5">Create Sponsor</div>
 		<div class="panel-body text-center">
-			<form name="orgCreateForm"	ng-submit="saveSponsor(sponsor)"  enctype="multipart/form-data">
+			<form name="orgCreateForm"	ng-submit="orgCreateForm.$valid && saveSponsor(sponsor)"  enctype="multipart/form-data" novalidate>
 				<div class="row">
 					<div class="col-md-12">
 						<div class=" form-group col-md-6">
@@ -32,14 +32,11 @@
 						</div>
 					</div>
 					
-					
-
 				<div class="col-md-6">
 					<div class="form-group col-md-6" id="uploadDiv">
 						<label class="flot-left">Upload File </label> <input type="file"
 							class="form-control form-group" name="file" id="file"
 							onchange="angular.element(this).scope().setFiles(this)">
-						
 					</div>
 				</div>
 					
