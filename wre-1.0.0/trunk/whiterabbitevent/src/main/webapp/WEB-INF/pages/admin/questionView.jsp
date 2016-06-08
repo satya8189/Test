@@ -31,34 +31,30 @@ margin-bottom:0px !important;
 			</div> 
 			<div class="col-md-12 space-hid">&nbsp;</div>
 			<table class="table" id="eventView">
-				<thead>
+				
 					<tr>
 					     <th>Question</th>
-					      <th>QuestionType</th>
+					     <th>QuestionType</th>
 					     <th>Option-A </th>
 						 <th>Option-B</th>
 						 <th>Option-C</th>
 						 <th>Option-D</th>
 						 <th>Answer</th>
-						 
-				   </tr>
-				</thead>
+						 <th>Action</th>
+						</tr>
+				
 				<tr ng-show="filteredSize!=0" ng-repeat="question in questionList  | filter: search | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
-				    <td >{{question.question}}</td>
-				    <td >{{question.appIdentifierName}}</td>
-					<td >{{question.optionA}}</td>
-					<td >{{question.optionB}}</td>
-					<td >{{question.optionC}}</td>
-				    <td >{{question.optionD}}</td>
-				    <td >{{question.answer}}</td>
-			<td>
-					
-				<a ng-click="questionEdit(question.questionId)"title="eventViewDetails">
+				    <td>{{question.question}}</td>
+				    <td>{{question.appIdentifierName}}</td>
+					<td>{{question.optionA}}</td>
+					<td>{{question.optionB}}</td>
+					<td>{{question.optionC}}</td>
+				    <td>{{question.optionD}}</td>
+				    <td>{{question.answer}}</td>
+					<td>
+						<a ng-click="questionEdit(question.questionId)"title="eventViewDetails">
 							<i class="fa fa-eye-slash icons"> </i>
-				</a>
-				
-				
-						
+						</a>
 					</td>
 				</tr>
 				<tr ng-show="filteredSize==0">
