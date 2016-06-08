@@ -1,10 +1,10 @@
-
+<%@include file="error-messages.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <toaster-container></toaster-container>
 
 
 
-<form name="createEvent" ng-submit="createDocument(document)" enctype="multipart/form-data">
+<form name="createEvent" ng-submit="createEvent.$valid && createDocument(document)" enctype="multipart/form-data" novalidate>
 
 <div class="col-md-12">
 	<a ng-click="cancelDocumentCreate(document.eventId)">
@@ -20,7 +20,10 @@
           <label class="flot-left">Document_Name <span style="color:red;">*</span></label>
       <input type="text" class="input-text form-control" id="agendo_Name" placeholder="Document"  ng-model="document.name" 
       name="gallery"   required>
-      </div>
+      <span ng-if="createEvent.$submitted" ng-messages="createEvent.gallery.$error" ng-messages-include="errors">
+		  						</span>
+
+</div>
       </div>
 	 </div>
 	 
