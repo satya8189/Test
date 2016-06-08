@@ -7,11 +7,13 @@ import org.springframework.web.multipart.MultipartFile;
 import com.wre.adminmgmt.bean.AgendaBean;
 import com.wre.adminmgmt.bean.AppIdentifierBean;
 import com.wre.adminmgmt.bean.ChatBean;
+import com.wre.adminmgmt.bean.ContactDetailsBean;
 import com.wre.adminmgmt.bean.EventBean;
 import com.wre.adminmgmt.bean.GalaryBean;
 import com.wre.adminmgmt.bean.InviteBean;
 import com.wre.adminmgmt.bean.NewsFeedBean;
 import com.wre.adminmgmt.bean.QuestionBean;
+import com.wre.adminmgmt.bean.RatingBean;
 import com.wre.adminmgmt.bean.SpeakerBean;
 import com.wre.adminmgmt.bean.SponsorBean;
 import com.wre.systemadminmgmt.bean.ParticipantBean;
@@ -92,6 +94,20 @@ public void createSponsor(MultipartFile file, Long eventId, String type,
 
 public List<EventBean> geteventServicesList(Long eventId);
 public String participantRegUpdate(ParticipantBean participantBean);
+
+public List<ContactDetailsBean> adminViewContactDetails(Long eventId);
+
+void saveContactDetails(ContactDetailsBean contactDetailsBean);
+
+void updateContactDetails(ContactDetailsBean contactDetailsBean);
+
+ContactDetailsBean getContactDetailsForEdit(Long contactId);
+
+List<RatingBean> getUserRatings(Long eventId);
+
+List<RatingBean> getUserRatings(RatingBean ratingBean);
+
+void saveUserRating(RatingBean ratingBean);
 
 
 
