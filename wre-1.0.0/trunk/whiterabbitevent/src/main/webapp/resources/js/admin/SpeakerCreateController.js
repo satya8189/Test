@@ -39,7 +39,7 @@ var SpeakerCreateController=function($scope, $http, $routeParams,$location,ngNot
 			     transformRequest : angular.identity
 			    }).success(function(data) {
 			    	//alert("video success");
-			    	ngNotifier.notify("Created  Successfully !");
+			    	ngNotifier.notify("Speaker Created  Successfully !");
 			    	$location.path("/speakerProfileView/"+speaker.eventId);
 			    }).error(function(data) {
 			    // alert("dsfsfds");
