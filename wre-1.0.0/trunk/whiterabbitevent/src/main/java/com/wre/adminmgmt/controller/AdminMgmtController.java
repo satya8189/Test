@@ -32,11 +32,13 @@ import org.springframework.web.multipart.MultipartFile;
 import com.wre.adminmgmt.bean.AgendaBean;
 import com.wre.adminmgmt.bean.AppIdentifierBean;
 import com.wre.adminmgmt.bean.ChatBean;
+import com.wre.adminmgmt.bean.ContactDetailsBean;
 import com.wre.adminmgmt.bean.EventBean;
 import com.wre.adminmgmt.bean.GalaryBean;
 import com.wre.adminmgmt.bean.InviteBean;
 import com.wre.adminmgmt.bean.NewsFeedBean;
 import com.wre.adminmgmt.bean.QuestionBean;
+import com.wre.adminmgmt.bean.RatingBean;
 import com.wre.adminmgmt.bean.SpeakerBean;
 import com.wre.adminmgmt.bean.SponsorBean;
 import com.wre.adminmgmt.service.AdminMgmtService;
@@ -771,6 +773,84 @@ List<EventBean> eventServicesList(@RequestParam("eventId") Long eventId) {
     		String result=adminMgmtService.participantRegUpdate(participantBean);
     		return "{\"response\":\"" + result + "\"}";
 }
+
+
+
+//=================Rating API
+
+//to save the rating given
+@RequestMapping(value="admin/saveUserRating",method = RequestMethod.POST)
+public @ResponseBody void saveUserRating(@RequestBody RatingBean ratingBean){
+	System.out.println("in saveUserRating.."+ratingBean.getType());
+		adminMgmtService.saveUserRating(ratingBean);
+	log.info("rating sent to service..");
+}
+
+//to list all the ratings
+@RequestMapping(value="admin/getUserRatings",method = RequestMethod.POST)
+public @ResponseBody List<RatingBean> getUserRatings(@RequestBody RatingBean ratingBean)
+//public @ResponseBody List<RatingBean> getUserRatings(@RequestParam("eventId")Long eventId)
+{
+	log.info("in getUserRatingsList by EventId--");
+	//List<RatingBean> userRatingsList=adminMgmtService.getUserRatings(eventId);
+	List<RatingBean> userRatingsList=adminMgmtService.getUserRatings(ratingBean);
+	return userRatingsList;
+}
+
+
+
+//=========contact details.....
+@RequestMapping("admin/contactDetailsView")
+public String goToContactDetailsView()
+{
+	log.info("in goToContactDetailsView");
+	return "admin/contactDetailsView";
+	}
+
+//To view Contact Details
+@RequestMapping(value="admin/ViewContactDetails",method= RequestMethod.GET)
+public @ResponseBody List<ContactDetailsBean> adminViewContactDetails(Long eventId){
+	List<ContactDetailsBean> contactDetailsList=adminMgmtService.adminViewContactDetails(eventId);
+	return contactDetailsList;
+}
+
+//to Edit the contact details
+@RequestMapping("admin/editContactDetails")
+public String goToEditContactDetails()
+{
+	log.info("in goToEditContactDetails");
+	return "admin/editContactDetails";
+	}
+
+
+//get contact dettails to edit  admin/getContactDetailsForEdit
+@RequestMapping(value="admin/getContactDetailsForEdit",method= RequestMethod.GET)
+//public @ResponseBody  List<ContactDetailsBean> getContactDetailsForEditByContactId(@RequestParam Long contactId)
+public @ResponseBody  ContactDetailsBean getContactDetailsForEditByContactId(@RequestParam Long contactId)
+{
+	log.info("in getContactDetails for edit"+contactId);
+	return adminMgmtService.getContactDetailsForEdit(contactId);
+	
+}
+
+
+//update contact details by edit  admin/updateContactDetails
+@RequestMapping(value="admin/updateContactDetails",method=RequestMethod.POST)
+public @ResponseBody void updateContactDetails(@RequestBody ContactDetailsBean contactDetailsBean)
+{
+	log.info("in updateContactDetails");
+	adminMgmtService.updateContactDetails(contactDetailsBean);
+}
+
+/*to save new contact details....admin/saveContactDetails*/
+@RequestMapping(value="admin/saveContactDetails",method=RequestMethod.POST)
+public @ResponseBody void saveContactDetails(@RequestBody ContactDetailsBean contactDetailsBean)
+{
+	log.info("in saveContactDetails  "+contactDetailsBean.toString());
+	adminMgmtService.saveContactDetails(contactDetailsBean);
+}
+
+
 
 
 
