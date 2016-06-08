@@ -18,23 +18,27 @@ import org.springframework.web.multipart.MultipartFile;
 import com.wre.adminmgmt.bean.AgendaBean;
 import com.wre.adminmgmt.bean.AppIdentifierBean;
 import com.wre.adminmgmt.bean.ChatBean;
+import com.wre.adminmgmt.bean.ContactDetailsBean;
 import com.wre.adminmgmt.bean.EventBean;
 import com.wre.adminmgmt.bean.GalaryBean;
 import com.wre.adminmgmt.bean.InviteBean;
 import com.wre.adminmgmt.bean.NewsFeedBean;
 import com.wre.adminmgmt.bean.QuestionBean;
+import com.wre.adminmgmt.bean.RatingBean;
 import com.wre.adminmgmt.bean.SpeakerBean;
 import com.wre.adminmgmt.bean.SponsorBean;
 import com.wre.adminmgmt.dao.AdminMgmtDao;
 import com.wre.common.util.WREConstants;
 import com.wre.model.Agenda;
 import com.wre.model.AppIdentifier;
+import com.wre.model.ContactDetails;
 import com.wre.model.Event;
 import com.wre.model.EventParticipant;
 import com.wre.model.EventServices;
 import com.wre.model.Galary;
 import com.wre.model.Newsfeed;
 import com.wre.model.Participants;
+import com.wre.model.Rating;
 import com.wre.model.Speaker;
 import com.wre.model.Sponcor;
 import com.wre.model.SurveyQuestion;
@@ -927,7 +931,179 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 			log.info("list size is --+" + eventbeanList.size());
 			return eventbeanList;
 		}
-	}
+	
+
+	//=================rating
+		@Override
+		public void saveUserRating(RatingBean ratingBean) {
+
+			log.info("save RatingBean....." + ratingBean.toString());
+			Rating rating=new Rating();
+
+			rating.setEventId(ratingBean.getEventId());
+			rating.setRatingId(ratingBean.getRatingId());
+			rating.setSourceId(ratingBean.getSourceId());
+			rating.setType(ratingBean.getType());
+			rating.setUserId(ratingBean.getUserId());
+			
+			AdminMgmtDaoImpl.save(rating);
+			log.info("Rating Saved..");
+
+		}
+
+
+		@Override
+		public List<RatingBean> getUserRatings(RatingBean ratingBean) {
+			//gets each user rating as a list
+			log.info("In getUserRatings====");
+			List<Rating> ratingList = AdminMgmtDaoImpl.getUserRatingList(ratingBean);
+			log.info("rating entity list"+ratingList.size());
+			
+			// we are getting the list as Sponcor which is entity
+			List<RatingBean> ratingBeanList = new ArrayList<RatingBean>();
+			
+			//log.info("before for each");
+			for (Rating ratingObject : ratingList) {
+				
+				ratingBean.setEventId(ratingObject.getEventId());
+				ratingBean.setRatingId(ratingObject.getRatingId());
+				ratingBean.setSourceId(ratingObject.getSourceId());
+				ratingBean.setType(ratingObject.getType());
+				ratingBean.setUserId(ratingObject.getUserId());
+				ratingBeanList.add(ratingBean);
+			}
+
+			log.info("ratingBeanlist size is --" + ratingBeanList.size());
+
+			return ratingBeanList;
+			
+		}
+
+
+		@Override
+		public List<RatingBean> getUserRatings(Long eventId) {
+			//gets each user rating as a list
+					log.info("In getUserRatingsBy EventId====");
+					
+					List<Rating> ratingList = AdminMgmtDaoImpl.getUserRatingList(eventId);
+					log.info("rating entity list"+ratingList.size());
+					
+					// we are getting the list as Sponcor which is entity
+					List<RatingBean> ratingBeanList = new ArrayList<RatingBean>();
+					RatingBean ratingBean = new RatingBean();
+					//log.info("before for each");
+					for (Rating ratingObject : ratingList) {
+						
+						ratingBean.setEventId(ratingObject.getEventId());
+						ratingBean.setRatingId(ratingObject.getRatingId());
+						ratingBean.setSourceId(ratingObject.getSourceId());
+						ratingBean.setType(ratingObject.getType());
+						ratingBean.setUserId(ratingObject.getUserId());
+						ratingBeanList.add(ratingBean);
+					}
+					return ratingBeanList;
+		}
+
+
+		@SuppressWarnings("null")
+		@Override
+		public List<ContactDetailsBean> adminViewContactDetails(Long eventId) {
+			//get contact details to view by admin
+			log.info("in adminViewContactDetails seviceImpls"+eventId);;
+			List<ContactDetails> contactDetailsListEntity=AdminMgmtDaoImpl.adminViewContactDetails(eventId);
+			List<ContactDetailsBean> contactDetailsBeanList=new ArrayList<ContactDetailsBean>();
+		
+			
+			if(contactDetailsListEntity.size()>0){
+				ContactDetailsBean contactDetailsBean=new ContactDetailsBean();
+				for(ContactDetails contactDetails:contactDetailsListEntity)
+				{
+					contactDetailsBean.setContactId(contactDetails.getContactId());
+					contactDetailsBean.setContactName(contactDetails.getContactName());
+					contactDetailsBean.setContactMobile(contactDetails.getContactMobile());
+					contactDetailsBean.setContactAlternateMobile(contactDetails.getContactAlternateMobile());
+					contactDetailsBean.setContactEmail(contactDetails.getContactEmail());
+					contactDetailsBean.setEventId(contactDetails.getEvent().getEventId());
+					contactDetailsBeanList.add(contactDetailsBean);
+					}
+			}
+			return contactDetailsBeanList;
+		}
+
+
+		@Override
+		//public List<ContactDetailsBean> getContactDetailsForEdit(Long contactId) {
+		public ContactDetailsBean getContactDetailsForEdit(Long contactId) {
+			//get contact details to view by admin
+			log.info("in adminGetContactDetailsForEdit seviceImpls"+contactId);;
+			//List<ContactDetails> contactDetailsList=AdminMgmtDaoImpl.getContactDetailsForEdit(contactId);
+			ContactDetails contactDetails=AdminMgmtDaoImpl.getContactDetailsForEdit(contactId);
+			
+			//set to contact details bean
+			ContactDetailsBean contactDetailsBean = new ContactDetailsBean();
+			contactDetailsBean .setContactId(contactDetails.getContactId());
+			contactDetailsBean.setContactName(contactDetails.getContactName());
+			contactDetailsBean.setContactEmail(contactDetails.getContactEmail());
+			contactDetailsBean.setContactMobile(contactDetails.getContactMobile());
+			contactDetailsBean.setContactAlternateMobile(contactDetails.getContactAlternateMobile());
+			contactDetailsBean.setEventId(contactDetails.getEvent().getEventId());
+			
+			//List<ContactDetailsBean> contactDetailsBeanList=new ArrayList<ContactDetailsBean>();
+			/*
+			if(contactDetailsList.size()>0){
+			ContactDetailsBean contactDetailsBean=new ContactDetailsBean();
+			
+			for(ContactDetails contactDetails:contactDetailsList){
+				contactDetailsBean.setContactId(contactDetails.getContactId());
+				contactDetailsBean.setContactName(contactDetails.getContactName());
+				contactDetailsBean.setContactMobile(contactDetails.getContactMobile());
+				contactDetailsBean.setContactAlternateMobile(contactDetails.getContactAlternateMobile());
+				contactDetailsBean.setContactEmail(contactDetails.getContactEmail());
+				contactDetailsBean.setEventId(contactDetails.getEvent().getEventId());
+				contactDetailsBeanList.add(contactDetailsBean);
+				}
+			}*/
+			///log.info("contacts List size"+contactDetailsBeanList.size());
+			log.info("contact Name....."+contactDetails.getContactName()+"contact mobile."+contactDetails.getContactMobile());
+			//return contactDetailsBeanList;
+			return contactDetailsBean;
+		}
+
+		@Override 
+		public void updateContactDetails(ContactDetailsBean contactDetailsBean)
+		{
+			log.info("in updateContactDetails..");
+			ContactDetails contactDetails=new ContactDetails();
+			contactDetails.setContactId(contactDetailsBean.getContactId());
+			contactDetails.setContactName(contactDetailsBean.getContactName());
+			contactDetails.setContactEmail(contactDetailsBean.getContactEmail());
+			contactDetails.setContactMobile(contactDetailsBean.getContactMobile());
+			contactDetails.setContactAlternateMobile(contactDetailsBean.getContactAlternateMobile());
+				Event event=new Event();
+				event.setEventId(contactDetailsBean.getEventId());
+			contactDetails.setEvent(event);
+			AdminMgmtDaoImpl.update(contactDetails);
+			
+		}
+		
+		@Override 
+		public void saveContactDetails(ContactDetailsBean contactDetailsBean)
+		{
+			log.info("in save contactdetails serviceimpl...");
+			ContactDetails contactDetails=new ContactDetails();
+			contactDetails.setContactName(contactDetailsBean.getContactName());
+			contactDetails.setContactEmail(contactDetailsBean.getContactEmail());
+			contactDetails.setContactMobile(contactDetailsBean.getContactMobile());
+			contactDetails.setContactAlternateMobile(contactDetailsBean.getContactAlternateMobile());
+			Event event=new Event();
+			event.setEventId(contactDetailsBean.getEventId());
+			contactDetails.setEvent(event);
+			AdminMgmtDaoImpl.save(contactDetails);
+		}
+		
+	
+
+}
 
 	
 
