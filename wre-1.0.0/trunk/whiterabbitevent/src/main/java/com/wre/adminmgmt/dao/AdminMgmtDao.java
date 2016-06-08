@@ -2,14 +2,17 @@ package com.wre.adminmgmt.dao;
 
 import java.util.List;
 
+import com.wre.adminmgmt.bean.RatingBean;
 import com.wre.common.dao.GenericDao;
 import com.wre.model.Agenda;
 import com.wre.model.AppIdentifier;
+import com.wre.model.ContactDetails;
 import com.wre.model.Event;
 import com.wre.model.EventServices;
 import com.wre.model.Galary;
 import com.wre.model.Newsfeed;
 import com.wre.model.Participants;
+import com.wre.model.Rating;
 import com.wre.model.Speaker;
 import com.wre.model.Sponcor;
 import com.wre.model.SurveyQuestion;
@@ -57,6 +60,14 @@ public List<Participants> getUser(String mobno);
 
 public List<EventServices> geteventServicesList(Long eventId);
 public String participantRegUpdate(ParticipantBean participantBean);
+
+public List<Rating> getUserRatingList(RatingBean ratingBean);
+
+public List<ContactDetails> adminViewContactDetails(Long eventId);
+
+public ContactDetails getContactDetailsForEdit(Long contactId);
+
+public List<Rating> getUserRatingList(Long eventId);
 
 
 
