@@ -135,7 +135,7 @@ public class SponcersActivity extends AppCompatActivity {
     }
 
     ItemTouchHelper.Callback _ithCallback = new ItemTouchHelper.Callback() {
-        //and in your imlpementaion of
+
         public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
             // get the viewHolder's and target's positions in your adapter data, swap them
             Collections.swap(sponsorList, viewHolder.getAdapterPosition(), target.getAdapterPosition());
