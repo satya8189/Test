@@ -1,4 +1,4 @@
-
+<%@include file="error-messages.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%-- <c:set var="eventId" value="${event.eventId}" scope="session" /> --%>
 
@@ -10,9 +10,7 @@
 		<div class="panel-heading text-center font-size-20 padding-15">
 		Edit Sponsor	Details</div>
 		<div class="panel-body text-center">
-			<form name="sponcorEditForm" ng-submit="updateSponsor(sponcor)"	novalidate>
-				
-					
+			<form name="sponcorEditForm" ng-submit="sponcorEditForm.$valid && updateSponsor(sponcor)"	novalidate>
 						
 					<div class="col-md-12">
 						<div class="col-md-2">
@@ -22,6 +20,7 @@
 							<input type="text" class="input-text form-control" id="sponsorName"
 								ng-model="sponcor.sponcorName" name="sponcorName"
 								required>
+							<span ng-if="sponcorEditForm.$submitted" ng-messages="sponcorEditForm.sponcorName.$error" ng-messages-include="errors"></span>
 						</div>
 					</div>
 					
@@ -34,6 +33,7 @@
 							<input type="text" class="input-text form-control" id="sponcorDesc"
 								ng-model="sponcor.sponcorDesc" name="sponcorDesc"
 								required>
+								<span ng-if="sponcorEditForm.$submitted" ng-messages="sponcorEditForm.sponcorDesc.$error" ng-messages-include="errors"></span>
 						</div>
 					</div>
 					
