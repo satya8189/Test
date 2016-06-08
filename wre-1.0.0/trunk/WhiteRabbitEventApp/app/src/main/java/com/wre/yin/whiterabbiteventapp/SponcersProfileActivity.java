@@ -39,7 +39,7 @@ public class SponcersProfileActivity extends AppCompatActivity {
         // sponcersName.setText(nameTxt);
 
 
-        new MyAsyncTask(Constants.INDIVIDUAL_SPONSOR +sponsorId, null, SponcersProfileActivity.this, new Callback() {
+        new MyAsyncTask(Constants.INDIVIDUAL_SPONSOR + sponsorId, null, SponcersProfileActivity.this, new Callback() {
             @Override
             public void onResult(String result) {
                 sponsorIndividualList = new ArrayList<HashMap<String, String>>();

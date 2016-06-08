@@ -56,7 +56,7 @@ public class SpeakerProfileActivity extends AppCompatActivity {
         ItemTouchHelper ith = new ItemTouchHelper(_ithCallback);
         ith.attachToRecyclerView(rView);
 
-        new MyAsyncTask(Constants.SPEAKERS_LIST + "?eventId="+eventId, null, SpeakerProfileActivity.this, new Callback() {
+        new MyAsyncTask(Constants.SPEAKERS_LIST + "?eventId=" + eventId, null, SpeakerProfileActivity.this, new Callback() {
             @Override
             public void onResult(String result) {
                 speakersList = new ArrayList<HashMap<String, String>>();
@@ -65,7 +65,7 @@ public class SpeakerProfileActivity extends AppCompatActivity {
                 for (SpeakerBean bean : speakerBeenList) {
                     HashMap<String, String> map = new HashMap<String, String>();
                     map.put("speakersName", bean.getSpeakerName());
-                    map.put("speakerId",bean.getSpeakerId().toString());
+                    map.put("speakerId", bean.getSpeakerId().toString());
 
                     speakersList.add(map);
 
@@ -112,7 +112,7 @@ public class SpeakerProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
                 SpeakersRecyclerViewHolders vHoder = (SpeakersRecyclerViewHolders) v.getTag();
                 int position = vHoder.getPosition();
-                HashMap<String,String> map1=mapsList.get(position);
+                HashMap<String, String> map1 = mapsList.get(position);
                 Intent i = new Intent(SpeakerProfileActivity.this, SpeakersProfileDetailsActivity.class);
                 i.putExtra("speakerId", map1.get("speakerId"));
                 i.putExtra("speakerName", map1.get("speakersName"));

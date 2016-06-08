@@ -27,37 +27,36 @@ public class MSGService extends IntentService {
     }
 
 
-
     @Override
     protected void onHandleIntent(Intent intent) {
         Bundle extras = intent.getExtras();
         GoogleCloudMessaging gcm = GoogleCloudMessaging.getInstance(this);
 
         String messageType = gcm.getMessageType(intent);
-        Log.e("message type--",messageType);
+        Log.e("message type--", messageType);
         prefs = getSharedPreferences("Chat", 0);
-     //  prefs1= getSharedPreferences("test",0);
+        //  prefs1= getSharedPreferences("test",0);
 
         if (!extras.isEmpty()) {
 
             if (GoogleCloudMessaging.
                     MESSAGE_TYPE_SEND_ERROR.equals(messageType)) {
-                Log.e("L2C","Error");
+                Log.e("L2C", "Error");
 
             } else if (GoogleCloudMessaging.
                     MESSAGE_TYPE_DELETED.equals(messageType)) {
-                Log.e("L2C","Error");
+                Log.e("L2C", "Error");
 
             } else if (GoogleCloudMessaging.
                     MESSAGE_TYPE_MESSAGE.equals(messageType)) {
-Log.d("current--",prefs.getString("mobile",""));
-                Log.d("current value--",extras.getString("fromu"));
+                Log.d("current--", prefs.getString("mobile", ""));
+                Log.d("current value--", extras.getString("fromu"));
 
            /*  if(!prefs.getString("CURRENT_ACTIVE","").equals(extras.getString("fromu"))) {
                     sendNotification(extras.getString("msg"), extras.getString("fromu"), extras.getString("name"));
                 }*/
-                Log.d("CurrentStatus--",prefs.getString("current_status",""));
-                if(!prefs.getString("current_status","").equals("onchat")) {
+                Log.d("CurrentStatus--", prefs.getString("current_status", ""));
+                if (!prefs.getString("current_status", "").equals("onchat")) {
                     sendNotification(extras.getString("msg"), extras.getString("fromu"), extras.getString("name"));
                 }
 
@@ -68,9 +67,7 @@ Log.d("current--",prefs.getString("mobile",""));
     }
 
 
-
-
-    private void sendNotification(String msg,String mobno,String name) {
+    private void sendNotification(String msg, String mobno, String name) {
 
         Bundle args = new Bundle();
         args.putString("mobno", mobno);
@@ -88,7 +85,7 @@ Log.d("current--",prefs.getString("mobile",""));
                 chat, PendingIntent.FLAG_CANCEL_CURRENT);
         notification.setContentIntent(contentIntent);
         notification.setAutoCancel(true);
-        manager =(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         manager.notify(0, notification.build());
     }
 

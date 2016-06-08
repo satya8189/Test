@@ -17,6 +17,7 @@ import java.util.List;
 
 public class Utils {
     private static Format formatter;
+
     private Utils() {
     }
 
@@ -80,15 +81,15 @@ public class Utils {
         float proportion = ((float) count) / ((float) total);
         return proportion * 100;
     }
-    public static String getDateFromJson(Date date,String type){
-        if(type.equals("full")) {
+
+    public static String getDateFromJson(Date date, String type) {
+        if (type.equals("full")) {
             formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        }else{
+        } else {
             formatter = new SimpleDateFormat("yyyy-MM-dd");
         }
         return formatter.format(date);
     }
-
 
 
 }

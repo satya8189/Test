@@ -26,7 +26,7 @@ public class AgendaActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     String layoutStatus = "gone";
 
-    private List<HashMap<String,String>> agendaList;
+    private List<HashMap<String, String>> agendaList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,18 +41,18 @@ public class AgendaActivity extends AppCompatActivity {
 
         recyclerView = (RecyclerView) findViewById(R.id.agenda_recycler_view);
 
-        new MyAsyncTask(Constants.AGENDA+"?eventId="+eventId, null, AgendaActivity.this, new Callback() {
+        new MyAsyncTask(Constants.AGENDA + "?eventId=" + eventId, null, AgendaActivity.this, new Callback() {
             @Override
             public void onResult(String result) {
-                agendaList=new ArrayList<HashMap<String, String>>();
-                List<AgendaBean> agendaBeanList= Utils.getList(result,AgendaBean.class);
+                agendaList = new ArrayList<HashMap<String, String>>();
+                List<AgendaBean> agendaBeanList = Utils.getList(result, AgendaBean.class);
 
-                for(AgendaBean bean:agendaBeanList){
-                    HashMap<String,String> map=new HashMap<String, String>();
-                    map.put("agenTitle",bean.getAgenTitle());
-                    map.put("agenDesc",bean.getAgenDesc());
-                    map.put("agenStartTime",bean.getAgenStartTime());
-                    map.put("agenEndTime",bean.getAgenEndTime());
+                for (AgendaBean bean : agendaBeanList) {
+                    HashMap<String, String> map = new HashMap<String, String>();
+                    map.put("agenTitle", bean.getAgenTitle());
+                    map.put("agenDesc", bean.getAgenDesc());
+                    map.put("agenStartTime", bean.getAgenStartTime());
+                    map.put("agenEndTime", bean.getAgenEndTime());
 
                     agendaList.add(map);
 
@@ -71,14 +71,14 @@ public class AgendaActivity extends AppCompatActivity {
     private class RecylerAdapter extends RecyclerView.Adapter<AgendaRecyclerViewHolder> {
         LayoutInflater inflater;
         Context context;
-        List<HashMap<String,String>> mapsList;
-        HashMap<String,String> maps;
+        List<HashMap<String, String>> mapsList;
+        HashMap<String, String> maps;
 
         //String[] name = {"Androidwarriors", "Stackoverflow", "Developer Android", "AndroidHive"};
 
-        public RecylerAdapter(Context context,ArrayList<HashMap<String,String>> list) {
+        public RecylerAdapter(Context context, ArrayList<HashMap<String, String>> list) {
             this.context = context;
-            mapsList=list;
+            mapsList = list;
             inflater = LayoutInflater.from(context);
         }
 
@@ -98,11 +98,11 @@ public class AgendaActivity extends AppCompatActivity {
 
             holder.agendaLayout.setBackgroundColor(randomAndroidColor);
 
-            maps=mapsList.get(position);
+            maps = mapsList.get(position);
 
             holder.agendaTitle.setText(maps.get("agenTitle"));
             holder.agendaDesc.setText(maps.get("agenDesc"));
-            holder.agendaTime.setText(maps.get("agenStartTime")+"-"+maps.get("agenEndTime"));
+            holder.agendaTime.setText(maps.get("agenStartTime") + "-" + maps.get("agenEndTime"));
             holder.cardView.setOnClickListener(clickListener);
             holder.cardView.setTag(holder);
         }

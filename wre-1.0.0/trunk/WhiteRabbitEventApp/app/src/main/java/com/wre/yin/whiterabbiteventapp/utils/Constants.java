@@ -54,6 +54,7 @@ public class Constants {
     public static final String PARTICIPENT_REG_UPDATE = PARTICIPENT_URL + "participantRegUpdate";
     public static final String INDIVIDUAL_SPEAKER = URL + "getSpeakerBySpeakerId?speakerId=";
     public static final String INDIVIDUAL_SPONSOR = URL + "getSponsorDataonSponsorId?sponcorId=";
+    public static final String QUESTIONS_LIST = URL + "questionList?eventId=";
 
 
     //Image Gallery file path constansts

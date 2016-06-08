@@ -20,7 +20,6 @@ import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
-import com.wre.yin.whiterabbiteventapp.beans.ParticipantBean;
 import com.wre.yin.whiterabbiteventapp.beans.ParticipantEventBean;
 import com.wre.yin.whiterabbiteventapp.utils.Callback;
 import com.wre.yin.whiterabbiteventapp.utils.Constants;

@@ -40,7 +40,7 @@ public class NewsFeedActivity extends AppCompatActivity {
 
         recyclerView = (RecyclerView) findViewById(R.id.newsfeed_recycler_view);
 
-        new MyAsyncTask(Constants.NEWS_LIST + "?eventId="+eventId, null, NewsFeedActivity.this, new Callback() {
+        new MyAsyncTask(Constants.NEWS_LIST + "?eventId=" + eventId, null, NewsFeedActivity.this, new Callback() {
             @Override
             public void onResult(String result) {
                 newsList = new ArrayList<HashMap<String, String>>();
@@ -52,7 +52,7 @@ public class NewsFeedActivity extends AppCompatActivity {
                     map.put("newsDesc", bean.getNewsDesc());
 
 
-                    String newsDate = Utils.getDateFromJson(bean.getNewsDate(),"full");
+                    String newsDate = Utils.getDateFromJson(bean.getNewsDate(), "full");
                     map.put("newsDate", newsDate);
 
 

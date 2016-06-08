@@ -52,10 +52,10 @@ public class CustomGridViewAdapter extends ArrayAdapter<Item> {
 
         holder.txtTitle.setText(item.getTitle());
 
-        int idIndex=item.getId();
+        int idIndex = item.getId();
         TypedArray img;
         img = context.getResources().obtainTypedArray(R.array.services);
-        holder.imageItem.setImageResource(img.getResourceId(idIndex-1, 1));
+        holder.imageItem.setImageResource(img.getResourceId(idIndex - 1, 1));
         return row;
 
     }
