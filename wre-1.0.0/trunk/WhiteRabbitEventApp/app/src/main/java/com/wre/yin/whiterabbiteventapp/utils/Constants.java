@@ -29,7 +29,7 @@ public class Constants {
 
     //url constants
     public static String URL1 = "http://192.168.1.85:8080/Chatting/rest/chat/";
-    public static String IMAGE_URL="http://183.82.103.156:8080/Resources/wre/";
+    public static String IMAGE_URL = "http://183.82.103.156:8080/Resources/wre/";
 
     public static String URL = "http://183.82.103.156:8080/whiterabbitevent/admin/";
     public static String PARTICIPENT_URL = "http://183.82.103.156:8080/whiterabbitevent/";
@@ -43,19 +43,17 @@ public class Constants {
     public static final String UPLOAD_IMAGE_VIDEO = URL1 + "imageUpload";
 
     public static final String EVENT_LIST = SYSTEM_URL + "getParticipantEventList";
-    public static final String EVENT_SERVICES_LIST=URL+"eventServicesList?eventId=";
-    public static final String AGENDA=URL+"agendoDetails";
-    public static final String NEWS_LIST=URL+"newsList";
-    public static final String SPONSORS_LIST=URL+"sponsorsList";
-    public static final String SPEAKERS_LIST=URL+"speakersList";
+    public static final String EVENT_SERVICES_LIST = URL + "eventServicesList?eventId=";
+    public static final String AGENDA = URL + "agendoDetails";
+    public static final String NEWS_LIST = URL + "newsList";
+    public static final String SPONSORS_LIST = URL + "sponsorsList";
+    public static final String SPEAKERS_LIST = URL + "speakersList";
 
 
-    public static final String PARTICIPENT_LOGIN=PARTICIPENT_URL+"participantlogin";
-    public static final String PARTICIPENT_REG_UPDATE=PARTICIPENT_URL+"participantRegUpdate";
-    public static final String INDIVIDUAL_SPEAKER=URL+"getSpeakerBySpeakerId?speakerId=";
-    public static final String INDIVIDUAL_SPONSOR=URL+"getSponsorDataonSponsorId?sponcorId=";
-
-
+    public static final String PARTICIPENT_LOGIN = PARTICIPENT_URL + "participantlogin";
+    public static final String PARTICIPENT_REG_UPDATE = PARTICIPENT_URL + "participantRegUpdate";
+    public static final String INDIVIDUAL_SPEAKER = URL + "getSpeakerBySpeakerId?speakerId=";
+    public static final String INDIVIDUAL_SPONSOR = URL + "getSponsorDataonSponsorId?sponcorId=";
 
 
     //Image Gallery file path constansts
