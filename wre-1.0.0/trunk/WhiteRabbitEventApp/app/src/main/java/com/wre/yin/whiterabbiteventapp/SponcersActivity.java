@@ -121,8 +121,9 @@ public class SponcersActivity extends AppCompatActivity {
             public void onClick(View v) {
                 SponcersRecyclerViewHolders vHoder = (SponcersRecyclerViewHolders) v.getTag();
                 int position = vHoder.getPosition();
+                HashMap<String, String> maps1=mapsList.get(position);
                 Intent i = new Intent(SponcersActivity.this, SponcersProfileActivity.class);
-                i.putExtra("sponsorId", maps.get("sponsorId"));
+                i.putExtra("sponsorId", maps1.get("sponsorId"));
                 startActivity(i);
             }
         };

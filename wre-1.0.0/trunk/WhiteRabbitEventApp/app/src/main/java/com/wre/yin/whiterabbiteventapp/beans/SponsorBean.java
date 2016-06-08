@@ -9,7 +9,7 @@ public class SponsorBean {
     private String eventName;
     private String sponcorDesc;
     private String sponcorName;
-
+    private String fileName;
     public String getFileName() {
         return fileName;
     }
@@ -18,7 +18,7 @@ public class SponsorBean {
         this.fileName = fileName;
     }
 
-    private String fileName;
+
 
 
     public String getSponcorDesc() {

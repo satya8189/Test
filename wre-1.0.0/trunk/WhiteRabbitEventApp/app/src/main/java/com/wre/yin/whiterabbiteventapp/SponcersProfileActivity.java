@@ -28,7 +28,6 @@ public class SponcersProfileActivity extends AppCompatActivity {
 
         String sponsorId = getIntent().getExtras().getString("sponsorId");
 
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         // getSupportActionBar().setTitle(nameTxt);
         sponcersName = (TextView) findViewById(R.id.sponcers_name_text);
@@ -45,15 +44,11 @@ public class SponcersProfileActivity extends AppCompatActivity {
             public void onResult(String result) {
                 sponsorIndividualList = new ArrayList<HashMap<String, String>>();
 
-                List<SponsorBean> individualSponsorBeanList = Utils.getList(result, SponsorBean.class);
-                for (SponsorBean bean : individualSponsorBeanList) {
-                    HashMap<String, String> map = new HashMap<String, String>();
-                    map.put("sponsorName", bean.getSponcorName());
-                    //    map.put("sponsorDesc", bean.getSponcorDesc());
+                SponsorBean indBean = Utils.getObject(result, SponsorBean.class);
 
-                    sponsorIndividualList.add(map);
+                sponcersName.setText(indBean.getSponcorName());
+                aboutSponsor.setText(indBean.getSponcorDesc());
 
-                }
 
             }
         }).execute();

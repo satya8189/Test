@@ -40,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
     String SENDER_ID = "1065186781236";
     static final String TAG = "L2C";
     GoogleCloudMessaging gcm;
-    ParticipantBean pBean=null;
+    ParticipantBean pBean = null;
     Context context;
     String regid;
     String jsonResult = null;
@@ -62,8 +62,8 @@ public class LoginActivity extends AppCompatActivity {
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String mobileNum=employeeId.getText().toString();
-                if(Utils.checkMobile(mobileNum)) {
+                String mobileNum = employeeId.getText().toString();
+                if (Utils.checkMobile(mobileNum)) {
 
 
                     ParticipantBean participantBean = new ParticipantBean();
@@ -72,18 +72,18 @@ public class LoginActivity extends AppCompatActivity {
                     new MyAsyncTask(Constants.PARTICIPENT_LOGIN, Utils.getJson(participantBean), LoginActivity.this, new Callback() {
                         @Override
                         public void onResult(String result) {
-                             pBean=Utils.getObject(result,ParticipantBean.class);
+                            pBean = Utils.getObject(result, ParticipantBean.class);
                             prefs = getSharedPreferences("Chat", 0);
-                            editor=prefs.edit();
-                            editor.putString("name",pBean.getFirstName());
-                            editor.putString("partId",pBean.getParticipantId().toString());
+                            editor = prefs.edit();
+                            editor.putString("name", pBean.getFirstName());
+                            editor.putString("partId", pBean.getParticipantId().toString());
                             editor.commit();
-                            String strPref = prefs.getString("mobile",null);
-                            if(strPref==null) {
+                            String strPref = prefs.getString("mobile", null);
+                            if (strPref == null) {
                                 new Register().execute(pBean.getPhoneNumber());
                             }
 
-                            editor.putString("mobile",pBean.getPhoneNumber());
+                            editor.putString("mobile", pBean.getPhoneNumber());
                             editor.commit();
                             Intent otpAct = new Intent(LoginActivity.this, OTPActivity.class);
                             startActivity(otpAct);
@@ -104,10 +104,9 @@ public class LoginActivity extends AppCompatActivity {
                         startActivity(otpAct);
                         finish();
                     }*/
-                }else{
+                } else {
                     employeeId.setError("Please enter a valid mobile number");
                 }
-
 
 
             }
@@ -120,17 +119,17 @@ public class LoginActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... args) {
-            String phone=args[0];
+            String phone = args[0];
             try {
                 if (gcm == null) {
                     gcm = GoogleCloudMessaging.getInstance(context);
                     regid = gcm.register(SENDER_ID);
                     //Log.e("RegId",regid);
-                    ParticipantBean p=new ParticipantBean();
+                    ParticipantBean p = new ParticipantBean();
                     p.setPhoneNumber(phone);
                     p.setRegisterId(regid);
                     HttpPost post = new HttpPost(Constants.PARTICIPENT_REG_UPDATE);
-                    String r=Utils.getJson(p);
+                    String r = Utils.getJson(p);
                     post.setEntity(new StringEntity(r));
                     httpclient = new DefaultHttpClient();
                     post.setHeader("Accept", "application/json");
@@ -140,10 +139,10 @@ public class LoginActivity extends AppCompatActivity {
                     jsonResult = inputStreamToString(httpResponse.getEntity().getContent()).toString();
                     System.out.println("Result " + jsonResult);
                     prefs = getSharedPreferences("Chat", 0);
-                    editor=prefs.edit();
+                    editor = prefs.edit();
 
 
-                    editor.putString("mobile",phone);
+                    editor.putString("mobile", phone);
                     editor.commit();
                     Intent otpAct = new Intent(LoginActivity.this, OTPActivity.class);
                     startActivity(otpAct);
@@ -151,7 +150,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 }
 
-               return  regid;
+                return regid;
 
             } catch (IOException ex) {
                 Log.e("Error", ex.getMessage());
@@ -160,6 +159,7 @@ public class LoginActivity extends AppCompatActivity {
             }
 
         }
+
         @Override
         protected void onPostExecute(String json) {
 

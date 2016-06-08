@@ -25,7 +25,7 @@
         android:text="NAme" />
 
     <TextView
-        android:id="@+id/speaker_prof"
+        android:id="@+id/speaker_desig"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/speaker_name"
@@ -37,11 +37,11 @@
         android:id="@+id/view1"
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:layout_below="@id/speaker_prof"
+        android:layout_below="@id/speaker_desig"
         android:background="#00ffff" />
 
     <TextView
-        android:id="@+id/location"
+        android:id="@+id/sp_location"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/view1"
@@ -53,14 +53,14 @@
         android:id="@+id/view2"
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:layout_below="@id/location"
+        android:layout_below="@id/sp_location"
         android:background="#00ffff" />
 
     <RelativeLayout
         android:id="@+id/rl1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/location"
+        android:layout_below="@+id/sp_location"
         android:gravity="center_vertical">
 
         <TextView
@@ -94,4 +94,11 @@
 
         android:layout_below="@id/rl1"
         android:background="#00ffff" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/speaker_desc"
+        android:text="Discription"
+        android:layout_below="@+id/view3"
+        android:layout_margin="5dp"/>
 </RelativeLayout>

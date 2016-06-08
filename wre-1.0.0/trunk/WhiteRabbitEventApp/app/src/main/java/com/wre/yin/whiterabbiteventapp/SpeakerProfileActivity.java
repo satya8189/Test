@@ -65,7 +65,7 @@ public class SpeakerProfileActivity extends AppCompatActivity {
                 for (SpeakerBean bean : speakerBeenList) {
                     HashMap<String, String> map = new HashMap<String, String>();
                     map.put("speakersName", bean.getSpeakerName());
-                    //    map.put("sponsorDesc", bean.getSponcorDesc());
+                    map.put("speakerId",bean.getSpeakerId().toString());
 
                     speakersList.add(map);
 
@@ -112,9 +112,10 @@ public class SpeakerProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
                 SpeakersRecyclerViewHolders vHoder = (SpeakersRecyclerViewHolders) v.getTag();
                 int position = vHoder.getPosition();
-                System.out.println("Speaker Name:" + mapsList.get(position));
+                HashMap<String,String> map1=mapsList.get(position);
                 Intent i = new Intent(SpeakerProfileActivity.this, SpeakersProfileDetailsActivity.class);
-                i.putExtra("speakerName", maps.get("speakersName"));
+                i.putExtra("speakerId", map1.get("speakerId"));
+                i.putExtra("speakerName", map1.get("speakersName"));
                 startActivity(i);
             }
         };
