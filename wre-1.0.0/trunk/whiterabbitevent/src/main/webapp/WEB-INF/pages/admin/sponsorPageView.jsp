@@ -68,15 +68,3 @@ margin-bottom:0px !important;
 		</div>
  </div>
 </div>
-
-
- <!--
- 
- 
- <div ng-repeat="sp in sponsorsList | filter:q | itemsPerPage: pageSize" current-page="currentPage">{{ sp.sponcorName }}</div>
- 
- 
- <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" 
- 		template-url="resources/js/dirPagination/dirPagination.tpl.html"></dir-pagination-controls>
- 
-  -->
