@@ -45,6 +45,7 @@ import com.wre.model.Speaker;
 import com.wre.model.Sponcor;
 import com.wre.model.SurveyQuestion;
 import com.wre.systemadminmgmt.bean.ParticipantBean;
+import com.wre.systemadminmgmt.bean.ParticipantEventBean;
 
 @Service("AdminMgmtService")
 public class AdminMgmtServiceImpl implements AdminMgmtService {
@@ -1169,6 +1170,40 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 			log.info("delete chatTopic ServiceImpl");
 			
 		}
+		
+		
+		//getParticipantEventBeanList
+		public List<ParticipantEventBean> getParticipantEventBeanList(Long eventId,String status) {
+			List<Object[]> eventParticipantList=AdminMgmtDaoImpl.getParticipantEventBeanList(eventId,status);
+			List<ParticipantEventBean> participantEventBeanList=new ArrayList<ParticipantEventBean>();
+			for(Object[] eventParticipantOject:eventParticipantList){
+				ParticipantEventBean participantEventBeanOject=new ParticipantEventBean();
+				participantEventBeanOject.setEventId(((BigInteger)eventParticipantOject[0]).longValue());
+				participantEventBeanOject.setEventname((String)eventParticipantOject[1]);
+				participantEventBeanOject.setFirstName((String)eventParticipantOject[2]);
+				participantEventBeanOject.setLostName((String)eventParticipantOject[3]);
+				participantEventBeanOject.setMobile((String)eventParticipantOject[4]);
+				participantEventBeanOject.setEmailId((String)eventParticipantOject[5]);
+				participantEventBeanOject.setStatus((String)eventParticipantOject[6]);
+			    participantEventBeanOject.setParticipateId(((BigInteger)eventParticipantOject[7]).longValue());
+			    participantEventBeanOject.setParticipateEventId(((BigInteger)eventParticipantOject[8]).longValue());
+			    
+		        participantEventBeanList.add(participantEventBeanOject);
+			}
+			log.info("list size is --+" + participantEventBeanList.size());
+			return participantEventBeanList;
+		}
+		
+		
+		
+	   //eventParticipantCreate
+		public void eventParticipantSave(ParticipantEventBean participantEventBean) {
+			AdminMgmtDaoImpl.eventParticipantSave(participantEventBean);
+			
+			
+			
+		}
+		
 
 }
 

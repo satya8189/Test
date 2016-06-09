@@ -18,6 +18,7 @@ import com.wre.adminmgmt.bean.RatingBean;
 import com.wre.adminmgmt.bean.SpeakerBean;
 import com.wre.adminmgmt.bean.SponsorBean;
 import com.wre.systemadminmgmt.bean.ParticipantBean;
+import com.wre.systemadminmgmt.bean.ParticipantEventBean;
 
 public interface AdminMgmtService {
 
@@ -119,6 +120,12 @@ public ChatTopicBean getChatTopicDetails(Long chatTopicId);
 public void chatTopicUpdate(ChatTopicBean chatTopicBean);
 
 public void chatTopicDelete(Long chatTopicId);
+
+public List<ParticipantEventBean> getParticipantEventBeanList(Long eventId,
+		String status);
+
+public void eventParticipantSave(ParticipantEventBean participantEventBean);
+
 
 
 
