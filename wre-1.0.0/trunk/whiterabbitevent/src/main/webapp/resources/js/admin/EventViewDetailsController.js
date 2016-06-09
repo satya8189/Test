@@ -18,8 +18,8 @@ var EventViewDetailsController = function($scope,$routeParams,$http,$location) {
 		if(event.serviceId=="2"){
 	location.href="#/agendoDetails/"+event.eventId;
 		}
-		else if(event.sereviceId=="3"){
-			alert("newsFeedView-----"+event.eventId);
+		else if(event.serviceId=="3"){
+			//alert("newsFeedView-----"+event.eventId);
 			location.href="#/newsFeedView/"+event.eventId;	
 			
 		}else if(event.serviceId=="4"){
@@ -52,15 +52,19 @@ var EventViewDetailsController = function($scope,$routeParams,$http,$location) {
 			//alert("kk");
 			location.href="#/venueLayout/"+event.eventId;
 			
-		}
-		else if(event.serviceId=="18"){
-			location.href="#/navigateToChatList/"+event.eventId;
-		}
-		else if(event.serviceId=="8"){
+		}else if(event.serviceId=="8"){
 			//alert("kk");
-			location.href="#/quationAndAnswersView/"+event.eventId;
-			
-		};
+			location.href="#/QuestionAndAnswersView/"+event.eventId;
+		
+		}else if(event.serviceId=="19"){
+			//alert("serviceId..."+event.serviceId+"&&service.eventId=="+event.eventId);
+			location.href="#/contactDetailsView/"+event.eventId;
+		
+		}else if(event.serviceId=="18"){
+			//alert("serviceId..."+event.eventId);
+			location.href="#/navigateToChatList/"+event.eventId;
+	};
+
 	};
 	
 	
