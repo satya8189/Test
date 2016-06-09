@@ -155,13 +155,8 @@ App.config([ '$routeProvider', function($routeProvider, $Scope) {
 		controller : QuestionEditController
 	});
 	
-	//QuationAndAnswersViewController
-	$routeProvider.when('/quationAndAnswersView/:eventId/', {
-		templateUrl : 'admin/quationAndAnswersView',
-		controller : QuationAndAnswersViewController
-	});
 	
-	QuationAndAnswersViewController.js
+	
 	/* By Taraq */
 	// sponsorPageView
 	$routeProvider.when('/sponsorPageView/:eventId', {
@@ -185,6 +180,7 @@ App.config([ '$routeProvider', function($routeProvider, $Scope) {
 	/* sponsor ends here */
 
 	/* Speaker starts here */
+	
 	// speakerProfileView/
 	$routeProvider.when('/speakerProfileView/:eventId', {
 		templateUrl : 'admin/speakerProfileView',
@@ -210,28 +206,21 @@ App.config([ '$routeProvider', function($routeProvider, $Scope) {
 		templateUrl : 'admin/venueLayoutView',
 		controller : VenueLayoutController
 	});
-	
-/*chat view starts here	*/
-//chat view list
-	$routeProvider.when('/navigateToChatList/:eventId', {
-		templateUrl : 'admin/navigateToChatTopicList',
-		controller : ChatTopicListViewController
-	});
-	
-//chat Create 
-	$routeProvider.when('/chatTopicCreate/:eventId', {
-		templateUrl : 'admin/navigateToCreateChatTopic',
-		controller : ChatTopicCreateController
-	});
 
-	//chat viewdetails
-	$routeProvider.when('/chatTopicView/:chatTopicId', {
-		templateUrl : 'admin/navigateChatDetails',
-		controller : ChatTopicViewDetailsController
+	
+	//#/contactDetailsView/
+	$routeProvider.when('/contactDetailsView/:eventId', {
+		templateUrl : 'admin/contactDetailsView',
+		controller : ContactDetailsViewController
 	});
 	
-	/*chat view ends here	*/	
-
+	//#/editContatctDetails/
+	$routeProvider.when('/editContatctDetails/:contactId', {
+		templateUrl : 'admin/editContactDetails',
+		controller : EditContactDetailsController
+	});
+	
+	
 	$routeProvider.otherwise({
 		redirectTo : '/eventView'
 	});
@@ -247,4 +236,56 @@ App.filter('startFrom', function () {
 		return [];
 	};
 });
+
+
+App.directive('format', function ($filter) {
+    'use strict';
+    return {
+        require: '?ngModel',
+        link: function (scope, elem, attrs, ctrl) {
+            if (!ctrl) {
+                return;
+            }
+
+            ctrl.$formatters.unshift(function () {
+                return $filter('number')(ctrl.$modelValue);
+            });
+
+//====================
+            //to add comma to the mobile numbers
+            ctrl.$parsers.push(function (viewValue) {
+
+            	//var transformedInput = viewValue.toLowerCase().replace(/ /g, '');
+                  //replace(/[^\dA-Z]/g, '').replace(/(.{10})/g, '$1,')
+            	
+            
+            	var transformedInput = viewValue.replace(/[^\dA-Z]/g, '').replace(/(.{10})/g, ',$1').trim();
+            	//alert(transformedInput.substr(1));
+            	
+            		if(transformedInput.charAt(0)==",")
+            			{
+            			 transformedInput=transformedInput.substr(1);
+            			}
+            	
+                  if (transformedInput!=viewValue) {
+                    ctrl.$setViewValue(transformedInput);
+                    ctrl.$render();
+                  }         
+
+                  return transformedInput;         
+                });
+           
+//============================
+           
+        }
+    };
+}).controller('InputCtrl', function($scope) {
+
+//$scope.mynum1 = 50000000;
+//$scope.mynum2 = 50000000;
+});
+
+
+
+
 
