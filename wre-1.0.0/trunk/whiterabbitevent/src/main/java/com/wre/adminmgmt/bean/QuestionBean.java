@@ -14,7 +14,7 @@ public class QuestionBean
     private String optionD;
     private String answer;
     private String appIdentifierName;
-    
+    private Long participantId ;
     
     
 	public String getAppIdentifierName() {
@@ -83,7 +83,11 @@ public class QuestionBean
 	public void setAnswer(String answer) {
 		this.answer = answer;
 	}
-    
-    
-
+	public Long getParticipantId() {
+		return participantId;
+	}
+	public void setParticipantId(Long participantId) {
+		this.participantId = participantId;
+	}
+	
 }
