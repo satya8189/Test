@@ -240,6 +240,13 @@ App.config([ '$routeProvider', function($routeProvider, $Scope) {
 		});
 		
 		/*chat view ends here	*/
+	//QuestionAndAnswersViewController
+	$routeProvider.when('/QuestionAndAnswersView/:eventId/', {
+		templateUrl : 'admin/QuestionAndAnswersView',
+		controller : QuestionAndAnswersViewController
+	});
+	
+	
 	$routeProvider.otherwise({
 		redirectTo : '/eventView'
 	});
