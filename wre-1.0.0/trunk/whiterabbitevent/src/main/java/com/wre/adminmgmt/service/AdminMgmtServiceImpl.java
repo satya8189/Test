@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.wre.adminmgmt.bean.AgendaBean;
 import com.wre.adminmgmt.bean.AppIdentifierBean;
 import com.wre.adminmgmt.bean.ChatBean;
+import com.wre.adminmgmt.bean.ChatTopicBean;
 import com.wre.adminmgmt.bean.ContactDetailsBean;
 import com.wre.adminmgmt.bean.EventBean;
 import com.wre.adminmgmt.bean.GalaryBean;
@@ -31,6 +32,7 @@ import com.wre.adminmgmt.dao.AdminMgmtDao;
 import com.wre.common.util.WREConstants;
 import com.wre.model.Agenda;
 import com.wre.model.AppIdentifier;
+import com.wre.model.ChatTopic;
 import com.wre.model.ContactDetails;
 import com.wre.model.Event;
 import com.wre.model.EventParticipant;
@@ -1101,7 +1103,72 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 			AdminMgmtDaoImpl.save(contactDetails);
 		}
 		
+		//chat_topic List
+		@Override
+		public List<ChatTopicBean> getChatTopicList(Long eventId) {
+			List<ChatTopic> chatTopicList = AdminMgmtDaoImpl.getChatTopicList(eventId);
+			List<ChatTopicBean> chatTopicBeanList = new ArrayList<ChatTopicBean>();
+			for(ChatTopic chatTopics:chatTopicList)
+			{
+				ChatTopicBean chatTopicBean  = new ChatTopicBean();
+				chatTopicBean.setChatTopicId(chatTopics.getTopicId());
+				chatTopicBean.setChatTopicName(chatTopics.getTopic());
+				chatTopicBean.setEventId(chatTopics.getEvent().getEventId());
+				chatTopicBeanList.add(chatTopicBean);
+			}
+			return chatTopicBeanList;
+		}
+		
+		//chat_topic Save method
+		@Override
+		public void saveChatTopic(ChatTopicBean chatTopicBean) {
+			ChatTopic chatTopic = new ChatTopic();
+			chatTopic.setTopic(chatTopicBean.getChatTopicName());
+			Event event = new Event();
+			event.setEventId(chatTopicBean.getEventId());
+			chatTopic.setEvent(event);
+			AdminMgmtDaoImpl.save(chatTopic);
+		}
+		//chat_topic getdetailsmethod
+		@Override
+		public ChatTopicBean getChatTopicDetails(Long chatTopicId) {
+			ChatTopicBean chatTopicBean = null;
+			ChatTopic chatTopicEntity = AdminMgmtDaoImpl.getChatTopicDetails(chatTopicId);
+			if(chatTopicEntity!=null){
+				chatTopicBean = new ChatTopicBean();
+				chatTopicBean.setChatTopicId(chatTopicEntity.getTopicId());
+				chatTopicBean.setChatTopicName(chatTopicEntity.getTopic());
+				chatTopicBean.setEventId(chatTopicEntity.getEvent().getEventId());
+			}
+			return chatTopicBean;
+		}
+	//chat_topic UpdateMethod
+		@Override
+		public void chatTopicUpdate(ChatTopicBean chatTopicBean) {
+			
+			 AdminMgmtDaoImpl.getChatTopicDetails(chatTopicBean.getChatTopicId());
+			
+				
+			ChatTopic chatTopicObj = new ChatTopic();
+			chatTopicObj.setTopic(chatTopicBean.getChatTopicName());
+			chatTopicObj.setTopicId(chatTopicBean.getChatTopicId());
+			log.info("sdsd");
+			Event event = new Event();
+			event.setEventId(chatTopicBean.getEventId());
+			chatTopicObj.setEvent(event);
+			AdminMgmtDaoImpl.update(chatTopicObj);
+			
+		}
 	
+		@Override
+		public void chatTopicDelete(Long chatTopicId) {
+			
+			ChatTopic chatTopicObj = new ChatTopic();
+			chatTopicObj.setTopicId(chatTopicId);
+			AdminMgmtDaoImpl.delete(chatTopicObj);
+			log.info("delete chatTopic ServiceImpl");
+			
+		}
 
 }
 

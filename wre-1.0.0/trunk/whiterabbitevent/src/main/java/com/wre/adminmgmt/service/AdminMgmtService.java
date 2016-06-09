@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.wre.adminmgmt.bean.AgendaBean;
 import com.wre.adminmgmt.bean.AppIdentifierBean;
 import com.wre.adminmgmt.bean.ChatBean;
+import com.wre.adminmgmt.bean.ChatTopicBean;
 import com.wre.adminmgmt.bean.ContactDetailsBean;
 import com.wre.adminmgmt.bean.EventBean;
 import com.wre.adminmgmt.bean.GalaryBean;
@@ -109,6 +110,15 @@ List<RatingBean> getUserRatings(RatingBean ratingBean);
 
 void saveUserRating(RatingBean ratingBean);
 
+public List<ChatTopicBean> getChatTopicList(Long eventId);
+
+public void saveChatTopic(ChatTopicBean chatTopicBean);
+
+public ChatTopicBean getChatTopicDetails(Long chatTopicId);
+
+public void chatTopicUpdate(ChatTopicBean chatTopicBean);
+
+public void chatTopicDelete(Long chatTopicId);
 
 
 
