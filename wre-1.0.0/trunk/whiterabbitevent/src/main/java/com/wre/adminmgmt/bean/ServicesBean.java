@@ -5,8 +5,16 @@ public class ServicesBean {
     private Long serviceId;
     private String serviceName;
     private String serviceDesc;
+    private int order;
     
     
+    
+	public int getOrder() {
+		return order;
+	}
+	public void setOrder(int order) {
+		this.order = order;
+	}
 	public Long getServiceId() {
 		return serviceId;
 	}
