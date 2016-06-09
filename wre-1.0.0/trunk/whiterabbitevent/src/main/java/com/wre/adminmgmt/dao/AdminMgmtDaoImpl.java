@@ -7,7 +7,6 @@ import org.apache.commons.logging.LogFactory;
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.SQLQuery;
-import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -27,6 +26,7 @@ import com.wre.model.Speaker;
 import com.wre.model.Sponcor;
 import com.wre.model.SurveyQuestion;
 import com.wre.systemadminmgmt.bean.ParticipantBean;
+import com.wre.systemadminmgmt.bean.ParticipantEventBean;
 
 
 
@@ -363,6 +363,39 @@ public ChatTopic getChatTopicDetails(Long chatTopicId) {
 	criteria.add(Restrictions.eq("topicId", chatTopicId));
 	criteria.setFetchMode("event", FetchMode.EAGER);
 	return (ChatTopic)criteria.uniqueResult();
+}
+
+public List<Object[]>  getParticipantEventBeanList(Long eventId,String status) {
+	String query = 
+	"SELECT e.Event_ID,e.Event_Name,p.FirstName,p.Last_Name,p.Phone,p.Email,ep.Status,p.Participant_ID,ep.Eve_Participant_ID  FROM event_participant ep"
+			+ " LEFT JOIN  wre_dev.event e ON e.Event_ID=ep.Event_ID "
+			+ " LEFT JOIN participants p ON p.Participant_ID=ep.Participant_ID WHERE ep.Event_ID=:id";
+
+	SQLQuery sqlQuery = sessionFactory.getCurrentSession().createSQLQuery(
+			query);
+	sqlQuery.setParameter("id", eventId);
+	List<Object[]> eventParticipantList = (List<Object[]>) sqlQuery.list();
+	return eventParticipantList;
+
+	
+}
+
+
+
+
+public void eventParticipantSave(
+		ParticipantEventBean participantEventBean) {
+	String query = 
+			"Update event_participant set Status=:status WHERE Event_ID=:eid and Participant_ID=:pid";
+
+			SQLQuery sqlQuery = sessionFactory.getCurrentSession().createSQLQuery(
+					query);
+			sqlQuery.setParameter("status", participantEventBean.getStatus());
+			sqlQuery.setParameter("eid", participantEventBean.getEventId());
+			sqlQuery.setParameter("pid", participantEventBean.getParticipateId());
+			sqlQuery.executeUpdate();
+	
+
 }
 
 

@@ -18,6 +18,7 @@ import com.wre.model.Speaker;
 import com.wre.model.Sponcor;
 import com.wre.model.SurveyQuestion;
 import com.wre.systemadminmgmt.bean.ParticipantBean;
+import com.wre.systemadminmgmt.bean.ParticipantEventBean;
 
 public interface AdminMgmtDao  extends GenericDao<Object>{
 
@@ -73,6 +74,12 @@ public List<Rating> getUserRatingList(Long eventId);
 public List<ChatTopic> getChatTopicList(Long eventId);
 
 public ChatTopic getChatTopicDetails(Long chatTopicId);
+
+public List<Object[]> getParticipantEventBeanList(Long eventId,
+		String status);
+
+public void eventParticipantSave(
+		ParticipantEventBean participantEventBean);
 
 
 }
