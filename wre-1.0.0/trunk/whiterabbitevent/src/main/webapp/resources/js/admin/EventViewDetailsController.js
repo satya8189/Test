@@ -52,7 +52,11 @@ var EventViewDetailsController = function($scope,$routeParams,$http,$location) {
 			//alert("kk");
 			location.href="#/venueLayout/"+event.eventId;
 			
-		}else if(event.serviceId=="8"){
+		}
+		else if(event.serviceId=="18"){
+			location.href="#/navigateToChatList/"+event.eventId;
+		}
+		else if(event.serviceId=="8"){
 			//alert("kk");
 			location.href="#/quationAndAnswersView/"+event.eventId;
 			

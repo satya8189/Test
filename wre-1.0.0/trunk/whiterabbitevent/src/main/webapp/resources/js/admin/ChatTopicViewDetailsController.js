@@ -12,10 +12,8 @@ var ChatTopicViewDetailsController = function($scope, $http, $location, $routePa
 	});
 	
 	$scope.updateChat = function(chat){
-		alert("demoChatDetails");
 		$http.post('admin/chatTopicUpdate',chat).success(function(){
 			$scope.chat = chat;
-			 alert("chatTopic"+chat.chatTopicId);
 			 ngNotifier.notify("ChatTopic Updated Successfully !");
 			 $location.path("/navigateToChatList/"+chat.eventId);
 			 
