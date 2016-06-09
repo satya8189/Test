@@ -207,6 +207,7 @@ public class SystemAdminMgmtServiceImpl implements SystemAdminMgmtService{
 			log.info("sas--"+servicesBean.getServiceId());
 			servicesBean.setServiceName(services.getServiceName());
 			servicesBean.setServiceDesc(services.getServiceDesc());
+			servicesBean.setOrder(services.getOrder());
 			servicesBeans.add(servicesBean);
 		}
 		return servicesBeans;
