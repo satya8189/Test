@@ -45,6 +45,7 @@ import com.wre.adminmgmt.bean.SponsorBean;
 import com.wre.adminmgmt.service.AdminMgmtService;
 import com.wre.common.util.WREConstants;
 import com.wre.systemadminmgmt.bean.ParticipantBean;
+import com.wre.systemadminmgmt.bean.ParticipantEventBean;
 
 @Controller
 public class AdminMgmtController {
@@ -906,6 +907,26 @@ public @ResponseBody void saveContactDetails(@RequestBody ContactDetailsBean con
 	public @ResponseBody void chatTopicDelete(@RequestParam ("chatTopicId") Long chatTopicId){
 		log.info("we are in chatTopicDelete ");
 		 adminMgmtService.chatTopicDelete(chatTopicId);
+	}
+	
+	//admin/ParticipantEventBeanList
+	@RequestMapping(value = "admin/ParticipantEventBeanList", method = RequestMethod.GET)
+	public @ResponseBody
+	List<ParticipantEventBean> getParticipantEventBeanList(@RequestParam("eventId") Long eventId,
+			@RequestParam("status") String status) {
+		List<ParticipantEventBean> participantEventList = adminMgmtService
+				.getParticipantEventBeanList(eventId,status);
+		return participantEventList;
+
+	}
+	
+
+	//participantEventBean
+	@RequestMapping(value = "admin/eventParticipantSave", method = RequestMethod.POST)
+	public @ResponseBody
+	void eventParticipantSave(@RequestBody ParticipantEventBean participantEventBean) {
+		log.info("in side save method");
+		adminMgmtService.eventParticipantSave(participantEventBean);
 	}
 
 }
