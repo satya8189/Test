@@ -37,7 +37,7 @@ margin-bottom:0px !important;
 						
 				   </tr>
 				</thead>
-				<tr ng-show="filteredSize!=0"ng-repeat="invite in inviteList ">
+				<tr ng-show="filteredSize!=0" ng-repeat="invite in inviteList | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
 				    <td >{{invite.firstName}}</td>
 					<td >{{invite.lastName}}</td>
 					<td >{{invite.email}}</td>
