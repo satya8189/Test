@@ -920,7 +920,6 @@ public @ResponseBody void saveContactDetails(@RequestBody ContactDetailsBean con
 
 	}
 	
-
 	//participantEventBean
 	@RequestMapping(value = "admin/eventParticipantSave", method = RequestMethod.POST)
 	public @ResponseBody
@@ -928,5 +927,24 @@ public @ResponseBody void saveContactDetails(@RequestBody ContactDetailsBean con
 		log.info("in side save method");
 		adminMgmtService.eventParticipantSave(participantEventBean);
 	}
+	
+
+	// admin/QuestionAndAnswersView
+	@RequestMapping(value = "admin/QuestionAndAnswersView")
+	public String QuestionAndAnswersView() {
+		log.info("navigate QuestionAndAnswersView page");
+		return "admin/QuestionAndAnswersView";
+	}
+
+	//Get participants list..........admin/getParticipantsList
+	@RequestMapping(value="admin/getParticipantsList",method=RequestMethod.GET)
+	public @ResponseBody List<ParticipantBean> gteParticipantsList(@RequestParam("eventId") Long eventId)
+	{
+		log.info("in admin/getParticipantsList"+eventId);
+		return adminMgmtService.getParticipantsList(eventId);
+	}
+
+	
+	
 
 }
