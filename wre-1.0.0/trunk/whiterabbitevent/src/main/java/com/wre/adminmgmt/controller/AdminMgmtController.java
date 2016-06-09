@@ -32,6 +32,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.wre.adminmgmt.bean.AgendaBean;
 import com.wre.adminmgmt.bean.AppIdentifierBean;
 import com.wre.adminmgmt.bean.ChatBean;
+import com.wre.adminmgmt.bean.ChatTopicBean;
 import com.wre.adminmgmt.bean.ContactDetailsBean;
 import com.wre.adminmgmt.bean.EventBean;
 import com.wre.adminmgmt.bean.GalaryBean;
@@ -851,7 +852,60 @@ public @ResponseBody void saveContactDetails(@RequestBody ContactDetailsBean con
 }
 
 
+/*ChatTopic data */
+//chat_topic List NavigationListPage
+	@RequestMapping(value="admin/navigateToChatTopicList")
+	public String navigateToChatTopicList(){
+		log.info("we are in navigationToChatTopicList");
+		return "admin/chatTopicView";
+	}
+	
+	//chatTopicList method
+	@RequestMapping(value ="admin/chatTopicList",method = RequestMethod.GET)
+	public @ResponseBody List<ChatTopicBean> getChatTopicList(@RequestParam("eventId") Long eventId) {
+		log.info("we are in chatTopicList " +eventId);
+		List<ChatTopicBean> chatTopicList = adminMgmtService.getChatTopicList(eventId);
+		log.info("size of List is"+chatTopicList.size());
+		return chatTopicList;
 
-
+	}
+	
+	//chat_topicNavigationPage
+	@RequestMapping(value="admin/navigateToCreateChatTopic")
+	public String navigateToChatTopicCreate(){
+		return"admin/chatTopicCreate";
+	}
+	
+	//Chat_Topic save method 
+	@RequestMapping(value="admin/saveChatTopic",method=RequestMethod.POST)
+	public @ResponseBody void saveChatTopic(@RequestBody ChatTopicBean chatTopicBean){
+		log.info("we are in chatTopic save method");
+		adminMgmtService.saveChatTopic(chatTopicBean);
+	}
+	//navigate to chatDetailsPage
+	@RequestMapping(value="admin/navigateChatDetails")
+	public String navigateToChatDetails(){
+		log.info("we are in navigate ChatViewDetils");
+		return "admin/chatTopicDetails";
+	}
+	//Chat_topic Details method
+	@RequestMapping(value="admin/chatTopicDetails",method = RequestMethod.GET)
+	public @ResponseBody ChatTopicBean getChatTopicDetails(@RequestParam("chatTopicId")Long chatTopicId){
+		log.info("we are in chatTopicDetalis"+chatTopicId);
+		return adminMgmtService.getChatTopicDetails(chatTopicId);
+	}
+	
+	//chat_topic Update method
+	@RequestMapping(value="admin/chatTopicUpdate",method = RequestMethod.POST)
+	public @ResponseBody void chatTopicUpdate(@RequestBody ChatTopicBean chatTopicBean){
+		log.info("we are in chatTopicUpdate");
+		adminMgmtService.chatTopicUpdate(chatTopicBean);
+	}
+	//chat_topic Delete method
+	@RequestMapping(value="admin/deleteChatTopic",method=RequestMethod.GET)
+	public @ResponseBody void chatTopicDelete(@RequestParam ("chatTopicId") Long chatTopicId){
+		log.info("we are in chatTopicDelete ");
+		 adminMgmtService.chatTopicDelete(chatTopicId);
+	}
 
 }
