@@ -8,14 +8,16 @@
   <title>WHITE RABBIT EVENT</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">    
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
   <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
   <link rel="stylesheet" href="resources/css/style.css"/>
   
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
   <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
   <script src="resources/js/angular/angular.js"></script>
   <script src="resources/js/angular/angular.min.js"></script> 
   <script src="resources/js/angular/angular-route.js"></script>
@@ -24,17 +26,16 @@
   <script src="resources/js/angular/angular-messages.min.js"></script>
   <script src="resources/js/ui-bootstrap-angularjs.js"></script> 
    
-     <script src="resources/js/navigationjs/systemAdminNavigation.js"></script>
-     <script src="resources/js/services.js"></script>
-      <script src="resources/js/filters.js"></script>
- 
+  <script src="resources/js/navigationjs/systemAdminNavigation.js"></script>
+  <script src="resources/js/services.js"></script>
+  <script src="resources/js/filters.js"></script>
      
     <!-- Client -->
     <script src="resources/js/systemadmin/ClientsViewController.js"></script>
     <script src="resources/js/systemadmin/ClientCreateController.js"></script>
     <script src="resources/js/systemadmin/ClientEventViewController.js"></script>
-     <script src="resources/js/systemadmin/ClientEventCreateController.js"></script>
-     <script src="resources/js/systemadmin/ClientEventEditController.js"></script>
+    <script src="resources/js/systemadmin/ClientEventCreateController.js"></script>
+    <script src="resources/js/systemadmin/ClientEventEditController.js"></script>
    <!--   EventViewController -->
     <script src="resources/js/systemadmin/EventViewController.js"></script>
      <script src="resources/js/systemadmin/ImageUploadController.js"></script>
@@ -117,7 +118,7 @@
             </div>
             </div>
         
-    
-      <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> 
+    {{5+4}}
+       
 </body>
 </html>
