@@ -44,6 +44,7 @@ import com.wre.model.Rating;
 import com.wre.model.Speaker;
 import com.wre.model.Sponcor;
 import com.wre.model.SurveyQuestion;
+import com.wre.model.SurveyQuestionAnswer;
 import com.wre.systemadminmgmt.bean.ParticipantBean;
 import com.wre.systemadminmgmt.bean.ParticipantEventBean;
 
@@ -1200,11 +1201,48 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 		public void eventParticipantSave(ParticipantEventBean participantEventBean) {
 			AdminMgmtDaoImpl.eventParticipantSave(participantEventBean);
 			
-			
-			
 		}
 		
+		
+		@Override 
+		public void saveSurveyQuestionAnswer(QuestionBean questionBean)
+		{
+			log.info("in save contactdetails serviceimpl...");
+			
+			SurveyQuestionAnswer surveyQuestionAnswer=new SurveyQuestionAnswer();
+				Event event=new Event();
+				event.setEventId(questionBean.getEventId());
+			surveyQuestionAnswer.setEvent(event);//set event
+				SurveyQuestion surveyQuestion=new SurveyQuestion();
+				surveyQuestion.setQuestionId(questionBean.getQuestionId());
+			surveyQuestionAnswer.setSurveyQuestion(surveyQuestion);//set question
+				Participants participant=new Participants();
+				participant.setParticipantId(questionBean.getParticipantId());
+			surveyQuestionAnswer.setParticipants(participant);//set participant
+			surveyQuestionAnswer.setParticipantAnswer(questionBean.getAnswer());//set answer
+			
+			AdminMgmtDaoImpl.save(surveyQuestionAnswer);
+		}
 
+		@Override
+		public List<ParticipantBean> getParticipantsList(Long eventId){
+			log.info("in getParticipantsList..SerImpl");
+			
+			List<Object[]> participantsList= AdminMgmtDaoImpl.getParticipantsList(eventId);
+			List<ParticipantBean> participantsBeanList=new ArrayList<ParticipantBean>();
+			for(Object[] participant: participantsList){
+				ParticipantBean participantBean=new ParticipantBean();
+				log.info(participant[0]+"--"+participant[1]+"=="+participant[2]);
+					participantBean.setParticipantId(((BigInteger)participant[0]).longValue());
+					participantBean.setFirstName((String)participant[1]);
+					participantBean.setEmailId((String)participant[2]);
+					
+				participantsBeanList.add(participantBean);
+			}
+			return participantsBeanList;
+		}
+		
+		
 }
 
 	

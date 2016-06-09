@@ -127,6 +127,9 @@ public List<ParticipantEventBean> getParticipantEventBeanList(Long eventId,
 public void eventParticipantSave(ParticipantEventBean participantEventBean);
 
 
+public void saveSurveyQuestionAnswer(QuestionBean questionBean);
+
+public List<ParticipantBean> getParticipantsList(Long eventId);
 
 
 
