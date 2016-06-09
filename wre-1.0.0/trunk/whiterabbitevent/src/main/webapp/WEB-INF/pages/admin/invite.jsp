@@ -44,8 +44,8 @@
 	  <div class="form-group col-md-6" >
 	  				
       <label class="flot-left">Mobile Number <span style="color:red;">*</span></label>
-      <input type="text" class="input-text form-control" id="agendo_Name" placeholder="Mobile Number"  ng-model="invite.phone" 
-      name="InviteName"   required>
+      <input type="text" class="input-text form-control" id="agendo_Name" placeholder="Mobile Number"  ng-model="invite.phone"  
+      name="InviteName"   pattern="[0-9]+([\.,][0-9]+)*" title="Numbers only" format required >
       </div>
       </div>
 	 </div>
