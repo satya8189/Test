@@ -220,7 +220,26 @@ App.config([ '$routeProvider', function($routeProvider, $Scope) {
 		controller : EditContactDetailsController
 	});
 	
-	
+	/*chat view starts here	*/
+	//chat view list
+		$routeProvider.when('/navigateToChatList/:eventId', {
+			templateUrl : 'admin/navigateToChatTopicList',
+			controller : ChatTopicListViewController
+		});
+		
+	//chat Create 
+		$routeProvider.when('/chatTopicCreate/:eventId', {
+			templateUrl : 'admin/navigateToCreateChatTopic',
+			controller : ChatTopicCreateController
+		});
+
+		//chat viewdetails
+		$routeProvider.when('/chatTopicView/:chatTopicId', {
+			templateUrl : 'admin/navigateChatDetails',
+			controller : ChatTopicViewDetailsController
+		});
+		
+		/*chat view ends here	*/
 	$routeProvider.otherwise({
 		redirectTo : '/eventView'
 	});
