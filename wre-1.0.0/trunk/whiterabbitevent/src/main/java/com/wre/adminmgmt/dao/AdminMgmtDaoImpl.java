@@ -15,6 +15,7 @@ import com.wre.adminmgmt.bean.RatingBean;
 import com.wre.common.dao.GenericDaoImpl;
 import com.wre.model.Agenda;
 import com.wre.model.AppIdentifier;
+import com.wre.model.ChatTopic;
 import com.wre.model.ContactDetails;
 import com.wre.model.Event;
 import com.wre.model.EventServices;
@@ -345,6 +346,24 @@ public ContactDetails getContactDetailsForEdit(Long contactId) {
 	return (ContactDetails)criteria.uniqueResult();
 }
 
+@Override
+public List<ChatTopic> getChatTopicList(Long eventId) {
+	Criteria criteria = sessionFactory.getCurrentSession().createCriteria(ChatTopic.class);
+	criteria.add(Restrictions.eq("event.eventId", eventId));
+	criteria.setFetchMode("event", FetchMode.EAGER);
+	return (List<ChatTopic>)criteria.list();
+}
+
+
+
+//chat topic Details
+@Override
+public ChatTopic getChatTopicDetails(Long chatTopicId) {
+	Criteria criteria = sessionFactory.getCurrentSession().createCriteria(ChatTopic.class);
+	criteria.add(Restrictions.eq("topicId", chatTopicId));
+	criteria.setFetchMode("event", FetchMode.EAGER);
+	return (ChatTopic)criteria.uniqueResult();
+}
 
 
 

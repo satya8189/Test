@@ -6,6 +6,7 @@ import com.wre.adminmgmt.bean.RatingBean;
 import com.wre.common.dao.GenericDao;
 import com.wre.model.Agenda;
 import com.wre.model.AppIdentifier;
+import com.wre.model.ChatTopic;
 import com.wre.model.ContactDetails;
 import com.wre.model.Event;
 import com.wre.model.EventServices;
@@ -69,6 +70,9 @@ public ContactDetails getContactDetailsForEdit(Long contactId);
 
 public List<Rating> getUserRatingList(Long eventId);
 
+public List<ChatTopic> getChatTopicList(Long eventId);
+
+public ChatTopic getChatTopicDetails(Long chatTopicId);
 
 
 }
