@@ -154,7 +154,7 @@
               <li class="li">Polling</li>
               <li class="li">Schedule</li>
               <li class="li">News Feed</li>
-              <li class="li">Document Sharing</li>
+              <li class="li">Document</li>
             <li class="li">Gallery</li>
                  <li class="li">Crowd Pics</li>
                  <li class="li">Videos</li>
