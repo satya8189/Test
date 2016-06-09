@@ -22,8 +22,8 @@ import java.util.List;
 import java.util.Random;
 
 public class NewsFeedActivity extends AppCompatActivity {
-    private RecyclerView recyclerView;
     String layoutStatus = "gone";
+    private RecyclerView recyclerView;
     private List<HashMap<String, String>> newsList;
 
 
@@ -39,32 +39,48 @@ public class NewsFeedActivity extends AppCompatActivity {
 
 
         recyclerView = (RecyclerView) findViewById(R.id.newsfeed_recycler_view);
+        if (Constants.isNetworkAvailable(NewsFeedActivity.this)) {
+            new MyAsyncTask(Constants.NEWS_LIST + "?eventId=" + eventId, null, NewsFeedActivity.this, new Callback() {
+                @Override
+                public void onResult(String result) {
+                    if (result != null)
+                        newsList = new ArrayList<HashMap<String, String>>();
+                    List<NewsFeedBean> newsBeanList = Utils.getList(result, NewsFeedBean.class);
 
-        new MyAsyncTask(Constants.NEWS_LIST + "?eventId=" + eventId, null, NewsFeedActivity.this, new Callback() {
-            @Override
-            public void onResult(String result) {
-                newsList = new ArrayList<HashMap<String, String>>();
-                List<NewsFeedBean> newsBeanList = Utils.getList(result, NewsFeedBean.class);
-
-                for (NewsFeedBean bean : newsBeanList) {
-                    HashMap<String, String> map = new HashMap<String, String>();
-                    map.put("newsTitle", bean.getNewsTitle());
-                    map.put("newsDesc", bean.getNewsDesc());
-
-
-                    String newsDate = Utils.getDateFromJson(bean.getNewsDate(), "full");
-                    map.put("newsDate", newsDate);
+                    for (NewsFeedBean bean : newsBeanList) {
+                        HashMap<String, String> map = new HashMap<String, String>();
+                        map.put("newsTitle", bean.getNewsTitle());
+                        map.put("newsDesc", bean.getNewsDesc());
 
 
-                    newsList.add(map);
+                        String newsDate = Utils.getDateFromJson(bean.getNewsDate(), "full");
+                        map.put("newsDate", newsDate);
 
+
+                        newsList.add(map);
+
+                    }
+                    RecyclerAdapter adapter = new RecyclerAdapter(NewsFeedActivity.this, (ArrayList<HashMap<String, String>>) newsList);
+                    recyclerView.setAdapter(adapter);
+                    recyclerView.setHasFixedSize(true);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(NewsFeedActivity.this));
                 }
-                RecyclerAdapter adapter = new RecyclerAdapter(NewsFeedActivity.this, (ArrayList<HashMap<String, String>>) newsList);
-                recyclerView.setAdapter(adapter);
-                recyclerView.setHasFixedSize(true);
-                recyclerView.setLayoutManager(new LinearLayoutManager(NewsFeedActivity.this));
-            }
-        }).execute();
+            }).execute();
+        } else {
+            Constants.createDialogSend(NewsFeedActivity.this, "error", "Please connect to internet");
+
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private class RecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerViewHolder> {
@@ -72,6 +88,26 @@ public class NewsFeedActivity extends AppCompatActivity {
         Context context;
         List<HashMap<String, String>> mapsList;
         HashMap<String, String> maps;
+        View.OnClickListener clickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                NewsRecyclerViewHolder vholder = (NewsRecyclerViewHolder) v.getTag();
+                int position = vholder.getPosition();
+                if (layoutStatus.equals("gone")) {
+                    vholder.expandLayout.setVisibility(View.VISIBLE);
+                    vholder.plus.setVisibility(View.GONE);
+                    vholder.minus.setVisibility(View.VISIBLE);
+                    layoutStatus = "visible";
+                } else {
+                    vholder.expandLayout.setVisibility(View.GONE);
+                    vholder.plus.setVisibility(View.VISIBLE);
+                    vholder.minus.setVisibility(View.GONE);
+                    layoutStatus = "gone";
+                }
+
+            }
+        };
 
         public RecyclerAdapter(Context context, ArrayList<HashMap<String, String>> list) {
             this.context = context;
@@ -104,41 +140,9 @@ public class NewsFeedActivity extends AppCompatActivity {
             holder.cardView.setTag(holder);
         }
 
-        View.OnClickListener clickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                NewsRecyclerViewHolder vholder = (NewsRecyclerViewHolder) v.getTag();
-                int position = vholder.getPosition();
-                if (layoutStatus.equals("gone")) {
-                    vholder.expandLayout.setVisibility(View.VISIBLE);
-                    vholder.plus.setVisibility(View.GONE);
-                    vholder.minus.setVisibility(View.VISIBLE);
-                    layoutStatus = "visible";
-                } else {
-                    vholder.expandLayout.setVisibility(View.GONE);
-                    vholder.plus.setVisibility(View.VISIBLE);
-                    vholder.minus.setVisibility(View.GONE);
-                    layoutStatus = "gone";
-                }
-
-            }
-        };
-
         @Override
         public int getItemCount() {
             return mapsList.size();
         }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
-            case android.R.id.home:
-                onBackPressed();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 }

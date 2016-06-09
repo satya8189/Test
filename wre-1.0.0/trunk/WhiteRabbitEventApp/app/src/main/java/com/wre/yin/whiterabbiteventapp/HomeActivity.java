@@ -68,8 +68,14 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
         profDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent profDetailsAct = new Intent(HomeActivity.this, EmpProfileActivity.class);
-                startActivity(profDetailsAct);
+                if (Constants.isNetworkAvailable(HomeActivity.this)) {
+
+                    Intent profDetailsAct = new Intent(HomeActivity.this, EmpProfileActivity.class);
+                    startActivity(profDetailsAct);
+                } else {
+                    Constants.createDialogSend(HomeActivity.this, "error", "Please connect to internet");
+
+                }
             }
         });
 
@@ -99,46 +105,49 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
         Picasso.with(getApplicationContext())
                 .load(R.drawable.user_icon)
                 .into(target);
+        if (Constants.isNetworkAvailable(HomeActivity.this)) {
+            new MyAsyncTask(Constants.EVENT_LIST + "?participantId=" + partId, null, HomeActivity.this, new Callback() {
+                @Override
+                public void onResult(String result) {
+                    if (result != null) {
+                        List<ParticipantEventBean> eventList = Utils.getList(result, ParticipantEventBean.class);
 
-        new MyAsyncTask(Constants.EVENT_LIST + "?participantId=" + partId, null, HomeActivity.this, new Callback() {
-            @Override
-            public void onResult(String result) {
-                List<ParticipantEventBean> eventList = Utils.getList(result, ParticipantEventBean.class);
+
+                        list = new ArrayList<HashMap<String, String>>();
+                        for (ParticipantEventBean bean : eventList) {
+                            HashMap<String, String> file_maps = new HashMap<String, String>();
+                            file_maps.put("eventName", bean.getEventname());
+                            file_maps.put("eventId", bean.getEventId().toString());
+                            file_maps.put("date", Utils.getDateFromJson(bean.getEventDate(), "d"));
+                            file_maps.put("eventImage", Constants.IMAGE_URL + bean.getEventId() + "/event_images/Screenshot%20from%202015-04-27%2014:20:13.png");
+                            list.add(file_maps);
+                        }
+                        for (HashMap<String, String> map : list) {
+                            TextSliderView textSliderView = new TextSliderView(HomeActivity.this);
+                            // initialize a SliderLayout
+                            textSliderView.description(map.get("eventName"))
+                                    .image(map.get("eventImage"))
+                                    .setScaleType(BaseSliderView.ScaleType.Fit).dateTime(map.get("date"))
+                                    .setOnSliderClickListener(HomeActivity.this);
 
 
-                list = new ArrayList<HashMap<String, String>>();
-                for (ParticipantEventBean bean : eventList) {
-                    HashMap<String, String> file_maps = new HashMap<String, String>();
-                    file_maps.put("eventName", bean.getEventname());
-                    file_maps.put("eventId", bean.getEventId().toString());
-                    file_maps.put("date", Utils.getDateFromJson(bean.getEventDate(), "d"));
-                    file_maps.put("eventImage", Constants.IMAGE_URL + bean.getEventId() + "/event_images/Screenshot%20from%202015-04-27%2014:20:13.png");
-                    list.add(file_maps);
+                            //add your extra information
+                            textSliderView.bundle(new Bundle());
+                            textSliderView.getBundle()
+                                    .putString("extra", map.get("eventId"));
+                            textSliderView.getBundle()
+                                    .putString("date", map.get("date"));
+
+                            mDemoSlider.addSlider(textSliderView);
+                            mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Fade);
+                        }
+                    }
                 }
-                for (HashMap<String, String> map : list) {
-                    TextSliderView textSliderView = new TextSliderView(HomeActivity.this);
-                    // initialize a SliderLayout
-                    textSliderView.description(map.get("eventName"))
-                            .image(map.get("eventImage"))
-                            .setScaleType(BaseSliderView.ScaleType.Fit).dateTime(map.get("date"))
-                            .setOnSliderClickListener(HomeActivity.this);
+            }).execute();
+        } else {
+            Constants.createDialogSend(HomeActivity.this, "error", "Please connect to internet");
 
-
-                    //add your extra information
-                    textSliderView.bundle(new Bundle());
-                    textSliderView.getBundle()
-                            .putString("extra", map.get("eventId"));
-                    textSliderView.getBundle()
-                            .putString("date", map.get("date"));
-
-                    mDemoSlider.addSlider(textSliderView);
-                    mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Fade);
-                    mDemoSlider.setPresetTransformer(SliderLayout.Transformer.ZoomIn);
-                    mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Stack);
-                }
-
-            }
-        }).execute();
+        }
     }
 
 

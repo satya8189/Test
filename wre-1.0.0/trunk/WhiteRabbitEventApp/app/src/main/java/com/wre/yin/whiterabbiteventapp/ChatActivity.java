@@ -20,6 +20,8 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.wre.yin.whiterabbiteventapp.utils.Constants;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -45,6 +47,29 @@ public class ChatActivity extends Activity {
     Button send_btn;
     Bundle bundle;
     TableLayout tab;
+    private BroadcastReceiver onNotice = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String str = intent.getStringExtra("msg");
+            String str1 = intent.getStringExtra("fromname");
+            String str2 = intent.getStringExtra("fromu");
+            prefs = getSharedPreferences("Chat", 0);
+            if ("onchat".equals(prefs.getString("current_status", ""))) {
+
+                TableRow tr1 = new TableRow(getApplicationContext());
+                tr1.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+                TextView textview = new TextView(getApplicationContext());
+                textview.setTextSize(20);
+                textview.setTextColor(Color.parseColor("#0B0719"));
+                textview.setText(Html.fromHtml("<b>" + str1 + " : </b>" + str));
+                tr1.addView(textview);
+                tab.addView(tr1);
+            }
+
+
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,15 +110,19 @@ public class ChatActivity extends Activity {
         send_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TableRow tr2 = new TableRow(getApplicationContext());
-                tr2.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
-                TextView textview = new TextView(getApplicationContext());
-                textview.setTextSize(20);
-                textview.setTextColor(Color.parseColor("#A901DB"));
-                textview.setText(Html.fromHtml("<b>You : </b>" + chat_msg.getText().toString()));
-                tr2.addView(textview);
-                tab.addView(tr2);
-                new Send().execute();
+                if (Constants.isNetworkAvailable(ChatActivity.this)) {
+                    TableRow tr2 = new TableRow(getApplicationContext());
+                    tr2.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+                    TextView textview = new TextView(getApplicationContext());
+                    textview.setTextSize(20);
+                    textview.setTextColor(Color.parseColor("#A901DB"));
+                    textview.setText(Html.fromHtml("<b>You : </b>" + chat_msg.getText().toString()));
+                    tr2.addView(textview);
+                    tab.addView(tr2);
+                    new Send().execute();
+                } else {
+                    Constants.createDialogSend(ChatActivity.this, "error", "Please connect to internet");
+                }
             }
         });
 
@@ -102,7 +131,7 @@ public class ChatActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-        System.out.println("in side back pressed");
+        //System.out.println("in side back pressed");
         prefs = getSharedPreferences("Chat", 0);
         SharedPreferences.Editor edit = prefs.edit();
         edit.remove("current_status");
@@ -111,31 +140,6 @@ public class ChatActivity extends Activity {
 
         super.onBackPressed();
     }
-
-
-    private BroadcastReceiver onNotice = new BroadcastReceiver() {
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String str = intent.getStringExtra("msg");
-            String str1 = intent.getStringExtra("fromname");
-            String str2 = intent.getStringExtra("fromu");
-            prefs = getSharedPreferences("Chat", 0);
-            if ("onchat".equals(prefs.getString("current_status", ""))) {
-
-                TableRow tr1 = new TableRow(getApplicationContext());
-                tr1.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
-                TextView textview = new TextView(getApplicationContext());
-                textview.setTextSize(20);
-                textview.setTextColor(Color.parseColor("#0B0719"));
-                textview.setText(Html.fromHtml("<b>" + str1 + " : </b>" + str));
-                tr1.addView(textview);
-                tab.addView(tr1);
-            }
-
-
-        }
-    };
 
     private StringBuilder inputStreamToString(InputStream is) {
         String rLine = "";

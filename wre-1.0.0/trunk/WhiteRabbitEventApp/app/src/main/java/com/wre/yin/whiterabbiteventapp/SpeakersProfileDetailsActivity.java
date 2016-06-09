@@ -36,17 +36,21 @@ public class SpeakersProfileDetailsActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(spName);
         speakerName = (TextView) findViewById(R.id.speaker_name);
         speakerName.setText(spName);
-
-        new MyAsyncTask(Constants.INDIVIDUAL_SPEAKER + spId, null, SpeakersProfileDetailsActivity.this, new Callback() {
-            @Override
-            public void onResult(String result) {
-                SpeakerBean spBean = Utils.getObject(result, SpeakerBean.class);
-                spDesig.setText(spBean.getTitle());
-                spLocation.setText(spBean.getLocation());
-                spDesc.setText(spBean.getDescription());
-            }
-        }).execute();
-
+        if (Constants.isNetworkAvailable(SpeakersProfileDetailsActivity.this)) {
+            new MyAsyncTask(Constants.INDIVIDUAL_SPEAKER + spId, null, SpeakersProfileDetailsActivity.this, new Callback() {
+                @Override
+                public void onResult(String result) {
+                    if (result != null) {
+                        SpeakerBean spBean = Utils.getObject(result, SpeakerBean.class);
+                        spDesig.setText(spBean.getTitle());
+                        spLocation.setText(spBean.getLocation());
+                        spDesc.setText(spBean.getDescription());
+                    }
+                }
+            }).execute();
+        } else {
+            Constants.createDialogSend(SpeakersProfileDetailsActivity.this, "error", "Please connect to internet");
+        }
     }
 
     @Override

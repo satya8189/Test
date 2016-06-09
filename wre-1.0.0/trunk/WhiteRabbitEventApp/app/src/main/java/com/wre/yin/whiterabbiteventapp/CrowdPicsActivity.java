@@ -289,59 +289,66 @@ public class CrowdPicsActivity extends AppCompatActivity {
 
     // AsyncTask - To convert Image to String
     public void encodeImagetoString() {
-        new AsyncTask<Void, Void, String>() {
+        if (Constants.isNetworkAvailable(CrowdPicsActivity.this)) {
+            new AsyncTask<Void, Void, String>() {
 
-            protected void onPreExecute() {
+                protected void onPreExecute() {
 
-            }
-
-            ;
-
-            @Override
-            protected String doInBackground(Void... params) {
-
-                if (fileTpe.equals("image")) {
-                    BitmapFactory.Options options = null;
-                    options = new BitmapFactory.Options();
-                    options.inSampleSize = 3;
-                    bitmap = BitmapFactory.decodeFile(imgPath,
-                            options);
-                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                    // Must compress the Image to reduce image size to make upload easy
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 50, stream);
-                    byte[] byte_arr = stream.toByteArray();
-                    // Encode Image to String
-                    encodedString = Base64.encodeToString(byte_arr, 0);
                 }
-                return "";
-            }
 
-            @Override
-            protected void onPostExecute(String msg) {
-                //prgDialog.setMessage("Calling Upload");
-                // Put converted Image string into Async Http Post param
-                //params.put("image", encodedString);
-                // Trigger Image upload
-                //triggerImageUpload();
-                prgDialog.dismiss();
-                UploadImgVid uploadImgVid = new UploadImgVid();
-                uploadImgVid.setEncodeString(encodedString);
-                uploadImgVid.setImageName(fileName);
-                uploadImgVid.setFileType(fileTpe);
+                ;
 
-                new MyAsyncTask(Constants.UPLOAD_IMAGE_VIDEO, Utils.getJson(uploadImgVid), CrowdPicsActivity.this, new Callback() {
-                    public void onResult(String result) {
+                @Override
+                protected String doInBackground(Void... params) {
 
-                        Result res = Utils.getObject(result, Result.class);
-                        if (res.getResult().equals("success")) {
-                            Toast.makeText(CrowdPicsActivity.this, "Image upload successfull..", Toast.LENGTH_LONG).show();
-                        }
+                    if (fileTpe.equals("image")) {
+                        BitmapFactory.Options options = null;
+                        options = new BitmapFactory.Options();
+                        options.inSampleSize = 3;
+                        bitmap = BitmapFactory.decodeFile(imgPath,
+                                options);
+                        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                        // Must compress the Image to reduce image size to make upload easy
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, stream);
+                        byte[] byte_arr = stream.toByteArray();
+                        // Encode Image to String
+                        encodedString = Base64.encodeToString(byte_arr, 0);
                     }
-                }).execute();
+                    return "";
+                }
 
+                @Override
+                protected void onPostExecute(String msg) {
+                    //prgDialog.setMessage("Calling Upload");
+                    // Put converted Image string into Async Http Post param
+                    //params.put("image", encodedString);
+                    // Trigger Image upload
+                    //triggerImageUpload();
+                    prgDialog.dismiss();
+                    UploadImgVid uploadImgVid = new UploadImgVid();
+                    uploadImgVid.setEncodeString(encodedString);
+                    uploadImgVid.setImageName(fileName);
+                    uploadImgVid.setFileType(fileTpe);
+                    if (Constants.isNetworkAvailable(CrowdPicsActivity.this)) {
+                        new MyAsyncTask(Constants.UPLOAD_IMAGE_VIDEO, Utils.getJson(uploadImgVid), CrowdPicsActivity.this, new Callback() {
+                            public void onResult(String result) {
+                                if (result != null) {
+                                    Result res = Utils.getObject(result, Result.class);
+                                    if (res.getResult().equals("success")) {
+                                        Toast.makeText(CrowdPicsActivity.this, "Image upload successfull..", Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                            }
+                        }).execute();
 
-            }
-        }.execute(null, null, null);
+                    } else {
+                        Constants.createDialogSend(CrowdPicsActivity.this, "error", "Please connect to internet");
+                    }
+                }
+            }.execute(null, null, null);
+        } else {
+            Constants.createDialogSend(CrowdPicsActivity.this, "error", "Please connect to internet");
+        }
     }
 
     @Override

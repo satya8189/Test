@@ -27,54 +27,40 @@ import java.util.List;
 
 public class Constants {
 
-    //url constants
-    public static String URL1 = "http://192.168.1.85:8080/Chatting/rest/chat/";
-    public static String IMAGE_URL = "http://183.82.103.156:8080/Resources/wre/";
-
-    public static String URL = "http://183.82.103.156:8080/whiterabbitevent/admin/";
-    public static String PARTICIPENT_URL = "http://183.82.103.156:8080/whiterabbitevent/";
-
-
-    public static String SYSTEM_URL = "http://183.82.103.156:8080/whiterabbitevent/systemadmin/";
-
-
     public static final String IMAGE_DIRECTORY_NAME = "Image File Upload";
     public static final String VIDEO_DIRECTORY_NAME = "Video File Upload";
+    // Number of columns of Grid View
+    public static final int NUM_OF_COLUMNS = 2;
+    // Gridview image padding
+    public static final int GRID_PADDING = 10; // in dp
+    // SD card image directory
+    public static final String PHOTO_ALBUM = "/DCIM/" + "/Camera/";
+    // supported file formats
+    public static final List<String> FILE_EXTN = Arrays.asList("jpg", "jpeg",
+            "png");
+    // Permissions for Marshmallow
+    public static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 1;
+    //url constants
+    public static String URL1 = "http://192.168.1.85:8080/Chatting/rest/chat/";
     public static final String UPLOAD_IMAGE_VIDEO = URL1 + "imageUpload";
-
-    public static final String EVENT_LIST = SYSTEM_URL + "getParticipantEventList";
+    public static String IMAGE_URL = "http://183.82.103.156:8080/Resources/wre/";
+    public static String URL = "http://183.82.103.156:8080/whiterabbitevent/admin/";
     public static final String EVENT_SERVICES_LIST = URL + "eventServicesList?eventId=";
     public static final String AGENDA = URL + "agendoDetails";
     public static final String NEWS_LIST = URL + "newsList";
     public static final String SPONSORS_LIST = URL + "sponsorsList";
     public static final String SPEAKERS_LIST = URL + "speakersList";
-
-
-    public static final String PARTICIPENT_LOGIN = PARTICIPENT_URL + "participantlogin";
-    public static final String PARTICIPENT_REG_UPDATE = PARTICIPENT_URL + "participantRegUpdate";
     public static final String INDIVIDUAL_SPEAKER = URL + "getSpeakerBySpeakerId?speakerId=";
     public static final String INDIVIDUAL_SPONSOR = URL + "getSponsorDataonSponsorId?sponcorId=";
     public static final String QUESTIONS_LIST = URL + "questionList?eventId=";
 
 
     //Image Gallery file path constansts
-
-    // Number of columns of Grid View
-    public static final int NUM_OF_COLUMNS = 2;
-
-    // Gridview image padding
-    public static final int GRID_PADDING = 10; // in dp
-
-    // SD card image directory
-    public static final String PHOTO_ALBUM = "/DCIM/" + "/Camera/";
-
-    // supported file formats
-    public static final List<String> FILE_EXTN = Arrays.asList("jpg", "jpeg",
-            "png");
-
-    // Permissions for Marshmallow
-    public static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 1;
-
+    public static String PARTICIPENT_URL = "http://183.82.103.156:8080/whiterabbitevent/";
+    public static final String PARTICIPENT_LOGIN = PARTICIPENT_URL + "participantlogin";
+    public static final String PARTICIPENT_REG_UPDATE = PARTICIPENT_URL + "participantRegUpdate";
+    public static String SYSTEM_URL = "http://183.82.103.156:8080/whiterabbitevent/systemadmin/";
+    public static final String EVENT_LIST = SYSTEM_URL + "getParticipantEventList";
 
     public static boolean isNetworkAvailable(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);

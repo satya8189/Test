@@ -38,20 +38,24 @@ public class SponcersProfileActivity extends AppCompatActivity {
 
         // sponcersName.setText(nameTxt);
 
+        if (Constants.isNetworkAvailable(SponcersProfileActivity.this)) {
+            new MyAsyncTask(Constants.INDIVIDUAL_SPONSOR + sponsorId, null, SponcersProfileActivity.this, new Callback() {
+                @Override
+                public void onResult(String result) {
+                    if (result != null)
+                        sponsorIndividualList = new ArrayList<HashMap<String, String>>();
 
-        new MyAsyncTask(Constants.INDIVIDUAL_SPONSOR + sponsorId, null, SponcersProfileActivity.this, new Callback() {
-            @Override
-            public void onResult(String result) {
-                sponsorIndividualList = new ArrayList<HashMap<String, String>>();
+                    SponsorBean indBean = Utils.getObject(result, SponsorBean.class);
 
-                SponsorBean indBean = Utils.getObject(result, SponsorBean.class);
-
-                sponcersName.setText(indBean.getSponcorName());
-                aboutSponsor.setText(indBean.getSponcorDesc());
+                    sponcersName.setText(indBean.getSponcorName());
+                    aboutSponsor.setText(indBean.getSponcorDesc());
 
 
-            }
-        }).execute();
+                }
+            }).execute();
+        } else {
+            Constants.createDialogSend(SponcersProfileActivity.this, "error", "Please connect to internet");
+        }
     }
 
     @Override

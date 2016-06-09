@@ -32,13 +32,10 @@ import java.io.InputStreamReader;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private Button nextBtn, submitBtn;
-    private EditText employeeId, otpTxt;
-    private SharedPreferences prefs;
-    SharedPreferences.Editor editor;
-    private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
-    String SENDER_ID = "1065186781236";
     static final String TAG = "L2C";
+    private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+    SharedPreferences.Editor editor;
+    String SENDER_ID = "1065186781236";
     GoogleCloudMessaging gcm;
     ParticipantBean pBean = null;
     Context context;
@@ -47,6 +44,9 @@ public class LoginActivity extends AppCompatActivity {
     HttpResponse httpResponse = null;
     HttpClient httpclient = null;
     HttpEntity httpEntity = null;
+    private Button nextBtn, submitBtn;
+    private EditText employeeId, otpTxt;
+    private SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,34 +63,34 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String mobileNum = employeeId.getText().toString();
-                if (Utils.checkMobile(mobileNum)) {
+                if (Constants.isNetworkAvailable(LoginActivity.this)) {
+                    if (Utils.checkMobile(mobileNum)) {
+                        ParticipantBean participantBean = new ParticipantBean();
+                        participantBean.setPhoneNumber(mobileNum);
 
+                        new MyAsyncTask(Constants.PARTICIPENT_LOGIN, Utils.getJson(participantBean), LoginActivity.this, new Callback() {
+                            @Override
+                            public void onResult(String result) {
+                                if (result != null) {
+                                    pBean = Utils.getObject(result, ParticipantBean.class);
+                                    prefs = getSharedPreferences("Chat", 0);
+                                    editor = prefs.edit();
+                                    editor.putString("name", pBean.getFirstName());
+                                    editor.putString("partId", pBean.getParticipantId().toString());
+                                    editor.commit();
+                                    String strPref = prefs.getString("mobile", null);
+                                    if (strPref == null) {
+                                        new Register().execute(pBean.getPhoneNumber());
+                                    }
 
-                    ParticipantBean participantBean = new ParticipantBean();
-                    participantBean.setPhoneNumber(mobileNum);
-
-                    new MyAsyncTask(Constants.PARTICIPENT_LOGIN, Utils.getJson(participantBean), LoginActivity.this, new Callback() {
-                        @Override
-                        public void onResult(String result) {
-                            pBean = Utils.getObject(result, ParticipantBean.class);
-                            prefs = getSharedPreferences("Chat", 0);
-                            editor = prefs.edit();
-                            editor.putString("name", pBean.getFirstName());
-                            editor.putString("partId", pBean.getParticipantId().toString());
-                            editor.commit();
-                            String strPref = prefs.getString("mobile", null);
-                            if (strPref == null) {
-                                new Register().execute(pBean.getPhoneNumber());
+                                    editor.putString("mobile", pBean.getPhoneNumber());
+                                    editor.commit();
+                                    Intent otpAct = new Intent(LoginActivity.this, OTPActivity.class);
+                                    startActivity(otpAct);
+                                    finish();
+                                }
                             }
-
-                            editor.putString("mobile", pBean.getPhoneNumber());
-                            editor.commit();
-                            Intent otpAct = new Intent(LoginActivity.this, OTPActivity.class);
-                            startActivity(otpAct);
-                            finish();
-
-                        }
-                    }).execute();
+                        }).execute();
 
              /*       if(pBean.getParticipantId()!=null){
                         System.out.println("insdie myasynctask--");
@@ -104,16 +104,32 @@ public class LoginActivity extends AppCompatActivity {
                         startActivity(otpAct);
                         finish();
                     }*/
+                    } else {
+                        employeeId.setError("Please enter a valid mobile number");
+                    }
+
                 } else {
-                    employeeId.setError("Please enter a valid mobile number");
+                    Constants.createDialogSend(LoginActivity.this, "error", "Please connect to internet");
                 }
-
-
             }
         });
 
     }
 
+    private StringBuilder inputStreamToString(InputStream is) {
+        String rLine = "";
+        StringBuilder answer = new StringBuilder();
+        InputStreamReader isr = new InputStreamReader(is);
+        BufferedReader rd = new BufferedReader(isr);
+        try {
+            while ((rLine = rd.readLine()) != null) {
+                answer.append(rLine);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return answer;
+    }
 
     private class Register extends AsyncTask<String, String, String> {
 
@@ -165,21 +181,5 @@ public class LoginActivity extends AppCompatActivity {
 
 
         }
-    }
-
-
-    private StringBuilder inputStreamToString(InputStream is) {
-        String rLine = "";
-        StringBuilder answer = new StringBuilder();
-        InputStreamReader isr = new InputStreamReader(is);
-        BufferedReader rd = new BufferedReader(isr);
-        try {
-            while ((rLine = rd.readLine()) != null) {
-                answer.append(rLine);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return answer;
     }
 }

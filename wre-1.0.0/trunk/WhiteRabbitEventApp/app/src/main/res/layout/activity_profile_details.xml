@@ -20,9 +20,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/speaker_img"
-        android:layout_margin="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+
         android:gravity="center"
-        android:text="NAme" />
+        android:text="Name" />
 
     <TextView
         android:id="@+id/speaker_desig"
@@ -71,8 +74,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="23dp"
-            android:layout_marginStart="23dp"
+            android:layout_margin="20dp"
             android:gravity="center"
             android:text="Rate this" />
 
@@ -81,9 +83,9 @@
             style="?android:attr/ratingBarStyleIndicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
             android:layout_alignTop="@+id/textView" />
     </RelativeLayout>
 
@@ -94,11 +96,12 @@
 
         android:layout_below="@id/rl1"
         android:background="#00ffff" />
+
     <TextView
+        android:id="@+id/speaker_desc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/speaker_desc"
-        android:text="Discription"
         android:layout_below="@+id/view3"
-        android:layout_margin="5dp"/>
+        android:layout_margin="20dp"
+        android:text="Discription" />
 </RelativeLayout>

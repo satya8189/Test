@@ -38,7 +38,28 @@ public class SponcersActivity extends AppCompatActivity {
     private RecyclerViewAdapter rcAdapter;
 
     private List<HashMap<String, String>> sponsorList;
+    ItemTouchHelper.Callback _ithCallback = new ItemTouchHelper.Callback() {
 
+        public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+            // get the viewHolder's and target's positions in your adapter data, swap them
+            Collections.swap(sponsorList, viewHolder.getAdapterPosition(), target.getAdapterPosition());
+            // and notify the adapter that its dataset has changed
+            rcAdapter.notifyItemMoved(viewHolder.getAdapterPosition(), target.getAdapterPosition());
+            return true;
+        }
+
+        @Override
+        public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+            //TODO
+        }
+
+        //defines the enabled move directions in each state (idle, swiping, dragging).
+        @Override
+        public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+            return makeFlag(ItemTouchHelper.ACTION_STATE_DRAG,
+                    ItemTouchHelper.DOWN | ItemTouchHelper.UP | ItemTouchHelper.START | ItemTouchHelper.END);
+        }
+    };
     private RecyclerView rView;
 
     @Override
@@ -62,36 +83,61 @@ public class SponcersActivity extends AppCompatActivity {
 
         ItemTouchHelper ith = new ItemTouchHelper(_ithCallback);
         ith.attachToRecyclerView(rView);
+        if (Constants.isNetworkAvailable(SponcersActivity.this)) {
+            new MyAsyncTask(Constants.SPONSORS_LIST + "?eventId=" + eventId, null, SponcersActivity.this, new Callback() {
+                @Override
+                public void onResult(String result) {
+                    if (result != null)
+                        sponsorList = new ArrayList<HashMap<String, String>>();
+                    List<SponsorBean> sponsorBeanList = Utils.getList(result, SponsorBean.class);
 
-        new MyAsyncTask(Constants.SPONSORS_LIST + "?eventId=" + eventId, null, SponcersActivity.this, new Callback() {
-            @Override
-            public void onResult(String result) {
-                sponsorList = new ArrayList<HashMap<String, String>>();
-                List<SponsorBean> sponsorBeanList = Utils.getList(result, SponsorBean.class);
+                    for (SponsorBean bean : sponsorBeanList) {
+                        HashMap<String, String> map = new HashMap<String, String>();
+                        map.put("sponsorName", bean.getSponcorName());
+                        map.put("sponsorId", bean.getSponcorId().toString());
+                        //    map.put("sponsorDesc", bean.getSponcorDesc());
 
-                for (SponsorBean bean : sponsorBeanList) {
-                    HashMap<String, String> map = new HashMap<String, String>();
-                    map.put("sponsorName", bean.getSponcorName());
-                    map.put("sponsorId", bean.getSponcorId().toString());
-                    //    map.put("sponsorDesc", bean.getSponcorDesc());
+                        sponsorList.add(map);
 
-                    sponsorList.add(map);
+                    }
+                    rcAdapter = new RecyclerViewAdapter(SponcersActivity.this, (ArrayList<HashMap<String, String>>) sponsorList);
 
+                    rView.setAdapter(rcAdapter);
                 }
-                rcAdapter = new RecyclerViewAdapter(SponcersActivity.this, (ArrayList<HashMap<String, String>>) sponsorList);
+            }).execute();
+        } else {
+            Constants.createDialogSend(SponcersActivity.this, "error", "Please connect to internet");
+        }
 
-                rView.setAdapter(rcAdapter);
-            }
-        }).execute();
+    }
 
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private class RecyclerViewAdapter extends RecyclerView.Adapter<SponcersRecyclerViewHolders> {
 
         List<HashMap<String, String>> mapsList;
         HashMap<String, String> maps;
-
+        View.OnClickListener clickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SponcersRecyclerViewHolders vHoder = (SponcersRecyclerViewHolders) v.getTag();
+                int position = vHoder.getPosition();
+                System.out.println("position id" + maps.get("sponsorId"));
+                HashMap<String, String> maps1 = mapsList.get(position);
+                Intent i = new Intent(SponcersActivity.this, SponcersProfileActivity.class);
+                i.putExtra("sponsorId", maps1.get("sponsorId"));
+                startActivity(i);
+            }
+        };
         private Context context;
 
         public RecyclerViewAdapter(Context context, ArrayList<HashMap<String, String>> list) {
@@ -117,56 +163,9 @@ public class SponcersActivity extends AppCompatActivity {
             holder.sponsorPhoto.setTag(holder);
         }
 
-        View.OnClickListener clickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SponcersRecyclerViewHolders vHoder = (SponcersRecyclerViewHolders) v.getTag();
-                int position = vHoder.getPosition();
-                System.out.println("position id" + maps.get("sponsorId"));
-                HashMap<String, String> maps1 = mapsList.get(position);
-                Intent i = new Intent(SponcersActivity.this, SponcersProfileActivity.class);
-                i.putExtra("sponsorId", maps1.get("sponsorId"));
-                startActivity(i);
-            }
-        };
-
         @Override
         public int getItemCount() {
             return this.mapsList.size();
         }
-    }
-
-    ItemTouchHelper.Callback _ithCallback = new ItemTouchHelper.Callback() {
-
-        public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-            // get the viewHolder's and target's positions in your adapter data, swap them
-            Collections.swap(sponsorList, viewHolder.getAdapterPosition(), target.getAdapterPosition());
-            // and notify the adapter that its dataset has changed
-            rcAdapter.notifyItemMoved(viewHolder.getAdapterPosition(), target.getAdapterPosition());
-            return true;
-        }
-
-        @Override
-        public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-            //TODO
-        }
-
-        //defines the enabled move directions in each state (idle, swiping, dragging).
-        @Override
-        public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
-            return makeFlag(ItemTouchHelper.ACTION_STATE_DRAG,
-                    ItemTouchHelper.DOWN | ItemTouchHelper.UP | ItemTouchHelper.START | ItemTouchHelper.END);
-        }
-    };
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
-            case android.R.id.home:
-                onBackPressed();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 }

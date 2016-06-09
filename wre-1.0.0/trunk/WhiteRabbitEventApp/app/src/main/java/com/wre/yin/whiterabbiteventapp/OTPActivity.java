@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.wre.yin.whiterabbiteventapp.utils.Constants;
+
 public class OTPActivity extends AppCompatActivity {
 
     private EditText otpTxt;
@@ -25,9 +27,13 @@ public class OTPActivity extends AppCompatActivity {
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent homeAct = new Intent(OTPActivity.this, HomeActivity.class);
-                startActivity(homeAct);
-                finish();
+                if (Constants.isNetworkAvailable(OTPActivity.this)) {
+                    Intent homeAct = new Intent(OTPActivity.this, HomeActivity.class);
+                    startActivity(homeAct);
+                    finish();
+                } else {
+                    Constants.createDialogSend(OTPActivity.this, "error", "Please connect to internet");
+                }
             }
         });
     }

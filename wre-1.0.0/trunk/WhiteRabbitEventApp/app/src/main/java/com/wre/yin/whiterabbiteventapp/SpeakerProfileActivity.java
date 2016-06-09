@@ -32,112 +32,6 @@ public class SpeakerProfileActivity extends AppCompatActivity {
 
     private RecyclerViewAdapter rcAdapter;
     private List<HashMap<String, String>> speakersList;
-    private RecyclerView rView;
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_speaker_profile);
-
-        String nameTxt = getIntent().getExtras().getString("name");
-        String eventId = getIntent().getExtras().getString("eventId");
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(nameTxt);
-
-        gridLayout = new GridLayoutManager(SpeakerProfileActivity.this, 2);
-
-
-        rView = (RecyclerView) findViewById(R.id.speakers_grid_recycler_view);
-        rView.setHasFixedSize(true);
-        rView.setLayoutManager(gridLayout);
-
-        ItemTouchHelper ith = new ItemTouchHelper(_ithCallback);
-        ith.attachToRecyclerView(rView);
-
-        new MyAsyncTask(Constants.SPEAKERS_LIST + "?eventId=" + eventId, null, SpeakerProfileActivity.this, new Callback() {
-            @Override
-            public void onResult(String result) {
-                speakersList = new ArrayList<HashMap<String, String>>();
-                List<SpeakerBean> speakerBeenList = Utils.getList(result, SpeakerBean.class);
-
-                for (SpeakerBean bean : speakerBeenList) {
-                    HashMap<String, String> map = new HashMap<String, String>();
-                    map.put("speakersName", bean.getSpeakerName());
-                    map.put("speakerId", bean.getSpeakerId().toString());
-
-                    speakersList.add(map);
-
-                }
-                rcAdapter = new RecyclerViewAdapter(SpeakerProfileActivity.this, (ArrayList<HashMap<String, String>>) speakersList);
-
-                rView.setAdapter(rcAdapter);
-            }
-        }).execute();
-    }
-
-    private class RecyclerViewAdapter extends RecyclerView.Adapter<SpeakersRecyclerViewHolders> {
-
-        List<HashMap<String, String>> mapsList;
-        HashMap<String, String> maps;
-
-        private Context context;
-
-        public RecyclerViewAdapter(Context context, ArrayList<HashMap<String, String>> list) {
-            mapsList = list;
-            this.context = context;
-        }
-
-
-        @Override
-        public SpeakersRecyclerViewHolders onCreateViewHolder(ViewGroup parent, int viewType) {
-
-            View layoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.sponsor_card_view_list, null);
-            SpeakersRecyclerViewHolders rcv = new SpeakersRecyclerViewHolders(layoutView);
-            return rcv;
-        }
-
-        @Override
-        public void onBindViewHolder(SpeakersRecyclerViewHolders holder, int position) {
-            maps = mapsList.get(position);
-            holder.speakerName.setText(maps.get("speakersName"));
-            // holder.speakerPhoto.setImageResource(maps.get(position).getPhoto());
-            holder.speakerPhoto.setOnClickListener(clickListener);
-            holder.speakerPhoto.setTag(holder);
-        }
-
-        View.OnClickListener clickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SpeakersRecyclerViewHolders vHoder = (SpeakersRecyclerViewHolders) v.getTag();
-                int position = vHoder.getPosition();
-                HashMap<String, String> map1 = mapsList.get(position);
-                Intent i = new Intent(SpeakerProfileActivity.this, SpeakersProfileDetailsActivity.class);
-                i.putExtra("speakerId", map1.get("speakerId"));
-                i.putExtra("speakerName", map1.get("speakersName"));
-                startActivity(i);
-            }
-        };
-
-        @Override
-        public int getItemCount() {
-            return this.mapsList.size();
-        }
-    }
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
-            case android.R.id.home:
-                onBackPressed();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
     ItemTouchHelper.Callback _ithCallback = new ItemTouchHelper.Callback() {
         //and in your imlpementaion of
         public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
@@ -160,4 +54,109 @@ public class SpeakerProfileActivity extends AppCompatActivity {
                     ItemTouchHelper.DOWN | ItemTouchHelper.UP | ItemTouchHelper.START | ItemTouchHelper.END);
         }
     };
+    private RecyclerView rView;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_speaker_profile);
+
+        String nameTxt = getIntent().getExtras().getString("name");
+        String eventId = getIntent().getExtras().getString("eventId");
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(nameTxt);
+
+        gridLayout = new GridLayoutManager(SpeakerProfileActivity.this, 2);
+
+
+        rView = (RecyclerView) findViewById(R.id.speakers_grid_recycler_view);
+        rView.setHasFixedSize(true);
+        rView.setLayoutManager(gridLayout);
+
+        ItemTouchHelper ith = new ItemTouchHelper(_ithCallback);
+        ith.attachToRecyclerView(rView);
+        if (Constants.isNetworkAvailable(SpeakerProfileActivity.this)) {
+            new MyAsyncTask(Constants.SPEAKERS_LIST + "?eventId=" + eventId, null, SpeakerProfileActivity.this, new Callback() {
+                @Override
+                public void onResult(String result) {
+                    if (result != null)
+                        speakersList = new ArrayList<HashMap<String, String>>();
+                    List<SpeakerBean> speakerBeenList = Utils.getList(result, SpeakerBean.class);
+
+                    for (SpeakerBean bean : speakerBeenList) {
+                        HashMap<String, String> map = new HashMap<String, String>();
+                        map.put("speakersName", bean.getSpeakerName());
+                        map.put("speakerId", bean.getSpeakerId().toString());
+
+                        speakersList.add(map);
+
+                    }
+                    rcAdapter = new RecyclerViewAdapter(SpeakerProfileActivity.this, (ArrayList<HashMap<String, String>>) speakersList);
+
+                    rView.setAdapter(rcAdapter);
+                }
+            }).execute();
+        } else {
+            Constants.createDialogSend(SpeakerProfileActivity.this, "error", "Please connect to internet");
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private class RecyclerViewAdapter extends RecyclerView.Adapter<SpeakersRecyclerViewHolders> {
+
+        List<HashMap<String, String>> mapsList;
+        HashMap<String, String> maps;
+        View.OnClickListener clickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SpeakersRecyclerViewHolders vHoder = (SpeakersRecyclerViewHolders) v.getTag();
+                int position = vHoder.getPosition();
+                HashMap<String, String> map1 = mapsList.get(position);
+                Intent i = new Intent(SpeakerProfileActivity.this, SpeakersProfileDetailsActivity.class);
+                i.putExtra("speakerId", map1.get("speakerId"));
+                i.putExtra("speakerName", map1.get("speakersName"));
+                startActivity(i);
+            }
+        };
+        private Context context;
+
+
+        public RecyclerViewAdapter(Context context, ArrayList<HashMap<String, String>> list) {
+            mapsList = list;
+            this.context = context;
+        }
+
+        @Override
+        public SpeakersRecyclerViewHolders onCreateViewHolder(ViewGroup parent, int viewType) {
+
+            View layoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.sponsor_card_view_list, null);
+            SpeakersRecyclerViewHolders rcv = new SpeakersRecyclerViewHolders(layoutView);
+            return rcv;
+        }
+
+        @Override
+        public void onBindViewHolder(SpeakersRecyclerViewHolders holder, int position) {
+            maps = mapsList.get(position);
+            holder.speakerName.setText(maps.get("speakersName"));
+            // holder.speakerPhoto.setImageResource(maps.get(position).getPhoto());
+            holder.speakerPhoto.setOnClickListener(clickListener);
+            holder.speakerPhoto.setTag(holder);
+        }
+
+        @Override
+        public int getItemCount() {
+            return this.mapsList.size();
+        }
+    }
 }

@@ -42,30 +42,34 @@ public class SurveyActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.survey_recycler_view);
 
         String eventId = getIntent().getExtras().getString("eventId");
+        if (Constants.isNetworkAvailable(SurveyActivity.this)) {
+            new MyAsyncTask(Constants.QUESTIONS_LIST + eventId, null, SurveyActivity.this, new Callback() {
+                @Override
+                public void onResult(String result) {
+                    if (result != null) {
+                        List<QuestionBean> qustBean = Utils.getList(result, QuestionBean.class);
+                        for (QuestionBean bean : qustBean) {
+                            HashMap<String, String> map1 = new HashMap<String, String>();
+                            map1.put("qtn", bean.getQuestion());
+                            map1.put("typ", bean.getAppIdentifierName());
+                            map1.put("opt1", bean.getOptionA());
+                            map1.put("opt2", bean.getOptionB());
+                            map1.put("opt3", bean.getOptionC());
+                            map1.put("opt4", bean.getOptionD());
+                            map1.put("qtnId", bean.getQuestionId().toString());
+                            listQtns.add(map1);
+                        }
+                    }
+                    RecylerAdapter adapter = new RecylerAdapter(SurveyActivity.this, (ArrayList<HashMap<String, String>>) listQtns);
+                    recyclerView.setAdapter(adapter);
+                    recyclerView.setHasFixedSize(true);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(SurveyActivity.this));
 
-        new MyAsyncTask(Constants.QUESTIONS_LIST + eventId, null, SurveyActivity.this, new Callback() {
-            @Override
-            public void onResult(String result) {
-                List<QuestionBean> qustBean = Utils.getList(result, QuestionBean.class);
-                for (QuestionBean bean : qustBean) {
-                    HashMap<String, String> map1 = new HashMap<String, String>();
-                    map1.put("qtn", bean.getQuestion());
-                    map1.put("typ", bean.getAppIdentifierName());
-                    map1.put("opt1", bean.getOptionA());
-                    map1.put("opt2", bean.getOptionB());
-                    map1.put("opt3", bean.getOptionC());
-                    map1.put("opt4", bean.getOptionD());
-                    map1.put("qtnId", bean.getQuestionId().toString());
-                    listQtns.add(map1);
                 }
-                RecylerAdapter adapter = new RecylerAdapter(SurveyActivity.this, (ArrayList<HashMap<String, String>>) listQtns);
-                recyclerView.setAdapter(adapter);
-                recyclerView.setHasFixedSize(true);
-                recyclerView.setLayoutManager(new LinearLayoutManager(SurveyActivity.this));
-
-            }
-        }).execute();
-
+            }).execute();
+        } else {
+            Constants.createDialogSend(SurveyActivity.this, "error", "Please connect to internet");
+        }
 
         // text.setText(nameTxt);
 
@@ -86,7 +90,35 @@ public class SurveyActivity extends AppCompatActivity {
         LayoutInflater inflater;
         Context context;
         ArrayList<HashMap<String, String>> qtnAList;
+        View.OnClickListener clickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String answer = null;
+                SurveyViewHolder vholder = (SurveyViewHolder) v.getTag();
+                int position = vholder.getPosition();
+                HashMap<String, String> map1 = qtnAList.get(position);
+                if (map1.get("typ").equals("Single Choice")) {
+                    Toast.makeText(context, "This is position " + vholder.ans.getText().toString(), Toast.LENGTH_LONG).show();
+                } else {
+                    int index = vholder.rdGrp.getCheckedRadioButtonId();
+                    RadioButton rdBtn = (RadioButton) findViewById(index);
+                    int idx = vholder.rdGrp.indexOfChild(rdBtn);
 
+                    if (vholder.opt1.isChecked()) {
+                        answer = vholder.opt1.getText().toString();
+                    } else if (vholder.opt2.isChecked()) {
+                        answer = vholder.opt2.getText().toString();
+                    } else if (vholder.opt3.isChecked()) {
+                        answer = vholder.opt3.getText().toString();
+                    } else if (vholder.opt4.isChecked()) {
+                        answer = vholder.opt4.getText().toString();
+                    }
+                    Toast.makeText(context, "This is position " + answer, Toast.LENGTH_LONG).show();
+
+                }
+
+            }
+        };
 
         public RecylerAdapter(Context context, ArrayList<HashMap<String, String>> qtnList) {
             this.context = context;
@@ -128,36 +160,6 @@ public class SurveyActivity extends AppCompatActivity {
             holder.submitBtn.setOnClickListener(clickListener);
             holder.submitBtn.setTag(holder);
         }
-
-        View.OnClickListener clickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String answer = null;
-                SurveyViewHolder vholder = (SurveyViewHolder) v.getTag();
-                int position = vholder.getPosition();
-                HashMap<String, String> map1 = qtnAList.get(position);
-                if (map1.get("typ").equals("Single Choice")) {
-                    Toast.makeText(context, "This is position " + vholder.ans.getText().toString(), Toast.LENGTH_LONG).show();
-                } else {
-                    int index = vholder.rdGrp.getCheckedRadioButtonId();
-                    RadioButton rdBtn = (RadioButton) findViewById(index);
-                    int idx = vholder.rdGrp.indexOfChild(rdBtn);
-
-                    if (vholder.opt1.isChecked()) {
-                        answer = vholder.opt1.getText().toString();
-                    } else if (vholder.opt2.isChecked()) {
-                        answer = vholder.opt2.getText().toString();
-                    } else if (vholder.opt3.isChecked()) {
-                        answer = vholder.opt3.getText().toString();
-                    } else if (vholder.opt4.isChecked()) {
-                        answer = vholder.opt4.getText().toString();
-                    }
-                    Toast.makeText(context, "This is position " + answer, Toast.LENGTH_LONG).show();
-
-                }
-
-            }
-        };
 
         @Override
         public int getItemCount() {

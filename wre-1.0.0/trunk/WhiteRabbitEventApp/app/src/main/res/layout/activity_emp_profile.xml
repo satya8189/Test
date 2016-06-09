@@ -7,7 +7,7 @@
     tools:context=".EmpProfileActivity">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profile_image"
+        android:id="@+id/emp_profile_image"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_alignParentTop="true"
@@ -19,10 +19,11 @@
         android:id="@+id/linear1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/profile_image"
+        android:layout_below="@+id/emp_profile_image"
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/emp_name"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginLeft="30dp"
@@ -35,6 +36,8 @@
             android:textSize="16sp" />
 
         <TextView
+            android:id="@+id/emp_mail"
+
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginLeft="30dp"
@@ -47,6 +50,8 @@
             android:textSize="16sp" />
 
         <TextView
+            android:id="@+id/emp_mobile"
+
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginLeft="30dp"
@@ -59,6 +64,8 @@
             android:textSize="16sp" />
 
         <TextView
+            android:id="@+id/emp_org"
+
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginLeft="30dp"
@@ -71,6 +78,8 @@
             android:textSize="16sp" />
 
         <TextView
+            android:id="@+id/emp_designation"
+
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginLeft="30dp"

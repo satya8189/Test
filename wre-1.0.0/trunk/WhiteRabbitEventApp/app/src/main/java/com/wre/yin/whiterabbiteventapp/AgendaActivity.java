@@ -23,9 +23,8 @@ import java.util.Random;
 
 
 public class AgendaActivity extends AppCompatActivity {
-    private RecyclerView recyclerView;
     String layoutStatus = "gone";
-
+    private RecyclerView recyclerView;
     private List<HashMap<String, String>> agendaList;
 
     @Override
@@ -41,31 +40,45 @@ public class AgendaActivity extends AppCompatActivity {
 
         recyclerView = (RecyclerView) findViewById(R.id.agenda_recycler_view);
 
-        new MyAsyncTask(Constants.AGENDA + "?eventId=" + eventId, null, AgendaActivity.this, new Callback() {
-            @Override
-            public void onResult(String result) {
-                agendaList = new ArrayList<HashMap<String, String>>();
-                List<AgendaBean> agendaBeanList = Utils.getList(result, AgendaBean.class);
+        if (Constants.isNetworkAvailable(AgendaActivity.this)) {
+            new MyAsyncTask(Constants.AGENDA + "?eventId=" + eventId, null, AgendaActivity.this, new Callback() {
+                @Override
+                public void onResult(String result) {
+                    if (result != null)
+                        agendaList = new ArrayList<HashMap<String, String>>();
+                    List<AgendaBean> agendaBeanList = Utils.getList(result, AgendaBean.class);
 
-                for (AgendaBean bean : agendaBeanList) {
-                    HashMap<String, String> map = new HashMap<String, String>();
-                    map.put("agenTitle", bean.getAgenTitle());
-                    map.put("agenDesc", bean.getAgenDesc());
-                    map.put("agenStartTime", bean.getAgenStartTime());
-                    map.put("agenEndTime", bean.getAgenEndTime());
+                    for (AgendaBean bean : agendaBeanList) {
+                        HashMap<String, String> map = new HashMap<String, String>();
+                        map.put("agenTitle", bean.getAgenTitle());
+                        map.put("agenDesc", bean.getAgenDesc());
+                        map.put("agenStartTime", bean.getAgenStartTime());
+                        map.put("agenEndTime", bean.getAgenEndTime());
 
-                    agendaList.add(map);
+                        agendaList.add(map);
 
+                    }
+                    RecylerAdapter adapter = new RecylerAdapter(AgendaActivity.this, (ArrayList<HashMap<String, String>>) agendaList);
+                    recyclerView.setAdapter(adapter);
+                    recyclerView.setHasFixedSize(true);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(AgendaActivity.this));
                 }
-                RecylerAdapter adapter = new RecylerAdapter(AgendaActivity.this, (ArrayList<HashMap<String, String>>) agendaList);
-                recyclerView.setAdapter(adapter);
-                recyclerView.setHasFixedSize(true);
-                recyclerView.setLayoutManager(new LinearLayoutManager(AgendaActivity.this));
+            }).execute();
+        } else {
+            Constants.createDialogSend(AgendaActivity.this, "error", "Please connect to internet");
 
+        }
+    }
 
-            }
-        }).execute();
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private class RecylerAdapter extends RecyclerView.Adapter<AgendaRecyclerViewHolder> {
@@ -75,6 +88,27 @@ public class AgendaActivity extends AppCompatActivity {
         HashMap<String, String> maps;
 
         //String[] name = {"Androidwarriors", "Stackoverflow", "Developer Android", "AndroidHive"};
+        View.OnClickListener clickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                AgendaRecyclerViewHolder vholder = (AgendaRecyclerViewHolder) v.getTag();
+                int position = vholder.getPosition();
+                if (layoutStatus.equals("gone")) {
+                    vholder.expandLayout.setVisibility(View.VISIBLE);
+                    vholder.plus.setVisibility(View.GONE);
+                    vholder.minus.setVisibility(View.VISIBLE);
+                    layoutStatus = "visible";
+                } else {
+                    vholder.expandLayout.setVisibility(View.GONE);
+                    vholder.plus.setVisibility(View.VISIBLE);
+                    vholder.minus.setVisibility(View.GONE);
+                    layoutStatus = "gone";
+                }
+                //  Toast.makeText(context,"This is position "+position,Toast.LENGTH_LONG ).show();
+
+            }
+        };
 
         public RecylerAdapter(Context context, ArrayList<HashMap<String, String>> list) {
             this.context = context;
@@ -107,42 +141,9 @@ public class AgendaActivity extends AppCompatActivity {
             holder.cardView.setTag(holder);
         }
 
-        View.OnClickListener clickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                AgendaRecyclerViewHolder vholder = (AgendaRecyclerViewHolder) v.getTag();
-                int position = vholder.getPosition();
-                if (layoutStatus.equals("gone")) {
-                    vholder.expandLayout.setVisibility(View.VISIBLE);
-                    vholder.plus.setVisibility(View.GONE);
-                    vholder.minus.setVisibility(View.VISIBLE);
-                    layoutStatus = "visible";
-                } else {
-                    vholder.expandLayout.setVisibility(View.GONE);
-                    vholder.plus.setVisibility(View.VISIBLE);
-                    vholder.minus.setVisibility(View.GONE);
-                    layoutStatus = "gone";
-                }
-                //  Toast.makeText(context,"This is position "+position,Toast.LENGTH_LONG ).show();
-
-            }
-        };
-
         @Override
         public int getItemCount() {
             return mapsList.size();
         }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
-            case android.R.id.home:
-                onBackPressed();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 }
