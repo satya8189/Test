@@ -81,5 +81,6 @@ public List<Object[]> getParticipantEventBeanList(Long eventId,
 public void eventParticipantSave(
 		ParticipantEventBean participantEventBean);
 
+public List<Object[]> getParticipantsList(Long eventId);
 
 }

@@ -376,12 +376,8 @@ public List<Object[]>  getParticipantEventBeanList(Long eventId,String status) {
 	sqlQuery.setParameter("id", eventId);
 	List<Object[]> eventParticipantList = (List<Object[]>) sqlQuery.list();
 	return eventParticipantList;
-
 	
 }
-
-
-
 
 public void eventParticipantSave(
 		ParticipantEventBean participantEventBean) {
@@ -394,8 +390,21 @@ public void eventParticipantSave(
 			sqlQuery.setParameter("eid", participantEventBean.getEventId());
 			sqlQuery.setParameter("pid", participantEventBean.getParticipateId());
 			sqlQuery.executeUpdate();
-	
 
+}
+
+@Override
+public List<Object[]> getParticipantsList(Long eventId){
+	log.info("in getParticipantsList...DAOImpl");
+	/*Criteria criteria=sessionFactory.getCurrentSession().createCriteria(Participants.class);
+	criteria.add(Restrictions.eq("event_participant.eventId", eventId));
+	*/
+	String sql="select p.participant_Id,p.firstname,p.email from participants p,event_participant ep where p.participant_id=ep.Participant_ID and ep.Event_ID= :eventId";
+	SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery(sql);
+    	query.setParameter("eventId",eventId);
+    	//query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+    	
+    return (List<Object[]>)query.list();
 }
 
 
