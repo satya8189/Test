@@ -1,5 +1,6 @@
 var SponsorPageViewController = function($scope, $http, $location,
 		$routeParams, ngNotifier, filterFilter) {
+	
 	$scope.$on("$routeChangeSuccess", function() {
 		$scope.eventId = $routeParams.eventId;
 
