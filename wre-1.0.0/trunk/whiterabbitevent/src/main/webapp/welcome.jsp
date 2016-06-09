@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>Welcome to White Rabbit Event Application  </h1>
+<h1>Welcome to White Rabbit Event Application  <a href="login">LoGiN</a></h1>
 </body>
 </html>
