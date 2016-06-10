@@ -28,8 +28,8 @@ margin-bottom:0px !important;
 			<table class="table" id="viewParticipants">
 				<thead>
 					<tr>
-						<th>First Name</th>
-						<th>Action</th>
+						<td>First Name</td>
+						<td>Action</td>
 					</tr>
 				</thead>
 				 <tr ng-show="filteredSize!=0" ng-repeat="participant in filtered = participantsList | filter: search | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit ">  
