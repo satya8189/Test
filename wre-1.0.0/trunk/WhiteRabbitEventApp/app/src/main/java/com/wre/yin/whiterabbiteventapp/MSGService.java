@@ -73,7 +73,7 @@ public class MSGService extends IntentService {
         args.putString("mobno", mobno);
         args.putString("name", name);
         args.putString("msg", msg);
-        Intent chat = new Intent(this, ChatActivity.class);
+        Intent chat = new Intent(this, MessageActivity.class);
         chat.putExtra("INFO", args);
         notification = new NotificationCompat.Builder(this);
         notification.setContentTitle(name);
