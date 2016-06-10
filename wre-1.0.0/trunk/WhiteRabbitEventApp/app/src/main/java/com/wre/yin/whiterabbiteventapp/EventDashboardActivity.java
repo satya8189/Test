@@ -37,7 +37,6 @@ import java.util.Map;
 
 public class EventDashboardActivity extends AppCompatActivity implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener {
 
-    public static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 1;
     private GridView gridView;
     private ArrayList<Item> gridArray = new ArrayList<Item>();
     private CustomGridViewAdapter customGridAdapter;
@@ -45,6 +44,7 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
     private TextView eventNameTxt, eventDateTime;
     private String eventName, eventDate;
     private boolean mPermissionDenied = false;
+    public static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 1;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -100,160 +100,157 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
 
         }
 
-        if (Constants.isNetworkAvailable(EventDashboardActivity.this)) {
-            new MyAsyncTask(Constants.EVENT_SERVICES_LIST + eventName, null, EventDashboardActivity.this, new Callback() {
-                @Override
-                public void onResult(String result) {
-                    if (result != null) {
-                        List<EventBean> eventBeenList = Utils.getList(result, EventBean.class);
-                        for (EventBean bean : eventBeenList) {
-                            if (bean.getServiceId() != 18) {
-                                gridArray.add(new Item((int) (long) bean.getServiceId(), bean.getServiceName()));
-                            }
-                        }
-                        gridView = (GridView) findViewById(R.id.grid);
-                        customGridAdapter = new CustomGridViewAdapter(EventDashboardActivity.this, R.layout.row_grid, gridArray);
-                        gridView.setAdapter(customGridAdapter);
 
-                        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                String name = gridArray.get(position).getTitle().toString();
-                                int indexId = gridArray.get(position).getId();
-                                //  Toast.makeText(getApplicationContext(), gridArray.get(position).getTitle(), Toast.LENGTH_SHORT).show();
-                                if (Constants.isNetworkAvailable(EventDashboardActivity.this)) {
+        new MyAsyncTask(Constants.EVENT_SERVICES_LIST + eventName, null, EventDashboardActivity.this, new Callback() {
+            @Override
+            public void onResult(String result) {
+                List<EventBean> eventBeenList = Utils.getList(result, EventBean.class);
+                gridArray.add(new Item(2, "Invite"));
+                for (EventBean bean : eventBeenList) {
 
-                                    switch (indexId) {
-                                        case 1:
-                                            Intent aboutEventAct = new Intent(EventDashboardActivity.this, AboutEventActivity.class);
-                                            aboutEventAct.putExtra("name", name);
-                                            aboutEventAct.putExtra("eventId", eventName);
-                                            startActivity(aboutEventAct);
-                                            break;
-                                        case 17:
-                                            if (Constants.checkAndRequestPermissions(EventDashboardActivity.this)) {
-                                                Intent detailsAct = new Intent(EventDashboardActivity.this, DetailsActivity.class);
-                                                detailsAct.putExtra("name", name);
-                                                detailsAct.putExtra("eventId", eventName);
-                                                startActivity(detailsAct);
-                                            }
-                                            break;
-
-                                        case 2:
-                                            Intent agendaAct = new Intent(EventDashboardActivity.this, AgendaActivity.class);
-                                            agendaAct.putExtra("name", name);
-                                            agendaAct.putExtra("eventId", eventName);
-                                            startActivity(agendaAct);
-                                            break;
-
-                                        case 3:
-                                            Intent newsaAct = new Intent(EventDashboardActivity.this, NewsFeedActivity.class);
-                                            newsaAct.putExtra("name", name);
-                                            newsaAct.putExtra("eventId", eventName);
-                                            startActivity(newsaAct);
-                                            break;
-                                        case 4:
-                                            if (Constants.checkAndRequestPermissions(EventDashboardActivity.this)) {
-                                                Intent galleryAct = new Intent(EventDashboardActivity.this, GalleryActivity.class);
-                                                galleryAct.putExtra("name", name);
-                                                galleryAct.putExtra("eventId", eventName);
-                                                startActivity(galleryAct);
-                                            }
-                                            break;
-                                        case 5:
-                                            if (Constants.checkAndRequestPermissions(EventDashboardActivity.this)) {
-                                                Intent crowdAct = new Intent(EventDashboardActivity.this, CrowdPicsActivity.class);
-                                                crowdAct.putExtra("name", name);
-                                                crowdAct.putExtra("eventId", eventName);
-                                                startActivity(crowdAct);
-                                            }
-                                            break;
-                                        case 6:
-                                            if (Constants.checkAndRequestPermissions(EventDashboardActivity.this)) {
-                                                Intent videosAct = new Intent(EventDashboardActivity.this, VideosActivity.class);
-                                                videosAct.putExtra("name", name);
-                                                videosAct.putExtra("eventId", eventName);
-                                                startActivity(videosAct);
-                                            }
-                                            break;
-
-                                        case 7:
-                                            Intent docShareAct = new Intent(EventDashboardActivity.this, DocShareActivity.class);
-                                            docShareAct.putExtra("name", name);
-                                            docShareAct.putExtra("eventId", eventName);
-                                            startActivity(docShareAct);
-                                            break;
-                                        case 8:
-                                            Intent qaAct = new Intent(EventDashboardActivity.this, QAActivity.class);
-                                            qaAct.putExtra("name", name);
-                                            qaAct.putExtra("eventId", eventName);
-                                            startActivity(qaAct);
-                                            break;
-                                        case 9:
-                                            Intent messageAct = new Intent(EventDashboardActivity.this, MessageActivity.class);
-                                            messageAct.putExtra("name", name);
-                                            messageAct.putExtra("eventId", eventName);
-                                            startActivity(messageAct);
-                                            break;
-                                        case 16:
-                                            Intent surveyAct = new Intent(EventDashboardActivity.this, SurveyActivity.class);
-                                            surveyAct.putExtra("name", name);
-                                            surveyAct.putExtra("eventId", eventName);
-                                            startActivity(surveyAct);
-                                            break;
-
-                                        case 10:
-                                            Intent qrCodeAct = new Intent(EventDashboardActivity.this, QRCodeActivity.class);
-                                            qrCodeAct.putExtra("name", name);
-                                            qrCodeAct.putExtra("eventId", eventName);
-                                            startActivity(qrCodeAct);
-                                            break;
-                                        case 11:
-                                            Intent socialAct = new Intent(EventDashboardActivity.this, SocialMediaActivity.class);
-                                            socialAct.putExtra("name", name);
-                                            socialAct.putExtra("eventId", eventName);
-                                            startActivity(socialAct);
-                                            break;
-                                        case 12:
-                                            Intent networkAct = new Intent(EventDashboardActivity.this, NetworkingActivity.class);
-                                            networkAct.putExtra("name", name);
-                                            networkAct.putExtra("eventId", eventName);
-
-                                            startActivity(networkAct);
-                                            break;
-                                        case 13:
-                                            Intent venueAct = new Intent(EventDashboardActivity.this, VenueActivity.class);
-                                            venueAct.putExtra("name", name);
-                                            venueAct.putExtra("eventId", eventName);
-                                            startActivity(venueAct);
-                                            break;
-
-                                        case 15:
-                                            Intent sponcersAct = new Intent(EventDashboardActivity.this, SponcersActivity.class);
-                                            sponcersAct.putExtra("name", name);
-                                            sponcersAct.putExtra("eventId", eventName);
-                                            startActivity(sponcersAct);
-                                            break;
-                                        case 14:
-                                            Intent speakerAct = new Intent(EventDashboardActivity.this, SpeakerProfileActivity.class);
-                                            speakerAct.putExtra("name", name);
-                                            speakerAct.putExtra("eventId", eventName);
-                                            startActivity(speakerAct);
-                                            break;
-                                    }
-                                } else {
-                                    Constants.createDialogSend(EventDashboardActivity.this, "error", "Please connect to internet");
-                                }
-                            }
-                        });
-
+                    if (bean.getOrder() < 17) {
+                        if(bean.getServiceId()!=17)
+                        gridArray.add(new Item((int) (long) bean.getOrder(), bean.getServiceName()));
                     }
                 }
-            }).execute();
-        } else {
-            Constants.createDialogSend(EventDashboardActivity.this, "error", "Please connect to internet");
+                gridArray.add(new Item(17, "Profile"));
+                gridView = (GridView) findViewById(R.id.grid);
+                customGridAdapter = new CustomGridViewAdapter(EventDashboardActivity.this, R.layout.row_grid, gridArray);
+                gridView.setAdapter(customGridAdapter);
 
-        }
+                gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        String name = gridArray.get(position).getTitle().toString();
+                        int indexId = gridArray.get(position).getId();
+                        //  Toast.makeText(getApplicationContext(), gridArray.get(position).getTitle(), Toast.LENGTH_SHORT).show();
+
+                        switch (indexId) {
+                            case 1:
+                                Intent aboutEventAct = new Intent(EventDashboardActivity.this, AboutEventActivity.class);
+                                aboutEventAct.putExtra("name", name);
+                                aboutEventAct.putExtra("eventId", eventName);
+                                startActivity(aboutEventAct);
+                                break;
+                            case 2:
+                                if (Constants.checkAndRequestPermissions(EventDashboardActivity.this)) {
+                                    Intent detailsAct = new Intent(EventDashboardActivity.this, DetailsActivity.class);
+                                    detailsAct.putExtra("name", name);
+                                    detailsAct.putExtra("eventId", eventName);
+                                    startActivity(detailsAct);
+                                }
+                                break;
+
+                            case 3:
+                                Intent agendaAct = new Intent(EventDashboardActivity.this, AgendaActivity.class);
+                                agendaAct.putExtra("name", name);
+                                agendaAct.putExtra("eventId", eventName);
+                                startActivity(agendaAct);
+                                break;
+
+                            case 4:
+                                Intent newsaAct = new Intent(EventDashboardActivity.this, NewsFeedActivity.class);
+                                newsaAct.putExtra("name", name);
+                                newsaAct.putExtra("eventId", eventName);
+                                startActivity(newsaAct);
+                                break;
+                            /*case 4:
+                                if (Constants.checkAndRequestPermissions(EventDashboardActivity.this)) {
+                                    Intent galleryAct = new Intent(EventDashboardActivity.this, GalleryActivity.class);
+                                    galleryAct.putExtra("name", name);
+                                    galleryAct.putExtra("eventId", eventName);
+                                    startActivity(galleryAct);
+                                }
+                                break;*/
+                            case 5:
+                                if (Constants.checkAndRequestPermissions(EventDashboardActivity.this)) {
+                                    Intent crowdAct = new Intent(EventDashboardActivity.this, CrowdPicsActivity.class);
+                                    crowdAct.putExtra("name", name);
+                                    crowdAct.putExtra("eventId", eventName);
+                                    startActivity(crowdAct);
+                                }
+                                break;
+                            case 6:
+                                if (Constants.checkAndRequestPermissions(EventDashboardActivity.this)) {
+                                    Intent videosAct = new Intent(EventDashboardActivity.this, VideosActivity.class);
+                                    videosAct.putExtra("name", name);
+                                    videosAct.putExtra("eventId", eventName);
+                                    startActivity(videosAct);
+                                }
+                                break;
+
+                            case 7:
+                                Intent docShareAct = new Intent(EventDashboardActivity.this, DocShareActivity.class);
+                                docShareAct.putExtra("name", name);
+                                docShareAct.putExtra("eventId", eventName);
+                                startActivity(docShareAct);
+                                break;
+                            case 17:
+                                Intent qaAct = new Intent(EventDashboardActivity.this, EmpProfileActivity.class);
+                                qaAct.putExtra("name", name);
+                                qaAct.putExtra("eventId", eventName);
+                                startActivity(qaAct);
+                                break;
+                            case 8:
+                                Intent messageAct = new Intent(EventDashboardActivity.this, MessageActivity.class);
+                                messageAct.putExtra("name", name);
+                                messageAct.putExtra("eventId", eventName);
+                                startActivity(messageAct);
+                                break;
+                            case 9:
+                                Intent surveyAct = new Intent(EventDashboardActivity.this, SurveyActivity.class);
+                                surveyAct.putExtra("name", name);
+                                surveyAct.putExtra("eventId", eventName);
+                                startActivity(surveyAct);
+                                break;
+
+                            case 10:
+                                Intent qrCodeAct = new Intent(EventDashboardActivity.this, QRCodeActivity.class);
+                                qrCodeAct.putExtra("name", name);
+                                qrCodeAct.putExtra("eventId", eventName);
+                                startActivity(qrCodeAct);
+                                break;
+                            case 11:
+                                Intent socialAct = new Intent(EventDashboardActivity.this, SocialMediaActivity.class);
+                                socialAct.putExtra("name", name);
+                                socialAct.putExtra("eventId", eventName);
+                                startActivity(socialAct);
+                                break;
+                            case 12:
+                                Intent networkAct = new Intent(EventDashboardActivity.this, NetworkingActivity.class);
+                                networkAct.putExtra("name", name);
+                                networkAct.putExtra("eventId", eventName);
+
+                                startActivity(networkAct);
+                                break;
+                            case 13:
+                                Intent venueAct = new Intent(EventDashboardActivity.this, VenueActivity.class);
+                                venueAct.putExtra("name", name);
+                                venueAct.putExtra("eventId", eventName);
+                                startActivity(venueAct);
+                                break;
+
+                            case 14:
+                                Intent sponcersAct = new Intent(EventDashboardActivity.this, SponcersActivity.class);
+                                sponcersAct.putExtra("name", name);
+                                sponcersAct.putExtra("eventId", eventName);
+                                startActivity(sponcersAct);
+                                break;
+                            case 15:
+                                Intent speakerAct = new Intent(EventDashboardActivity.this, SpeakerProfileActivity.class);
+                                speakerAct.putExtra("name", name);
+                                speakerAct.putExtra("eventId", eventName);
+                                startActivity(speakerAct);
+                                break;
+
+                        }
+
+                    }
+                });
+
+            }
+        }).execute();
+
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
