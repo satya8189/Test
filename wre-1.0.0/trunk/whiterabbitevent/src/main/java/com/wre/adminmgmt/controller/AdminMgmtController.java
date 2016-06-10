@@ -938,13 +938,29 @@ public @ResponseBody void saveContactDetails(@RequestBody ContactDetailsBean con
 
 	//Get participants list..........admin/getParticipantsList
 	@RequestMapping(value="admin/getParticipantsList",method=RequestMethod.GET)
-	public @ResponseBody List<ParticipantBean> gteParticipantsList(@RequestParam("eventId") Long eventId)
+	public @ResponseBody List<ParticipantBean> getParticipantsList(@RequestParam("eventId") Long eventId)
 	{
 		log.info("in admin/getParticipantsList"+eventId);
 		return adminMgmtService.getParticipantsList(eventId);
 	}
 
-	
+	//to go to admin/ViewParticipantAnswers page
+	@RequestMapping(value="admin/viewParticipantAnswers")
+	public String goToParticipantsAnswersPage()
+	{
+		log.info("in gotoparticipantanswerspage --");
+		return "admin/ViewParticipantAnswers";
+	}
+
+	//to get the paricipant anwers...admin/ViewParticipantAnswers 
+	/*@RequestMapping(value="admin/ViewParticipantAnswers",method=RequestMethod.GET)
+	public @ResponseBody List<ParticipantBean> gteParticipantsAnswers(@RequestParam("participantId") Long participantId)
+	{
+	//select sq.Question,sq.Answer,sqa.Participant_Answer from survey_question sq,survey_question_answer sqa where sqa.Participant_id=61 and sqa.Event_ID=14 and sqa.Question_ID=sq.Question_ID;
+		log.info("in admin/getParticipantsList"+participantId);
+		//return adminMgmtService.getParticipantsAnswers(participantId);
+		return null;
+	}*/
 	
 
 }
