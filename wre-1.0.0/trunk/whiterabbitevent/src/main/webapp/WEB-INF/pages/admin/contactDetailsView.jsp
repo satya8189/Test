@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@include file="error-messages.jsp" %>
 <div class="col-md-12">
 
 	<a ng-click="navigateToEventViewDetails(contact.eventId)"> <i class="glyphicon glyphicon-chevron-left"></i>
@@ -63,7 +63,7 @@
 		  						</span>
 						</div>
 					</div>
-					<button type="submit" class="btn button  save margin-2"	ng-click="validateHiddenFields()">Update</button>
+					<button type="submit" class="btn button  save margin-2">Update</button>
 			</form>
 		</div>
 		</div>
