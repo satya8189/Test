@@ -4,34 +4,35 @@
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="16dp"
+    android:layout_marginBottom="10dp"
     card_view:cardCornerRadius="10dp"
     card_view:cardUseCompatPadding="true">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/sponsor_photo"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center_horizontal"
             android:scaleType="centerCrop"
-            android:layout_margin="5dp"
             android:src="@drawable/event_image1" />
 
         <TextView
             android:id="@+id/sponsor_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/sponsor_photo"
+            android:layout_margin="10dp"
             android:gravity="center"
             android:text="Country"
-            android:padding="10dp"
-            android:textColor="#000000"
-            android:textSize="13sp" />
 
-    </RelativeLayout>
+            android:textColor="#000000"
+            android:textSize="12sp" />
+
+    </LinearLayout>
 
 </android.support.v7.widget.CardView>

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".EventDashboardActivity">
 
     <com.daimajia.slider.library.SliderLayout
@@ -27,15 +28,18 @@
         android:id="@+id/relativeLayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:layout_below="@+id/slider"
-        android:layout_margin="10dp">
+        android:layout_marginBottom="2dp"
+        android:background="#fff"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp">
 
         <TextView
             android:id="@+id/event_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="left"
+            android:gravity="start"
             android:text="EventName"
             android:textColor="#000"
             android:textStyle="bold" />
@@ -44,17 +48,16 @@
             android:id="@+id/event_time_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/event_name"
             android:layout_below="@+id/event_name"
             android:layout_marginTop="3dp"
-            android:gravity="left"
+            android:gravity="start"
             android:text="Date And Time" />
 
         <TextView
             android:id="@+id/noof_users"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="right"
+            android:gravity="end"
             android:text="No of Users"
             android:textColor="#000"
             android:textStyle="bold" />
@@ -65,22 +68,29 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/noof_users"
             android:layout_marginTop="3dp"
-            android:gravity="right"
+            android:gravity="end"
             android:text="Attendance" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_below="@+id/attendMsg"
+            android:layout_marginTop="5dp"
+            android:background="#ececec" />
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/rel"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/relativeLayout1"
-        android:background="#000">
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/relativeLayout1">
 
         <GridView
             android:id="@+id/grid"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#fff"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@color/background"
             android:columnWidth="100dp"
             android:gravity="center"
             android:horizontalSpacing="5dp"

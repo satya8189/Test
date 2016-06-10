@@ -3,10 +3,15 @@ package com.wre.yin.whiterabbiteventapp;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.widget.TextView;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 public class QAActivity extends AppCompatActivity {
-    private TextView text;
+    private EditText questionTxt;
+    private Button btnSubmit;
+    private String spId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -14,14 +19,21 @@ public class QAActivity extends AppCompatActivity {
         setContentView(R.layout.activity_qa);
 
         String nameTxt = getIntent().getExtras().getString("name");
-        text = (TextView) findViewById(R.id.activity_text);
+        spId = getIntent().getExtras().getString("speakerId");
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(nameTxt);
+        getSupportActionBar().setTitle("Question");
 
+        questionTxt = (EditText) findViewById(R.id.question_edittext);
+        btnSubmit = (Button) findViewById(R.id.question_submit);
 
-        text.setText("Enter Your Question :");
-
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String questionString = questionTxt.getText().toString();
+                Toast.makeText(getApplicationContext(), "" + questionString, Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     @Override

@@ -190,7 +190,7 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
                                             startActivity(qaAct);
                                             break;
                                         case 9:
-                                            Intent messageAct = new Intent(EventDashboardActivity.this, ChatActivity.class);
+                                            Intent messageAct = new Intent(EventDashboardActivity.this, MessageActivity.class);
                                             messageAct.putExtra("name", name);
                                             messageAct.putExtra("eventId", eventName);
                                             startActivity(messageAct);

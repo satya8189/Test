@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.wre.yin.whiterabbiteventapp.beans.ParticipantBean;
@@ -62,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String mobileNum = employeeId.getText().toString();
+                final String mobileNum = employeeId.getText().toString();
                 if (Constants.isNetworkAvailable(LoginActivity.this)) {
                     if (Utils.checkMobile(mobileNum)) {
                         ParticipantBean participantBean = new ParticipantBean();
@@ -73,21 +74,28 @@ public class LoginActivity extends AppCompatActivity {
                             public void onResult(String result) {
                                 if (result != null) {
                                     pBean = Utils.getObject(result, ParticipantBean.class);
-                                    prefs = getSharedPreferences("Chat", 0);
-                                    editor = prefs.edit();
-                                    editor.putString("name", pBean.getFirstName());
-                                    editor.putString("partId", pBean.getParticipantId().toString());
-                                    editor.commit();
-                                    String strPref = prefs.getString("mobile", null);
-                                    if (strPref == null) {
-                                        new Register().execute(pBean.getPhoneNumber());
-                                    }
+                                    if (mobileNum.equals(pBean.getPhoneNumber())) {
 
-                                    editor.putString("mobile", pBean.getPhoneNumber());
-                                    editor.commit();
-                                    Intent otpAct = new Intent(LoginActivity.this, OTPActivity.class);
-                                    startActivity(otpAct);
-                                    finish();
+                                        prefs = getSharedPreferences("Chat", 0);
+                                        editor = prefs.edit();
+                                        editor.putString("name", pBean.getFirstName());
+                                        editor.putString("partId", pBean.getParticipantId().toString());
+                                        editor.commit();
+                                        String strPref = prefs.getString("mobile", null);
+                                        if (strPref == null) {
+                                            new Register().execute(pBean.getPhoneNumber());
+                                        }
+
+                                        editor.putString("mobile", pBean.getPhoneNumber());
+                                        editor.commit();
+                                        Intent otpAct = new Intent(LoginActivity.this, OTPActivity.class);
+                                        startActivity(otpAct);
+                                        finish();
+                                    } else {
+                                        employeeId.setError("Please enter a Registered mobile number");
+                                    }
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "Sorry for the inconvienence...", Toast.LENGTH_LONG).show();
                                 }
                             }
                         }).execute();

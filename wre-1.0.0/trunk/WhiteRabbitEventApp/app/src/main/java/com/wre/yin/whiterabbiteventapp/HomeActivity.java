@@ -139,7 +139,7 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
                                     .putString("date", map.get("date"));
 
                             mDemoSlider.addSlider(textSliderView);
-                            mDemoSlider.setPresetTransformer(SliderLayout.Transformer.RotateDown);
+                            mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Stack);
                         }
                     }
                 }
