@@ -97,6 +97,8 @@
 	<script type="text/javascript" src="resources/js/admin/ChatTopicCreateController.js"></script>
 	<script type="text/javascript" src="resources/js/admin/ChatTopicViewDetailsController.js"></script>
      
+	<!-- Social Media -->
+	<script type="text/javascript" src="resources/js/admin/SocialMediaController.js"></script>
 
 </head>
 <body>
