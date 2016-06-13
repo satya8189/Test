@@ -42,6 +42,7 @@ import com.wre.adminmgmt.bean.QuestionBean;
 import com.wre.adminmgmt.bean.RatingBean;
 import com.wre.adminmgmt.bean.SpeakerBean;
 import com.wre.adminmgmt.bean.SponsorBean;
+import com.wre.adminmgmt.bean.SurveyQuestionAnswerBean;
 import com.wre.adminmgmt.service.AdminMgmtService;
 import com.wre.common.util.WREConstants;
 import com.wre.systemadminmgmt.bean.ParticipantBean;
@@ -944,23 +945,25 @@ public @ResponseBody void saveContactDetails(@RequestBody ContactDetailsBean con
 		return adminMgmtService.getParticipantsList(eventId);
 	}
 
-	//to go to admin/ViewParticipantAnswers page
-	@RequestMapping(value="admin/viewParticipantAnswers")
-	public String goToParticipantsAnswersPage()
+		//go to admin/ViewParticipantAnswers page
+	@RequestMapping(value="admin/ViewParticipantAnswers")
+	public String goToViewParticipantAnswers()
 	{
-		log.info("in gotoparticipantanswerspage --");
 		return "admin/ViewParticipantAnswers";
 	}
-
-	//to get the paricipant anwers...admin/ViewParticipantAnswers 
-	/*@RequestMapping(value="admin/ViewParticipantAnswers",method=RequestMethod.GET)
-	public @ResponseBody List<ParticipantBean> gteParticipantsAnswers(@RequestParam("participantId") Long participantId)
+	
+	
+	//to get the paricipant anwers...admin/getViewParticipantAnswers 
+	@RequestMapping(value="admin/getViewParticipantAnswers",method=RequestMethod.GET)
+	public @ResponseBody List<SurveyQuestionAnswerBean> gteParticipantsAnswers(@RequestParam("eventId")Long eventId,@RequestParam("participantId") Long participantId)
 	{
 	//select sq.Question,sq.Answer,sqa.Participant_Answer from survey_question sq,survey_question_answer sqa where sqa.Participant_id=61 and sqa.Event_ID=14 and sqa.Question_ID=sq.Question_ID;
-		log.info("in admin/getParticipantsList"+participantId);
-		//return adminMgmtService.getParticipantsAnswers(participantId);
-		return null;
-	}*/
+		log.info("in admin/getViewParticipantAnswers--eventiD--"+eventId+"--participantId..."+participantId);
+		//create surveyQuestionAnswerBean wrto SurveyQuestionAnswer entity
+		
+		return adminMgmtService.getParticipantsAnswers(eventId,participantId);
+		//return null;
+	}
 	
 
 }
