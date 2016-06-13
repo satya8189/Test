@@ -253,6 +253,15 @@ App.config([ '$routeProvider', function($routeProvider, $Scope) {
 		controller : ViewParticipantAnswersController
 	});
 	
+	/*Q&A*/
+	
+	/*SocialMedia Starts Here*/
+	//SocialMedia
+	$routeProvider.when('/SocialMedia/:eventId/', {
+		templateUrl : 'admin/SocialMedia',
+		controller : SocialMediaController
+	});
+	
 	
 	$routeProvider.otherwise({
 		redirectTo : '/eventView'
