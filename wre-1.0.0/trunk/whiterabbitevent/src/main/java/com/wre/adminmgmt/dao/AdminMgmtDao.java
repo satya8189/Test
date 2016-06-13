@@ -83,4 +83,7 @@ public void eventParticipantSave(
 
 public List<Object[]> getParticipantsList(Long eventId);
 
+public List<Object[]> getParticipantsAnswersList(Long eventId,
+		Long participantId);
+
 }

@@ -407,7 +407,17 @@ public List<Object[]> getParticipantsList(Long eventId){
     return (List<Object[]>)query.list();
 }
 
-
+		@Override
+		public List<Object[]> getParticipantsAnswersList(Long eventId,Long participantId){
+			log.info("in getParticipantsAnswersList...DAOImpl");
+			
+			String sql="select sq.Question,sq.Answer,sqa.Participant_Answer from survey_question sq,survey_question_answer sqa where sqa.Participant_id= :participantId and sqa.Event_ID= :eventId and sqa.Question_ID=sq.Question_ID;";
+			SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery(sql);
+		    	query.setParameter("participantId",participantId);
+		    	query.setParameter("eventId",eventId);
+		    	//query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+		    	return (List<Object[]>)query.list();
+		}
 
 
 }
