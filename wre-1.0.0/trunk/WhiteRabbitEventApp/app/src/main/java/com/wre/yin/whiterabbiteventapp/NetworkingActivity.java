@@ -1,6 +1,7 @@
 package com.wre.yin.whiterabbiteventapp;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,9 +12,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.wre.yin.whiterabbiteventapp.beans.ParticipantEventBean;
+import com.wre.yin.whiterabbiteventapp.utils.Callback;
+import com.wre.yin.whiterabbiteventapp.utils.Constants;
+import com.wre.yin.whiterabbiteventapp.utils.MyAsyncTask;
+import com.wre.yin.whiterabbiteventapp.utils.Utils;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 public class NetworkingActivity extends AppCompatActivity {
     private TextView text;
     private RecyclerView recyclerView;
+    private String eventId;
+    private SharedPreferences prefs;
+
+    private List<HashMap<String,String>> partList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,11 +42,28 @@ public class NetworkingActivity extends AppCompatActivity {
 
         recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
 
+        eventId = getIntent().getExtras().getString("eventId");
 
-        RecylerAdapter adapter = new RecylerAdapter(this);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        partList=new ArrayList<>();
+        new MyAsyncTask(Constants.PARTICIPANT_LIST + "?eventId=" + eventId + "&status=ACTIVE", null, NetworkingActivity.this, new Callback() {
+            @Override
+            public void onResult(String result) {
+                List<ParticipantEventBean> participantEventBeanList= Utils.getList(result,ParticipantEventBean.class);
+                for(ParticipantEventBean bean:participantEventBeanList){
+                    HashMap<String,String> partMap=new HashMap<String, String>();
+                    partMap.put("partId",bean.getParticipateId().toString());
+                    partMap.put("partName",bean.getFirstName()+" "+bean.getLostName());
+                    partMap.put("partPhone",bean.getMobile());
+                    partList.add(partMap);
+
+                }
+                RecylerAdapter adapter = new RecylerAdapter(NetworkingActivity.this, (ArrayList<HashMap<String, String>>) partList);
+                recyclerView.setAdapter(adapter);
+                recyclerView.setHasFixedSize(true);
+                recyclerView.setLayoutManager(new LinearLayoutManager(NetworkingActivity.this));
+            }
+        }).execute();
+
     }
 
     @Override
@@ -49,21 +81,22 @@ public class NetworkingActivity extends AppCompatActivity {
     private class RecylerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
         LayoutInflater inflater;
         Context context;
-        String[] name = {"Androidwarriors", "Stackoverflow", "Developer Android", "AndroidHive",
-                "Slidenerd", "TheNewBoston", "Truiton", "HmkCode", "JavaTpoint", "Javapeper"};
+        ArrayList<HashMap<String,String>> partAdList;
+
+
         View.OnClickListener clickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 RecyclerViewHolder vholder = (RecyclerViewHolder) v.getTag();
                 int position = vholder.getPosition();
-                // Toast.makeText(context,"This is position "+position,Toast.LENGTH_LONG ).show();
 
             }
         };
 
-        public RecylerAdapter(Context context) {
+        public RecylerAdapter(Context context,ArrayList<HashMap<String,String>> partArList) {
             this.context = context;
+            this.partAdList=partArList;
             inflater = LayoutInflater.from(context);
         }
 
@@ -76,14 +109,16 @@ public class NetworkingActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(RecyclerViewHolder holder, int position) {
-            holder.tv1.setText(name[position]);
+            HashMap<String,String> partAdMap=partAdList.get(position);
+            holder.partName.setText(partAdMap.get("partName"));
+            holder.partPhone.setText(partAdMap.get("partPhone"));
             holder.cardView.setOnClickListener(clickListener);
             holder.cardView.setTag(holder);
         }
 
         @Override
         public int getItemCount() {
-            return name.length;
+            return partAdList.size();
         }
     }
 }

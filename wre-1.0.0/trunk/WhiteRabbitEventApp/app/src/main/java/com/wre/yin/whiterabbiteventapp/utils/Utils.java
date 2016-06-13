@@ -29,7 +29,7 @@ public class Utils {
     public static String getJson(final Object object) {
         Gson gson = new Gson();
         String res = gson.toJson(object);
-        //System.out.println("Json :" + res);
+        System.out.println("Json :" + res);
         return res;
     }
 

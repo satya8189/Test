@@ -45,10 +45,7 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
     private String eventName, eventDate;
     private boolean mPermissionDenied = false;
     public static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 1;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
+
     private GoogleApiClient client;
 
 

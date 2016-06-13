@@ -12,6 +12,42 @@ public class ParticipantEventBean {
     private Long participateId;
     private String eventname;
     private Date eventDate;
+    private String firstName;
+    private String lostName;
+    private String mobile;
+    private String emailId;
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLostName() {
+        return lostName;
+    }
+
+    public void setLostName(String lastName) {
+        this.lostName = lastName;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getEmailId() {
+        return emailId;
+    }
+
+    public void setEmailId(String emailId) {
+        this.emailId = emailId;
+    }
 
     public Date getEventDate() {
         return eventDate;

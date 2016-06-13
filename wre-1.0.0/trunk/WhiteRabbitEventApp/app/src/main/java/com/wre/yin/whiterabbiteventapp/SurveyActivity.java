@@ -1,6 +1,7 @@
 package com.wre.yin.whiterabbiteventapp;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -28,6 +29,8 @@ public class SurveyActivity extends AppCompatActivity {
     private TextView text;
     private RecyclerView recyclerView;
     private List<HashMap<String, String>> listQtns;
+    private String partId,eventId;
+    SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +43,10 @@ public class SurveyActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(nameTxt);
         recyclerView = (RecyclerView) findViewById(R.id.survey_recycler_view);
+        prefs = getSharedPreferences("Chat", 0);
+        eventId = getIntent().getExtras().getString("eventId");
+        partId = prefs.getString("partId", null);
 
-        String eventId = getIntent().getExtras().getString("eventId");
         if (Constants.isNetworkAvailable(SurveyActivity.this)) {
             new MyAsyncTask(Constants.QUESTIONS_LIST + eventId, null, SurveyActivity.this, new Callback() {
                 @Override
@@ -98,7 +103,23 @@ public class SurveyActivity extends AppCompatActivity {
                 int position = vholder.getPosition();
                 HashMap<String, String> map1 = qtnAList.get(position);
                 if (map1.get("typ").equals("Single Choice")) {
-                    Toast.makeText(context, "This is position " + vholder.ans.getText().toString(), Toast.LENGTH_LONG).show();
+
+                    answer=vholder.ans.getText().toString();
+                    if(answer.equals("")){
+                        Toast.makeText(context, "Please give a answer.. " , Toast.LENGTH_LONG).show();
+                    }else{
+                        QuestionBean questionBean=new QuestionBean();
+                        questionBean.setEventId(Long.parseLong(eventId));
+                        questionBean.setParticipantId(Long.parseLong(partId));
+                        questionBean.setQuestionId(Long.parseLong(map1.get("qtnId")));
+                        questionBean.setAnswer(answer);
+                        new MyAsyncTask(Constants.QUESTIONS_ANSWER_SAVE, Utils.getJson(questionBean), SurveyActivity.this, new Callback() {
+                            @Override
+                            public void onResult(String result) {
+                                System.out.println("Result in text:"+result);
+                            }
+                        }).execute();
+                    }
                 } else {
                     int index = vholder.rdGrp.getCheckedRadioButtonId();
                     RadioButton rdBtn = (RadioButton) findViewById(index);
@@ -113,8 +134,17 @@ public class SurveyActivity extends AppCompatActivity {
                     } else if (vholder.opt4.isChecked()) {
                         answer = vholder.opt4.getText().toString();
                     }
-                    Toast.makeText(context, "This is position " + answer, Toast.LENGTH_LONG).show();
-
+                    QuestionBean questionBean=new QuestionBean();
+                    questionBean.setEventId(Long.parseLong(eventId));
+                    questionBean.setParticipantId(Long.parseLong(partId));
+                    questionBean.setQuestionId(Long.parseLong(map1.get("qtnId")));
+                    questionBean.setAnswer(answer);
+                    new MyAsyncTask(Constants.QUESTIONS_ANSWER_SAVE, Utils.getJson(questionBean), SurveyActivity.this, new Callback() {
+                        @Override
+                        public void onResult(String result) {
+                            System.out.println("Result in radio:"+result);
+                        }
+                    }).execute();
                 }
 
             }

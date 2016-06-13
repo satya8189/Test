@@ -44,7 +44,10 @@ public class Constants {
     public static String URL1 = "http://192.168.1.85:8080/Chatting/rest/chat/";
     public static final String UPLOAD_IMAGE_VIDEO = URL1 + "imageUpload";
     public static String IMAGE_URL = "http://183.82.103.156:8080/Resources/wre/";
+
     public static String URL = "http://183.82.103.156:8080/whiterabbitevent/admin/";
+
+
     public static final String EVENT_SERVICES_LIST = URL + "eventServicesList?eventId=";
     public static final String AGENDA = URL + "agendoDetails";
     public static final String NEWS_LIST = URL + "newsList";
@@ -53,6 +56,9 @@ public class Constants {
     public static final String INDIVIDUAL_SPEAKER = URL + "getSpeakerBySpeakerId?speakerId=";
     public static final String INDIVIDUAL_SPONSOR = URL + "getSponsorDataonSponsorId?sponcorId=";
     public static final String QUESTIONS_LIST = URL + "questionList?eventId=";
+    public static final String QUESTIONS_ANSWER_SAVE=URL+"saveQuestionAnswer";
+    public static final String PARTICIPANT_LIST=URL+"ParticipantEventBeanList";
+    public static final String PARTICIPANT_UPDATE=URL+"eventParticipantSave";
 
 
     //Image Gallery file path constansts

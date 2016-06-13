@@ -56,6 +56,8 @@ public class LoginActivity extends AppCompatActivity {
         context = getApplicationContext();
 
         getSupportActionBar().hide();
+        prefs = getSharedPreferences("Chat", 0);
+        editor = prefs.edit();
 
         employeeId = (EditText) findViewById(R.id.employee_id);
         nextBtn = (Button) findViewById(R.id.next_btn);
@@ -76,11 +78,10 @@ public class LoginActivity extends AppCompatActivity {
                                     pBean = Utils.getObject(result, ParticipantBean.class);
                                     if (mobileNum.equals(pBean.getPhoneNumber())) {
 
-                                        prefs = getSharedPreferences("Chat", 0);
-                                        editor = prefs.edit();
+
                                         editor.putString("name", pBean.getFirstName());
                                         editor.putString("partId", pBean.getParticipantId().toString());
-                                        editor.commit();
+
                                         String strPref = prefs.getString("mobile", null);
                                         if (strPref == null) {
                                             new Register().execute(pBean.getPhoneNumber());

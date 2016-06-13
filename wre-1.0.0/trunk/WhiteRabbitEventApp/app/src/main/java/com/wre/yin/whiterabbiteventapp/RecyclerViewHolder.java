@@ -8,16 +8,16 @@ import android.widget.TextView;
 
 public class RecyclerViewHolder extends RecyclerView.ViewHolder {
 
-    TextView tv1, tv2, tv3;
-    ImageView imageView;
+    TextView partName,partPhone;
+    ImageView partProfileImg;
     CardView cardView;
 
     public RecyclerViewHolder(View itemView) {
         super(itemView);
 
-        tv1 = (TextView) itemView.findViewById(R.id.list_title);
-        tv2 = (TextView) itemView.findViewById(R.id.list_desc);
-        imageView = (ImageView) itemView.findViewById(R.id.list_avatar);
+        partName = (TextView) itemView.findViewById(R.id.part_list_name);
+        partPhone = (TextView) itemView.findViewById(R.id.part_list_phone);
+        partProfileImg = (ImageView) itemView.findViewById(R.id.part_list_profile_img);
         cardView = (CardView) itemView.findViewById(R.id.card_view);
 
     }

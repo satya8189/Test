@@ -36,12 +36,6 @@ public class DocShareActivity extends AppCompatActivity {
         pdfGrid.setAdapter(new CustomAdapter(this, pdfDocsNameList, pdfDocImage));
         excelGrid.setAdapter(new CustomAdapter(this, excelDocsNameList, excelDocImage));
 
-
-        // text = (TextView) findViewById(R.id.activity_text);
-        //hai
-
-        // text.setText(nameTxt);
-
     }
 
     @Override

@@ -15,6 +15,15 @@ public class QuestionBean {
     private String optionD;
     private String answer;
     private String appIdentifierName;
+    private Long participantId ;
+
+    public Long getParticipantId() {
+        return participantId;
+    }
+
+    public void setParticipantId(Long participantId) {
+        this.participantId = participantId;
+    }
 
     public Long getQuestionId() {
         return questionId;
