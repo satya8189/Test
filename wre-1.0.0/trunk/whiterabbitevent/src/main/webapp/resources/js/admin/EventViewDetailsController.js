@@ -63,6 +63,10 @@ var EventViewDetailsController = function($scope,$routeParams,$http,$location) {
 		}else if(event.serviceId=="18"){
 			//alert("serviceId..."+event.eventId);
 			location.href="#/navigateToChatList/"+event.eventId;
+
+		}else if(event.serviceId=="11"){
+			alert("serviceId..SocialMedia.."+event.eventId);
+			location.href="#/SocialMedia/"+event.eventId;
 	};
 
 	};
