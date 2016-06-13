@@ -240,10 +240,17 @@ App.config([ '$routeProvider', function($routeProvider, $Scope) {
 		});
 		
 		/*chat view ends here	*/
-	//QuestionAndAnswersViewController
+	
+		/*Q&A Starts here*/
+		//QuestionAndAnswersViewController
 	$routeProvider.when('/QuestionAndAnswersView/:eventId/', {
 		templateUrl : 'admin/QuestionAndAnswersView',
 		controller : QuestionAndAnswersViewController
+	});
+	
+	$routeProvider.when('/ViewParticipantAnswers/:eventId/:participantId', {
+		templateUrl : 'admin/ViewParticipantAnswers',
+		controller : ViewParticipantAnswersController
 	});
 	
 	
