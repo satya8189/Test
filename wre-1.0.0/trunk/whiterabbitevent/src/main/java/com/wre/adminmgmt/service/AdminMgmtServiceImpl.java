@@ -28,6 +28,7 @@ import com.wre.adminmgmt.bean.QuestionBean;
 import com.wre.adminmgmt.bean.RatingBean;
 import com.wre.adminmgmt.bean.SpeakerBean;
 import com.wre.adminmgmt.bean.SponsorBean;
+import com.wre.adminmgmt.bean.SurveyQuestionAnswerBean;
 import com.wre.adminmgmt.dao.AdminMgmtDao;
 import com.wre.common.util.WREConstants;
 import com.wre.model.Agenda;
@@ -1240,6 +1241,30 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 				participantsBeanList.add(participantBean);
 			}
 			return participantsBeanList;
+		}
+		
+		@Override
+		public List<SurveyQuestionAnswerBean> getParticipantsAnswers(Long eventId,Long participantId){
+			log.info("in getParticipantsAnswers..SerImpl");
+			
+			List<Object[]> surveyQAList= AdminMgmtDaoImpl.getParticipantsAnswersList(eventId,participantId);
+			
+			
+			List<SurveyQuestionAnswerBean> surveyQuestionAnswerList=new ArrayList<SurveyQuestionAnswerBean>();
+			
+			for(Object[] surveyQA: surveyQAList){
+				SurveyQuestionAnswerBean surveyQuestionAnswerBean=new SurveyQuestionAnswerBean();
+					log.info(surveyQA[0]+"--"+surveyQA[1]+"=="+surveyQA[2]);
+						SurveyQuestion surveyQuestion=new SurveyQuestion();
+						surveyQuestion.setQuestion((String)surveyQA[0]);
+					surveyQuestionAnswerBean.setSurveyQuestion(surveyQuestion);
+					surveyQuestionAnswerBean.setAnswer((String)surveyQA[1]);
+					surveyQuestionAnswerBean.setParticipantAnswer((String)surveyQA[2]);
+					
+				surveyQuestionAnswerList.add(surveyQuestionAnswerBean);
+			}
+			return surveyQuestionAnswerList;
+			//return null;
 		}
 		
 		

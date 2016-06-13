@@ -17,6 +17,7 @@ import com.wre.adminmgmt.bean.QuestionBean;
 import com.wre.adminmgmt.bean.RatingBean;
 import com.wre.adminmgmt.bean.SpeakerBean;
 import com.wre.adminmgmt.bean.SponsorBean;
+import com.wre.adminmgmt.bean.SurveyQuestionAnswerBean;
 import com.wre.systemadminmgmt.bean.ParticipantBean;
 import com.wre.systemadminmgmt.bean.ParticipantEventBean;
 
@@ -130,6 +131,8 @@ public void eventParticipantSave(ParticipantEventBean participantEventBean);
 public void saveSurveyQuestionAnswer(QuestionBean questionBean);
 
 public List<ParticipantBean> getParticipantsList(Long eventId);
+
+public List<SurveyQuestionAnswerBean> getParticipantsAnswers(Long eventId, Long participantId);
 
 
 
