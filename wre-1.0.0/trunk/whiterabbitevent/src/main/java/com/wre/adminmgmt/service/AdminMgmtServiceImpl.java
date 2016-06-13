@@ -1208,7 +1208,7 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 		@Override 
 		public void saveSurveyQuestionAnswer(QuestionBean questionBean)
 		{
-			log.info("in save contactdetails serviceimpl...");
+			log.info("in save SaveSurveyQuestionAnswer serviceimpl.."+questionBean.toString());
 			
 			SurveyQuestionAnswer surveyQuestionAnswer=new SurveyQuestionAnswer();
 				Event event=new Event();
