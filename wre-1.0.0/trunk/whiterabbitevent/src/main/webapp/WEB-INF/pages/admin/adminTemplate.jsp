@@ -67,7 +67,7 @@
     <script src="resources/js/admin/QuestionCreateController.js"></script>
     <script src="resources/js/admin/QuestionEditController.js"></script>
     <script src="resources/js/admin/QuestionAndAnswersViewController.js"></script>
-	
+	<script src="resources/js/admin/ViewParticipantAnswersController.js"></script>    
 	    
     <!-- file upload -->
 	<script type="text/javascript" src="resources/js/ng-file-upload.js"></script>
