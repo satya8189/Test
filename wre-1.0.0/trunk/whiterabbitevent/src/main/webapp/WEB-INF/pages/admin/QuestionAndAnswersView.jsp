@@ -28,7 +28,7 @@ margin-bottom:0px !important;
 			<table class="table" id="viewParticipants">
 				<thead>
 					<tr>
-						<td>First Name</td>
+						<td>Participant Name</td>
 						<td>Action</td>
 					</tr>
 				</thead>
