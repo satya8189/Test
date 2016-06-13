@@ -70,7 +70,7 @@
 			<value>com.wre.model.Rating</value>
 			<value>com.wre.model.ChatTopic</value>
 	        <value>com.wre.model.ContactDetails</value>
-
+ 			<value>com.wre.model.SocialMedia</value>
 
 			</list>
 		</property>
