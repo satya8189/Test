@@ -44,6 +44,7 @@ import com.wre.adminmgmt.bean.SpeakerBean;
 import com.wre.adminmgmt.bean.SponsorBean;
 import com.wre.adminmgmt.bean.SurveyQuestionAnswerBean;
 import com.wre.adminmgmt.service.AdminMgmtService;
+import com.wre.adminmgmt.service.AdminMgmtServiceImpl;
 import com.wre.common.util.WREConstants;
 import com.wre.systemadminmgmt.bean.ParticipantBean;
 import com.wre.systemadminmgmt.bean.ParticipantEventBean;
@@ -924,7 +925,7 @@ public @ResponseBody void saveContactDetails(@RequestBody ContactDetailsBean con
 	//participantEventBean
 	@RequestMapping(value = "admin/eventParticipantSave", method = RequestMethod.POST)
 	public @ResponseBody
-	void eventParticipantSave(@RequestBody ParticipantEventBean participantEventBean) {
+	void eventParticipants(@RequestBody ParticipantEventBean participantEventBean) {
 		log.info("in side save method");
 		adminMgmtService.eventParticipantSave(participantEventBean);
 	}
@@ -953,9 +954,10 @@ public @ResponseBody void saveContactDetails(@RequestBody ContactDetailsBean con
 	}
 	
 	
+	
 	//to get the paricipant anwers...admin/getViewParticipantAnswers 
 	@RequestMapping(value="admin/getViewParticipantAnswers",method=RequestMethod.GET)
-	public @ResponseBody List<SurveyQuestionAnswerBean> gteParticipantsAnswers(@RequestParam("eventId")Long eventId,@RequestParam("participantId") Long participantId)
+	public @ResponseBody List<SurveyQuestionAnswerBean> getParticipantsAnswers(@RequestParam("eventId")Long eventId,@RequestParam("participantId") Long participantId)
 	{
 	//select sq.Question,sq.Answer,sqa.Participant_Answer from survey_question sq,survey_question_answer sqa where sqa.Participant_id=61 and sqa.Event_ID=14 and sqa.Question_ID=sq.Question_ID;
 		log.info("in admin/getViewParticipantAnswers--eventiD--"+eventId+"--participantId..."+participantId);
@@ -964,6 +966,28 @@ public @ResponseBody void saveContactDetails(@RequestBody ContactDetailsBean con
 		return adminMgmtService.getParticipantsAnswers(eventId,participantId);
 		//return null;
 	}
+	
+	//===saveQuestion&Answer API by QId,EventId,ParticipantId,Answer
+	
+	@RequestMapping(value="admin/saveQuestionAnswer",method=RequestMethod.POST)
+	public @ResponseBody void saveQuestionAnswer(@RequestBody QuestionBean questionBean)
+	{
+		adminMgmtService.saveSurveyQuestionAnswer(questionBean);
+	}
+	
+	//===============Q&A
+	
+	//===========SOCIALMEDIA====
+	
+	
+	//go to admin/SocialMedia page
+	@RequestMapping(value="admin/SocialMedia")
+	public String goToSocialMedia()
+	{
+		return "admin/SocialMedia";
+	}
+	
+	
 	
 
 }
