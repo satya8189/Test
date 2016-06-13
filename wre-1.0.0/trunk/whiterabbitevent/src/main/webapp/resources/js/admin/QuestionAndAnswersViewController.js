@@ -56,9 +56,9 @@ var QuestionAndAnswersViewController = function($scope,$location, $http, $routeP
 	
 	$scope.viewQuestionAndAnswers = function(participantId)
 	{
-		alert("working in viewQuestionAndAnswers---"+participantId);
-//		/$location.path("/eventViewDetails/" + participantId);
-		
+		alert("working in viewQuestionAndAnswers---"+participantId+"---"+$scope.eventId);
+		//$location.path("/eventViewDetails/"+participantId);
+		location.href='#/ViewParticipantAnswers/'+$scope.eventId+'/'+participantId;
 	};
 	
 };
