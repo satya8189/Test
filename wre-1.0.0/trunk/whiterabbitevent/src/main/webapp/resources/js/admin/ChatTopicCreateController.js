@@ -12,10 +12,10 @@ var ChatTopicCreateController = function($scope,$http, $location, $routeParams,n
 		}).error(function() {
 			 ngNotifier.notify("ChatTopic Not Created Successfully !");
 		});
-		$scope.cancelCreateChat = function(){
-			
-			$location.path("/navigateToChatList/"+$routeParams.eventId);
-		}
+		
+	};
+	$scope.cancelCreateChat = function(){
+		
+		$location.path("/navigateToChatList/"+$routeParams.eventId);
 	}
-	
 }

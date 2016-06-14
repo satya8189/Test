@@ -21,4 +21,9 @@ var ChatTopicViewDetailsController = function($scope, $http, $location, $routePa
 			ngNotifier.notify("ChatTopic Not Updated Successfully !");
 		});	
 	}
+	
+$scope.cancelUpdateChat = function(chat){
+		
+		$location.path("/navigateToChatList/"+chat.eventId);
+	}
 }
