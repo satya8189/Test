@@ -24,6 +24,7 @@ import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.wre.yin.whiterabbiteventapp.adapters.CustomGridViewAdapter;
 import com.wre.yin.whiterabbiteventapp.beans.EventBean;
+import com.wre.yin.whiterabbiteventapp.beans.GalaryBean;
 import com.wre.yin.whiterabbiteventapp.beans.Item;
 import com.wre.yin.whiterabbiteventapp.utils.Callback;
 import com.wre.yin.whiterabbiteventapp.utils.Constants;
@@ -48,6 +49,8 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
 
     private GoogleApiClient client;
 
+    private List<String> galleryList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,14 +68,46 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
         eventName = getIntent().getExtras().getString("eventId");
         eventDate = getIntent().getExtras().getString("date");
 
+        galleryList=new ArrayList<>();
 
         eventNameTxt = (TextView) findViewById(R.id.event_name);
         eventNameTxt.setText(eventName + " Event");
         eventDateTime = (TextView) findViewById(R.id.event_time_date);
         eventDateTime.setText(eventDate);
+        new MyAsyncTask(Constants.EVENT_IMAGES + "?eventId=" + eventName + "&type=event_images", null, EventDashboardActivity.this, new Callback() {
+            @Override
+            public void onResult(String result) {
+                List<GalaryBean> galaryBeenList=Utils.getList(result,GalaryBean.class);
+                if(galaryBeenList!=null) {
+                    for (GalaryBean bean : galaryBeenList) {
+                        galleryList.add(Constants.BASE_URL + bean.getUrl());
+                    }
+                    for (String name : galleryList) {
+                        TextSliderViewDashboard textSliderView = new TextSliderViewDashboard(EventDashboardActivity.this);
+                        // initialize a SliderLayout
+                        textSliderView
+                                .description("")
+                                .image(name)
+                                .setScaleType(BaseSliderView.ScaleType.Fit)
+                                .setOnSliderClickListener(EventDashboardActivity.this);
+
+                        //add your extra information
+                        textSliderView.bundle(new Bundle());
+                        textSliderView.getBundle()
+                                .putString("extra", name);
+
+                        mDemoSlider.addSlider(textSliderView);
+                        mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Stack);
+
+                    }
+                }
+
+            }
+        }).execute();
 
 
-        HashMap<String, Integer> file_maps = new HashMap<String, Integer>();
+
+        /*HashMap<String, Integer> file_maps = new HashMap<String, Integer>();
         file_maps.put("Event 1", R.drawable.event_image1);
         file_maps.put("Event 2", R.drawable.event_image2);
         file_maps.put("Event 3", R.drawable.event_image3);
@@ -95,7 +130,7 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
             mDemoSlider.addSlider(textSliderView);
             mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Stack);
 
-        }
+        }*/
 
 
         new MyAsyncTask(Constants.EVENT_SERVICES_LIST + eventName, null, EventDashboardActivity.this, new Callback() {

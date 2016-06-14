@@ -150,11 +150,7 @@ public class DetailsActivity extends AppCompatActivity {
 
             // Start downloading json data from Google Directions API
             downloadTask.execute(url);
-
-
         }
-
-
     }
 
     public void saveStatus(String status){

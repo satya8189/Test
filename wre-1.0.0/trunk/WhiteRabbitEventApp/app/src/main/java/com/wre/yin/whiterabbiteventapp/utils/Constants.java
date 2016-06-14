@@ -36,13 +36,12 @@ public class Constants {
     // SD card image directory
     public static final String PHOTO_ALBUM = "/DCIM/" + "/Camera/";
     // supported file formats
-    public static final List<String> FILE_EXTN = Arrays.asList("jpg", "jpeg",
-            "png");
+    public static final List<String> FILE_EXTN = Arrays.asList("jpg", "jpeg","png");
     // Permissions for Marshmallow
     public static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 1;
     //url constants
     public static String URL1 = "http://192.168.1.85:8080/Chatting/rest/chat/";
-    public static final String UPLOAD_IMAGE_VIDEO = URL1 + "imageUpload";
+
     public static String IMAGE_URL = "http://183.82.103.156:8080/Resources/wre/";
 
     public static String URL = "http://183.82.103.156:8080/whiterabbitevent/admin/";
@@ -64,7 +63,7 @@ public class Constants {
     public static final String EVENT_IMAGES=URL+"getEventImages";
 
     public static final String SAVE_HELP_DETAILS=URL+"updateHelpDetails";
-    public static final String SAVE_PARTI_DETAILS=URL+"updateParticipantDetails";
+    public static final String PARTICIPANT_UPDATE=URL+"updateParticipantDetails";
 
     //Image Gallery file path constansts
     public static String PARTICIPENT_URL = "http://183.82.103.156:8080/whiterabbitevent/";
@@ -72,6 +71,8 @@ public class Constants {
     public static final String PARTICIPENT_REG_UPDATE = PARTICIPENT_URL + "participantRegUpdate";
     public static String SYSTEM_URL = "http://183.82.103.156:8080/whiterabbitevent/systemadmin/";
     public static final String EVENT_LIST = SYSTEM_URL + "getParticipantEventList";
+
+    public static final String UPLOAD_IMAGE_VIDEO = URL1 + "imageUpload";
 
     public static boolean isNetworkAvailable(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);

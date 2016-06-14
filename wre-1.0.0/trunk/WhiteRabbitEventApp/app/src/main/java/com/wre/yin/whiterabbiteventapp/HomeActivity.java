@@ -112,7 +112,6 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
                     if (result != null) {
                         List<ParticipantEventBean> eventList = Utils.getList(result, ParticipantEventBean.class);
 
-
                         list = new ArrayList<HashMap<String, String>>();
                         for (ParticipantEventBean bean : eventList) {
                             HashMap<String, String> file_maps = new HashMap<String, String>();
