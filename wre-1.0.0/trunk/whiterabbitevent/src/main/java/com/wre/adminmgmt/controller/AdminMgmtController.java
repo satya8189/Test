@@ -955,11 +955,12 @@ public @ResponseBody void saveContactDetails(@RequestBody ContactDetailsBean con
 		adminMgmtService.eventParticipantSave(participantEventBean);
 	}
 
-	//updateParticipantAPI.....to updateparticipant by passing bean with name..ParticipantBean..with attribute..eventId,participantId and data..entity-participants
-	@RequestMapping(value="admin/updateParticipant",method=RequestMethod.POST)
-	public @ResponseBody String updateParticipant(@RequestBody ParticipantBean participantBean)
+	//updateParticipantAPI.....to updateparticipant by passing bean with name..
+	//ParticipantBean..with attributes..participantId and data(exclude otp,registerId)..entity-participants
+	@RequestMapping(value="admin/updateParticipantDetails",method=RequestMethod.POST)
+	public @ResponseBody String updateParticipantDetails(@RequestBody ParticipantBean participantBean)
 	{
-		log.info("in updateParticipant ");
+		log.info("in update Participant details.."+participantBean.getEmailId());
 		adminMgmtService.updateParticipant(participantBean);
 		return "success";
 	}
