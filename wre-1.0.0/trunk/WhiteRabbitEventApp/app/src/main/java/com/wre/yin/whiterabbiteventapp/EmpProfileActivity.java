@@ -1,15 +1,29 @@
 package com.wre.yin.whiterabbiteventapp;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
+
+import com.wre.yin.whiterabbiteventapp.beans.ContactDetailsBean;
+import com.wre.yin.whiterabbiteventapp.utils.Callback;
+import com.wre.yin.whiterabbiteventapp.utils.Constants;
+import com.wre.yin.whiterabbiteventapp.utils.MyAsyncTask;
+import com.wre.yin.whiterabbiteventapp.utils.Utils;
 
 public class EmpProfileActivity extends AppCompatActivity {
 
     private ImageView empProfilePic;
-    private TextView empName, empMail, empMobile, empOrg, empDesignation;
+    private EditText empName, empMail, empMobile, empAlterMobile, empOrg, empDesignation;
+    private Button saveUpdateBtn;
+
+    private SharedPreferences prefs;
+    private String partiName, partId, partMobile, partEmail, partAltNumber, partDesig, partOrg, eventId;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,16 +34,52 @@ public class EmpProfileActivity extends AppCompatActivity {
 
         getSupportActionBar().setTitle("Profile Details");
 
+        prefs = getSharedPreferences("Chat", 0);
+        partiName = prefs.getString("name", null);
+        partId = prefs.getString("partId", null);
+
+       // eventId = getIntent().getExtras().getString("eventId");
         empProfilePic = (ImageView) findViewById(R.id.emp_profile_image);
 
-        empName = (TextView) findViewById(R.id.emp_name);
-        empMail = (TextView) findViewById(R.id.emp_mail);
-        empMobile = (TextView) findViewById(R.id.emp_mobile);
-        empOrg = (TextView) findViewById(R.id.emp_org);
-        empDesignation = (TextView) findViewById(R.id.emp_designation);
+        empName = (EditText) findViewById(R.id.emp_name);
+        empMail = (EditText) findViewById(R.id.emp_mail);
+        empMobile = (EditText) findViewById(R.id.emp_mobile);
+        empAlterMobile = (EditText) findViewById(R.id.emp_alternate_mobile);
+        // empOrg = (EditText) findViewById(R.id.emp_org);
+        // empDesignation = (EditText) findViewById(R.id.emp_designation);
 
+        saveUpdateBtn = (Button) findViewById(R.id.save_update_btn);
+
+        empName.setText(partiName);
+
+        saveUpdateBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                partiName = empName.getText().toString();
+                partMobile = empMobile.getText().toString();
+                partEmail = empMail.getText().toString();
+                partAltNumber = empAlterMobile.getText().toString();
+
+                ContactDetailsBean contactBean = new ContactDetailsBean();
+                contactBean.setContactName(partiName);
+                contactBean.setContactEmail(partEmail);
+                contactBean.setContactMobile(partMobile);
+                contactBean.setContactAlternateMobile(partAltNumber);
+
+                new MyAsyncTask(Constants.PARTICIPANT_UPDATE, Utils.getJson(contactBean), EmpProfileActivity.this, new Callback() {
+                    @Override
+                    public void onResult(String result) {
+
+                        System.out.println("update result" + result);
+
+                    }
+                }).execute();
+
+            }
+        });
 
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

@@ -6,90 +6,130 @@
     android:background="#354A69"
     tools:context=".EmpProfileActivity">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/emp_profile_image"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:src="@drawable/user_icon" />
-
-    <LinearLayout
-        android:id="@+id/linear1"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/emp_profile_image"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/emp_name"
+        <LinearLayout
+            android:id="@+id/linear1"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/rectangle_shape"
-            android:gravity="center"
-            android:text="Name"
-            android:textColor="#fff"
-            android:textSize="16sp" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/emp_mail"
 
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/rectangle_shape"
-            android:gravity="center"
-            android:text="Email"
-            android:textColor="#fff"
-            android:textSize="16sp" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/emp_profile_image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:src="@drawable/user_icon" />
 
-        <TextView
-            android:id="@+id/emp_mobile"
 
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/rectangle_shape"
-            android:gravity="center"
-            android:text="Mobile "
-            android:textColor="#fff"
-            android:textSize="16sp" />
+            <EditText
+                android:id="@+id/emp_name"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/rectangle_shape"
+                android:ems="20"
+                android:gravity="center"
+                android:hint="Name"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:singleLine="true"
+                android:textColor="#fff"
+                android:textColorHint="@color/white"
+                android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/emp_org"
+            <EditText
+                android:id="@+id/emp_mail"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/rectangle_shape"
+                android:ems="20"
+                android:gravity="center"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:singleLine="true"
+                android:textColor="#fff"
+                android:textColorHint="@color/white"
+                android:textSize="16sp" />
 
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/rectangle_shape"
-            android:gravity="center"
-            android:text="Organisation"
-            android:textColor="#fff"
-            android:textSize="16sp" />
+            <EditText
+                android:id="@+id/emp_mobile"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/rectangle_shape"
+                android:ems="20"
+                android:gravity="center"
+                android:hint="Mobile "
+                android:inputType="phone"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:singleLine="true"
+                android:textColor="#fff"
+                android:textColorHint="@color/white"
 
-        <TextView
-            android:id="@+id/emp_designation"
+                android:textSize="16sp" />
 
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/rectangle_shape"
-            android:gravity="center"
-            android:text="Designation"
-            android:textColor="#fff"
-            android:textSize="16sp" />
-    </LinearLayout>
+            <EditText
+                android:id="@+id/emp_alternate_mobile"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/rectangle_shape"
+                android:ems="20"
+                android:gravity="center"
+                android:hint="Alternate Mobile"
+                android:inputType="phone"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:singleLine="true"
+                android:textColor="#fff"
+                android:textColorHint="@color/white"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/emp_designation"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/rectangle_shape"
+                android:ems="20"
+                android:gravity="center"
+                android:hint="Designation"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:singleLine="true"
+                android:textColor="#fff"
+                android:textColorHint="@color/white"
+                android:textSize="16sp"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/save_update_btn"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="30dp"
+                android:background="@drawable/rectangle_shape_no"
+                android:text="save"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </ScrollView>
+
 
 </RelativeLayout>

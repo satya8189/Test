@@ -39,7 +39,6 @@
     <drawable name="service_17">@drawable/speaker_pic</drawable>
 
 
-
     <integer-array name="services">
         <item>@drawable/service_1</item>
         <item>@drawable/service_2</item>
