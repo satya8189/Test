@@ -848,8 +848,8 @@ public @ResponseBody void updateContactDetails(@RequestBody ContactDetailsBean c
 	
 }
 
-//return string as data stored contactAPI
-@RequestMapping(value="admin/updateContactsDetails",method=RequestMethod.POST)
+//=========return string as data stored contactAPI
+@RequestMapping(value="admin/updateHelpDetails",method=RequestMethod.POST)
 public @ResponseBody String updateContactsDetails(@RequestBody ContactDetailsBean contactDetailsBean)
 {
 	log.info("in updateContactDetails");
