@@ -1,8 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <div class="col-md-12">
-	
-</div>
+	<a ng-click="cancelUpdateChat(chat)">
+		 <i class="glyphicon glyphicon-chevron-left"></i>
+	</a>
+	 </div>
 <form name="chatEditForm" ng-submit="chatEditForm.$valid && updateChat(chat)" novalidate>
 <div class="form-group">		
 						 <label>ChatTopic </label>
