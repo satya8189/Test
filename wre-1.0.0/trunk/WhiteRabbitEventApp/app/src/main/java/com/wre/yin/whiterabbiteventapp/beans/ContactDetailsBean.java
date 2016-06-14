@@ -12,14 +12,14 @@ public class ContactDetailsBean {
     private String contactMobile;
     private String contactAlternateMobile;
     private String helpText;
-    private String participantId;
+    private long participantId;
 
 
-    public String getParticipantId() {
+    public Long getParticipantId() {
         return participantId;
     }
 
-    public void setParticipantId(String participantId) {
+    public void setParticipantId(Long participantId) {
         this.participantId = participantId;
     }
 

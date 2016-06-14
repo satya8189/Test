@@ -88,6 +88,7 @@ public class LoginActivity extends AppCompatActivity {
                                         }
 
                                         editor.putString("mobile", pBean.getPhoneNumber());
+                                        editor.putString("mail", pBean.getEmailId());
                                         editor.commit();
                                         Intent otpAct = new Intent(LoginActivity.this, OTPActivity.class);
                                         startActivity(otpAct);

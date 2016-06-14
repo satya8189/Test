@@ -19,6 +19,7 @@ public class HelpActivity extends AppCompatActivity {
     private Button helpSubmit;
     private String contactName, contactMobile, contactEmail, helpText;
     private SharedPreferences prefs;
+
     private String partiName, partId, partMobile, partEmail, partAltNumber, partDesig, partOrg, eventId;
 
     @Override
@@ -36,6 +37,13 @@ public class HelpActivity extends AppCompatActivity {
         prefs = getSharedPreferences("Chat", 0);
         partiName = prefs.getString("name", null);
         partId = prefs.getString("partId", null);
+        partMobile = prefs.getString("mobile", null);
+        partEmail = prefs.getString("mail", null);
+
+
+        contact_Name.setText(partiName);
+        contact_Mobile.setText(partMobile);
+        contact_Email.setText(partEmail);
 
         helpSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,15 +57,18 @@ public class HelpActivity extends AppCompatActivity {
                 if (Constants.isNetworkAvailable(HelpActivity.this)) {
 
                     ContactDetailsBean contactBean = new ContactDetailsBean();
-                    contactBean.setContactName(partiName);
-                    contactBean.setContactEmail(partEmail);
-                    contactBean.setContactMobile(partMobile);
-                    contactBean.setParticipantId(partId);
+                    contactBean.setContactName(contactName);
+                    contactBean.setContactEmail(contactEmail);
+                    contactBean.setContactMobile(contactMobile);
+                    contactBean.setParticipantId(Long.parseLong(partId));
+
+                    contactBean.setHelpText(helpText);
+                    contactBean.setEventId(14);
 
                     new MyAsyncTask(Constants.SAVE_HELP_DETAILS, Utils.getJson(contactBean), HelpActivity.this, new Callback() {
                         @Override
                         public void onResult(String result) {
-                            //  ContactDetailsBean res = Utils.getObject(result, ContactDetailsBean.class);
+                       //      ContactDetailsBean res = Utils.getObject(result, ContactDetailsBean.class);
 
                             System.out.println("update result" + result);
 

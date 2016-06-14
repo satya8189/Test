@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.wre.yin.whiterabbiteventapp.beans.ContactDetailsBean;
+import com.wre.yin.whiterabbiteventapp.beans.ParticipantBean;
 import com.wre.yin.whiterabbiteventapp.utils.Callback;
 import com.wre.yin.whiterabbiteventapp.utils.Constants;
 import com.wre.yin.whiterabbiteventapp.utils.MyAsyncTask;
@@ -37,8 +37,11 @@ public class EmpProfileActivity extends AppCompatActivity {
         prefs = getSharedPreferences("Chat", 0);
         partiName = prefs.getString("name", null);
         partId = prefs.getString("partId", null);
+        partMobile = prefs.getString("mobile", null);
+        partEmail = prefs.getString("mail", null);
 
-       // eventId = getIntent().getExtras().getString("eventId");
+
+        // eventId = getIntent().getExtras().getString("eventId");
         empProfilePic = (ImageView) findViewById(R.id.emp_profile_image);
 
         empName = (EditText) findViewById(R.id.emp_name);
@@ -51,22 +54,26 @@ public class EmpProfileActivity extends AppCompatActivity {
         saveUpdateBtn = (Button) findViewById(R.id.save_update_btn);
 
         empName.setText(partiName);
+        empMail.setText(partEmail);
+        empMobile.setText(partMobile);
 
         saveUpdateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                partiName = empName.getText().toString();
-                partMobile = empMobile.getText().toString();
-                partEmail = empMail.getText().toString();
-                partAltNumber = empAlterMobile.getText().toString();
+                String updatePartiName = empName.getText().toString();
+                String upadatePartMobile = empMobile.getText().toString();
+                String updatePartEmail = empMail.getText().toString();
+                String partAltNumber = empAlterMobile.getText().toString();
 
-                ContactDetailsBean contactBean = new ContactDetailsBean();
-                contactBean.setContactName(partiName);
-                contactBean.setContactEmail(partEmail);
-                contactBean.setContactMobile(partMobile);
-                contactBean.setContactAlternateMobile(partAltNumber);
+                ParticipantBean partBean = new ParticipantBean();
+                partBean.setFirstName(updatePartiName);
+                partBean.setEmailId(updatePartEmail);
+                partBean.setPhoneNumber(upadatePartMobile);
 
-                new MyAsyncTask(Constants.PARTICIPANT_UPDATE, Utils.getJson(contactBean), EmpProfileActivity.this, new Callback() {
+                partBean.setParticipantId(Long.parseLong(partId));
+
+
+                new MyAsyncTask(Constants.PARTICIPANT_UPDATE, Utils.getJson(partBean), EmpProfileActivity.this, new Callback() {
                     @Override
                     public void onResult(String result) {
 
