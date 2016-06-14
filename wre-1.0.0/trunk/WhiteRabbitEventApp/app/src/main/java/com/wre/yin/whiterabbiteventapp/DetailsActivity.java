@@ -1,5 +1,6 @@
 package com.wre.yin.whiterabbiteventapp;
 
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
@@ -9,6 +10,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -19,7 +22,12 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.wre.yin.whiterabbiteventapp.beans.ParticipantEventBean;
+import com.wre.yin.whiterabbiteventapp.utils.Callback;
+import com.wre.yin.whiterabbiteventapp.utils.Constants;
 import com.wre.yin.whiterabbiteventapp.utils.DirectionsJSONParser;
+import com.wre.yin.whiterabbiteventapp.utils.MyAsyncTask;
+import com.wre.yin.whiterabbiteventapp.utils.Utils;
 
 import org.json.JSONObject;
 
@@ -45,6 +53,11 @@ public class DetailsActivity extends AppCompatActivity {
     private TextView text;
     private boolean mPermissionDenied = false;
 
+    private Button yesButton,noButton,maybeButtun;
+    private String eventId,partId;
+
+    private SharedPreferences prefs;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +70,32 @@ public class DetailsActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(nameTxt);
+        eventId = getIntent().getExtras().getString("eventId");
+        prefs = getSharedPreferences("Chat", 0);
+        partId = prefs.getString("partId", null);
+
+        yesButton=(Button)findViewById(R.id.partStatusYes);
+        noButton=(Button)findViewById(R.id.partStatusNo);
+        maybeButtun=(Button)findViewById(R.id.partStatusMaybe);
+
+        yesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                saveStatus("Yes");
+            }
+        });
+       noButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                saveStatus("No");
+            }
+        });
+        maybeButtun.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                saveStatus("MayBe");
+            }
+        });
 
         SupportMapFragment fm = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map_fragment);
 
@@ -66,7 +105,6 @@ public class DetailsActivity extends AppCompatActivity {
             Location loc = gpsTracker.getLocation();
             sourceLatitude = gpsTracker.getLatitude();
             sourceLongitude = gpsTracker.getLongitude();
-            System.out.println("Longitute:" + gpsTracker.getLongitude() + "Latitude:" + gpsTracker.getLatitude());
         } else {
             gpsTracker.showSettingsAlert();
         }
@@ -117,6 +155,19 @@ public class DetailsActivity extends AppCompatActivity {
         }
 
 
+    }
+
+    public void saveStatus(String status){
+        ParticipantEventBean participantEventBean=new ParticipantEventBean();
+        participantEventBean.setEventId(Long.parseLong(eventId));
+        participantEventBean.setParticipateId(Long.parseLong(partId));
+        participantEventBean.setStatus(status);
+        new MyAsyncTask(Constants.PARTICIPANT_EVENT_STATUS, Utils.getJson(participantEventBean), DetailsActivity.this, new Callback() {
+            @Override
+            public void onResult(String result) {
+                System.out.println("Result:"+result);
+            }
+        }).execute();
     }
 
     private String getDirectionsUrl(LatLng origin, LatLng dest) {

@@ -46,6 +46,7 @@ public class Constants {
     public static String IMAGE_URL = "http://183.82.103.156:8080/Resources/wre/";
 
     public static String URL = "http://183.82.103.156:8080/whiterabbitevent/admin/";
+    public static final String BASE_URL="http://183.82.103.156:8080";
 
 
     public static final String EVENT_SERVICES_LIST = URL + "eventServicesList?eventId=";
@@ -58,7 +59,11 @@ public class Constants {
     public static final String QUESTIONS_LIST = URL + "questionList?eventId=";
     public static final String QUESTIONS_ANSWER_SAVE=URL+"saveQuestionAnswer";
     public static final String PARTICIPANT_LIST=URL+"ParticipantEventBeanList";
-    public static final String PARTICIPANT_UPDATE=URL+"eventParticipantSave";
+    public static final String ABOUT_EVENT=URL+"Viewdetails?eventId=";
+    public static final String PARTICIPANT_EVENT_STATUS=URL+"eventParticipantStatusSave";
+    public static final String EVENT_IMAGES=URL+"getEventImages";
+
+
 
 
     //Image Gallery file path constansts

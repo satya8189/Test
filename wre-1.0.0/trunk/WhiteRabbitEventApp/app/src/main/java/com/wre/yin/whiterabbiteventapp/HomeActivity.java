@@ -119,6 +119,7 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
                             file_maps.put("eventName", bean.getEventname());
                             file_maps.put("eventId", bean.getEventId().toString());
                             file_maps.put("date", Utils.getDateFromJson(bean.getEventDate(), "d"));
+
                             file_maps.put("eventImage", Constants.IMAGE_URL + bean.getEventId() + "/event_images/Screenshot%20from%202015-04-27%2014:20:13.png");
                             list.add(file_maps);
                         }

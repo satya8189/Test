@@ -61,7 +61,7 @@
         tools:layout="@layout/activity_maps" />
 
     <TextView
-        android:id="@+id/address_text"
+        android:id="@+id/invite_address_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/map_fragment"
@@ -69,12 +69,12 @@
         android:text="Address" />
 
     <ImageView
-        android:id="@+id/qr_image"
+        android:id="@+id/invite_qr_image"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_above="@+id/linear_attend"
-        android:layout_below="@+id/address_text"
-        android:src="@drawable/wre_qr_code" />
+        android:layout_below="@+id/invite_address_text"
+         />
 
     <LinearLayout
         android:id="@+id/linear_attend"
@@ -97,6 +97,7 @@
         <Button
             android:layout_width="40dp"
             android:layout_height="30dp"
+            android:id="@+id/partStatusYes"
             android:layout_margin="2dp"
             android:layout_weight="1"
             android:background="@drawable/rectangle_shape_yes"
@@ -109,6 +110,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_margin="2dp"
+            android:id="@+id/partStatusNo"
             android:layout_weight="1"
             android:background="@drawable/rectangle_shape_no"
             android:text="No"
@@ -120,6 +122,7 @@
             android:layout_width="60dp"
             android:layout_height="30dp"
             android:layout_margin="2dp"
+            android:id="@+id/partStatusMaybe"
             android:layout_weight="1"
             android:background="@drawable/rectangle_shape_maybe"
             android:text="May be"

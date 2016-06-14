@@ -71,7 +71,7 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
         eventDateTime = (TextView) findViewById(R.id.event_time_date);
         eventDateTime.setText(eventDate);
 
-        // mDemoSlider.setCustomIndicator((PagerIndicator) findViewById(R.id.custom_indicator));
+
         HashMap<String, Integer> file_maps = new HashMap<String, Integer>();
         file_maps.put("Event 1", R.drawable.event_image1);
         file_maps.put("Event 2", R.drawable.event_image2);
@@ -104,7 +104,8 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
                 List<EventBean> eventBeenList = Utils.getList(result, EventBean.class);
                 gridArray.add(new Item(2, "Invite"));
                 for (EventBean bean : eventBeenList) {
-
+                    if(bean.getServiceId()==19)
+                        gridArray.add(new Item(16, "Help"));
                     if (bean.getOrder() < 17) {
                         if(bean.getServiceId()!=17)
                         gridArray.add(new Item((int) (long) bean.getOrder(), bean.getServiceName()));
@@ -151,14 +152,14 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
                                 newsaAct.putExtra("eventId", eventName);
                                 startActivity(newsaAct);
                                 break;
-                            /*case 4:
+                            case 16:
                                 if (Constants.checkAndRequestPermissions(EventDashboardActivity.this)) {
                                     Intent galleryAct = new Intent(EventDashboardActivity.this, GalleryActivity.class);
                                     galleryAct.putExtra("name", name);
                                     galleryAct.putExtra("eventId", eventName);
                                     startActivity(galleryAct);
                                 }
-                                break;*/
+                                break;
                             case 5:
                                 if (Constants.checkAndRequestPermissions(EventDashboardActivity.this)) {
                                     Intent crowdAct = new Intent(EventDashboardActivity.this, CrowdPicsActivity.class);
