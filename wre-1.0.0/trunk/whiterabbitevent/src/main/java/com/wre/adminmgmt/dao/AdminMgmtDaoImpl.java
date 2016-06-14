@@ -300,7 +300,6 @@ public List<EventServices> geteventServicesList(Long eventId) {
 		criteria.setFetchMode("services", FetchMode.EAGER);
 		criteria.add(Restrictions.eq("event.eventId",eventId));
 		criteria.add(Restrictions.ne("services.serviceId",new Long(18)));
-		criteria.add(Restrictions.ne("services.serviceId",new Long(19)));
 		//criteria.addOrder(Order.asc("services.order"));
 		
 		List<EventServices> eventServicesList=criteria.list();
