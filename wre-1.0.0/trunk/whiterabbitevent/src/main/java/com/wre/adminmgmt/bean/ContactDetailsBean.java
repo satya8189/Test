@@ -10,6 +10,8 @@ public class ContactDetailsBean {
 	  private String contactEmail;
 	  private String contactMobile;
 	  private String contactAlternateMobile;
+	  private String helpText;
+	  private long participantId;
 	  
 	public long getContactId() {
 		return contactId;
@@ -48,12 +50,17 @@ public class ContactDetailsBean {
 		this.contactAlternateMobile = contactAlternateMobile;
 	}
 	
-	@Override
-	public String toString() {
-		return "ContactDetailsBean [contactId=" + contactId + ", eventId="
-				+ eventId + ", contactName=" + contactName + ", contactEmail="
-				+ contactEmail + ", contactMobile=" + contactMobile
-				+ ", contactAlternateMobile=" + contactAlternateMobile + "]";
+	public String getHelpText() {
+		return helpText;
+	}
+	public void setHelpText(String helpText) {
+		this.helpText = helpText;
+	}
+	public long getParticipantId() {
+		return participantId;
+	}
+	public void setParticipantId(long participantId) {
+		this.participantId = participantId;
 	}
 	
 }
