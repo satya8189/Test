@@ -10,7 +10,6 @@ var NewsFeedCreateController = function($scope, $http, $location, $routeParams,n
 	$http.post('admin/saveNews',news).success(function(success) {
 		//alert("admin/saveNews");
 		ngNotifier.notify("Record Created Successfully !");
-	
 	$location.path("/newsFeedView/"+news.eventId);
 				});
 

@@ -52,7 +52,7 @@ var SponsorPageViewController = function($scope, $http, $location,
 	$scope.navigateToSponsorCreate = function(eventId) {
 		$scope.eventId = eventId;
 		// alert("navigating to createSponsor"+eventId);
-		$location.path("/sponsorCreate/" + eventId);
+		$location.path("/sponsorCreate/"+eventId);
 
 	};
 

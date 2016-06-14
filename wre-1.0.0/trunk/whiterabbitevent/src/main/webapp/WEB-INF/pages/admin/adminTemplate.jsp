@@ -98,12 +98,13 @@
 	<script type="text/javascript" src="resources/js/admin/ChatTopicViewDetailsController.js"></script>
      
 	<!-- Social Media -->
+	<script type="text/javascript" src="resources/js/admin/CreateSocialMediaController.js"></script>
 	<script type="text/javascript" src="resources/js/admin/SocialMediaController.js"></script>
-
+	<script type="text/javascript" src="resources/js/admin/EditSocialMediaController.js"></script>
+	<script type="text/javascript" src="resources/js/admin/UpdateSocialMediaController.js"></script>
 </head>
 <body>
         <!--Heading-->
-        
         <nav class="navbar navbar-default">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -133,11 +134,8 @@
       
     </div><!-- /.navbar-collapse -->
 </nav>
-        
-        
         <!--Heading Ends-->
         
-    
         <div class="panel head">
       
             
@@ -158,7 +156,7 @@
               <li class="li">Schedule</li>
               <li class="li">News Feed</li>
               <li class="li">Document</li>
-            <li class="li">Gallery</li>
+            	 <li class="li">Gallery</li>
                  <li class="li">Crowd Pics</li>
                  <li class="li">Videos</li>
                  <li class="li">Q&A</li>

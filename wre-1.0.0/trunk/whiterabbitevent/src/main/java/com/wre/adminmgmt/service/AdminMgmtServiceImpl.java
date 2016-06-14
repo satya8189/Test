@@ -26,6 +26,7 @@ import com.wre.adminmgmt.bean.InviteBean;
 import com.wre.adminmgmt.bean.NewsFeedBean;
 import com.wre.adminmgmt.bean.QuestionBean;
 import com.wre.adminmgmt.bean.RatingBean;
+import com.wre.adminmgmt.bean.SocialMediaBean;
 import com.wre.adminmgmt.bean.SpeakerBean;
 import com.wre.adminmgmt.bean.SponsorBean;
 import com.wre.adminmgmt.bean.SurveyQuestionAnswerBean;
@@ -42,6 +43,7 @@ import com.wre.model.Galary;
 import com.wre.model.Newsfeed;
 import com.wre.model.Participants;
 import com.wre.model.Rating;
+import com.wre.model.SocialMedia;
 import com.wre.model.Speaker;
 import com.wre.model.Sponcor;
 import com.wre.model.SurveyQuestion;
@@ -1087,6 +1089,10 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 				Event event=new Event();
 				event.setEventId(contactDetailsBean.getEventId());
 			contactDetails.setEvent(event);
+				Participants participant=new Participants();
+				participant.setParticipantId(contactDetailsBean.getParticipantId());
+			contactDetails.setParticipants(participant);
+			contactDetails.setHelpText(contactDetailsBean.getHelpText());
 			AdminMgmtDaoImpl.update(contactDetails);
 			
 		}
@@ -1220,7 +1226,7 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 				Participants participant=new Participants();
 				participant.setParticipantId(questionBean.getParticipantId());
 			surveyQuestionAnswer.setParticipants(participant);//set participant
-			surveyQuestionAnswer.setParticipantAnswer(questionBean.getAnswer());//set answer
+			surveyQuestionAnswer.setParticipantAnswer(questionBean.getAnswer());//set participant answer
 			
 			AdminMgmtDaoImpl.save(surveyQuestionAnswer);
 		}
@@ -1265,6 +1271,87 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 			}
 			return surveyQuestionAnswerList;
 			//return null;
+		}
+		
+		public List<SocialMediaBean> getSocialMediaList(Long eventId){
+			log.info("in serviceImpl..getSocialMediaList.."+eventId);
+			List<SocialMedia> socialMediaList=AdminMgmtDaoImpl.getSocialMediaList(eventId);
+			log.info("got sm list.."+socialMediaList.size());
+			List<SocialMediaBean> socialMediaBeanList=new ArrayList<SocialMediaBean>();
+			for(SocialMedia socialMedia:socialMediaList)
+			{
+				SocialMediaBean socialMediaBean=new SocialMediaBean();
+					socialMediaBean.setSocialId(socialMedia.getSocialId());
+					socialMediaBean.setName(socialMedia.getName());
+					socialMediaBean.setUrl(socialMedia.getUrl());
+				socialMediaBeanList.add(socialMediaBean);
+			}
+			
+			return socialMediaBeanList;
+			}
+
+		@Override
+		public SocialMediaBean getSocialMediaForEdit(Long socialId) {
+			SocialMedia socialMediaObject=AdminMgmtDaoImpl.getSocialMediaForEdit(socialId);
+			log.info("sociailMediaObject..data.."+socialMediaObject.getSocialId());
+			SocialMediaBean socialMediaBean=new SocialMediaBean();
+				socialMediaBean.setEventId(socialMediaObject.getEvent().getEventId());
+				socialMediaBean.setName(socialMediaObject.getName());
+				socialMediaBean.setUrl(socialMediaObject.getUrl());
+				socialMediaBean.setSocialId(socialMediaObject.getSocialId());
+			return socialMediaBean;
+		}
+
+		@Override
+		public void updateSocialMedia(SocialMediaBean socialMediaBean) {
+			SocialMedia socialMedia=new SocialMedia();
+			
+			Event event=new Event();
+			event.setEventId(socialMediaBean.getEventId());
+			socialMedia.setEvent(event);
+			socialMedia.setSocialId(socialMediaBean.getSocialId());
+			socialMedia.setName(socialMediaBean.getName());
+			socialMedia.setUrl(socialMediaBean.getUrl());
+			AdminMgmtDaoImpl.update(socialMedia);
+			log.info("updated...");
+		}
+
+		@Override
+		public void deleteSocialMedia(Long socialId) {
+			log.info("delete socialmedia service.."+socialId);
+			SocialMedia socialMedia=new SocialMedia();
+			socialMedia.setSocialId(socialId);
+			AdminMgmtDaoImpl.delete(socialMedia);
+			log.info("deleted..");
+		}
+
+		@Override
+		public void saveSocialMedia(SocialMediaBean socialMediaBean) {
+			SocialMedia socialMedia=new SocialMedia();
+				Event event=new Event();
+				event.setEventId(socialMediaBean.getEventId());
+			socialMedia.setEvent(event);
+			socialMedia.setName(socialMediaBean.getName());
+			socialMedia.setUrl(socialMediaBean.getUrl());
+			AdminMgmtDaoImpl.save(socialMedia);
+			log.info("socialMedia saved..");
+			
+		}
+
+		@Override
+		public void updateParticipant(ParticipantBean participantBean) {
+			Participants participant=new Participants();
+			
+			participant.setParticipantId(participantBean.getParticipantId());
+			participant.setEmail(participantBean.getEmailId());
+			participant.setFirstName(participantBean.getFirstName());
+			participant.setLastName(participantBean.getLastName());
+			participant.setOtp(participantBean.getOTP());
+			participant.setPhone(participantBean.getPhoneNumber());
+			participant.setStatus(participantBean.getStatus());
+			participant.setRegId(participantBean.getRegisterId());
+			
+			AdminMgmtDaoImpl.update(participant);
 		}
 		
 		

@@ -4,7 +4,7 @@ var ViewParticipantAnswersController=function($scope,$http,$routeParams,$locatio
 	
 	
 	$scope.$on("$routeChangeSuccess",function(){
-		alert("working in ViewParticipantAnswersController eventId--"+$scope.eventId+"partcipant...id...."+$routeParams.participantId);
+		//alert("working in ViewParticipantAnswersController eventId--"+$scope.eventId+"partcipant...id...."+$routeParams.participantId);
 		//get participant answers for those eventid and participantid
 		$http.get('admin/getViewParticipantAnswers?eventId='+$scope.eventId+'&&participantId='+$routeParams.participantId).success(function(sqaList){
 			

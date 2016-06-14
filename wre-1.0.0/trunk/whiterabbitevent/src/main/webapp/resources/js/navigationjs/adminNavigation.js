@@ -256,12 +256,22 @@ App.config([ '$routeProvider', function($routeProvider, $Scope) {
 	/*Q&A*/
 	
 	/*SocialMedia Starts Here*/
+	//to create socialMedia..../createSocialMedia/
+	$routeProvider.when('/createSocialMedia/:eventId',{
+		templateUrl: 'admin/createSocialMedia',
+		controller: CreateSocialMediaController
+	});
+	
 	//SocialMedia
 	$routeProvider.when('/SocialMedia/:eventId/', {
 		templateUrl : 'admin/SocialMedia',
 		controller : SocialMediaController
 	});
-	
+	//edit socailMedia---editSocialMedia
+	$routeProvider.when('/editSocialMedia/:socialId/', {
+		templateUrl : 'admin/editSocialMedia',
+		controller : EditSocialMediaController
+	});
 	
 	$routeProvider.otherwise({
 		redirectTo : '/eventView'

@@ -9,7 +9,7 @@ var QuestionAndAnswersViewController = function($scope,$location, $http, $routeP
 			
 			$scope.participantsList= pList;
 			
-			alert("got participants.Length.."+$scope.participantsList.length);
+			//alert("got participants.Length.."+$scope.participantsList.length);
 			
 			// =================================
 			// create empty search model (object) to trigger
@@ -56,8 +56,6 @@ var QuestionAndAnswersViewController = function($scope,$location, $http, $routeP
 	
 	$scope.viewQuestionAndAnswers = function(participantId)
 	{
-		alert("working in viewQuestionAndAnswers---"+participantId+"---"+$scope.eventId);
-		//$location.path("/eventViewDetails/"+participantId);
 		location.href='#/ViewParticipantAnswers/'+$scope.eventId+'/'+participantId;
 	};
 	

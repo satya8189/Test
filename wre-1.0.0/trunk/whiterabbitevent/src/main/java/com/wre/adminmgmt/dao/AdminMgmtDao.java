@@ -14,6 +14,7 @@ import com.wre.model.Galary;
 import com.wre.model.Newsfeed;
 import com.wre.model.Participants;
 import com.wre.model.Rating;
+import com.wre.model.SocialMedia;
 import com.wre.model.Speaker;
 import com.wre.model.Sponcor;
 import com.wre.model.SurveyQuestion;
@@ -86,4 +87,7 @@ public List<Object[]> getParticipantsList(Long eventId);
 public List<Object[]> getParticipantsAnswersList(Long eventId,
 		Long participantId);
 
+public List<SocialMedia> getSocialMediaList(Long eventId);
+
+public SocialMedia getSocialMediaForEdit(Long eventId);
 }

@@ -22,6 +22,7 @@ import com.wre.model.Galary;
 import com.wre.model.Newsfeed;
 import com.wre.model.Participants;
 import com.wre.model.Rating;
+import com.wre.model.SocialMedia;
 import com.wre.model.Speaker;
 import com.wre.model.Sponcor;
 import com.wre.model.SurveyQuestion;
@@ -417,6 +418,24 @@ public List<Object[]> getParticipantsList(Long eventId){
 		    	query.setParameter("eventId",eventId);
 		    	//query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
 		    	return (List<Object[]>)query.list();
+		}
+
+
+
+		@Override
+		public List<SocialMedia> getSocialMediaList(Long eventId) {
+			Criteria criteria=sessionFactory.getCurrentSession().createCriteria(SocialMedia.class);
+			criteria.add(Restrictions.eq("event.eventId",eventId));
+			return (List<SocialMedia>)criteria.list();
+		}
+
+
+
+		@Override
+		public SocialMedia getSocialMediaForEdit(Long socialId) {
+			Criteria criteria=sessionFactory.getCurrentSession().createCriteria(SocialMedia.class);
+			criteria.add(Restrictions.eq("socialId",socialId));
+			return (SocialMedia)criteria.uniqueResult();
 		}
 
 

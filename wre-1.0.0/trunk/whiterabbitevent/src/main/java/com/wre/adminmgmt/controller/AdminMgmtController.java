@@ -40,6 +40,7 @@ import com.wre.adminmgmt.bean.InviteBean;
 import com.wre.adminmgmt.bean.NewsFeedBean;
 import com.wre.adminmgmt.bean.QuestionBean;
 import com.wre.adminmgmt.bean.RatingBean;
+import com.wre.adminmgmt.bean.SocialMediaBean;
 import com.wre.adminmgmt.bean.SpeakerBean;
 import com.wre.adminmgmt.bean.SponsorBean;
 import com.wre.adminmgmt.bean.SurveyQuestionAnswerBean;
@@ -837,14 +838,25 @@ public @ResponseBody  ContactDetailsBean getContactDetailsForEditByContactId(@Re
 	
 }
 
-
+//Hav to return string
 //update contact details by edit  admin/updateContactDetails
 @RequestMapping(value="admin/updateContactDetails",method=RequestMethod.POST)
 public @ResponseBody void updateContactDetails(@RequestBody ContactDetailsBean contactDetailsBean)
 {
 	log.info("in updateContactDetails");
 	adminMgmtService.updateContactDetails(contactDetailsBean);
+	
 }
+
+//return string as data stored contactAPI
+@RequestMapping(value="admin/updateContactsDetails",method=RequestMethod.POST)
+public @ResponseBody String updateContactsDetails(@RequestBody ContactDetailsBean contactDetailsBean)
+{
+	log.info("in updateContactDetails");
+		adminMgmtService.updateContactDetails(contactDetailsBean);
+	return "success";
+}
+
 
 /*to save new contact details....admin/saveContactDetails*/
 @RequestMapping(value="admin/saveContactDetails",method=RequestMethod.POST)
@@ -929,8 +941,17 @@ public @ResponseBody void saveContactDetails(@RequestBody ContactDetailsBean con
 		log.info("in side save method");
 		adminMgmtService.eventParticipantSave(participantEventBean);
 	}
-	
 
+	//updateParticipantAPI.....to updateparticipant by passing bean with name..ParticipantBean..with attribute..eventId,participantId and data..entity-participants
+	@RequestMapping(value="admin/updateParticipant",method=RequestMethod.POST)
+	public @ResponseBody String updateParticipant(@RequestBody ParticipantBean participantBean)
+	{
+		log.info("in updateParticipant ");
+		adminMgmtService.updateParticipant(participantBean);
+		return "success";
+	}
+	
+	
 	// admin/QuestionAndAnswersView
 	@RequestMapping(value = "admin/QuestionAndAnswersView")
 	public String QuestionAndAnswersView() {
@@ -970,9 +991,10 @@ public @ResponseBody void saveContactDetails(@RequestBody ContactDetailsBean con
 	//===saveQuestion&Answer API by QId,EventId,ParticipantId,Answer
 	
 	@RequestMapping(value="admin/saveQuestionAnswer",method=RequestMethod.POST)
-	public @ResponseBody void saveQuestionAnswer(@RequestBody QuestionBean questionBean)
+	public @ResponseBody String saveQuestionAnswer(@RequestBody QuestionBean questionBean)
 	{
 		adminMgmtService.saveSurveyQuestionAnswer(questionBean);
+		return "success";
 	}
 	
 	//===============Q&A
@@ -987,7 +1009,57 @@ public @ResponseBody void saveContactDetails(@RequestBody ContactDetailsBean con
 		return "admin/SocialMedia";
 	}
 	
+	//goto admin/createSocialMedia
+	@RequestMapping(value="admin/createSocialMedia")
+	public String goToSocialMediaCreate()
+	{
+		return "admin/CreateSocialMedia";
+	}
 	
 	
-
+	//to save socialMedia..
+	@RequestMapping(value="admin/saveSocialMedia",method=RequestMethod.POST)
+	public @ResponseBody void saveSocialMedia(@RequestBody SocialMediaBean socialMediaBean)
+	{
+		log.info("in admin/saveSocialMedia.."+socialMediaBean.toString());
+		adminMgmtService.saveSocialMedia(socialMediaBean);
+	}
+	
+	//to get social media list
+	@RequestMapping(value="admin/getSocialMediaList",method=RequestMethod.GET)
+	public @ResponseBody List<SocialMediaBean> getSocialMedialList(@RequestParam("eventId")Long eventId){
+		log.info("in getSocialMediaList.."+eventId);
+		return adminMgmtService.getSocialMediaList(eventId);
+		//return null;
+	}
+	
+	//to edit the social media list...admin/editSocialMedia
+	@RequestMapping(value="admin/editSocialMedia")
+	public String goToEditSocialMedia(){
+		log.info("in admin/editSocialMedia--");	
+		return "admin/EditSocialMedia";
+	}
+	
+	//to get admin/getSocialMediaForEdit
+	@RequestMapping(value="admin/getSocialMediaForEdit",method=RequestMethod.GET)
+	public @ResponseBody SocialMediaBean getSocialMediaForEdit(@RequestParam("socialId")Long socialId){
+		log.info("admin/getSocialMediaForEdit==="+socialId);
+		return adminMgmtService.getSocialMediaForEdit(socialId);
+	}
+	
+	
+	//admin/updateSocialMedia
+	@RequestMapping(value="admin/updateSocialMedia",method=RequestMethod.POST)
+	public @ResponseBody void updateSocialMedia(@RequestBody SocialMediaBean socialMediaBean)
+	{
+		log.info("in admin/updateSocialMedia.."+socialMediaBean.getName());
+		adminMgmtService.updateSocialMedia(socialMediaBean);
+	}
+	
+	//To....admin/deleteSocialMedia
+	@RequestMapping(value="admin/deleteSocialMedia",method=RequestMethod.POST)
+	public @ResponseBody void deleteSocialMedia(@RequestParam("socialId") Long socialId){
+		log.info("delete socialMedia..."+socialId);
+		adminMgmtService.deleteSocialMedia(socialId);
+	}
 }

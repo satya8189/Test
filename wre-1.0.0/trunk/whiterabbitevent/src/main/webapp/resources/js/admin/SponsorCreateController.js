@@ -2,13 +2,9 @@ var SponsorCreateController = function($scope, $http, $location, $routeParams,ng
 	$scope.sponsor={};
 			    
 		$scope.$on("$routeChangeSuccess", function() {
-		
 			//alert("navigated...");
-				
 			$scope.sponsor.eventId=$routeParams.eventId;
-		
 			//alert("event ID--------"+$routeParams.eventId);
-		
 	});
 
 		
