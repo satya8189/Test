@@ -10,7 +10,7 @@ public class GalaryBean
 
     private Long glaryItemId;
     
-    private Participants participants;
+    
     private String name;
     private String path;
     private String type;
@@ -39,12 +39,6 @@ public class GalaryBean
 		this.glaryItemId = glaryItemId;
 	}
 	
-	public Participants getParticipants() {
-		return participants;
-	}
-	public void setParticipants(Participants participants) {
-		this.participants = participants;
-	}
 	public String getName() {
 		return name;
 	}
