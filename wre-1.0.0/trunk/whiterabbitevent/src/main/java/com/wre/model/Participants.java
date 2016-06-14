@@ -34,6 +34,7 @@ public class Participants  implements java.io.Serializable {
   private String phone;
   private String status;
   private String regId;
+  
   private Set<Galary> galaries = new HashSet<Galary>(0);
   private Set<EventParticipant> eventParticipants = new HashSet<EventParticipant>(0);
   private Set<SurveyQuestionAnswer> surveyQuestionAnswers = new HashSet<SurveyQuestionAnswer>(0);

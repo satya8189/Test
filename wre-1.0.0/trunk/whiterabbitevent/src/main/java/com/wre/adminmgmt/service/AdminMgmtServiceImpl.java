@@ -1346,10 +1346,10 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 			participant.setEmail(participantBean.getEmailId());
 			participant.setFirstName(participantBean.getFirstName());
 			participant.setLastName(participantBean.getLastName());
-			participant.setOtp(participantBean.getOTP());
+			//participant.setOtp(participantBean.getOTP());
 			participant.setPhone(participantBean.getPhoneNumber());
 			participant.setStatus(participantBean.getStatus());
-			participant.setRegId(participantBean.getRegisterId());
+			//participant.setRegId(participantBean.getRegisterId());
 			
 			AdminMgmtDaoImpl.update(participant);
 		}
