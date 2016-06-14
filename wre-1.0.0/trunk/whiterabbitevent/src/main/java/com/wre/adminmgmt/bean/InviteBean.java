@@ -11,7 +11,7 @@ package com.wre.adminmgmt.bean;
     private String phone;
     private String status;
     private Long eventId;
-    
+    private String eventName;
 	public Long getParticipantId() {
 		return participantId;
 	}
@@ -59,6 +59,12 @@ package com.wre.adminmgmt.bean;
 	}
 	public void setEventId(Long eventId) {
 		this.eventId = eventId;
+	}
+	public String getEventName() {
+		return eventName;
+	}
+	public void setEventName(String eventName) {
+		this.eventName = eventName;
 	}
 	
     
