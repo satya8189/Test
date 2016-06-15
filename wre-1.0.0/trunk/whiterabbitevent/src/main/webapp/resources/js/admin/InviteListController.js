@@ -1,7 +1,5 @@
 var InviteListController = function($scope,$routeParams,$http, $location) {
 	$scope.inviteList = {};
-	//alert("adfsaf");
-		
 		
 		$scope.$on("$routeChangeSuccess", function () {
 			
@@ -9,8 +7,8 @@ var InviteListController = function($scope,$routeParams,$http, $location) {
 			//alert("hi--------"+$routeParams.eventId);
 				
 		  $http.get('admin/inviteDetails?eventId='+$routeParams.eventId).success(function(inviteList){
-			  alert("admin/inviteDetails");
-			 
+			  //alert("admin/inviteDetails");
+			  	$scope.eventId=$routeParams.eventId;
 				$scope.inviteList = inviteList;
 				
 				// =================================
@@ -47,8 +45,8 @@ var InviteListController = function($scope,$routeParams,$http, $location) {
 		
 		 });
 		  
-		  $scope.cancelInviteList = function(eventId){
-				
+		  $scope.cancelInviteListView = function(eventId){
+				//alert("getting back.."+eventId);
 				$location.path("/invite/"+eventId);
 				
 			};
