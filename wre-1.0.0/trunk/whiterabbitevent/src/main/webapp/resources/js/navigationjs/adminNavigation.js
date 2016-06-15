@@ -273,6 +273,21 @@ App.config([ '$routeProvider', function($routeProvider, $Scope) {
 		controller : EditSocialMediaController
 	});
 	
+	
+	/*NetworkingViewController*/
+	$routeProvider.when('/networkingView/:eventId/', {
+		templateUrl : 'admin/networkingView',
+		controller : NetworkingViewController
+	});
+	
+	//NetworkingEditController
+	$routeProvider.when('/networkingEdit/:participantId/', {
+		templateUrl : 'admin/networkingEdit',
+		controller : NetworkingEditController
+	});
+	
+	
+	
 	$routeProvider.otherwise({
 		redirectTo : '/eventView'
 	});
