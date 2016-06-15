@@ -59,5 +59,9 @@ var ChatTopicListViewController = function($scope,$routeParams,$http,$location,n
 		});
 	};
 
-	
+	$scope.navigateToEventViewDetails= function(eventId)
+	{
+		$location.path("/eventViewDetails/"+$routeParams.eventId);
+	};
+
 	}
