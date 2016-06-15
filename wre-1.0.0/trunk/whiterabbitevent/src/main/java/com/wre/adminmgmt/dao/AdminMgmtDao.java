@@ -90,4 +90,8 @@ public List<Object[]> getParticipantsAnswersList(Long eventId,
 public List<SocialMedia> getSocialMediaList(Long eventId);
 
 public SocialMedia getSocialMediaForEdit(Long eventId);
+
+public Participants participantEdit(Long participantId);
+
+public void eventParticipantStatusSave(ParticipantEventBean participantEventBean);
 }

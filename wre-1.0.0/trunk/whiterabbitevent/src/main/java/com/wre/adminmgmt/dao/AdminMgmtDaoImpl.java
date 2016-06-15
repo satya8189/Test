@@ -388,7 +388,7 @@ public void eventParticipantSave(
 					query);
 			sqlQuery.setParameter("status", participantEventBean.getStatus());
 			sqlQuery.setParameter("eid", participantEventBean.getEventId());
-			sqlQuery.setParameter("pid", participantEventBean.getParticipateId());
+			sqlQuery.setParameter("pid", participantEventBean.getParticipantId());
 			sqlQuery.executeUpdate();
 
 }
@@ -436,7 +436,33 @@ public List<Object[]> getParticipantsList(Long eventId){
 			criteria.add(Restrictions.eq("socialId",socialId));
 			return (SocialMedia)criteria.uniqueResult();
 		}
+		
+		//participantEdit
+				public Participants participantEdit(Long participantId) {
+					Criteria criteria=sessionFactory.getCurrentSession().createCriteria(Participants.class);
+					criteria.add(Restrictions.eq("participantId",participantId));
+					criteria.setFetchMode("event", FetchMode.EAGER);
+					return (Participants)criteria.uniqueResult();
+				}
 
+//eventParticipantStatusSave
+				public void eventParticipantStatusSave(
+						ParticipantEventBean participantEventBean) {
+					String query = 
+							"Update event_participant set Status=:status WHERE Event_ID=:eid and Participant_ID=:pid";
+
+							SQLQuery sqlQuery = sessionFactory.getCurrentSession().createSQLQuery(
+									query);
+							sqlQuery.setParameter("status", participantEventBean.getStatus());
+							sqlQuery.setParameter("eid", participantEventBean.getEventId());
+							sqlQuery.setParameter("pid", participantEventBean.getParticipantId());
+							sqlQuery.executeUpdate();
+
+				}
+		
+
+
+		
 
 }
 
