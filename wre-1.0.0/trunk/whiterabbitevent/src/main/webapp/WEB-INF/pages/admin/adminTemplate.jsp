@@ -102,6 +102,10 @@
 	<script type="text/javascript" src="resources/js/admin/SocialMediaController.js"></script>
 	<script type="text/javascript" src="resources/js/admin/EditSocialMediaController.js"></script>
 	<script type="text/javascript" src="resources/js/admin/UpdateSocialMediaController.js"></script>
+	
+    
+     <script type="text/javascript" src="resources/js/admin/NetworkingEditController.js"></script>
+       <script type="text/javascript" src="resources/js/admin/NetworkingViewController.js"></script>
 </head>
 <body>
         <!--Heading-->
