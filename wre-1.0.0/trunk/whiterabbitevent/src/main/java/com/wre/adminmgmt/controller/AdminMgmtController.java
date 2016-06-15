@@ -1124,8 +1124,50 @@ public @ResponseBody void saveContactDetails(@RequestBody ContactDetailsBean con
 		}
 		System.out.println("\n\nYou have successfully created QR Code.");
 	}
+//==========================================================
+	
+	//admin/networkingView
+	
+		@RequestMapping(value="admin/networkingView")
+		public String networkingView()
+		{
+			return "admin/networkingView";
+		}
+		
+		//admin/networkingEdit
+		@RequestMapping(value="admin/networkingEdit")
+		public String networkingEdit()
+		{
+			return "admin/networkingEdit";
+		}
+		
+		// ParticipantBean edit
+				@RequestMapping(value = "admin/participantEdit", method = RequestMethod.GET)
+				public @ResponseBody
+				ParticipantBean participantEdit(@RequestParam("participantId") Long participantId) {
+					ParticipantBean participantBean = adminMgmtService
+							.participantEdit(participantId);
+					return participantBean;
 
-
+				}
+				
+				//updateParticipant
+				@RequestMapping(value = "participant/update", method = RequestMethod.POST)
+				public @ResponseBody
+				void updateParticipants(@RequestBody ParticipantBean participantBean) {
+					System.out.println("participantBean update" + participantBean.getFirstName());
+					//adminMgmtService.updateParticipant(participantBean);
+					adminMgmtService.updateParticipantDetails(participantBean);
+				}
+				
+				//participantEventBean
+				@RequestMapping(value = "admin/eventParticipantStatusSave", method = RequestMethod.POST)
+				public @ResponseBody
+				void eventParticipantStatusSave(@RequestBody ParticipantEventBean participantEventBean) {
+					log.info("in side save method");
+					adminMgmtService.eventParticipantStatusSave(participantEventBean);
+				}
+			
 	
 	
 }
