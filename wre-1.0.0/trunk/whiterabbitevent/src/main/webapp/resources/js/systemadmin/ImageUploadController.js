@@ -6,11 +6,11 @@ var ImageUploadController = function($scope, $http, $location, $routeParams,ngNo
 	
 
 	$scope.$on("$routeChangeSuccess", function() {
-		alert($routeParams.eventId);
+		//alert($routeParams.eventId);
 		var type="event_images";
 		 $http.get('admin/getEventImages?eventId='+$routeParams.eventId+'&type='+type).success(function(eventImages){
 			    $scope.eventImages = eventImages;
-			    alert($scope.eventImages.length);
+			   // alert($scope.eventImages.length);
  	 });
 	});
 	
@@ -33,14 +33,18 @@ var ImageUploadController = function($scope, $http, $location, $routeParams,ngNo
 		    	alert(type);
 		    	 $http.get('admin/getEventImages?eventId='+$routeParams.eventId+'&type='+type).success(function(eventImages){
 					    $scope.eventImages = eventImages;
-					    alert($scope.eventImages.length);
+					    //alert($scope.eventImages.length);
 		    	 });
 		    }).error(function(data) {
-		     alert("dsfsfds");
 		    });
 	
 
 };
+
+$scope.cancelUploadLayout = function(eventId){
+	$location.path("/eventView/"+$routeParams.eventId)
+	
+}
 
 $scope.cancelGalleryCreate= function(eventId) {
 	$location.path("/galleryView/"+eventId);
