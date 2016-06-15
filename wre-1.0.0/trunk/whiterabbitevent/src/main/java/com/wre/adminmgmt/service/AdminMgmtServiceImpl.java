@@ -1189,11 +1189,11 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 				participantEventBeanOject.setEventId(((BigInteger)eventParticipantOject[0]).longValue());
 				participantEventBeanOject.setEventname((String)eventParticipantOject[1]);
 				participantEventBeanOject.setFirstName((String)eventParticipantOject[2]);
-				participantEventBeanOject.setLostName((String)eventParticipantOject[3]);
+				participantEventBeanOject.setLastName((String)eventParticipantOject[3]);
 				participantEventBeanOject.setMobile((String)eventParticipantOject[4]);
 				participantEventBeanOject.setEmailId((String)eventParticipantOject[5]);
 				participantEventBeanOject.setStatus((String)eventParticipantOject[6]);
-			    participantEventBeanOject.setParticipateId(((BigInteger)eventParticipantOject[7]).longValue());
+			    participantEventBeanOject.setParticipantId(((BigInteger)eventParticipantOject[7]).longValue());
 			    participantEventBeanOject.setParticipateEventId(((BigInteger)eventParticipantOject[8]).longValue());
 			    
 		        participantEventBeanList.add(participantEventBeanOject);
@@ -1354,6 +1354,44 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 			AdminMgmtDaoImpl.update(participant);
 		}
 		
+		 //participantEdit
+			public ParticipantBean participantEdit(Long participantId) {
+				ParticipantBean participantBean = null;
+				Participants participantsObject = AdminMgmtDaoImpl
+						.participantEdit(participantId);
+				if (participantId != null) {
+					participantBean = new ParticipantBean();
+					participantBean.setParticipantId(participantsObject.getParticipantId());
+					participantBean.setFirstName(participantsObject.getFirstName());
+					participantBean.setLastName(participantsObject.getLastName());
+					participantBean.setPhoneNumber(participantsObject.getPhone());
+					participantBean.setEmailId(participantsObject.getEmail());
+					participantBean.setStatus(participantsObject.getStatus());
+
+				}
+
+				log.info("FirstName---" + participantBean.getFirstName());
+				return participantBean;
+			}
+			
+			@Override
+			public void updateParticipantDetails(ParticipantBean participantBean) {
+				Participants participants = AdminMgmtDaoImpl.participantEdit(participantBean.getParticipantId());
+				participants.setFirstName(participantBean.getEmailId());
+				participants.setLastName(participantBean.getLastName());
+				participants.setPhone(participantBean.getPhoneNumber());
+				participants.setEmail(participantBean.getEmailId());
+				participants.setStatus(participantBean.getStatus());
+				AdminMgmtDaoImpl.update(participants);
+
+			}
+			
+			// eventParticipantCreate
+			public void eventParticipantStatusSave(
+					ParticipantEventBean participantEventBean) {
+				AdminMgmtDaoImpl.eventParticipantStatusSave(participantEventBean);
+
+			}
 		
 }
 

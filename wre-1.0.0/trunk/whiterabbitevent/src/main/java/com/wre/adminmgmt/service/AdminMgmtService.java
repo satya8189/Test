@@ -147,6 +147,11 @@ public void deleteSocialMedia(Long socialId);
 public void saveSocialMedia(SocialMediaBean socialMediaBean);
 
 public void updateParticipant(ParticipantBean participantBean);
+public ParticipantBean participantEdit(Long participantId);
+
+public void updateParticipantDetails(ParticipantBean participantBean);
+
+public void eventParticipantStatusSave(ParticipantEventBean participantEventBean);
 
 
 
