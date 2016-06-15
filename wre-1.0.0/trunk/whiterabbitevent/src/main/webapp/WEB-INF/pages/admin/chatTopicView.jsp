@@ -13,10 +13,8 @@ margin-bottom:0px !important;
 </style>
 <toaster-container></toaster-container>
 
-<!-- <div class="container-fluid">
- <a ng-click="cancelAgendoView(eventId)"> <i
-		class="glyphicon glyphicon-chevron-left"></i>
-	</a>  -->
+<a ng-click="navigateToEventViewDetails(eventId)"> <i class="glyphicon glyphicon-chevron-left"></i>
+	</a>
 	
 <form>
 <div class="alert-bg" ng-show="alert">
