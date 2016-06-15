@@ -28,9 +28,20 @@
 						<td class="col-md-2">
 							<label>EventAgenda: {{event.eventAgenda}}</label>
 						</td>
-						</tr><tr>
+						</tr>
+						<tr>
 						<td class="col-md-2">
 							<label>EventAddress: {{event.eventAddress}}</label>
+						</td>
+						</tr>
+						<tr>
+						<td class="col-md-2">
+							<label>EventDate: {{event.eventDate}}</label>
+						</td>
+						</tr>
+						
+						<td class="col-md-2">
+							<label>EventDate: {{event.eventTime}}</label>
 						</td>
 						</tr>
 						</table>
