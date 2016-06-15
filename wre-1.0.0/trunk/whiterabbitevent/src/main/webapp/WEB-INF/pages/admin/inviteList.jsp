@@ -14,7 +14,7 @@ margin-bottom:0px !important;
 <toaster-container></toaster-container>
 
 <div class="container">
-<a ng-click="cancelInviteList()">
+<a ng-click="cancelInviteListView(eventId)">
 		 <i class="glyphicon glyphicon-chevron-left"></i>
 	</a>
 	<form>
@@ -43,13 +43,6 @@ margin-bottom:0px !important;
 					<td >{{invite.email}}</td>
 					<td >{{invite.phone}}</td>
 				    <td >{{invite.status}}</td>
-			<td>
-					
-				
-				
-				
-						
-					</td>
 				</tr>
 				<tr ng-show="filteredSize==0">
 				<td colspan="6">
