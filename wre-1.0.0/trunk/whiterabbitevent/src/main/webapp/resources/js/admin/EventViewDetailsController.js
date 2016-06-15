@@ -67,6 +67,11 @@ var EventViewDetailsController = function($scope,$routeParams,$http,$location) {
 		}else if(event.serviceId=="11"){
 			//alert("serviceId..SocialMedia.."+event.eventId);
 			location.href="#/SocialMedia/"+event.eventId;
+			
+			//networking
+	    }else if(event.serviceId=="12"){
+		location.href="#/networkingView/"+event.eventId;
+
 	};
 
 	};
