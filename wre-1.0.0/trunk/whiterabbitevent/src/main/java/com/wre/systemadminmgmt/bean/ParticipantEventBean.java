@@ -6,11 +6,11 @@ public class ParticipantEventBean {
 	private Long participateEventId ;
 	private String status ;
 	private Long eventId;
-	private Long participateId;
+	private Long participantId;
 	private String eventname ;
 	private Date eventDate;
 	private String firstName;
-	private String lostName;
+    private String lastName;
 	private String mobile;
 	private String emailId;
 	
@@ -45,11 +45,12 @@ public class ParticipantEventBean {
 	public void setEventId(Long eventId) {
 		this.eventId = eventId;
 	}
-	public Long getParticipateId() {
-		return participateId;
+	
+	public Long getParticipantId() {
+		return participantId;
 	}
-	public void setParticipateId(Long participateId) {
-		this.participateId = participateId;
+	public void setParticipantId(Long participantId) {
+		this.participantId = participantId;
 	}
 	public String getFirstName() {
 		return firstName;
@@ -57,11 +58,12 @@ public class ParticipantEventBean {
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
-	public String getLostName() {
-		return lostName;
-	}
-	public void setLostName(String lostName) {
-		this.lostName = lostName;
+	
+    public String getLastName() {
+		return lastName;
+		}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 	public String getMobile() {
 		return mobile;
