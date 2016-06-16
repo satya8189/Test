@@ -5,7 +5,7 @@
 
 <div class="container">
 
-<a ng-click="cancelUploadLayout(eventId)"> <i
+<a ng-click="cancelUploadLayout(upload.eventId)"> <i
 		class="glyphicon glyphicon-chevron-left"></i>
 	</a> 
 	
