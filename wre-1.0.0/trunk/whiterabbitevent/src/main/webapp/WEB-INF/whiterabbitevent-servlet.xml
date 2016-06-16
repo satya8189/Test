@@ -71,7 +71,7 @@
 			<value>com.wre.model.ChatTopic</value>
 	        <value>com.wre.model.ContactDetails</value>
  			<value>com.wre.model.SocialMedia</value>
-
+ 			<value>com.wre.model.ParticipantQuries</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
