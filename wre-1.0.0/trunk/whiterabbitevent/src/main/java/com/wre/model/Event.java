@@ -1,6 +1,6 @@
 package com.wre.model;
 
-//Generated 13 Jun, 2016 3:48:00 PM by Hibernate Tools 4.3.1
+//Generated 16 Jun, 2016 12:13:43 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -43,24 +43,25 @@ public class Event  implements java.io.Serializable {
   private String eventTime;
   private String status;
   private Set<Agenda> agendas = new HashSet<Agenda>(0);
-  private Set<Speaker> speakers = new HashSet<Speaker>(0);
   private Set<EventServices> eventServiceses = new HashSet<EventServices>(0);
-  private Set<SurveyQuestion> surveyQuestions = new HashSet<SurveyQuestion>(0);
   private Set<Galary> galaries = new HashSet<Galary>(0);
   private Set<SocialMedia> socialMedias = new HashSet<SocialMedia>(0);
-  private Set<SurveyQuestionAnswer> surveyQuestionAnswers = new HashSet<SurveyQuestionAnswer>(0);
   private Set<ContactDetails> contactDetailses = new HashSet<ContactDetails>(0);
+  private Set<Speaker> speakers = new HashSet<Speaker>(0);
+  private Set<SurveyQuestion> surveyQuestions = new HashSet<SurveyQuestion>(0);
+  private Set<SurveyQuestionAnswer> surveyQuestionAnswers = new HashSet<SurveyQuestionAnswer>(0);
   private Set<Newsfeed> newsfeeds = new HashSet<Newsfeed>(0);
   private Set<Sponcor> sponcors = new HashSet<Sponcor>(0);
+  private Set<ParticipantQuries> participantQurieses = new HashSet<ParticipantQuries>(0);
   private Set<EventParticipant> eventParticipants = new HashSet<EventParticipant>(0);
-  private Set<QuestionAnswer> questionAnswers = new HashSet<QuestionAnswer>(0);
-  private Set<Message> messages = new HashSet<Message>(0);
   private Set<ChatTopic> chatTopics = new HashSet<ChatTopic>(0);
+  private Set<Message> messages = new HashSet<Message>(0);
+  private Set<QuestionAnswer> questionAnswers = new HashSet<QuestionAnswer>(0);
 
  public Event() {
  }
 
- public Event(Client client, User user, String eventAddress, String eventAgenda, Date eventDate, String eventDesc, String eventName, String eventTime, String status, Set<Agenda> agendas, Set<Speaker> speakers, Set<EventServices> eventServiceses, Set<SurveyQuestion> surveyQuestions, Set<Galary> galaries, Set<SocialMedia> socialMedias, Set<SurveyQuestionAnswer> surveyQuestionAnswers, Set<ContactDetails> contactDetailses, Set<Newsfeed> newsfeeds, Set<Sponcor> sponcors, Set<EventParticipant> eventParticipants, Set<QuestionAnswer> questionAnswers, Set<Message> messages, Set<ChatTopic> chatTopics) {
+ public Event(Client client, User user, String eventAddress, String eventAgenda, Date eventDate, String eventDesc, String eventName, String eventTime, String status, Set<Agenda> agendas, Set<EventServices> eventServiceses, Set<Galary> galaries, Set<SocialMedia> socialMedias, Set<ContactDetails> contactDetailses, Set<Speaker> speakers, Set<SurveyQuestion> surveyQuestions, Set<SurveyQuestionAnswer> surveyQuestionAnswers, Set<Newsfeed> newsfeeds, Set<Sponcor> sponcors, Set<ParticipantQuries> participantQurieses, Set<EventParticipant> eventParticipants, Set<ChatTopic> chatTopics, Set<Message> messages, Set<QuestionAnswer> questionAnswers) {
     this.client = client;
     this.user = user;
     this.eventAddress = eventAddress;
@@ -71,19 +72,20 @@ public class Event  implements java.io.Serializable {
     this.eventTime = eventTime;
     this.status = status;
     this.agendas = agendas;
-    this.speakers = speakers;
     this.eventServiceses = eventServiceses;
-    this.surveyQuestions = surveyQuestions;
     this.galaries = galaries;
     this.socialMedias = socialMedias;
-    this.surveyQuestionAnswers = surveyQuestionAnswers;
     this.contactDetailses = contactDetailses;
+    this.speakers = speakers;
+    this.surveyQuestions = surveyQuestions;
+    this.surveyQuestionAnswers = surveyQuestionAnswers;
     this.newsfeeds = newsfeeds;
     this.sponcors = sponcors;
+    this.participantQurieses = participantQurieses;
     this.eventParticipants = eventParticipants;
-    this.questionAnswers = questionAnswers;
-    this.messages = messages;
     this.chatTopics = chatTopics;
+    this.messages = messages;
+    this.questionAnswers = questionAnswers;
  }
 
   @Id @GeneratedValue(strategy=IDENTITY)
@@ -198,30 +200,12 @@ public class Event  implements java.io.Serializable {
  }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="event")
- public Set<Speaker> getSpeakers() {
-     return this.speakers;
- }
- 
- public void setSpeakers(Set<Speaker> speakers) {
-     this.speakers = speakers;
- }
-
-@OneToMany(fetch=FetchType.LAZY, mappedBy="event")
  public Set<EventServices> getEventServiceses() {
      return this.eventServiceses;
  }
  
  public void setEventServiceses(Set<EventServices> eventServiceses) {
      this.eventServiceses = eventServiceses;
- }
-
-@OneToMany(fetch=FetchType.LAZY, mappedBy="event")
- public Set<SurveyQuestion> getSurveyQuestions() {
-     return this.surveyQuestions;
- }
- 
- public void setSurveyQuestions(Set<SurveyQuestion> surveyQuestions) {
-     this.surveyQuestions = surveyQuestions;
  }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="event")
@@ -243,21 +227,39 @@ public class Event  implements java.io.Serializable {
  }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="event")
- public Set<SurveyQuestionAnswer> getSurveyQuestionAnswers() {
-     return this.surveyQuestionAnswers;
- }
- 
- public void setSurveyQuestionAnswers(Set<SurveyQuestionAnswer> surveyQuestionAnswers) {
-     this.surveyQuestionAnswers = surveyQuestionAnswers;
- }
-
-@OneToMany(fetch=FetchType.LAZY, mappedBy="event")
  public Set<ContactDetails> getContactDetailses() {
      return this.contactDetailses;
  }
  
  public void setContactDetailses(Set<ContactDetails> contactDetailses) {
      this.contactDetailses = contactDetailses;
+ }
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="event")
+ public Set<Speaker> getSpeakers() {
+     return this.speakers;
+ }
+ 
+ public void setSpeakers(Set<Speaker> speakers) {
+     this.speakers = speakers;
+ }
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="event")
+ public Set<SurveyQuestion> getSurveyQuestions() {
+     return this.surveyQuestions;
+ }
+ 
+ public void setSurveyQuestions(Set<SurveyQuestion> surveyQuestions) {
+     this.surveyQuestions = surveyQuestions;
+ }
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="event")
+ public Set<SurveyQuestionAnswer> getSurveyQuestionAnswers() {
+     return this.surveyQuestionAnswers;
+ }
+ 
+ public void setSurveyQuestionAnswers(Set<SurveyQuestionAnswer> surveyQuestionAnswers) {
+     this.surveyQuestionAnswers = surveyQuestionAnswers;
  }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="event")
@@ -279,6 +281,15 @@ public class Event  implements java.io.Serializable {
  }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="event")
+ public Set<ParticipantQuries> getParticipantQurieses() {
+     return this.participantQurieses;
+ }
+ 
+ public void setParticipantQurieses(Set<ParticipantQuries> participantQurieses) {
+     this.participantQurieses = participantQurieses;
+ }
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="event")
  public Set<EventParticipant> getEventParticipants() {
      return this.eventParticipants;
  }
@@ -288,12 +299,12 @@ public class Event  implements java.io.Serializable {
  }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="event")
- public Set<QuestionAnswer> getQuestionAnswers() {
-     return this.questionAnswers;
+ public Set<ChatTopic> getChatTopics() {
+     return this.chatTopics;
  }
  
- public void setQuestionAnswers(Set<QuestionAnswer> questionAnswers) {
-     this.questionAnswers = questionAnswers;
+ public void setChatTopics(Set<ChatTopic> chatTopics) {
+     this.chatTopics = chatTopics;
  }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="event")
@@ -306,15 +317,12 @@ public class Event  implements java.io.Serializable {
  }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="event")
- public Set<ChatTopic> getChatTopics() {
-     return this.chatTopics;
+ public Set<QuestionAnswer> getQuestionAnswers() {
+     return this.questionAnswers;
  }
  
- public void setChatTopics(Set<ChatTopic> chatTopics) {
-     this.chatTopics = chatTopics;
+ public void setQuestionAnswers(Set<QuestionAnswer> questionAnswers) {
+     this.questionAnswers = questionAnswers;
  }
-
-
-
 
 }
