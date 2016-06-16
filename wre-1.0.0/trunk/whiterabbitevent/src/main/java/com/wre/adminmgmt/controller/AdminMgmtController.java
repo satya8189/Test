@@ -795,13 +795,12 @@ List<EventBean> eventServicesList(@RequestParam("eventId") Long eventId) {
 
 
 //=================Rating API
-
 //to save the rating given
 @RequestMapping(value="admin/saveUserRating",method = RequestMethod.POST)
-public @ResponseBody void saveUserRating(@RequestBody RatingBean ratingBean){
+public @ResponseBody String saveUserRating(@RequestBody RatingBean ratingBean){
 	System.out.println("in saveUserRating.."+ratingBean.getType());
-		adminMgmtService.saveUserRating(ratingBean);
 	log.info("rating sent to service..");
+	return adminMgmtService.saveUserRating(ratingBean);
 }
 
 //to list all the ratings
