@@ -13,6 +13,7 @@ import com.wre.adminmgmt.bean.EventBean;
 import com.wre.adminmgmt.bean.GalaryBean;
 import com.wre.adminmgmt.bean.InviteBean;
 import com.wre.adminmgmt.bean.NewsFeedBean;
+import com.wre.adminmgmt.bean.ParticipantQuriesBean;
 import com.wre.adminmgmt.bean.QuestionBean;
 import com.wre.adminmgmt.bean.RatingBean;
 import com.wre.adminmgmt.bean.SocialMediaBean;
@@ -153,6 +154,10 @@ public ParticipantBean participantEdit(Long participantId,Long eventId);
 public void updateParticipantDetails(ParticipantBean participantBean);
 
 public void eventParticipantStatusSave(ParticipantEventBean participantEventBean);
+
+public void participantQueriesSave(ParticipantQuriesBean participantQuriesBean);
+
+
 
 
 

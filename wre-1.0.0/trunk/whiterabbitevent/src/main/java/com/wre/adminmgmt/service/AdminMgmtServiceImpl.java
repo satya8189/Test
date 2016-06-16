@@ -24,6 +24,7 @@ import com.wre.adminmgmt.bean.EventBean;
 import com.wre.adminmgmt.bean.GalaryBean;
 import com.wre.adminmgmt.bean.InviteBean;
 import com.wre.adminmgmt.bean.NewsFeedBean;
+import com.wre.adminmgmt.bean.ParticipantQuriesBean;
 import com.wre.adminmgmt.bean.QuestionBean;
 import com.wre.adminmgmt.bean.RatingBean;
 import com.wre.adminmgmt.bean.SocialMediaBean;
@@ -41,6 +42,7 @@ import com.wre.model.EventParticipant;
 import com.wre.model.EventServices;
 import com.wre.model.Galary;
 import com.wre.model.Newsfeed;
+import com.wre.model.ParticipantQuries;
 import com.wre.model.Participants;
 import com.wre.model.Rating;
 import com.wre.model.SocialMedia;
@@ -1337,9 +1339,7 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 			socialMedia.setUrl(socialMediaBean.getUrl());
 			AdminMgmtDaoImpl.save(socialMedia);
 			log.info("socialMedia saved..");
-			
 		}
-
 		@Override
 		public void updateParticipant(ParticipantBean participantBean) {
 			Participants participant=new Participants();
@@ -1352,7 +1352,6 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 			participant.setPhone(participantBean.getPhoneNumber());
 			participant.setStatus(participantBean.getStatus());
 			//participant.setRegId(participantBean.getRegisterId());
-			
 			AdminMgmtDaoImpl.update(participant);
 		}
 		
@@ -1362,9 +1361,7 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 				//Participants participantsObject = AdminMgmtDaoImpl.participantEdit(participantId,eventId);
 				Object[] participantsObject=AdminMgmtDaoImpl.participantEdit(participantId,eventId);
 				log.info("participant for network edit.PID."+participantsObject[1]);
-				
 					participantBean = new ParticipantBean();
-				
 					participantBean.setParticipantId(((BigInteger)participantsObject[0]).longValue());
 					participantBean.setFirstName((String)participantsObject[1]);
 					participantBean.setLastName((String)participantsObject[2]);
@@ -1374,7 +1371,6 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 				
 				return participantBean;
 			}
-			
 			@Override
 			public void updateParticipantDetails(ParticipantBean participantBean) {
 				//Participants participants = AdminMgmtDaoImpl.participantEdit(participantBean.getParticipantId());
@@ -1394,6 +1390,24 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 					ParticipantEventBean participantEventBean) {
 				AdminMgmtDaoImpl.eventParticipantStatusSave(participantEventBean);
 
+			}
+
+			@Override
+			public void participantQueriesSave(ParticipantQuriesBean participantQuriesBean) {
+				
+				ParticipantQuries participantQuries = new ParticipantQuries();
+				participantQuries.setQuery(participantQuriesBean.getQuery());
+				Event event = new Event();
+				event.setEventId(participantQuriesBean.getEventId());
+				participantQuries.setEvent(event);
+				Speaker speaker = new Speaker();
+				speaker.setSpeakerId(participantQuriesBean.getSpeakerId());
+				participantQuries.setSpeaker(speaker);
+				Participants participants = new Participants();
+				participants.setParticipantId(participantQuriesBean.getParticipantId());
+				participantQuries.setParticipants(participants);
+				AdminMgmtDaoImpl.save(participantQuries);
+				
 			}
 		
 }
