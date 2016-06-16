@@ -20,7 +20,7 @@ var EditSocialMediaController=function($scope,$location,$http,$routeParams,ngNot
 	
 	//To ..updateSocialMedia
 	$scope.updateSocialMedia= function(SocialMedia){
-		alert("update.."+SocialMedia.socialId);
+		//alert("update.."+SocialMedia.socialId);
 		$http.post('admin/updateSocialMedia',SocialMedia).success(function(){
 			//alert("updated...");
 			$location.path("/SocialMedia/"+SocialMedia.eventId);
