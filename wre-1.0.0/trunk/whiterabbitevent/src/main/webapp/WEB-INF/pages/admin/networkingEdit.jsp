@@ -2,18 +2,16 @@
 
 <div class="container">
 <c:set var="userId" value="${USER.userId}" scope="session" />
-	<a ng-click="navigateToNewsFeedView(news.eventId)">
-		 <i class="glyphicon glyphicon-chevron-left"></i>
+	<a ng-click="cancelNetworkingEdit(eventId)">
+		 				<i class="glyphicon glyphicon-chevron-left"></i>
 	</a>
-	 
- </a>
+				
 	<div class="panel">
 		<div class="panel-heading text-center font-size-20 padding-15">Edit
 			Networking</div>
 		<div class="panel-body text-center">
 			<form name="nEditForm"
 				ng-submit="nEditForm.$valid && updateNetworking(networking)" novalidate>
-				
 					<div class="form-group col-md-6">
 							<input type="hidden" ng-model="networking.userId" value="${userId}"
 								ng-init="networking.userId=${userId}"> <label class="flot-left">First
