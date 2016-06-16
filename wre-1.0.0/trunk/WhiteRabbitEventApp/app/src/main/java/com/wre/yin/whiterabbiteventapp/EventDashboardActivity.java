@@ -2,7 +2,9 @@ package com.wre.yin.whiterabbiteventapp;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -26,6 +28,7 @@ import com.wre.yin.whiterabbiteventapp.adapters.CustomGridViewAdapter;
 import com.wre.yin.whiterabbiteventapp.beans.EventBean;
 import com.wre.yin.whiterabbiteventapp.beans.GalaryBean;
 import com.wre.yin.whiterabbiteventapp.beans.Item;
+import com.wre.yin.whiterabbiteventapp.beans.ParticipantEventBean;
 import com.wre.yin.whiterabbiteventapp.utils.Callback;
 import com.wre.yin.whiterabbiteventapp.utils.Constants;
 import com.wre.yin.whiterabbiteventapp.utils.MyAsyncTask;
@@ -42,14 +45,15 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
     private ArrayList<Item> gridArray = new ArrayList<Item>();
     private CustomGridViewAdapter customGridAdapter;
     private SliderLayout mDemoSlider;
-    private TextView eventIdTxt, eventDateTime;
-    private String eventId, eventDate;
+     public static TextView eventIdTxt, eventDateTime,noOfParticipanta,attendStatus;
+    private String eventId, eventDate,eventName,partId;
     private boolean mPermissionDenied = false;
     public static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 1;
 
     private GoogleApiClient client;
 
     private List<String> galleryList;
+    private SharedPreferences prefs;
 
 
     @Override
@@ -61,19 +65,52 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
         mDemoSlider = (SliderLayout) findViewById(R.id.slider);
         // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().hide();
+        prefs = getSharedPreferences("Chat", 0);
+        partId = prefs.getString("partId", null);
 
         if (Constants.checkAndRequestPermissions(this)) {
 
         }
         eventId = getIntent().getExtras().getString("eventId");
         eventDate = getIntent().getExtras().getString("date");
+        eventName = getIntent().getExtras().getString("eventName");
 
         galleryList = new ArrayList<>();
 
+        noOfParticipanta=(TextView)findViewById(R.id.noof_users);
+        attendStatus=(TextView)findViewById(R.id.attendence_status);
         eventIdTxt = (TextView) findViewById(R.id.event_name);
-        eventIdTxt.setText(eventId + " Event");
+        eventIdTxt.setText(eventName);
         eventDateTime = (TextView) findViewById(R.id.event_time_date);
         eventDateTime.setText(eventDate);
+
+        new MyAsyncTask(Constants.ATTENDENCE_STATUS + eventId + "&participantId=" + partId, null, EventDashboardActivity.this, new Callback() {
+            @Override
+            public void onResult(String result) {
+                if(result.equals("Yes")){
+                    attendStatus.setText("I will attend");
+                    attendStatus.setTextColor(Color.GREEN);
+                }else if(result.equals("No")){
+                    attendStatus.setText("I will not attend");
+                    attendStatus.setTextColor(Color.RED);
+                }else if(result.equals("MayBe")){
+                    attendStatus.setText("Maybe I will attend");
+                    attendStatus.setTextColor(Color.BLACK);
+                }else{
+                    attendStatus.setText("Not yet deside");
+                    attendStatus.setTextColor(Color.BLUE);
+                }
+            }
+        }).execute();
+
+        new MyAsyncTask(Constants.PARTICIPANT_LIST + "?eventId=" + eventId + "&status=ACTIVE", null, EventDashboardActivity.this, new Callback() {
+            @Override
+            public void onResult(String result) {
+                List<ParticipantEventBean> participantEventBeanList= Utils.getList(result,ParticipantEventBean.class);
+                noOfParticipanta.setText(""+participantEventBeanList.size());
+            }
+        }).execute();
+
         new MyAsyncTask(Constants.EVENT_IMAGES + "?eventId=" + eventId + "&type=event_images", null, EventDashboardActivity.this, new Callback() {
             @Override
             public void onResult(String result) {

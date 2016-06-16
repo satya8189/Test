@@ -41,6 +41,7 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
     private String partiName, partId;
     private TextView partName;
     private List<HashMap<String, String>> list;
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +51,7 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
         getSupportActionBar().hide();
 
         prefs = getSharedPreferences("Chat", 0);
-
+        editor = prefs.edit();
         mDemoSlider = (SliderLayout) findViewById(R.id.slider);
         mDemoSlider.setCustomIndicator((PagerIndicator) findViewById(R.id.custom_indicator));
         profDetails = (ImageView) findViewById(R.id.profile_details);
@@ -136,6 +137,8 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
                             textSliderView.getBundle()
                                     .putString("extra", map.get("eventId"));
                             textSliderView.getBundle()
+                                    .putString("eventName", map.get("eventName"));
+                            textSliderView.getBundle()
                                     .putString("date", map.get("date"));
 
                             mDemoSlider.addSlider(textSliderView);
@@ -172,8 +175,11 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
         String eventName = slider.getBundle().get("extra").toString();
         String date = slider.getBundle().get("date").toString();
         Intent i = new Intent(HomeActivity.this, EventDashboardActivity.class);
+        editor.putString("eventId",eventName);
+        editor.commit();
         i.putExtra("eventId", eventName);
         i.putExtra("date", date);
+        i.putExtra("eventName", slider.getBundle().get("eventName").toString());
         startActivity(i);
 
     }

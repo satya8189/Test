@@ -100,6 +100,8 @@ public class DetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 saveStatus("Yes");
+                /*EventDashboardActivity.attendStatus.setText("I will attend");
+                EventDashboardActivity.attendStatus.setTextColor(Color.GREEN);*/
             }
         });
         noButton.setOnClickListener(new View.OnClickListener() {

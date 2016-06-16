@@ -61,10 +61,11 @@ public class Constants {
     public static final String ABOUT_EVENT=URL+"Viewdetails?eventId=";
     public static final String PARTICIPANT_EVENT_STATUS=URL+"eventParticipantStatusSave";
     public static final String EVENT_IMAGES=URL+"getEventImages";
-
     public static final String SAVE_HELP_DETAILS=URL+"updateHelpDetails";
     public static final String PARTICIPANT_UPDATE=URL+"updateParticipantDetails";
     public static final String FILES_LIST=URL+"galaryList?eventId=";
+    public static final String ATTENDENCE_STATUS=URL+"getEventParticipantStatus?eventId=";
+    public static final String SPEAKER_QUERY=URL+"participantQueriesSave";
 
     //Image Gallery file path constansts
     public static String PARTICIPENT_URL = "http://183.82.103.156:8080/whiterabbitevent/";
