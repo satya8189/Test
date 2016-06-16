@@ -11,6 +11,7 @@ var NetworkingViewController = function($scope,$http,$routeParams,$location,filt
 			//alert(eventList.length);	   
 			 $scope.networkList = eventList;
 			 
+			 
 			// =================================
 				// create empty search model (object) to trigger
 				// $watch on update
@@ -19,8 +20,7 @@ var NetworkingViewController = function($scope,$http,$routeParams,$location,filt
 				/*
 				 * $scope.resetFilters = function () { // needs to
 				 * be a function or it won't trigger a $watch
-				 * $scope.search = {}; 
-				 * };
+				 * $scope.search = {}; };
 				 */
 
 				// pagination controls
@@ -30,15 +30,19 @@ var NetworkingViewController = function($scope,$http,$routeParams,$location,filt
 				$scope.noOfPages = Math.ceil($scope.totalItems
 						/ $scope.entryLimit);
 			
-
 				// $watch search to update pagination
 				$scope.$watch('search', function(newVal, oldVal) {
-					$scope.filtered = filterFilter($scope.networkList, newVal);
+					$scope.filtered = filterFilter(
+							$scope.networkList, newVal);
 					$scope.totalItems = $scope.filtered.length;
-					$scope.noOfPages = Math.ceil($scope.totalItems/ $scope.entryLimit);
+					$scope.noOfPages = Math.ceil($scope.totalItems
+							/ $scope.entryLimit);
 					$scope.currentPage = 1;
 				}, true);
+
 				// ===================================*/
+
+				
 				  	});
 				 });
 		
