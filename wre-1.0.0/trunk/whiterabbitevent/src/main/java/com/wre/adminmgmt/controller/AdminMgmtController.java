@@ -51,6 +51,7 @@ import com.wre.adminmgmt.bean.EventBean;
 import com.wre.adminmgmt.bean.GalaryBean;
 import com.wre.adminmgmt.bean.InviteBean;
 import com.wre.adminmgmt.bean.NewsFeedBean;
+import com.wre.adminmgmt.bean.ParticipantQuriesBean;
 import com.wre.adminmgmt.bean.QuestionBean;
 import com.wre.adminmgmt.bean.RatingBean;
 import com.wre.adminmgmt.bean.SocialMediaBean;
@@ -1165,6 +1166,13 @@ public @ResponseBody void saveContactDetails(@RequestBody ContactDetailsBean con
 					adminMgmtService.eventParticipantStatusSave(participantEventBean);
 				}
 			
+				//participantQueriesSaveMethod
+				@RequestMapping(value="admin/participantQueriesSave",method=RequestMethod.POST)
+				public  @ResponseBody void participantQueriesSave(@RequestBody ParticipantQuriesBean participantQuriesBean){
+					log.info("we are in participantQueriesSave method");
+					adminMgmtService.participantQueriesSave(participantQuriesBean);
+					
+				}
 	
 	
 }
