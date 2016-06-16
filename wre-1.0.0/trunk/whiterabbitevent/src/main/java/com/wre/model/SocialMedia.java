@@ -29,14 +29,16 @@ public class SocialMedia  implements java.io.Serializable {
   private Event event;
   private String name;
   private String url;
+  private String type;
 
  public SocialMedia() {
  }
 
- public SocialMedia(Event event, String name, String url) {
+ public SocialMedia(Event event, String name, String url,String type) {
     this.event = event;
     this.name = name;
     this.url = url;
+    this.type=type;
  }
 
   @Id @GeneratedValue(strategy=IDENTITY)
@@ -81,7 +83,17 @@ public class SocialMedia  implements java.io.Serializable {
      this.url = url;
  }
 
-
+ @Column(name="Type", length=100)
+ public String getType() {
+     return this.type;
+ }
+ 
+ public void setType(String type) {
+     this.type = type;
+ }
+ 
+ 
+ 
 
 
 }
