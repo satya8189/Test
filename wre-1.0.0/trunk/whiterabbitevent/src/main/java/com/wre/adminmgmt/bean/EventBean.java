@@ -23,6 +23,7 @@ public class EventBean
     private String serviceName;
     private String other;
     private int order;
+    private String date;
     
 	public int getOrder() {
 		return order;
@@ -155,6 +156,13 @@ public class EventBean
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
+	public String getDate() {
+		return date;
+	}
+	public void setDate(String date) {
+		this.date = date;
+	}
+	
 	
 	
     

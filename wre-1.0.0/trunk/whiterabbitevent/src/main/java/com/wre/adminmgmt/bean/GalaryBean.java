@@ -17,6 +17,7 @@ public class GalaryBean
     private Date createdDate;
     private Long eventId;
     private String url;
+    private String fileName;
     
     
 	public String getUrl() {
@@ -63,6 +64,14 @@ public class GalaryBean
 	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
 	}
+	public String getFileName() {
+		return fileName;
+	}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+	
+	
 
     
 
