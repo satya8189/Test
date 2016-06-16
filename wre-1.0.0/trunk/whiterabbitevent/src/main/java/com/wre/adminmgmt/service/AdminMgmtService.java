@@ -102,17 +102,17 @@ public String participantRegUpdate(ParticipantBean participantBean);
 
 public List<ContactDetailsBean> adminViewContactDetails(Long eventId);
 
-void saveContactDetails(ContactDetailsBean contactDetailsBean);
+public void saveContactDetails(ContactDetailsBean contactDetailsBean);
 
-void updateContactDetails(ContactDetailsBean contactDetailsBean);
+public String updateContactDetails(ContactDetailsBean contactDetailsBean);
 
-ContactDetailsBean getContactDetailsForEdit(Long contactId);
+public ContactDetailsBean getContactDetailsForEdit(Long contactId);
 
-List<RatingBean> getUserRatings(Long eventId);
+public List<RatingBean> getUserRatings(Long eventId);
 
-List<RatingBean> getUserRatings(RatingBean ratingBean);
+public List<RatingBean> getUserRatings(RatingBean ratingBean);
 
-void saveUserRating(RatingBean ratingBean);
+public void saveUserRating(RatingBean ratingBean);
 
 public List<ChatTopicBean> getChatTopicList(Long eventId);
 
@@ -130,7 +130,7 @@ public List<ParticipantEventBean> getParticipantEventBeanList(Long eventId,
 public void eventParticipantSave(ParticipantEventBean participantEventBean);
 
 
-public void saveSurveyQuestionAnswer(QuestionBean questionBean);
+public String saveSurveyQuestionAnswer(QuestionBean questionBean);
 
 public List<ParticipantBean> getParticipantsList(Long eventId);
 
@@ -147,7 +147,8 @@ public void deleteSocialMedia(Long socialId);
 public void saveSocialMedia(SocialMediaBean socialMediaBean);
 
 public void updateParticipant(ParticipantBean participantBean);
-public ParticipantBean participantEdit(Long participantId);
+
+public ParticipantBean participantEdit(Long participantId,Long eventId);
 
 public void updateParticipantDetails(ParticipantBean participantBean);
 

@@ -863,11 +863,10 @@ public @ResponseBody void updateContactDetails(@RequestBody ContactDetailsBean c
 
 //=========return string as data stored contactAPI
 @RequestMapping(value="admin/updateHelpDetails",method=RequestMethod.POST)
-public @ResponseBody String updateContactsDetails(@RequestBody ContactDetailsBean contactDetailsBean)
+public @ResponseBody String saveContactsDetails(@RequestBody ContactDetailsBean contactDetailsBean)
 {
 	log.info("in updateContactDetails");
-		adminMgmtService.updateContactDetails(contactDetailsBean);
-	return "success";
+	return adminMgmtService.updateContactDetails(contactDetailsBean);	
 }
 
 
@@ -1007,8 +1006,8 @@ public @ResponseBody void saveContactDetails(@RequestBody ContactDetailsBean con
 	@RequestMapping(value="admin/saveQuestionAnswer",method=RequestMethod.POST)
 	public @ResponseBody String saveQuestionAnswer(@RequestBody QuestionBean questionBean)
 	{
-		adminMgmtService.saveSurveyQuestionAnswer(questionBean);
-		return "success";
+		return adminMgmtService.saveSurveyQuestionAnswer(questionBean);
+		
 	}
 	
 	//===============Q&A
@@ -1144,9 +1143,8 @@ public @ResponseBody void saveContactDetails(@RequestBody ContactDetailsBean con
 		// ParticipantBean edit
 				@RequestMapping(value = "admin/participantEdit", method = RequestMethod.GET)
 				public @ResponseBody
-				ParticipantBean participantEdit(@RequestParam("participantId") Long participantId) {
-					ParticipantBean participantBean = adminMgmtService
-							.participantEdit(participantId);
+				ParticipantBean participantEdit(@RequestParam("participantId") Long participantId,@RequestParam("eventId") Long eventId) {
+					ParticipantBean participantBean = adminMgmtService.participantEdit(participantId,eventId);
 					return participantBean;
 
 				}
@@ -1155,7 +1153,7 @@ public @ResponseBody void saveContactDetails(@RequestBody ContactDetailsBean con
 				@RequestMapping(value = "participant/update", method = RequestMethod.POST)
 				public @ResponseBody
 				void updateParticipants(@RequestBody ParticipantBean participantBean) {
-					System.out.println("participantBean update" + participantBean.getFirstName());
+					System.out.println("participantBean update" + participantBean.getStatus());
 					//adminMgmtService.updateParticipant(participantBean);
 					adminMgmtService.updateParticipantDetails(participantBean);
 				}

@@ -1,32 +1,32 @@
 var NetworkingEditController = function($scope, $http, $routeParams,$location,ngNotifier) {
-	
-	alert("NetworkingEditController");
+	$scope.eventId={};
 	$scope.networking={};
-
 	$scope.$on('$routeChangeSuccess', function() {
-		alert("participateId "+$routeParams.participantId);
-		$http.get('admin/participantEdit?participantId='+$routeParams.participantId).success(function(networking) {
-			
+		$http.get('admin/participantEdit?participantId='+$routeParams.participantId+'&&eventId='+$routeParams.eventId).success(function(networking) {
 			$scope.networking=networking;
-			alert("hggj-----"+$scope.networking.firstName);
-					
+			$scope.eventId=$routeParams.eventId;
+			//alert("eventId.."+eventId);
+			
+			
+
 				});
 	});
         
         
     	$scope.updateNetworking = function(networking) {
-    		alert("updateNetworking");
 		
-		$http.post('participant/update',networking).success(function(status) {
-		alert("	participant/update");
-			$location.path("/networkingView/"+networking.eventId);
-			
-
-
+		$http.post('participant/update',networking).success(function() {
+		//alert("participant/update");
+			$location.path("/networkingView/"+$routeParams.eventId);
+			ngNotifier.notify("Updated successfully.!");
 					});
+		};
 		
-		
-	};
+		//get back..cancelNetworkingEdit
+		$scope.cancelNetworkingEdit= function(eventId){
+			//alert("getting back.."+eventId);
+			$location.path("/networkingView/"+eventId);
+		} ;
 	
 };
 

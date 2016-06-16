@@ -281,7 +281,7 @@ App.config([ '$routeProvider', function($routeProvider, $Scope) {
 	});
 	
 	//NetworkingEditController
-	$routeProvider.when('/networkingEdit/:participantId/', {
+	$routeProvider.when('/networkingEdit/:participantId/:eventId', {
 		templateUrl : 'admin/networkingEdit',
 		controller : NetworkingEditController
 	});

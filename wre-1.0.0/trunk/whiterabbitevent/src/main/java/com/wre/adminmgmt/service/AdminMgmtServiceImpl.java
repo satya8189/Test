@@ -1054,34 +1054,17 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 			contactDetailsBean.setContactMobile(contactDetails.getContactMobile());
 			contactDetailsBean.setContactAlternateMobile(contactDetails.getContactAlternateMobile());
 			contactDetailsBean.setEventId(contactDetails.getEvent().getEventId());
-			
-			//List<ContactDetailsBean> contactDetailsBeanList=new ArrayList<ContactDetailsBean>();
-			/*
-			if(contactDetailsList.size()>0){
-			ContactDetailsBean contactDetailsBean=new ContactDetailsBean();
-			
-			for(ContactDetails contactDetails:contactDetailsList){
-				contactDetailsBean.setContactId(contactDetails.getContactId());
-				contactDetailsBean.setContactName(contactDetails.getContactName());
-				contactDetailsBean.setContactMobile(contactDetails.getContactMobile());
-				contactDetailsBean.setContactAlternateMobile(contactDetails.getContactAlternateMobile());
-				contactDetailsBean.setContactEmail(contactDetails.getContactEmail());
-				contactDetailsBean.setEventId(contactDetails.getEvent().getEventId());
-				contactDetailsBeanList.add(contactDetailsBean);
-				}
-			}*/
-			///log.info("contacts List size"+contactDetailsBeanList.size());
 			log.info("contact Name....."+contactDetails.getContactName()+"contact mobile."+contactDetails.getContactMobile());
 			//return contactDetailsBeanList;
 			return contactDetailsBean;
 		}
 
 		@Override 
-		public void updateContactDetails(ContactDetailsBean contactDetailsBean)
+		public String updateContactDetails(ContactDetailsBean contactDetailsBean)
 		{
 			log.info("in updateContactDetails..");
 			ContactDetails contactDetails=new ContactDetails();
-			contactDetails.setContactId(contactDetailsBean.getContactId());
+			//contactDetails.setContactId(contactDetailsBean.getContactId());
 			contactDetails.setContactName(contactDetailsBean.getContactName());
 			contactDetails.setContactEmail(contactDetailsBean.getContactEmail());
 			contactDetails.setContactMobile(contactDetailsBean.getContactMobile());
@@ -1093,8 +1076,18 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 				participant.setParticipantId(contactDetailsBean.getParticipantId());
 			contactDetails.setParticipants(participant);
 			contactDetails.setHelpText(contactDetailsBean.getHelpText());
-			AdminMgmtDaoImpl.update(contactDetails);
-			
+			//AdminMgmtDaoImpl.update(contactDetails);
+			 long r=(Long)AdminMgmtDaoImpl.save(contactDetails);
+			String result="";
+			log.info("save help details.."+r);
+			if(r>0)
+			{
+				result="success";
+			}
+			else{
+				result="fail";
+			}
+			return result;
 		}
 		
 		@Override 
@@ -1212,7 +1205,7 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 		
 		
 		@Override 
-		public void saveSurveyQuestionAnswer(QuestionBean questionBean)
+		public String saveSurveyQuestionAnswer(QuestionBean questionBean)
 		{
 			log.info("in save SaveSurveyQuestionAnswer serviceimpl.."+questionBean.toString());
 			
@@ -1228,7 +1221,13 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 			surveyQuestionAnswer.setParticipants(participant);//set participant
 			surveyQuestionAnswer.setParticipantAnswer(questionBean.getAnswer());//set participant answer
 			
-			AdminMgmtDaoImpl.save(surveyQuestionAnswer);
+			long i=(Long)AdminMgmtDaoImpl.save(surveyQuestionAnswer);
+			log.info("saveSurveyQA--"+i);
+			String result="fail";
+			if(i>0){
+				result="success";
+			}
+			return result;
 		}
 
 		@Override
@@ -1355,35 +1354,36 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 		}
 		
 		 //participantEdit
-			public ParticipantBean participantEdit(Long participantId) {
+			public ParticipantBean participantEdit(Long participantId,Long eventId) {
 				ParticipantBean participantBean = null;
-				Participants participantsObject = AdminMgmtDaoImpl
-						.participantEdit(participantId);
-				if (participantId != null) {
+				//Participants participantsObject = AdminMgmtDaoImpl.participantEdit(participantId,eventId);
+				Object[] participantsObject=AdminMgmtDaoImpl.participantEdit(participantId,eventId);
+				log.info("participant for network edit.PID."+participantsObject[1]);
+				
 					participantBean = new ParticipantBean();
-					participantBean.setParticipantId(participantsObject.getParticipantId());
-					participantBean.setFirstName(participantsObject.getFirstName());
-					participantBean.setLastName(participantsObject.getLastName());
-					participantBean.setPhoneNumber(participantsObject.getPhone());
-					participantBean.setEmailId(participantsObject.getEmail());
-					participantBean.setStatus(participantsObject.getStatus());
-
-				}
-
-				log.info("FirstName---" + participantBean.getFirstName());
+				
+					participantBean.setParticipantId(((BigInteger)participantsObject[0]).longValue());
+					participantBean.setFirstName((String)participantsObject[1]);
+					participantBean.setLastName((String)participantsObject[2]);
+					participantBean.setEmailId((String)participantsObject[3]);
+					participantBean.setPhoneNumber((String)participantsObject[4]);
+					participantBean.setStatus((String)participantsObject[5]);
+				
 				return participantBean;
 			}
 			
 			@Override
 			public void updateParticipantDetails(ParticipantBean participantBean) {
-				Participants participants = AdminMgmtDaoImpl.participantEdit(participantBean.getParticipantId());
-				participants.setFirstName(participantBean.getEmailId());
-				participants.setLastName(participantBean.getLastName());
-				participants.setPhone(participantBean.getPhoneNumber());
-				participants.setEmail(participantBean.getEmailId());
-				participants.setStatus(participantBean.getStatus());
+				//Participants participants = AdminMgmtDaoImpl.participantEdit(participantBean.getParticipantId());
+				log.info("updating participant.."+participantBean.getEmailId());
+				Participants participants =new Participants();
+					participants.setParticipantId(participantBean.getParticipantId());
+					participants.setFirstName(participantBean.getFirstName());
+					participants.setLastName(participantBean.getLastName());
+					participants.setPhone(participantBean.getPhoneNumber());
+					participants.setEmail(participantBean.getEmailId());
+					participants.setStatus(participantBean.getStatus());
 				AdminMgmtDaoImpl.update(participants);
-
 			}
 			
 			// eventParticipantCreate

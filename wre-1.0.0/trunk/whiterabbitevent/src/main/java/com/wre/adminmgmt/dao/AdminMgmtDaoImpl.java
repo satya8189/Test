@@ -438,14 +438,22 @@ public List<Object[]> getParticipantsList(Long eventId){
 		}
 		
 		//participantEdit
-				public Participants participantEdit(Long participantId) {
-					Criteria criteria=sessionFactory.getCurrentSession().createCriteria(Participants.class);
+				public Object[] participantEdit(Long participantId,Long eventId) {
+
+					String sql="SELECT p.participant_Id,p.firstname,p.last_name,p.email,p.phone,p.status FROM participants p,event_participant ep WHERE p.participant_id= :participantId AND ep.Event_ID= :eventId AND ep.`Participant_ID`=p.`Participant_ID`";
+					SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery(sql);
+				    	query.setParameter("eventId",eventId);
+				    	query.setParameter("participantId",participantId);
+				    	
+					
+					/*Criteria criteria=sessionFactory.getCurrentSession().createCriteria(Participants.class);
 					criteria.add(Restrictions.eq("participantId",participantId));
 					criteria.setFetchMode("event", FetchMode.EAGER);
-					return (Participants)criteria.uniqueResult();
+					return (Participants)criteria.uniqueResult();*/
+				    	return (Object[])query.uniqueResult();
 				}
 
-//eventParticipantStatusSave
+				//eventParticipantStatusSave
 				public void eventParticipantStatusSave(
 						ParticipantEventBean participantEventBean) {
 					String query = 
