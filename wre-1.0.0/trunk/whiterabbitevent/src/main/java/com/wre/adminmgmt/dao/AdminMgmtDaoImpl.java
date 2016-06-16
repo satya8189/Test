@@ -467,6 +467,16 @@ public List<Object[]> getParticipantsList(Long eventId){
 							sqlQuery.executeUpdate();
 
 				}
+				public String getEventParticipantStatus(Long eventId, Long participantId) {
+					String query="SELECT ep.Status FROM event_participant ep WHERE ep.Event_ID=:eid AND ep.Participant_ID=:pid";
+					SQLQuery sqlQuery = sessionFactory.getCurrentSession().createSQLQuery(
+							query);
+					sqlQuery.setParameter("eid",eventId );
+					sqlQuery.setParameter("pid",participantId );
+					String status=(String)sqlQuery.uniqueResult();
+			
+					return status;
+				}
 		
 
 

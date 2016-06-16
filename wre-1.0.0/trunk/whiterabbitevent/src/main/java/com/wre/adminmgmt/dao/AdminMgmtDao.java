@@ -94,4 +94,6 @@ public SocialMedia getSocialMediaForEdit(Long eventId);
 public Object[] participantEdit(Long participantId, Long eventId);
 
 public void eventParticipantStatusSave(ParticipantEventBean participantEventBean);
+
+public String getEventParticipantStatus(Long eventId, Long participantId);
 }
