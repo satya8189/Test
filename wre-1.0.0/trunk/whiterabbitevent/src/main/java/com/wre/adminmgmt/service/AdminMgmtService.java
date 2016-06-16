@@ -154,7 +154,7 @@ public void updateParticipantDetails(ParticipantBean participantBean);
 public void eventParticipantStatusSave(ParticipantEventBean participantEventBean);
 
 public String getEventParticipantStatus(Long eventId, Long participantId);
-public void participantQueriesSave(ParticipantQuriesBean participantQuriesBean);
+public String participantQueriesSave(ParticipantQuriesBean participantQuriesBean);
 
 
 
