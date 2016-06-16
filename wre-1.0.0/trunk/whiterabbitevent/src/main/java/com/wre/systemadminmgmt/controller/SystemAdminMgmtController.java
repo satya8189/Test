@@ -121,6 +121,17 @@ public class SystemAdminMgmtController{
 			return modelAndView;
 		}
 		
+		//logout method
+		@RequestMapping(value="/logout",method=RequestMethod.GET)
+		public ModelAndView logoutUser(HttpSession session){
+			session.removeAttribute(WREConstants.USER);
+			session.invalidate();
+			ModelAndView modelAndView=new ModelAndView("login");
+			modelAndView.addObject("userBean", new UserBean());
+			return modelAndView;
+		}
+		
+		
 		//client List View page
 		@RequestMapping(value="systemadmin/clientsView",method=RequestMethod.GET)
 		public String ClientListViewPage(){
