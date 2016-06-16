@@ -6,56 +6,16 @@ import java.util.Date;
  * Created by root on 3/6/16.
  */
 public class ParticipantEventBean {
-    private Long participateEventId;
-    private String status;
+    private Long participateEventId ;
+    private String status ;
     private Long eventId;
-    private Long participateId;
-    private String eventname;
+    private Long participantId;
+    private String eventname ;
     private Date eventDate;
     private String firstName;
-    private String lostName;
+    private String lastName;
     private String mobile;
     private String emailId;
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLostName() {
-        return lostName;
-    }
-
-    public void setLostName(String lastName) {
-        this.lostName = lastName;
-    }
-
-    public String getMobile() {
-        return mobile;
-    }
-
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
-
-    public String getEmailId() {
-        return emailId;
-    }
-
-    public void setEmailId(String emailId) {
-        this.emailId = emailId;
-    }
-
-    public Date getEventDate() {
-        return eventDate;
-    }
-
-    public void setEventDate(Date eventDate) {
-        this.eventDate = eventDate;
-    }
 
     public Long getParticipateEventId() {
         return participateEventId;
@@ -81,12 +41,12 @@ public class ParticipantEventBean {
         this.eventId = eventId;
     }
 
-    public Long getParticipateId() {
-        return participateId;
+    public Long getParticipantId() {
+        return participantId;
     }
 
-    public void setParticipateId(Long participateId) {
-        this.participateId = participateId;
+    public void setParticipantId(Long participantId) {
+        this.participantId = participantId;
     }
 
     public String getEventname() {
@@ -95,5 +55,45 @@ public class ParticipantEventBean {
 
     public void setEventname(String eventname) {
         this.eventname = eventname;
+    }
+
+    public Date getEventDate() {
+        return eventDate;
+    }
+
+    public void setEventDate(Date eventDate) {
+        this.eventDate = eventDate;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getEmailId() {
+        return emailId;
+    }
+
+    public void setEmailId(String emailId) {
+        this.emailId = emailId;
     }
 }

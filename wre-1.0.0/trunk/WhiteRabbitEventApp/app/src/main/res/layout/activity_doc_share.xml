@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
     android:orientation="vertical"
     tools:context="com.wre.yin.whiterabbiteventapp.DocShareActivity">
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+
 
 
         <LinearLayout
@@ -19,8 +17,9 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
+                android:visibility="gone"
                 android:orientation="vertical">
 
                 <TextView
@@ -38,12 +37,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="10dp"
-                        android:numColumns="2"></GridView>
+                        android:numColumns="3"></GridView>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
                 android:orientation="vertical">
 
@@ -59,15 +58,17 @@
                 <GridView
                     android:id="@+id/pdf_doc_grid"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:numColumns="2"></GridView>
+                    android:numColumns="3"></GridView>
+
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:visibility="gone"
                 android:orientation="vertical">
 
                 <TextView
@@ -88,5 +89,10 @@
                     android:numColumns="2"></GridView>
             </LinearLayout>
         </LinearLayout>
-</ScrollView>
-</LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/downloading_file_text"
+        android:layout_alignParentBottom="true"
+        />
+</RelativeLayout>

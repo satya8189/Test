@@ -22,6 +22,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.wre.yin.whiterabbiteventapp.beans.EventBean;
 import com.wre.yin.whiterabbiteventapp.beans.ParticipantEventBean;
 import com.wre.yin.whiterabbiteventapp.utils.Callback;
 import com.wre.yin.whiterabbiteventapp.utils.Constants;
@@ -50,11 +51,11 @@ public class DetailsActivity extends AppCompatActivity {
     double destLongitude = 80.241609;
     double sourceLatitude, sourceLongitude;
     GPSTracker gpsTracker;
-    private TextView text;
+    private TextView inviteTime,inviteDate,inviteAddress;
     private boolean mPermissionDenied = false;
 
-    private Button yesButton,noButton,maybeButtun;
-    private String eventId,partId;
+    private Button yesButton, noButton, maybeButtun;
+    private String eventId, partId;
 
     private SharedPreferences prefs;
 
@@ -74,9 +75,26 @@ public class DetailsActivity extends AppCompatActivity {
         prefs = getSharedPreferences("Chat", 0);
         partId = prefs.getString("partId", null);
 
-        yesButton=(Button)findViewById(R.id.partStatusYes);
-        noButton=(Button)findViewById(R.id.partStatusNo);
-        maybeButtun=(Button)findViewById(R.id.partStatusMaybe);
+        inviteTime=(TextView)findViewById(R.id.invite_time);
+        inviteDate=(TextView)findViewById(R.id.invite_date);
+        inviteAddress=(TextView)findViewById(R.id.invite_address_text);
+
+        new MyAsyncTask(Constants.ABOUT_EVENT + eventId, null, DetailsActivity.this, new Callback() {
+            @Override
+            public void onResult(String result) {
+
+                EventBean eventBean=Utils.getObject(result,EventBean.class);
+                if(eventBean!=null) {
+                    inviteTime.setText(eventBean.getEventTime());
+                    inviteDate.setText(eventBean.getDate());
+                    inviteAddress.setText(eventBean.getEventAddress());
+                }
+            }
+        }).execute();
+
+        yesButton = (Button) findViewById(R.id.partStatusYes);
+        noButton = (Button) findViewById(R.id.partStatusNo);
+        maybeButtun = (Button) findViewById(R.id.partStatusMaybe);
 
         yesButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,7 +102,7 @@ public class DetailsActivity extends AppCompatActivity {
                 saveStatus("Yes");
             }
         });
-       noButton.setOnClickListener(new View.OnClickListener() {
+        noButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 saveStatus("No");
@@ -153,15 +171,15 @@ public class DetailsActivity extends AppCompatActivity {
         }
     }
 
-    public void saveStatus(String status){
-        ParticipantEventBean participantEventBean=new ParticipantEventBean();
+    public void saveStatus(String status) {
+        ParticipantEventBean participantEventBean = new ParticipantEventBean();
         participantEventBean.setEventId(Long.parseLong(eventId));
-        participantEventBean.setParticipateId(Long.parseLong(partId));
+        participantEventBean.setParticipantId(Long.parseLong(partId));
         participantEventBean.setStatus(status);
         new MyAsyncTask(Constants.PARTICIPANT_EVENT_STATUS, Utils.getJson(participantEventBean), DetailsActivity.this, new Callback() {
             @Override
             public void onResult(String result) {
-                System.out.println("Result:"+result);
+                System.out.println("Result:" + result);
             }
         }).execute();
     }

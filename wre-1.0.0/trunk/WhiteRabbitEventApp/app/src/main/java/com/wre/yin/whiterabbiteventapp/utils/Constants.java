@@ -64,6 +64,7 @@ public class Constants {
 
     public static final String SAVE_HELP_DETAILS=URL+"updateHelpDetails";
     public static final String PARTICIPANT_UPDATE=URL+"updateParticipantDetails";
+    public static final String FILES_LIST=URL+"galaryList?eventId=";
 
     //Image Gallery file path constansts
     public static String PARTICIPENT_URL = "http://183.82.103.156:8080/whiterabbitevent/";

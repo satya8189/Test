@@ -29,6 +29,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/invite_date"
                 android:text="11-05-2016" />
         </LinearLayout>
 
@@ -47,6 +48,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/invite_time"
                 android:text="11.30 Am" />
         </LinearLayout>
     </LinearLayout>

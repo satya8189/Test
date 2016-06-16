@@ -37,11 +37,8 @@ public class EmpProfileActivity extends AppCompatActivity {
         prefs = getSharedPreferences("Chat", 0);
         partiName = prefs.getString("name", null);
         partId = prefs.getString("partId", null);
-        partMobile = prefs.getString("mobile", null);
-        partEmail = prefs.getString("mail", null);
 
-
-        // eventId = getIntent().getExtras().getString("eventId");
+       // eventId = getIntent().getExtras().getString("eventId");
         empProfilePic = (ImageView) findViewById(R.id.emp_profile_image);
 
         empName = (EditText) findViewById(R.id.emp_name);
@@ -54,8 +51,6 @@ public class EmpProfileActivity extends AppCompatActivity {
         saveUpdateBtn = (Button) findViewById(R.id.save_update_btn);
 
         empName.setText(partiName);
-        empMail.setText(partEmail);
-        empMobile.setText(partMobile);
 
         saveUpdateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +64,9 @@ public class EmpProfileActivity extends AppCompatActivity {
                 partBean.setFirstName(updatePartiName);
                 partBean.setEmailId(updatePartEmail);
                 partBean.setPhoneNumber(upadatePartMobile);
+                partBean.setStatus("ACTIVE");
+                partBean.setLastName("Kumar");
+
 
                 partBean.setParticipantId(Long.parseLong(partId));
 
@@ -81,6 +79,7 @@ public class EmpProfileActivity extends AppCompatActivity {
 
                     }
                 }).execute();
+
 
             }
         });

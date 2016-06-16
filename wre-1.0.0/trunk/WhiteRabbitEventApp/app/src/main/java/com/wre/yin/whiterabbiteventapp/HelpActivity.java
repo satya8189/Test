@@ -61,7 +61,7 @@ public class HelpActivity extends AppCompatActivity {
                         contactBean.setContactName(contactName);
                         contactBean.setContactEmail(contactEmail);
                         contactBean.setContactMobile(contactMobile);
-                        contactBean.setParticipantId(partId);
+                        contactBean.setParticipantId(Long.parseLong(partId));
                         contactBean.setEventId(Long.parseLong(eventId));
                         contactBean.setContactAlternateMobile("");
                         contactBean.setHelpText(helpText);

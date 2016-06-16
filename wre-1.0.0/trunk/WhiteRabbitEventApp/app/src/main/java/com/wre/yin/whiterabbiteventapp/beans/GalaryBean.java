@@ -13,6 +13,15 @@ public class GalaryBean {
     private Date createdDate;
     private Long eventId;
     private String url;
+    private String fileName;
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
 
     public Long getGlaryItemId() {
         return glaryItemId;

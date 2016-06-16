@@ -42,8 +42,8 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
     private ArrayList<Item> gridArray = new ArrayList<Item>();
     private CustomGridViewAdapter customGridAdapter;
     private SliderLayout mDemoSlider;
-    private TextView eventNameTxt, eventDateTime;
-    private String eventName, eventDate;
+    private TextView eventIdTxt, eventDateTime;
+    private String eventId, eventDate;
     private boolean mPermissionDenied = false;
     public static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 1;
 
@@ -65,20 +65,20 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
         if (Constants.checkAndRequestPermissions(this)) {
 
         }
-        eventName = getIntent().getExtras().getString("eventId");
+        eventId = getIntent().getExtras().getString("eventId");
         eventDate = getIntent().getExtras().getString("date");
 
-        galleryList=new ArrayList<>();
+        galleryList = new ArrayList<>();
 
-        eventNameTxt = (TextView) findViewById(R.id.event_name);
-        eventNameTxt.setText(eventName + " Event");
+        eventIdTxt = (TextView) findViewById(R.id.event_name);
+        eventIdTxt.setText(eventId + " Event");
         eventDateTime = (TextView) findViewById(R.id.event_time_date);
         eventDateTime.setText(eventDate);
-        new MyAsyncTask(Constants.EVENT_IMAGES + "?eventId=" + eventName + "&type=event_images", null, EventDashboardActivity.this, new Callback() {
+        new MyAsyncTask(Constants.EVENT_IMAGES + "?eventId=" + eventId + "&type=event_images", null, EventDashboardActivity.this, new Callback() {
             @Override
             public void onResult(String result) {
-                List<GalaryBean> galaryBeenList=Utils.getList(result,GalaryBean.class);
-                if(galaryBeenList!=null) {
+                List<GalaryBean> galaryBeenList = Utils.getList(result, GalaryBean.class);
+                if (galaryBeenList != null) {
                     for (GalaryBean bean : galaryBeenList) {
                         galleryList.add(Constants.BASE_URL + bean.getUrl());
                     }
@@ -105,45 +105,17 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
             }
         }).execute();
 
-
-
-        /*HashMap<String, Integer> file_maps = new HashMap<String, Integer>();
-        file_maps.put("Event 1", R.drawable.event_image1);
-        file_maps.put("Event 2", R.drawable.event_image2);
-        file_maps.put("Event 3", R.drawable.event_image3);
-
-
-        for (String name : file_maps.keySet()) {
-            TextSliderViewDashboard textSliderView = new TextSliderViewDashboard(this);
-            // initialize a SliderLayout
-            textSliderView
-                    .description(name)
-                    .image(file_maps.get(name))
-                    .setScaleType(BaseSliderView.ScaleType.Fit)
-                    .setOnSliderClickListener(this);
-
-            //add your extra information
-            textSliderView.bundle(new Bundle());
-            textSliderView.getBundle()
-                    .putString("extra", name);
-
-            mDemoSlider.addSlider(textSliderView);
-            mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Stack);
-
-        }*/
-
-
-        new MyAsyncTask(Constants.EVENT_SERVICES_LIST + eventName, null, EventDashboardActivity.this, new Callback() {
+        new MyAsyncTask(Constants.EVENT_SERVICES_LIST + eventId, null, EventDashboardActivity.this, new Callback() {
             @Override
             public void onResult(String result) {
                 List<EventBean> eventBeenList = Utils.getList(result, EventBean.class);
                 gridArray.add(new Item(2, "Invite"));
                 for (EventBean bean : eventBeenList) {
-                    if(bean.getServiceId()==19)
-                        gridArray.add(new Item(16, "Help"));
+                    /*if (bean.getServiceId() == 19)
+                        gridArray.add(new Item(16, "Help"));*/
                     if (bean.getOrder() < 17) {
-                        if(bean.getServiceId()!=17)
-                        gridArray.add(new Item((int) (long) bean.getOrder(), bean.getServiceName()));
+                        if (bean.getServiceId() != 17)
+                            gridArray.add(new Item((int) (long) bean.getOrder(), bean.getServiceName()));
                     }
                 }
                 gridArray.add(new Item(17, "Profile"));
@@ -162,14 +134,14 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
                             case 1:
                                 Intent aboutEventAct = new Intent(EventDashboardActivity.this, AboutEventActivity.class);
                                 aboutEventAct.putExtra("name", name);
-                                aboutEventAct.putExtra("eventId", eventName);
+                                aboutEventAct.putExtra("eventId", eventId);
                                 startActivity(aboutEventAct);
                                 break;
                             case 2:
                                 if (Constants.checkAndRequestPermissions(EventDashboardActivity.this)) {
                                     Intent detailsAct = new Intent(EventDashboardActivity.this, DetailsActivity.class);
                                     detailsAct.putExtra("name", name);
-                                    detailsAct.putExtra("eventId", eventName);
+                                    detailsAct.putExtra("eventId", eventId);
                                     startActivity(detailsAct);
                                 }
                                 break;
@@ -177,21 +149,21 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
                             case 3:
                                 Intent agendaAct = new Intent(EventDashboardActivity.this, AgendaActivity.class);
                                 agendaAct.putExtra("name", name);
-                                agendaAct.putExtra("eventId", eventName);
+                                agendaAct.putExtra("eventId", eventId);
                                 startActivity(agendaAct);
                                 break;
 
                             case 4:
                                 Intent newsaAct = new Intent(EventDashboardActivity.this, NewsFeedActivity.class);
                                 newsaAct.putExtra("name", name);
-                                newsaAct.putExtra("eventId", eventName);
+                                newsaAct.putExtra("eventId", eventId);
                                 startActivity(newsaAct);
                                 break;
                             case 16:
                                 if (Constants.checkAndRequestPermissions(EventDashboardActivity.this)) {
-                                    Intent galleryAct = new Intent(EventDashboardActivity.this, GalleryActivity.class);
+                                    Intent galleryAct = new Intent(EventDashboardActivity.this, HelpActivity.class);
                                     galleryAct.putExtra("name", name);
-                                    galleryAct.putExtra("eventId", eventName);
+                                    galleryAct.putExtra("eventId", eventId);
                                     startActivity(galleryAct);
                                 }
                                 break;
@@ -199,7 +171,7 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
                                 if (Constants.checkAndRequestPermissions(EventDashboardActivity.this)) {
                                     Intent crowdAct = new Intent(EventDashboardActivity.this, CrowdPicsActivity.class);
                                     crowdAct.putExtra("name", name);
-                                    crowdAct.putExtra("eventId", eventName);
+                                    crowdAct.putExtra("eventId", eventId);
                                     startActivity(crowdAct);
                                 }
                                 break;
@@ -207,7 +179,7 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
                                 if (Constants.checkAndRequestPermissions(EventDashboardActivity.this)) {
                                     Intent videosAct = new Intent(EventDashboardActivity.this, VideosActivity.class);
                                     videosAct.putExtra("name", name);
-                                    videosAct.putExtra("eventId", eventName);
+                                    videosAct.putExtra("eventId", eventId);
                                     startActivity(videosAct);
                                 }
                                 break;
@@ -215,64 +187,64 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
                             case 7:
                                 Intent docShareAct = new Intent(EventDashboardActivity.this, DocShareActivity.class);
                                 docShareAct.putExtra("name", name);
-                                docShareAct.putExtra("eventId", eventName);
+                                docShareAct.putExtra("eventId", eventId);
                                 startActivity(docShareAct);
                                 break;
                             case 17:
                                 Intent qaAct = new Intent(EventDashboardActivity.this, EmpProfileActivity.class);
                                 qaAct.putExtra("name", name);
-                                qaAct.putExtra("eventId", eventName);
+                                qaAct.putExtra("eventId", eventId);
                                 startActivity(qaAct);
                                 break;
                             case 8:
                                 Intent messageAct = new Intent(EventDashboardActivity.this, MessageActivity.class);
                                 messageAct.putExtra("name", name);
-                                messageAct.putExtra("eventId", eventName);
+                                messageAct.putExtra("eventId", eventId);
                                 startActivity(messageAct);
                                 break;
                             case 9:
                                 Intent surveyAct = new Intent(EventDashboardActivity.this, SurveyActivity.class);
                                 surveyAct.putExtra("name", name);
-                                surveyAct.putExtra("eventId", eventName);
+                                surveyAct.putExtra("eventId", eventId);
                                 startActivity(surveyAct);
                                 break;
 
                             case 10:
                                 Intent qrCodeAct = new Intent(EventDashboardActivity.this, QRCodeActivity.class);
                                 qrCodeAct.putExtra("name", name);
-                                qrCodeAct.putExtra("eventId", eventName);
+                                qrCodeAct.putExtra("eventId", eventId);
                                 startActivity(qrCodeAct);
                                 break;
                             case 11:
                                 Intent socialAct = new Intent(EventDashboardActivity.this, SocialMediaActivity.class);
                                 socialAct.putExtra("name", name);
-                                socialAct.putExtra("eventId", eventName);
+                                socialAct.putExtra("eventId", eventId);
                                 startActivity(socialAct);
                                 break;
                             case 12:
                                 Intent networkAct = new Intent(EventDashboardActivity.this, NetworkingActivity.class);
                                 networkAct.putExtra("name", name);
-                                networkAct.putExtra("eventId", eventName);
+                                networkAct.putExtra("eventId", eventId);
 
                                 startActivity(networkAct);
                                 break;
                             case 13:
                                 Intent venueAct = new Intent(EventDashboardActivity.this, VenueActivity.class);
                                 venueAct.putExtra("name", name);
-                                venueAct.putExtra("eventId", eventName);
+                                venueAct.putExtra("eventId", eventId);
                                 startActivity(venueAct);
                                 break;
 
                             case 14:
                                 Intent sponcersAct = new Intent(EventDashboardActivity.this, SponcersActivity.class);
                                 sponcersAct.putExtra("name", name);
-                                sponcersAct.putExtra("eventId", eventName);
+                                sponcersAct.putExtra("eventId", eventId);
                                 startActivity(sponcersAct);
                                 break;
                             case 15:
                                 Intent speakerAct = new Intent(EventDashboardActivity.this, SpeakerProfileActivity.class);
                                 speakerAct.putExtra("name", name);
-                                speakerAct.putExtra("eventId", eventName);
+                                speakerAct.putExtra("eventId", eventId);
                                 startActivity(speakerAct);
                                 break;
 

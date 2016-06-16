@@ -2,8 +2,8 @@ package com.wre.yin.whiterabbiteventapp.beans;
 
 public class ParticipantBean {
 
-    private Long participantId;
-    private String firstName;
+    private Long participantId ;
+    private String firstName ;
     private String lastName;
     private String emailId;
     private String OTP;

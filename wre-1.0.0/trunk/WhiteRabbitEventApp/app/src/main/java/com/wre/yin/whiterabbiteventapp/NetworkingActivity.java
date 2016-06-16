@@ -51,8 +51,8 @@ public class NetworkingActivity extends AppCompatActivity {
                 List<ParticipantEventBean> participantEventBeanList= Utils.getList(result,ParticipantEventBean.class);
                 for(ParticipantEventBean bean:participantEventBeanList){
                     HashMap<String,String> partMap=new HashMap<String, String>();
-                    partMap.put("partId",bean.getParticipateId().toString());
-                    partMap.put("partName",bean.getFirstName()+" "+bean.getLostName());
+                    partMap.put("partId",bean.getParticipantId().toString());
+                    partMap.put("partName",bean.getFirstName()+" "+bean.getLastName());
                     partMap.put("partPhone",bean.getMobile());
                     partList.add(partMap);
 
