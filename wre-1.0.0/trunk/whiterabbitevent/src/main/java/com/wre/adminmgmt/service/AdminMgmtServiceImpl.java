@@ -942,7 +942,7 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 
 	//=================rating
 		@Override
-		public void saveUserRating(RatingBean ratingBean) {
+		public String saveUserRating(RatingBean ratingBean) {
 
 			log.info("save RatingBean....." + ratingBean.toString());
 			Rating rating=new Rating();
@@ -952,10 +952,13 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 			rating.setSourceId(ratingBean.getSourceId());
 			rating.setType(ratingBean.getType());
 			rating.setUserId(ratingBean.getUserId());
-			
-			AdminMgmtDaoImpl.save(rating);
+			String result="fail";
+			long i=(Long) AdminMgmtDaoImpl.save(rating);
+			if(i>0){
+				result="success";
+			}
 			log.info("Rating Saved..");
-
+			return result;
 		}
 
 

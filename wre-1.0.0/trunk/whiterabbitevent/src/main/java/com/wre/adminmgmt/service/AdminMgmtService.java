@@ -112,7 +112,7 @@ public List<RatingBean> getUserRatings(Long eventId);
 
 public List<RatingBean> getUserRatings(RatingBean ratingBean);
 
-public void saveUserRating(RatingBean ratingBean);
+public String saveUserRating(RatingBean ratingBean);
 
 public List<ChatTopicBean> getChatTopicList(Long eventId);
 
