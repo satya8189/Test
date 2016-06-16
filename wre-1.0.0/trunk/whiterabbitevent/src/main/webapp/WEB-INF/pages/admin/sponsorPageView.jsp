@@ -51,7 +51,7 @@ margin-bottom:0px !important;
 						No records found..
 					</td>
 				</tr>
-				<tr>
+				<tr ng-show="filteredSize!=0">
 					<td  colspan="6" align="center">
 						<pagination page="currentPage" max-size="noOfPages" total-items="totalItems" 
 							items-per-page="entryLimit" class="pagination" boundary-links="true"></pagination>
