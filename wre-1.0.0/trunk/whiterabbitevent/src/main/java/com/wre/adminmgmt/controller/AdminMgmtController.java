@@ -59,7 +59,6 @@ import com.wre.adminmgmt.bean.SpeakerBean;
 import com.wre.adminmgmt.bean.SponsorBean;
 import com.wre.adminmgmt.bean.SurveyQuestionAnswerBean;
 import com.wre.adminmgmt.service.AdminMgmtService;
-import com.wre.adminmgmt.service.AdminMgmtServiceImpl;
 import com.wre.common.util.WREConstants;
 import com.wre.systemadminmgmt.bean.ParticipantBean;
 import com.wre.systemadminmgmt.bean.ParticipantEventBean;
@@ -1159,12 +1158,23 @@ public @ResponseBody void saveContactDetails(@RequestBody ContactDetailsBean con
 				}
 				
 				//participantEventBean
-				@RequestMapping(value = "admin/eventParticipantStatusSave", method = RequestMethod.POST)
-				public @ResponseBody
-				void eventParticipantStatusSave(@RequestBody ParticipantEventBean participantEventBean) {
-					log.info("in side save method");
-					adminMgmtService.eventParticipantStatusSave(participantEventBean);
+	@RequestMapping(value = "admin/eventParticipantStatusSave", method = RequestMethod.POST)
+	public @ResponseBody String eventParticipantStatusSave(@RequestBody ParticipantEventBean participantEventBean) {
+	log.info("in side save method");
+	adminMgmtService.eventParticipantStatusSave(participantEventBean);
+	String res="suucess";
+	 return "{\"result\":\"" + res + "\"}";
 				}
+				
+				@RequestMapping(value="admin/getEventParticipantStatus",method=RequestMethod.GET)
+				public @ResponseBody String getEventParticipantStatus(@RequestParam Long eventId ,@RequestParam Long participantId)
+				{
+		
+				log.info("sdfasdfasfss");
+					return adminMgmtService.getEventParticipantStatus(eventId,participantId);
+					
+				}
+				
 			
 				//participantQueriesSaveMethod
 				@RequestMapping(value="admin/participantQueriesSave",method=RequestMethod.POST)
