@@ -289,6 +289,7 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 			galaryBeanOject.setName(galaryOject.getName());
 			galaryBeanOject.setType(galaryOject.getType());
 			galaryBeanOject.setEventId(galaryOject.getEvent().getEventId());
+			galaryBeanOject.setFileName(galaryOject.getFileName());
 
 			galaryBeanList.add(galaryBeanOject);
 
@@ -332,6 +333,9 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 			eventBeanOject.setEventAgenda(eventOject.getEventAgenda());
 			eventBeanOject.setEventDesc(eventOject.getEventDesc());
 			eventBeanOject.setEventName(eventOject.getEventName());
+			eventBeanOject.setDate(eventOject.getEventDate().toString());
+			eventBeanOject.setEventTime(eventOject.getEventTime());
+			
 		}
 
 		return eventBeanOject;
@@ -954,11 +958,13 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 			rating.setSourceId(ratingBean.getSourceId());
 			rating.setType(ratingBean.getType());
 			rating.setUserId(ratingBean.getUserId());
-			String result="fail";
-			long i=(Long) AdminMgmtDaoImpl.save(rating);
+			
+			String result="fails";
+			long i=(Long)AdminMgmtDaoImpl.save(rating);
 			if(i>0){
 				result="success";
 			}
+			
 			log.info("Rating Saved..");
 			return result;
 		}
@@ -1339,7 +1345,9 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 			socialMedia.setUrl(socialMediaBean.getUrl());
 			AdminMgmtDaoImpl.save(socialMedia);
 			log.info("socialMedia saved..");
+			
 		}
+
 		@Override
 		public void updateParticipant(ParticipantBean participantBean) {
 			Participants participant=new Participants();
@@ -1352,6 +1360,7 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 			participant.setPhone(participantBean.getPhoneNumber());
 			participant.setStatus(participantBean.getStatus());
 			//participant.setRegId(participantBean.getRegisterId());
+			
 			AdminMgmtDaoImpl.update(participant);
 		}
 		
@@ -1361,7 +1370,9 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 				//Participants participantsObject = AdminMgmtDaoImpl.participantEdit(participantId,eventId);
 				Object[] participantsObject=AdminMgmtDaoImpl.participantEdit(participantId,eventId);
 				log.info("participant for network edit.PID."+participantsObject[1]);
+				
 					participantBean = new ParticipantBean();
+				
 					participantBean.setParticipantId(((BigInteger)participantsObject[0]).longValue());
 					participantBean.setFirstName((String)participantsObject[1]);
 					participantBean.setLastName((String)participantsObject[2]);
@@ -1371,6 +1382,7 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 				
 				return participantBean;
 			}
+			
 			@Override
 			public void updateParticipantDetails(ParticipantBean participantBean) {
 				//Participants participants = AdminMgmtDaoImpl.participantEdit(participantBean.getParticipantId());
@@ -1391,7 +1403,12 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 				AdminMgmtDaoImpl.eventParticipantStatusSave(participantEventBean);
 
 			}
-
+			
+			public String getEventParticipantStatus(Long eventId,Long participantId) {
+				
+				return AdminMgmtDaoImpl.getEventParticipantStatus(eventId,participantId);
+			}
+			
 			@Override
 			public void participantQueriesSave(ParticipantQuriesBean participantQuriesBean) {
 				
@@ -1409,7 +1426,6 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 				AdminMgmtDaoImpl.save(participantQuries);
 				
 			}
-		
 }
 
 	

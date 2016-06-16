@@ -22,7 +22,6 @@ import com.wre.adminmgmt.bean.SponsorBean;
 import com.wre.adminmgmt.bean.SurveyQuestionAnswerBean;
 import com.wre.systemadminmgmt.bean.ParticipantBean;
 import com.wre.systemadminmgmt.bean.ParticipantEventBean;
-import com.wre.adminmgmt.bean.SocialMediaBean;
 
 public interface AdminMgmtService {
 
@@ -49,7 +48,6 @@ public NewsFeedBean newsEditDetails(Long newsFeedId);
 public void updateNews(NewsFeedBean newsFeedBean);
 
 public void saveNews(NewsFeedBean newsFeedBean);
-
 public List<GalaryBean> galaryList(Long eventId,String type);
 
 public EventBean detailsView(Long eventId);
@@ -155,9 +153,8 @@ public void updateParticipantDetails(ParticipantBean participantBean);
 
 public void eventParticipantStatusSave(ParticipantEventBean participantEventBean);
 
+public String getEventParticipantStatus(Long eventId, Long participantId);
 public void participantQueriesSave(ParticipantQuriesBean participantQuriesBean);
-
-
 
 
 
