@@ -1410,7 +1410,7 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 			}
 			
 			@Override
-			public void participantQueriesSave(ParticipantQuriesBean participantQuriesBean) {
+			public String participantQueriesSave(ParticipantQuriesBean participantQuriesBean) {
 				
 				ParticipantQuries participantQuries = new ParticipantQuries();
 				participantQuries.setQuery(participantQuriesBean.getQuery());
@@ -1423,8 +1423,14 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 				Participants participants = new Participants();
 				participants.setParticipantId(participantQuriesBean.getParticipantId());
 				participantQuries.setParticipants(participants);
-				AdminMgmtDaoImpl.save(participantQuries);
+				long i=(Long)AdminMgmtDaoImpl.save(participantQuries);
 				
+				log.info("savePartcipantQueries--"+i);
+				String result="fail";
+				if(i>0){
+					result="success";
+				}
+				return result;
 			}
 }
 
