@@ -140,12 +140,12 @@
         "source": "/home/yinsol-ejaz/AndroidStudioProjects/svn/WhiteRabbitEventApp/library1/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/layout/abc_list_menu_item_checkbox.xml"
     },
     {
-        "merged": "/home/yinsol-ejaz/AndroidStudioProjects/svn/WhiteRabbitEventApp/library1/build/intermediates/res/merged/release/layout/notification_media_action.xml",
-        "source": "/home/yinsol-ejaz/AndroidStudioProjects/svn/WhiteRabbitEventApp/library1/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/layout/notification_media_action.xml"
-    },
-    {
         "merged": "/home/yinsol-ejaz/AndroidStudioProjects/svn/WhiteRabbitEventApp/library1/build/intermediates/res/merged/release/layout/notification_template_big_media.xml",
         "source": "/home/yinsol-ejaz/AndroidStudioProjects/svn/WhiteRabbitEventApp/library1/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/layout/notification_template_big_media.xml"
+    },
+    {
+        "merged": "/home/yinsol-ejaz/AndroidStudioProjects/svn/WhiteRabbitEventApp/library1/build/intermediates/res/merged/release/layout/notification_media_action.xml",
+        "source": "/home/yinsol-ejaz/AndroidStudioProjects/svn/WhiteRabbitEventApp/library1/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/res/layout/notification_media_action.xml"
     },
     {
         "merged": "/home/yinsol-ejaz/AndroidStudioProjects/svn/WhiteRabbitEventApp/library1/build/intermediates/res/merged/release/layout/abc_screen_simple_overlay_action_mode.xml",
