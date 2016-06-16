@@ -132,7 +132,9 @@
       <ul class="nav navbar-nav navbar-right">
        <li class="head-date"> <i class="glyphicon glyphicon-search"></i></li>
            <li class="head-date"> <i class="glyphicon glyphicon-bell"></i></li>
-           <li class="head-date"> <i class="glyphicon glyphicon-user"></i></li>
+           <li class="head-date"> <span class="glyphicon glyphicon-user"><a class="logout-link" href="/whiterabbitevent/logout">
+            Logout
+            </a></span>
           </ul>
         
       
@@ -154,9 +156,9 @@
                   
                 </ul>
             <ul class="ul ">
-              <li class="li">Invite</li>
+              <li class="li">Invite</li> 
               <li class="li" ><a class="navbar-links" href="#/eventView/${userId}" id="event">Event</a></li>
-              <li class="li">Polling</li>
+             <li class="li">Polling</li>
               <li class="li">Schedule</li>
               <li class="li">News Feed</li>
               <li class="li">Document</li>
@@ -164,7 +166,7 @@
                  <li class="li">Crowd Pics</li>
                  <li class="li">Videos</li>
                  <li class="li">Q&A</li>
-                 <li class="li">SUR</li>
+                 <li class="li">SUR</li> 
               </ul>
             </div>
           <div class="col-md-10">
