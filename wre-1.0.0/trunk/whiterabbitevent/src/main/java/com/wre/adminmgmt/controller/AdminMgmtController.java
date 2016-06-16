@@ -1178,9 +1178,10 @@ public @ResponseBody void saveContactDetails(@RequestBody ContactDetailsBean con
 			
 				//participantQueriesSaveMethod
 				@RequestMapping(value="admin/participantQueriesSave",method=RequestMethod.POST)
-				public  @ResponseBody void participantQueriesSave(@RequestBody ParticipantQuriesBean participantQuriesBean){
+				public  @ResponseBody String participantQueriesSave(@RequestBody ParticipantQuriesBean participantQuriesBean){
 					log.info("we are in participantQueriesSave method");
-					adminMgmtService.participantQueriesSave(participantQuriesBean);
+					String result = adminMgmtService.participantQueriesSave(participantQuriesBean);
+					return result;
 					
 				}
 	
