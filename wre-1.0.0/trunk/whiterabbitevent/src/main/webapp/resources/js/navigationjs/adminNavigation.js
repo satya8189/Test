@@ -8,7 +8,7 @@ var App = angular.module('whiterabbitevent', [ 'ngRoute', 'wre.services','ui.boo
 App.config([ '$routeProvider', function($routeProvider, $Scope) {
 
 	/* eventView */
-	$routeProvider.when('/eventView/:userId', {
+	$routeProvider.when('/eventView', {
 		templateUrl : 'admin/eventView',
 		controller : EventViewController
 	});
@@ -289,7 +289,7 @@ App.config([ '$routeProvider', function($routeProvider, $Scope) {
 	
 	
 	$routeProvider.otherwise({
-			//redirectTo: '/eventView/2'
+			
 			redirectTo : '/eventView'
 	});
 } ]);
