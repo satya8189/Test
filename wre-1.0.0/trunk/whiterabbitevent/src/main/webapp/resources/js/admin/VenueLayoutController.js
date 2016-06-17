@@ -1,11 +1,11 @@
 var VenueLayoutController=function($scope,$location,$http,$routeParams,ngNotifier){
 	$scope.upload={};
-	
+	//$socpe.eventId={};
 	$scope.$on("$routeChangeSuccess",function(){
 		
 		
 		$scope.upload.eventId=$routeParams.eventId;
-		
+		//$scope.eventId=$routeParams.eventId;
 		
 		
 		
@@ -41,7 +41,7 @@ var VenueLayoutController=function($scope,$location,$http,$routeParams,ngNotifie
 
 $scope.cancelUploadLayout = function(eventId)
 {
-	//alert("getting back to eventViewDetails");
+	//alert("getting back to eventViewDetails---"+eventId);
 	$location.path("/eventViewDetails/"+eventId);
 };
 

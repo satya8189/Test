@@ -1,6 +1,6 @@
 
 var NewsFeedViewController = function($scope,$http,$routeParams) {
-	alert("NewsFeedViewController");
+	//alert("NewsFeedViewController");
 	$scope.inviteList = {};
 	
 	
