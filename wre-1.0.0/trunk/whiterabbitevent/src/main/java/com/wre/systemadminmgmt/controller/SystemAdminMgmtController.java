@@ -107,14 +107,14 @@ public class SystemAdminMgmtController{
 			ModelAndView modelAndView=null;
 			UserBean userBean=(UserBean)session.getAttribute(WREConstants.USER);
 			 if(userBean.getRoleId().equals(WREConstants.SYS_ADMIN_ROLE))
-			   {
-			 modelAndView=new ModelAndView("systemadmin/systemAdminTemplate");
-			 log.info("systemadmin login success....");
+			   	{
+				 	modelAndView=new ModelAndView("systemadmin/systemAdminTemplate");
+				 	log.info("systemadmin login success....");
 			   }else{
 				   if(userBean.getRoleId().equals(WREConstants.ADMIN_ROLE))
 				   {
-				   modelAndView=new ModelAndView("admin/adminTemplate"); 
-			   }
+					   modelAndView=new ModelAndView("admin/adminTemplate"); 
+				   }
 			   }
 			  log.info("adminAuthenticationSuccess-------------");
 			

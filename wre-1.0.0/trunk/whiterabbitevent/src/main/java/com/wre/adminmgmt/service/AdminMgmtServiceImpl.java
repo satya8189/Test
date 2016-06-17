@@ -1294,6 +1294,8 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 					socialMediaBean.setSocialId(socialMedia.getSocialId());
 					socialMediaBean.setName(socialMedia.getName());
 					socialMediaBean.setUrl(socialMedia.getUrl());
+					socialMediaBean.setType(socialMedia.getType());
+					socialMediaBean.setEventId(socialMedia.getEvent().getEventId());
 				socialMediaBeanList.add(socialMediaBean);
 			}
 			
@@ -1345,6 +1347,7 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 			socialMedia.setEvent(event);
 			socialMedia.setName(socialMediaBean.getName());
 			socialMedia.setUrl(socialMediaBean.getUrl());
+			socialMedia.setType(socialMediaBean.getType());
 			AdminMgmtDaoImpl.save(socialMedia);
 			log.info("socialMedia saved..");
 			

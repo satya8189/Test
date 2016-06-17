@@ -311,7 +311,7 @@ public class AdminMgmtController {
 
 	// admin/agendoDetails
 
-	@RequestMapping(value = "admin/agendoDetails",method = RequestMethod.GET)
+	@RequestMapping(value = "admin/agendoDetails", method = RequestMethod.GET)
 	public @ResponseBody
 	List<AgendaBean> getAgendoDetails(@RequestParam("eventId") Long eventId) {
 		log.info("in side AgendoDetails method----" + eventId);
@@ -540,13 +540,16 @@ public class AdminMgmtController {
 	/* saveSponsor */// admin/sponsorSave
 	@RequestMapping(value = "admin/sponsorSave", method = RequestMethod.POST)
 	public @ResponseBody
-	void saveSponsor(@RequestParam(value = "file", required = true) MultipartFile file,
+	void saveSponsor(
+			@RequestParam(value = "file", required = true) MultipartFile file,
 			@RequestParam("eventId") Long eventId,
-			 @RequestParam("type") String type, @RequestParam("sponcorDesc") String sponcorDesc ,
-			 @RequestParam("sponcorName") String sponcorName)  {
+			@RequestParam("type") String type,
+			@RequestParam("sponcorDesc") String sponcorDesc,
+			@RequestParam("sponcorName") String sponcorName) {
 
-        log.info(" in side sponsorSave method");
-		adminMgmtService.createSponsor(file,eventId,type,sponcorDesc,sponcorName);
+		log.info(" in side sponsorSave method");
+		adminMgmtService.createSponsor(file, eventId, type, sponcorDesc,
+				sponcorName);
 	}
 
 	// admin/editSponsor
@@ -567,23 +570,23 @@ public class AdminMgmtController {
 		log.info("sponcor for edit......" + sb);
 		return sb;
 	}
-//updateSponsor
+
+	// updateSponsor
 	@RequestMapping(value = "admin/updateSponsor", method = RequestMethod.POST)
 	public @ResponseBody
-	void updateSponsor(@RequestParam(value = "file", required = true) MultipartFile file,
+	void updateSponsor(
+			@RequestParam(value = "file", required = true) MultipartFile file,
 			@RequestParam("eventId") Long eventId,
 			@RequestParam("sponcorId") Long sponcorId,
 			@RequestParam("type") String type,
-			@RequestParam("sponcorName") String sponcorName, 
-	        @RequestParam("sponcorDesc") String sponcorDesc)
-	        {
-	   
-		log.info("in side speakerSave method");
-		
-		adminMgmtService.updateSponsor(file,eventId,type,sponcorName,sponcorDesc,sponcorId);
-	}
+			@RequestParam("sponcorName") String sponcorName,
+			@RequestParam("sponcorDesc") String sponcorDesc) {
 
-	
+		log.info("in side speakerSave method");
+
+		adminMgmtService.updateSponsor(file, eventId, type, sponcorName,
+				sponcorDesc, sponcorId);
+	}
 
 	/* ============End of Sponsor======== */
 
@@ -598,9 +601,9 @@ public class AdminMgmtController {
 	@RequestMapping("admin/speakersList")
 	public @ResponseBody
 	List<SpeakerBean> getSpeakersList(Long eventId) {
-		log.info("in getSpeakersList---"+eventId);
+		log.info("in getSpeakersList---" + eventId);
 		List<SpeakerBean> sl = adminMgmtService.getSpeakersList(eventId);
-		//log.info("---eventId----" + eventId);
+		// log.info("---eventId----" + eventId);
 		log.info("--speakerslist ---" + sl);
 		// return null;
 		return sl;
@@ -617,17 +620,19 @@ public class AdminMgmtController {
 
 	@RequestMapping(value = "admin/speakerSave", method = RequestMethod.POST)
 	public @ResponseBody
-	void saveSpeaker(@RequestParam(value = "file", required = true) MultipartFile file,
-			@RequestParam("eventId") Long eventId,	
+	void saveSpeaker(
+			@RequestParam(value = "file", required = true) MultipartFile file,
+			@RequestParam("eventId") Long eventId,
 			@RequestParam("type") String type,
-			@RequestParam("speakerName") String speakerName, 
-	        @RequestParam("location") String location,
-	        @RequestParam("title") String title,
-	        @RequestParam("description") String description,
-	        @RequestParam("rating") String rating){
+			@RequestParam("speakerName") String speakerName,
+			@RequestParam("location") String location,
+			@RequestParam("title") String title,
+			@RequestParam("description") String description,
+			@RequestParam("rating") String rating) {
 		log.info("in side speakerSave method");
-		
-		adminMgmtService.createSpeaker(file,eventId,type,speakerName,location,title,description,rating);
+
+		adminMgmtService.createSpeaker(file, eventId, type, speakerName,
+				location, title, description, rating);
 	}
 
 	// admin/speakerEdit
@@ -649,18 +654,20 @@ public class AdminMgmtController {
 	// udpateSpeaker
 	@RequestMapping(value = "admin/updateSpeaker", method = RequestMethod.POST)
 	public @ResponseBody
-	void udpateSpeaker(@RequestParam(value = "file", required = true) MultipartFile file,
+	void udpateSpeaker(
+			@RequestParam(value = "file", required = true) MultipartFile file,
 			@RequestParam("eventId") Long eventId,
 			@RequestParam("speakerId") Long speakerId,
 			@RequestParam("type") String type,
-			@RequestParam("speakerName") String speakerName, 
-	        @RequestParam("location") String location,
-	        @RequestParam("title") String title,
-	        @RequestParam("description") String description,
-	        @RequestParam("rating") String rating){
+			@RequestParam("speakerName") String speakerName,
+			@RequestParam("location") String location,
+			@RequestParam("title") String title,
+			@RequestParam("description") String description,
+			@RequestParam("rating") String rating) {
 		log.info("in side speakerSave method");
-		
-		adminMgmtService.udpateSpeaker(file,eventId,type,speakerName,location,title,description,rating,speakerId);
+
+		adminMgmtService.udpateSpeaker(file, eventId, type, speakerName,
+				location, title, description, rating, speakerId);
 	}
 
 	/* Speaker Ends Here* */
@@ -673,297 +680,314 @@ public class AdminMgmtController {
 		return "admin/venueLayoutView";
 	}
 
-
-   
-    @RequestMapping(value ="getuser",method = RequestMethod.POST)
-	    public  @ResponseBody List<ChatBean> getuser(@RequestBody ChatBean chatBean) {
-	    	log.info("in side updatespeaker method");
-	    		log.info("checking......"+chatBean.getMobno());
-	    		return adminMgmtService.getUser(chatBean.getMobno());
-    }
-
-
-   
-    
-    
-    @RequestMapping(value ="send",method = RequestMethod.POST)
-	    public @ResponseBody String send(@RequestBody ChatBean chatBean) {
-	    	
-String result="success";
-HttpResponse httpResponse = null;
-HttpClient httpclient = null;
-HttpEntity httpEntity = null;
-String url="https://android.googleapis.com/gcm/send";
-JSONArray array = new JSONArray();
-//array.add("APA91bEe6q1iMfeEviUi5h6mz4JDGt8_U2FUkip_m6umlgEwfmBAjYGygYVTaqfN60ibhGkIaXh8x3L1Oj3hb0eLbTpuj-oQJmgByw53nPrBjRoqsdIeNQU3-YUrkH9zDXYwmGT7bkSE");
-List<ChatBean> chatBeanList=adminMgmtService.getUser(chatBean.getFrom());
-for(ChatBean chatBeanObj:chatBeanList){
-array.add(chatBeanObj.getReg_id());
-}
-
-JSONObject obj = new JSONObject();
-JSONObject data = new JSONObject();
-data.put("msg", chatBean.getMsg());
-data.put("fromu", chatBean.getFrom());
-data.put("name",chatBean.getFromn());
-
-
-obj.put("registration_ids",array);
-obj.put("data", data);
-obj.put("time_to_live", 4444);
-System.out.println("final string ---"+obj.toString());
-try {
-HttpPost post = new HttpPost(url);
-post.setEntity(new StringEntity(obj.toString()));
-httpclient = new DefaultHttpClient();
-post.setHeader("Accept", "application/json");
-post.setHeader("Content-type", "application/json");
-post.setHeader("Authorization","key=AIzaSyB0jpk-YqaD6UsG5IppdjGLEM0ozNCNHSk");
-httpResponse = httpclient.execute(post);
-httpEntity = httpResponse.getEntity();
-String jsonResult = inputStreamToString(httpResponse.getEntity().getContent()).toString();
-System.out.println("Result " + jsonResult);
-result="Success";
-}catch(Exception e){
-e.printStackTrace();
-}
-	    	return "{\"response\":\"" + result + "\"}";
-	     }
-
-private StringBuilder inputStreamToString(InputStream is) {
-String rLine = "";
-StringBuilder answer = new StringBuilder();
-InputStreamReader isr = new InputStreamReader(is);
-BufferedReader rd = new BufferedReader(isr);
-try {
-while ((rLine = rd.readLine()) != null) {
-answer.append(rLine);
-}
-} catch (IOException e) {
-e.printStackTrace();
-}
-return answer;
-}
-//admin/uploadEventImage
-
-@RequestMapping(value = "admin/uploadEventImage", method = RequestMethod.POST)
-public @ResponseBody
-void uploadEventImage(
-		@RequestParam(value = "file", required = true) MultipartFile file,
-		@RequestParam("eventId") Long eventId,
-		@RequestParam("type") String type) {
-	log.info("in side uploadVenu method");
-	log.info("id--" + eventId);
-	log.info("file name---" + file.getOriginalFilename());
-	adminMgmtService.uploadEventImage(file, eventId, type);
-}
-
-@RequestMapping(value="admin/getEventImages",method = RequestMethod.GET)
-public @ResponseBody List<GalaryBean> getEventImages(@RequestParam("eventId") Long eventId,@RequestParam("type") String type){
-	List<GalaryBean> eventImages=new ArrayList<GalaryBean>();
-	//String path="/Resources/wre/"+eventId+"/"+type;
-	String path=WREConstants.RESOURCE_PATH+eventId+"/"+type;
-	File folder = new File(path);
-	File[] listOfFiles = folder.listFiles();
-	for (File file : listOfFiles) {
-		GalaryBean galaryBean = new GalaryBean();
-		galaryBean.setName(file.getName());
-		galaryBean.setUrl("/Resources/wre/"+eventId+"/"+type+"/"+file.getName());
-		eventImages.add(galaryBean);
-	}
-	log.info(eventImages.size());
-	return eventImages;
-}
-
-@RequestMapping(value = "admin/eventServicesList", method = RequestMethod.GET)
-public @ResponseBody
-List<EventBean> eventServicesList(@RequestParam("eventId") Long eventId) {
-	List<EventBean> eventList = adminMgmtService
-			.geteventServicesList(eventId);
-	return eventList;
-
-}
-
-@RequestMapping(value ="/participantRegUpdate",method = RequestMethod.POST)
-    public  @ResponseBody String participantRegUpdate(@RequestBody ParticipantBean participantBean) {
-    	log.info("in side updatespeaker method");
-    		log.info("checking......"+participantBean.getPhoneNumber());
-    		String result=adminMgmtService.participantRegUpdate(participantBean);
-    		return "{\"response\":\"" + result + "\"}";
-}
-
-
-
-//=================Rating API
-//to save the rating given
-@RequestMapping(value="admin/saveUserRating",method = RequestMethod.POST)
-public @ResponseBody String saveUserRating(@RequestBody RatingBean ratingBean){
-	System.out.println("in saveUserRating.."+ratingBean.getType());
-	log.info("rating sent to service..");
-	return adminMgmtService.saveUserRating(ratingBean);
-}
-
-//to list all the ratings
-@RequestMapping(value="admin/getUserRatings",method = RequestMethod.POST)
-public @ResponseBody List<RatingBean> getUserRatings(@RequestBody RatingBean ratingBean)
-//public @ResponseBody List<RatingBean> getUserRatings(@RequestParam("eventId")Long eventId)
-{
-	log.info("in getUserRatingsList by EventId--");
-	//List<RatingBean> userRatingsList=adminMgmtService.getUserRatings(eventId);
-	List<RatingBean> userRatingsList=adminMgmtService.getUserRatings(ratingBean);
-	return userRatingsList;
-}
-
-
-
-//=========contact details.....
-@RequestMapping("admin/contactDetailsView")
-public String goToContactDetailsView()
-{
-	log.info("in goToContactDetailsView");
-	return "admin/contactDetailsView";
+	@RequestMapping(value = "getuser", method = RequestMethod.POST)
+	public @ResponseBody
+	List<ChatBean> getuser(@RequestBody ChatBean chatBean) {
+		log.info("in side updatespeaker method");
+		log.info("checking......" + chatBean.getMobno());
+		return adminMgmtService.getUser(chatBean.getMobno());
 	}
 
-//To view Contact Details
-@RequestMapping(value="admin/ViewContactDetails",method= RequestMethod.GET)
-public @ResponseBody List<ContactDetailsBean> adminViewContactDetails(Long eventId){
-	List<ContactDetailsBean> contactDetailsList=adminMgmtService.adminViewContactDetails(eventId);
-	return contactDetailsList;
-}
+	@RequestMapping(value = "send", method = RequestMethod.POST)
+	public @ResponseBody
+	String send(@RequestBody ChatBean chatBean) {
 
-//to Edit the contact details
-@RequestMapping("admin/editContactDetails")
-public String goToEditContactDetails()
-{
-	log.info("in goToEditContactDetails");
-	return "admin/editContactDetails";
+		String result = "success";
+		HttpResponse httpResponse = null;
+		HttpClient httpclient = null;
+		HttpEntity httpEntity = null;
+		String url = "https://android.googleapis.com/gcm/send";
+		JSONArray array = new JSONArray();
+		// array.add("APA91bEe6q1iMfeEviUi5h6mz4JDGt8_U2FUkip_m6umlgEwfmBAjYGygYVTaqfN60ibhGkIaXh8x3L1Oj3hb0eLbTpuj-oQJmgByw53nPrBjRoqsdIeNQU3-YUrkH9zDXYwmGT7bkSE");
+		List<ChatBean> chatBeanList = adminMgmtService.getUser(chatBean
+				.getFrom());
+		for (ChatBean chatBeanObj : chatBeanList) {
+			array.add(chatBeanObj.getReg_id());
+		}
+
+		JSONObject obj = new JSONObject();
+		JSONObject data = new JSONObject();
+		data.put("msg", chatBean.getMsg());
+		data.put("fromu", chatBean.getFrom());
+		data.put("name", chatBean.getFromn());
+
+		obj.put("registration_ids", array);
+		obj.put("data", data);
+		obj.put("time_to_live", 4444);
+		System.out.println("final string ---" + obj.toString());
+		try {
+			HttpPost post = new HttpPost(url);
+			post.setEntity(new StringEntity(obj.toString()));
+			httpclient = new DefaultHttpClient();
+			post.setHeader("Accept", "application/json");
+			post.setHeader("Content-type", "application/json");
+			post.setHeader("Authorization",
+					"key=AIzaSyB0jpk-YqaD6UsG5IppdjGLEM0ozNCNHSk");
+			httpResponse = httpclient.execute(post);
+			httpEntity = httpResponse.getEntity();
+			String jsonResult = inputStreamToString(
+					httpResponse.getEntity().getContent()).toString();
+			System.out.println("Result " + jsonResult);
+			result = "Success";
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "{\"response\":\"" + result + "\"}";
 	}
 
+	private StringBuilder inputStreamToString(InputStream is) {
+		String rLine = "";
+		StringBuilder answer = new StringBuilder();
+		InputStreamReader isr = new InputStreamReader(is);
+		BufferedReader rd = new BufferedReader(isr);
+		try {
+			while ((rLine = rd.readLine()) != null) {
+				answer.append(rLine);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return answer;
+	}
 
-//get contact dettails to edit  admin/getContactDetailsForEdit
-@RequestMapping(value="admin/getContactDetailsForEdit",method= RequestMethod.GET)
-//public @ResponseBody  List<ContactDetailsBean> getContactDetailsForEditByContactId(@RequestParam Long contactId)
-public @ResponseBody  ContactDetailsBean getContactDetailsForEditByContactId(@RequestParam Long contactId)
-{
-	log.info("in getContactDetails for edit"+contactId);
-	return adminMgmtService.getContactDetailsForEdit(contactId);
-	
-}
+	// admin/uploadEventImage
 
-//Hav to return string
-//update contact details by edit  admin/updateContactDetails
-@RequestMapping(value="admin/updateContactDetails",method=RequestMethod.POST)
-public @ResponseBody void updateContactDetails(@RequestBody ContactDetailsBean contactDetailsBean)
-{
-	log.info("in updateContactDetails");
-	adminMgmtService.updateContactDetails(contactDetailsBean);
-	
-}
+	@RequestMapping(value = "admin/uploadEventImage", method = RequestMethod.POST)
+	public @ResponseBody
+	void uploadEventImage(
+			@RequestParam(value = "file", required = true) MultipartFile file,
+			@RequestParam("eventId") Long eventId,
+			@RequestParam("type") String type) {
+		log.info("in side uploadVenu method");
+		log.info("id--" + eventId);
+		log.info("file name---" + file.getOriginalFilename());
+		adminMgmtService.uploadEventImage(file, eventId, type);
+	}
 
-//=========return string as data stored contactAPI
-@RequestMapping(value="admin/updateHelpDetails",method=RequestMethod.POST)
-public @ResponseBody String saveContactsDetails(@RequestBody ContactDetailsBean contactDetailsBean)
-{
-	log.info("in updateContactDetails");
-	return adminMgmtService.updateContactDetails(contactDetailsBean);	
-}
+	@RequestMapping(value = "admin/getEventImages", method = RequestMethod.GET)
+	public @ResponseBody
+	List<GalaryBean> getEventImages(@RequestParam("eventId") Long eventId,
+			@RequestParam("type") String type) {
+		List<GalaryBean> eventImages = new ArrayList<GalaryBean>();
+		// String path="/Resources/wre/"+eventId+"/"+type;
+		String path = WREConstants.RESOURCE_PATH + eventId + "/" + type;
+		File folder = new File(path);
+		File[] listOfFiles = folder.listFiles();
+		for (File file : listOfFiles) {
+			GalaryBean galaryBean = new GalaryBean();
+			galaryBean.setName(file.getName());
+			galaryBean.setUrl("/Resources/wre/" + eventId + "/" + type + "/"
+					+ file.getName());
+			eventImages.add(galaryBean);
+		}
+		log.info(eventImages.size());
+		return eventImages;
+	}
 
+	@RequestMapping(value = "admin/eventServicesList", method = RequestMethod.GET)
+	public @ResponseBody
+	List<EventBean> eventServicesList(@RequestParam("eventId") Long eventId) {
+		List<EventBean> eventList = adminMgmtService
+				.geteventServicesList(eventId);
+		return eventList;
 
-/*to save new contact details....admin/saveContactDetails*/
-@RequestMapping(value="admin/saveContactDetails",method=RequestMethod.POST)
-public @ResponseBody void saveContactDetails(@RequestBody ContactDetailsBean contactDetailsBean)
-{
-	log.info("in saveContactDetails  "+contactDetailsBean.toString());
-	adminMgmtService.saveContactDetails(contactDetailsBean);
-}
+	}
 
+	@RequestMapping(value = "/participantRegUpdate", method = RequestMethod.POST)
+	public @ResponseBody
+	String participantRegUpdate(@RequestBody ParticipantBean participantBean) {
+		log.info("in side updatespeaker method");
+		log.info("checking......" + participantBean.getPhoneNumber());
+		String result = adminMgmtService.participantRegUpdate(participantBean);
+		return "{\"response\":\"" + result + "\"}";
+	}
 
-/*ChatTopic data */
-//chat_topic List NavigationListPage
-	@RequestMapping(value="admin/navigateToChatTopicList")
-	public String navigateToChatTopicList(){
+	// =================Rating API
+	// to save the rating given
+	@RequestMapping(value = "admin/saveUserRating", method = RequestMethod.POST)
+	public @ResponseBody
+	String saveUserRating(@RequestBody RatingBean ratingBean) {
+		System.out.println("in saveUserRating.." + ratingBean.getType());
+		log.info("rating sent to service..");
+		return adminMgmtService.saveUserRating(ratingBean);
+	}
+
+	// to list all the ratings
+	@RequestMapping(value = "admin/getUserRatings", method = RequestMethod.POST)
+	public @ResponseBody
+	List<RatingBean> getUserRatings(@RequestBody RatingBean ratingBean)
+	// public @ResponseBody List<RatingBean>
+	// getUserRatings(@RequestParam("eventId")Long eventId)
+	{
+		log.info("in getUserRatingsList by EventId--");
+		// List<RatingBean>
+		// userRatingsList=adminMgmtService.getUserRatings(eventId);
+		List<RatingBean> userRatingsList = adminMgmtService
+				.getUserRatings(ratingBean);
+		return userRatingsList;
+	}
+
+	// =========contact details.....
+	@RequestMapping("admin/contactDetailsView")
+	public String goToContactDetailsView() {
+		log.info("in goToContactDetailsView");
+		return "admin/contactDetailsView";
+	}
+
+	// To view Contact Details
+	@RequestMapping(value = "admin/ViewContactDetails", method = RequestMethod.GET)
+	public @ResponseBody
+	List<ContactDetailsBean> adminViewContactDetails(Long eventId) {
+		List<ContactDetailsBean> contactDetailsList = adminMgmtService
+				.adminViewContactDetails(eventId);
+		return contactDetailsList;
+	}
+
+	// to Edit the contact details
+	@RequestMapping("admin/editContactDetails")
+	public String goToEditContactDetails() {
+		log.info("in goToEditContactDetails");
+		return "admin/editContactDetails";
+	}
+
+	// get contact dettails to edit admin/getContactDetailsForEdit
+	@RequestMapping(value = "admin/getContactDetailsForEdit", method = RequestMethod.GET)
+	// public @ResponseBody List<ContactDetailsBean>
+	// getContactDetailsForEditByContactId(@RequestParam Long contactId)
+	public @ResponseBody
+	ContactDetailsBean getContactDetailsForEditByContactId(
+			@RequestParam Long contactId) {
+		log.info("in getContactDetails for edit" + contactId);
+		return adminMgmtService.getContactDetailsForEdit(contactId);
+
+	}
+
+	// Hav to return string
+	// update contact details by edit admin/updateContactDetails
+	@RequestMapping(value = "admin/updateContactDetails", method = RequestMethod.POST)
+	public @ResponseBody
+	void updateContactDetails(@RequestBody ContactDetailsBean contactDetailsBean) {
+		log.info("in updateContactDetails");
+		adminMgmtService.updateContactDetails(contactDetailsBean);
+
+	}
+
+	// =========return string as data stored contactAPI
+	@RequestMapping(value = "admin/updateHelpDetails", method = RequestMethod.POST)
+	public @ResponseBody
+	String saveContactsDetails(
+			@RequestBody ContactDetailsBean contactDetailsBean) {
+		log.info("in updateContactDetails");
+		return adminMgmtService.updateContactDetails(contactDetailsBean);
+	}
+
+	/* to save new contact details....admin/saveContactDetails */
+	@RequestMapping(value = "admin/saveContactDetails", method = RequestMethod.POST)
+	public @ResponseBody
+	void saveContactDetails(@RequestBody ContactDetailsBean contactDetailsBean) {
+		log.info("in saveContactDetails  " + contactDetailsBean.toString());
+		adminMgmtService.saveContactDetails(contactDetailsBean);
+	}
+
+	/* ChatTopic data */
+	// chat_topic List NavigationListPage
+	@RequestMapping(value = "admin/navigateToChatTopicList")
+	public String navigateToChatTopicList() {
 		log.info("we are in navigationToChatTopicList");
 		return "admin/chatTopicView";
 	}
-	
-	//chatTopicList method
-	@RequestMapping(value ="admin/chatTopicList",method = RequestMethod.GET)
-	public @ResponseBody List<ChatTopicBean> getChatTopicList(@RequestParam("eventId") Long eventId) {
-		log.info("we are in chatTopicList " +eventId);
-		List<ChatTopicBean> chatTopicList = adminMgmtService.getChatTopicList(eventId);
-		log.info("size of List is"+chatTopicList.size());
+
+	// chatTopicList method
+	@RequestMapping(value = "admin/chatTopicList", method = RequestMethod.GET)
+	public @ResponseBody
+	List<ChatTopicBean> getChatTopicList(@RequestParam("eventId") Long eventId) {
+		log.info("we are in chatTopicList " + eventId);
+		List<ChatTopicBean> chatTopicList = adminMgmtService
+				.getChatTopicList(eventId);
+		log.info("size of List is" + chatTopicList.size());
 		return chatTopicList;
 
 	}
-	
-	//chat_topicNavigationPage
-	@RequestMapping(value="admin/navigateToCreateChatTopic")
-	public String navigateToChatTopicCreate(){
-		return"admin/chatTopicCreate";
+
+	// chat_topicNavigationPage
+	@RequestMapping(value = "admin/navigateToCreateChatTopic")
+	public String navigateToChatTopicCreate() {
+		return "admin/chatTopicCreate";
 	}
-	
-	//Chat_Topic save method 
-	@RequestMapping(value="admin/saveChatTopic",method=RequestMethod.POST)
-	public @ResponseBody void saveChatTopic(@RequestBody ChatTopicBean chatTopicBean){
+
+	// Chat_Topic save method
+	@RequestMapping(value = "admin/saveChatTopic", method = RequestMethod.POST)
+	public @ResponseBody
+	void saveChatTopic(@RequestBody ChatTopicBean chatTopicBean) {
 		log.info("we are in chatTopic save method");
 		adminMgmtService.saveChatTopic(chatTopicBean);
 	}
-	//navigate to chatDetailsPage
-	@RequestMapping(value="admin/navigateChatDetails")
-	public String navigateToChatDetails(){
+
+	// navigate to chatDetailsPage
+	@RequestMapping(value = "admin/navigateChatDetails")
+	public String navigateToChatDetails() {
 		log.info("we are in navigate ChatViewDetils");
 		return "admin/chatTopicDetails";
 	}
-	//Chat_topic Details method
-	@RequestMapping(value="admin/chatTopicDetails",method = RequestMethod.GET)
-	public @ResponseBody ChatTopicBean getChatTopicDetails(@RequestParam("chatTopicId")Long chatTopicId){
-		log.info("we are in chatTopicDetalis"+chatTopicId);
+
+	// Chat_topic Details method
+	@RequestMapping(value = "admin/chatTopicDetails", method = RequestMethod.GET)
+	public @ResponseBody
+	ChatTopicBean getChatTopicDetails(
+			@RequestParam("chatTopicId") Long chatTopicId) {
+		log.info("we are in chatTopicDetalis" + chatTopicId);
 		return adminMgmtService.getChatTopicDetails(chatTopicId);
 	}
-	
-	//chat_topic Update method
-	@RequestMapping(value="admin/chatTopicUpdate",method = RequestMethod.POST)
-	public @ResponseBody void chatTopicUpdate(@RequestBody ChatTopicBean chatTopicBean){
+
+	// chat_topic Update method
+	@RequestMapping(value = "admin/chatTopicUpdate", method = RequestMethod.POST)
+	public @ResponseBody
+	void chatTopicUpdate(@RequestBody ChatTopicBean chatTopicBean) {
 		log.info("we are in chatTopicUpdate");
 		adminMgmtService.chatTopicUpdate(chatTopicBean);
 	}
-	//chat_topic Delete method
-	@RequestMapping(value="admin/deleteChatTopic",method=RequestMethod.GET)
-	public @ResponseBody void chatTopicDelete(@RequestParam ("chatTopicId") Long chatTopicId){
+
+	// chat_topic Delete method
+	@RequestMapping(value = "admin/deleteChatTopic", method = RequestMethod.GET)
+	public @ResponseBody
+	void chatTopicDelete(@RequestParam("chatTopicId") Long chatTopicId) {
 		log.info("we are in chatTopicDelete ");
-		 adminMgmtService.chatTopicDelete(chatTopicId);
+		adminMgmtService.chatTopicDelete(chatTopicId);
 	}
-	
-	//admin/ParticipantEventBeanList
+
+	// admin/ParticipantEventBeanList
 	@RequestMapping(value = "admin/ParticipantEventBeanList", method = RequestMethod.GET)
 	public @ResponseBody
-	List<ParticipantEventBean> getParticipantEventBeanList(@RequestParam("eventId") Long eventId,
+	List<ParticipantEventBean> getParticipantEventBeanList(
+			@RequestParam("eventId") Long eventId,
 			@RequestParam("status") String status) {
 		List<ParticipantEventBean> participantEventList = adminMgmtService
-				.getParticipantEventBeanList(eventId,status);
+				.getParticipantEventBeanList(eventId, status);
 		return participantEventList;
 
 	}
-	
-	//participantEventBean
+
+	// participantEventBean
 	@RequestMapping(value = "admin/eventParticipantSave", method = RequestMethod.POST)
 	public @ResponseBody
-	void eventParticipants(@RequestBody ParticipantEventBean participantEventBean) {
+	void eventParticipants(
+			@RequestBody ParticipantEventBean participantEventBean) {
 		log.info("in side save method");
 		adminMgmtService.eventParticipantSave(participantEventBean);
 	}
 
-	//updateParticipantAPI.....to updateparticipant by passing bean with name..
-	//ParticipantBean..with attributes..participantId and data(exclude otp,registerId)..entity-participants
-	@RequestMapping(value="admin/updateParticipantDetails",method=RequestMethod.POST)
-	public @ResponseBody String updateParticipantDetails(@RequestBody ParticipantBean participantBean)
-	{
-		log.info("in update Participant details.."+participantBean.getEmailId());
+	// updateParticipantAPI.....to updateparticipant by passing bean with name..
+	// ParticipantBean..with attributes..participantId and data(exclude
+	// otp,registerId)..entity-participants
+	@RequestMapping(value = "admin/updateParticipantDetails", method = RequestMethod.POST)
+	public @ResponseBody
+	String updateParticipantDetails(@RequestBody ParticipantBean participantBean) {
+		log.info("in update Participant details.."
+				+ participantBean.getEmailId());
 		adminMgmtService.updateParticipant(participantBean);
 		return "success";
 	}
-	
-	
+
 	// admin/QuestionAndAnswersView
 	@RequestMapping(value = "admin/QuestionAndAnswersView")
 	public String QuestionAndAnswersView() {
@@ -971,142 +995,154 @@ public @ResponseBody void saveContactDetails(@RequestBody ContactDetailsBean con
 		return "admin/QuestionAndAnswersView";
 	}
 
-	//Get participants list..........admin/getParticipantsList
-	@RequestMapping(value="admin/getParticipantsList",method=RequestMethod.GET)
-	public @ResponseBody List<ParticipantBean> getParticipantsList(@RequestParam("eventId") Long eventId)
-	{
-		log.info("in admin/getParticipantsList"+eventId);
+	// Get participants list..........admin/getParticipantsList
+	@RequestMapping(value = "admin/getParticipantsList", method = RequestMethod.GET)
+	public @ResponseBody
+	List<ParticipantBean> getParticipantsList(
+			@RequestParam("eventId") Long eventId) {
+		log.info("in admin/getParticipantsList" + eventId);
 		return adminMgmtService.getParticipantsList(eventId);
 	}
 
-		//go to admin/ViewParticipantAnswers page
-	@RequestMapping(value="admin/ViewParticipantAnswers")
-	public String goToViewParticipantAnswers()
-	{
+	// go to admin/ViewParticipantAnswers page
+	@RequestMapping(value = "admin/ViewParticipantAnswers")
+	public String goToViewParticipantAnswers() {
 		return "admin/ViewParticipantAnswers";
 	}
-	
-	
-	
-	//to get the paricipant anwers...admin/getViewParticipantAnswers 
-	@RequestMapping(value="admin/getViewParticipantAnswers",method=RequestMethod.GET)
-	public @ResponseBody List<SurveyQuestionAnswerBean> getParticipantsAnswers(@RequestParam("eventId")Long eventId,@RequestParam("participantId") Long participantId)
-	{
-	//select sq.Question,sq.Answer,sqa.Participant_Answer from survey_question sq,survey_question_answer sqa where sqa.Participant_id=61 and sqa.Event_ID=14 and sqa.Question_ID=sq.Question_ID;
-		log.info("in admin/getViewParticipantAnswers--eventiD--"+eventId+"--participantId..."+participantId);
-		//create surveyQuestionAnswerBean wrto SurveyQuestionAnswer entity
-		
-		return adminMgmtService.getParticipantsAnswers(eventId,participantId);
-		//return null;
+
+	// to get the paricipant anwers...admin/getViewParticipantAnswers
+	@RequestMapping(value = "admin/getViewParticipantAnswers", method = RequestMethod.GET)
+	public @ResponseBody
+	List<SurveyQuestionAnswerBean> getParticipantsAnswers(
+			@RequestParam("eventId") Long eventId,
+			@RequestParam("participantId") Long participantId) {
+		// select sq.Question,sq.Answer,sqa.Participant_Answer from
+		// survey_question sq,survey_question_answer sqa where
+		// sqa.Participant_id=61 and sqa.Event_ID=14 and
+		// sqa.Question_ID=sq.Question_ID;
+		log.info("in admin/getViewParticipantAnswers--eventiD--" + eventId
+				+ "--participantId..." + participantId);
+		// create surveyQuestionAnswerBean wrto SurveyQuestionAnswer entity
+
+		return adminMgmtService.getParticipantsAnswers(eventId, participantId);
+		// return null;
 	}
-	
-	//===saveQuestion&Answer API by QId,EventId,ParticipantId,Answer
-	
-	@RequestMapping(value="admin/saveQuestionAnswer",method=RequestMethod.POST)
-	public @ResponseBody String saveQuestionAnswer(@RequestBody QuestionBean questionBean)
-	{
+
+	// ===saveQuestion&Answer API by QId,EventId,ParticipantId,Answer
+
+	@RequestMapping(value = "admin/saveQuestionAnswer", method = RequestMethod.POST)
+	public @ResponseBody
+	String saveQuestionAnswer(@RequestBody QuestionBean questionBean) {
 		return adminMgmtService.saveSurveyQuestionAnswer(questionBean);
-		
+
 	}
-	
-	//===============Q&A
-	
-	//===========SOCIALMEDIA====
-	
-	//go to admin/SocialMedia page
-	@RequestMapping(value="admin/SocialMedia")
-	public String goToSocialMedia()
-	{
+
+	// ===============Q&A
+
+	// ===========SOCIALMEDIA====
+
+	// go to admin/SocialMedia page
+	@RequestMapping(value = "admin/SocialMedia")
+	public String goToSocialMedia() {
 		return "admin/SocialMedia";
 	}
-	
-	//goto admin/createSocialMedia
-	@RequestMapping(value="admin/createSocialMedia")
-	public String goToSocialMediaCreate()
-	{
+
+	// goto admin/createSocialMedia
+	@RequestMapping(value = "admin/createSocialMedia")
+	public String goToSocialMediaCreate() {
 		return "admin/CreateSocialMedia";
 	}
-	
-	//to save socialMedia..
-	@RequestMapping(value="admin/saveSocialMedia",method=RequestMethod.POST)
-	public @ResponseBody void saveSocialMedia(@RequestBody SocialMediaBean socialMediaBean)
-	{
-		log.info("in admin/saveSocialMedia.."+socialMediaBean.toString());
+
+	// to save socialMedia..
+	@RequestMapping(value = "admin/saveSocialMedia", method = RequestMethod.POST)
+	public @ResponseBody
+	void saveSocialMedia(@RequestBody SocialMediaBean socialMediaBean) {
+		log.info("in admin/saveSocialMedia.." + socialMediaBean.toString());
 		adminMgmtService.saveSocialMedia(socialMediaBean);
 	}
-	
-	//to get social media list
-	//this can be used as API to list the SocialMedia
-	@RequestMapping(value="admin/getSocialMediaList",method=RequestMethod.GET)
-	public @ResponseBody List<SocialMediaBean> getSocialMedialList(@RequestParam("eventId")Long eventId){
-		log.info("in getSocialMediaList.."+eventId);
+
+	// to get social media list
+	// this can be used as API to list the SocialMedia
+	@RequestMapping(value = "admin/getSocialMediaList", method = RequestMethod.GET)
+	public @ResponseBody
+	List<SocialMediaBean> getSocialMedialList(
+			@RequestParam("eventId") Long eventId) {
+		log.info("in getSocialMediaList.." + eventId);
 		return adminMgmtService.getSocialMediaList(eventId);
-		//return null;
+		// return null;
 	}
-	
-	//to edit the social media list...admin/editSocialMedia
-	@RequestMapping(value="admin/editSocialMedia")
-	public String goToEditSocialMedia(){
-		log.info("in admin/editSocialMedia--");	
+
+	// to edit the social media list...admin/editSocialMedia
+	@RequestMapping(value = "admin/editSocialMedia")
+	public String goToEditSocialMedia() {
+		log.info("in admin/editSocialMedia--");
 		return "admin/EditSocialMedia";
 	}
-	
-	//to get admin/getSocialMediaForEdit
-	@RequestMapping(value="admin/getSocialMediaForEdit",method=RequestMethod.GET)
-	public @ResponseBody SocialMediaBean getSocialMediaForEdit(@RequestParam("socialId")Long socialId){
-		log.info("admin/getSocialMediaForEdit==="+socialId);
+
+	// to get admin/getSocialMediaForEdit
+	@RequestMapping(value = "admin/getSocialMediaForEdit", method = RequestMethod.GET)
+	public @ResponseBody
+	SocialMediaBean getSocialMediaForEdit(
+			@RequestParam("socialId") Long socialId) {
+		log.info("admin/getSocialMediaForEdit===" + socialId);
 		return adminMgmtService.getSocialMediaForEdit(socialId);
 	}
-	
-	
-	//admin/updateSocialMedia
-	@RequestMapping(value="admin/updateSocialMedia",method=RequestMethod.POST)
-	public @ResponseBody void updateSocialMedia(@RequestBody SocialMediaBean socialMediaBean)
-	{
-		log.info("in admin/updateSocialMedia.."+socialMediaBean.getName());
+
+	// admin/updateSocialMedia
+	@RequestMapping(value = "admin/updateSocialMedia", method = RequestMethod.POST)
+	public @ResponseBody
+	void updateSocialMedia(@RequestBody SocialMediaBean socialMediaBean) {
+		log.info("in admin/updateSocialMedia.." + socialMediaBean.getName());
 		adminMgmtService.updateSocialMedia(socialMediaBean);
 	}
-	
-	//To....admin/deleteSocialMedia
-	@RequestMapping(value="admin/deleteSocialMedia",method=RequestMethod.POST)
-	public @ResponseBody void deleteSocialMedia(@RequestParam("socialId") Long socialId){
-		log.info("delete socialMedia..."+socialId);
+
+	// To....admin/deleteSocialMedia
+	@RequestMapping(value = "admin/deleteSocialMedia", method = RequestMethod.POST)
+	public @ResponseBody
+	void deleteSocialMedia(@RequestParam("socialId") Long socialId) {
+		log.info("delete socialMedia..." + socialId);
 		adminMgmtService.deleteSocialMedia(socialId);
 	}
-	
-	//generate the QR CODE for paticipant
-	@RequestMapping(value="admin/generateQRCode",method=RequestMethod.POST)
-	public @ResponseBody void generateQRCode(@RequestBody InviteBean inviteBean){
- 
-		String myCodeText = inviteBean.getEventName()+","+inviteBean.getPhone()+","+inviteBean.getFirstName()+""+inviteBean.getLastName();
-		String filePath =WREConstants.RESOURCE_PATH+inviteBean.getEventId()
-				+WREConstants.FILE_SEPARATER+inviteBean.getParticipantId()+WREConstants.FILE_SEPARATER+"QR.png";
-				
+
+	// generate the QR CODE for paticipant
+	@RequestMapping(value = "admin/generateQRCode", method = RequestMethod.POST)
+	public @ResponseBody
+	void generateQRCode(@RequestBody InviteBean inviteBean) {
+
+		String myCodeText = inviteBean.getEventName() + ","
+				+ inviteBean.getPhone() + "," + inviteBean.getFirstName() + ""
+				+ inviteBean.getLastName();
+		String filePath = WREConstants.RESOURCE_PATH + inviteBean.getEventId()
+				+ WREConstants.FILE_SEPARATER + inviteBean.getParticipantId()
+				+ WREConstants.FILE_SEPARATER + "QR.png";
+
 		int size = 250;
 		String fileType = "png";
 		File myFile = new File(filePath);
 		try {
-			
-			Map<EncodeHintType, Object> hintMap = new EnumMap<EncodeHintType, Object>(EncodeHintType.class);
+
+			Map<EncodeHintType, Object> hintMap = new EnumMap<EncodeHintType, Object>(
+					EncodeHintType.class);
 			hintMap.put(EncodeHintType.CHARACTER_SET, "UTF-8");
-			
-			// Now with zxing version 3.2.1 you could change border size (white border size to just 1)
+
+			// Now with zxing version 3.2.1 you could change border size (white
+			// border size to just 1)
 			hintMap.put(EncodeHintType.MARGIN, 1); /* default = 4 */
 			hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
- 
+
 			QRCodeWriter qrCodeWriter = new QRCodeWriter();
-			BitMatrix byteMatrix = qrCodeWriter.encode(myCodeText, BarcodeFormat.QR_CODE, size,
-					size, hintMap);
+			BitMatrix byteMatrix = qrCodeWriter.encode(myCodeText,
+					BarcodeFormat.QR_CODE, size, size, hintMap);
 			int CrunchifyWidth = byteMatrix.getWidth();
-			BufferedImage image = new BufferedImage(CrunchifyWidth, CrunchifyWidth,
-					BufferedImage.TYPE_INT_RGB);
+			BufferedImage image = new BufferedImage(CrunchifyWidth,
+					CrunchifyWidth, BufferedImage.TYPE_INT_RGB);
 			image.createGraphics();
- 
+
 			Graphics2D graphics = (Graphics2D) image.getGraphics();
 			graphics.setColor(Color.WHITE);
 			graphics.fillRect(0, 0, CrunchifyWidth, CrunchifyWidth);
 			graphics.setColor(Color.BLACK);
- 
+
 			for (int i = 0; i < CrunchifyWidth; i++) {
 				for (int j = 0; j < CrunchifyWidth; j++) {
 					if (byteMatrix.get(i, j)) {
@@ -1122,68 +1158,76 @@ public @ResponseBody void saveContactDetails(@RequestBody ContactDetailsBean con
 		}
 		System.out.println("\n\nYou have successfully created QR Code.");
 	}
-//==========================================================
-	
-	//admin/networkingView
-	
-		@RequestMapping(value="admin/networkingView")
-		public String networkingView()
-		{
-			return "admin/networkingView";
-		}
-		
-		//admin/networkingEdit
-		@RequestMapping(value="admin/networkingEdit")
-		public String networkingEdit()
-		{
-			return "admin/networkingEdit";
-		}
-		
-		// ParticipantBean edit
-				@RequestMapping(value = "admin/participantEdit", method = RequestMethod.GET)
-				public @ResponseBody
-				ParticipantBean participantEdit(@RequestParam("participantId") Long participantId,@RequestParam("eventId") Long eventId) {
-					ParticipantBean participantBean = adminMgmtService.participantEdit(participantId,eventId);
-					return participantBean;
 
-				}
-				
-				//updateParticipant
-				@RequestMapping(value = "participant/update", method = RequestMethod.POST)
-				public @ResponseBody
-				void updateParticipants(@RequestBody ParticipantBean participantBean) {
-					System.out.println("participantBean update" + participantBean.getStatus());
-					//adminMgmtService.updateParticipant(participantBean);
-					adminMgmtService.updateParticipantDetails(participantBean);
-				}
-				
-				//participantEventBean
+	// ==========================================================
+
+	// admin/networkingView
+
+	@RequestMapping(value = "admin/networkingView")
+	public String networkingView() {
+		return "admin/networkingView";
+	}
+
+	// admin/networkingEdit
+	@RequestMapping(value = "admin/networkingEdit")
+	public String networkingEdit() {
+		return "admin/networkingEdit";
+	}
+
+	// ParticipantBean edit
+	@RequestMapping(value = "admin/participantEdit", method = RequestMethod.GET)
+	public @ResponseBody
+	ParticipantBean participantEdit(
+			@RequestParam("participantId") Long participantId,
+			@RequestParam("eventId") Long eventId) {
+		ParticipantBean participantBean = adminMgmtService.participantEdit(
+				participantId, eventId);
+		return participantBean;
+
+	}
+
+	// updateParticipant
+	@RequestMapping(value = "participant/update", method = RequestMethod.POST)
+	public @ResponseBody
+	void updateParticipants(@RequestBody ParticipantBean participantBean) {
+		System.out.println("participantBean update"
+				+ participantBean.getStatus());
+		// adminMgmtService.updateParticipant(participantBean);
+		adminMgmtService.updateParticipantDetails(participantBean);
+	}
+
+	// participantEventBean
 	@RequestMapping(value = "admin/eventParticipantStatusSave", method = RequestMethod.POST)
-	public @ResponseBody String eventParticipantStatusSave(@RequestBody ParticipantEventBean participantEventBean) {
-	log.info("in side save method");
-	adminMgmtService.eventParticipantStatusSave(participantEventBean);
-	String res="suucess";
-	 return "{\"result\":\"" + res + "\"}";
-				}
-				
-				@RequestMapping(value="admin/getEventParticipantStatus",method=RequestMethod.GET)
-				public @ResponseBody String getEventParticipantStatus(@RequestParam Long eventId ,@RequestParam Long participantId)
-				{
-		
-				log.info("sdfasdfasfss");
-					return adminMgmtService.getEventParticipantStatus(eventId,participantId);
-					
-				}
-				
-			
-				//participantQueriesSaveMethod
-				@RequestMapping(value="admin/participantQueriesSave",method=RequestMethod.POST)
-				public  @ResponseBody String participantQueriesSave(@RequestBody ParticipantQuriesBean participantQuriesBean){
-					log.info("we are in participantQueriesSave method");
-					String result = adminMgmtService.participantQueriesSave(participantQuriesBean);
-					return result;
-					
-				}
-	
-	
+	public @ResponseBody
+	String eventParticipantStatusSave(
+			@RequestBody ParticipantEventBean participantEventBean) {
+		log.info("in side save method");
+		adminMgmtService.eventParticipantStatusSave(participantEventBean);
+		String res = "suucess";
+		return "{\"result\":\"" + res + "\"}";
+	}
+
+	@RequestMapping(value = "admin/getEventParticipantStatus", method = RequestMethod.GET)
+	public @ResponseBody
+	String getEventParticipantStatus(@RequestParam Long eventId,
+			@RequestParam Long participantId) {
+
+		log.info("sdfasdfasfss");
+		return adminMgmtService.getEventParticipantStatus(eventId,
+				participantId);
+
+	}
+
+	// participantQueriesSaveMethod
+	@RequestMapping(value = "admin/participantQueriesSave", method = RequestMethod.POST)
+	public @ResponseBody
+	String participantQueriesSave(
+			@RequestBody ParticipantQuriesBean participantQuriesBean) {
+		log.info("we are in participantQueriesSave method");
+		String result = adminMgmtService
+				.participantQueriesSave(participantQuriesBean);
+		return result;
+
+	}
+
 }
