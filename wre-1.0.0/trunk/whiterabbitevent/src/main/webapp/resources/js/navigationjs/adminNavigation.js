@@ -289,7 +289,8 @@ App.config([ '$routeProvider', function($routeProvider, $Scope) {
 	
 	
 	$routeProvider.otherwise({
-		redirectTo : '/eventView'
+			//redirectTo: '/eventView/2'
+			redirectTo : '/eventView'
 	});
 } ]);
 

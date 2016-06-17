@@ -1309,6 +1309,7 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 				socialMediaBean.setName(socialMediaObject.getName());
 				socialMediaBean.setUrl(socialMediaObject.getUrl());
 				socialMediaBean.setSocialId(socialMediaObject.getSocialId());
+				socialMediaBean.setType(socialMediaObject.getType());
 			return socialMediaBean;
 		}
 
@@ -1322,6 +1323,7 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 			socialMedia.setSocialId(socialMediaBean.getSocialId());
 			socialMedia.setName(socialMediaBean.getName());
 			socialMedia.setUrl(socialMediaBean.getUrl());
+			socialMedia.setType(socialMediaBean.getType());
 			AdminMgmtDaoImpl.update(socialMedia);
 			log.info("updated...");
 		}

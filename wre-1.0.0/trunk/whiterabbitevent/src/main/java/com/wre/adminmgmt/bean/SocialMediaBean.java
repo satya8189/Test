@@ -8,7 +8,8 @@ public class SocialMediaBean {
 	  private String name;
 	  private String url;
 	  private Long eventId;
-	
+	  private String type;
+	  
     public Long getSocialId() {
 		return socialId;
 	}
@@ -35,9 +36,19 @@ public class SocialMediaBean {
 	public void setEventId(Long eventId) {
 		this.eventId = eventId;
 	}
+	
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 	@Override
 	public String toString() {
-		return "SocialMediaBean [socialId=" + socialId + ",eventId.."+eventId+", name=" + name + ", url=" + url + "]";
+		return "SocialMediaBean [socialId=" + socialId + ", name=" + name
+				+ ", url=" + url + ", eventId=" + eventId + ", type=" + type
+				+ "]";
 	}
-
+	
+	
 }

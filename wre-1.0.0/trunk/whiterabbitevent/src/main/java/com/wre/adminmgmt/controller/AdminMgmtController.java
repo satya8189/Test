@@ -1013,7 +1013,6 @@ public @ResponseBody void saveContactDetails(@RequestBody ContactDetailsBean con
 	
 	//===========SOCIALMEDIA====
 	
-	
 	//go to admin/SocialMedia page
 	@RequestMapping(value="admin/SocialMedia")
 	public String goToSocialMedia()
@@ -1028,7 +1027,6 @@ public @ResponseBody void saveContactDetails(@RequestBody ContactDetailsBean con
 		return "admin/CreateSocialMedia";
 	}
 	
-	
 	//to save socialMedia..
 	@RequestMapping(value="admin/saveSocialMedia",method=RequestMethod.POST)
 	public @ResponseBody void saveSocialMedia(@RequestBody SocialMediaBean socialMediaBean)
@@ -1038,6 +1036,7 @@ public @ResponseBody void saveContactDetails(@RequestBody ContactDetailsBean con
 	}
 	
 	//to get social media list
+	//this can be used as API to list the SocialMedia
 	@RequestMapping(value="admin/getSocialMediaList",method=RequestMethod.GET)
 	public @ResponseBody List<SocialMediaBean> getSocialMedialList(@RequestParam("eventId")Long eventId){
 		log.info("in getSocialMediaList.."+eventId);
@@ -1074,6 +1073,7 @@ public @ResponseBody void saveContactDetails(@RequestBody ContactDetailsBean con
 		log.info("delete socialMedia..."+socialId);
 		adminMgmtService.deleteSocialMedia(socialId);
 	}
+	
 	//generate the QR CODE for paticipant
 	@RequestMapping(value="admin/generateQRCode",method=RequestMethod.POST)
 	public @ResponseBody void generateQRCode(@RequestBody InviteBean inviteBean){
