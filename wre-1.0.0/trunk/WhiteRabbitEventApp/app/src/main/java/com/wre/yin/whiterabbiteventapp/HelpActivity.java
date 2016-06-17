@@ -38,50 +38,64 @@ public class HelpActivity extends AppCompatActivity {
         prefs = getSharedPreferences("Chat", 0);
         partiName = prefs.getString("name", null);
         partId = prefs.getString("partId", null);
-         eventId = getIntent().getExtras().getString("eventId");
+        eventId = getIntent().getExtras().getString("eventId");
         helpSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                                          @Override
+                                          public void onClick(View v) {
 
-                contactName = contact_Name.getText().toString();
-                contactMobile = contact_Mobile.getText().toString();
-                contactEmail = contact_Email.getText().toString();
-                helpText = help_Text.getText().toString();
+                                              contactName = contact_Name.getText().toString();
+                                              contactMobile = contact_Mobile.getText().toString();
+                                              contactEmail = contact_Email.getText().toString();
+                                              helpText = help_Text.getText().toString();
 
-                if (Constants.isNetworkAvailable(HelpActivity.this)) {
+                                              if (Constants.isNetworkAvailable(HelpActivity.this)) {
 
-                    if (contactName.equals("") && contactMobile.equals("") && contactEmail.equals("") && helpText.equals("")) {
-                        contact_Name.setError("Field Cannot be empty");
-                        contact_Email.setError("Field Cannot be empty");
-                        contact_Mobile.setError("Field Cannot be empty");
-                        help_Text.setError("Field Cannot be empty");
-                    } else {
+                                                  if (contactName.equals("")) {
+                                                      contact_Name.setError("Enter Name");
+                                                      contact_Name.requestFocus();
+                                                  } else if (contactMobile.equals("")) {
+                                                      contact_Mobile.setError("Enter Mobile number");
+                                                      contact_Mobile.requestFocus();
+                                                  }
+                                                  else if (contactEmail.equals("")) {
+                                                      contact_Email.setError("Enter Email");
+                                                      contact_Email.requestFocus();
 
-                        ContactDetailsBean contactBean = new ContactDetailsBean();
-                        contactBean.setContactName(contactName);
-                        contactBean.setContactEmail(contactEmail);
-                        contactBean.setContactMobile(contactMobile);
-                        contactBean.setParticipantId(Long.parseLong(partId));
-                        contactBean.setEventId(Long.parseLong(eventId));
-                        contactBean.setContactAlternateMobile("");
-                        contactBean.setHelpText(helpText);
+                                                  } else if (helpText.equals("")) {
+                                                      help_Text.setError("Enter Help text here");
+                                                      help_Text.requestFocus();
 
-                        new MyAsyncTask(Constants.SAVE_HELP_DETAILS, Utils.getJson(contactBean), HelpActivity.this, new Callback() {
-                            @Override
-                            public void onResult(String result) {
-                                //  ContactDetailsBean res = Utils.getObject(result, ContactDetailsBean.class);
+                                                  } else {
+                                                      ContactDetailsBean contactBean = new ContactDetailsBean();
+                                                      contactBean.setContactName(contactName);
+                                                      contactBean.setContactEmail(contactEmail);
+                                                      contactBean.setContactMobile(contactMobile);
+                                                      contactBean.setParticipantId(Long.parseLong(partId));
+                                                      contactBean.setEventId(Long.parseLong(eventId));
+                                                      contactBean.setContactAlternateMobile("");
+                                                      contactBean.setHelpText(helpText);
 
-                                System.out.println("update result" + result);
+                                                      new MyAsyncTask(Constants.SAVE_HELP_DETAILS, Utils.getJson(contactBean), HelpActivity.this, new Callback() {
+                                                          @Override
+                                                          public void onResult(String result) {
+                                                              //  ContactDetailsBean res = Utils.getObject(result, ContactDetailsBean.class);
 
-                            }
-                        }).execute();
-                    }
-                } else {
-                    Constants.createDialogSend(HelpActivity.this, "error", "No internet...");
-                }
-            }
-        });
+                                                              System.out.println("update result" + result);
+
+                                                          }
+                                                      }).execute();
+                                                  }
+                                              } else
+
+                                              {
+                                                  Constants.createDialogSend(HelpActivity.this, "error", "No internet...");
+                                              }
+                                          }
+                                      }
+
+        );
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

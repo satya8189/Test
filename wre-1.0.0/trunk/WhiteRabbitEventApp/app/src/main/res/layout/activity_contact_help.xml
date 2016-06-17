@@ -53,8 +53,11 @@
                                 android:gravity="center"
                                 android:hint="Enter Name"
                                 android:inputType="text"
-                                android:textSize="18sp" />
+                                android:singleLine="true"
+                                android:textSize="18sp">
 
+                                <requestFocus />
+                            </EditText>
                         </LinearLayout>
 
 
@@ -79,9 +82,10 @@
                                 android:gravity="center"
                                 android:hint="Mobile Number"
                                 android:inputType="phone"
+                                android:maxLength="10"
+                                android:singleLine="true"
                                 android:textSize="18sp" />
                         </LinearLayout>
-
 
 
                         <LinearLayout
@@ -105,6 +109,8 @@
                                 android:layout_marginLeft="20dp"
                                 android:gravity="center"
                                 android:hint="Email"
+                                android:inputType="textEmailAddress"
+                                android:singleLine="true"
                                 android:textSize="18sp" />
                         </LinearLayout>
 
