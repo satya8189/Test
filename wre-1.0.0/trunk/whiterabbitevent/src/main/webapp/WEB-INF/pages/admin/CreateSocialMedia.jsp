@@ -19,6 +19,25 @@
 					</div>
 					
 					<div class="col-md-12">
+						<div class=" form-group col-md-6">
+							<label class="flot-left">Type<span style="color:red;">*</span></label> 
+						<!-- 	<input type="text" class="input-text form-control" id="sponcorName"
+								placeholder="WebName" ng-model="sm.name" name="smName" required> 
+                         	<span ng-if="orgCreateForm.$submitted" ng-messages="orgCreateForm.smName.$error" ng-messages-include="errors">
+		  						</span> -->
+		  						<select name="smtype" class="input-text form-control" ng-model="sm.type" id="smtype" required>
+		  							<option>Google+</option>
+		  							<option>Facebook</option>
+		  							<option>Twitter</option>
+		  							<option>LinkedIn</option>
+		  							<option>Flickr</option>
+		  							<option>Instagram</option>
+		  						</select> 
+		  						<span ng-if="orgCreateForm.$submitted" ng-messages="orgCreateForm.smtype.$error" ng-messages-include="errors"></span>
+						</div>
+					</div>
+					
+					<div class="col-md-12">
 						<div class="form-group col-md-6" ng-init="minlength=10">
 							<label class="flot-left">URL<span style="color:red;">*</span></label> 
 								<input type="text" class="input-text form-control" name="url"
