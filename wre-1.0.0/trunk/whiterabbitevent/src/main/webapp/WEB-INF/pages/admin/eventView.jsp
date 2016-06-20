@@ -8,12 +8,15 @@
 margin-bottom:0px !important;
 }
 .panel-body {
-  
+  padding: 13px 50px ;
+}
+#none{
+display:none;
 }
 </style>
 <toaster-container></toaster-container>
 
-<div class="cal-md-12">
+<div class="cal-md-12"   ng-init="getEventList('${userId}');">
 	<form>
 	
 	<div class="header-none" align="center">Events List</div>
@@ -23,8 +26,8 @@ margin-bottom:0px !important;
 		 <input ng-model="search"  ng-show="eventList.length!=0" class="form-control" placeholder="Search">
 			</div> 
 			<div class="col-md-12 space-hid">&nbsp;</div>
-			<table class="table table-bordered" id="eventView">
-				<thead class="headbg">
+			<table class="table" id="eventView">
+				<thead>
 					<tr>
 					     <th>EventAddress</th>
 					     <th>EventAgenda </th>
@@ -58,14 +61,13 @@ margin-bottom:0px !important;
 				No records found..
 				</td>
 				</tr>
-				</table>
-				<div ng-show="filteredSize!=0">
-					<div colspan="6" align="center">
+				<tr ng-show="filteredSize!=0">
+					<td colspan="6" align="center">
 						<pagination page="currentPage" max-size="noOfPages" total-items="totalItems" 
 							items-per-page="entryLimit" class="pagination-sm" boundary-links="true"></pagination>
-					</div>
-				</div>
-			
+					</td>
+				</tr>
+			</table>
 			
 			
 		</div>
