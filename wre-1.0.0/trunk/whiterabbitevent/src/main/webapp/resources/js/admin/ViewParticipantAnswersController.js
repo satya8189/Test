@@ -31,8 +31,7 @@ var ViewParticipantAnswersController=function($scope,$http,$routeParams,$locatio
 
 			// $watch search to update pagination
 			$scope.$watch('search', function(newVal, oldVal) {
-				$scope.filtered = filterFilter(
-						$scope.partcipantQuestionAnswerList, newVal);
+				$scope.filtered = filterFilter(	$scope.partcipantQuestionAnswerList, newVal);
 				$scope.totalItems = $scope.filtered.length;
 				$scope.noOfPages = Math.ceil($scope.totalItems
 						/ $scope.entryLimit);

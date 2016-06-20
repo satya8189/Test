@@ -1,27 +1,16 @@
 var NetworkingViewController = function($scope,$http,$routeParams,$location,filterFilter) {
-  
-		$scope.eventId={};
+  	$scope.eventId={};
 		$scope.networkList={};
 		$scope.$on("$routeChangeSuccess", function () {
-		
 		 $scope.eventId=$routeParams.eventId;
-		 //alert("eventId-----------"+$routeParams.eventId);
+	//	 alert("eventId-----------"+$routeParams.eventId);
 			
 		 $http.get('admin/ParticipantEventBeanList?eventId='+$routeParams.eventId+'&status=ACTIVE').success(function(eventList){
-			//alert(eventList.length);	   
 			 $scope.networkList = eventList;
-			 
-			 
 			// =================================
 				// create empty search model (object) to trigger
 				// $watch on update
 				$scope.search = null;
-
-				/*
-				 * $scope.resetFilters = function () { // needs to
-				 * be a function or it won't trigger a $watch
-				 * $scope.search = {}; };
-				 */
 
 				// pagination controls
 				$scope.currentPage = 1;
@@ -41,7 +30,6 @@ var NetworkingViewController = function($scope,$http,$routeParams,$location,filt
 				}, true);
 
 				// ===================================*/
-
 				
 				  	});
 				 });
