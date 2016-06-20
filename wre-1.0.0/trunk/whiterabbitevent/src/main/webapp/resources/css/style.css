@@ -176,9 +176,14 @@ font-size: 25px;
     color:#fff;
         margin-bottom: 4px;
 }
-.tablehead{
-	background-color: #265a88;
+.headbg{
+	background-color: #588CC0;
     color: #fff;
+}
+a {
+    color: #337ab7;
+  text-decoration: blink;
+    cursor: pointer;
 }
 table,td{
 	text-align:center;
@@ -186,4 +191,8 @@ table,td{
 }
 .padding-0 {
 	padding: 0px;
+}
+.buttonbg{
+	position: relative;
+    top: 40px;
 }
