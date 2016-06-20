@@ -1,16 +1,14 @@
 var EventViewController = function($scope,$routeParams,$http, $location) {
 	
-	
-	
 	$scope.eventList={};
 	$scope.filteredSize;
 	
 	$scope.getEventList = function(userId){
-	
+		
 		 $http.get('admin/eventList?userId='+userId).success(function(eventList){
 			
 			    $scope.eventList = eventList;
-			    
+			    alert(eventList.length);
 			 // create empty search model (object) to trigger $watch on update
 				$scope.search =null;
 
@@ -27,16 +25,14 @@ var EventViewController = function($scope,$routeParams,$http, $location) {
 
 				// $watch search to update pagination
 				$scope.$watch('search', function (newVal, oldVal) {
-					$scope.filtered = filterFilter($scope.orgList, newVal);
+					$scope.filtered = filterFilter($scope.eventList, newVal);
 					$scope.totalItems = $scope.filtered.length;
 					$scope.noOfPages = 5;
 					$scope.currentPage = 1;
 					$scope.filteredSize=$scope.filtered.length;
-				}, true);
-			    
-			    
-			    
+				}, true);		    
 			  	});
+	
 	};
 	$scope.eventViewDetails = function(eventId){
 		location.href="#/eventViewDetails/"+eventId;
