@@ -40,6 +40,23 @@ border: 1px solid #588CC0;
 								required>
 								<span ng-if="smEditForm.$submitted" ng-messages="smEditForm.sponcorDesc.$error" ng-messages-include="errors"></span>
 						</div>
+						
+						<!-- <div class="col-md-2">
+							<label>Type</label>
+						</div>
+						<div class="col-md-2">
+							<select class="input-text form-control" id="type"
+								ng-model="sm.type" name="sponcorDesc"	required>
+								<option>Google+</option>
+		  						<option>Facebook</option>
+		  						<option>Twitter</option>
+		  						<option>LinkedIn</option>
+		  						<option>Flickr</option>
+		  						<option>Instagram</option>
+								</select>
+								<span ng-if="smEditForm.$submitted" ng-messages="smEditForm.sponcorDesc.$error" ng-messages-include="errors"></span>
+						</div>
+						 -->
 					</div>
 					
 					<div class="text-center">

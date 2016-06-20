@@ -14,11 +14,9 @@ margin-bottom:0px !important;
 display:none;
 }
 </style>
-<toaster-container></toaster-container>
 
-<div class="cal-md-12"   ng-init="getEventList('${userId}');">
+<div class="cal-md-12" ng-init="getEventList('${userId}');">
 	<form>
-	
 	<div class="header-none" align="center">Events List</div>
 	<div class="panel">
 		<div class="panel-body">
@@ -46,14 +44,10 @@ display:none;
 					<td >{{event.eventDesc}}</td>
 				    <td >{{event.eventDate | date: 'yyyy-MM-dd'}}</td>
 					<td >{{event.status}}</td>
-			<td>
-					
-				<a ng-click="eventViewDetails(event.eventId)"title="eventViewDetails">
+					<td>
+						<a ng-click="eventViewDetails(event.eventId)"title="eventViewDetails">
 							<i class="fa fa-eye-slash icons"> </i>
-				</a>
-				
-				
-						
+						</a>
 					</td>
 				</tr>
 				<tr ng-show="filteredSize==0">
@@ -69,8 +63,6 @@ display:none;
 							items-per-page="entryLimit" class="pagination-sm" boundary-links="true"></pagination>
 					</div>
 				</div>
-			
-			
 			
 		</div>
 	</div>

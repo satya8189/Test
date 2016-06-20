@@ -34,34 +34,28 @@ margin-bottom:0px !important;
 					</tr>
 				</thead>
 				 <tr ng-show="filteredSize!=0" ng-repeat="pqa in filtered = partcipantQuestionAnswerList | filter: search | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit ">  
-					
 					<td>{{pqa.surveyQuestion.question}}</td> 
 					<td>{{pqa.answer}}</td>
 					<td>{{pqa.participantAnswer}}</td>
+					
 					<!-- <td>
 						<a ng-click="viewQuestionAndAnswers(participant.participantId)" title="View Question and Answers">
 							<i class="glyphicon glyphicon-eye-open"> </i>
 						</a>
 					</td> -->
 				</tr>
-				<tr ng-show="filteredSize==0">
-					<td colspan="6">
-						No records found..
-					</td>
+				<tr ng-show="partcipantQuestionAnswerList.length==0">
+				<td colspan="6">
+				No records found..
+				</td>
 				</tr>
 				</table>
-				<div>
+				<div ng-show="filteredSize!=0">
 					<div  colspan="6" align="center">
 						<pagination page="currentPage" max-size="noOfPages" total-items="totalItems" 
 							items-per-page="entryLimit" class="pagination" boundary-links="true"></pagination>
 					</div>
-						
-				</div> 
-			
-			
- 		<div  class="res-table" ng-show="filteredSize==0">
-				No records found..
-			</div>
+				</div>
 		</div>
  </div>
 </div>
