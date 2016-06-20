@@ -6,8 +6,7 @@ border: 1px solid #588CC0;
 </style>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <toaster-container></toaster-container>
-<form name="createEvent" ng-submit="
-" enctype="multipart/form-data">
+<form name="createEvent" ng-submit="uploadLayout()" enctype="multipart/form-data">
 
 <div class="col-md-12">
 
