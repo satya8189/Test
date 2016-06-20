@@ -24,7 +24,9 @@ margin-left: 32.5%;
     margin-bottom: 0px;
 border-radius: 0px;
     border: none;
+    box-shadow:none;
 }
+
 .head>.panel-heading
 {
     background-image: url(../img/head-corner.png);
@@ -133,7 +135,7 @@ color: #8C8C8C;
 }
 .li:hover, .li:focus, .li:active
 {
-    border-left: 5px solid #609cdb;
+    border-left: 1px solid #609cdb;
     cursor: pointer;
 }
 .menu-bg
@@ -148,6 +150,7 @@ color: #8C8C8C;
 .body-content
 {
     padding: 20px auto;
+ min-height: 550px;
 }
 .panel-heading [data-toggle="collapse"].collapsed:after {
 font-family: 'Glyphicons Halflings';
