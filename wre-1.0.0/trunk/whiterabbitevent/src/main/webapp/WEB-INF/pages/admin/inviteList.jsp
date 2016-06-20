@@ -7,27 +7,26 @@
 .panel{
 margin-bottom:0px !important;
 }
-.panel-body {
-  padding: 13px 50px ;
-}
+
+
 </style>
 <toaster-container></toaster-container>
 
-<div class="container">
+<div class="col-md-12">
 <a ng-click="cancelInviteListView(eventId)">
-		 <i class="glyphicon glyphicon-chevron-left"></i>
+		 <i class="fa fa-angle-left back"></i>
 	</a>
 	<form>
 	
-	<div class="header-none">Invite List</div>
+	<div class="header-none text-center">Invite List</div>
 	<div class="panel">
 		<div class="panel-body">
 		 <div class="col-md-2 col-md-offset-10 padding-0">
 		 <input ng-model="search"  ng-show="inviteList.length!=0" class="form-control" placeholder="Search">
 			</div> 
 			<div class="col-md-12 space-hid">&nbsp;</div>
-			<table class="table" id="eventView">
-				<thead>
+			<table class="table table-bordered" id="eventView">
+				<thead class="headbg">
 					<tr>
 					     <th>FirstName</th>
 					     <th>LastName </th>

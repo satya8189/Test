@@ -69,7 +69,9 @@ border: 1px solid #588CC0;
 		  						</span>
 						</div>
 					</div>
+					
 					<button type="submit" class="btn button  save margin-2">Update</button>
+					
 			</form>
 		</div>
 		</div>
@@ -96,19 +98,21 @@ border: 1px solid #588CC0;
 					
 				
 
-						<div class="col-md-3">
+						<div class="col-md-2">
 							<label>Mobile Number:</label>
 						
 							<label>{{contact.contactMobile}}</labe>
 						</div>
 					
-						<div class="col-md-3">
+						<div class="col-md-2">
 							<label>Alternate Mobile Nubmer:</label>
 						
 							<label>{{contact.contactAlternateMobile}}</labe>
 						</div>
-					</div>
+					<div class="col-mf-12">
 					<button type="submit" class="btn button btn-primary save margin-2"	ng-click="editContactDetails(contact.contactId)">Edit</button>
+					</div>
+					</div>
 					<div>&nbsp;</div>
 			<!-- </form> -->
 		</div>

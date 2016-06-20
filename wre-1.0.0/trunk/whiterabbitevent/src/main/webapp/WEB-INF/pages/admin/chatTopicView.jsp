@@ -13,7 +13,7 @@ margin-bottom:0px !important;
 </style>
 <toaster-container></toaster-container>
 
-<a ng-click="navigateToEventViewDetails(eventId)"> <i class="glyphicon glyphicon-chevron-left"></i>
+<a ng-click="navigateToEventViewDetails(eventId)"> <i class="fa fa-angle-left back"></i>
 	</a>
 	
 <form>
