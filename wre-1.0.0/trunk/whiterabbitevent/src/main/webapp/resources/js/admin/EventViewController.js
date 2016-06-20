@@ -8,7 +8,7 @@ var EventViewController = function($scope,$routeParams,$http, $location) {
 		 $http.get('admin/eventList?userId='+userId).success(function(eventList){
 			
 			    $scope.eventList = eventList;
-			    alert(eventList.length);
+			    //alert(eventList.length);
 			 // create empty search model (object) to trigger $watch on update
 				$scope.search =null;
 
