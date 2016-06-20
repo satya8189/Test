@@ -22,7 +22,7 @@ margin-bottom:0px !important;
 	<div class="panel">
 	<form>
 	<a ng-click="navigateToSponsorCreate(eventId)" class="btn btn-primary
-			 pull-left button  btn-color">Create Sponsor</a>
+			 pull-left button  btn-color buttonbg">Create Sponsor</a>
 	</form>
 		<div class="panel-body">
 		 <div class="col-md-2 col-md-offset-10 padding-0">
