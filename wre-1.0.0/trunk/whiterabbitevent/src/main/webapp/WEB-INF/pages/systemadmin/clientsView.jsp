@@ -24,11 +24,11 @@
 				<input ng-model="search" class="form-control" placeholder="Search" ng-show="clientList.length > 0"
 					ng-hide="clientList.length==0"></div>
 					<div class="col-md-1 padding-0 "><a href="#/createClient"
-			class="btn btn-default pull-left button btn btn-primary">Create
+			class="btn  pull-left button btn btn-primary">Create
 			Client</a></div>
 					<div class="col-md-12 space-hid">&nbsp;</div>
 			<table class="table table-bordered" id="clientView">
-				<thead class="tablehead">
+				<thead class="headbg">
 					<tr>
 						<th>ClientName</th>
 						<th>ClientAddress</th>
