@@ -1,7 +1,8 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <toaster-container></toaster-container>
-<form name="createEvent" ng-submit="uploadLayout()" enctype="multipart/form-data">
+<form name="createEvent" ng-submit="
+" enctype="multipart/form-data">
 
 <div class="container">
 

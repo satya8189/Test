@@ -147,29 +147,10 @@
             
         <div class="panel-body">
             
-          <div class="col-md-2 padd-0 menu-bg">
-              <ul class="ul">
-                  <div class="name">
-                <img src="${pageContext.request.contextPath}/resources/images/attractmen.org-libra-men.jpg" width="70px" height="70px" style="border-radius: 50%;">
-                      <span style="margin-left: 30px;color: white;">Naveen</span>
-                      </div>
-                  
-                </ul>
-            <ul class="ul ">
-              <li class="li">Invite</li> 
-              <li class="li" ><a class="navbar-links" href="#/eventView/${userId}" id="event">Event</a></li>
-             <li class="li">Polling</li>
-              <li class="li">Schedule</li>
-              <li class="li">News Feed</li>
-              <li class="li">Document</li>
-            	 <li class="li">Gallery</li>
-                 <li class="li">Crowd Pics</li>
-                 <li class="li">Videos</li>
-                 <li class="li">Q&A</li>
-                 <li class="li">SUR</li> 
-              </ul>
+          <div class="col-md-0 padd-0 menu-bg" id="none">
+              
             </div>
-          <div class="col-md-10">
+          <div class="col-md-12">
            <div class="body-content">
              <h3 style="text-align: -webkit-center;"> Invite people toEvents</h3>
        

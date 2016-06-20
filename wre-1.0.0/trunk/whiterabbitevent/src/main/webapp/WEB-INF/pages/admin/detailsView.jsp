@@ -41,7 +41,7 @@
 						</tr>
 						
 						<td class="col-md-2">
-							<label>EventDate: {{event.eventTime}}</label>
+							<label>EventTime: {{event.eventTime}}</label>
 						</td>
 						</tr>
 						</table>
