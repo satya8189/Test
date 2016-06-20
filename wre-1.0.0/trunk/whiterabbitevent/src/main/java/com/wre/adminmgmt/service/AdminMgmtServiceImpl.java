@@ -333,8 +333,8 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 			eventBeanOject.setEventAgenda(eventOject.getEventAgenda());
 			eventBeanOject.setEventDesc(eventOject.getEventDesc());
 			eventBeanOject.setEventName(eventOject.getEventName());
-			eventBeanOject.setDate(eventOject.getEventDate().toString());
 			eventBeanOject.setEventDate(eventOject.getEventDate());
+			
 			eventBeanOject.setEventTime(eventOject.getEventTime());
 			
 		}
