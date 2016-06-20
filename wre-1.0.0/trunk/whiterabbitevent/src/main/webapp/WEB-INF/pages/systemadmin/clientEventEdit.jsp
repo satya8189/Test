@@ -67,17 +67,27 @@ background-color: #fff;
 		return $state;
 	};
 </script>
+<style>
+.panel{
+border: 1px solid #588CC0;
+}
 
+</style>
 </head>
 <body>
+<div class="col-md-12">
+	<a ng-click="cancelClientEventEdit(event)"> <i
+		class="fa fa-angle-left back"></i>
+	</a>
+
+	<div class="panel">
+		<div class="panel-heading text-center font-size-20 padding-15 headbg" >Create
+			Client</div>
+		<div class="panel-body">
 <form name="ipForm" ng-submit="ipForm.$valid && updateEvent(event)" 
  novalidate >
 
-<div>
-<a ng-click="cancelClientEventEdit(event)"> <i
-		class="fa fa-angle-left back"></i>
-	</a>
-</div>
+<div>&nbsp;</div>
 <div class="">
 <div class="form-group col-md-4 col-md-offset-4">
 <label >Services Provided </label>
@@ -158,6 +168,10 @@ background-color: #fff;
 					
 					</div>
 					</form>
+					
+					</div>
+					</div>
+					<div>&nbsp;</div>
 					
 </body>
 </html>
