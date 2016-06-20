@@ -1,10 +1,7 @@
 <style>
-.panel{
-margin-bottom:0px !important;
-}
 @media (min-width: 992px){
-.col-md-offset-6 {
-    margin-left: 48%;
+.col-md-offset-9 {
+    margin-left: 74%;
 }
 
 </style>
@@ -17,11 +14,6 @@ margin-bottom:0px !important;
 	<form>
 	
 	<div class="col-md-12">
-
-	
-			
-
-
 	
 	<div class="panel">
 		<div class="panel-body">
@@ -30,14 +22,16 @@ margin-bottom:0px !important;
 		class="fa fa-angle-left back"></i>
 	</a> 
 		</div>	
-			<div class="col-md-2 col-md-offset-6 text-right" ng-show="eventList.length > 0">
-				<input ng-model="search" class="form-control" placeholder="Search"
+		
+			<div class="col-md-2 col-md-offset-9 text-left" ng-show="eventList.length > 0">
+				<input ng-model="search" class="form-control full-right" placeholder="Search"
 					ng-hide="eventList.length==0"></div>
-					<div class="col-md-1 padding-0 "> 	<button ng-click="navigateClientEventCreate()" class=" btn btn-primary"
+					<div class="col-md-1 padding-0 "> 	<button ng-click="navigateClientEventCreate()" class=" btn btn-primary pull-left"
 			>Create
 			Event</button></div>
+			<div class="col-md-12 space-hid">&nbsp;</div>
 			<table class="table table-bordered" id="eventView">
-				<thead class="tablehead">
+				<thead class="headbg">
 					<tr>
 						<th>Event Name</th>
 						<th> EventDesc</th>
