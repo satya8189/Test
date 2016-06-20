@@ -64,6 +64,8 @@
 							<div ng-if="ClientCreateForm.$submitted" ng-messages="ClientCreateForm.emailId.$error" ng-messages-include="errors">
      						 </div>
      						 </div>
+     						 </div>
+     						 <div class="col-md-12">
 							<div class="form-group col-md-6">
 							<label>FristName <span style="color: red;">*</span></label>
 							<input type="text" class="input-text form-control" id ="firstName" placeholder="fristname"
@@ -88,7 +90,7 @@
                    
 					</div>
 				
-				<div>&nbsp;</div>
+				
 <div class="text-center">
 				<input type="submit" ng-click="submitted=true" class="btn button  btn btn-primary save margin-2" value="Save">
 </div>
