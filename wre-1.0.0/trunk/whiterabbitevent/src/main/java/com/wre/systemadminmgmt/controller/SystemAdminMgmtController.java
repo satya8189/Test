@@ -106,6 +106,7 @@ public class SystemAdminMgmtController{
 		public ModelAndView  systemAdminAuthenticationSuccess(@ModelAttribute("error")String error,HttpSession session){
 			ModelAndView modelAndView=null;
 			UserBean userBean=(UserBean)session.getAttribute(WREConstants.USER);
+			
 			 if(userBean.getRoleId().equals(WREConstants.SYS_ADMIN_ROLE))
 			   	{
 				 	modelAndView=new ModelAndView("systemadmin/systemAdminTemplate");
@@ -113,7 +114,7 @@ public class SystemAdminMgmtController{
 			   }else{
 				   if(userBean.getRoleId().equals(WREConstants.ADMIN_ROLE))
 				   {
-					   modelAndView=new ModelAndView("admin/adminTemplate"); 
+					   modelAndView=new ModelAndView("admin/adminTemplate");
 				   }
 			   }
 			  log.info("adminAuthenticationSuccess-------------");

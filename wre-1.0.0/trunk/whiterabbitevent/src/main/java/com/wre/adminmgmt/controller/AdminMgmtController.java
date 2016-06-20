@@ -957,33 +957,30 @@ public class AdminMgmtController {
 
 	// admin/ParticipantEventBeanList
 	@RequestMapping(value = "admin/ParticipantEventBeanList", method = RequestMethod.GET)
-	public @ResponseBody
-	List<ParticipantEventBean> getParticipantEventBeanList(
-			@RequestParam("eventId") Long eventId,
-			@RequestParam("status") String status) {
-		List<ParticipantEventBean> participantEventList = adminMgmtService
+	public @ResponseBody List<ParticipantEventBean> getParticipantEventBeanList(@RequestParam("eventId") Long eventId,@RequestParam("status") String status) {
+			List<ParticipantEventBean> participantEventList = adminMgmtService
 				.getParticipantEventBeanList(eventId, status);
 		return participantEventList;
-
 	}
 
 	// participantEventBean
 	@RequestMapping(value = "admin/eventParticipantSave", method = RequestMethod.POST)
 	public @ResponseBody
-	void eventParticipants(
-			@RequestBody ParticipantEventBean participantEventBean) {
+	void eventParticipants(@RequestBody ParticipantEventBean participantEventBean) {
 		log.info("in side save method");
 		adminMgmtService.eventParticipantSave(participantEventBean);
 	}
+	
+	
+	
 
-	// updateParticipantAPI.....to updateparticipant by passing bean with name..
+	// APIupdateParticipant.....to updateparticipant by passing bean with name..
 	// ParticipantBean..with attributes..participantId and data(exclude
 	// otp,registerId)..entity-participants
 	@RequestMapping(value = "admin/updateParticipantDetails", method = RequestMethod.POST)
 	public @ResponseBody
 	String updateParticipantDetails(@RequestBody ParticipantBean participantBean) {
-		log.info("in update Participant details.."
-				+ participantBean.getEmailId());
+		log.info("in update Participant details.."+participantBean.getEmailId()+"---"+participantBean.getStatus());
 		adminMgmtService.updateParticipant(participantBean);
 		return "success";
 	}

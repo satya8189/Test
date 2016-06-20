@@ -1203,7 +1203,7 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 			    
 		        participantEventBeanList.add(participantEventBeanOject);
 			}
-			log.info("list size is --+" + participantEventBeanList.size());
+			log.info("eventParticipantList size is --+" + participantEventBeanList.size());
 			return participantEventBeanList;
 		}
 		
