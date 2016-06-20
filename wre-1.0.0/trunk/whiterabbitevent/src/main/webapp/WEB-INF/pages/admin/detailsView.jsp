@@ -1,59 +1,63 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<style>
+.panel{
+border: 1px solid #588CC0;
+}
 
+</style>
 <div class="col-md-12">
-	<a ng-click="navigateToEventViewDetails(eventId)"> <i class="glyphicon glyphicon-chevron-left"></i>
+	<a ng-click="navigateToEventViewDetails(eventId)"> <i class="fa fa-angle-left back"></i>
 	</a>
 
 	<c:set var="eventId" value="${event.eventId}" scope="session" />
 	<div class="panel">
-		<div class="panel-heading text-center font-size-20 padding-15">
+		<div class="panel-heading text-center font-size-20 padding-15 headbg">
 			Details</div>
 		<div class="panel-body text-center">
 			<form name="eventCreateForm"
 				ng-submit="updateEvent(event)"
 				novalidate>
+				<div>&nbsp;</div>
 				<div class="row">
-					<table class="col-md-8 padding-35">
+					<div class="col-md-12 padding-35">
 
-					<tr>		
-						<td class="col-md-2">
+							
+						<div class="col-md-3">
 							<label>Event Name: {{event.eventName}}</label>
-						</td>
-						</tr><tr>
-						<td class="col-md-2">
+						</div>
+						<div class="col-md-3">
 							<label>EventDesc: {{event.eventDesc}}</label>
-						</td>
-						</tr>
-						<tr>
-						<td class="col-md-2">
+						</div>
+						<div class="col-md-3">
 							<label>EventAgenda: {{event.eventAgenda}}</label>
-						</td>
-						</tr>
-						<tr>
-						<td class="col-md-2">
+						</div>
+						<div class="col-md-3">
 							<label>EventAddress: {{event.eventAddress}}</label>
-						</td>
-						</tr>
-						<tr>
-						<td class="col-md-2">
-							<label>EventDate: {{event.eventDate}}</label>
-						</td>
-						</tr>
+						</div>
 						
-						<td class="col-md-2">
+						<div class="col-md-3">
+							<label>EventDate: {{event.eventDate}}</label>
+						</div>
+						<div class="col-md-3">
 							<label>EventTime: {{event.eventTime}}</label>
-						</td>
-						</tr>
-						</table>
+						</div>
+						
 						
 					</div>
 
 				</div>
-				</form>
-			</div>
+				
 				<div>&nbsp;</div>
-				<button type="submit" class="btn button  save margin-2"
+				<div class="text-center">
+				<button type="submit" class="btn button btn-primary save margin-2"
 					ng-click="editDetailsView(eventId)">Edit</button>
+					</div>
+					<div>&nbsp;</div>
+					</form>
+			</div>
+		</div>
+		<div>&nbsp;</div>
 		</div>
 	</div>
-</div>
+<div>&nbsp;</div>
+
