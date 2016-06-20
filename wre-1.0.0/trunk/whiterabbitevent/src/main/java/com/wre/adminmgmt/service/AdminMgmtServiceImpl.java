@@ -839,7 +839,7 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 	// uploadVenuLayout
 	public void uploadVenuLayout(MultipartFile file, Long eventId, String type) {
 
-		log.info("Enter into saveOrganizationApproveFile");
+		log.info("Enter into uploadVenueLayout");
 		String filePath = WREConstants.RESOURCE_PATH + eventId + File.separator
 				+ type;
 

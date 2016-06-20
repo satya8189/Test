@@ -3,24 +3,20 @@ var VenueLayoutController=function($scope,$location,$http,$routeParams,ngNotifie
 	//$socpe.eventId={};
 	$scope.$on("$routeChangeSuccess",function(){
 		
-		
 		$scope.upload.eventId=$routeParams.eventId;
 		//$scope.eventId=$routeParams.eventId;
-		
 		
 		
 	});
 	
 	$scope.uploadLayout = function() {
-		
-		
 		var fd = new FormData();
 
 		  // Take the first selected file
 		    fd.append("file", file.files[0]);
 		    fd.append("eventId",$scope.upload.eventId);
-		    
 		    fd.append("type","layout");
+		   
 		    $http.post('admin/uploadVenuLayout',fd, {
 		     withCredentials : true,
 		     headers : {
@@ -31,11 +27,9 @@ var VenueLayoutController=function($scope,$location,$http,$routeParams,ngNotifie
 		    	ngNotifier.notify("Record Created Successfully !");
 		     
 		    }).error(function(data) {
-		     alert("dsfsfds");
+		     alert("error in uploading venue layout");
 		    });
-	
-
-};
+	};
 
 //cancelUploadLayout
 
