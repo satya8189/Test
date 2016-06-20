@@ -13,6 +13,11 @@
 	background: transparent;
 	border: none;
 }
+.panel{
+	background-color:#fff;
+	 border: 1px solid #588CC0;
+	
+	}
 </style>
 
 <script type="text/javascript">
@@ -80,7 +85,10 @@
 		</a>
 	</div>
 	<div class="col-md-12">
-
+<div class="panel">
+		<div class="panel-heading text-center font-size-20 padding-15 headbg" >Create
+			Client</div>
+		<div class="panel-body">
 		<form name="ipForm" ng-submit="ipForm.$valid && saveEvent(event)"
 			novalidate>
 			<div class="form-group col-md-4">
@@ -196,8 +204,10 @@
 			</div>
 
 			<div ng-hide="rdboption=='demoone'" ng-init="rdboption=='demo'">
-				<div class="form-group col-md-4 col-md-offset-4">
-					<label>User </label> <select id="userId"
+			 <div class="col-md-12">
+				<div class="form-group col-md-6">
+					<label>User </label> 
+					<select id="userId"
 						class="form-control js-example-basic-single "
 						data-ng-model="event.userId"
 						ng-options="userOb.userId as userOb.firstName for userOb in usersList"
@@ -207,12 +217,16 @@
 				</div>
 
 
-			</div>
-			<div class="form-group col-md-3">
-				<input type="file" class="upload" name="file" id="file"
-					accept="image/*" />
-			</div>
-
+			
+			
+						<div class="form-group col-md-6 " 
+							id="uploadDiv">
+							<label class="flot-left">Upload Image </label> 
+							<input type="file" class="form-control form-group" name="file" id="file" onchange="angular.element(this).scope().setFiles(this)">
+							
+						</div>
+					</div>
+</div>
 			<div class="col-md-12">
 				<span class="help-inline" id="uploadDivError" style="display: none;">Select logo to upload</span> 
 			<span class="help-inline" id="extensionDivError"style="display: none;">only jpeg,png,gif formats are allowed</span>
@@ -228,7 +242,8 @@
 			</div>
 		</form>
 	</div>
-
-
+</div>
+</div>
+<div>&nbsp;</div>
 </body>
 </html>
