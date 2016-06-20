@@ -25,7 +25,7 @@ margin-bottom:0px !important;
 		 <input ng-model="search"  ng-show="inviteList.length!=0" class="form-control" placeholder="Search">
 			</div> 
 			<div class="col-md-12 space-hid">&nbsp;</div>
-			<table class="table table-bordered" id="eventView">
+			<table class="table" id="eventView">
 				<thead class="headbg">
 					<tr>
 					     <th>FirstName</th>
@@ -33,7 +33,6 @@ margin-bottom:0px !important;
 						 <th>Email</th>
 						 <th> Phone</th>
 						 <th> Status</th>
-						
 				   </tr>
 				</thead>
 				<tr ng-show="filteredSize!=0" ng-repeat="invite in inviteList | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
