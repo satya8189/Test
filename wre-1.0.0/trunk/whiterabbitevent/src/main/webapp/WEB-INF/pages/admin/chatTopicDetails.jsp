@@ -2,7 +2,7 @@
 
 <div class="col-md-12">
 	<a ng-click="cancelUpdateChat(chat)">
-		 <i class="glyphicon glyphicon-chevron-left"></i>
+		 <i class="fa fa-angle-left back"></i>
 	</a>
 	 </div>
 <form name="chatEditForm" ng-submit="chatEditForm.$valid && updateChat(chat)" novalidate>

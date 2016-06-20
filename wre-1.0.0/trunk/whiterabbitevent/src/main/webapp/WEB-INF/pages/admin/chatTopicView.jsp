@@ -31,7 +31,7 @@ margin-bottom:0px !important;
 			</span>
 		</div>
 	</div>
-	<a ng-click="navigateChatTopicCreate(eventId)" class="btn btn-default pull-left button btn-color">CreateChatTopic</a>
+	
 	
 	 
 	 			
@@ -41,9 +41,10 @@ margin-bottom:0px !important;
 		 <div class="col-md-2 col-md-offset-10 padding-0">
 		 <input ng-model="search"  ng-show="chatList.length!=0" class="form-control" placeholder="Search"">
 		 	</div> 
+		 	<a ng-click="navigateChatTopicCreate(eventId)" class="btn btn-primary pull-left button  btn-color">CreateChatTopic</a>
 			<div class="col-md-12 space-hid">&nbsp;</div>
-			<table class="table" id="eventView">
-				<thead>
+			<table class="table table-bordered" id="eventView">
+				<thead class="headbg">
 					<tr>
 					     <th>ChatId</th>
 					     <th>ChatTopicName </th>
@@ -73,14 +74,14 @@ margin-bottom:0px !important;
 				No records found..
 				</td>
 				</tr>
-				
-				<tr ng-show="filteredSize!=0">
-					<td colspan="6" align="center">
+				</table>
+				<div ng-show="filteredSize!=0">
+					<div colspan="6" align="center">
 						<pagination page="currentPage" max-size="noOfPages" total-items="totalItems" 
 							items-per-page="entryLimit" class="pagination-sm" boundary-links="true"></pagination>
-					</td>
-				</tr>
-			</table>
+					</div>
+				</div>
+			
 				
 		</div>
 	</div>

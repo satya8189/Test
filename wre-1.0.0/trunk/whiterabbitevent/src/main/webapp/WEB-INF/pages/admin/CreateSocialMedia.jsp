@@ -1,12 +1,19 @@
 <%@include file="error-messages.jsp" %>
+<style>
+.panel{
+border: 1px solid #588CC0;
+}
+
+</style>
  <div class="col-md-12">
 	<a ng-click="cancelCreateSocialMedia(sm.eventId)">
-		 <i class="glyphicon glyphicon-chevron-left"></i>
+		 <i class="fa fa-angle-left back"></i>
 	</a>
 	<div class="panel">
-		<div class="panel-heading text-center font-size-20 padding-5">Create SocialMedia</div>
+		<div class="panel-heading text-center font-size-20 padding-5 headbg">Create SocialMedia</div>
 		<div class="panel-body text-center">
 			<form name="orgCreateForm"	ng-submit="orgCreateForm.$valid && saveSocialMedia(sm)" novalidate>
+				<div>&nbsp;</div>
 				<div class="row">
 					<div class="col-md-12">
 						<div class=" form-group col-md-6">
@@ -16,9 +23,7 @@
                          	<span ng-if="orgCreateForm.$submitted" ng-messages="orgCreateForm.smName.$error" ng-messages-include="errors">
 		  						</span>
 						</div>
-					</div>
 					
-					<div class="col-md-12">
 						<div class=" form-group col-md-6">
 							<label class="flot-left">Type<span style="color:red;">*</span></label> 
 						<!-- 	<input type="text" class="input-text form-control" id="sponcorName"
@@ -47,7 +52,8 @@
 					</div>
 				</div>
 				<div>&nbsp;</div>
-				<button type="submit" class="btn button  save margin-2">Save</button>
+				<button type="submit" class="btn button btn-primary save margin-2">Save</button>
+			<div>&nbsp;</div>
 			</form>
 		</div>
 	</div>
