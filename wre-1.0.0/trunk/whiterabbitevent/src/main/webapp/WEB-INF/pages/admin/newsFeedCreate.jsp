@@ -1,4 +1,9 @@
+<style>
+.panel{
+border: 1px solid #588CC0;
+}
 
+</style>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <toaster-container></toaster-container>
 <jsp:include page="error-messages.jsp"></jsp:include> 
@@ -8,55 +13,41 @@
 
 <div class="col-md-12">
 	<a ng-click="navigateToNewsFeedView(news.eventId)">
-		 <i class="glyphicon glyphicon-chevron-left"></i>
+		 <i class="fa fa-angle-left back"></i>
 	</a>
-	
+		<div>&nbsp;</div>
 <div class="panel">
- <div class="panel-heading text-center font-size-20 padding-15">Create News</div>
+ <div class="panel-heading text-center font-size-20 padding-15 headbg">Create News</div>
   <div class="panel-body text-center">
-  
+  <div>&nbsp;</div>
     <div class="row">
 	<div class="col-md-12">
 	  <div class="form-group col-md-6" >
           <label class="flot-left">News Feed Name <span style="color:red;">*</span></label>
       <input type="text" class="input-text form-control" id="eventName" placeholder="NewsFeed Name"  ng-model="news.newsTitle" 
       name="eventName"   required>
-      <span ng-if="createEvent.$submitted" ng-messages="createEvent.eventName.$error" ng-messages-include="errors">
+      <span ng-if="createEvent.$submitted" ng-messages="createEvent.eventName.$error" ng-messages-include="errors" style="color:red;">
 		  </span>
       </div>
-      </div>
-	 </div>
-	 
-	 
-	  <div class="row">
-	<div class="col-md-12">
+     
 	  <div class="form-group col-md-6" >
           <label class="flot-left">NewsDesc <span style="color:red;">*</span></label>
       <input type="text" class="input-text form-control" id="newsDesc" placeholder="NewsDesc"  ng-model="news.newsDesc" 
       name="NewsDesc"   required>
-      <span ng-if="createEvent.$submitted" ng-messages="createEvent.NewsDesc.$error" ng-messages-include="errors">
-		  </span>
-      </div>
-      </div>
-	 </div>
-	 
-	 
-	  <div class="row">
-	<div class="col-md-12">
-	  <div class="form-group col-md-6" >
-          <label class="flot-left">NewsFeed Date <span style="color:red;">*</span></label>
-      <input type="date" class="input-text form-control" id="newsDate" placeholder="NewsDate"  ng-model="news.newsDate" 
-      name="NewsDate"   required>
-      <span ng-if="createEvent.$submitted" ng-messages="createEvent.NewsDate.$error" ng-messages-include="errors">
+      <span ng-if="createEvent.$submitted" ng-messages="createEvent.NewsDesc.$error" ng-messages-include="errors" style="color:red;">
 		  </span>
       </div>
       </div>
 	 </div>
 
-</div>
+
     <div>&nbsp;</div>
-<input type="submit" value="Save" class="btn button save margin-2" ng-click="submitted=true"/>
+    <div class="text-center">
+<input type="submit" value="Save" class="btn button btn-primary save margin-2" ng-click="submitted=true"/>
+</div>
+<div>&nbsp;</div>
 </div>
 </div>
-
+</div>
 </form>
+ <div>&nbsp;</div>

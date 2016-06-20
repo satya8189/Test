@@ -1,5 +1,11 @@
 
+	<style>
+	.buttontop{
+	position: relative;
+    top: 10px;
+	}
 	
+	</style>
 <script>
 	$(".link-active").removeClass("link-active");
 	$("#drugs").addClass("link-active");	
@@ -16,23 +22,23 @@ margin-bottom:0px !important;
 <!-- {{4+5}} --> 
 <body>
 
-<div class="row">
+<div class="col-md-12">
 	
 	<a ng-click="cancelSpeakerProfileView(eventId)">
-		 <i class="glyphicon glyphicon-chevron-left"></i>
+		 <i class="fa fa-angle-left back"></i>
 	</a>
 	
 	<div class="panel">
 	<form>
-	<a ng-click="navigateToSpeakerrCreate(eventId)" class="btn btn-default pull-left button btn-color">Create Speaker</a>
+	<a ng-click="navigateToSpeakerrCreate(eventId)" class="btn btn-primary pull-left button btn-color buttonbg">Create Speaker</a>
 	</form>
 		<div class="panel-body ">
 		 <div class="col-md-2 col-md-offset-10 padding-0">
 		 <input ng-model="search"  ng-show="speakersList.length!=0" class="form-control" placeholder="Search">
 			</div> 
 			<div class="col-md-12 space-hid">&nbsp;</div>
-			<table class="table" id="viewSponsors">
-				<thead>
+			<table class="table table-bordered " id="viewSponsors">
+				<thead class="headbg">
 					<tr>
 					
 						<th>Speaker Name</th>
@@ -61,14 +67,15 @@ margin-bottom:0px !important;
 					No records found..
 				</td>
 				</tr>
-				<tr ng-show="filteredSize!=0">
-					<td colspan="6" align="center">
+				</table>
+				<div ng-show="filteredSize!=0">
+					<div colspan="6" align="center">
 						<pagination page="currentPage" max-size="noOfPages" total-items="totalItems" 
 							items-per-page="entryLimit" class="pagination-sm" boundary-links="true">
 						</pagination>
-					</td>
-				</tr>
-		</table>
+					</div>
+				</div>
+		
 		
 		
 		<!-- <table class="res-table" ng-show="filteredSize!=0" ng-repeat="sp in filtered = speakersList | filter:search ">

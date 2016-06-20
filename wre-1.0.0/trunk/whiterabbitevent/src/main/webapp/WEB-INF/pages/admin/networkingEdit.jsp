@@ -1,17 +1,25 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<style>
+.panel{
+border: 1px solid #588CC0;
+}
 
-<div class="container">
+</style>
+
+<div class="col-md-12">
 <c:set var="userId" value="${USER.userId}" scope="session" />
 	<a ng-click="cancelNetworkingEdit(eventId)">
-		 				<i class="glyphicon glyphicon-chevron-left"></i>
+		 				<i class="fa fa-angle-left back"></i>
 	</a>
 				
 	<div class="panel">
-		<div class="panel-heading text-center font-size-20 padding-15">Edit
+		<div class="panel-heading text-center font-size-20 padding-15 headbg">Edit
 			Networking</div>
 		<div class="panel-body text-center">
 			<form name="nEditForm"
 				ng-submit="nEditForm.$valid && updateNetworking(networking)" novalidate>
+				 <div>&nbsp;</div>
+				<div class="col-md-12">
 					<div class="form-group col-md-6">
 							<input type="hidden" ng-model="networking.userId" value="${userId}"
 								ng-init="networking.userId=${userId}"> <label class="flot-left">First
@@ -30,7 +38,8 @@
 								 id="NName" ng-model="networking.lastName" placeholder="LastName" name="nName" required>
 								<span ng-if="nEditForm.$submitted" ng-messages="nEditForm.nName.$error" ng-messages-include="errors"></span>
 						</div>
-						
+						</div>
+						<div class="col-md-12">
 						<div class="form-group col-md-6">
 							<input type="hidden" ng-model="news.userId" value="${userId}"
 								ng-init="agendo.userId=${userId}"> <label class="flot-left">Mobile
@@ -46,7 +55,8 @@
 								 id="NName" ng-model="networking.emailId" placeholder="Email_id" name="nName" required>
 								<span ng-if="nEditForm.$submitted" ng-messages="nEditForm.nName.$error" ng-messages-include="errors"></span>
 						</div>
-						
+						</div>
+						<div class="col-md-12">
 						<div class="form-group col-md-6">
 							<input type="hidden" ng-model="news.userId" value="${userId}"
 								ng-init="agendo.userId=${userId}"> <label class="flot-left">Status
@@ -55,10 +65,10 @@
 								<span ng-if="nEditForm.$submitted" ng-messages="nEditForm.nName.$error" ng-messages-include="errors"></span>
 						</div>
 							  	
-							  						
-							<button type="submit" class="btn button  save margin-2"
+							  	</div>					
+							<button type="submit" class="btn button btn-primary save margin-2"
 					 ng-click="validateHiddenFields()">Update</button>
-					 
+					 <div>&nbsp;</div> 
 			</form>
 		</div>
 	</div>

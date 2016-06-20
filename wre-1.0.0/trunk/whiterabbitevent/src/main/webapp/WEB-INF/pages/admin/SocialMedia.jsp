@@ -1,4 +1,4 @@
-<h3>SocialMedia</h3>
+<!-- <h3>SocialMedia</h3> -->
 
 	
 <script>
@@ -12,25 +12,29 @@ margin-bottom:0px !important;
 .panel-body {
   /*padding: 10px 30px ;*/
 }
+.buttontop{
+	position: relative;
+    top: 10px;
+	}
 </style>
  <body>
   
-<div class="container-fluid">
+<div class="col-md-12">
 	<a ng-click="cancelSocialMediaView(eventId)">
-		 <i class="glyphicon glyphicon-chevron-left"></i>
+		 <i class="fa fa-angle-left back"></i>
 	</a>
 	<!-- {{4+5}} --> 
 	<div class="panel">
 	<form>
-	<a ng-click="createSocialMedia(eventId)" class="btn btn-default pull-left button btn-color">Create SocialMedia</a>
+	<a ng-click="createSocialMedia(eventId)" class="btn btn-primary pull-left button btn-color buttonbg">Create SocialMedia</a>
 	</form>
 		<div class="panel-body">
 		 <div class="col-md-2 col-md-offset-10 padding-0">
 		 <input ng-model="search"  ng-show="sponsorsList.length!=0" class="form-control" placeholder="Search">
 			</div> 
 			<div class="col-md-12 space-hid">&nbsp;</div>
-			<table class="table" id="viewSocialMedia">
-				<thead>
+			<table class="table table-bordered" id="viewSocialMedia">
+				<thead class="headbg">
 					<tr>
 						<th>Name</th>
 						<th>URL</th>

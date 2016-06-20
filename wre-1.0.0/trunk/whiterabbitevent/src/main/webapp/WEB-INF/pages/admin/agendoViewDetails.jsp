@@ -15,12 +15,12 @@ margin-bottom:0px !important;
 
 <div class="container-fluid">
  <a ng-click="cancelAgendoView(eventId)"> <i
-		class="glyphicon glyphicon-chevron-left"></i>
+		class="fa fa-angle-left back"></i>
 	</a> 
 	
 <form>
 
-	<a ng-click="navigateagendoCreate(eventId)" class="btn btn-default pull-left button btn-color">Create Agenda</a>
+	<a ng-click="navigateagendoCreate(eventId)" class="btn btn-primary pull-left button btn-color buttonbg">Create Agenda</a>
 	
 	<!-- <a ng-click="navigateagendoCreate(eventId)" title="eventViewDetails">agendaCreate
 			<i class="fa fa-eye-slash icons"> </i>
@@ -33,8 +33,8 @@ margin-bottom:0px !important;
 		 <input ng-model="search"  ng-show="agendoList.length!=0" class="form-control" placeholder="Search"">
 		 	</div> 
 			<div class="col-md-12 space-hid">&nbsp;</div>
-			<table class="table" id="eventView">
-				<thead>
+			<table class="table table-bordered" id="eventView">
+				<thead class="headbg">
 					<tr>
 					     <th>AgenTitle</th>
 					     <th>AgenDesc </th>
@@ -65,14 +65,14 @@ margin-bottom:0px !important;
 				No records found..
 				</td>
 				</tr>
-				
-				<tr ng-show="filteredSize!=0">
-					<td colspan="6" align="center">
+				</table>
+				<div ng-show="filteredSize!=0">
+					<div colspan="6" align="center">
 						<pagination page="currentPage" max-size="noOfPages" total-items="totalItems" 
 							items-per-page="entryLimit" class="pagination-sm" boundary-links="true"></pagination>
-					</td>
-				</tr>
-			</table>
+					</div>
+				</div>
+			
 				
 		</div>
 	</div>

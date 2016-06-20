@@ -7,31 +7,32 @@
 .panel{
 margin-bottom:0px !important;
 }
-.panel-body {
-  padding: 13px 50px ;q
+.buttonbg1{
+position: relative;
+    top: 30px;
 }
 </style>
 <toaster-container></toaster-container>
 
-<div class="container">
+<div class="col-md-12">
 	  <a ng-click="cancelQuestionsView(eventId)"> <i
-		class="glyphicon glyphicon-chevron-left"></i>
+		class="fa fa-angle-left back"></i>
 	</a> 
 	<form>
 	
-		<a ng-click="questionCreate(eventId)"title="eventViewDetails">Question Create
-							<i class="fa fa-eye-slash icons"> </i>
+		<a ng-click="questionCreate(eventId)"title="eventViewDetails" class="btn btn-primary buttonbg1">Question Create
+							<i class="fa fa-eye-slash icons "> </i>
 				</a>
 	
-	<div class="header-none">Question List</div>
+	<div class="header-none text-center">Question List</div>
 	<div class="panel">
 		<div class="panel-body">
 		 <div class="col-md-2 col-md-offset-10 padding-0">
 		 <input ng-model="search"  ng-show="questionList.length!=0" class="form-control" placeholder="Search">
 			</div> 
 			<div class="col-md-12 space-hid">&nbsp;</div>
-			<table class="table" id="eventView">
-				
+			<table class="table table-bordered" id="eventView">
+				<thead class="headbg">
 					<tr>
 					     <th>Question</th>
 					     <th>QuestionType</th>
@@ -42,7 +43,7 @@ margin-bottom:0px !important;
 						 <th>Answer</th>
 						 <th>Action</th>
 						</tr>
-				
+				</thead>
 				<tr ng-show="filteredSize!=0" ng-repeat="question in questionList  | filter: search | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
 				    <td>{{question.question}}</td>
 				    <td>{{question.appIdentifierName}}</td>
@@ -62,13 +63,14 @@ margin-bottom:0px !important;
 				No records found..
 				</td>
 				</tr>
-				<tr ng-show="filteredSize!=0">
-					<td colspan="6" align="center">
+					</table>
+				<div ng-show="filteredSize!=0">
+					<div colspan="6" align="center">
 						<pagination page="currentPage" max-size="noOfPages" total-items="totalItems" 
 							items-per-page="entryLimit" class="pagination-sm" boundary-links="true"></pagination>
-					</td>
-				</tr>
-			</table>
+					</div>
+				</div>
+		
 			
 			
 		</div>

@@ -14,9 +14,9 @@ margin-bottom:0px !important;
  <body>
 
   
-<div class="container-fluid">
+<div class="col-md-12">
 	<a ng-click="cancelQuestionAndAnswerView(eventId)">
-		 <i class="glyphicon glyphicon-chevron-left"></i>
+		 <i class="fa fa-angle-left back"></i>
 	</a>
 	<!-- {{4+5}}  -->
 	<div class="panel">
@@ -25,11 +25,11 @@ margin-bottom:0px !important;
 		 <input ng-model="search"  ng-show="participantsList.length!=0" class="form-control" placeholder="Search">
 			</div> 
 			<div class="col-md-12 space-hid">&nbsp;</div>
-			<table class="table" id="viewParticipants">
-				<thead>
+			<table class="table table-bordered" id="viewParticipants">
+				<thead class="headbg">
 					<tr>
-						<td>Participant Name</td>
-						<td>Action</td>
+						<th>Participant Name</th>
+						<th>Action</th>
 					</tr>
 				</thead>
 				 <tr ng-show="filteredSize!=0" ng-repeat="participant in filtered = participantsList | filter: search | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit ">  
@@ -47,14 +47,15 @@ margin-bottom:0px !important;
 						No records found..
 					</td>
 				</tr>
-				<tr>
-					<td  colspan="6" align="center">
+				</table>
+				<div>
+					<div  colspan="6" align="center">
 						<pagination page="currentPage" max-size="noOfPages" total-items="totalItems" 
 							items-per-page="entryLimit" class="pagination" boundary-links="true"></pagination>
-					</td>
+					</div>
 						
-				</tr> 
-			</table>
+				</div> 
+			
 			
 			
 			

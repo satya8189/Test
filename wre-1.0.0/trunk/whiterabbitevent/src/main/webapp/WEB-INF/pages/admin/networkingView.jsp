@@ -75,28 +75,29 @@ margin-bottom:0px !important;
 .panel{
 margin-bottom:0px !important;
 }
-.panel-body {
-  padding: 13px 50px ;
-}
+
 </style>
 <toaster-container></toaster-container>
 
 <div class="cal-md-12">
 	<form>
-	<a ng-click="cancelNetworkingView(eventId)">
-		 <i class="glyphicon glyphicon-chevron-left"></i>
-	</a>
 	
 	<div class="header-none" align="center">EventsParticipant List</div>
+	<a ng-click="cancelNetworkingView(eventId)">
+		 <i class="fa fa-angle-left back"></i>
+	</a>
+	
 	<div class="panel">
 		<div class="panel-body">
+		
+	
 		 <div class="col-md-2 col-md-offset-10 padding-0">
 			 <input ng-model="search"  ng-show="networkList.length!=0" class="form-control" placeholder="Search">
 		 </div> 
 		
 			<div class="col-md-12 space-hid">&nbsp;</div>
-			<table class="table" id="networkView">
-				<thead>
+			<table class="table table-bordered" id="networkView">
+				<thead class="headbg">
 					<tr> 
 					     <th>FirstName</th>
 					     <th>LastName</th>
@@ -125,15 +126,15 @@ margin-bottom:0px !important;
 						No records found..
 					</td>
 				</tr>
-				
-				<tr ng-show="filteredSize!=0">
-					<td colspan="6" align="center">
+				</table>
+				<div ng-show="filteredSize!=0">
+					<div colspan="6" align="center">
 						<pagination page="currentPage" max-size="noOfPages" total-items="totalItems" 
 							items-per-page="entryLimit" class="pagination-sm" boundary-links="true">
 						</pagination>
-					</td>
-				</tr>
-			</table>
+					</div>
+				</div>
+			
 			
 			
 		</div>
