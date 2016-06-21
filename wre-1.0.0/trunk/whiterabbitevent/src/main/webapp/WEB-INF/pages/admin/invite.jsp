@@ -1,3 +1,4 @@
+<%@include file="error-messages.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <style>
 .panel{
@@ -51,19 +52,20 @@ border: 1px solid #588CC0;
 	  <div class="form-group col-md-6 col-md-offset-3" >
 	  				
       <label class="flot-left">Mobile Number <span style="color:red;">*</span></label>
-      <input type="text" class="input-text form-control" id="agendo_Name" placeholder="Mobile Number"  ng-model="invite.phone"  
-      name="InviteName"   pattern="[0-9]+([\.,][0-9]+)*" title="Numbers only" format required >
+       <input type="text" class="input-text form-control" id="agendo_Name" placeholder="Mobile Number"  ng-model="invite.phone"  
+      name="Mobile" title="Numbers only" onkeypress="this.value=this.value.replace(/[^\d,]/g,'')" required > 
+      
+      <span  ng-if="createEvent.$submitted" ng-messages="createEvent.Mobile.$error" ng-messages-include="errors" style="color:red"></span>
+      
       </div>
       </div>
 	 </div>
 	 <div>&nbsp;</div>
 			<input type="submit" value="Submit" ng-click="submitted=true" class="btn btn-primary"/>	
 			<div>&nbsp;</div>	
-</form>
+	</form>
 
-				
-
-				
+						
 			
 
 				

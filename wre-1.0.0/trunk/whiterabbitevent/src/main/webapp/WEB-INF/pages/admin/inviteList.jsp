@@ -17,7 +17,6 @@ margin-bottom:0px !important;
 		 <i class="fa fa-angle-left back"></i>
 	</a>
 	<form>
-	
 	<div class="header-none text-center">Invite List</div>
 	<div class="panel">
 		<div class="panel-body">
@@ -54,7 +53,6 @@ margin-bottom:0px !important;
 					</td>
 				</tr>
 			</table>
-			
 			
 		</div>
 	</div>
