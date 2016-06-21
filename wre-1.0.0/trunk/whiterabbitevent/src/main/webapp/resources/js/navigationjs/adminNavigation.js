@@ -314,20 +314,17 @@ App.directive('format', function ($filter) {
             if (!ctrl) {
                 return;
             }
-
             ctrl.$formatters.unshift(function () {
                 return $filter('number')(ctrl.$modelValue);
             });
 
-//====================
-            //to add comma to the mobile numbers
+            //====================
+           /* //to add comma to the mobile numbers
             ctrl.$parsers.push(function (viewValue) {
 
             	//var transformedInput = viewValue.toLowerCase().replace(/ /g, '');
                   //replace(/[^\dA-Z]/g, '').replace(/(.{10})/g, '$1,')
-            	
-            
-            	var transformedInput = viewValue.replace(/[^\dA-Z]/g, '').replace(/(.{10})/g, ',$1').trim();
+            	var transformedInput = viewValue.replace(/[^\dA-Z]/g, '').replace(/(.{10})/g, '$1,').trim();
             	//alert(transformedInput.substr(1));
             	
             		if(transformedInput.charAt(0)==",")
@@ -342,7 +339,7 @@ App.directive('format', function ($filter) {
 
                   return transformedInput;         
                 });
-           
+*/           
 //============================
            
         }
