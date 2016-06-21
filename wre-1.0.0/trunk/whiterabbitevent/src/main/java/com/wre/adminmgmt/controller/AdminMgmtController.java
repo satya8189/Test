@@ -5,6 +5,8 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -18,6 +20,7 @@ import javax.imageio.ImageIO;
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpEntity;
@@ -1226,5 +1229,35 @@ public class AdminMgmtController {
 		return result;
 
 	}
+	
+	@RequestMapping(value = "admin/imageUpload", method = RequestMethod.POST)
+	 public @ResponseBody String imageUpload(@RequestBody GalaryBean galaryBean){
+	  String filePath;
+	  String result=null;
+	
+	  try {
+	            // Decode String using Base64 Class
+	            byte[] imageByteArray = Base64.decodeBase64(galaryBean.getEncodeString());
+	            FileOutputStream imageOutFile;
+	            // Write Image into File system - Make sure you update the path
+	            filePath=WREConstants.RESOURCE_PATH+galaryBean.getEncodeString()+WREConstants.FILE_SEPARATER+galaryBean.getType()+WREConstants.FILE_SEPARATER+galaryBean.getName();
+	            imageOutFile = new FileOutputStream(filePath);
+
+	            	            imageOutFile.write(imageByteArray);
+	 
+	            imageOutFile.close();
+	            adminMgmtService.saveGalary(galaryBean);
+	            
+	            result="success";
+	            System.out.println("Image Successfully Stored");
+	        } catch (FileNotFoundException fnfe) {
+	            System.out.println("Image Path not found" + fnfe);
+	        } catch (IOException ioe) {
+	            System.out.println("Exception while converting the Image " + ioe);
+	        }
+	  
+	 
+	  return "{\"result\":\"" + result + "\"}";
+	 }
 
 }
