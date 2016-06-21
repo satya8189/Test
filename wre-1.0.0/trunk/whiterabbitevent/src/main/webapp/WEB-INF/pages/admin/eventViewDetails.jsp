@@ -29,7 +29,7 @@ padding: 10px 0px 0px;
 
 <div class="row">
 <div ng-repeat=" service in serviceList">
-
+						
 						<div class="col-md-3 col-sm-6 col-xs-12" style="padding-top: 10px"><a ng-click="serviceDetails(service)">
 							<div class="padashboard">
 								<img src="resources/images/agenda.png" ng-if="service.serviceName=='Agenda'"/>
