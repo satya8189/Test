@@ -1240,7 +1240,7 @@ public class AdminMgmtController {
 	            byte[] imageByteArray = Base64.decodeBase64(galaryBean.getEncodeString());
 	            FileOutputStream imageOutFile;
 	            // Write Image into File system - Make sure you update the path
-	            filePath=WREConstants.RESOURCE_PATH+galaryBean.getEncodeString()+WREConstants.FILE_SEPARATER+galaryBean.getType()+WREConstants.FILE_SEPARATER+galaryBean.getName();
+	            filePath=WREConstants.RESOURCE_PATH+galaryBean.getEventId()+WREConstants.FILE_SEPARATER+galaryBean.getType()+WREConstants.FILE_SEPARATER+galaryBean.getName();
 	            imageOutFile = new FileOutputStream(filePath);
 
 	            	            imageOutFile.write(imageByteArray);
