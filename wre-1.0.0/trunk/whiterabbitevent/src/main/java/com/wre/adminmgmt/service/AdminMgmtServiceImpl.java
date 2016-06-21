@@ -1438,6 +1438,21 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 				}
 				return result;
 			}
+
+			@Override
+			public void saveGalary(GalaryBean galaryBean) {
+				Galary galary = new Galary();
+				galary.setName(galaryBean.getName());
+				galary.setType(galaryBean.getType());
+				galary.setFileName(galaryBean.getFileName());
+				Event event = new Event();
+				event.setEventId(galaryBean.getEventId());
+				galary.setEvent(event);
+				AdminMgmtDaoImpl.save(galary);
+			}
+			
+
+
 }
 
 	

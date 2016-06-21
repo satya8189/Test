@@ -156,6 +156,8 @@ public void eventParticipantStatusSave(ParticipantEventBean participantEventBean
 public String getEventParticipantStatus(Long eventId, Long participantId);
 public String participantQueriesSave(ParticipantQuriesBean participantQuriesBean);
 
+public void saveGalary(GalaryBean galaryBean);
+
 
 
 
