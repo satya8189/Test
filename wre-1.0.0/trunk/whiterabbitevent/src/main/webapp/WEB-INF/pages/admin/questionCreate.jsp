@@ -44,7 +44,7 @@ border: 1px solid #588CC0;
 		  </span>
       </div>
      
-	  <div class="form-group col-md-6" >
+	  <div class="form-group col-md-6" ng-show="question.appIdentifierId!=201">
           <label class="flot-left">OptionA <span style="color:red;">*</span></label>
       <input type="text" class="input-text form-control" id="agendo_DescName" placeholder="optionA"  ng-model="question.optionA" 
       name="Agendo_DescName"   required>
@@ -56,7 +56,7 @@ border: 1px solid #588CC0;
 	 
 	
 	<div class="col-md-12">
-	  <div class="form-group col-md-6" >
+	  <div class="form-group col-md-6" ng-show="question.appIdentifierId!=201">
           <label class="flot-left">OptionB <span style="color:red;">*</span></label>
       <input type="text" class="input-text form-control" id="agenStartTime" placeholder="OptionB"  ng-model="question.optionB" 
       name="agenStartTime"   required>
@@ -65,7 +65,7 @@ border: 1px solid #588CC0;
       </div>
     
 	
-	  <div class="form-group col-md-6" >
+	  <div class="form-group col-md-6" ng-show="question.appIdentifierId!=201">
           <label class="flot-left">OptionC <span style="color:red;">*</span></label>
       <input type="text" class="input-text form-control" id="agenStartTime" placeholder="OptionC"  ng-model="question.optionC" 
       name="agenEndTime"   required>
@@ -75,7 +75,7 @@ border: 1px solid #588CC0;
       </div>
 	 
 	<div class="col-md-12">
-	  <div class="form-group col-md-6" >
+	  <div class="form-group col-md-6" ng-show="question.appIdentifierId!=201">
           <label class="flot-left">OptionD <span style="color:red;">*</span></label>
       <input type="text" class="input-text form-control" id="agenBy" placeholder="OptionD"  ng-model="question.optionD" 
       name="agenBy"   required>
