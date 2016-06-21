@@ -46,7 +46,7 @@ margin-bottom:0px !important;
 			<table class="table table-bordered" id="eventView">
 				<thead class="headbg">
 					<tr>
-					     <th>ChatId</th>
+					    
 					     <th>ChatTopicName </th>
 						 
 						  <th>Action</th>
@@ -54,7 +54,7 @@ margin-bottom:0px !important;
 				   </tr>
 				</thead>
 				<tr ng-show="filteredSize!=0" ng-repeat="chat in chatList | filter:search | startFrom : (currentPage-1)*entryLimit | limitTo : entryLimit">
-				    <td >{{chat.chatTopicId}}</td>
+				   
 					<td >{{chat.chatTopicName}}</td>
 					
 					
