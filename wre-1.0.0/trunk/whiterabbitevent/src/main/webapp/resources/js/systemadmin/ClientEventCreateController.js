@@ -57,8 +57,7 @@ var ClientEventCreateController = function($scope, $http, $routeParams,$location
     			$location.path("/clientEventsView/"+event.clientId);
     			
     		}).error(function() {
-    			alert("sdfsdf");
-    			ngNotifier.notify("Event not Created Successfully !");
+    			ngNotifier.notifyError("Event Not Created Successfully !");
     		});
         	}else{
             		$scope.disabled=false;
