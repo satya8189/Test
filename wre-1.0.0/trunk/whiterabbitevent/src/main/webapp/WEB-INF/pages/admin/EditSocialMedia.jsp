@@ -25,7 +25,7 @@ border: 1px solid #588CC0;
 							<input type="text" class="input-text form-control" id="socialMediaName"
 								ng-model="sm.name" name="socialMediaName"
 								required>
-							<span ng-if="smEditForm.$submitted" ng-messages="smEditForm.socialMediaName.$error" ng-messages-include="errors"></span>
+							<span ng-if="smEditForm.$submitted" ng-messages="smEditForm.socialMediaName.$error" ng-messages-include="errors" style="color:red;"></span>
 						</div>
 					
 					
@@ -38,7 +38,7 @@ border: 1px solid #588CC0;
 							<input type="text" class="input-text  form-control" id="URL"
 								ng-model="sm.url" name="sponcorDesc"
 								required>
-								<span ng-if="smEditForm.$submitted" ng-messages="smEditForm.sponcorDesc.$error" ng-messages-include="errors"></span>
+								<span ng-if="smEditForm.$submitted" ng-messages="smEditForm.sponcorDesc.$error" ng-messages-include="errors" style="color:red;"></span>
 						</div>
 						
 						<!-- <div class="col-md-2">
