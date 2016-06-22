@@ -22,6 +22,10 @@ font-size:20px;
  margin: 0px;
 padding: 10px 0px 0px;
 }
+img{
+height: 58px;
+width: 58px;
+}
 </style>
 
 </head>
@@ -50,6 +54,7 @@ padding: 10px 0px 0px;
 								<img src="resources/images/network.png" ng-if="service.serviceName=='Chat'"/>
 								<img src="resources/images/Q&A.png" ng-if="service.serviceName=='Help'"/>
 								<img src="resources/images/video.png" ng-if="service.serviceName=='Videos'"/>
+								<img src="resources/images/video.png" ng-if="service.serviceName=='EventImage'"/>
 								 <h4 class="f18" style="text-transform: capitalize;">{{service.serviceName}}</h4> 
 							 </div>
 							</div>

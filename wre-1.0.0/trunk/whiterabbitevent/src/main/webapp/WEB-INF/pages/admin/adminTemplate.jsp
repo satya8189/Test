@@ -104,6 +104,7 @@
     
      <script type="text/javascript" src="resources/js/admin/NetworkingEditController.js"></script>
        <script type="text/javascript" src="resources/js/admin/NetworkingViewController.js"></script>
+       <script type="text/javascript" src="resources/js/admin/EventImageUploadController.js"></script>
 </head>
 <body>
         <!--Heading-->
