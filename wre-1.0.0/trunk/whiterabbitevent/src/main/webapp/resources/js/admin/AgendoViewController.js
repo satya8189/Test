@@ -1,14 +1,18 @@
 var AgendoViewController = function($scope,$routeParams,$http,$location) {
 	$scope.agendoList = {};
 	$scope.eventId={};
-	
+	$scope.filteredSize;
 	$scope.$on("$routeChangeSuccess", function () {
 		
 		$scope.eventId=$routeParams.eventId;
 			
 		 $http.get('admin/agendoDetails?eventId='+$routeParams.eventId).success(function(agendoList){
 				    $scope.agendoList = agendoList;
-			
+				    if(agendoList.length==0)
+					{
+						$scope.filteredSize=0;
+					}
+				    
 				  //=================================
 					// create empty search model (object) to trigger $watch on update
 						$scope.search = null;
@@ -30,6 +34,7 @@ var AgendoViewController = function($scope,$routeParams,$http,$location) {
 						$scope.totalItems = $scope.filtered.length;
 						$scope.noOfPages = Math.ceil($scope.totalItems / $scope.entryLimit);
 						$scope.currentPage = 1;
+						$scope.filteredSize=$scope.filtered.length;
 						}, true);
 				    //===================================*/
 				    
