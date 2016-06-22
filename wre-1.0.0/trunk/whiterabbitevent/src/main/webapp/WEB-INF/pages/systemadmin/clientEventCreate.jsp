@@ -202,7 +202,12 @@
 				</div>
 
 			</div>
-
+<div class="form-group col-md-6 " 
+							id="uploadDiv">
+							<label class="flot-left">Upload Image </label> 
+							<input type="file" class="form-control form-group" name="file" id="file" onchange="angular.element(this).scope().setFiles(this)">
+							
+						</div>
 			<div ng-hide="rdboption=='demoone'" ng-init="rdboption=='demo'">
 			 <div class="col-md-12">
 				<div class="form-group col-md-6">
@@ -219,17 +224,12 @@
 
 			
 			
-						<div class="form-group col-md-6 " 
-							id="uploadDiv">
-							<label class="flot-left">Upload Image </label> 
-							<input type="file" class="form-control form-group" name="file" id="file" onchange="angular.element(this).scope().setFiles(this)">
-							
-						</div>
+						
 					</div>
 </div>
 			<div class="col-md-12">
-				<span class="help-inline" id="uploadDivError" style="display: none;">Select logo to upload</span> 
-			<span class="help-inline" id="extensionDivError"style="display: none;">only jpeg,png,gif formats are allowed</span>
+				<span class="help-inline" id="uploadDivError" style="display: none;color:red;" >Select logo to upload</span> 
+			<span class="help-inline" id="extensionDivError" style="display: none;color: red;">only jpeg,png,gif formats are allowed</span>
 			</div>
 
 
