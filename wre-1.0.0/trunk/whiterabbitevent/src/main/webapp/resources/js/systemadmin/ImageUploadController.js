@@ -30,7 +30,6 @@ var ImageUploadController = function($scope, $http, $location, $routeParams,ngNo
 		     transformRequest : angular.identity
 		    }).success(function(data) {
 		    	ngNotifier.notify("Record Created Successfully !");
-		    	alert(type);
 		    	 $http.get('admin/getEventImages?eventId='+$routeParams.eventId+'&type='+type).success(function(eventImages){
 					    $scope.eventImages = eventImages;
 					    //alert($scope.eventImages.length);
