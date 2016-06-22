@@ -27,23 +27,20 @@ public class Rating  implements java.io.Serializable {
      private Long userId;
      private Long eventId;
      private String type;
-
+     private Float rating;
 
 
     public Rating() {
     }
 
-    public Rating(Long ratingId,Long sourceId,Long userId,Long eventId,String type) {
+    public Rating(Long ratingId,Long sourceId,Long userId,Long eventId,String type,Float rating) {
        this.ratingId = ratingId;
        this.sourceId = sourceId;
        this.userId = userId;
        this.eventId = eventId;
        this.type = type;
-
-
+       this.rating = rating;
     }
-   
-
 
     
   @Id @GeneratedValue(strategy=IDENTITY)
@@ -91,9 +88,14 @@ public class Rating  implements java.io.Serializable {
 		this.type = type;
 	}
 
+	@Column(name="Rating",length = 20)
+	public Float getRating() {
+		return rating;
+	}
 
-
-
+	public void setRating(Float rating) {
+		this.rating = rating;
+	}
 
 }
 
