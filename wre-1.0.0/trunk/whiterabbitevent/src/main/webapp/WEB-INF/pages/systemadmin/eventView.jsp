@@ -22,19 +22,19 @@ border: 1px solid #588CC0;
 					<div class="col-md-12 padding-35">
 
 					
-						<div class="col-md-3">
+						<div class="col-md-12">
 							<label>Event Name: {{event.eventName}}</label>
 						</div>
 						
-						<div class="col-md-3">
+						<div class="col-md-12">
 							<label>EventDesc: {{event.eventDesc}}</label>
 						</div>
 						
-						<div class="col-md-3">
+						<div class="col-md-12">
 							<label>EventAgenda: {{event.eventAgenda}}</label>
 						</div>
 						
-						<div class="col-md-3">
+						<div class="col-md-12">
 							<label>EventAddress: {{event.eventAddress}}</label>
 						</div>
 						</div>
@@ -43,12 +43,12 @@ border: 1px solid #588CC0;
 				
 				
 			
-				<div>&nbsp;</div>
+				<!-- <div>&nbsp;</div>
 				<div class="text-center">
 				 <button type="submit" class="btn button btn-primary save margin-2"
 					ng-click="imageUpload(eventId)">Upload image</button>
-					</div>
-					<div>&nbsp;</div>
+					</div>-->
+					<div>&nbsp;</div> 
 					</form> 
 		</div>
 		</div>
