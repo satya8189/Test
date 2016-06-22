@@ -23,9 +23,10 @@ var GalleryCreateController = function($scope, $http, $location, $routeParams,ng
 		    }).success(function(data) {
 		    	ngNotifier.notify("Record Created Successfully !");
 		     $location.path("/galleryView/"+gallery.eventId);
-		    }).error(function(data) {
-		     alert("dsfsfds");
-		    });
+		    }).error(function() {
+				ngNotifier.notifyError("Please choose file  !");
+			});
+
 	
 
 };
