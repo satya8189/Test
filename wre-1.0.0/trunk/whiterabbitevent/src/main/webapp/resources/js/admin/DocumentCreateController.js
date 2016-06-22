@@ -24,11 +24,9 @@ var DocumentCreateController = function($scope, $http, $location, $routeParams,n
 			  //  	alert("success");
 			    	ngNotifier.notify("Record Created Successfully !");
 			     $location.path("/documentView/"+document.eventId);
-			    }).error(function(data) {
-			     //alert("dsfsfds");
-			    	ngNotifier.notify("Error in uploading.!");
-			    });
-		
+			    }).error(function() {
+					ngNotifier.notifyError("Please choose file !");
+				});
 
 	};
 
