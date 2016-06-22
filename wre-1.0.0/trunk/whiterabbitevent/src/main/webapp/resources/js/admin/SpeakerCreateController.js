@@ -42,6 +42,7 @@ var SpeakerCreateController=function($scope, $http, $routeParams,$location,ngNot
 			    	ngNotifier.notify("Speaker Created  Successfully !");
 			    	$location.path("/speakerProfileView/"+speaker.eventId);
 			    }).error(function() {
+			    	ngNotifier.notify("Speaker Not Created  Successfully !");
 					ngNotifier.notifyError("Please choose Required file !");
 				});
 
