@@ -1,15 +1,12 @@
 
 package com.wre.common.util;
 
-import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.security.Key;
 import java.security.MessageDigest;
 import java.security.SecureRandom;
 import java.util.Formatter;
@@ -26,8 +23,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-
-import sun.misc.BASE64Encoder;
 
 
 
@@ -272,7 +267,41 @@ return pass.toString();
 	  }
 
 
-	
+	  public static void deleteFolder(String folderToDelete) throws IOException {
+	        String os = System.getProperty("os.name").toLowerCase();
+	        File emptyFolder = createEmptyDirectory();
+	        if (isWindows(os)) {
+	                Runtime.getRuntime().exec("cmd /c robocopy " + emptyFolder + " " + folderToDelete + " /purge & rmdir " + folderToDelete);
+	        } else if (isUnix(os) || isMac(os) || isSolaris(os)) {
+	                Runtime.getRuntime().exec("rm -r -f  " + folderToDelete);
+	        }
+	}
+	private static File createEmptyDirectory() {
+	        File emptyFolder = new File("EmptyFolder");
+	        if (!emptyFolder.exists()) {
+	                boolean isCreated = emptyFolder.mkdir();
+	        }
+
+	        return emptyFolder;
+	}
+
+	public static boolean isWindows(String os) {
+	        return os.contains("win");
+	}
+
+	public static boolean isUnix(String os) {
+	        return os.contains("nix") || os.contains("aix") || os.contains("nux");
+	}
+
+	public static boolean isSolaris(String os) {
+	        return os.contains("sunos");
+	}
+
+	public static boolean isMac(String os) {
+	        return os.contains("mac");
+	}
+	  
+	  
 }
 
 
