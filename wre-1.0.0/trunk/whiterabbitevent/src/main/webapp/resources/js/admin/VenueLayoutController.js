@@ -26,11 +26,11 @@ var VenueLayoutController=function($scope,$location,$http,$routeParams,ngNotifie
 		    }).success(function(data) {
 		    	ngNotifier.notify("Record Created Successfully !");
 		     
-		    }).error(function(data) {
-		     alert("error in uploading venue layout");
-		    });
-	};
+		    }).error(function() {
+				ngNotifier.notifyError("Please choose Required file !");
+			});
 
+	};
 //cancelUploadLayout
 
 $scope.cancelUploadLayout = function(eventId)
@@ -40,7 +40,7 @@ $scope.cancelUploadLayout = function(eventId)
 };
 
 
-
+	
 
 	
 };
