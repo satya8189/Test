@@ -1,6 +1,6 @@
 var SpeakerProfileViewController = function($scope, $http, $location, $routeParams,ngNotifier)
 	{
-			    
+	$scope.filteredSize;		    
 		$scope.$on("$routeChangeSuccess",function() {
 			$scope.eventId=$routeParams.eventId;
 			//alert("event ID---++"+$routeParams.eventId);
@@ -8,7 +8,9 @@ var SpeakerProfileViewController = function($scope, $http, $location, $routePara
 			function(sList) {
 				//alert("got the data from controller");
 				$scope.speakersList=sList;
-				
+				if(sList.length==0){
+					$scope.filteredSize=0;
+				}
 				//=================================
 				// create empty search model (object) to trigger $watch on update
 					$scope.search = null;
@@ -25,6 +27,7 @@ var SpeakerProfileViewController = function($scope, $http, $location, $routePara
 					$scope.totalItems = $scope.filtered.length;
 					$scope.noOfPages = Math.ceil($scope.totalItems / $scope.entryLimit);
 					$scope.currentPage = 1;
+					$scope.filteredSize=$scope.filtered.length;
 					}, true);
 			    //===================================*/
 				

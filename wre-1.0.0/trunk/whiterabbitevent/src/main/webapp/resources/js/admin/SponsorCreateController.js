@@ -35,6 +35,7 @@ var SponsorCreateController = function($scope, $http, $location, $routeParams,ng
 			    	ngNotifier.notify("Sponsor Created  Successfully !");
 			    }).error(function(data) {
 			    // alert("dsfsfds");
+			    	ngNotifier.notifyError("plese select file !");
 			    });
 		
 

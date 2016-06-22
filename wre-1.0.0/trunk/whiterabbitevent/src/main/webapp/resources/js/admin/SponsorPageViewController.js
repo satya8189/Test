@@ -3,7 +3,7 @@ var SponsorPageViewController = function($scope, $http, $location,
 	
 	$scope.$on("$routeChangeSuccess", function() {
 		$scope.eventId = $routeParams.eventId;
-
+		$scope.filteredSize;
 		$http.get('admin/sponsorsList?eventId=' + $routeParams.eventId)
 				.success(
 						function(sList) {
@@ -38,6 +38,7 @@ var SponsorPageViewController = function($scope, $http, $location,
 								$scope.noOfPages = Math.ceil($scope.totalItems
 										/ $scope.entryLimit);
 								$scope.currentPage = 1;
+								$scope.filteredSize=$scope.filtered.length;
 							}, true);
 
 							// ===================================*/
