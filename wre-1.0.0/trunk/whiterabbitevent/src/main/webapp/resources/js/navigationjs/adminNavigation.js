@@ -286,7 +286,10 @@ App.config([ '$routeProvider', function($routeProvider, $Scope) {
 		controller : NetworkingEditController
 	});
 	
-	
+	 $routeProvider.when('/eventImageUpload/:eventId',{
+		 templateUrl:'admin/eventImageUpload',
+		 controller:EventImageUploadController
+	 });
 	
 	$routeProvider.otherwise({
 			
