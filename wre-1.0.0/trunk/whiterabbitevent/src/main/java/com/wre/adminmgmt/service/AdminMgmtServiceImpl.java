@@ -526,6 +526,8 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 
 	// updateQuestionDetails
 	public void updateQuestionDetails(QuestionBean questionBean) {
+		
+		log.info("question data"+questionBean.toString());
 		SurveyQuestion surveyQuestionOject = AdminMgmtDaoImpl
 				.questionEdit(questionBean.getQuestionId());
 
@@ -959,13 +961,13 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 			rating.setSourceId(ratingBean.getSourceId());
 			rating.setType(ratingBean.getType());
 			rating.setUserId(ratingBean.getUserId());
+			rating.setRating(ratingBean.getRating());
 			
-			String result="fails";
+			String result="fail";
 			long i=(Long)AdminMgmtDaoImpl.save(rating);
 			if(i>0){
 				result="success";
 			}
-			
 			log.info("Rating Saved..");
 			return result;
 		}

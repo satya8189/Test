@@ -810,7 +810,7 @@ public class AdminMgmtController {
 	@RequestMapping(value = "admin/saveUserRating", method = RequestMethod.POST)
 	public @ResponseBody
 	String saveUserRating(@RequestBody RatingBean ratingBean) {
-		System.out.println("in saveUserRating.." + ratingBean.getType());
+		System.out.println("in saveUserRating.." + ratingBean.getRating());
 		log.info("rating sent to service..");
 		return adminMgmtService.saveUserRating(ratingBean);
 	}
@@ -974,15 +974,12 @@ public class AdminMgmtController {
 		adminMgmtService.eventParticipantSave(participantEventBean);
 	}
 	
-	
-	
 
 	// APIupdateParticipant.....to updateparticipant by passing bean with name..
 	// ParticipantBean..with attributes..participantId and data(exclude
 	// otp,registerId)..entity-participants
 	@RequestMapping(value = "admin/updateParticipantDetails", method = RequestMethod.POST)
-	public @ResponseBody
-	String updateParticipantDetails(@RequestBody ParticipantBean participantBean) {
+	public @ResponseBody String updateParticipantDetails(@RequestBody ParticipantBean participantBean) {
 		log.info("in update Participant details.."+participantBean.getEmailId()+"---"+participantBean.getStatus());
 		adminMgmtService.updateParticipant(participantBean);
 		return "success";

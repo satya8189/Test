@@ -7,6 +7,7 @@ public class RatingBean {
     private Long userId;
     private Long eventId;
     private String type;
+    private Float rating;
     
     public Long getRatingId() {
 		return ratingId;
@@ -38,12 +39,19 @@ public class RatingBean {
 	public void setType(String type) {
 		this.type = type;
 	}
+	
+	public Float getRating() {
+		return rating;
+	}
+	public void setRating(Float rating) {
+		this.rating = rating;
+	}
+	
 	@Override
 	public String toString() {
-		return "RatingBean Data [ratingId=" + ratingId + ", sourceId=" + sourceId
+		return "RatingBean [ratingId=" + ratingId + ", sourceId=" + sourceId
 				+ ", userId=" + userId + ", eventId=" + eventId + ", type="
-				+ type + "]";
+				+ type + ", rating=" + rating + "]";
 	}
-
-    
+	    
 }
