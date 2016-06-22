@@ -44,13 +44,7 @@ App.config(['$routeProvider', function ($routeProvider,$Scope) {
 		 controller:EventViewController
 	 });
 	 
-	 //imageUpload
-	 
-	 $routeProvider.when('/imageUpload/:eventId',{
-		 templateUrl:'systemadmin/imageUpload',
-		 controller:ImageUploadController
-	 });
-	 
+	
     $routeProvider.otherwise({redirectTo: '/clientsView'});
 }]);
     
