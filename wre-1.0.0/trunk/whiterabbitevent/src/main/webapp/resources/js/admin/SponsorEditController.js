@@ -49,9 +49,10 @@ $scope.$on("$routeChangeSuccess", function() {
 			    	//alert("video success");
 			    	ngNotifier.notify("Created  Successfully !");
 			     $location.path("/sponsorPageView/"+sponcor.eventId);
-			    }).error(function(data) {
-			    // alert("dsfsfds");
-			    });
+			    }).error(function() {
+					ngNotifier.notifyError("Please choose Required file !");
+				});
+
 			
 	};
 
