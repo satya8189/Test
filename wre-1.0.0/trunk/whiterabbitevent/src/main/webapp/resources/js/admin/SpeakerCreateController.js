@@ -41,9 +41,10 @@ var SpeakerCreateController=function($scope, $http, $routeParams,$location,ngNot
 			    	//alert("video success");
 			    	ngNotifier.notify("Speaker Created  Successfully !");
 			    	$location.path("/speakerProfileView/"+speaker.eventId);
-			    }).error(function(data) {
-			    // alert("dsfsfds");
-			    });
+			    }).error(function() {
+					ngNotifier.notifyError("Please choose Required file !");
+				});
+
 		
 	 };
 
