@@ -2,15 +2,19 @@
 var NewsFeedViewController = function($scope,$http,$routeParams) {
 	//alert("NewsFeedViewController");
 	$scope.inviteList = {};
-	
+	$scope.filteredSize;	
 	
 	$scope.$on("$routeChangeSuccess", function () {
 		
 		$scope.eventId=$routeParams.eventId;
-			
-	  $http.get('admin/newsList?eventId='+$routeParams.eventId).success(function(newsList){
+		
+		$http.get('admin/newsList?eventId='+$routeParams.eventId).success(function(newsList){
 		      $scope.newsList = newsList;
-	
+		      if(newsList.length==0)
+				{
+					$scope.filteredSize=0;
+				}
+			    
 		    //=================================
 				// create empty search model (object) to trigger $watch on update
 					$scope.search = null;
@@ -32,6 +36,7 @@ var NewsFeedViewController = function($scope,$http,$routeParams) {
 					$scope.totalItems = $scope.filtered.length;
 					$scope.noOfPages = Math.ceil($scope.totalItems / $scope.entryLimit);
 					$scope.currentPage = 1;
+					$scope.filteredSize=$scope.filtered.length;
 					}, true);
 			    //===================================*/
 		      

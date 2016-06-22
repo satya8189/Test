@@ -1,7 +1,7 @@
 var QuestionViewController = function($scope,$routeParams,$http, $location) {
 	$scope.questionList={};
 	$scope.eventId={};
-	
+	$scope.filteredSize;
 	$scope.$on("$routeChangeSuccess", function () {
 		
 		$scope.eventId=$routeParams.eventId;
@@ -12,7 +12,9 @@ var QuestionViewController = function($scope,$routeParams,$http, $location) {
 				//alert("admin/questionList");
 				    $scope.questionList = questionList;
 				  //  alert("admin/questionList-------------------------");
-				    
+				    if(questionList==0){
+				    	$scope.filteredSize=0;
+				    }
 
 					  //=================================
 						// create empty search model (object) to trigger $watch on update
@@ -35,6 +37,7 @@ var QuestionViewController = function($scope,$routeParams,$http, $location) {
 							$scope.totalItems = $scope.filtered.length;
 							$scope.noOfPages = Math.ceil($scope.totalItems / $scope.entryLimit);
 							$scope.currentPage = 1;
+							$scope.filteredSize=$scope.filtered.length;
 							}, true);
 					    //===================================*/
 					    

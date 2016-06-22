@@ -1,6 +1,7 @@
 var SocialMediaController=function($scope,$location,$http,$routeParams,ngNotifier,$route){
 	
 	$scope.eventId={};
+	$scope.filteredSize;
 	$scope.$on("$routeChangeSuccess",function(){
 		$scope.eventId=$routeParams.eventId;
 		
@@ -9,9 +10,12 @@ var SocialMediaController=function($scope,$location,$http,$routeParams,ngNotifie
 		/*$http.get('admin/getSocialMediaList?eventId='+eventId).success(function()//socialMediaList)
 		*/
 		$http.get('admin/getSocialMediaList?eventId='+$routeParams.eventId).success(function(sMList) {
-				//alert("got social media list."+sMList.length);
+			//alert("got social media list."+sMList.length);
 			$scope.socialmediaList=sMList;
-			
+			if(sMList.length==0)
+				{
+					$scope.filteredSize=0;
+				}
 			// =================================
 			// create empty search model (object) to trigger
 			// $watch on update
@@ -39,10 +43,11 @@ var SocialMediaController=function($scope,$location,$http,$routeParams,ngNotifie
 				$scope.noOfPages = Math.ceil($scope.totalItems
 						/ $scope.entryLimit);
 				$scope.currentPage = 1;
+				$scope.filteredSize=$scope.filtered.length;
 			}, true);
 
 			// ===================================*/
-
+			alert(filteredSize);
 		});
 	});
 	
