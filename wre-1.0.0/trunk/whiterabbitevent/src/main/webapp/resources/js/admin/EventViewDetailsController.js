@@ -49,7 +49,7 @@ var EventViewDetailsController = function($scope,$routeParams,$http,$location) {
 			//alert("kk");
 			location.href="#/speakerProfileView/"+event.eventId;
 		}else if(event.serviceId=="13"){
-			//alert("kk");
+			alert("serviceId..Venuelayout.."+event.eventId);
 			location.href="#/venueLayout/"+event.eventId;
 			
 		}else if(event.serviceId=="8"){
@@ -71,6 +71,10 @@ var EventViewDetailsController = function($scope,$routeParams,$http,$location) {
 			//networking
 	    }else if(event.serviceId=="12"){
 		location.href="#/networkingView/"+event.eventId;
+		
+	    }else if(event.serviceId=="20"){
+			location.href="#/eventImageUpload/"+event.eventId;
+
 
 	};
 
