@@ -92,7 +92,7 @@ public class MessageActivity extends AppCompatActivity {
             tr1.addView(textview);
             tab.addView(tr1);*/
 
-            mimicOtherMessage(bundle.getString("msg"),bundle.getString("name"),null);
+            mimicOtherMessage(bundle.getString("msg"), bundle.getString("name"), null);
 
         }
         mButtonSend.setOnClickListener(new View.OnClickListener() {
@@ -102,16 +102,16 @@ public class MessageActivity extends AppCompatActivity {
                 if (TextUtils.isEmpty(message)) {
                     return;
                 }
-                sendMessage(message,"You",null);
+                sendMessage(message, "You", null);
                 new Send().execute();
-               // mEditTextMessage.setText("");
+                // mEditTextMessage.setText("");
             }
         });
 
         mImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendMessage("You",null);
+                sendMessage("You", null);
             }
         });
 
@@ -136,34 +136,34 @@ public class MessageActivity extends AppCompatActivity {
                 tr1.addView(textview);
                 tab.addView(tr1);*/
 
-                mimicOtherMessage(str,str1,null);
+                mimicOtherMessage(str, str1, null);
             }
 
 
         }
     };
 
-    private void sendMessage(String message,String name,String time) {
-        ChatMessage chatMessage = new ChatMessage(message, true, false,name,time);
+    private void sendMessage(String message, String name, String time) {
+        ChatMessage chatMessage = new ChatMessage(message, true, false, name, time);
         mAdapter.add(chatMessage);
 
 
     }
 
-    private void mimicOtherMessage(String message,String name,String time) {
-        ChatMessage chatMessage = new ChatMessage(message, false, false,name,time);
+    private void mimicOtherMessage(String message, String name, String time) {
+        ChatMessage chatMessage = new ChatMessage(message, false, false, name, time);
         mAdapter.add(chatMessage);
     }
 
-    private void sendMessage(String name,String time) {
-        ChatMessage chatMessage = new ChatMessage(null, true, true,name,time);
+    private void sendMessage(String name, String time) {
+        ChatMessage chatMessage = new ChatMessage(null, true, true, name, time);
         mAdapter.add(chatMessage);
 
 
     }
 
-    private void mimicOtherMessage(String name,String time) {
-        ChatMessage chatMessage = new ChatMessage(null, false, true,name,time);
+    private void mimicOtherMessage(String name, String time) {
+        ChatMessage chatMessage = new ChatMessage(null, false, true, name, time);
         mAdapter.add(chatMessage);
     }
 

@@ -5,9 +5,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -28,8 +30,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.wre.yin.whiterabbiteventapp.adapters.CustomVideosGridAdaptor;
+import com.wre.yin.whiterabbiteventapp.beans.GalaryBean;
 import com.wre.yin.whiterabbiteventapp.beans.Result;
-import com.wre.yin.whiterabbiteventapp.beans.UploadImgVid;
 import com.wre.yin.whiterabbiteventapp.utils.Callback;
 import com.wre.yin.whiterabbiteventapp.utils.Constants;
 import com.wre.yin.whiterabbiteventapp.utils.MyAsyncTask;
@@ -41,7 +44,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -69,6 +75,10 @@ public class VideosActivity extends AppCompatActivity {
     private int _columnIndex;
     private int[] _videosId;
     private Uri _contentUri;
+    private String eventId;
+    private List<HashMap<String, String>> mGridData;
+
+
     private AdapterView.OnItemClickListener _itemClickLis = new AdapterView.OnItemClickListener() {
         public void onItemClick(AdapterView parent, View v, int position, long id) {
             // Now we want to actually get the data location of the file
@@ -147,6 +157,8 @@ public class VideosActivity extends AppCompatActivity {
         String nameTxt = getIntent().getExtras().getString("name");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(nameTxt);
+        eventId = getIntent().getExtras().getString("eventId");
+
 
         prgDialog = new ProgressDialog(this);
         prgDialog.setCancelable(false);
@@ -230,8 +242,33 @@ public class VideosActivity extends AppCompatActivity {
     }
 
     private void setGalleryAdapter() {
-        _gallery.setAdapter(new VideoGalleryAdapter(_context));
-        _gallery.setOnItemClickListener(_itemClickLis);
+        new MyAsyncTask(Constants.FILES_LIST + eventId + "&type=video", null, VideosActivity.this, new Callback() {
+            @Override
+            public void onResult(String result) {
+                mGridData = new ArrayList<HashMap<String, String>>();
+                List<GalaryBean> docBeanList= Utils.getList(result,GalaryBean.class);
+                for(GalaryBean bean:docBeanList){
+                    HashMap<String,String> map=new HashMap<String, String>();
+                    map.put("fileName",bean.getName());
+                    map.put("videoUrl",Constants.IMAGE_URL+eventId+"/video/"+bean.getFileName());
+                    mGridData.add(map);
+                }
+                CustomVideosGridAdaptor  videosAdapter = new CustomVideosGridAdaptor(VideosActivity.this, R.layout.videos_row_grid, (ArrayList<HashMap<String, String>>) mGridData);
+                _gallery.setAdapter(videosAdapter);
+
+        _gallery.setAdapter(new VideoGalleryAdapter(_context, (ArrayList<HashMap<String, String>>) mGridData));
+        _gallery.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                HashMap<String,String> resMap=mGridData.get(i);
+                Intent videoPlay=new Intent(VideosActivity.this,VideoPlayerActivity.class);
+                videoPlay.putExtra("videoUrl",resMap.get("videoUrl"));
+                videoPlay.putExtra("fileName",resMap.get("fileName"));
+                startActivity(videoPlay);
+            }
+        });
+            }
+        }).execute();
 
     }
 
@@ -387,10 +424,11 @@ public class VideosActivity extends AppCompatActivity {
                 //prgDialog.setMessage("Calling Upload");
                 // Put converted Image string into Async Http Post param
                 prgDialog.dismiss();
-                UploadImgVid uploadImgVid = new UploadImgVid();
+                GalaryBean uploadImgVid = new GalaryBean();
                 uploadImgVid.setEncodeString(encodedString);
-                uploadImgVid.setVideoName(fileName);
-                uploadImgVid.setFileType(fileTpe);
+                uploadImgVid.setFileName(fileName);
+                uploadImgVid.setType(fileTpe);
+                uploadImgVid.setEventId(Long.parseLong(eventId));
 
                 new MyAsyncTask(Constants.UPLOAD_IMAGE_VIDEO, Utils.getJson(uploadImgVid), VideosActivity.this, new Callback() {
                     public void onResult(String result) {
@@ -419,13 +457,15 @@ public class VideosActivity extends AppCompatActivity {
 
     private class VideoGalleryAdapter extends BaseAdapter {
         LayoutInflater inflater;
+        ArrayList<HashMap<String, String>> videoListThis;
 
-        public VideoGalleryAdapter(Context c) {
+        public VideoGalleryAdapter(Context c, ArrayList<HashMap<String, String>> videoList) {
             _context = c;
+            videoListThis = videoList;
         }
 
         public int getCount() {
-            return _videosId.length;
+            return videoListThis.size();
         }
 
         public Object getItem(int position) {
@@ -446,7 +486,10 @@ public class VideosActivity extends AppCompatActivity {
                 }
 
                 ImageView imgVw = new ImageView(_context);
-                imgVw.setImageBitmap(getImage(_videosId[position]));
+                HashMap<String, String> resultMap = videoListThis.get(position);
+                String videoUrl = resultMap.get("videoUrl");
+                Bitmap thumb = retriveVideoFrameFromVideo(videoUrl);
+                imgVw.setImageBitmap(thumb);
                 imgVw.setLayoutParams(new GridView.LayoutParams(196, 196));
                 imgVw.setPadding(8, 8, 8, 8);
                 RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
@@ -469,6 +512,8 @@ public class VideosActivity extends AppCompatActivity {
 
             } catch (Exception ex) {
                 System.out.println("StartActivity:getView()-135: ex " + ex.getClass() + ", " + ex.getMessage());
+            } catch (Throwable throwable) {
+                throwable.printStackTrace();
             }
             return relativeLayout;
 
@@ -495,13 +540,30 @@ public class VideosActivity extends AppCompatActivity {
 
         }
 
-        // Create the thumbnail on the fly
-        private Bitmap getImage(int id) {
-            Bitmap thumb = MediaStore.Video.Thumbnails.getThumbnail(
-                    getContentResolver(),
-                    id, MediaStore.Video.Thumbnails.MICRO_KIND, null);
-            return thumb;
-        }
+        public Bitmap retriveVideoFrameFromVideo(String videoPath)
+                throws Throwable {
+            Bitmap bitmap = null;
+            MediaMetadataRetriever mediaMetadataRetriever = null;
+            try {
+                mediaMetadataRetriever = new MediaMetadataRetriever();
+                if (Build.VERSION.SDK_INT >= 14)
+                    mediaMetadataRetriever.setDataSource(videoPath, new HashMap<String, String>());
+                else
+                    mediaMetadataRetriever.setDataSource(videoPath);
+                //   mediaMetadataRetriever.setDataSource(videoPath);
+                bitmap = mediaMetadataRetriever.getFrameAtTime();
+            } catch (Exception e) {
+                e.printStackTrace();
+                throw new Throwable(
+                        "Exception in retriveVideoFrameFromVideo(String videoPath)"
+                                + e.getMessage());
 
+            } finally {
+                if (mediaMetadataRetriever != null) {
+                    mediaMetadataRetriever.release();
+                }
+            }
+            return bitmap;
+        }
     }
 }

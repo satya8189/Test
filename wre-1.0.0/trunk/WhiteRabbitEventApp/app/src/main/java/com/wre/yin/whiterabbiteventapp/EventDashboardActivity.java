@@ -45,8 +45,8 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
     private ArrayList<Item> gridArray = new ArrayList<Item>();
     private CustomGridViewAdapter customGridAdapter;
     private SliderLayout mDemoSlider;
-     public static TextView eventIdTxt, eventDateTime,noOfParticipanta,attendStatus;
-    private String eventId, eventDate,eventName,partId;
+    public static TextView eventIdTxt, eventDateTime, noOfParticipanta, attendStatus;
+    private String eventId, eventDate, eventName, partId;
     private boolean mPermissionDenied = false;
     public static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 1;
 
@@ -77,8 +77,8 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
 
         galleryList = new ArrayList<>();
 
-        noOfParticipanta=(TextView)findViewById(R.id.noof_users);
-        attendStatus=(TextView)findViewById(R.id.attendence_status);
+        noOfParticipanta = (TextView) findViewById(R.id.noof_users);
+        attendStatus = (TextView) findViewById(R.id.attendence_status);
         eventIdTxt = (TextView) findViewById(R.id.event_name);
         eventIdTxt.setText(eventName);
         eventDateTime = (TextView) findViewById(R.id.event_time_date);
@@ -87,16 +87,16 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
         new MyAsyncTask(Constants.ATTENDENCE_STATUS + eventId + "&participantId=" + partId, null, EventDashboardActivity.this, new Callback() {
             @Override
             public void onResult(String result) {
-                if(result.equals("Yes")){
+                if (result.equals("Yes")) {
                     attendStatus.setText("I will attend");
                     attendStatus.setTextColor(Color.GREEN);
-                }else if(result.equals("No")){
+                } else if (result.equals("No")) {
                     attendStatus.setText("I will not attend");
                     attendStatus.setTextColor(Color.RED);
-                }else if(result.equals("MayBe")){
+                } else if (result.equals("MayBe")) {
                     attendStatus.setText("Maybe I will attend");
                     attendStatus.setTextColor(Color.BLACK);
-                }else{
+                } else {
                     attendStatus.setText("Not yet deside");
                     attendStatus.setTextColor(Color.BLUE);
                 }
@@ -106,8 +106,8 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
         new MyAsyncTask(Constants.PARTICIPANT_LIST + "?eventId=" + eventId + "&status=ACTIVE", null, EventDashboardActivity.this, new Callback() {
             @Override
             public void onResult(String result) {
-                List<ParticipantEventBean> participantEventBeanList= Utils.getList(result,ParticipantEventBean.class);
-                noOfParticipanta.setText(""+participantEventBeanList.size());
+                List<ParticipantEventBean> participantEventBeanList = Utils.getList(result, ParticipantEventBean.class);
+                noOfParticipanta.setText("" + participantEventBeanList.size());
             }
         }).execute();
 

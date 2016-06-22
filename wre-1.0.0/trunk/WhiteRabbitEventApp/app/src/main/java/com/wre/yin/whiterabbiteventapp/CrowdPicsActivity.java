@@ -24,8 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wre.yin.whiterabbiteventapp.adapters.GridViewImageAdapter;
-import com.wre.yin.whiterabbiteventapp.beans.Result;
-import com.wre.yin.whiterabbiteventapp.beans.UploadImgVid;
+import com.wre.yin.whiterabbiteventapp.beans.GalaryBean;
 import com.wre.yin.whiterabbiteventapp.utils.Callback;
 import com.wre.yin.whiterabbiteventapp.utils.Constants;
 import com.wre.yin.whiterabbiteventapp.utils.GalleryUtils;
@@ -60,37 +59,8 @@ public class CrowdPicsActivity extends AppCompatActivity {
     private GridViewImageAdapter adapter;
     private GridView gridView;
     private int columnWidth;
+    private String eventId;
 
-    private static File getOutputMediaFile(int type) {
-
-        // External sdcard location
-        File mediaStorageDir = new File(
-                Environment
-                        .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
-                Constants.IMAGE_DIRECTORY_NAME);
-
-        // Create the storage directory if it does not exist
-        if (!mediaStorageDir.exists()) {
-            if (!mediaStorageDir.mkdirs()) {
-                Log.d("Acc", "Oops! Failed create "
-                        + Constants.IMAGE_DIRECTORY_NAME + " directory");
-                return null;
-            }
-        }
-
-        // Create a media file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss",
-                Locale.getDefault()).format(new Date());
-        File mediaFile;
-        if (type == MEDIA_TYPE_IMAGE) {
-            mediaFile = new File(mediaStorageDir.getPath() + File.separator
-                    + "IMG_" + timeStamp + ".jpg");
-        } else {
-            return null;
-        }
-
-        return mediaFile;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,7 +70,7 @@ public class CrowdPicsActivity extends AppCompatActivity {
         String nameTxt = getIntent().getExtras().getString("name");
         prgDialog = new ProgressDialog(this);
         prgDialog.setCancelable(false);
-
+        eventId = getIntent().getExtras().getString("eventId");
         uploadImage = (Button) findViewById(R.id.upload_image);
         camGalLayout = (LinearLayout) findViewById(R.id.upload_image_view);
         camPick = (CircleImageView) findViewById(R.id.camara_link);
@@ -155,6 +125,38 @@ public class CrowdPicsActivity extends AppCompatActivity {
         // setting grid view adapter
         gridView.setAdapter(adapter);
     }
+
+    private static File getOutputMediaFile(int type) {
+
+        // External sdcard location
+        File mediaStorageDir = new File(
+                Environment
+                        .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
+                Constants.IMAGE_DIRECTORY_NAME);
+
+        // Create the storage directory if it does not exist
+        if (!mediaStorageDir.exists()) {
+            if (!mediaStorageDir.mkdirs()) {
+                Log.d("Acc", "Oops! Failed create "
+                        + Constants.IMAGE_DIRECTORY_NAME + " directory");
+                return null;
+            }
+        }
+
+        // Create a media file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss",
+                Locale.getDefault()).format(new Date());
+        File mediaFile;
+        if (type == MEDIA_TYPE_IMAGE) {
+            mediaFile = new File(mediaStorageDir.getPath() + File.separator
+                    + "IMG_" + timeStamp + ".jpg");
+        } else {
+            return null;
+        }
+
+        return mediaFile;
+    }
+
 
     private void InitilizeGridLayout() {
         Resources r = getResources();
@@ -325,19 +327,22 @@ public class CrowdPicsActivity extends AppCompatActivity {
                     // Trigger Image upload
                     //triggerImageUpload();
                     prgDialog.dismiss();
-                    UploadImgVid uploadImgVid = new UploadImgVid();
+                    GalaryBean uploadImgVid = new GalaryBean();
                     uploadImgVid.setEncodeString(encodedString);
-                    uploadImgVid.setImageName(fileName);
-                    uploadImgVid.setFileType(fileTpe);
+                    uploadImgVid.setName(fileName);
+                    uploadImgVid.setType(fileTpe);
+                    uploadImgVid.setEventId(Long.parseLong(eventId));
                     if (Constants.isNetworkAvailable(CrowdPicsActivity.this)) {
                         new MyAsyncTask(Constants.UPLOAD_IMAGE_VIDEO, Utils.getJson(uploadImgVid), CrowdPicsActivity.this, new Callback() {
                             public void onResult(String result) {
-                                if (result != null) {
+
+                                System.out.println("Result:" + result);
+                                /*if (result != null) {
                                     Result res = Utils.getObject(result, Result.class);
                                     if (res.getResult().equals("success")) {
                                         Toast.makeText(CrowdPicsActivity.this, "Image upload successfull..", Toast.LENGTH_LONG).show();
                                     }
-                                }
+                                }*/
                             }
                         }).execute();
 

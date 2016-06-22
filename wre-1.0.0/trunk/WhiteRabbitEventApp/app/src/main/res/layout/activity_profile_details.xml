@@ -8,7 +8,7 @@
     tools:context=".SpeakersProfileDetailsActivity">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/speaker_img"
+        android:id="@+id/speaker_indi_img"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_gravity="center_horizontal"
@@ -89,17 +89,17 @@
             android:layout_centerVertical="true"
             android:layout_margin="10dp"
             android:gravity="center"
-            android:text="Rate this" />
+            android:text="Give Rating" />
 
         <RatingBar
-            android:id="@+id/ratingBar"
-            style="?android:attr/ratingBarStyleIndicator"
+            android:id="@+id/speaker_ratingBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
+            android:numStars="5"
+            android:stepSize="1.0"
+            android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
-            android:layout_alignTop="@+id/textView"
-            android:layout_centerInParent="true" />
+            android:layout_alignParentEnd="true" />
     </RelativeLayout>
 
     <View

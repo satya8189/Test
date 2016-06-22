@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.wre.yin.whiterabbiteventapp.beans.SponsorBean;
 import com.wre.yin.whiterabbiteventapp.utils.Callback;
 import com.wre.yin.whiterabbiteventapp.utils.Constants;
@@ -29,38 +30,11 @@ public class SponcersActivity extends AppCompatActivity {
 
     private static final String TAG = SponcersActivity.class.getName();
     private TextView text;
-
     private SharedPreferences prefs;
-
     private GridLayoutManager gridLayout;
-
-
+    private String eventId;
     private RecyclerViewAdapter rcAdapter;
-
     private List<HashMap<String, String>> sponsorList;
-    ItemTouchHelper.Callback _ithCallback = new ItemTouchHelper.Callback() {
-
-        public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-            // get the viewHolder's and target's positions in your adapter data, swap them
-            Collections.swap(sponsorList, viewHolder.getAdapterPosition(), target.getAdapterPosition());
-            // and notify the adapter that its dataset has changed
-            rcAdapter.notifyItemMoved(viewHolder.getAdapterPosition(), target.getAdapterPosition());
-            return true;
-        }
-
-        @Override
-        public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-            //TODO
-        }
-
-        //defines the enabled move directions in each state (idle, swiping, dragging).
-        @Override
-        public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
-            return makeFlag(ItemTouchHelper.ACTION_STATE_DRAG,
-                    ItemTouchHelper.DOWN | ItemTouchHelper.UP | ItemTouchHelper.START | ItemTouchHelper.END);
-        }
-    };
-    private RecyclerView rView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +42,7 @@ public class SponcersActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sponcers);
 
         String nameTxt = getIntent().getExtras().getString("name");
-        String eventId = getIntent().getExtras().getString("eventId");
+        eventId = getIntent().getExtras().getString("eventId");
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(nameTxt);
@@ -95,7 +69,7 @@ public class SponcersActivity extends AppCompatActivity {
                         HashMap<String, String> map = new HashMap<String, String>();
                         map.put("sponsorName", bean.getSponcorName());
                         map.put("sponsorId", bean.getSponcorId().toString());
-                        //    map.put("sponsorDesc", bean.getSponcorDesc());
+                        map.put("sponsorUrl", Constants.IMAGE_URL + eventId + "/sponsor/" + bean.getFileName());
 
                         sponsorList.add(map);
 
@@ -110,7 +84,29 @@ public class SponcersActivity extends AppCompatActivity {
         }
 
     }
+    ItemTouchHelper.Callback _ithCallback = new ItemTouchHelper.Callback() {
 
+        public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+            // get the viewHolder's and target's positions in your adapter data, swap them
+            Collections.swap(sponsorList, viewHolder.getAdapterPosition(), target.getAdapterPosition());
+            // and notify the adapter that its dataset has changed
+            rcAdapter.notifyItemMoved(viewHolder.getAdapterPosition(), target.getAdapterPosition());
+            return true;
+        }
+
+        @Override
+        public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+            //TODO
+        }
+
+        //defines the enabled move directions in each state (idle, swiping, dragging).
+        @Override
+        public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+            return makeFlag(ItemTouchHelper.ACTION_STATE_DRAG,
+                    ItemTouchHelper.DOWN | ItemTouchHelper.UP | ItemTouchHelper.START | ItemTouchHelper.END);
+        }
+    };
+    private RecyclerView rView;
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -135,6 +131,7 @@ public class SponcersActivity extends AppCompatActivity {
                 HashMap<String, String> maps1 = mapsList.get(position);
                 Intent i = new Intent(SponcersActivity.this, SponcersProfileActivity.class);
                 i.putExtra("sponsorId", maps1.get("sponsorId"));
+                i.putExtra("sponsorUrl", maps1.get("sponsorUrl"));
                 startActivity(i);
             }
         };
@@ -160,6 +157,7 @@ public class SponcersActivity extends AppCompatActivity {
             holder.sponsorName.setText(maps.get("sponsorName"));
             // holder.sponsorPhoto.setImageResource(maps.get(position).getPhoto());
             holder.sponsorPhoto.setOnClickListener(clickListener);
+            Picasso.with(context).load(maps.get("sponsorUrl")).into(holder.sponsorPhoto);
             holder.sponsorPhoto.setTag(holder);
         }
 

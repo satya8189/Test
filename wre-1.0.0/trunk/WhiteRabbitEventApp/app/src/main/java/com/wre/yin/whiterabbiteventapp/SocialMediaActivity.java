@@ -7,12 +7,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.wre.yin.whiterabbiteventapp.utils.Callback;
 import com.wre.yin.whiterabbiteventapp.utils.Constants;
+import com.wre.yin.whiterabbiteventapp.utils.MyAsyncTask;
+import com.wre.yin.whiterabbiteventapp.utils.Utils;
+
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SocialMediaActivity extends AppCompatActivity {
-    private CircleImageView gPlus, faceBook, twitterBtn;
+    private CircleImageView gPlus, faceBook, twitterBtn, linkedinBtn;
+    private String eventId, fb, gPlusStr, twitter, linkedIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +31,18 @@ public class SocialMediaActivity extends AppCompatActivity {
         gPlus = (CircleImageView) findViewById(R.id.btnGplus);
         faceBook = (CircleImageView) findViewById(R.id.btnFb);
         twitterBtn = (CircleImageView) findViewById(R.id.btnTwitter);
+        linkedinBtn = (CircleImageView) findViewById(R.id.btnLinkedin);
+        eventId = getIntent().getExtras().getString("eventId");
+
+        new MyAsyncTask(Constants.SOCIAL_MEDIA_IDS + eventId, null, SocialMediaActivity.this, new Callback() {
+            @Override
+            public void onResult(String result) {
+                List<SocialMediaActivity> socialList = Utils.getList(result, SocialMediaActivity.class);
+
+            }
+        }).execute();
+
+
         faceBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

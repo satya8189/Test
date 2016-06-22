@@ -28,7 +28,7 @@ public class NetworkingActivity extends AppCompatActivity {
     private String eventId;
     private SharedPreferences prefs;
 
-    private List<HashMap<String,String>> partList;
+    private List<HashMap<String, String>> partList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,16 +44,16 @@ public class NetworkingActivity extends AppCompatActivity {
 
         eventId = getIntent().getExtras().getString("eventId");
 
-        partList=new ArrayList<>();
+        partList = new ArrayList<>();
         new MyAsyncTask(Constants.PARTICIPANT_LIST + "?eventId=" + eventId + "&status=ACTIVE", null, NetworkingActivity.this, new Callback() {
             @Override
             public void onResult(String result) {
-                List<ParticipantEventBean> participantEventBeanList= Utils.getList(result,ParticipantEventBean.class);
-                for(ParticipantEventBean bean:participantEventBeanList){
-                    HashMap<String,String> partMap=new HashMap<String, String>();
-                    partMap.put("partId",bean.getParticipantId().toString());
-                    partMap.put("partName",bean.getFirstName()+" "+bean.getLastName());
-                    partMap.put("partPhone",bean.getMobile());
+                List<ParticipantEventBean> participantEventBeanList = Utils.getList(result, ParticipantEventBean.class);
+                for (ParticipantEventBean bean : participantEventBeanList) {
+                    HashMap<String, String> partMap = new HashMap<String, String>();
+                    partMap.put("partId", bean.getParticipantId().toString());
+                    partMap.put("partName", bean.getFirstName() + " " + bean.getLastName());
+                    partMap.put("partPhone", bean.getMobile());
                     partList.add(partMap);
 
                 }
@@ -81,7 +81,7 @@ public class NetworkingActivity extends AppCompatActivity {
     private class RecylerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
         LayoutInflater inflater;
         Context context;
-        ArrayList<HashMap<String,String>> partAdList;
+        ArrayList<HashMap<String, String>> partAdList;
 
 
         View.OnClickListener clickListener = new View.OnClickListener() {
@@ -94,9 +94,9 @@ public class NetworkingActivity extends AppCompatActivity {
             }
         };
 
-        public RecylerAdapter(Context context,ArrayList<HashMap<String,String>> partArList) {
+        public RecylerAdapter(Context context, ArrayList<HashMap<String, String>> partArList) {
             this.context = context;
-            this.partAdList=partArList;
+            this.partAdList = partArList;
             inflater = LayoutInflater.from(context);
         }
 
@@ -109,7 +109,7 @@ public class NetworkingActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(RecyclerViewHolder holder, int position) {
-            HashMap<String,String> partAdMap=partAdList.get(position);
+            HashMap<String, String> partAdMap = partAdList.get(position);
             holder.partName.setText(partAdMap.get("partName"));
             holder.partPhone.setText(partAdMap.get("partPhone"));
             holder.cardView.setOnClickListener(clickListener);

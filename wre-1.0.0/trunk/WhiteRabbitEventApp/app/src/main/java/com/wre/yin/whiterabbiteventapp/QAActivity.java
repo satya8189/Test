@@ -17,7 +17,7 @@ import com.wre.yin.whiterabbiteventapp.utils.Utils;
 public class QAActivity extends AppCompatActivity {
     private EditText questionTxt;
     private Button btnSubmit;
-    private String spId,eventId,partId;
+    private String spId, eventId, partId;
     private SharedPreferences prefs;
 
 
@@ -30,7 +30,7 @@ public class QAActivity extends AppCompatActivity {
         spId = getIntent().getExtras().getString("speakerId");
         prefs = getSharedPreferences("Chat", 0);
         partId = prefs.getString("partId", null);
-        eventId=prefs.getString("eventId",null);
+        eventId = prefs.getString("eventId", null);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Question");
@@ -42,8 +42,8 @@ public class QAActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String questionString = questionTxt.getText().toString();
-                if(!questionString.isEmpty()){
-                    ParticipantQuriesBean bean=new ParticipantQuriesBean();
+                if (!questionString.isEmpty()) {
+                    ParticipantQuriesBean bean = new ParticipantQuriesBean();
                     bean.setEventId(Long.parseLong(eventId));
                     bean.setParticipantId(Long.parseLong(partId));
                     bean.setSpeakerId(Long.parseLong(spId));
@@ -51,6 +51,10 @@ public class QAActivity extends AppCompatActivity {
                     new MyAsyncTask(Constants.SPEAKER_QUERY, Utils.getJson(bean), QAActivity.this, new Callback() {
                         @Override
                         public void onResult(String result) {
+                            if (result.equals("success")) {
+                                questionTxt.setText("");
+                                Constants.createDialogSend(QAActivity.this,"success","Your query submitted successfully");
+                            }
 
                         }
                     }).execute();

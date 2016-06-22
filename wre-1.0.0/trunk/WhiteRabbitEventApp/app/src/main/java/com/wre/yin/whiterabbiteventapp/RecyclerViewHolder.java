@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 public class RecyclerViewHolder extends RecyclerView.ViewHolder {
 
-    TextView partName,partPhone;
+    TextView partName, partPhone;
     ImageView partProfileImg;
     CardView cardView;
 

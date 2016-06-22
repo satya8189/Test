@@ -36,16 +36,18 @@ public class Constants {
     // SD card image directory
     public static final String PHOTO_ALBUM = "/DCIM/" + "/Camera/";
     // supported file formats
-    public static final List<String> FILE_EXTN = Arrays.asList("jpg", "jpeg","png");
+    public static final List<String> FILE_EXTN = Arrays.asList("jpg", "jpeg", "png");
     // Permissions for Marshmallow
     public static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 1;
     //url constants
-    public static String URL1 = "http://192.168.1.85:8080/Chatting/rest/chat/";
+    public static String URL1 = "http://192.168.1.39:8080/whiterabbitevent/admin/";
+
+    public static String URL2 = "http://192.168.1.85:8080/Chatting/rest/chat/";
 
     public static String IMAGE_URL = "http://183.82.103.156:8080/Resources/wre/";
 
     public static String URL = "http://183.82.103.156:8080/whiterabbitevent/admin/";
-    public static final String BASE_URL="http://183.82.103.156:8080";
+    public static final String BASE_URL = "http://183.82.103.156:8080";
 
 
     public static final String EVENT_SERVICES_LIST = URL + "eventServicesList?eventId=";
@@ -56,16 +58,17 @@ public class Constants {
     public static final String INDIVIDUAL_SPEAKER = URL + "getSpeakerBySpeakerId?speakerId=";
     public static final String INDIVIDUAL_SPONSOR = URL + "getSponsorDataonSponsorId?sponcorId=";
     public static final String QUESTIONS_LIST = URL + "questionList?eventId=";
-    public static final String QUESTIONS_ANSWER_SAVE=URL+"saveQuestionAnswer";
-    public static final String PARTICIPANT_LIST=URL+"ParticipantEventBeanList";
-    public static final String ABOUT_EVENT=URL+"Viewdetails?eventId=";
-    public static final String PARTICIPANT_EVENT_STATUS=URL+"eventParticipantStatusSave";
-    public static final String EVENT_IMAGES=URL+"getEventImages";
-    public static final String SAVE_HELP_DETAILS=URL+"updateHelpDetails";
-    public static final String PARTICIPANT_UPDATE=URL+"updateParticipantDetails";
-    public static final String FILES_LIST=URL+"galaryList?eventId=";
-    public static final String ATTENDENCE_STATUS=URL+"getEventParticipantStatus?eventId=";
-    public static final String SPEAKER_QUERY=URL+"participantQueriesSave";
+    public static final String QUESTIONS_ANSWER_SAVE = URL + "saveQuestionAnswer";
+    public static final String PARTICIPANT_LIST = URL + "ParticipantEventBeanList";
+    public static final String ABOUT_EVENT = URL + "Viewdetails?eventId=";
+    public static final String PARTICIPANT_EVENT_STATUS = URL + "eventParticipantStatusSave";
+    public static final String EVENT_IMAGES = URL + "getEventImages";
+    public static final String SAVE_HELP_DETAILS = URL + "updateHelpDetails";
+    public static final String PARTICIPANT_UPDATE = URL + "updateParticipantDetails";
+    public static final String FILES_LIST = URL + "galaryList?eventId=";
+    public static final String ATTENDENCE_STATUS = URL + "getEventParticipantStatus?eventId=";
+    public static final String SPEAKER_QUERY = URL + "participantQueriesSave";
+    public static final String SOCIAL_MEDIA_IDS = URL + "getSocialMediaList?eventId=";
 
     //Image Gallery file path constansts
     public static String PARTICIPENT_URL = "http://183.82.103.156:8080/whiterabbitevent/";

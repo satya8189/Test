@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="15"
-        android:targetSdkVersion="24" />
+        android:targetSdkVersion="23" />
 
     <permission
         android:name="android.permission.ACCESS_COARSE_LOCATION"
@@ -176,6 +176,9 @@
             android:value="@integer/google_play_services_version" />
 
         <activity android:name="com.wre.yin.whiterabbiteventapp.HelpActivity" />
+        <activity android:name="com.wre.yin.whiterabbiteventapp.GalleryNewActivity" />
+        <activity android:name="com.wre.yin.whiterabbiteventapp.NewGalImageDetails" />
+        <activity android:name="com.wre.yin.whiterabbiteventapp.VideoPlayerActivity" />
         <!-- Include the AdActivity and InAppPurchaseActivity configChanges and themes. -->
         <activity
             android:name="com.google.android.gms.ads.AdActivity"
@@ -285,8 +288,7 @@ Service handling Google Sign-In user revocation. For apps that do not integrate 
 
         <activity
             android:name="com.google.android.gms.tagmanager.TagManagerPreviewActivity"
-            android:noHistory="true" >
- <!-- optional, removes the previewActivity from the activity stack. -->
+            android:noHistory="true" > <!-- optional, removes the previewActivity from the activity stack. -->
             <intent-filter>
                 <data android:scheme="tagmanager.c.com.wre.yin.whiterabbiteventapp" />
 

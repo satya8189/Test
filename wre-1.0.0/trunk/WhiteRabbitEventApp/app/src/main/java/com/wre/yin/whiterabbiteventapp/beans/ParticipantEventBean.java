@@ -6,11 +6,11 @@ import java.util.Date;
  * Created by root on 3/6/16.
  */
 public class ParticipantEventBean {
-    private Long participateEventId ;
-    private String status ;
+    private Long participateEventId;
+    private String status;
     private Long eventId;
     private Long participantId;
-    private String eventname ;
+    private String eventname;
     private Date eventDate;
     private String firstName;
     private String lastName;

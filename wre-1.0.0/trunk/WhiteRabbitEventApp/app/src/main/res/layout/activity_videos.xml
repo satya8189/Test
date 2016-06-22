@@ -45,11 +45,11 @@
 
     <GridView
         android:id="@+id/upload_video_grid"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:background="#fff"
         android:layout_below="@+id/upload_video_view"
         android:gravity="center"
-        android:numColumns="auto_fit"
+        android:numColumns="2"
         android:stretchMode="columnWidth"></GridView>
 </RelativeLayout>

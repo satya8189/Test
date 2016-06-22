@@ -29,7 +29,7 @@ public class SurveyActivity extends AppCompatActivity {
     private TextView text;
     private RecyclerView recyclerView;
     private List<HashMap<String, String>> listQtns;
-    private String partId,eventId;
+    private String partId, eventId;
     SharedPreferences prefs;
 
     @Override
@@ -104,11 +104,11 @@ public class SurveyActivity extends AppCompatActivity {
                 HashMap<String, String> map1 = qtnAList.get(position);
                 if (map1.get("typ").equals("Single Choice")) {
 
-                    answer=vholder.ans.getText().toString();
-                    if(answer.equals("")){
-                        Toast.makeText(context, "Please give a answer.. " , Toast.LENGTH_LONG).show();
-                    }else{
-                        QuestionBean questionBean=new QuestionBean();
+                    answer = vholder.ans.getText().toString();
+                    if (answer.equals("")) {
+                        Toast.makeText(context, "Please give a answer.. ", Toast.LENGTH_LONG).show();
+                    } else {
+                        QuestionBean questionBean = new QuestionBean();
                         questionBean.setEventId(Long.parseLong(eventId));
                         questionBean.setParticipantId(Long.parseLong(partId));
                         questionBean.setQuestionId(Long.parseLong(map1.get("qtnId")));
@@ -116,7 +116,7 @@ public class SurveyActivity extends AppCompatActivity {
                         new MyAsyncTask(Constants.QUESTIONS_ANSWER_SAVE, Utils.getJson(questionBean), SurveyActivity.this, new Callback() {
                             @Override
                             public void onResult(String result) {
-                                System.out.println("Result in text:"+result);
+                                System.out.println("Result in text:" + result);
                             }
                         }).execute();
                     }
@@ -134,7 +134,7 @@ public class SurveyActivity extends AppCompatActivity {
                     } else if (vholder.opt4.isChecked()) {
                         answer = vholder.opt4.getText().toString();
                     }
-                    QuestionBean questionBean=new QuestionBean();
+                    QuestionBean questionBean = new QuestionBean();
                     questionBean.setEventId(Long.parseLong(eventId));
                     questionBean.setParticipantId(Long.parseLong(partId));
                     questionBean.setQuestionId(Long.parseLong(map1.get("qtnId")));
@@ -142,7 +142,7 @@ public class SurveyActivity extends AppCompatActivity {
                     new MyAsyncTask(Constants.QUESTIONS_ANSWER_SAVE, Utils.getJson(questionBean), SurveyActivity.this, new Callback() {
                         @Override
                         public void onResult(String result) {
-                            System.out.println("Result in radio:"+result);
+                            System.out.println("Result in radio:" + result);
                         }
                     }).execute();
                 }

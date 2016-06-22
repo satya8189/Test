@@ -39,11 +39,11 @@ import java.util.List;
 
 public class DocShareActivity extends AppCompatActivity {
 
-   private CoordinatorLayout coordinatorLayout;
+    private CoordinatorLayout coordinatorLayout;
     private GridView wordGrid, pdfGrid, excelGrid;
 
     private String eventId;
-    private List<HashMap<String,String>> docList;
+    private List<HashMap<String, String>> docList;
     private TextView loadingText;
 
     @Override
@@ -54,22 +54,22 @@ public class DocShareActivity extends AppCompatActivity {
         String nameTxt = getIntent().getExtras().getString("name");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(nameTxt);
-         eventId = getIntent().getExtras().getString("eventId");
+        eventId = getIntent().getExtras().getString("eventId");
         wordGrid = (GridView) findViewById(R.id.word_docs_grid);
         pdfGrid = (GridView) findViewById(R.id.pdf_doc_grid);
         excelGrid = (GridView) findViewById(R.id.excel_doc_grid);
-        loadingText=(TextView)findViewById(R.id.downloading_file_text);
+        loadingText = (TextView) findViewById(R.id.downloading_file_text);
 
 
         new MyAsyncTask(Constants.FILES_LIST + eventId + "&type=document", null, DocShareActivity.this, new Callback() {
             @Override
             public void onResult(String result) {
-                docList=new ArrayList<HashMap<String, String>>();
-                List<GalaryBean> docBeanList= Utils.getList(result,GalaryBean.class);
-                for(GalaryBean bean:docBeanList){
-                    HashMap<String,String> docMap=new HashMap<String, String>();
-                    docMap.put("docName",bean.getName());
-                    docMap.put("docFileName",Constants.IMAGE_URL+eventId+"/document/"+bean.getFileName());
+                docList = new ArrayList<HashMap<String, String>>();
+                List<GalaryBean> docBeanList = Utils.getList(result, GalaryBean.class);
+                for (GalaryBean bean : docBeanList) {
+                    HashMap<String, String> docMap = new HashMap<String, String>();
+                    docMap.put("docName", bean.getName());
+                    docMap.put("docFileName", Constants.IMAGE_URL + eventId + "/document/" + bean.getFileName());
                     docList.add(docMap);
                 }
                 pdfGrid.setAdapter(new CustomAdapter(DocShareActivity.this, (ArrayList<HashMap<String, String>>) docList));
@@ -78,12 +78,12 @@ public class DocShareActivity extends AppCompatActivity {
             }
         }).execute();
 
-       // wordGrid.setAdapter(new CustomAdapter(this, wordDocsNameList, wordDocImage));
+        // wordGrid.setAdapter(new CustomAdapter(this, wordDocsNameList, wordDocImage));
 
 
     }
 
-    void setText(final String msg){
+    void setText(final String msg) {
         runOnUiThread(new Runnable() {
             public void run() {
                 loadingText.setText(msg);
@@ -105,19 +105,19 @@ public class DocShareActivity extends AppCompatActivity {
     }
 
     public class CustomAdapter extends BaseAdapter {
-        private  LayoutInflater inflater = null;
+        private LayoutInflater inflater = null;
         Context context;
         float per = 0;
         int downloadedSize = 0, totalsize;
-        ArrayList<HashMap<String,String>> docList1;
-        HashMap<String,String> result;
-        public CustomAdapter(Context context1, ArrayList<HashMap<String,String>> docList) {
+        ArrayList<HashMap<String, String>> docList1;
+        HashMap<String, String> result;
+
+        public CustomAdapter(Context context1, ArrayList<HashMap<String, String>> docList) {
             context = context1;
-            docList1=docList;
+            docList1 = docList;
             inflater = (LayoutInflater) context.
                     getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
-
 
 
         @Override
@@ -144,7 +144,7 @@ public class DocShareActivity extends AppCompatActivity {
             rowView = inflater.inflate(R.layout.docs_list_row, null);
             holder.docsName = (TextView) rowView.findViewById(R.id.docs_name_text);
             holder.docsTypeImage = (ImageView) rowView.findViewById(R.id.docs_type_image);
-            result=docList1.get(position);
+            result = docList1.get(position);
             holder.docsName.setText(result.get("docName"));
 
             rowView.setOnClickListener(new View.OnClickListener() {
@@ -156,7 +156,7 @@ public class DocShareActivity extends AppCompatActivity {
 
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                    result=docList1.get(position);
+                    result = docList1.get(position);
                     builder.setTitle(result.get("docName"));
                     builder.setItems(items, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int item) {
@@ -167,7 +167,7 @@ public class DocShareActivity extends AppCompatActivity {
                             } else if (itemName == "View") {
                                 new Thread(new Runnable() {
                                     public void run() {
-                                        Uri path = Uri.fromFile(downloadFile(result.get("docFileName"),result.get("docName")+".pdf"));
+                                        Uri path = Uri.fromFile(downloadFile(result.get("docFileName"), result.get("docName") + ".pdf"));
                                         try {
                                             Intent intent = new Intent(Intent.ACTION_VIEW);
                                             intent.setDataAndType(path, "application/pdf");
@@ -176,7 +176,7 @@ public class DocShareActivity extends AppCompatActivity {
 
                                         } catch (ActivityNotFoundException e) {
 
-                                            Toast.makeText(context,"PDF Reader application is not installed in your device",Toast.LENGTH_LONG).show();
+                                            Toast.makeText(context, "PDF Reader application is not installed in your device", Toast.LENGTH_LONG).show();
                                         }
                                     }
                                 }).start();
@@ -184,7 +184,7 @@ public class DocShareActivity extends AppCompatActivity {
                             } else if (itemName == "Download") {
                                 new Thread(new Runnable() {
                                     public void run() {
-                                        downloadFile(result.get("docFileName"),result.get("docName")+".pdf");
+                                        downloadFile(result.get("docFileName"), result.get("docName") + ".pdf");
                                     }
                                 }).start();
                             }
@@ -217,9 +217,9 @@ public class DocShareActivity extends AppCompatActivity {
                 urlConnection.connect();
 
                 // set the path where we want to save the file
-                File SDCardRoot = new File(Environment.getExternalStorageDirectory(),"WREX Documents");
+                File SDCardRoot = new File(Environment.getExternalStorageDirectory(), "WREX Documents");
                 // create a new file, to save the downloaded file
-                if(!SDCardRoot.exists())
+                if (!SDCardRoot.exists())
                     SDCardRoot.mkdir();
 
                 file = new File(SDCardRoot, dest_file_path);
@@ -242,11 +242,10 @@ public class DocShareActivity extends AppCompatActivity {
                     fileOutput.write(buffer, 0, bufferLength);
                     downloadedSize += bufferLength;
                     per = ((float) downloadedSize / totalsize) * 100;
-                setText("Total PDF File size  : "
-                        + (totalsize / 1024)
-                        + " KB\n\nDownloading PDF " + (int) per
-                        + "% complete");
-
+                    setText("Total PDF File size  : "
+                            + (totalsize / 1024)
+                            + " KB\n\nDownloading PDF " + (int) per
+                            + "% complete");
 
 
                 }

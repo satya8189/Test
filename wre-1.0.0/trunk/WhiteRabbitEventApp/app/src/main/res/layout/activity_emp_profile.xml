@@ -16,14 +16,58 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/emp_profile_image"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center"
-                android:src="@drawable/user_icon" />
+                >
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/emp_profile_image"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/user_icon"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true" />
+                <Button
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"
+                    android:id="@+id/edit_profile_pic"
+                    android:background="#99253535"
+                    android:textColor="#fff"
+                    android:text="Edit"
+                    android:layout_marginBottom="19dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true" />
+            </RelativeLayout>
 
+
+            <LinearLayout
+                android:id="@+id/upload_profile_image_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edit_profile_pic"
+                android:layout_marginBottom="5dp"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                >
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile_camara_link"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:src="@drawable/cam_pic" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile_gallery_link"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/gallery_pick" />
+
+            </LinearLayout>
 
             <EditText
                 android:id="@+id/emp_name"

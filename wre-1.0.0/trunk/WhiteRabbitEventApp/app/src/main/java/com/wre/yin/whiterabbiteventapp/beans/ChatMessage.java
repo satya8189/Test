@@ -1,15 +1,15 @@
 package com.wre.yin.whiterabbiteventapp.beans;
 
-public class  ChatMessage {
+public class ChatMessage {
     private boolean isImage, isMine;
-    private String content,name,time;
+    private String content, name, time;
 
-    public ChatMessage(String message, boolean mine, boolean image,String cName,String cTime) {
+    public ChatMessage(String message, boolean mine, boolean image, String cName, String cTime) {
         content = message;
         isMine = mine;
         isImage = image;
-        name=cName;
-        time=cTime;
+        name = cName;
+        time = cTime;
     }
 
     public String getName() {

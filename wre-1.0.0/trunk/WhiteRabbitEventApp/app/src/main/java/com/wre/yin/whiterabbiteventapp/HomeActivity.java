@@ -175,7 +175,7 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
         String eventName = slider.getBundle().get("extra").toString();
         String date = slider.getBundle().get("date").toString();
         Intent i = new Intent(HomeActivity.this, EventDashboardActivity.class);
-        editor.putString("eventId",eventName);
+        editor.putString("eventId", eventName);
         editor.commit();
         i.putExtra("eventId", eventName);
         i.putExtra("date", date);

@@ -9,8 +9,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.wre.yin.whiterabbiteventapp.SponcersProfileActivity">
 
-    <ImageView
-        android:id="@+id/sponsor_pic"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/sponsor_indi_pic"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:src="@drawable/user_icon" />
@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/sponcers_des_text"
         android:layout_alignStart="@+id/sponcers_des_text"
-        android:layout_alignTop="@+id/sponsor_pic"
+        android:layout_alignTop="@+id/sponsor_indi_pic"
         android:layout_marginTop="36dp"
         android:text="Sponcers Name" />
 
@@ -31,8 +31,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/sponcers_name_text"
         android:layout_marginTop="39dp"
-        android:layout_toEndOf="@+id/sponsor_pic"
-        android:layout_toRightOf="@+id/sponsor_pic"
+        android:layout_toEndOf="@+id/sponsor_indi_pic"
+        android:layout_toRightOf="@+id/sponsor_indi_pic"
         android:text="Sponcers Desig" />
 
     <TextView
@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/sponsor_pic"
+        android:layout_below="@+id/sponsor_indi_pic"
         android:layout_marginTop="41dp"
         android:text="About Sponcers " />
 

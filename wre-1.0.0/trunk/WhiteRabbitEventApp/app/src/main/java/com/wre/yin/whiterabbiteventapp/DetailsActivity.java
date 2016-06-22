@@ -51,7 +51,7 @@ public class DetailsActivity extends AppCompatActivity {
     double destLongitude = 80.241609;
     double sourceLatitude, sourceLongitude;
     GPSTracker gpsTracker;
-    private TextView inviteTime,inviteDate,inviteAddress;
+    private TextView inviteTime, inviteDate, inviteAddress;
     private boolean mPermissionDenied = false;
 
     private Button yesButton, noButton, maybeButtun;
@@ -75,16 +75,16 @@ public class DetailsActivity extends AppCompatActivity {
         prefs = getSharedPreferences("Chat", 0);
         partId = prefs.getString("partId", null);
 
-        inviteTime=(TextView)findViewById(R.id.invite_time);
-        inviteDate=(TextView)findViewById(R.id.invite_date);
-        inviteAddress=(TextView)findViewById(R.id.invite_address_text);
+        inviteTime = (TextView) findViewById(R.id.invite_time);
+        inviteDate = (TextView) findViewById(R.id.invite_date);
+        inviteAddress = (TextView) findViewById(R.id.invite_address_text);
 
         new MyAsyncTask(Constants.ABOUT_EVENT + eventId, null, DetailsActivity.this, new Callback() {
             @Override
             public void onResult(String result) {
 
-                EventBean eventBean=Utils.getObject(result,EventBean.class);
-                if(eventBean!=null) {
+                EventBean eventBean = Utils.getObject(result, EventBean.class);
+                if (eventBean != null) {
                     inviteTime.setText(eventBean.getEventTime());
                     inviteDate.setText(eventBean.getDate());
                     inviteAddress.setText(eventBean.getEventAddress());

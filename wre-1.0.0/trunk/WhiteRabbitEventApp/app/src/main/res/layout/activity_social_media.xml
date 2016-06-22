@@ -32,6 +32,12 @@
             android:layout_margin="10dp"
             android:id="@+id/btnTwitter"
             android:src="@drawable/social_twitter"/>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="10dp"
+            android:id="@+id/btnLinkedin"
+            android:src="@drawable/linkedin_circle"/>
         <!--<Button
             android:id="@+id/btnGplus"
             android:layout_width="match_parent"

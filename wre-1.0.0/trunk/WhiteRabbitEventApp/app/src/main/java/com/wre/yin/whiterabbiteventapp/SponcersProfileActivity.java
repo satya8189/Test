@@ -3,9 +3,9 @@ package com.wre.yin.whiterabbiteventapp;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.wre.yin.whiterabbiteventapp.beans.SponsorBean;
 import com.wre.yin.whiterabbiteventapp.utils.Callback;
 import com.wre.yin.whiterabbiteventapp.utils.Constants;
@@ -16,26 +16,29 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class SponcersProfileActivity extends AppCompatActivity {
-    TextView sponcersName, sponsorDesignation, aboutSponsor;
-    ImageView sponsorImage;
+    private TextView sponcersName, sponsorDesignation, aboutSponsor;
+    private CircleImageView sponsorImage;
     private List<HashMap<String, String>> sponsorIndividualList;
+    private String sponsorId, spoUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sponcers_profile);
 
-        String sponsorId = getIntent().getExtras().getString("sponsorId");
-
+        sponsorId = getIntent().getExtras().getString("sponsorId");
+        spoUrl = getIntent().getExtras().getString("sponsorUrl");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         // getSupportActionBar().setTitle(nameTxt);
         sponcersName = (TextView) findViewById(R.id.sponcers_name_text);
         sponsorDesignation = (TextView) findViewById(R.id.sponcers_des_text);
         aboutSponsor = (TextView) findViewById(R.id.about_sponcer_txt);
-        sponsorImage = (ImageView) findViewById(R.id.sponsor_pic);
+        sponsorImage = (CircleImageView) findViewById(R.id.sponsor_indi_pic);
 
-
+        Picasso.with(getApplicationContext()).load(spoUrl).into(sponsorImage);
         // sponcersName.setText(nameTxt);
 
         if (Constants.isNetworkAvailable(SponcersProfileActivity.this)) {

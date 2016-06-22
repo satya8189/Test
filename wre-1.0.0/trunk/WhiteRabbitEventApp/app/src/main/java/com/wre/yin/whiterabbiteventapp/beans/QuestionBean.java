@@ -15,7 +15,7 @@ public class QuestionBean {
     private String optionD;
     private String answer;
     private String appIdentifierName;
-    private Long participantId ;
+    private Long participantId;
 
     public Long getParticipantId() {
         return participantId;
