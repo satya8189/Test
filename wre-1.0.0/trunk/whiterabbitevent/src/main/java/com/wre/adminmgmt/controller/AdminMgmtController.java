@@ -63,6 +63,7 @@ import com.wre.adminmgmt.bean.SponsorBean;
 import com.wre.adminmgmt.bean.SurveyQuestionAnswerBean;
 import com.wre.adminmgmt.service.AdminMgmtService;
 import com.wre.common.util.WREConstants;
+import com.wre.common.util.WREUtil;
 import com.wre.systemadminmgmt.bean.ParticipantBean;
 import com.wre.systemadminmgmt.bean.ParticipantEventBean;
 
@@ -440,6 +441,35 @@ public class AdminMgmtController {
 		adminMgmtService.deleteGallery(glaryItemId);
 
 	}
+	
+	@RequestMapping(value ="admin/deleteEventImage", method = RequestMethod.POST)
+	public @ResponseBody
+	List<GalaryBean> deleteGalleryImage(@RequestBody GalaryBean galaryBean ) {
+		List<GalaryBean> eventImages = new ArrayList<GalaryBean>();
+		try {
+			File dir = new File("C:/apache-tomcat-7.0.69/webapps/Resources/wre/14/event_images/"+galaryBean.getName());
+			String folderToDelete = dir.toString();
+			File deleteFile = new File(folderToDelete);
+			if (deleteFile.exists()) {
+				WREUtil.deleteFolder(folderToDelete);
+				 eventImages = new ArrayList<GalaryBean>();
+				String path = WREConstants.RESOURCE_PATH + galaryBean.getEventId() +WREConstants.FILE_SEPARATER+galaryBean.getType();
+				File folder = new File(path);
+				File[] listOfFiles = folder.listFiles();
+				for (File file : listOfFiles) {
+					galaryBean = new GalaryBean();
+					galaryBean.setName(file.getName());
+					galaryBean.setUrl(WREConstants.READ_CONTENT_PATH+ galaryBean.getEventId()+WREConstants.FILE_SEPARATER+
+							galaryBean.getType() +WREConstants.FILE_SEPARATER+ file.getName());
+					eventImages.add(galaryBean);
+			  }
+				
+			}
+		} catch (Exception e) {
+			log.error(e);
+		}
+		return eventImages;
+	}
 
 	// admin/deleteGallery
 
@@ -772,13 +802,14 @@ public class AdminMgmtController {
 	List<GalaryBean> getEventImages(@RequestParam("eventId") Long eventId,
 			@RequestParam("type") String type) {
 		List<GalaryBean> eventImages = new ArrayList<GalaryBean>();
-		// String path="/Resources/wre/"+eventId+"/"+type;
 		String path = WREConstants.RESOURCE_PATH + eventId + "/" + type;
 		File folder = new File(path);
 		File[] listOfFiles = folder.listFiles();
 		for (File file : listOfFiles) {
 			GalaryBean galaryBean = new GalaryBean();
 			galaryBean.setName(file.getName());
+			galaryBean.setEventId(eventId);
+			galaryBean.setType(type);
 			galaryBean.setUrl("/Resources/wre/" + eventId + "/" + type + "/"
 					+ file.getName());
 			eventImages.add(galaryBean);
@@ -810,7 +841,7 @@ public class AdminMgmtController {
 	@RequestMapping(value = "admin/saveUserRating", method = RequestMethod.POST)
 	public @ResponseBody
 	String saveUserRating(@RequestBody RatingBean ratingBean) {
-		System.out.println("in saveUserRating.." + ratingBean.getRating());
+		System.out.println("in saveUserRating.." + ratingBean.getType());
 		log.info("rating sent to service..");
 		return adminMgmtService.saveUserRating(ratingBean);
 	}
@@ -974,12 +1005,15 @@ public class AdminMgmtController {
 		adminMgmtService.eventParticipantSave(participantEventBean);
 	}
 	
+	
+	
 
 	// APIupdateParticipant.....to updateparticipant by passing bean with name..
 	// ParticipantBean..with attributes..participantId and data(exclude
 	// otp,registerId)..entity-participants
 	@RequestMapping(value = "admin/updateParticipantDetails", method = RequestMethod.POST)
-	public @ResponseBody String updateParticipantDetails(@RequestBody ParticipantBean participantBean) {
+	public @ResponseBody
+	String updateParticipantDetails(@RequestBody ParticipantBean participantBean) {
 		log.info("in update Participant details.."+participantBean.getEmailId()+"---"+participantBean.getStatus());
 		adminMgmtService.updateParticipant(participantBean);
 		return "success";
@@ -1256,5 +1290,12 @@ public class AdminMgmtController {
 	 
 	  return "{\"result\":\"" + result + "\"}";
 	 }
+	
+	@RequestMapping(value="admin/eventImageUpload")
+	public String eventImageUpload(){
+		log.info("we are in Admin imageUpload");
+		return "admin/eventImageUpload";
+		
+	}
 
 }
