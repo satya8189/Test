@@ -21,7 +21,7 @@ position: relative;
 	<form>
 	
 		<a ng-click="questionCreate(eventId)"title="eventViewDetails" class="btn btn-primary buttonbg1">Question Create
-							<i class="fa fa-eye-slash icons "> </i>
+							 
 				</a>
 	
 	<div class="header-none text-center">Question List</div>
@@ -54,7 +54,7 @@ position: relative;
 				    <td>{{question.answer}}</td>
 					<td>
 						<a ng-click="questionEdit(question.questionId)"title="eventViewDetails">
-							<i class="fa fa-eye-slash icons"> </i>
+							<i class="glyphicon glyphicon-pencil"> </i>
 						</a>
 					</td>
 				</tr>
