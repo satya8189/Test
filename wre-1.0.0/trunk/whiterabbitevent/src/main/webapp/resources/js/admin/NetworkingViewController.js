@@ -1,12 +1,17 @@
 var NetworkingViewController = function($scope,$http,$routeParams,$location,filterFilter) {
   	$scope.eventId={};
 		$scope.networkList={};
+		$scope.filteredSize;
 		$scope.$on("$routeChangeSuccess", function () {
 		 $scope.eventId=$routeParams.eventId;
 	//	 alert("eventId-----------"+$routeParams.eventId);
 			
 		 $http.get('admin/ParticipantEventBeanList?eventId='+$routeParams.eventId+'&status=ACTIVE').success(function(eventList){
 			 $scope.networkList = eventList;
+			 if(eventList.length==0)
+				{
+					$scope.filteredSize=0;
+				}
 			// =================================
 				// create empty search model (object) to trigger
 				// $watch on update
@@ -27,6 +32,7 @@ var NetworkingViewController = function($scope,$http,$routeParams,$location,filt
 					$scope.noOfPages = Math.ceil($scope.totalItems
 							/ $scope.entryLimit);
 					$scope.currentPage = 1;
+					$scope.filteredSize=$scope.filtered.length;
 				}, true);
 
 				// ===================================*/
