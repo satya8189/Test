@@ -25,10 +25,10 @@ $scope.uploadVideo = function(video) {
 			    	//alert("video success");
 			    	ngNotifier.notify("video Uploaded Successfully !");
 			     $location.path("/videoView/"+video.eventId);
-			    }).error(function() {
-					ngNotifier.notifyError("Please choose Required file !");
-				});
-
+			    }).error(function(data) {
+			    // alert("dsfsfds");
+			    	ngNotifier.notifyError("please select file!");
+			    });
 		
 
 	};
