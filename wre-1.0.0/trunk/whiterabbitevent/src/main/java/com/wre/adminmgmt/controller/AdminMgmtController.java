@@ -1266,7 +1266,7 @@ public class AdminMgmtController {
 	    					+ name);
 	            imageOutFile = new FileOutputStream(serverFile);
 
-	            	            imageOutFile.write(imageByteArray);
+	            	    imageOutFile.write(imageByteArray);
 	            imageOutFile.close();
 	            adminMgmtService.saveGalary(galaryBean);
 	            
@@ -1289,7 +1289,7 @@ public class AdminMgmtController {
 		
 	}
 	
-	@RequestMapping(value = "admin/profileUpload", method = RequestMethod.POST)
+     @RequestMapping(value = "admin/profileUpload", method = RequestMethod.POST)
 	 public @ResponseBody String profileUpload(@RequestBody GalaryBean galaryBean){
 	  String filePath;
 	  String result=null;
@@ -1299,10 +1299,21 @@ public class AdminMgmtController {
 	            byte[] imageByteArray = Base64.decodeBase64(galaryBean.getEncodeString());
 	            FileOutputStream imageOutFile;
 	            // Write Image into File system - Make sure you update the path
-	            filePath=WREConstants.RESOURCE_PATH+galaryBean.getEventId()+WREConstants.FILE_SEPARATER+galaryBean.getType()+WREConstants.FILE_SEPARATER+galaryBean.getParticipantId()+galaryBean;
-	            imageOutFile = new FileOutputStream(filePath);
-                imageOutFile.write(imageByteArray);
+	            filePath=WREConstants.RESOURCE_PATH+galaryBean.getEventId()+WREConstants.FILE_SEPARATER+galaryBean.getParticipantId()+galaryBean+WREConstants.FILE_SEPARATER+galaryBean.getType();
+	            File uploadfile=new File(filePath);
+	            String name = galaryBean.getFileName();
+	    			if (!uploadfile.exists()) {
+	    				uploadfile.mkdirs();
+	    			}
+	    			// Create the file on server
+	    			File serverFile = new File(uploadfile.getAbsolutePath() + File.separator
+	    					+ name);
+	            imageOutFile = new FileOutputStream(serverFile);
+
+	            	    imageOutFile.write(imageByteArray);
 	            imageOutFile.close();
+	            adminMgmtService.profileUpload(galaryBean);
+	            
 	            result="success";
 	            System.out.println("Image Successfully Stored");
 	        } catch (FileNotFoundException fnfe) {
