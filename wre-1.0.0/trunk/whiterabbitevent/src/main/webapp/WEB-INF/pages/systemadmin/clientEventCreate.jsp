@@ -220,8 +220,12 @@
 						<option value="">Select User</option>
 					</select>
 				</div>
-
-
+	
+						<div class="form-group col-md-6 " 
+							id="uploadDiv">
+							<label class="flot-left">Upload Image </label> 
+							<input type="file" class="form-control form-group" name="file" id="file" onchange="angular.element(this).scope().setFiles(this)">
+						</div>
 			
 			
 						
