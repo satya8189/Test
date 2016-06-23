@@ -226,8 +226,6 @@
 							<label class="flot-left">Upload Image </label> 
 							<input type="file" class="form-control form-group" name="file" id="file" onchange="angular.element(this).scope().setFiles(this)">
 						</div>
-			
-			
 						
 					</div>
 </div>
