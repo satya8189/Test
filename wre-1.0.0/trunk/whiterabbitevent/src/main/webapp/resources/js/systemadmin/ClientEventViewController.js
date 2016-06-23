@@ -47,7 +47,7 @@ var ClientEventViewController = function($scope, $http, $routeParams, $location,
 
 	$scope.cancelClientEventView = function() {
 		$location.path("/clientsView");
-	}
+	};
 	
 	$scope.eventView = function(eventId){
 		location.href="#/eventView/"+eventId;
