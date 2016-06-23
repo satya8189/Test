@@ -17,15 +17,9 @@ margin-bottom:0px !important;
  <a ng-click="cancelAgendoView(eventId)"> <i
 		class="fa fa-angle-left back"></i>
 	</a> 
-	
 <form>
-
 	<a ng-click="navigateagendoCreate(eventId)" class="btn btn-primary pull-left button btn-color buttonbg">Create Agenda</a>
 	
-	<!-- <a ng-click="navigateagendoCreate(eventId)" title="eventViewDetails">agendaCreate
-			<i class="fa fa-eye-slash icons"> </i>
-	</a>
-	 -->			
 	<div class="header-center" align="center">Agendas List</div>
 	<div class="panel">
 		<div class="panel-body">
@@ -36,16 +30,16 @@ margin-bottom:0px !important;
 			<table class="table table-bordered" id="eventView">
 				<thead class="headbg">
 					<tr>
-					     <th>AgenTitle</th>
-					     <th>AgenDesc </th>
-						 <th>AgenStartTime</th>
-						  <th>AgenEndTime</th>
-						 <th>AgenBy</th>
+					     <th>AgendaTitle</th>
+					     <th>AgendaDescription </th>
+						 <th>AgendaStartTime</th>
+						  <th>AgendaEndTime</th>
+						 <th>AgendaBy</th>
 						  <th>Action</th>
 						
 				   </tr>
 				</thead>
-				<tr ng-show="filteredSize!=0"ng-repeat="event in agendoList | filter:search | startFrom : (currentPage-1)*entryLimit | limitTo : entryLimit">
+				<tr ng-show="filteredSize!=0" ng-repeat="event in agendoList | filter:search | startFrom : (currentPage-1)*entryLimit | limitTo : entryLimit">
 				    <td >{{event.agenTitle}}</td>
 					<td >{{event.agenDesc}}</td>
 					<td >{{event.agenStartTime}}</td>
@@ -58,12 +52,11 @@ margin-bottom:0px !important;
 							<i class="glyphicon glyphicon-pencil"> </i>
 				</a>
 					</td>
-					
 				</tr>	
 					<tr ng-show="filteredSize==0">
-				<td colspan="6">
-				No records found..
-				</td>
+					<td colspan="6">
+						No records found..
+					</td>
 				</tr>
 				</table>
 				<div ng-show="filteredSize!=0">
@@ -72,9 +65,7 @@ margin-bottom:0px !important;
 							items-per-page="entryLimit" class="pagination-sm" boundary-links="true"></pagination>
 					</div>
 				</div>
-			
-				
-		</div>
+			</div>
 	</div>
 	</form>
 </div>

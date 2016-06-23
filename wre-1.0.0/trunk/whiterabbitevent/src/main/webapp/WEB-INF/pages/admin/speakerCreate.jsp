@@ -60,11 +60,18 @@ border: 1px solid #588CC0;
 				
 				
 				<div class="col-md-6">
-					<div class="form-group col-md-6" id="uploadDiv">
+					<!-- <div class="form-group col-md-6" id="uploadDiv">
 						<label class="flot-left">Upload File </label> <input type="file"
 							class="form-control form-group" name="file" id="file"
 							onchange="angular.element(this).scope().setFiles(this)">
 					</div>
+					 -->
+					<div class="form-group col-md-6 "	id="uploadDiv">
+     		  				<label class="flot-left">Upload a Document </label>
+							<input class="input-text form-control" id="file" ng-model="filename" valid-file name="file" required type="file" accept="application/*"/>
+							<span style="color:red" ng-if="spCreateForm.file.$invalid" ng-show="spCreateForm.$submitted">Please select a file to upload</span>
+							<!-- <span ng-if="createEvent.file.$invalid" ng-messages="createEvent.file.$file" ng-messages-include="errors" style="color:red"></span> -->
+			  		</div>
 				</div>
 				<div>&nbsp;</div>
 				<div class="text-center">

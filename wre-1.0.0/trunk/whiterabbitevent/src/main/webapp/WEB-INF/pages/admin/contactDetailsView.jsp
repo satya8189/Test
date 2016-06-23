@@ -4,7 +4,9 @@
 .panel{
 border: 1px solid #588CC0;
 }
-
+span{
+	color: red;
+}
 </style>
 <div class="col-md-12">
 

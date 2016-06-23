@@ -61,12 +61,6 @@ margin-bottom:0px !important;
 						
 				</tr> 
 			</table>
-			
-			
-			
- 		<div  class="res-table" ng-show="filteredSize==0">
-				No records found..
-			</div>
 		</div>
  </div>
 </div>

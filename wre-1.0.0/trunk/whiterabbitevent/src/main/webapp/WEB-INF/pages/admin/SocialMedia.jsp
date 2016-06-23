@@ -54,25 +54,18 @@ margin-bottom:0px !important;
 						</a>
 					</td>
 				</tr>
-				<tr ng-show="filteredSize==0">
+				<tr class="res-table" ng-show="filteredSize==0">
 					<td colspan="6">
 						No records found..
 					</td>
 				</tr>
-				<tr>
-					<td  colspan="6" align="center">
-						<pagination page="currentPage" max-size="noOfPages" total-items="totalItems" 
-							items-per-page="entryLimit" class="pagination" boundary-links="true"></pagination>
-					</td>
-						
-				</tr> 
+				
 			</table>
-			
-			
-			
- 		<div  class="res-table" ng-show="filteredSize==0">
-				No records found..
+			<div ng-show="filteredListSize!=0" class="col-md-12 text-center">
+					<pagination class="pagination-sm" page="currentPage" max-size="noOfPages"
+								total-items="totalItems" items-per-page="entryLimit"
+						 boundary-links="true">
+				    </pagination>
 			</div>
-		</div>
- </div>
+			 </div>
 </div>
