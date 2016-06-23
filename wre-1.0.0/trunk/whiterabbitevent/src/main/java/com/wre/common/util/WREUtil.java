@@ -238,7 +238,7 @@ public static String generateRandomCode() {
 log.info("Entered into generateRandomCode() method..");
 String chars = "abcdefghijklmnopqrstuvwxyz"
 		+ "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "0123456789";
-final int PW_LENGTH = 6;
+final int PW_LENGTH = 5;
 Random rnd = new SecureRandom();
 StringBuilder pass = new StringBuilder();
 for (int i = 0; i < PW_LENGTH; i++) {
@@ -301,7 +301,9 @@ return pass.toString();
 	        return os.contains("mac");
 	}
 	  
-	  
+	
+	
+
 }
 
 
