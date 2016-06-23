@@ -16,8 +16,9 @@ var ClientCreateController = function($scope,$http,$location,ngNotifier){
 			ngNotifier.notify("Client Not Created Successfully !");
 			
 		});
-	}
+	};
+	
 	$scope.cancelEvent = function(){
 		$location.path("/clientsView");
-	}
-} 
+	};
+} ;
