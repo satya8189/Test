@@ -477,6 +477,39 @@ public List<Object[]> getParticipantsList(Long eventId){
 			
 					return status;
 				}
+
+
+
+				@Override
+				public void updateOtp(ParticipantBean participantBean) {
+					String query="upadate participants set OTP=:otp WHERE Participant_ID=:pid";
+					SQLQuery sqlQuery = sessionFactory.getCurrentSession().createSQLQuery(
+							query);
+					sqlQuery.setParameter("otp",participantBean.getOTP() );
+					sqlQuery.setParameter("pid",participantBean.getParticipantId() );
+					sqlQuery.executeUpdate();
+			
+				
+				}
+
+
+
+				@Override
+				public String checkOTP(ParticipantBean participantBean) {
+					Participants participants=null;
+					String result="fail";
+					
+					Criteria criteria=sessionFactory.getCurrentSession().createCriteria(Participants.class);
+					criteria.add(Restrictions.eq("participantId",participantBean.getParticipantId()));
+					criteria.add(Restrictions.eq("otp",participantBean.getOTP()));
+					criteria.setFetchMode("event", FetchMode.EAGER);
+					participants= (Participants)criteria.uniqueResult();
+					if(participants!=null){
+						result="success";
+					}
+										
+					return result;					
+				}
 		
 
 
