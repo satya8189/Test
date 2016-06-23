@@ -303,14 +303,11 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 			String name) {
 
 		log.info("Enter into saveOrganizationApproveFile");
-		String filePath = WREConstants.RESOURCE_PATH + eventId + File.separator
-				+type+File.separator;
-
+		String filePath = WREConstants.RESOURCE_PATH + eventId + WREConstants.FILE_SEPARATER
+				+type+WREConstants.FILE_SEPARATER;
 		if (file != null) {
 			saveFile(file, filePath);
-
 		}
-
 		Galary galary = new Galary();
 		galary.setName(name);
 		galary.setType(type);
@@ -359,12 +356,10 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 				+ file);
 
 		String name = file.getOriginalFilename();
-
 		try {
 			byte[] bytes = file.getBytes();
 			// Creating the directory to store file
 			File dir = new File(filePath);
-
 			if (!dir.exists()) {
 				dir.mkdirs();
 			}
@@ -1452,6 +1447,8 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 				galary.setEvent(event);
 				AdminMgmtDaoImpl.save(galary);
 			}
+			
+
 			
 
 
