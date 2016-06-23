@@ -25,6 +25,7 @@ import com.wre.adminmgmt.bean.GalaryBean;
 import com.wre.adminmgmt.bean.InviteBean;
 import com.wre.adminmgmt.bean.NewsFeedBean;
 import com.wre.adminmgmt.bean.ParticipantQuriesBean;
+import com.wre.adminmgmt.bean.QuestionAnswerBean;
 import com.wre.adminmgmt.bean.QuestionBean;
 import com.wre.adminmgmt.bean.RatingBean;
 import com.wre.adminmgmt.bean.SocialMediaBean;
@@ -1219,6 +1220,40 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 		{
 			log.info("in save SaveSurveyQuestionAnswer serviceimpl.."+questionBean.toString());
 			
+			List<QuestionAnswerBean> questionAnswerBeanList=questionBean.getqAList();
+			
+			log.info("QuestionAnswerBean List Size"+questionAnswerBeanList.size());
+			long s=0,k;
+			if(questionAnswerBeanList.size()>0){
+			for(QuestionAnswerBean questionAnswerBean:questionAnswerBeanList){
+				//put the below login here
+					SurveyQuestionAnswer surveyQuestionAnswer=new SurveyQuestionAnswer();
+					Event event=new Event();
+					event.setEventId(questionBean.getEventId());
+				surveyQuestionAnswer.setEvent(event);//set event
+					SurveyQuestion surveyQuestion=new SurveyQuestion();
+					surveyQuestion.setQuestionId(questionAnswerBean.getqId());//get question id from QABean
+				surveyQuestionAnswer.setSurveyQuestion(surveyQuestion);//set question
+					Participants participant=new Participants();
+					participant.setParticipantId(questionBean.getParticipantId());
+				surveyQuestionAnswer.setParticipants(participant);//set participant
+				surveyQuestionAnswer.setParticipantAnswer(questionAnswerBean.getAnswer());//set participant answer(from QABean)
+				
+				 k=(Long)AdminMgmtDaoImpl.save(surveyQuestionAnswer);
+				if(k>0){
+					s++;
+				}
+			}//if s is equal to questionBeanList.size() then return success
+			}
+			
+			log.info("saveSurveyQA-saved-size"+s);
+			String result="fail";
+			if(s==questionAnswerBeanList.size()){
+				result="success";
+			}
+			return result;
+			
+			/*
 			SurveyQuestionAnswer surveyQuestionAnswer=new SurveyQuestionAnswer();
 				Event event=new Event();
 				event.setEventId(questionBean.getEventId());
@@ -1232,12 +1267,8 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 			surveyQuestionAnswer.setParticipantAnswer(questionBean.getAnswer());//set participant answer
 			
 			long i=(Long)AdminMgmtDaoImpl.save(surveyQuestionAnswer);
-			log.info("saveSurveyQA--"+i);
-			String result="fail";
-			if(i>0){
-				result="success";
-			}
-			return result;
+			log.info("saveSurveyQA--"+i);*/
+			
 		}
 
 		@Override
