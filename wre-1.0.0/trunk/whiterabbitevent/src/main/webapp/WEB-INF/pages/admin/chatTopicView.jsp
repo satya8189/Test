@@ -39,7 +39,7 @@ margin-bottom:0px !important;
 	<div class="panel">
 		<div class="panel-body">
 		 <div class="col-md-2 col-md-offset-10 padding-0">
-		 <input ng-model="search"  ng-show="chatList.length!=0" class="form-control" placeholder="Search"">
+		 <input ng-model="search"  ng-show="chatList.length!=0" ng-show="chatList.length > 0" class="form-control" placeholder="Search">
 		 	</div> 
 		 	<a ng-click="navigateChatTopicCreate(eventId)" class="btn btn-primary pull-left button  btn-color">CreateChatTopic</a>
 			<div class="col-md-12 space-hid">&nbsp;</div>
