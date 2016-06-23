@@ -13,7 +13,7 @@ border: 1px solid #588CC0;
  <div>&nbsp;</div>
 	<div class="panel">
 		<div class="panel-heading text-center font-size-20 padding-15 headbg">Edit
-			Agendo</div>
+			Agenda</div>
 		<div class="panel-body text-center">
 			<form name="agendaForm"
 				ng-submit="agendaForm.$valid && updateAgendo(agendo)" novalidate>
@@ -33,7 +33,7 @@ border: 1px solid #588CC0;
 						
 						
 	  <div class="form-group col-md-6" >
-          <label class="flot-left">Agendo_DescName <span style="color:red;">*</span></label>
+          <label class="flot-left">Agenda_DescName <span style="color:red;">*</span></label>
       <input type="text" class="input-text form-control" id="agendo_DescName" placeholder="Agendo_DescName"  ng-model="agendo.agenDesc" 
       name="Agendo_DescName"   required>
       <span ng-if="agendaForm.$submitted" ng-messages="agendaForm.Agendo_DescName.$error" ng-messages-include="errors" style="color:red;">
