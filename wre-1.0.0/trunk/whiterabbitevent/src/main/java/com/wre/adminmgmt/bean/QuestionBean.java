@@ -1,5 +1,8 @@
 package com.wre.adminmgmt.bean;
 
+import java.util.List;
+
+
 public class QuestionBean 
 {
 
@@ -15,7 +18,7 @@ public class QuestionBean
     private String answer;
     private String appIdentifierName;
     private Long participantId ;
-    
+	private List<QuestionAnswerBean> qAList;
     
 	public String getAppIdentifierName() {
 		return appIdentifierName;
@@ -89,5 +92,23 @@ public class QuestionBean
 	public void setParticipantId(Long participantId) {
 		this.participantId = participantId;
 	}
+	public List<QuestionAnswerBean> getqAList() {
+		return qAList;
+	}
+	public void setqAList(List<QuestionAnswerBean> qAList) {
+		this.qAList = qAList;
+	}
+	@Override
+	public String toString() {
+		return "QuestionBean [questionId=" + questionId + ", appIdentifierId="
+				+ appIdentifierId + ", eventId=" + eventId + ", userId="
+				+ userId + ", question=" + question + ", optionA=" + optionA
+				+ ", optionB=" + optionB + ", optionC=" + optionC
+				+ ", optionD=" + optionD + ", answer=" + answer
+				+ ", appIdentifierName=" + appIdentifierName
+				+ ", participantId=" + participantId + ", qAList=" + qAList
+				+ "]";
+	}
+	
 	
 }
