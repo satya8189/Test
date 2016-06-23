@@ -1308,4 +1308,23 @@ public class AdminMgmtController {
 	  return "{\"result\":\"" + result + "\"}";
 	 }
 
+	//OTP Generation Method 
+	@RequestMapping(value="admin/generateOTP" ,method=RequestMethod.POST)
+	public @ResponseBody String generateOTP(@RequestBody ParticipantBean participantBean){
+		log.info("we are in generate OTP controller");
+		String s = adminMgmtService.generateOTP(participantBean);
+		return "{\"OTP\":\"" + s + "\"}";
+		
+	}
+	
+	//OTP Check Method 
+		@RequestMapping(value="admin/checkOTP" ,method=RequestMethod.POST)
+		public @ResponseBody String checkOTP(@RequestBody ParticipantBean participantBean){
+			log.info("we are in generate OTP controller");
+			String s = adminMgmtService.checkOTP(participantBean);
+			return "{\"OTP\":\"" + s + "\"}";
+			
+		}
+	//OTP sendMethod
+	
 }
