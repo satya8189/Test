@@ -443,32 +443,17 @@ public class AdminMgmtController {
 	}
 	
 	@RequestMapping(value ="admin/deleteEventImage", method = RequestMethod.POST)
-	public @ResponseBody
-	List<GalaryBean> deleteGalleryImage(@RequestBody GalaryBean galaryBean ) {
-		List<GalaryBean> eventImages = new ArrayList<GalaryBean>();
+	public @ResponseBody void deleteGalleryImage(@RequestBody GalaryBean galaryBean ) {
 		try {
-			File dir = new File("C:/apache-tomcat-7.0.69/webapps/Resources/wre/14/event_images/"+galaryBean.getName());
+			File dir = new File(WREConstants.DELETE_PATH+galaryBean.getUrl());
 			String folderToDelete = dir.toString();
 			File deleteFile = new File(folderToDelete);
 			if (deleteFile.exists()) {
-				WREUtil.deleteFolder(folderToDelete);
-				 eventImages = new ArrayList<GalaryBean>();
-				String path = WREConstants.RESOURCE_PATH + galaryBean.getEventId() +WREConstants.FILE_SEPARATER+galaryBean.getType();
-				File folder = new File(path);
-				File[] listOfFiles = folder.listFiles();
-				for (File file : listOfFiles) {
-					galaryBean = new GalaryBean();
-					galaryBean.setName(file.getName());
-					galaryBean.setUrl(WREConstants.READ_CONTENT_PATH+ galaryBean.getEventId()+WREConstants.FILE_SEPARATER+
-							galaryBean.getType() +WREConstants.FILE_SEPARATER+ file.getName());
-					eventImages.add(galaryBean);
+				deleteFile.delete();
 			  }
-				
-			}
 		} catch (Exception e) {
 			log.error(e);
 		}
-		return eventImages;
 	}
 
 	// admin/deleteGallery
@@ -481,7 +466,6 @@ public class AdminMgmtController {
 		List<QuestionBean> questionList = adminMgmtService
 				.questionList(eventId);
 		return questionList;
-
 	}
 
 	// admin/questionCreate
@@ -1297,5 +1281,31 @@ public class AdminMgmtController {
 		return "admin/eventImageUpload";
 		
 	}
+	
+	@RequestMapping(value = "admin/profileUpload", method = RequestMethod.POST)
+	 public @ResponseBody String profileUpload(@RequestBody GalaryBean galaryBean){
+	  String filePath;
+	  String result=null;
+	
+	  try {
+	            // Decode String using Base64 Class
+	            byte[] imageByteArray = Base64.decodeBase64(galaryBean.getEncodeString());
+	            FileOutputStream imageOutFile;
+	            // Write Image into File system - Make sure you update the path
+	            filePath=WREConstants.RESOURCE_PATH+galaryBean.getEventId()+WREConstants.FILE_SEPARATER+galaryBean.getType()+WREConstants.FILE_SEPARATER+galaryBean.getParticipantId()+galaryBean;
+	            imageOutFile = new FileOutputStream(filePath);
+                imageOutFile.write(imageByteArray);
+	            imageOutFile.close();
+	            result="success";
+	            System.out.println("Image Successfully Stored");
+	        } catch (FileNotFoundException fnfe) {
+	            System.out.println("Image Path not found" + fnfe);
+	        } catch (IOException ioe) {
+	            System.out.println("Exception while converting the Image " + ioe);
+	        }
+	  
+	 
+	  return "{\"result\":\"" + result + "\"}";
+	 }
 
 }
