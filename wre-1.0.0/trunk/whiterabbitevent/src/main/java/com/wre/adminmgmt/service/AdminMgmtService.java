@@ -158,6 +158,10 @@ public String participantQueriesSave(ParticipantQuriesBean participantQuriesBean
 
 public void saveGalary(GalaryBean galaryBean);
 
+public String generateOTP(ParticipantBean participantBean);
+
+public String checkOTP(ParticipantBean participantBean);
+
 
 
 

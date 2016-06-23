@@ -33,6 +33,7 @@ import com.wre.adminmgmt.bean.SponsorBean;
 import com.wre.adminmgmt.bean.SurveyQuestionAnswerBean;
 import com.wre.adminmgmt.dao.AdminMgmtDao;
 import com.wre.common.util.WREConstants;
+import com.wre.common.util.WREUtil;
 import com.wre.model.Agenda;
 import com.wre.model.AppIdentifier;
 import com.wre.model.ChatTopic;
@@ -1446,6 +1447,22 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 				event.setEventId(galaryBean.getEventId());
 				galary.setEvent(event);
 				AdminMgmtDaoImpl.save(galary);
+			}
+
+			@Override
+			public String generateOTP(ParticipantBean participantBean) {
+				String otp=WREUtil.generateRandomCode();
+				participantBean.setOTP(otp);
+				
+				AdminMgmtDaoImpl.updateOtp(participantBean);
+				
+				return otp;
+			}
+
+			@Override
+			public String checkOTP(ParticipantBean participantBean) {
+				
+				return AdminMgmtDaoImpl.checkOTP(participantBean);
 			}
 			
 
