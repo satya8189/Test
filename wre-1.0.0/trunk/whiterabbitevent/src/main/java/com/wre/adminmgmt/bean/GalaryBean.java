@@ -19,6 +19,7 @@ public class GalaryBean
     private String url;
     private String fileName;
   private String  encodeString;
+  private Long participantId ;
     
     
 	public String getUrl() {
@@ -77,6 +78,14 @@ public class GalaryBean
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
+	public Long getParticipantId() {
+		return participantId;
+	}
+	public void setParticipantId(Long participantId) {
+		this.participantId = participantId;
+	}
+	
+	
 	
     
 
