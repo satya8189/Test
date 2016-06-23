@@ -162,6 +162,8 @@ public String generateOTP(ParticipantBean participantBean);
 
 public String checkOTP(ParticipantBean participantBean);
 
+public void profileUpload(GalaryBean galaryBean);
+
 
 
 

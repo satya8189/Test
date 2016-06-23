@@ -1495,6 +1495,26 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 				
 				return AdminMgmtDaoImpl.checkOTP(participantBean);
 			}
+
+			@Override
+			public void profileUpload(GalaryBean galaryBean) {
+				
+				Galary galary = new Galary();
+				galary.setName(galaryBean.getName());
+				galary.setType(galaryBean.getType());
+				galary.setFileName(galaryBean.getFileName());
+				Event event = new Event();
+				event.setEventId(galaryBean.getEventId());
+				galary.setEvent(event);
+				
+				Participants participants=new Participants();
+				participants.setParticipantId(galaryBean.getParticipantId());
+				galary.setParticipants(participants);
+				AdminMgmtDaoImpl.save(galary);
+			
+		
+				
+			}
 			
 
 			
