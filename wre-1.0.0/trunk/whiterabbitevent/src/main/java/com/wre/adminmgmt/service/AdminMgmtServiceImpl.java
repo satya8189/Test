@@ -1239,18 +1239,19 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 				surveyQuestionAnswer.setParticipants(participant);//set participant
 				surveyQuestionAnswer.setParticipantAnswer(questionAnswerBean.getAnswer());//set participant answer(from QABean)
 				
-				 k=(Long)AdminMgmtDaoImpl.save(surveyQuestionAnswer);
-				if(k>0){
+				 //k=(Long)AdminMgmtDaoImpl.saveOrUpdate(surveyQuestionAnswer);
+				AdminMgmtDaoImpl.saveOrUpdate(surveyQuestionAnswer);
+				/*if(k>0){
 					s++;
-				}
+				}*/
 			}//if s is equal to questionBeanList.size() then return success
 			}
 			
-			log.info("saveSurveyQA-saved-size"+s);
+			//log.info("saveSurveyQA-saved-size"+s);
 			String result="fail";
-			if(s==questionAnswerBeanList.size()){
-				result="success";
-			}
+			//	if(s==questionAnswerBeanList.size()){
+			result="success";
+			/*}*/
 			return result;
 			
 			/*
