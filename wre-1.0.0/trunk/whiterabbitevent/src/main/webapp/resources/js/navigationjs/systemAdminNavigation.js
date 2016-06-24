@@ -44,6 +44,12 @@ App.config(['$routeProvider', function ($routeProvider,$Scope) {
 		 controller:EventViewController
 	 });
 	 
+	 //serviceList view...../serviceListView
+	 $routeProvider.when('/serviceListView/:eventId',{
+		 templateUrl:'systemadmin/serviceListView',
+		 controller: ServiceViewController
+	 });
+	  
 	
     $routeProvider.otherwise({redirectTo: '/clientsView'});
 }]);
