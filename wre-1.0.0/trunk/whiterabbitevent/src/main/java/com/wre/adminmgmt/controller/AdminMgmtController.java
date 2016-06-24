@@ -1343,6 +1343,15 @@ public class AdminMgmtController {
 			return "{\"OTP\":\"" + s + "\"}";
 			
 		}
-	//OTP sendMethod
 	
+	
+		//sending OTP method
+		@RequestMapping(value="admin/sendOTP",method=RequestMethod.POST)
+		public @ResponseBody String sendingOTP(@RequestBody ParticipantBean participantBean){
+			log.info("we are in sending OTP Controller");
+			 String s = adminMgmtService.sendingOTP(participantBean);
+			return s;
+		}
 }
+
+
