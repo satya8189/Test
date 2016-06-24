@@ -121,6 +121,7 @@ public Event detailsView(Long eventId) {
 	Criteria criteria=sessionFactory.getCurrentSession().createCriteria(Event.class);
     criteria.add(Restrictions.eq("eventId",eventId));
 	criteria.setFetchMode("event", FetchMode.EAGER);
+	criteria.setFetchMode("client", FetchMode.EAGER);
 	return (Event)criteria.uniqueResult();
 	
 	 
@@ -525,7 +526,14 @@ public List<Object[]> getParticipantsList(Long eventId){
 					
 				}
 		
-
+               @Override
+				public Participants getParticipantByPhoneNumber(String phoneNumber) {
+					Participants participants = null;
+					Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Participants.class);
+					criteria.add(Restrictions.eq("phone", phoneNumber));
+					participants = (Participants)criteria.uniqueResult();
+					return participants;
+				}
 
 		
 

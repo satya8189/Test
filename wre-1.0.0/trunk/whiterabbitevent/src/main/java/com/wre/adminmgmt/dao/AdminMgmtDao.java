@@ -102,4 +102,5 @@ public void updateOtp(ParticipantBean participantBean);
 public String checkOTP(ParticipantBean participantBean);
 
  void profileUpload(Long participantId, String fileName);
+ public Participants getParticipantByPhoneNumber(String phoneNumber);
 }
