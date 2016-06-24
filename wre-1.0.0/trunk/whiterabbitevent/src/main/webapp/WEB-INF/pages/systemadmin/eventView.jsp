@@ -6,7 +6,7 @@ border: 1px solid #588CC0;
 
 </style>
 <div class="col-md-12">
-	<a ng-click="navigateToEventViewDetails(eventId)"> <i class="fa fa-angle-left back"></i>
+	<a ng-click="navigateToEventViewDetails(event)"> <i class="fa fa-angle-left back"></i>
 	</a>
 
 	<c:set var="eventId" value="${event.eventId}" scope="session" />
@@ -39,15 +39,6 @@ border: 1px solid #588CC0;
 						</div>
 						</div>
 					</div>
-
-				
-				
-			
-				<!-- <div>&nbsp;</div>
-				<div class="text-center">
-				 <button type="submit" class="btn button btn-primary save margin-2"
-					ng-click="imageUpload(eventId)">Upload image</button>
-					</div>-->
 					<div>&nbsp;</div> 
 					</form> 
 		</div>
