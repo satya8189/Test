@@ -10,6 +10,7 @@ public class ParticipantBean {
 	private String phoneNumber;
 	private String status;
 	private String registerId;
+	private String Profile_Pic;
 	public Long getParticipantId() {
 		return participantId;
 	}
@@ -58,6 +59,14 @@ public class ParticipantBean {
 	public void setRegisterId(String registerId) {
 		this.registerId = registerId;
 	}
+	public String getProfile_Pic() {
+		return Profile_Pic;
+	}
+	public void setProfile_Pic(String profile_Pic) {
+		Profile_Pic = profile_Pic;
+	}
+	
+	
 	
 
 }
