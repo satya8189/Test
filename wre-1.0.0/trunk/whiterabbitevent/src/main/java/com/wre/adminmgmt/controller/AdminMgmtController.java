@@ -1312,7 +1312,7 @@ public class AdminMgmtController {
 
 	            	    imageOutFile.write(imageByteArray);
 	            imageOutFile.close();
-	            adminMgmtService.profileUpload(galaryBean);
+	            adminMgmtService.profileUpload(galaryBean.getParticipantId(),galaryBean.getFileName());
 	            
 	            result="success";
 	            System.out.println("Image Successfully Stored");
