@@ -53,9 +53,8 @@ border: 1px solid #588CC0;
 			  	</div>
 			</div>
 		<div>&nbsp;</div>
-
 				<button type="submit" class="btn button btn-primary save margin-2">Save</button>
-<div>&nbsp;</div>
+			<div>&nbsp;</div>
 			</form>
 
 		</div>
