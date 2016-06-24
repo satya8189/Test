@@ -35,6 +35,7 @@ public class Participants  implements java.io.Serializable {
   private String phone;
   private String status;
   private String regId;
+  private String profilePic;
   private Set<Galary> galaries = new HashSet<Galary>(0);
   private Set<EventParticipant> eventParticipants = new HashSet<EventParticipant>(0);
   private Set<SurveyQuestionAnswer> surveyQuestionAnswers = new HashSet<SurveyQuestionAnswer>(0);
@@ -46,7 +47,7 @@ public class Participants  implements java.io.Serializable {
  public Participants() {
  }
 
- public Participants(String email, String firstName, String lastName, String otp, String phone, String status, String regId, Set<Galary> galaries, Set<EventParticipant> eventParticipants, Set<SurveyQuestionAnswer> surveyQuestionAnswers, Set<ContactDetails> contactDetailses, Set<ParticipantQuries> participantQurieses, Set<QuestionAnswer> questionAnswers, Set<Message> messages) {
+ public Participants(String email, String firstName, String lastName, String otp, String phone, String status, String regId,String profilePic, Set<Galary> galaries, Set<EventParticipant> eventParticipants, Set<SurveyQuestionAnswer> surveyQuestionAnswers, Set<ContactDetails> contactDetailses, Set<ParticipantQuries> participantQurieses, Set<QuestionAnswer> questionAnswers, Set<Message> messages) {
     this.email = email;
     this.firstName = firstName;
     this.lastName = lastName;
@@ -54,6 +55,7 @@ public class Participants  implements java.io.Serializable {
     this.phone = phone;
     this.status = status;
     this.regId = regId;
+    this.profilePic=profilePic;
     this.galaries = galaries;
     this.eventParticipants = eventParticipants;
     this.surveyQuestionAnswers = surveyQuestionAnswers;
@@ -144,6 +146,15 @@ public class Participants  implements java.io.Serializable {
  public void setRegId(String regId) {
      this.regId = regId;
  }
+ 
+ @Column(name="Profile_Pic", length=50)
+public String getProfilePic() {
+	return profilePic;
+}
+
+public void setProfilePic(String profilePic) {
+	this.profilePic = profilePic;
+}
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="participants")
  public Set<Galary> getGalaries() {
