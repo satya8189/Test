@@ -164,7 +164,7 @@ public String checkOTP(ParticipantBean participantBean);
 
 public void profileUpload(Long participantId, String fileName);
 
-
+public String sendingOTP(ParticipantBean participantBean);
 
 
 

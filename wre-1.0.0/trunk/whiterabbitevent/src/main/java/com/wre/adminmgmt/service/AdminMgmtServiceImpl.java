@@ -1,9 +1,13 @@
 package com.wre.adminmgmt.service;
 
 import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.math.BigInteger;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -333,7 +337,7 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 			eventBeanOject.setEventDesc(eventOject.getEventDesc());
 			eventBeanOject.setEventName(eventOject.getEventName());
 			eventBeanOject.setEventDate(eventOject.getEventDate());
-			
+			eventBeanOject.setClientId(eventOject.getClient().getClientId());
 			eventBeanOject.setEventTime(eventOject.getEventTime());
 			
 		}
@@ -1503,7 +1507,34 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 				
 			}
 
-			
+			@Override
+			public String sendingOTP(ParticipantBean participantBean) {
+				Participants participants = null;
+				String result = null;
+				participants = AdminMgmtDaoImpl.getParticipantByPhoneNumber(participantBean.getPhoneNumber());
+				
+				 if(participants!=null){
+					  String messagedata="Dear%20User,%20your%20OTP%20is%20"+participants.getOtp()+"%20,Please%20don't%20share%20This%20OTP%20to%20other%20persons";
+					           String sms_url="http://bulksmsapps.com/apisms.aspx?user=surenganne&password=Ganne@2013&genkey=758742187&sender=WRE&message="+messagedata+"&number="+participantBean.getPhoneNumber();
+					           log.info("we are Sending message to "+participantBean.getPhoneNumber());
+					           URL url;
+					           try {
+					               url = new URL(sms_url);
+					               InputStream is = url.openConnection().getInputStream();
+					               BufferedReader reader = new BufferedReader( new InputStreamReader( is )  );
+					               reader.close();
+					               result="success";
+					           } catch (Exception e) {
+					               System.err.println(e);
+					               result="fail";
+					           }
+					           System.out.println("message send successfully");
+					  }else{
+					   result="inavlidphoneno";
+					  }
+				 log.info(result);
+					  return result;
+			}
 			
 
 			
