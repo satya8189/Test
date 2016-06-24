@@ -1,4 +1,4 @@
-var VenueLayoutController=function($scope,$location,$http,$routeParams,ngNotifier){
+var VenueLayoutController=function($scope,$location,$http,$routeParams,ngNotifier,$route){
 	$scope.upload={};
 	//$socpe.eventId={};
 	$scope.$on("$routeChangeSuccess",function(){
@@ -25,9 +25,10 @@ var VenueLayoutController=function($scope,$location,$http,$routeParams,ngNotifie
 		     transformRequest : angular.identity
 		    }).success(function(data) {
 		    	ngNotifier.notify("Record Created Successfully !");
-		     
+		    	$route.reload();
+		    	//$window.location.reload();
 		    }).error(function() {
-				ngNotifier.notifyError("Please choose Required file !");
+				//ngNotifier.notifyError("Please choose Required file !");
 			});
 
 	};
@@ -38,9 +39,6 @@ $scope.cancelUploadLayout = function(eventId)
 	//alert("getting back to eventViewDetails---"+eventId);
 	$location.path("/eventViewDetails/"+eventId);
 };
-
-
-	
 
 	
 };
