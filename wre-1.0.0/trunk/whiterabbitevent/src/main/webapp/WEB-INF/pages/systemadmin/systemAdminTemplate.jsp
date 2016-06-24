@@ -38,6 +38,8 @@
     <script src="resources/js/systemadmin/ClientEventEditController.js"></script>
    <!--   EventViewController -->
     <script src="resources/js/systemadmin/EventViewController.js"></script>
+    <!-- To view the list of services -->
+    <script src="resources/js/systemadmin/ServiceViewController.js"></script>
      
       
   	<script type="text/javascript" src="resources/js/multiselect/select2.js"></script>
