@@ -100,4 +100,6 @@ public String getEventParticipantStatus(Long eventId, Long participantId);
 public void updateOtp(ParticipantBean participantBean);
 
 public String checkOTP(ParticipantBean participantBean);
+
+ void profileUpload(Long participantId, String fileName);
 }

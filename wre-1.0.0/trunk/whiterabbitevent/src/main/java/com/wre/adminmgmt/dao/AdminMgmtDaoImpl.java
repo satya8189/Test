@@ -510,6 +510,20 @@ public List<Object[]> getParticipantsList(Long eventId){
 										
 					return result;					
 				}
+
+               @Override
+				public void profileUpload(Long participantId, String fileName) {
+					
+					String query="upadate participants set Profile_Pic=:fileName WHERE Participant_ID=:pid";
+					SQLQuery sqlQuery = sessionFactory.getCurrentSession().createSQLQuery(
+							query);
+					sqlQuery.setParameter("fileName",fileName );
+					sqlQuery.setParameter("pid",participantId );
+					sqlQuery.executeUpdate();
+			
+			
+					
+				}
 		
 
 
