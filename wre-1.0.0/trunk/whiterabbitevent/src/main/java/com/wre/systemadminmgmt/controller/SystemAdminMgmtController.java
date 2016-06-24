@@ -296,7 +296,21 @@ public class SystemAdminMgmtController{
 			
 			@RequestMapping(value="/participantlogin",method=RequestMethod.POST)
 			public @ResponseBody ParticipantBean participantLogin(@RequestBody ParticipantBean participantBean){
-				return systemAdminMgmtService.getParticipantDetails(participantBean);
+				ParticipantBean bean=systemAdminMgmtService.getParticipantDetails(participantBean);
+				log.info("we are in getParticipantDetails");
+				if(bean.getParticipantId()!=null){
+					adminMgmtService.generateOTP(bean);
+				 adminMgmtService.sendingOTP(participantBean);
+					log.info("we are in generateOTP");
+				}
+				return bean;
+				
+			}
+			
+			@RequestMapping(value="systemadmin/serviceListView")
+			public String goToServiceListView(){
+				log.info("we are in serviceListView..");
+				return "systemadmin/serviceView";
 				
 			}
 			
