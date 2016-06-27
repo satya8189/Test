@@ -483,7 +483,7 @@ public List<Object[]> getParticipantsList(Long eventId){
 
 				@Override
 				public void updateOtp(ParticipantBean participantBean) {
-					String query="upadate participants set OTP=:otp WHERE Participant_ID=:pid";
+					String query="update participants set OTP=:otp WHERE Participant_ID=:pid";
 					SQLQuery sqlQuery = sessionFactory.getCurrentSession().createSQLQuery(
 							query);
 					sqlQuery.setParameter("otp",participantBean.getOTP() );
