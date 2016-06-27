@@ -326,7 +326,7 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 	}
 
 	// get detailsView
-	public EventBean detailsView(Long eventId) {
+	public EventBean detailsView(Long eventId,String type) {
 		EventBean eventBeanOject = null;
 		Event eventOject = AdminMgmtDaoImpl.detailsView(eventId);
 		if (eventOject != null) {
@@ -336,7 +336,11 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 			eventBeanOject.setEventAgenda(eventOject.getEventAgenda());
 			eventBeanOject.setEventDesc(eventOject.getEventDesc());
 			eventBeanOject.setEventName(eventOject.getEventName());
-			eventBeanOject.setEventDate(eventOject.getEventDate());
+			if("app".equals(type)){
+			eventBeanOject.setDate(eventOject.getEventDate().toString());
+			}else{
+				eventBeanOject.setEventDate(eventOject.getEventDate());
+			}
 			eventBeanOject.setClientId(eventOject.getClient().getClientId());
 			eventBeanOject.setEventTime(eventOject.getEventTime());
 			
