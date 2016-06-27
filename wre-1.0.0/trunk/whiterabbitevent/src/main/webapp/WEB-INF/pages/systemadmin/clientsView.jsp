@@ -21,8 +21,7 @@
 		<div class="panel-body">
 		 
 			<div class="col-md-2 col-md-offset-9 text-left " >
-				<input ng-model="search" class="form-control" placeholder="Search" ng-show="clientList.length > 0"
-					ng-hide="clientList.length==0"></div>
+				<input ng-model="search" class="form-control" placeholder="Search" ng-show="clientList.length > 0"></div>
 					<div class="col-md-1 padding-0 "><a href="#/createClient"
 			class="btn  pull-left button btn btn-primary">Create
 			Client</a></div>
