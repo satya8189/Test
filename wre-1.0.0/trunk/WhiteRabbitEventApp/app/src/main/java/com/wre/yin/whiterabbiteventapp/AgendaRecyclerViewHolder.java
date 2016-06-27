@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 public class AgendaRecyclerViewHolder extends RecyclerView.ViewHolder {
 
-    TextView agendaTitle, agendaDesc, agendaTime;
+    TextView agendaTitle, agendaDesc, agendaTime, agendaBy;
     LinearLayout expandLayout, agendaLayout;
     CardView cardView;
     ImageView plus, minus;
@@ -20,6 +20,7 @@ public class AgendaRecyclerViewHolder extends RecyclerView.ViewHolder {
         agendaTitle = (TextView) itemView.findViewById(R.id.list_title);
         agendaDesc = (TextView) itemView.findViewById(R.id.expanded_text);
         agendaTime = (TextView) itemView.findViewById(R.id.time_duration);
+        agendaBy = (TextView) itemView.findViewById(R.id.agenda_by);
         plus = (ImageView) itemView.findViewById(R.id.plus_img);
         minus = (ImageView) itemView.findViewById(R.id.minus_img);
 

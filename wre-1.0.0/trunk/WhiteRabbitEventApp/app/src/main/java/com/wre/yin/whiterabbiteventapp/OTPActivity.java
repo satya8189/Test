@@ -11,7 +11,7 @@ import com.wre.yin.whiterabbiteventapp.utils.Constants;
 
 public class OTPActivity extends AppCompatActivity {
 
-    private EditText otpTxt;
+    private static EditText otpTxt;
     private Button submitBtn;
 
     @Override
@@ -36,6 +36,21 @@ public class OTPActivity extends AppCompatActivity {
                 }
             }
         });
+
+
+    }
+
+    public String recievedSms(String message) {
+        try {
+            System.out.println("message--->>>" + message);
+
+
+            otpTxt.setText(message);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return message;
     }
 
 }

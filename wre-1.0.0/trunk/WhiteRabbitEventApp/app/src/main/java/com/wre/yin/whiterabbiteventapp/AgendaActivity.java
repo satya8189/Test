@@ -54,7 +54,7 @@ public class AgendaActivity extends AppCompatActivity {
                         map.put("agenDesc", bean.getAgenDesc());
                         map.put("agenStartTime", bean.getAgenStartTime());
                         map.put("agenEndTime", bean.getAgenEndTime());
-
+                        map.put("agenBy", bean.getAgenBy());
                         agendaList.add(map);
 
                     }
@@ -126,7 +126,6 @@ public class AgendaActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(AgendaRecyclerViewHolder holder, int position) {
 
-
             int[] androidColors = getResources().getIntArray(R.array.rainbow);
             int randomAndroidColor = androidColors[new Random().nextInt(androidColors.length)];
 
@@ -137,6 +136,7 @@ public class AgendaActivity extends AppCompatActivity {
             holder.agendaTitle.setText(maps.get("agenTitle"));
             holder.agendaDesc.setText(maps.get("agenDesc"));
             holder.agendaTime.setText(maps.get("agenStartTime") + "-" + maps.get("agenEndTime"));
+            holder.agendaBy.setText(maps.get("agenBy"));
             holder.cardView.setOnClickListener(clickListener);
             holder.cardView.setTag(holder);
         }
@@ -146,4 +146,6 @@ public class AgendaActivity extends AppCompatActivity {
             return mapsList.size();
         }
     }
+
+
 }
