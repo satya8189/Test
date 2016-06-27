@@ -2,8 +2,8 @@ var EventViewController = function($scope,$routeParams,$http, $location) {
 	$scope.event={};
 	$scope.$on("$routeChangeSuccess", function() {
 		$scope.eventId=$routeParams.eventId;
-		
-		$http.get('admin/Viewdetails?eventId='+$routeParams.eventId).success(function(event) {
+		var type='web';
+		$http.get('admin/Viewdetails?eventId='+$routeParams.eventId+'&type='+type).success(function(event) {
 			$scope.event=event;
 					
 				});
