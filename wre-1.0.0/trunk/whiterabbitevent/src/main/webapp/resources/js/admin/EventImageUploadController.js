@@ -12,7 +12,6 @@ var EventImageUploadController = function($scope, $http, $location, $routeParams
  	 });
 	});
 	
-
 		$scope.uploadImage = function() {
 		var fd = new FormData();
 		var type = "event_images";
@@ -28,7 +27,7 @@ var EventImageUploadController = function($scope, $http, $location, $routeParams
 			transformRequest : angular.identity
 		}).success(
 				function(data) {
-					ngNotifier.notify("Record Created Successfully !");
+					ngNotifier.notify("Event Image created Successfully !");
 					$http.get('admin/getEventImages?eventId='+ $routeParams.eventId + '&type=' + type)
 							.success(function(eventImages) {
 								$scope.eventImages = eventImages;
@@ -40,7 +39,7 @@ var EventImageUploadController = function($scope, $http, $location, $routeParams
 	$scope.deleteGallery = function(galary) {
 		// alert("deleteGallery"+galary.glaryItemId);
 		$http.post('admin/deleteEventImage', galary).success(function() {
-					ngNotifier.notify("Gallery deleted successfully.!");
+					ngNotifier.notify("Event Image deleted successfully.!");
 					var type="event_images";
 					$http.get('admin/getEventImages?eventId='+$routeParams.eventId +'&type='+type)
 							.success(function(eventImages) {

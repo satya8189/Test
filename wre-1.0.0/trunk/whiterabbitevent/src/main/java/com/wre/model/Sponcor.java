@@ -52,7 +52,7 @@ public class Sponcor  implements java.io.Serializable {
         this.sponcorId = sponcorId;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="Event_ID")
     public Event getEvent() {
         return this.event;
@@ -92,8 +92,6 @@ public class Sponcor  implements java.io.Serializable {
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
-
-
 
 }
 
