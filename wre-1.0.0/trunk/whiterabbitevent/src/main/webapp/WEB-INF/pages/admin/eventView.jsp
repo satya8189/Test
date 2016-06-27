@@ -52,7 +52,7 @@ display:none;
 				</tr>
 				<tr ng-show="filteredSize==0">
 				<td colspan="6">
-				No records found..
+					No records found..
 				</td>
 				</tr>
 
