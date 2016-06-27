@@ -53,4 +53,8 @@ var ClientEventViewController = function($scope, $http, $routeParams, $location,
 		location.href="#/eventView/"+eventId;
 	};
 	
+	$scope.serviceListView = function(eventId){
+		location.href="#/serviceListView/"+eventId;
+	};
+	
 };
