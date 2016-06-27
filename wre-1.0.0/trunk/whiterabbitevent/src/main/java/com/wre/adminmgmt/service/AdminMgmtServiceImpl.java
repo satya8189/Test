@@ -955,12 +955,17 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 	
 
 	//=================rating
+		@SuppressWarnings("unused")
 		@Override
 		public String saveUserRating(RatingBean ratingBean) {
 
 			log.info("save RatingBean....." + ratingBean.toString());
+			Rating ratingByUserId=AdminMgmtDaoImpl.getRatingById(ratingBean.getUserId());
+			
 			Rating rating=new Rating();
 
+			String result="fail";
+			//long i=(Long)AdminMgmtDaoImpl.saveOrUpdate(rating);
 			rating.setEventId(ratingBean.getEventId());
 			rating.setRatingId(ratingBean.getRatingId());
 			rating.setSourceId(ratingBean.getSourceId());
@@ -968,9 +973,15 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 			rating.setUserId(ratingBean.getUserId());
 			rating.setRating(ratingBean.getRating());
 			
-			String result="fail";
-			long i=(Long)AdminMgmtDaoImpl.save(rating);
-			if(i>0){
+			if(ratingByUserId==null){
+				long i=(Long)AdminMgmtDaoImpl.save(rating);
+				if(i>0){
+					result="success";
+				}
+			}else{
+				//log.info("rating By UserID--"+ratingByUserId.getUserId());
+				rating.setRatingId(ratingByUserId.getRatingId());
+				AdminMgmtDaoImpl.update(rating);
 				result="success";
 			}
 			log.info("Rating Saved..");

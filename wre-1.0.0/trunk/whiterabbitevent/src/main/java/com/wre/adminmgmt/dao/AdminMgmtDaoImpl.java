@@ -548,6 +548,18 @@ public List<Object[]> getParticipantsList(Long eventId){
 				participants=(Participants) criteria.uniqueResult();
 				return participants;
 			}
+			
+			/* (non-Javadoc)
+			 * @see com.wre.adminmgmt.dao.AdminMgmtDao#getParticipantById(java.lang.Long)
+			 */
+			@Override
+			public Rating getRatingById(Long participantId) {
+				Rating rating=null;
+				Criteria criteria=sessionFactory.getCurrentSession().createCriteria(Rating.class);
+				criteria.add(Restrictions.eq("userId", participantId));
+				rating=(Rating) criteria.uniqueResult();
+				return rating;
+			}
 
 }
 

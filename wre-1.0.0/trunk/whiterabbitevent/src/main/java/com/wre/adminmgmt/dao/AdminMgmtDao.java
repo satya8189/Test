@@ -110,4 +110,13 @@ public String checkOTP(ParticipantBean participantBean);
   * @return
   */
 public Participants getParticipantById(Long participantId);
+
+/**
+ * 
+ * @param participantId
+ * @return
+ */
+public Rating getRatingById(Long participantId);
+
+
 }
