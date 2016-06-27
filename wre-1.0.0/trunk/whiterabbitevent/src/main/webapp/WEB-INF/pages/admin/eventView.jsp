@@ -27,23 +27,23 @@ display:none;
 			<table class="table table-bordered" id="eventView">
 				<thead class="headbg">
 					<tr>
-					     <th>EventAddress</th>
-					     <th>EventAgenda </th>
-						 <th>Event Name</th>
-						 <th> EventDesc</th>
-						 <th>EventDate</th>
+					     <th>Event Name</th>
+						 <th>EventDesc</th>
+						 <th>EventAgenda </th>
+						 <th>EventAddress</th>
+					     <th>EventDate</th>
 						 <th>Status</th>
 						 <th>Action</th>
 						
 				   </tr>
 				</thead>
 				<tr ng-show="filteredSize!=0" ng-repeat="event in eventList | filter: search | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit ">
-				    <td >{{event.eventAddress}}</td>
-					<td >{{event.eventAgenda}}</td>
-					<td >{{event.eventName}}</td>
-					<td >{{event.eventDesc}}</td>
-				    <td >{{event.eventDate | date: 'yyyy-MM-dd'}}</td>
-					<td >{{event.status}}</td>
+					<td>{{event.eventName}}</td>
+					<td>{{event.eventDesc}}</td>
+				    <td>{{event.eventAgenda}}</td>
+					<td>{{event.eventAddress}}</td>
+				    <td>{{event.eventDate | date: 'yyyy-MM-dd'}}</td>
+					<td>{{event.status}}</td>
 					<td>
 						<a ng-click="eventViewDetails(event.eventId)"title="eventViewDetails">
 							<i class="fa fa-eye-slash icons"> </i>
