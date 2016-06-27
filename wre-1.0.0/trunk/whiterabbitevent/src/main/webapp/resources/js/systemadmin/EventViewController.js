@@ -14,13 +14,13 @@ var EventViewController = function($scope,$routeParams,$http, $location) {
 			$location.path("/editDetailsView/"+eventId);
 		};
 		
-		$scope.navigateToEventViewDetails= function(eventId)
+		$scope.navigateToEventViewDetails= function(event)
 		{
-			$location.path("/eventViewDetails/"+eventId);
+			 $scope.event = event;
+			 $location.path("/clientEventsView/"+event.clientId);
 		};
 	
-		
-		
+	
 		$scope.imageUpload= function(eventId)
 		{
 			$location.path("/imageUpload/"+eventId);
