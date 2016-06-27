@@ -1390,7 +1390,7 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 
 		@Override
 		public void updateParticipant(ParticipantBean participantBean) {
-			Participants participant=new Participants();
+			Participants participant=AdminMgmtDaoImpl.getParticipantById(participantBean.getParticipantId());
 			
 			participant.setParticipantId(participantBean.getParticipantId());
 			participant.setEmail(participantBean.getEmailId());

@@ -103,4 +103,11 @@ public String checkOTP(ParticipantBean participantBean);
 
  void profileUpload(Long participantId, String fileName);
  public Participants getParticipantByPhoneNumber(String phoneNumber);
+
+ /**
+  * 
+  * @param participantId
+  * @return
+  */
+public Participants getParticipantById(Long participantId);
 }

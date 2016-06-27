@@ -535,7 +535,19 @@ public List<Object[]> getParticipantsList(Long eventId){
 					return participants;
 				}
 
-		
+
+
+			/* (non-Javadoc)
+			 * @see com.wre.adminmgmt.dao.AdminMgmtDao#getParticipantById(java.lang.Long)
+			 */
+			@Override
+			public Participants getParticipantById(Long participantId) {
+				Participants participants=null;
+				Criteria criteria=sessionFactory.getCurrentSession().createCriteria(Participants.class);
+				criteria.add(Restrictions.eq("participantId", participantId));
+				participants=(Participants) criteria.uniqueResult();
+				return participants;
+			}
 
 }
 
