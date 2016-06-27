@@ -50,7 +50,7 @@ public void updateNews(NewsFeedBean newsFeedBean);
 public void saveNews(NewsFeedBean newsFeedBean);
 public List<GalaryBean> galaryList(Long eventId,String type);
 
-public EventBean detailsView(Long eventId);
+public EventBean detailsView(Long eventId, String type);
 
 public void updateDetails(EventBean eventBean);
 
