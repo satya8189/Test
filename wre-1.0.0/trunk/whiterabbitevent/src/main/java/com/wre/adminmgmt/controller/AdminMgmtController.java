@@ -63,7 +63,6 @@ import com.wre.adminmgmt.bean.SponsorBean;
 import com.wre.adminmgmt.bean.SurveyQuestionAnswerBean;
 import com.wre.adminmgmt.service.AdminMgmtService;
 import com.wre.common.util.WREConstants;
-import com.wre.common.util.WREUtil;
 import com.wre.systemadminmgmt.bean.ParticipantBean;
 import com.wre.systemadminmgmt.bean.ParticipantEventBean;
 
@@ -396,8 +395,8 @@ public class AdminMgmtController {
 
 	@RequestMapping(value = "admin/Viewdetails", method = RequestMethod.GET)
 	public @ResponseBody
-	EventBean detailsView(@RequestParam("eventId") Long eventId) {
-		EventBean eventBean = adminMgmtService.detailsView(eventId);
+	EventBean detailsView(@RequestParam("eventId") Long eventId,@RequestParam("type") String type) {
+		EventBean eventBean = adminMgmtService.detailsView(eventId,type);
 		return eventBean;
 
 	}
