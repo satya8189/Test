@@ -3,16 +3,31 @@ package com.wre.adminmgmt.bean;
 import java.util.List;
 
 public class ChatBean {
-	String name;
-	String mobno;
-	String reg_id;
-	String fromn;
-	String from;
+	private String name;
+	private String mobno;
+	private String reg_id;
+	private String fromn;
+	private String from;
+	private String date;
+	private String topic;
+	private String to;
+	private String msg;
+	private String fromu;
+	private List<String> regids;
 	
-	String to;
-	String msg;
-	String fromu;
-	List<String> regids;
+	
+	public String getDate() {
+		return date;
+	}
+	public void setDate(String date) {
+		this.date = date;
+	}
+	public String getTopic() {
+		return topic;
+	}
+	public void setTopic(String topic) {
+		this.topic = topic;
+	}
 	public String getName() {
 		return name;
 	}

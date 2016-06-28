@@ -726,6 +726,8 @@ public class AdminMgmtController {
 		data.put("msg", chatBean.getMsg());
 		data.put("fromu", chatBean.getFrom());
 		data.put("name", chatBean.getFromn());
+		data.put("date", chatBean.getDate());
+		data.put("topic", chatBean.getTopic());
 
 		obj.put("registration_ids", array);
 		obj.put("data", data);
