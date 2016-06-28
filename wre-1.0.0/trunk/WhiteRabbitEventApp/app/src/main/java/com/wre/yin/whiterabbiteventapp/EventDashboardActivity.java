@@ -107,7 +107,7 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
             @Override
             public void onResult(String result) {
                 List<ParticipantEventBean> participantEventBeanList = Utils.getList(result, ParticipantEventBean.class);
-                noOfParticipanta.setText("" + participantEventBeanList.size());
+                noOfParticipanta.setText("Users " + participantEventBeanList.size());
             }
         }).execute();
 
