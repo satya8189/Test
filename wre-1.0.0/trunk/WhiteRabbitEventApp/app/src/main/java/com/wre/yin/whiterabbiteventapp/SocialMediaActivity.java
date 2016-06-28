@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.wre.yin.whiterabbiteventapp.beans.SocialMediaBean;
 import com.wre.yin.whiterabbiteventapp.utils.Callback;
 import com.wre.yin.whiterabbiteventapp.utils.Constants;
 import com.wre.yin.whiterabbiteventapp.utils.MyAsyncTask;
@@ -17,8 +18,8 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SocialMediaActivity extends AppCompatActivity {
-    private CircleImageView gPlus, faceBook, twitterBtn, linkedinBtn;
-    private String eventId, fb, gPlusStr, twitter, linkedIn;
+    private CircleImageView gPlus, faceBook, twitterBtn, linkedinBtn,flickerBtn,instagramBtn;
+    private String eventId, fb, gPlusStr, twitter, linkedIn,socialId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,12 +33,36 @@ public class SocialMediaActivity extends AppCompatActivity {
         faceBook = (CircleImageView) findViewById(R.id.btnFb);
         twitterBtn = (CircleImageView) findViewById(R.id.btnTwitter);
         linkedinBtn = (CircleImageView) findViewById(R.id.btnLinkedin);
+        flickerBtn= (CircleImageView) findViewById(R.id.btnFlicker);
+        instagramBtn=(CircleImageView) findViewById(R.id.btnInstagram);
         eventId = getIntent().getExtras().getString("eventId");
 
         new MyAsyncTask(Constants.SOCIAL_MEDIA_IDS + eventId, null, SocialMediaActivity.this, new Callback() {
             @Override
             public void onResult(String result) {
-                List<SocialMediaActivity> socialList = Utils.getList(result, SocialMediaActivity.class);
+                List<SocialMediaBean> socialList = Utils.getList(result, SocialMediaBean.class);
+                for(SocialMediaBean bean:socialList){
+                    if(bean.getType().equals("Facebook")){
+                        socialId=bean.getName();
+                        faceBook.setVisibility(View.VISIBLE);
+                    }else if(bean.getType().equals("Google+")){
+                        socialId=bean.getName();
+                        gPlus.setVisibility(View.VISIBLE);
+                    }else if(bean.getType().equals("Twitter")){
+                        socialId=bean.getName();
+                        twitterBtn.setVisibility(View.VISIBLE);
+                    }else if(bean.getType().equals("LinkedIn")){
+                        socialId=bean.getName();
+                        linkedinBtn.setVisibility(View.VISIBLE);
+                    }else if(bean.getType().equals("Flickr")){
+                        socialId=bean.getName();
+                        flickerBtn.setVisibility(View.VISIBLE);
+                    }else if(bean.getType().equals("Instagram")){
+                        socialId=bean.getName();
+                        instagramBtn.setVisibility(View.VISIBLE);
+                    }
+
+                }
 
             }
         }).execute();
@@ -49,7 +74,7 @@ public class SocialMediaActivity extends AppCompatActivity {
                 if (Constants.isNetworkAvailable(SocialMediaActivity.this)) {
                     Intent viewIntent =
                             new Intent("android.intent.action.VIEW",
-                                    Uri.parse("https://www.facebook.com/gunturanilkumar007"));
+                                    Uri.parse("https://www.facebook.com/"+socialId));
                     startActivity(viewIntent);
                 } else {
                     Constants.createDialogSend(SocialMediaActivity.this, "error", "Please connect to internet");
@@ -62,7 +87,7 @@ public class SocialMediaActivity extends AppCompatActivity {
                 if (Constants.isNetworkAvailable(SocialMediaActivity.this)) {
                     Intent viewIntent =
                             new Intent("android.intent.action.VIEW",
-                                    Uri.parse("https://plus.google.com/+anilkumarguntur"));
+                                    Uri.parse("https://plus.google.com/"+socialId));
                     startActivity(viewIntent);
                 } else {
                     Constants.createDialogSend(SocialMediaActivity.this, "error", "Please connect to internet");
@@ -77,7 +102,49 @@ public class SocialMediaActivity extends AppCompatActivity {
                 if (Constants.isNetworkAvailable(SocialMediaActivity.this)) {
                     Intent viewIntent =
                             new Intent("android.intent.action.VIEW",
-                                    Uri.parse("https://twitter.com/honyanil"));
+                                    Uri.parse("https://twitter.com/"+socialId));
+                    startActivity(viewIntent);
+                } else {
+                    Constants.createDialogSend(SocialMediaActivity.this, "error", "Please connect to internet");
+                }
+            }
+
+        });
+        linkedinBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (Constants.isNetworkAvailable(SocialMediaActivity.this)) {
+                    Intent viewIntent =
+                            new Intent("android.intent.action.VIEW",
+                                    Uri.parse("https://www.linkedin.com/in/"+socialId));
+                    startActivity(viewIntent);
+                } else {
+                    Constants.createDialogSend(SocialMediaActivity.this, "error", "Please connect to internet");
+                }
+            }
+
+        });
+        flickerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (Constants.isNetworkAvailable(SocialMediaActivity.this)) {
+                    Intent viewIntent =
+                            new Intent("android.intent.action.VIEW",
+                                    Uri.parse("https://twitter.com/"+socialId));
+                    startActivity(viewIntent);
+                } else {
+                    Constants.createDialogSend(SocialMediaActivity.this, "error", "Please connect to internet");
+                }
+            }
+
+        });
+        instagramBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (Constants.isNetworkAvailable(SocialMediaActivity.this)) {
+                    Intent viewIntent =
+                            new Intent("android.intent.action.VIEW",
+                                    Uri.parse("www.instagram.com/"+socialId));
                     startActivity(viewIntent);
                 } else {
                     Constants.createDialogSend(SocialMediaActivity.this, "error", "Please connect to internet");

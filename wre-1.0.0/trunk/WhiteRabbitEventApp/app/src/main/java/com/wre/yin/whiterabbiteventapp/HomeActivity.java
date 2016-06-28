@@ -55,14 +55,14 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
         mDemoSlider = (SliderLayout) findViewById(R.id.slider);
         mDemoSlider.setCustomIndicator((PagerIndicator) findViewById(R.id.custom_indicator));
         profDetails = (ImageView) findViewById(R.id.profile_details);
-        proFic = (ImageView) findViewById(R.id.profilepic);
+        proFic = (ImageView) findViewById(R.id.profile_home_pic);
         rl1 = (RelativeLayout) findViewById(R.id.rl1);
 
         partName = (TextView) findViewById(R.id.profile_name);
 
         partiName = prefs.getString("name", null);
         partId = prefs.getString("partId", null);
-
+        Picasso.with(getApplicationContext()).load("http://183.82.103.156:8080/Resources/wre/profile_pics/"+partId+"/profile.jpg").placeholder(R.drawable.user_icon).into(proFic);
         partName.setText(partiName);
 
         if (Constants.checkAndRequestPermissions(HomeActivity.this)) ;
@@ -86,7 +86,7 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
                 Palette.generateAsync(bitmap, new Palette.PaletteAsyncListener() {
                     public void onGenerated(Palette palette) {
                         // iView.setImageBitmap(bitmap);
-                        proFic.setImageBitmap(bitmap);
+                       // Picasso.with(getApplicationContext()).load("http://183.82.103.156:8080/Resources/wre/profile_pics/"+partId+"/profile.jpg").into(proFic);
                         int defaultColor = getResources().getColor(android.R.color.black);
                         rl1.setBackgroundColor(palette.getVibrantColor(defaultColor));
                     }
@@ -103,9 +103,7 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
 
             }
         };
-        Picasso.with(getApplicationContext())
-                .load(R.drawable.user_icon)
-                .into(target);
+
         if (Constants.isNetworkAvailable(HomeActivity.this)) {
             new MyAsyncTask(Constants.EVENT_LIST + "?participantId=" + partId, null, HomeActivity.this, new Callback() {
                 @Override
@@ -176,6 +174,8 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
         String date = slider.getBundle().get("date").toString();
         Intent i = new Intent(HomeActivity.this, EventDashboardActivity.class);
         editor.putString("eventId", eventName);
+        editor.putString("eventName",slider.getBundle().get("eventName").toString());
+        editor.putString("eventDate", date);
         editor.commit();
         i.putExtra("eventId", eventName);
         i.putExtra("date", date);

@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="15"
-        android:targetSdkVersion="23" />
+        android:targetSdkVersion="24" />
 
     <permission
         android:name="android.permission.ACCESS_COARSE_LOCATION"
@@ -179,6 +179,7 @@
         <activity android:name="com.wre.yin.whiterabbiteventapp.GalleryNewActivity" />
         <activity android:name="com.wre.yin.whiterabbiteventapp.NewGalImageDetails" />
         <activity android:name="com.wre.yin.whiterabbiteventapp.VideoPlayerActivity" />
+        <activity android:name="com.wre.yin.whiterabbiteventapp.DiscoTopics" />
         <!-- Include the AdActivity and InAppPurchaseActivity configChanges and themes. -->
         <activity
             android:name="com.google.android.gms.ads.AdActivity"

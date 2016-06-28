@@ -4,6 +4,7 @@ package com.wre.yin.whiterabbiteventapp.beans;
  * Created by root on 17/6/16.
  */
 public class SocialMediaBean {
+
     private Long socialId;
     private String name;
     private String url;

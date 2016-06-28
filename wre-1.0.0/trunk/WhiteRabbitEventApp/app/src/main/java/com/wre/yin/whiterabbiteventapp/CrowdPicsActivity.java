@@ -2,6 +2,7 @@ package com.wre.yin.whiterabbiteventapp;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -53,13 +54,15 @@ public class CrowdPicsActivity extends AppCompatActivity {
     private LinearLayout camGalLayout;
     private CircleImageView camPick, gallPick;
     private Uri fileUri;
-    private String imgPath, fileName, fileTpe, encodedString;
+    private String eventId,imgPath, fileName, fileTpe, encodedString,eventName,partName,fName;
     private GalleryUtils utils;
     private ArrayList<String> imagePaths = new ArrayList<String>();
     private GridViewImageAdapter adapter;
     private GridView gridView;
     private int columnWidth;
-    private String eventId;
+
+    private SharedPreferences prefs;
+
 
 
     @Override
@@ -68,6 +71,10 @@ public class CrowdPicsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_crowd_pics);
 
         String nameTxt = getIntent().getExtras().getString("name");
+        prefs = getSharedPreferences("Chat", 0);
+        partName=prefs.getString("name", null);
+        eventName=prefs.getString("eventName", null);
+
         prgDialog = new ProgressDialog(this);
         prgDialog.setCancelable(false);
         eventId = getIntent().getExtras().getString("eventId");
@@ -144,12 +151,12 @@ public class CrowdPicsActivity extends AppCompatActivity {
         }
 
         // Create a media file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss",
+        String timeStamp = new SimpleDateFormat("yyyyMMdd-HHmmss",
                 Locale.getDefault()).format(new Date());
         File mediaFile;
         if (type == MEDIA_TYPE_IMAGE) {
             mediaFile = new File(mediaStorageDir.getPath() + File.separator
-                    + "IMG_" + timeStamp + ".jpg");
+                    + "IMG-" + timeStamp + ".jpg");
         } else {
             return null;
         }
@@ -211,6 +218,10 @@ public class CrowdPicsActivity extends AppCompatActivity {
                     imgPath = fileUri.getPath();
                     String fileNameSegments[] = imgPath.split("/");
                     fileName = fileNameSegments[fileNameSegments.length - 1];
+                    String fileNameSeg[]=fileName.split("-");
+
+                    fName=eventName+"-"+partName+"-"+fileNameSeg[1]+"-"+new SimpleDateFormat("HHmmss",
+                            Locale.getDefault()).format(new Date());
                     // Put file name in Async Http Post Param which will used in Java web app
                     //params.put("filename", fileName);
                     uploadImageFromCam();
@@ -256,6 +267,10 @@ public class CrowdPicsActivity extends AppCompatActivity {
                     // Get the Image's file name
                     String fileNameSegments[] = imgPath.split("/");
                     fileName = fileNameSegments[fileNameSegments.length - 1];
+
+                    String fileNameSeg[]=fileName.split("-");
+                    fName=eventName+"-"+partName+"-"+fileNameSeg[1]+"-"+new SimpleDateFormat("HHmmss",
+                            Locale.getDefault()).format(new Date());
                     uploadImageFromCam();
                     // Put file name in Async Http Post Param which will used in Java web app
                     // params.put("filename", fileName);
@@ -329,20 +344,19 @@ public class CrowdPicsActivity extends AppCompatActivity {
                     prgDialog.dismiss();
                     GalaryBean uploadImgVid = new GalaryBean();
                     uploadImgVid.setEncodeString(encodedString);
-                    uploadImgVid.setName(fileName);
+                    uploadImgVid.setName(fName);
                     uploadImgVid.setType(fileTpe);
+                    uploadImgVid.setFileName(fileName);
                     uploadImgVid.setEventId(Long.parseLong(eventId));
                     if (Constants.isNetworkAvailable(CrowdPicsActivity.this)) {
                         new MyAsyncTask(Constants.UPLOAD_IMAGE_VIDEO, Utils.getJson(uploadImgVid), CrowdPicsActivity.this, new Callback() {
                             public void onResult(String result) {
-
-                                System.out.println("Result:" + result);
-                                /*if (result != null) {
-                                    Result res = Utils.getObject(result, Result.class);
-                                    if (res.getResult().equals("success")) {
-                                        Toast.makeText(CrowdPicsActivity.this, "Image upload successfull..", Toast.LENGTH_LONG).show();
-                                    }
-                                }*/
+                            String res=Utils.getString("result",result);
+                                if(res.equals("success")){
+                                    Constants.createDialogSend(CrowdPicsActivity.this,"success","Your image has been upload successfully..");
+                                }else{
+                                    Constants.createDialogSend(CrowdPicsActivity.this,"fail","Something went wrong please try again..");
+                                }
                             }
                         }).execute();
 

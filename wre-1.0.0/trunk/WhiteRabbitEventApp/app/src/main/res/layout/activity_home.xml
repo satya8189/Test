@@ -20,17 +20,17 @@
             android:src="@drawable/ic_account_circle" />
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profilepic"
+            android:id="@+id/profile_home_pic"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:src="@drawable/wre_logo" />
+             />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@+id/profilepic"
+            android:layout_toRightOf="@+id/profile_home_pic"
             android:orientation="vertical">
 
             <TextView

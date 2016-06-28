@@ -58,8 +58,8 @@ public class MessageActivity extends AppCompatActivity {
         String nameTxt = getIntent().getExtras().getString("name");
         //  text = (TextView) findViewById(R.id.activity_text);
 
-        /*getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(nameTxt);*/
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(nameTxt);
 
 
         // text.setText(nameTxt);
@@ -172,10 +172,23 @@ public class MessageActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
+                SharedPreferences.Editor edit = prefs.edit();
+
+                edit.putString("current_status", "");
+                edit.commit();
                 onBackPressed();
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        SharedPreferences.Editor edit = prefs.edit();
+
+        edit.putString("current_status", "");
+        edit.commit();
     }
 
     private StringBuilder inputStreamToString(InputStream is) {

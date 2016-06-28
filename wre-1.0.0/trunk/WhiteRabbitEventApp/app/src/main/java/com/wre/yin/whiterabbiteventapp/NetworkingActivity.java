@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.wre.yin.whiterabbiteventapp.beans.ParticipantEventBean;
 import com.wre.yin.whiterabbiteventapp.utils.Callback;
 import com.wre.yin.whiterabbiteventapp.utils.Constants;
@@ -113,6 +114,7 @@ public class NetworkingActivity extends AppCompatActivity {
             holder.partName.setText(partAdMap.get("partName"));
             holder.partPhone.setText(partAdMap.get("partPhone"));
             holder.cardView.setOnClickListener(clickListener);
+            Picasso.with(context).load("http://183.82.103.156:8080/Resources/wre/profile_pics/"+partAdMap.get("partId")+"/profile.jpg").placeholder(R.drawable.user_icon).into(holder.partProfileImg);
             holder.cardView.setTag(holder);
         }
 

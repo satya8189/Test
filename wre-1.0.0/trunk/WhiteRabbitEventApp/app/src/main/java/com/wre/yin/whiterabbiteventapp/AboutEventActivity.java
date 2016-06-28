@@ -3,8 +3,10 @@ package com.wre.yin.whiterabbiteventapp;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.wre.yin.whiterabbiteventapp.beans.EventBean;
 import com.wre.yin.whiterabbiteventapp.utils.Callback;
 import com.wre.yin.whiterabbiteventapp.utils.Constants;
@@ -15,6 +17,7 @@ public class AboutEventActivity extends AppCompatActivity {
     private TextView descAboutEvent;
     // private WebView webView;
     private String eventId;
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,11 +26,14 @@ public class AboutEventActivity extends AppCompatActivity {
 
         String nameTxt = getIntent().getExtras().getString("name");
         descAboutEvent = (TextView) findViewById(R.id.event_details_text);
+        imageView=(ImageView)findViewById(R.id.about_event_image) ;
+        eventId = getIntent().getExtras().getString("eventId");
+        Picasso.with(getApplicationContext()).load(Constants.IMAGE_URL +eventId + "/event_home/home.png").placeholder(R.drawable.user_icon).into(imageView);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(nameTxt);
-        eventId = getIntent().getExtras().getString("eventId");
-        new MyAsyncTask(Constants.ABOUT_EVENT + eventId, null, AboutEventActivity.this, new Callback() {
+
+        new MyAsyncTask(Constants.ABOUT_EVENT + eventId+"&type=app", null, AboutEventActivity.this, new Callback() {
             @Override
             public void onResult(String result) {
                 EventBean eventBean = Utils.getObject(result, EventBean.class);

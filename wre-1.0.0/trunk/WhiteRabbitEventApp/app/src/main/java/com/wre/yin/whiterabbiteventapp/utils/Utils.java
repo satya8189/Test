@@ -48,12 +48,12 @@ public class Utils {
     }
 
 
-    public static String getString(final String jsonString) {
+    public static String getString(final String keyString,final String jsonString) {
         JSONObject json = null;
         String res = null;
         try {
             json = new JSONObject(jsonString);
-            res = json.getString("result");
+            res = json.getString(keyString);
 
         } catch (JSONException e) {
             // TODO Auto-generated catch block

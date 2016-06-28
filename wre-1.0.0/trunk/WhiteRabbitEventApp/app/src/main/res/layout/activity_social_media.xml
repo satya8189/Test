@@ -9,76 +9,67 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
         android:orientation="horizontal"
         android:gravity="center"
-        android:layout_margin="4dp">
+        android:id="@+id/linearLayout"
+        android:layout_marginTop="166dp"
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:id="@+id/btnGplus"
             android:layout_margin="10dp"
-            android:src="@drawable/social_g_plus"/>
+            android:src="@drawable/social_g_plus"
+            android:visibility="gone"/>
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:id="@+id/btnFb"
             android:layout_margin="10dp"
+            android:visibility="gone"
             android:src="@drawable/social_f"/>
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_margin="10dp"
             android:id="@+id/btnTwitter"
+            android:visibility="gone"
             android:src="@drawable/social_twitter"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_below="@+id/linearLayout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_margin="10dp"
             android:id="@+id/btnLinkedin"
+            android:visibility="gone"
             android:src="@drawable/linkedin_circle"/>
-        <!--<Button
-            android:id="@+id/btnGplus"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_margin="5dp"
-            android:background="@drawable/layers_gplus_button_bg"
-            android:paddingBottom="10dp"
-            android:paddingLeft="40dp"
-            android:paddingRight="10dp"
-            android:paddingTop="10dp"
-            android:text="Connect with Google+"
-            android:textColor="#fff"
-            android:textSize="12sp" />
-
-        <Button
-            android:id="@+id/btnFb"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_margin="5dp"
-            android:background="@drawable/layers_fb_button_bg"
-            android:paddingBottom="10dp"
-            android:paddingLeft="40dp"
-            android:paddingRight="10dp"
-            android:paddingTop="10dp"
-            android:text="Connect with Facebook"
-
-            android:textColor="#fff"
-            android:textSize="12sp" />
-
-        <Button
-            android:id="@+id/btnTwitter"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_margin="5dp"
-            android:background="@drawable/layers_twitter_button_bg"
-            android:paddingBottom="10dp"
-            android:paddingLeft="50dp"
-            android:paddingRight="10dp"
-            android:paddingTop="10dp"
-            android:text="Connect with Twitter"
-            android:textColor="#fff"
-            android:textSize="12sp" />-->
+        <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_margin="10dp"
+        android:id="@+id/btnFlicker"
+            android:visibility="gone"
+        android:src="@drawable/flickr_icon"/>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_margin="10dp"
+            android:id="@+id/btnInstagram"
+            android:visibility="gone"
+            android:src="@drawable/instagram_logo"/>
     </LinearLayout>
 </RelativeLayout>

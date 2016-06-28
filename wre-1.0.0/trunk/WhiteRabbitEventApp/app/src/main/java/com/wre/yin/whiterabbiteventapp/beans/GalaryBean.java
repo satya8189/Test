@@ -6,6 +6,9 @@ import java.util.Date;
  * Created by root on 14/6/16.
  */
 public class GalaryBean {
+    private Long glaryItemId;
+
+
     private String name;
     private String path;
     private String type;
@@ -13,7 +16,24 @@ public class GalaryBean {
     private Long eventId;
     private String url;
     private String fileName;
-    private String encodeString;
+    private String  encodeString;
+    private Long participantId ;
+
+    public Long getParticipantId() {
+        return participantId;
+    }
+
+    public void setParticipantId(Long participantId) {
+        this.participantId = participantId;
+    }
+
+    public Long getGlaryItemId() {
+        return glaryItemId;
+    }
+
+    public void setGlaryItemId(Long glaryItemId) {
+        this.glaryItemId = glaryItemId;
+    }
 
     public String getName() {
         return name;

@@ -1,5 +1,6 @@
 package com.wre.yin.whiterabbiteventapp;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -12,7 +13,9 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -56,7 +59,7 @@ public class DetailsActivity extends AppCompatActivity {
 
     private Button yesButton, noButton, maybeButtun;
     private String eventId, partId;
-
+    private ImageView qrCodeImage;
     private SharedPreferences prefs;
 
 
@@ -78,8 +81,9 @@ public class DetailsActivity extends AppCompatActivity {
         inviteTime = (TextView) findViewById(R.id.invite_time);
         inviteDate = (TextView) findViewById(R.id.invite_date);
         inviteAddress = (TextView) findViewById(R.id.invite_address_text);
+        qrCodeImage=(ImageView)findViewById(R.id.invite_qr_image);
 
-        new MyAsyncTask(Constants.ABOUT_EVENT + eventId, null, DetailsActivity.this, new Callback() {
+        new MyAsyncTask(Constants.ABOUT_EVENT + eventId+"&type=app", null, DetailsActivity.this, new Callback() {
             @Override
             public void onResult(String result) {
 
@@ -181,7 +185,11 @@ public class DetailsActivity extends AppCompatActivity {
         new MyAsyncTask(Constants.PARTICIPANT_EVENT_STATUS, Utils.getJson(participantEventBean), DetailsActivity.this, new Callback() {
             @Override
             public void onResult(String result) {
-                System.out.println("Result:" + result);
+                String res=Utils.getString("result",result);
+                if(res.equals("suucess")){
+                    Toast.makeText(DetailsActivity.this,"Your status has been submitted successfully...",Toast.LENGTH_LONG).show();
+
+                }
             }
         }).execute();
     }
@@ -255,6 +263,8 @@ public class DetailsActivity extends AppCompatActivity {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
                 onBackPressed();
+                Intent i=new Intent(DetailsActivity.this,EventDashboardActivity.class);
+                startActivity(i);
                 return true;
         }
         return super.onOptionsItemSelected(item);

@@ -2,14 +2,23 @@ package com.wre.yin.whiterabbiteventapp.beans;
 
 public class ParticipantBean {
 
-    private Long participantId;
-    private String firstName;
+    private Long participantId ;
+    private String firstName ;
     private String lastName;
     private String emailId;
     private String OTP;
     private String phoneNumber;
     private String status;
     private String registerId;
+    private String Profile_Pic;
+
+    public String getProfile_Pic() {
+        return Profile_Pic;
+    }
+
+    public void setProfile_Pic(String profile_Pic) {
+        Profile_Pic = profile_Pic;
+    }
 
     public Long getParticipantId() {
         return participantId;

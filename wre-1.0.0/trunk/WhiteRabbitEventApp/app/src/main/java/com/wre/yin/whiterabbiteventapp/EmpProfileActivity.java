@@ -22,6 +22,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+import com.wre.yin.whiterabbiteventapp.beans.GalaryBean;
 import com.wre.yin.whiterabbiteventapp.beans.ParticipantBean;
 import com.wre.yin.whiterabbiteventapp.utils.Callback;
 import com.wre.yin.whiterabbiteventapp.utils.Constants;
@@ -68,9 +70,13 @@ public class EmpProfileActivity extends AppCompatActivity {
         prefs = getSharedPreferences("Chat", 0);
         partiName = prefs.getString("name", null);
         partId = prefs.getString("partId", null);
-
+        eventId= prefs.getString("eventId", null);
+        prgDialog = new ProgressDialog(this);
+        prgDialog.setCancelable(false);
         // eventId = getIntent().getExtras().getString("eventId");
         empProfilePic = (ImageView) findViewById(R.id.emp_profile_image);
+
+        Picasso.with(EmpProfileActivity.this).load("http://183.82.103.156:8080/Resources/wre/profile_pics/"+partId+"/profile.jpg").placeholder(R.drawable.user_icon).into(empProfilePic);
 
         empName = (EditText) findViewById(R.id.emp_name);
         empMail = (EditText) findViewById(R.id.emp_mail);
@@ -289,7 +295,7 @@ public class EmpProfileActivity extends AppCompatActivity {
             prgDialog.setMessage("Converting Image to Binary Data");
             prgDialog.show();
             // Convert image to String using Base64
-            fileTpe = "image";
+            fileTpe = "profile_pics";
             encodeImagetoString();
             // When Image is not selected from Gallery
         } else {
@@ -312,7 +318,7 @@ public class EmpProfileActivity extends AppCompatActivity {
                 @Override
                 protected String doInBackground(Void... params) {
 
-                    if (fileTpe.equals("image")) {
+                    if (fileTpe.equals("profile_pics")) {
                         BitmapFactory.Options options = null;
                         options = new BitmapFactory.Options();
                         options.inSampleSize = 3;
@@ -336,28 +342,29 @@ public class EmpProfileActivity extends AppCompatActivity {
                     // Trigger Image upload
                     //triggerImageUpload();
                     prgDialog.dismiss();
-                    /*GalaryBean uploadImgVid = new GalaryBean();
+                    GalaryBean uploadImgVid = new GalaryBean();
                     uploadImgVid.setEncodeString(encodedString);
                     uploadImgVid.setName(fileName);
                     uploadImgVid.setType(fileTpe);
                     uploadImgVid.setEventId(Long.parseLong(eventId));
+                    uploadImgVid.setParticipantId(Long.parseLong(partId));
                     if (Constants.isNetworkAvailable(EmpProfileActivity.this)) {
-                        new MyAsyncTask(Constants.UPLOAD_IMAGE_VIDEO, Utils.getJson(uploadImgVid), EmpProfileActivity.this, new Callback() {
+                        new MyAsyncTask(Constants.PROFILE_PIC_UPLOAD, Utils.getJson(uploadImgVid), EmpProfileActivity.this, new Callback() {
                             public void onResult(String result) {
 
                                 System.out.println("Result:"+result);
-                                *//*if (result != null) {
-                                    Result res = Utils.getObject(result, Result.class);
-                                    if (res.getResult().equals("success")) {
-                                        Toast.makeText(CrowdPicsActivity.this, "Image upload successfull..", Toast.LENGTH_LONG).show();
+                                if (result != null) {
+                                    String res = Utils.getString("result",result);
+                                    if (res.equals("success")) {
+                                        Picasso.with(EmpProfileActivity.this).load("http://183.82.103.156:8080/Resources/wre/profile_pics/"+partId+"/profile.jpg").placeholder(R.drawable.user_icon).into(empProfilePic);
                                     }
-                                }*//*
+                                }
                             }
                         }).execute();
 
                     } else {
                         Constants.createDialogSend(EmpProfileActivity.this, "error", "Please connect to internet");
-                    }*/
+                    }
                 }
             }.execute(null, null, null);
         } else {
@@ -371,6 +378,7 @@ public class EmpProfileActivity extends AppCompatActivity {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
                 onBackPressed();
+                finish();
                 return true;
         }
         return super.onOptionsItemSelected(item);

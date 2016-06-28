@@ -5,9 +5,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
+import com.squareup.picasso.Picasso;
+import com.wre.yin.whiterabbiteventapp.utils.Constants;
+
 public class VenueActivity extends AppCompatActivity {
 
     private ImageView venueImage;
+    private String eventId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,8 +24,8 @@ public class VenueActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(nameTxt);
 
-
-        venueImage.setBackgroundResource(R.drawable.layout_pic);
+        eventId = getIntent().getExtras().getString("eventId");
+        Picasso.with(getApplicationContext()).load(Constants.IMAGE_URL +eventId + "/layout/layout.png").placeholder(R.drawable.user_icon).into(venueImage);
 
     }
 

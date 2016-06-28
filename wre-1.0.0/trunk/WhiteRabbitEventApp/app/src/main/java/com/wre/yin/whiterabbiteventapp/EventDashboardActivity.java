@@ -67,13 +67,15 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
         getSupportActionBar().hide();
         prefs = getSharedPreferences("Chat", 0);
         partId = prefs.getString("partId", null);
-
+        eventId = prefs.getString("eventId", null);
+        eventDate = prefs.getString("eventDate", null);
+        eventName = prefs.getString("eventName", null);
         if (Constants.checkAndRequestPermissions(this)) {
 
         }
-        eventId = getIntent().getExtras().getString("eventId");
+        /*eventId = getIntent().getExtras().getString("eventId");
         eventDate = getIntent().getExtras().getString("date");
-        eventName = getIntent().getExtras().getString("eventName");
+        eventName = getIntent().getExtras().getString("eventName");*/
 
         galleryList = new ArrayList<>();
 
@@ -89,7 +91,7 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
             public void onResult(String result) {
                 if (result.equals("Yes")) {
                     attendStatus.setText("I will attend");
-                    attendStatus.setTextColor(Color.GREEN);
+                    attendStatus.setTextColor(Color.BLUE);
                 } else if (result.equals("No")) {
                     attendStatus.setText("I will not attend");
                     attendStatus.setTextColor(Color.RED);
@@ -147,10 +149,13 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
             public void onResult(String result) {
                 List<EventBean> eventBeenList = Utils.getList(result, EventBean.class);
                 gridArray.add(new Item(2, "Invite"));
+                EventBean evBean = eventBeenList.get(eventBeenList.size() - 1);
+
                 for (EventBean bean : eventBeenList) {
-                    /*if (bean.getServiceId() == 19)
-                        gridArray.add(new Item(16, "Help"));*/
+
                     if (bean.getOrder() < 17) {
+                        if (bean.getOrder() == 5 && evBean.getServiceId() == 21)
+                            gridArray.add(new Item(18, evBean.getServiceName()));
                         if (bean.getServiceId() != 17)
                             gridArray.add(new Item((int) (long) bean.getOrder(), bean.getServiceName()));
                     }
@@ -206,6 +211,14 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
                                 break;
                             case 5:
                                 if (Constants.checkAndRequestPermissions(EventDashboardActivity.this)) {
+                                    Intent crowdAct = new Intent(EventDashboardActivity.this, GalleryNewActivity.class);
+                                    crowdAct.putExtra("name", name);
+                                    crowdAct.putExtra("eventId", eventId);
+                                    startActivity(crowdAct);
+                                }
+                                break;
+                            case 18:
+                                if (Constants.checkAndRequestPermissions(EventDashboardActivity.this)) {
                                     Intent crowdAct = new Intent(EventDashboardActivity.this, CrowdPicsActivity.class);
                                     crowdAct.putExtra("name", name);
                                     crowdAct.putExtra("eventId", eventId);
@@ -234,7 +247,7 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
                                 startActivity(qaAct);
                                 break;
                             case 8:
-                                Intent messageAct = new Intent(EventDashboardActivity.this, MessageActivity.class);
+                                Intent messageAct = new Intent(EventDashboardActivity.this, DiscoTopics.class);
                                 messageAct.putExtra("name", name);
                                 messageAct.putExtra("eventId", eventId);
                                 startActivity(messageAct);
@@ -440,5 +453,11 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
         );
         AppIndex.AppIndexApi.end(client, viewAction);
         client.disconnect();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        
     }
 }

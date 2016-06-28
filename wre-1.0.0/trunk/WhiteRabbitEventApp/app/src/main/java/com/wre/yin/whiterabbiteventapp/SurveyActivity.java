@@ -10,10 +10,12 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.wre.yin.whiterabbiteventapp.beans.QuestionAnswer;
 import com.wre.yin.whiterabbiteventapp.beans.QuestionBean;
 import com.wre.yin.whiterabbiteventapp.utils.Callback;
 import com.wre.yin.whiterabbiteventapp.utils.Constants;
@@ -31,6 +33,8 @@ public class SurveyActivity extends AppCompatActivity {
     private List<HashMap<String, String>> listQtns;
     private String partId, eventId;
     SharedPreferences prefs;
+    List<QuestionAnswer> qAndA=new ArrayList<>();
+    private Button submitBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +50,25 @@ public class SurveyActivity extends AppCompatActivity {
         prefs = getSharedPreferences("Chat", 0);
         eventId = getIntent().getExtras().getString("eventId");
         partId = prefs.getString("partId", null);
+        submitBtn=(Button)findViewById(R.id.survey_total_submit);
+
+        submitBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                QuestionBean questionBean = new QuestionBean();
+                questionBean.setEventId(Long.parseLong(eventId));
+                questionBean.setParticipantId(Long.parseLong(partId));
+                questionBean.setqAList(qAndA);
+                new MyAsyncTask(Constants.QUESTIONS_ANSWER_SAVE, Utils.getJson(questionBean), SurveyActivity.this, new Callback() {
+                    @Override
+                    public void onResult(String result) {
+                        System.out.println("Result in text:" + result);
+                    }
+                }).execute();
+
+            }
+        });
+
 
         if (Constants.isNetworkAvailable(SurveyActivity.this)) {
             new MyAsyncTask(Constants.QUESTIONS_LIST + eventId, null, SurveyActivity.this, new Callback() {
@@ -108,17 +131,12 @@ public class SurveyActivity extends AppCompatActivity {
                     if (answer.equals("")) {
                         Toast.makeText(context, "Please give a answer.. ", Toast.LENGTH_LONG).show();
                     } else {
-                        QuestionBean questionBean = new QuestionBean();
-                        questionBean.setEventId(Long.parseLong(eventId));
-                        questionBean.setParticipantId(Long.parseLong(partId));
-                        questionBean.setQuestionId(Long.parseLong(map1.get("qtnId")));
-                        questionBean.setAnswer(answer);
-                        new MyAsyncTask(Constants.QUESTIONS_ANSWER_SAVE, Utils.getJson(questionBean), SurveyActivity.this, new Callback() {
-                            @Override
-                            public void onResult(String result) {
-                                System.out.println("Result in text:" + result);
-                            }
-                        }).execute();
+                        /**/
+                        QuestionAnswer qa=new QuestionAnswer();
+                        qa.setqId(Long.parseLong(map1.get("qtnId")));
+                        qa.setAnswer(answer);
+                        qAndA.add(qa);
+
                     }
                 } else {
                     int index = vholder.rdGrp.getCheckedRadioButtonId();
@@ -134,7 +152,7 @@ public class SurveyActivity extends AppCompatActivity {
                     } else if (vholder.opt4.isChecked()) {
                         answer = vholder.opt4.getText().toString();
                     }
-                    QuestionBean questionBean = new QuestionBean();
+                    /*QuestionBean questionBean = new QuestionBean();
                     questionBean.setEventId(Long.parseLong(eventId));
                     questionBean.setParticipantId(Long.parseLong(partId));
                     questionBean.setQuestionId(Long.parseLong(map1.get("qtnId")));
@@ -144,7 +162,11 @@ public class SurveyActivity extends AppCompatActivity {
                         public void onResult(String result) {
                             System.out.println("Result in radio:" + result);
                         }
-                    }).execute();
+                    }).execute();*/
+                    QuestionAnswer qa=new QuestionAnswer();
+                    qa.setqId(Long.parseLong(map1.get("qtnId")));
+                    qa.setAnswer(answer);
+                    qAndA.add(qa);
                 }
 
             }

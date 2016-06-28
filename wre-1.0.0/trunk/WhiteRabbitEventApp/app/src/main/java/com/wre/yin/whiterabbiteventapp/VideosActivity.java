@@ -3,6 +3,7 @@ package com.wre.yin.whiterabbiteventapp;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.media.MediaMetadataRetriever;
@@ -68,7 +69,7 @@ public class VideosActivity extends AppCompatActivity {
     private LinearLayout camGalLayout;
     private CircleImageView camPick, gallPick;
     private Uri fileUri;
-    private String vidPath, fileName, fileTpe, encodedString;
+    private String vidPath, fileName, fileTpe, encodedString,eventName,partName,fName;
     //flag for which one is used for images selection
     private GridView _gallery;
     private Cursor _cursor;
@@ -77,7 +78,70 @@ public class VideosActivity extends AppCompatActivity {
     private Uri _contentUri;
     private String eventId;
     private List<HashMap<String, String>> mGridData;
+    private SharedPreferences prefs;
 
+
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        _context = getApplicationContext();
+        setContentView(R.layout.activity_videos);
+
+        String nameTxt = getIntent().getExtras().getString("name");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(nameTxt);
+        eventId = getIntent().getExtras().getString("eventId");
+        prefs = getSharedPreferences("Chat", 0);
+        partName=prefs.getString("name", null);
+        eventName=prefs.getString("eventName", null);
+
+        prgDialog = new ProgressDialog(this);
+        prgDialog.setCancelable(false);
+
+        _gallery = (GridView) findViewById(R.id.upload_video_grid);
+        _contentUri = MEDIA_EXTERNAL_CONTENT_URI;
+
+        initVideosId();
+        setGalleryAdapter();
+
+        uploadVideo = (Button) findViewById(R.id.upload_video);
+        camGalLayout = (LinearLayout) findViewById(R.id.upload_video_view);
+        camPick = (CircleImageView) findViewById(R.id.video_camara_link);
+        gallPick = (CircleImageView) findViewById(R.id.video_gallery_link);
+        uploadVideo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (layoutStatus.equals("gone")) {
+                    camGalLayout.setVisibility(View.VISIBLE);
+                    layoutStatus = "visible";
+                } else {
+                    camGalLayout.setVisibility(View.GONE);
+                    layoutStatus = "gone";
+                }
+
+            }
+        });
+        camPick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recordVideo();
+                camGalLayout.setVisibility(View.GONE);
+                layoutStatus = "gone";
+            }
+        });
+        gallPick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadVideofromGallery();
+                camGalLayout.setVisibility(View.GONE);
+                layoutStatus = "gone";
+            }
+        });
+
+
+    }
 
     private AdapterView.OnItemClickListener _itemClickLis = new AdapterView.OnItemClickListener() {
         public void onItemClick(AdapterView parent, View v, int position, long id) {
@@ -135,75 +199,17 @@ public class VideosActivity extends AppCompatActivity {
         }
 
         // Create a media file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss",
+        String timeStamp = new SimpleDateFormat("yyyyMMdd-HHmmss",
                 Locale.getDefault()).format(new Date());
         File mediaFile;
         if (type == MEDIA_TYPE_VIDEO) {
             mediaFile = new File(mediaStorageDir.getPath() + File.separator
-                    + "VID_" + timeStamp + ".mp4");
+                    + "VID-" + timeStamp + ".mp4");
         } else {
             return null;
         }
 
         return mediaFile;
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        _context = getApplicationContext();
-        setContentView(R.layout.activity_videos);
-
-        String nameTxt = getIntent().getExtras().getString("name");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(nameTxt);
-        eventId = getIntent().getExtras().getString("eventId");
-
-
-        prgDialog = new ProgressDialog(this);
-        prgDialog.setCancelable(false);
-
-        _gallery = (GridView) findViewById(R.id.upload_video_grid);
-        _contentUri = MEDIA_EXTERNAL_CONTENT_URI;
-
-        initVideosId();
-        setGalleryAdapter();
-
-        uploadVideo = (Button) findViewById(R.id.upload_video);
-        camGalLayout = (LinearLayout) findViewById(R.id.upload_video_view);
-        camPick = (CircleImageView) findViewById(R.id.video_camara_link);
-        gallPick = (CircleImageView) findViewById(R.id.video_gallery_link);
-        uploadVideo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (layoutStatus.equals("gone")) {
-                    camGalLayout.setVisibility(View.VISIBLE);
-                    layoutStatus = "visible";
-                } else {
-                    camGalLayout.setVisibility(View.GONE);
-                    layoutStatus = "gone";
-                }
-
-            }
-        });
-        camPick.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                recordVideo();
-                camGalLayout.setVisibility(View.GONE);
-                layoutStatus = "gone";
-            }
-        });
-        gallPick.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loadVideofromGallery();
-                camGalLayout.setVisibility(View.GONE);
-                layoutStatus = "gone";
-            }
-        });
-
-
     }
 
     private void initVideosId() {
@@ -247,11 +253,13 @@ public class VideosActivity extends AppCompatActivity {
             public void onResult(String result) {
                 mGridData = new ArrayList<HashMap<String, String>>();
                 List<GalaryBean> docBeanList= Utils.getList(result,GalaryBean.class);
-                for(GalaryBean bean:docBeanList){
-                    HashMap<String,String> map=new HashMap<String, String>();
-                    map.put("fileName",bean.getName());
-                    map.put("videoUrl",Constants.IMAGE_URL+eventId+"/video/"+bean.getFileName());
-                    mGridData.add(map);
+                if(docBeanList!=null) {
+                    for (GalaryBean bean : docBeanList) {
+                        HashMap<String, String> map = new HashMap<String, String>();
+                        map.put("fileName", bean.getName());
+                        map.put("videoUrl", Constants.IMAGE_URL + eventId + "/video/" + bean.getFileName());
+                        mGridData.add(map);
+                    }
                 }
                 CustomVideosGridAdaptor  videosAdapter = new CustomVideosGridAdaptor(VideosActivity.this, R.layout.videos_row_grid, (ArrayList<HashMap<String, String>>) mGridData);
                 _gallery.setAdapter(videosAdapter);
@@ -317,7 +325,10 @@ public class VideosActivity extends AppCompatActivity {
                     String fileNameSegments[] = vidPath.split("/");
                     fileName = fileNameSegments[fileNameSegments.length - 1];
                     // Put file name in Async Http Post Param which will used in Java web app
+                    String fileNameSeg[]=fileName.split("-");
 
+                    fName=eventName+"-"+partName+"-"+fileNameSeg[1]+"-"+new SimpleDateFormat("HHmmss",
+                            Locale.getDefault()).format(new Date());
                     uploadVideoFromCam();
                     System.out.println("Camara video path" + fileUri.getPath());
 
@@ -352,15 +363,12 @@ public class VideosActivity extends AppCompatActivity {
                     int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                     vidPath = cursor.getString(columnIndex);
                     cursor.close();
-                    /*ImageView imgView = (ImageView) findViewById(R.id.imgView);
-                    // Set the Image in ImageView
-					imgView.setImageBitmap(BitmapFactory
-							.decodeFile(imgPath));*/
-                    // Get the Image's file name
                     String fileNameSegments[] = vidPath.split("/");
                     fileName = fileNameSegments[fileNameSegments.length - 1];
-                    // Put file name in Async Http Post Param which will used in Java web app
+                    String fileNameSeg[]=fileName.split("-");
 
+                    fName=eventName+"-"+partName+"-"+fileNameSeg[1]+"-"+new SimpleDateFormat("HHmmss",
+                            Locale.getDefault()).format(new Date());
                     uploadVideoFromCam();
 
                 } else {
@@ -425,6 +433,7 @@ public class VideosActivity extends AppCompatActivity {
                 // Put converted Image string into Async Http Post param
                 prgDialog.dismiss();
                 GalaryBean uploadImgVid = new GalaryBean();
+                uploadImgVid.setName(fName);
                 uploadImgVid.setEncodeString(encodedString);
                 uploadImgVid.setFileName(fileName);
                 uploadImgVid.setType(fileTpe);

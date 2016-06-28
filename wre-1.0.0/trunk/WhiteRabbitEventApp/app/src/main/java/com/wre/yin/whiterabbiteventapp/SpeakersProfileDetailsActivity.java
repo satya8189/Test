@@ -1,6 +1,7 @@
 package com.wre.yin.whiterabbiteventapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
@@ -8,9 +9,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
+import com.wre.yin.whiterabbiteventapp.beans.RatingBean;
 import com.wre.yin.whiterabbiteventapp.beans.SpeakerBean;
 import com.wre.yin.whiterabbiteventapp.utils.Callback;
 import com.wre.yin.whiterabbiteventapp.utils.Constants;
@@ -24,8 +25,9 @@ public class SpeakersProfileDetailsActivity extends AppCompatActivity {
     private TextView speakerName, spDesc, spDesig, spLocation, askQuestion;
     private ImageView spProfilePic;
     private RatingBar spRating;
-    private String spId, spName, spUrl;
+    private String spId, spName, spUrl,eventId,partId;
     private CircleImageView spImage;
+    private SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,10 @@ public class SpeakersProfileDetailsActivity extends AppCompatActivity {
         spId = getIntent().getExtras().getString("speakerId");
         spName = getIntent().getExtras().getString("speakerName");
         spUrl = getIntent().getExtras().getString("speakerUrl");
+        eventId = getIntent().getExtras().getString("eventId");
+
+        prefs = getSharedPreferences("Chat", 0);
+        partId=prefs.getString("partId", null);
 
         spDesig = (TextView) findViewById(R.id.speaker_desig);
         spLocation = (TextView) findViewById(R.id.sp_location);
@@ -49,7 +55,21 @@ public class SpeakersProfileDetailsActivity extends AppCompatActivity {
 
             public void onRatingChanged(RatingBar ratingBar, float rating,  boolean fromUser) {
 
-                Toast.makeText(getApplicationContext(),(String.valueOf(rating)),Toast.LENGTH_LONG).show();
+                String rate=String.valueOf(rating);
+                if(!rate.equals("")){
+                    RatingBean ratingBean=new RatingBean();
+                    ratingBean.setEventId(Long.parseLong(eventId));
+                    ratingBean.setRating(Float.parseFloat(rate));
+                    ratingBean.setSourceId(Long.parseLong(spId));
+                    ratingBean.setUserId(Long.parseLong(partId));
+
+                    new MyAsyncTask(Constants.SPEAKER_RATING, Utils.getJson(ratingBean), SpeakersProfileDetailsActivity.this, new Callback() {
+                        @Override
+                        public void onResult(String result) {
+                            System.out.println(result);
+                        }
+                    }).execute();
+                }
 
             }
         });

@@ -1,5 +1,7 @@
 package com.wre.yin.whiterabbiteventapp.beans;
 
+import java.util.List;
+
 /**
  * Created by YINSOL on 6/1/2016.
  */
@@ -16,6 +18,15 @@ public class QuestionBean {
     private String answer;
     private String appIdentifierName;
     private Long participantId;
+    private List<QuestionAnswer> qAList;
+
+    public List<QuestionAnswer> getqAList() {
+        return qAList;
+    }
+
+    public void setqAList(List<QuestionAnswer> qAList) {
+        this.qAList = qAList;
+    }
 
     public Long getParticipantId() {
         return participantId;

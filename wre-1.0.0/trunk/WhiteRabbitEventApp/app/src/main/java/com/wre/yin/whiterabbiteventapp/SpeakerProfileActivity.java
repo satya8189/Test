@@ -33,6 +33,7 @@ public class SpeakerProfileActivity extends AppCompatActivity {
     private RecyclerViewAdapter rcAdapter;
     private List<HashMap<String, String>> speakersList;
     private RecyclerView rView;
+    private String eventId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +41,7 @@ public class SpeakerProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_speaker_profile);
 
         String nameTxt = getIntent().getExtras().getString("name");
-        final String eventId = getIntent().getExtras().getString("eventId");
+         eventId= getIntent().getExtras().getString("eventId");
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(nameTxt);
@@ -129,6 +130,7 @@ public class SpeakerProfileActivity extends AppCompatActivity {
                 i.putExtra("speakerId", map1.get("speakerId"));
                 i.putExtra("speakerName", map1.get("speakersName"));
                 i.putExtra("speakerUrl", map1.get("speakerUrl"));
+                i.putExtra("eventId",eventId);
                 startActivity(i);
             }
         };

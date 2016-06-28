@@ -40,7 +40,7 @@ public class Constants {
     // Permissions for Marshmallow
     public static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 1;
     //url constants
-    public static String URL1 = "http://192.168.1.39:8080/whiterabbitevent/admin/";
+    public static String URL1 = "http://192.168.1.8:8080/whiterabbitevent/admin/";
 
     public static String URL2 = "http://192.168.1.85:8080/Chatting/rest/chat/";
 
@@ -69,6 +69,10 @@ public class Constants {
     public static final String ATTENDENCE_STATUS = URL + "getEventParticipantStatus?eventId=";
     public static final String SPEAKER_QUERY = URL + "participantQueriesSave";
     public static final String SOCIAL_MEDIA_IDS = URL + "getSocialMediaList?eventId=";
+    public static final String PROFILE_PIC_UPLOAD = URL + "profileUpload";
+    public static final String SPEAKER_RATING = URL + "saveUserRating";
+    public static final String CHAT_TOPICS_LIST = URL + "chatTopicList?eventId=";
+
 
     //Image Gallery file path constansts
     public static String PARTICIPENT_URL = "http://183.82.103.156:8080/whiterabbitevent/";
@@ -77,7 +81,7 @@ public class Constants {
     public static String SYSTEM_URL = "http://183.82.103.156:8080/whiterabbitevent/systemadmin/";
     public static final String EVENT_LIST = SYSTEM_URL + "getParticipantEventList";
 
-    public static final String UPLOAD_IMAGE_VIDEO = URL1 + "imageUpload";
+    public static final String UPLOAD_IMAGE_VIDEO = URL + "imageUpload";
 
     public static boolean isNetworkAvailable(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
