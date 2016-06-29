@@ -18,7 +18,7 @@ border: 1px solid #588CC0;
 	</a> 
 	
 <div class="panel">
- <div class="panel-heading text-center font-size-20 padding-15 headbg">Event Image sUpload</div>
+ <div class="panel-heading text-center font-size-20 padding-15 headbg">Event Images Upload</div>
   <div class="panel-body text-center">
    <div>&nbsp;</div>
 	 <div class="col-md-12">
@@ -44,7 +44,7 @@ border: 1px solid #588CC0;
 <div>&nbsp;</div>
              <div class="col-md-10 col-md-offset-1">
                  <div>&nbsp;</div>
-                   <div class="heading-with-icon">Workspace Images</div>
+                   <div class="heading-with-icon"><h3>{{event.eventName}}</h3>&nbsp;&nbsp; Images</div>
                          <div>&nbsp;</div>
                          <div class="upload-image  col-md-3" ng-if="eventImages.length>0" ng-repeat="image in eventImages">
                                  <!-- URL: {{image.url}} -->
