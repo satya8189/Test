@@ -1,48 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:padding="16dp"
     tools:context="com.wre.yin.whiterabbiteventapp.SponcersProfileActivity">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/sponsor_indi_pic"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:src="@drawable/user_icon" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/sponcers_name_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/sponcers_des_text"
-        android:layout_alignStart="@+id/sponcers_des_text"
-        android:layout_alignTop="@+id/sponsor_indi_pic"
-        android:layout_marginTop="36dp"
-        android:text="Sponcers Name" />
+        <LinearLayout
+            android:id="@+id/ll1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/sponcers_des_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/sponcers_name_text"
-        android:layout_marginTop="39dp"
-        android:layout_toEndOf="@+id/sponsor_indi_pic"
-        android:layout_toRightOf="@+id/sponsor_indi_pic"
-        android:text="Sponcers Desig" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/sponsor_indi_pic"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/user_icon" />
 
-    <TextView
-        android:id="@+id/about_sponcer_txt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/sponsor_indi_pic"
-        android:layout_marginTop="41dp"
-        android:text="About Sponcers " />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@+id/sponsor_indi_pic"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:padding="10dp">
 
-</RelativeLayout>
+                <TextView
+                    android:id="@+id/sponcers_name_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sponcers Name" />
+
+                <TextView
+                    android:id="@+id/sponcers_des_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="Sponcers Desig" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/about_sponcer_txt"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/ll1"
+            android:layout_marginTop="20dp"
+            android:text="About Sponcers " />
+    </RelativeLayout>
+</ScrollView>
