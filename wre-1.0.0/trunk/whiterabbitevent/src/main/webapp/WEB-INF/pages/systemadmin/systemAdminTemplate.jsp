@@ -40,8 +40,26 @@
     <script src="resources/js/systemadmin/EventViewController.js"></script>
     <!-- To view the list of services -->
     <script src="resources/js/systemadmin/ServiceViewController.js"></script>
-     
-      
+<!--  admin services ViewDetails starts     -->
+    <script src="resources/js/admin/AgendoViewController.js"></script>
+    <script src="resources/js/admin/DetailsViewController.js"></script>
+    <script src="resources/js/admin/NewsFeedViewController.js"></script>
+    <script src="resources/js/admin/GalleryViewController.js"></script>
+    <script src="resources/js/admin/VideoViewController.js"></script>
+    <script src="resources/js/admin/DocumentViewController.js"></script>
+    <script src="resources/js/admin/QuestionAndAnswersViewController.js"></script>
+    <script src="resources/js/admin/ViewParticipantAnswersController.js"></script>
+    <script src="resources/js/admin/SocialMediaController.js"></script>
+    <script src="resources/js/admin/NetworkingViewController.js"></script>
+	<script src="resources/js/admin/SpeakerProfileViewController.js"></script>
+	<script src="resources/js/admin/SponsorPageViewController.js"></script>
+	<script src="resources/js/admin/QuestionViewController.js"></script>
+	<script src="resources/js/admin/InviteController.js"></script>
+   <script src="resources/js/admin/InviteListController.js"></script> 
+   <script src="resources/js/admin/ChatTopicListViewController.js"></script> 
+  <script src="resources/js/admin/EventViewDetailsController.js"></script>  
+    
+<!--  admin services ViewDetails ends     -->  
   	<script type="text/javascript" src="resources/js/multiselect/select2.js"></script>
 	<script type="text/javascript"  src="resources/js/multiselect/select2.min.js"></script>
 	 <link rel="stylesheet" href="resources/js/multiselect/select2.min.css">
