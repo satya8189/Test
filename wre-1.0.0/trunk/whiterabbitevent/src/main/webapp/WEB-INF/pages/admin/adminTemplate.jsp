@@ -6,6 +6,7 @@
 <c:set var="firstName" value="${USER.firstName}" scope="session" />
 <c:set var="lastName" value="${USER.lastName}" scope="session" />
 <c:set var="userId" value="${USER.userId}" scope="session" />
+
   <title>WHITE RABBIT EVENT</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
