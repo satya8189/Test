@@ -337,7 +337,7 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 			eventBeanOject.setEventDesc(eventOject.getEventDesc());
 			eventBeanOject.setEventName(eventOject.getEventName());
 			if("app".equals(type)){
-			eventBeanOject.setDate(eventOject.getEventDate().toString());
+				eventBeanOject.setDate(eventOject.getEventDate().toString());
 			}else{
 				eventBeanOject.setEventDate(eventOject.getEventDate());
 			}
@@ -1242,7 +1242,7 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 			List<QuestionAnswerBean> questionAnswerBeanList=questionBean.getqAList();
 			
 			log.info("QuestionAnswerBean List Size"+questionAnswerBeanList.size());
-			long s=0,k;
+			//long s=0,k;
 			if(questionAnswerBeanList.size()>0){
 			for(QuestionAnswerBean questionAnswerBean:questionAnswerBeanList){
 				//put the below login here

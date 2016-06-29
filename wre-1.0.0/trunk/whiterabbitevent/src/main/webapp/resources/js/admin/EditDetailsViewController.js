@@ -1,13 +1,11 @@
 var EditDetailsViewController = function($scope, $http, $location, $routeParams,ngNotifier) {
-	
 	$scope.event={};
-
-			    
-		$scope.$on("$routeChangeSuccess", function() {
-		
-		$http.get('admin/Viewdetails?eventId='+$routeParams.eventId).success(function(event) {
+	$scope.eventId=$routeParams.eventId;
+	//alert("eventId."+$scope.eventId);
+	
+	$scope.$on("$routeChangeSuccess", function() {
+			$http.get('admin/Viewdetails?eventId='+$routeParams.eventId+'&&type='+"web").success(function(event) {
 			$scope.event=event;
-					
 				});
 	});
 		
@@ -17,7 +15,7 @@ var EditDetailsViewController = function($scope, $http, $location, $routeParams,
 						location.href="#/detailsView/"+event.eventId;
 						ngNotifier.notify("Event Updated Successfully.!");
 				}).error(function(){
-					ngNotifier.error("Error in updating.!");
+						ngNotifier.error("Error in updating.!");
 				});
 			};
 	      

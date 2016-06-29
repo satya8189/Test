@@ -348,9 +348,6 @@ App.directive('format', function ($filter) {
         }
     };
 }).controller('InputCtrl', function($scope) {
-
-//$scope.mynum1 = 50000000;
-//$scope.mynum2 = 50000000;
 });
 
 //to validate the file for image/document/video upload

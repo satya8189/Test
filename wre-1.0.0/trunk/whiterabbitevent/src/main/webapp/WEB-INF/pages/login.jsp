@@ -79,16 +79,15 @@ margin-left: 24px;
 <div class="container">
 <div class="panel">
 <div class="h3 text-center" style="margin-top: 5%;padding-bottom: 16px;">Login</div>
-    <c:if test="${not empty error}">
-<div class="alert alert-danger">
-   <a href="#" class="close" data-dismiss="alert" aria-label="Close">
-      &times;
-   </a>
-${error}
-</div>
-</c:if>
+    <%-- <c:if test="${not empty error}"> --%>
+    <c:if test="${error ne '' && error ne null}">
+		<div class="alert alert-danger">
+   			<a href="#" class="close" data-dismiss="alert" aria-label="Close">
+      		&times;${error}
+   			</a>
+		</div>
+	</c:if>
 <form:form  action="/whiterabbitevent/loginAuthentication" method="post" commandName="userBean" cssClass="clientform">
-
 <div class="form-group">
   <form:input path="email"  placeholder="User Name" class="form-control " title="Please  enter your email"/>
 </div>

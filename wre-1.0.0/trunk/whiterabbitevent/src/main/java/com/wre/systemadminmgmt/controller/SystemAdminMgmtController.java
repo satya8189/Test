@@ -44,7 +44,6 @@ public class SystemAdminMgmtController{
 	@Qualifier(value = "AdminMgmtService")
 	private AdminMgmtService adminMgmtService;
    
-	
 	private static final Log log = LogFactory.getLog(SystemAdminMgmtController.class);
 	
 	 /**
@@ -66,12 +65,9 @@ public class SystemAdminMgmtController{
 			log.info("inside login method");
 			UserBean userObject=systemAdminMgmtService.loginAuthentication(userBean);
 			String navigationpage=null;
-			if(userObject!=null){
-			 
-			   
+			if(userObject!=null){  
 				 if(WREUtil.encryptData(userBean.getPassword()).equals(userObject.getPassword()))
-				   { 
-					  
+				   {  
 				         session.setAttribute(WREConstants.USER,userObject );
 				         redirectAttributes.addFlashAttribute("error", "success");
 				         navigationpage="redirect:/wre";
@@ -83,21 +79,17 @@ public class SystemAdminMgmtController{
 				   log.info("password wrong");
 				   redirectAttributes.addFlashAttribute("error", "Password was Wrong!!");
 				   redirectAttributes.addFlashAttribute("userBean", userBean);
-				   navigationpage="redirect:/login/authenticationFailed";
+				   //navigationpage="redirect:/login/authenticationFailed";
+				   navigationpage="redirect:login";
 			   }
-			   
-
 			}
-			 
 			else{
 		      log.info("email wrong");
 			   redirectAttributes.addFlashAttribute("error", " Email Is Incorrect");
 			   redirectAttributes.addFlashAttribute("userBean", userBean);
-			   navigationpage="redirect:/login/authenticationFailed";
-			
+			   //navigationpage="redirect:/login/authenticationFailed";
+			   navigationpage="redirect:login";
 		   }
-	    
-		
 		     return   navigationpage;
 		}
 
