@@ -1,4 +1,4 @@
-	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
 <script>
 	$(".link-active").removeClass("link-active");
 	$("#event").addClass("link-active");	
@@ -12,7 +12,10 @@ margin-bottom:0px !important;
 }
 </style>
 <toaster-container></toaster-container>
-
+<c:set var="userId" value="${USER.userId}" scope="session" />
+<c:set var="roleId" value="${USER.roleId}" scope="session" />
+<c:set var="eventId" value="${event.eventId}" scope="session" />
+<input type="hidden" ng-init="roleId='${USER.roleId}'" value="${USER.roleId}" ng-model="roleId">
 <a ng-click="navigateToEventViewDetails(eventId)"> <i class="fa fa-angle-left back"></i>
 	</a>
 	
@@ -41,7 +44,7 @@ margin-bottom:0px !important;
 		 <div class="col-md-2 col-md-offset-10 padding-0">
 		 <input ng-model="search"  ng-show="chatList.length!=0" ng-show="chatList.length > 0" class="form-control" placeholder="Search">
 		 	</div> 
-		 	<a ng-click="navigateChatTopicCreate(eventId)" class="btn btn-primary pull-left button  btn-color">CreateChatTopic</a>
+		 	<a ng-click="navigateChatTopicCreate(eventId)" class="btn btn-primary pull-left button  btn-color" ng-hide="roleId==100">CreateChatTopic</a>
 			<div class="col-md-12 space-hid">&nbsp;</div>
 			<table class="table table-bordered" id="eventView">
 				<thead class="headbg">
@@ -49,7 +52,7 @@ margin-bottom:0px !important;
 					    
 					     <th>ChatTopicName </th>
 						 
-						  <th>Action</th>
+						  <th ng-hide="roleId==100">Action</th>
 						
 				   </tr>
 				</thead>
@@ -59,11 +62,11 @@ margin-bottom:0px !important;
 					
 					
 					<td>
-					<a ng-click="navigateToChatEdit(chat.chatTopicId)" title="EditChatTopicDetails">
+					<a ng-click="navigateToChatEdit(chat.chatTopicId)" title="EditChatTopicDetails" ng-hide="roleId==100">
 							<span class="glyphicon glyphicon-pencil margin-2 icons"> </span>
 						</a>
 					<a
-						title="DeleteChatTopic" ng-click="deleteChat(chat.chatTopicId)">
+						title="DeleteChatTopic" ng-click="deleteChat(chat.chatTopicId)" ng-hide="roleId==100">
 							<span class="glyphicon glyphicon-trash margin-2 red"> </span>
 					</a>		
 					</td>	

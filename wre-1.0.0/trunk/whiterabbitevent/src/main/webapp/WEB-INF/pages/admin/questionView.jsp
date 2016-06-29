@@ -1,4 +1,4 @@
-	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
 <script>
 	$(".link-active").removeClass("link-active");
 	$("#event").addClass("link-active");	
@@ -13,14 +13,17 @@ position: relative;
 }
 </style>
 <toaster-container></toaster-container>
-
+ <c:set var="userId" value="${USER.userId}" scope="session" />
+<c:set var="roleId" value="${USER.roleId}" scope="session" />
+<c:set var="eventId" value="${event.eventId}" scope="session" />
+<input type="hidden" ng-init="roleId='${USER.roleId}'" value="${USER.roleId}" ng-model="roleId">
 <div class="col-md-12">
 	  <a ng-click="cancelQuestionsView(eventId)"> <i
 		class="fa fa-angle-left back"></i>
 	</a> 
 	<form>
 	
-		<a ng-click="questionCreate(eventId)"title="eventViewDetails" class="btn btn-primary buttonbg1">Question Create
+		<a ng-click="questionCreate(eventId)"title="eventViewDetails" class="btn btn-primary buttonbg1" ng-hide="roleId==100">Question Create
 				<i class="fa fa-eye-slash icons "> </i>			 
 				</a>
 	
@@ -41,7 +44,7 @@ position: relative;
 						 <th>Option-C</th>
 						 <th>Option-D</th>
 						 <th>Answer</th>
-						 <th>Action</th>
+						 <th ng-hide="roleId==100">Action</th>
 						</tr>
 				</thead>
 				<tr ng-show="filteredSize!=0" ng-repeat="question in questionList  | filter: search | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
@@ -53,7 +56,7 @@ position: relative;
 				    <td>{{question.optionD}}</td>
 				    <td>{{question.answer}}</td>
 					<td>
-						<a ng-click="questionEdit(question.questionId)"title="eventViewDetails">
+						<a ng-click="questionEdit(question.questionId)"title="eventViewDetails" ng-hide="roleId==100">
 							<i class="glyphicon glyphicon-pencil"> </i>
 						</a>
 					</td>

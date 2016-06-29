@@ -43,8 +43,8 @@ border: 1px solid #588CC0;
 					<div class="form-group col-md-6" id="uploadDiv">
 						<label class="flot-left">Upload File </label> <input type="file"
 							class="form-control form-group" name="file" id="file"
-							onchange="angular.element(this).scope().setFiles(this)">
-						
+							onchange="angular.element(this).scope().setFiles(this)" required>
+						<span ng-if="sponcorEditForm.$submitted"  style="color:red">Please Select file</span>
 					</div>
 				</div>
 				<button type="submit" class="btn button btn-primary save margin-2">Update</button>

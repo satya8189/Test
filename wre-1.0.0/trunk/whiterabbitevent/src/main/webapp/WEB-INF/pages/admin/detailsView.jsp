@@ -8,6 +8,9 @@ border: 1px solid #588CC0;
 <div class="col-md-12">
 	<a ng-click="navigateToEventViewDetails(eventId)"> <i class="fa fa-angle-left back"></i>
 	</a>
+<c:set var="userId" value="${USER.userId}" scope="session" />
+<c:set var="roleId" value="${USER.roleId}" scope="session" />
+<input type="hidden" ng-init="roleId='${USER.roleId}'" value="${USER.roleId}" ng-model="roleId">
 
 	<c:set var="eventId" value="${event.eventId}" scope="session" />
 	<div class="panel">
@@ -50,7 +53,7 @@ border: 1px solid #588CC0;
 				<div>&nbsp;</div>
 				<div class="text-center">
 				<button type="submit" class="btn button btn-primary save margin-2"
-					ng-click="editDetailsView(eventId)">Edit</button>
+					ng-click="editDetailsView(eventId)" ng-hide="roleId==100">Edit</button>
 					</div>
 					<div>&nbsp;</div>
 					</form>

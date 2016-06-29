@@ -1,4 +1,4 @@
-	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
 <script>
 	$(".link-active").removeClass("link-active");
 	$("#event").addClass("link-active");	
@@ -12,7 +12,10 @@ margin-bottom:0px !important;
 }
 </style>
 <toaster-container></toaster-container>
-
+<c:set var="userId" value="${USER.userId}" scope="session" />
+<c:set var="roleId" value="${USER.roleId}" scope="session" />
+<c:set var="eventId" value="${event.eventId}" scope="session" />
+<input type="hidden" ng-init="roleId='${USER.roleId}'" value="${USER.roleId}" ng-model="roleId">
 <div class="container">
 	<a ng-click="navigateToEventsView(eventId)">
 		 <i class="fa fa-angle-left back"></i>
@@ -20,7 +23,7 @@ margin-bottom:0px !important;
 <div class="header-none" align="center">VideoView</div>
 	<div class="tab-content">
               <div id="home" class="tab-pane fade in active">
-            	<a ng-click="videoUpload(eventId)" class="btn btn-primary pull-left button btn-color">Upload Video</a> 
+            	<a ng-click="videoUpload(eventId)" class="btn btn-primary pull-left button btn-color" ng-hide="roleId==100">Upload Video</a> 
             	  
                 <div class="col-md-12 padding-0">
 			
@@ -34,7 +37,7 @@ margin-bottom:0px !important;
 
                         <label>Name : {{video.name}}</label>
                            
-                           <button ng-click="deleteGallery(video)" title="deletgalary" class="btn btn-primary">Delete Video
+                           <button ng-click="deleteGallery(video)" title="deletgalary" class="btn btn-primary" ng-hide="roleId==100">Delete Video
 							<!-- <i class="fa fa-eye-slash icons"> </i> -->
 				</button>
                         

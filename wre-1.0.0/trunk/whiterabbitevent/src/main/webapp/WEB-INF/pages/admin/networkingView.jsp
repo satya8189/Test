@@ -1,4 +1,4 @@
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
 <script>
 	$(".link-active").removeClass("link-active");
 	$("#event").addClass("link-active");	
@@ -10,7 +10,10 @@ margin-bottom:0px !important;
 
 </style>
 <toaster-container></toaster-container>
-
+<c:set var="userId" value="${USER.userId}" scope="session" />
+<c:set var="roleId" value="${USER.roleId}" scope="session" />
+<c:set var="eventId" value="${event.eventId}" scope="session" />
+<input type="hidden" ng-init="roleId='${USER.roleId}'" value="${USER.roleId}" ng-model="roleId">
 <div class="cal-md-12">
 	<form>
 	

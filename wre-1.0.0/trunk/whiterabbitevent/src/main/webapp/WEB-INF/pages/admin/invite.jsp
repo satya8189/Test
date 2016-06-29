@@ -10,8 +10,10 @@ border: 1px solid #588CC0;
 		<a ng-click="cancelInviteView(event.eventId)">
 		 <i class="fa fa-angle-left back"></i>
 	</a>
-	
-	<c:set var="eventId" value="${event.eventId}" scope="session" />
+	<c:set var="userId" value="${USER.userId}" scope="session" />
+<c:set var="roleId" value="${USER.roleId}" scope="session" />
+<c:set var="eventId" value="${event.eventId}" scope="session" />
+<input type="hidden" ng-init="roleId='${USER.roleId}'" value="${USER.roleId}" ng-model="roleId">
 	<div class="panel">
 		<div class="panel-heading text-center font-size-20 padding-15 headbg">
 			Details</div>
@@ -52,7 +54,7 @@ border: 1px solid #588CC0;
 	  <div class="form-group col-md-6 col-md-offset-3" >
 	  				
       <label class="flot-left">Mobile Number <span style="color:red;">*</span></label>
-       <input type="text" class="input-text form-control" id="agendo_Name" placeholder="Mobile Number"  ng-model="invite.phone"  
+       <input type="text" class="input-text form-control" id="agendo_Name" placeholder="Mobile Number"  ng-model="invite.phone" ng-hide="roleId==100" 
       name="Mobile" title="Numbers only" onkeypress="this.value=this.value.replace(/[^\d,]/g,'')" required > 
       
       <span  ng-if="createEvent.$submitted" ng-messages="createEvent.Mobile.$error" ng-messages-include="errors" style="color:red"></span>
@@ -61,7 +63,7 @@ border: 1px solid #588CC0;
       </div>
 	 </div>
 	 <div>&nbsp;</div>
-			<input type="submit" value="Submit" ng-click="submitted=true" class="btn btn-primary"/>	
+			<input type="submit" value="Submit" ng-click="submitted=true" ng-hide="roleId==100" class="btn btn-primary" />	
 			<div>&nbsp;</div>	
 	</form>
 

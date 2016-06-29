@@ -1,4 +1,4 @@
-	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
 <script>
 	$(".link-active").removeClass("link-active");
 	$("#event").addClass("link-active");	
@@ -12,13 +12,16 @@ margin-bottom:0px !important;
 }
 </style>
 <toaster-container></toaster-container>
+<c:set var="userId" value="${USER.userId}" scope="session" />
+<c:set var="roleId" value="${USER.roleId}" scope="session" />
+<input type="hidden" ng-init="roleId='${USER.roleId}'" value="${USER.roleId}" ng-model="roleId">
 
 <div class="container-fluid">
  <a ng-click="cancelAgendoView(eventId)"> <i
 		class="fa fa-angle-left back"></i>
 	</a> 
 <form>
-	<a ng-click="navigateagendoCreate(eventId)" class="btn btn-primary pull-left button btn-color buttonbg">Create Agenda</a>
+	<a ng-click="navigateagendoCreate(eventId)" class="btn btn-primary pull-left button btn-color buttonbg" ng-hide="roleId==100">Create Agenda</a>
 	
 	<div class="header-center" align="center">Agendas List</div>
 	<div class="panel">
@@ -35,7 +38,7 @@ margin-bottom:0px !important;
 						 <th>AgendaStartTime</th>
 						  <th>AgendaEndTime</th>
 						 <th>AgendaBy</th>
-						  <th>Action</th>
+						  <th ng-hide="roleId==100" >Action</th>
 						
 				   </tr>
 				</thead>
@@ -48,7 +51,7 @@ margin-bottom:0px !important;
 					
 					<td>
 					
-				<a ng-click="agendoEdit(event.agenId)"title="agendoEdit">
+				<a ng-click="agendoEdit(event.agenId)"title="agendoEdit" ng-hide="roleId==100">
 							<i class="glyphicon glyphicon-pencil"> </i>
 				</a>
 					</td>

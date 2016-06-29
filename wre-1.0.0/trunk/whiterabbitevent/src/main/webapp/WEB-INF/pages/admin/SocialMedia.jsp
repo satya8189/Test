@@ -1,6 +1,6 @@
 <!-- <h3>SocialMedia</h3> -->
 
-	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
 <script>
 	$(".link-active").removeClass("link-active");
 	$("#sponcor").addClass("link-active");	
@@ -18,7 +18,10 @@ margin-bottom:0px !important;
 	}
 </style>
  <body>
-  
+  <c:set var="userId" value="${USER.userId}" scope="session" />
+<c:set var="roleId" value="${USER.roleId}" scope="session" />
+<c:set var="eventId" value="${event.eventId}" scope="session" />
+<input type="hidden" ng-init="roleId='${USER.roleId}'" value="${USER.roleId}" ng-model="roleId">
 <div class="col-md-12">
 	<a ng-click="cancelSocialMediaView(eventId)">
 		 <i class="fa fa-angle-left back"></i>
@@ -26,7 +29,7 @@ margin-bottom:0px !important;
 	<!-- {{4+5}} --> 
 	<div class="panel">
 	<form>
-	<a ng-click="createSocialMedia(eventId)" class="btn btn-primary pull-left button btn-color buttonbg">Create SocialMedia</a>
+	<a ng-click="createSocialMedia(eventId)" class="btn btn-primary pull-left button btn-color buttonbg" ng-hide="roleId==100">Create SocialMedia</a>
 	</form>
 		<div class="panel-body">
 		 <div class="col-md-2 col-md-offset-10 padding-0">
@@ -38,18 +41,18 @@ margin-bottom:0px !important;
 					<tr>
 						<th>Name</th>
 						<th>URL</th>
-						<th>Action</th>
+						<th ng-hide="roleId==100">Action</th>
 					</tr>
 				</thead>
 				 <tr ng-show="filteredSize!=0" ng-repeat="sm in filtered = socialmediaList | filter: search | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit ">  
 					<td>{{sm.name}}</td>
 					<td>{{sm.url}}</td>
 					<td>
-						<a ng-click="editSocialMedia(sm.socialId)" title="EditSocialMedia">
+						<a ng-click="editSocialMedia(sm.socialId)" title="EditSocialMedia" ng-hide="roleId==100">
 							<i class="glyphicon glyphicon-pencil"> </i>
 						</a>
 						
-						<a ng-click="deleteSocialMedia(sm.socialId)" title="DeleteSocialMedia">
+						<a ng-click="deleteSocialMedia(sm.socialId)" title="DeleteSocialMedia" ng-hide="roleId==100">
 							<i class="glyphicon glyphicon-trash"> </i>
 						</a>
 					</td>
