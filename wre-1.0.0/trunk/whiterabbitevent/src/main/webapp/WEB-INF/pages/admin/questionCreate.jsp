@@ -10,7 +10,7 @@ border: 1px solid #588CC0;
 <jsp:include page="error-messages.jsp"></jsp:include>
 <c:set var="userId" value="${USER.userId}" scope="session" />
 
-<form name="createEvent" ng-submit="questionCreate(question)" novalidate>
+<form name="createEvent" ng-submit="createEvent.$valid && questionCreate(question)" novalidate>
 
 <div class="col-md-12">
 		<div class="col-md-12">
@@ -35,12 +35,12 @@ border: 1px solid #588CC0;
 	 </div> 
    </div>
     
-	<div class="col-md-12">
+	  <div class="col-md-12">
 	  <div class="form-group col-md-6" >
           <label class="flot-left">Question <span style="color:red;">*</span></label>
       <input type="text" class="input-text form-control" id="agendo_Name" placeholder="Question"  ng-model="question.question" 
-      name="Question"   required>
-      <span ng-if="createEvent.$submitted" ng-messages="createEvent.Question.$error" ng-messages-include="errors"style="color:red">
+      name="Question"   required/>
+      <span ng-if="createEvent.$submitted" ng-messages="createEvent.Question.$error" ng-messages-include="errors" style="color:red">
 		  </span>
       </div>
      
@@ -53,9 +53,7 @@ border: 1px solid #588CC0;
       </div>
       </div>
 	
-	 
-	
-	<div class="col-md-12">
+	 <div class="col-md-12">
 	  <div class="form-group col-md-6" ng-show="question.appIdentifierId!=201">
           <label class="flot-left">OptionB <span style="color:red;">*</span></label>
       <input type="text" class="input-text form-control" id="agenStartTime" placeholder="OptionB"  ng-model="question.optionB" 
@@ -74,7 +72,7 @@ border: 1px solid #588CC0;
       </div>
       </div>
 	 
-	<div class="col-md-12">
+	  <div class="col-md-12">
 	  <div class="form-group col-md-6" ng-show="question.appIdentifierId!=201">
           <label class="flot-left">OptionD <span style="color:red;">*</span></label>
       <input type="text" class="input-text form-control" id="agenBy" placeholder="OptionD"  ng-model="question.optionD" 
@@ -86,13 +84,12 @@ border: 1px solid #588CC0;
 	 
 	  <div class="form-group col-md-6" >
           <label class="flot-left">Answer <span style="color:red;">*</span></label>
-      <input type="text" class="input-text form-control" id="agenBy" placeholder="Answer"  ng-model="question.answer" 
-      name="answer"   required>
+      <input type="text" class="input-text form-control" id="agenBy" placeholder="Answer" ng-model="question.answer" 
+      name="answer"><!--    required> -->
       <span ng-if="createEvent.$submitted" ng-messages="createEvent.answer.$error" ng-messages-include="errors" style="color:red">
 		  </span>
       </div>
       </div>
-	
 	 
 </div>
     <div>&nbsp;</div>
