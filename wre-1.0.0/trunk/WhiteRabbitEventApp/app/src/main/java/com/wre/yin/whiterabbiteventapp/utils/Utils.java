@@ -63,7 +63,7 @@ public class Utils {
     }
 
     public static String getDateTime() {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        DateFormat dateFormat = new SimpleDateFormat("HH:mm");
         Calendar cal = Calendar.getInstance();
 
         return dateFormat.format(cal.getTime());

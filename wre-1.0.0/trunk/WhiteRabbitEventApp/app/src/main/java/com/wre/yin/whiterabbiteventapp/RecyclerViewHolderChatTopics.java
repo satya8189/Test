@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 public class RecyclerViewHolderChatTopics extends RecyclerView.ViewHolder {
 
-    TextView partName;
+    TextView partName,notyNum;
     ImageView partProfileImg;
     CardView cardView;
 
@@ -18,6 +18,7 @@ public class RecyclerViewHolderChatTopics extends RecyclerView.ViewHolder {
         partName = (TextView) itemView.findViewById(R.id.chat_topic_list_name);
 
         partProfileImg = (ImageView) itemView.findViewById(R.id.chat_topic_list_profile_img);
+        notyNum=(TextView)itemView.findViewById(R.id.notifications_number);
         cardView = (CardView) itemView.findViewById(R.id.chat_topic_card_view);
 
     }

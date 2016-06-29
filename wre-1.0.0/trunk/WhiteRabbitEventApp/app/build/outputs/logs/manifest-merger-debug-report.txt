@@ -1447,16 +1447,16 @@ ADDED from /home/yinsol-ejaz/AndroidStudioProjects/svn/WhiteRabbitEventApp/app/s
 		ADDED from /home/yinsol-ejaz/AndroidStudioProjects/svn/WhiteRabbitEventApp/app/src/main/AndroidManifest.xml:65:13-73
 	android:name
 		ADDED from /home/yinsol-ejaz/AndroidStudioProjects/svn/WhiteRabbitEventApp/app/src/main/AndroidManifest.xml:64:13-40
-intent-filter#com.example.gcm+com.google.android.c2dm.intent.RECEIVE
+intent-filter#com.google.android.c2dm.intent.RECEIVE+com.wre.yin.whiterabbiteventapp
 ADDED from /home/yinsol-ejaz/AndroidStudioProjects/svn/WhiteRabbitEventApp/app/src/main/AndroidManifest.xml:66:13-70:29
 action#com.google.android.c2dm.intent.RECEIVE
 ADDED from /home/yinsol-ejaz/AndroidStudioProjects/svn/WhiteRabbitEventApp/app/src/main/AndroidManifest.xml:67:17-81
 	android:name
 		ADDED from /home/yinsol-ejaz/AndroidStudioProjects/svn/WhiteRabbitEventApp/app/src/main/AndroidManifest.xml:67:25-78
-category#com.example.gcm
-ADDED from /home/yinsol-ejaz/AndroidStudioProjects/svn/WhiteRabbitEventApp/app/src/main/AndroidManifest.xml:69:17-60
+category#com.wre.yin.whiterabbiteventapp
+ADDED from /home/yinsol-ejaz/AndroidStudioProjects/svn/WhiteRabbitEventApp/app/src/main/AndroidManifest.xml:69:17-76
 	android:name
-		ADDED from /home/yinsol-ejaz/AndroidStudioProjects/svn/WhiteRabbitEventApp/app/src/main/AndroidManifest.xml:69:27-57
+		ADDED from /home/yinsol-ejaz/AndroidStudioProjects/svn/WhiteRabbitEventApp/app/src/main/AndroidManifest.xml:69:27-73
 service#com.wre.yin.whiterabbiteventapp.MSGService
 ADDED from /home/yinsol-ejaz/AndroidStudioProjects/svn/WhiteRabbitEventApp/app/src/main/AndroidManifest.xml:73:9-47
 	android:name

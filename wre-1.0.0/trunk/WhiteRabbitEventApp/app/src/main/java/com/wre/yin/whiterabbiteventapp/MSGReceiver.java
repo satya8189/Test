@@ -18,6 +18,9 @@ public class MSGReceiver extends WakefulBroadcastReceiver {
         msgrcv.putExtra("msg", extras.getString("msg"));
         msgrcv.putExtra("fromu", extras.getString("fromu"));
         msgrcv.putExtra("fromname", extras.getString("name"));
+        msgrcv.putExtra("date", extras.getString("date"));
+        msgrcv.putExtra("topic", extras.getString("topic"));
+        msgrcv.putExtra("eventId", extras.getString("eventId"));
 
 
         LocalBroadcastManager.getInstance(context).sendBroadcast(msgrcv);
@@ -25,4 +28,5 @@ public class MSGReceiver extends WakefulBroadcastReceiver {
         startWakefulService(context, (intent.setComponent(comp)));
         setResultCode(Activity.RESULT_OK);
     }
+
 }

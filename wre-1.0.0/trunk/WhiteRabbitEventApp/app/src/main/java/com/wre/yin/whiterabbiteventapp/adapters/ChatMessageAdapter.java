@@ -43,22 +43,26 @@ public class ChatMessageAdapter extends ArrayAdapter<ChatMessage> {
     public View getView(int position, View convertView, ViewGroup parent) {
         int viewType = getItemViewType(position);
         if (viewType == MY_MESSAGE) {
-            TextView myName, message;
+            TextView myName, message,myTime;
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_mine_message, parent, false);
 
             message = (TextView) convertView.findViewById(R.id.msg_my);
             myName = (TextView) convertView.findViewById(R.id.msg_my_name);
+            myTime = (TextView) convertView.findViewById(R.id.my_time);
+            myTime.setText(getItem(position).getTime());
             myName.setText(getItem(position).getName());
 
             message.setText(getItem(position).getContent());
 
         } else if (viewType == OTHER_MESSAGE) {
-            TextView otherName, otherMessage;
+            TextView otherName, otherMessage,othetTime;
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_other_message, parent, false);
 
             otherMessage = (TextView) convertView.findViewById(R.id.msg_other_msg);
             otherName = (TextView) convertView.findViewById(R.id.msg_other_name);
+            othetTime= (TextView) convertView.findViewById(R.id.msg_other_time);
 
+            othetTime.setText(getItem(position).getTime());
             otherName.setText(getItem(position).getName());
             otherMessage.setText(getItem(position).getContent());
 

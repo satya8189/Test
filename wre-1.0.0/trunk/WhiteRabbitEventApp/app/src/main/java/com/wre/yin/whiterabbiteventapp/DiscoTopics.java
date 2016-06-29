@@ -8,24 +8,29 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.wre.yin.whiterabbiteventapp.beans.ChatBean;
 import com.wre.yin.whiterabbiteventapp.beans.ChatTopicBean;
 import com.wre.yin.whiterabbiteventapp.utils.Callback;
 import com.wre.yin.whiterabbiteventapp.utils.Constants;
+import com.wre.yin.whiterabbiteventapp.utils.DBHelper;
 import com.wre.yin.whiterabbiteventapp.utils.MyAsyncTask;
 import com.wre.yin.whiterabbiteventapp.utils.Utils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class DiscoTopics extends AppCompatActivity {
     private RecyclerView recyclerView;
     private String eventId;
     private SharedPreferences prefs;
+    private DBHelper dbHelper;
 
-    private List<String> topicsList;
+    private List<HashMap<String,String>> topicsList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,9 +49,15 @@ public class DiscoTopics extends AppCompatActivity {
             public void onResult(String result) {
                 List<ChatTopicBean> list= Utils.getList(result,ChatTopicBean.class);
                 for(ChatTopicBean bean:list){
-                  topicsList.add(bean.getChatTopicName());
+                    HashMap<String,String> map=new HashMap<String, String>();
+                    map.put("topic",bean.getChatTopicName());
+                    dbHelper=new DBHelper(DiscoTopics.this);
+                    List<ChatBean> chatBeanList=dbHelper.getAllNoty(bean.getChatTopicName());
+                    map.put("count",String.valueOf(chatBeanList.size()));
+
+                  topicsList.add(map);
                 }
-                RecylerAdapter adapter = new RecylerAdapter(DiscoTopics.this, (ArrayList<String>) topicsList);
+                RecylerAdapter adapter = new RecylerAdapter(DiscoTopics.this, (ArrayList<HashMap<String,String>>) topicsList);
                 recyclerView.setAdapter(adapter);
                 recyclerView.setHasFixedSize(true);
                 recyclerView.setLayoutManager(new LinearLayoutManager(DiscoTopics.this));
@@ -56,11 +67,21 @@ public class DiscoTopics extends AppCompatActivity {
             }
         }).execute();
     }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     private class RecylerAdapter extends RecyclerView.Adapter<RecyclerViewHolderChatTopics> {
         LayoutInflater inflater;
         Context context;
-        ArrayList<String> topicList;
+        ArrayList<HashMap<String,String>> topicList;
 
 
         View.OnClickListener clickListener = new View.OnClickListener() {
@@ -69,16 +90,17 @@ public class DiscoTopics extends AppCompatActivity {
 
                 RecyclerViewHolderChatTopics vholder = (RecyclerViewHolderChatTopics) v.getTag();
                 int position = vholder.getPosition();
-                String topic=topicList.get(position);
+                HashMap<String,String> topic=topicList.get(position);
                 Intent messageAct = new Intent(DiscoTopics.this, MessageActivity.class);
-                messageAct.putExtra("name", topic);
+                messageAct.putExtra("name", topic.get("topic"));
                 messageAct.putExtra("eventId", eventId);
                 startActivity(messageAct);
+                finish();
 
             }
         };
 
-        public RecylerAdapter(Context context, ArrayList<String> partArList) {
+        public RecylerAdapter(Context context, ArrayList<HashMap<String,String>> partArList) {
             this.context = context;
             this.topicList = partArList;
             inflater = LayoutInflater.from(context);
@@ -93,8 +115,15 @@ public class DiscoTopics extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(RecyclerViewHolderChatTopics holder, int position) {
-            String topic= topicList.get(position);
-            holder.partName.setText(topic);
+            HashMap<String,String> topic= topicList.get(position);
+            holder.partName.setText(topic.get("topic"));
+            int countNum=Integer.parseInt(topic.get("count"));
+            holder.notyNum.setVisibility(View.VISIBLE);
+            if(countNum>0) {
+                holder.notyNum.setText(topic.get("count"));
+            }else{
+                holder.notyNum.setVisibility(View.GONE);
+            }
             holder.cardView.setOnClickListener(clickListener);
            // Picasso.with(context).load("http://183.82.103.156:8080/Resources/wre/profile_pics/"+partAdMap.get("partId")+"/profile.jpg").placeholder(R.drawable.user_icon).into(holder.partProfileImg);
             holder.cardView.setTag(holder);

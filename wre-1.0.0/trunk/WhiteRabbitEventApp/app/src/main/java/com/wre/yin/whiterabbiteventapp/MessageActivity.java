@@ -19,7 +19,10 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.wre.yin.whiterabbiteventapp.adapters.ChatMessageAdapter;
+import com.wre.yin.whiterabbiteventapp.beans.ChatBean;
 import com.wre.yin.whiterabbiteventapp.beans.ChatMessage;
+import com.wre.yin.whiterabbiteventapp.utils.DBHelper;
+import com.wre.yin.whiterabbiteventapp.utils.Utils;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -35,6 +38,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class MessageActivity extends AppCompatActivity {
@@ -46,7 +50,9 @@ public class MessageActivity extends AppCompatActivity {
     SharedPreferences prefs;
     Bundle bundle;
 
-    String message;
+    private String message,eventId;
+    private String topicName;
+    private DBHelper dbHelper;
 
     private ChatMessageAdapter mAdapter;
 
@@ -55,12 +61,40 @@ public class MessageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
 
-        String nameTxt = getIntent().getExtras().getString("name");
+        topicName = getIntent().getExtras().getString("name");
+        mListView = (ListView) findViewById(R.id.listView);
+        mButtonSend = (Button) findViewById(R.id.btn_send);
+        mEditTextMessage = (EditText) findViewById(R.id.et_message);
+        mImageView = (ImageView) findViewById(R.id.iv_image);
+        mAdapter = new ChatMessageAdapter(this, new ArrayList<ChatMessage>());
+        mListView.setAdapter(mAdapter);
         //  text = (TextView) findViewById(R.id.activity_text);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(nameTxt);
+        getSupportActionBar().setTitle(topicName);
+        eventId = getIntent().getExtras().getString("eventId");
+        dbHelper = new DBHelper(getApplicationContext());
+        List<ChatBean> chatBeanList = dbHelper.getAllNoty(topicName);
+        for (ChatBean bean : chatBeanList) {
+            ChatBean chatBean = new ChatBean();
+            chatBean.setMsgTime(bean.getMsgTime());
+            chatBean.setMsg(bean.getMsg());
+            chatBean.setFromName(bean.getFromName());
+            chatBean.setChatTopic(bean.getChatTopic());
+            chatBean.setEventId(bean.getEventId());
+            dbHelper.insertChatValues(chatBean);
+        }
+        dbHelper.deleteNotypAll(topicName);
+        List<ChatBean> chatBeanListH = dbHelper.getAllChat(topicName);
+        for (ChatBean bean : chatBeanListH) {
+            if (bean.getFromName() != null) {
+                mimicOtherMessage(bean.getMsg(), bean.getFromName(), bean.getMsgTime());
+            } else if (bean.getToName() != null) {
+                sendMessage(bean.getMsg(), bean.getToName(), bean.getMsgTime());
+            }
 
+
+        }
 
         // text.setText(nameTxt);
 
@@ -69,30 +103,16 @@ public class MessageActivity extends AppCompatActivity {
         SharedPreferences.Editor edit = prefs.edit();
 
         edit.putString("current_status", "onchat");
+        edit.putString("current_topic", topicName);
         edit.commit();
 
         LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("Msg"));
 
-        mListView = (ListView) findViewById(R.id.listView);
-        mButtonSend = (Button) findViewById(R.id.btn_send);
-        mEditTextMessage = (EditText) findViewById(R.id.et_message);
-        mImageView = (ImageView) findViewById(R.id.iv_image);
-
-        mAdapter = new ChatMessageAdapter(this, new ArrayList<ChatMessage>());
-        mListView.setAdapter(mAdapter);
 
         if (bundle != null && bundle.getString("name") != null) {
-            /*Log.d("inside notification", "");
-            TableRow tr1 = new TableRow(getApplicationContext());
-            tr1.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
-            TextView textview = new TextView(getApplicationContext());
-            textview.setTextSize(20);
-            textview.setTextColor(Color.parseColor("#0B0719"));
-            textview.setText(Html.fromHtml("<b>" + bundle.getString("name") + " : </b>" + bundle.getString("msg")));
-            tr1.addView(textview);
-            tab.addView(tr1);*/
 
-            mimicOtherMessage(bundle.getString("msg"), bundle.getString("name"), null);
+
+            //mimicOtherMessage(bundle.getString("msg"), bundle.getString("name"), Utils.getDateTime());
 
         }
         mButtonSend.setOnClickListener(new View.OnClickListener() {
@@ -102,7 +122,15 @@ public class MessageActivity extends AppCompatActivity {
                 if (TextUtils.isEmpty(message)) {
                     return;
                 }
-                sendMessage(message, "You", null);
+                ChatBean cBean = new ChatBean();
+                cBean.setToName("You");
+                cBean.setMsg(message);
+                cBean.setMsgTime(Utils.getDateTime());
+                cBean.setChatTopic(topicName);
+                cBean.setEventId(eventId);
+
+                dbHelper.insertChatValues(cBean);
+                sendMessage(message, "You", Utils.getDateTime());
                 new Send().execute();
                 // mEditTextMessage.setText("");
             }
@@ -121,26 +149,25 @@ public class MessageActivity extends AppCompatActivity {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            String str = intent.getStringExtra("msg");
-            String str1 = intent.getStringExtra("fromname");
-            String str2 = intent.getStringExtra("fromu");
+            ChatBean cBean = new ChatBean();
             prefs = getSharedPreferences("Chat", 0);
-            if ("onchat".equals(prefs.getString("current_status", ""))) {
+            if ("onchat".equals(prefs.getString("current_status", ""))&&topicName.equals(intent.getStringExtra("topic"))) {
+                String str = intent.getStringExtra("msg");
+                String str1 = intent.getStringExtra("fromname");
+                String str2 = intent.getStringExtra("topic");
 
-                /*TableRow tr1 = new TableRow(getApplicationContext());
-                tr1.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
-                TextView textview = new TextView(getApplicationContext());
-                textview.setTextSize(20);
-                textview.setTextColor(Color.parseColor("#0B0719"));
-                textview.setText(Html.fromHtml("<b>" + str1 + " : </b>" + str));
-                tr1.addView(textview);
-                tab.addView(tr1);*/
+                cBean.setFromName(str1);
+                cBean.setMsg(str);
+                cBean.setMsgTime(Utils.getDateTime());
+                cBean.setChatTopic(topicName);
+                cBean.setEventId(eventId);
+                dbHelper = new DBHelper(getApplicationContext());
+                dbHelper.insertChatValues(cBean);
+                mimicOtherMessage(str, str1, Utils.getDateTime());
 
-                mimicOtherMessage(str, str1, null);
             }
-
-
         }
+
     };
 
     private void sendMessage(String message, String name, String time) {
@@ -172,10 +199,14 @@ public class MessageActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
+                LocalBroadcastManager.getInstance(MessageActivity.this).unregisterReceiver(onNotice);
                 SharedPreferences.Editor edit = prefs.edit();
-
                 edit.putString("current_status", "");
+                edit.putString("current_topic", "");
                 edit.commit();
+                Intent i=new Intent(MessageActivity.this,DiscoTopics.class);
+                i.putExtra("eventId",eventId);
+                startActivity(i);
                 onBackPressed();
                 return true;
         }
@@ -183,12 +214,28 @@ public class MessageActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed() {
-        super.onBackPressed();
+    protected void onPause() {
+        super.onPause();
+        LocalBroadcastManager.getInstance(MessageActivity.this).unregisterReceiver(onNotice);
         SharedPreferences.Editor edit = prefs.edit();
 
         edit.putString("current_status", "");
+        edit.putString("current_topic", "");
         edit.commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        LocalBroadcastManager.getInstance(MessageActivity.this).unregisterReceiver(onNotice);
+        SharedPreferences.Editor edit = prefs.edit();
+
+        edit.putString("current_status", "");
+        edit.putString("current_topic", "");
+        edit.commit();
+        Intent i=new Intent(MessageActivity.this,DiscoTopics.class);
+        i.putExtra("eventId",eventId);
+        startActivity(i);
     }
 
     private StringBuilder inputStreamToString(InputStream is) {
@@ -220,6 +267,9 @@ public class MessageActivity extends AppCompatActivity {
                 jObj.put("from", prefs.getString("mobile", ""));
                 jObj.put("fromn", prefs.getString("name", ""));
                 jObj.put("msg", message);
+                jObj.put("date", Utils.getDateTime());
+                jObj.put("topic", topicName);
+                jObj.put("eventId", eventId);
 
                 HttpPost post = new HttpPost("http://183.82.103.156:8080/whiterabbitevent/send");
                 post.setEntity(new StringEntity(jObj.toString()));
@@ -247,7 +297,6 @@ public class MessageActivity extends AppCompatActivity {
                 res = json.getString("response");
                 if (res.equals("Failure")) {
                     Toast.makeText(getApplicationContext(), "The user has logged out. You cant send message anymore !", Toast.LENGTH_SHORT).show();
-
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
