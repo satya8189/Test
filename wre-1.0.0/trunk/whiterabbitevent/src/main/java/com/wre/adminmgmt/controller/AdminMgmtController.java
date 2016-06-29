@@ -728,7 +728,7 @@ public class AdminMgmtController {
 		data.put("name", chatBean.getFromn());
 		data.put("date", chatBean.getDate());
 		data.put("topic", chatBean.getTopic());
-
+		data.put("eventId", chatBean.getEventId());
 		obj.put("registration_ids", array);
 		obj.put("data", data);
 		obj.put("time_to_live", 4444);

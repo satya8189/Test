@@ -13,9 +13,16 @@ public class ChatBean {
 	private String to;
 	private String msg;
 	private String fromu;
+	private String eventId;
 	private List<String> regids;
 	
 	
+	public String getEventId() {
+		return eventId;
+	}
+	public void setEventId(String eventId) {
+		this.eventId = eventId;
+	}
 	public String getDate() {
 		return date;
 	}
