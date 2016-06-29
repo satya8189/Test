@@ -6,7 +6,7 @@ var InviteController = function($scope, $http, $location, $routeParams,ngNotifie
 	
 	$scope.$on("$routeChangeSuccess", function() {
 	
-	$http.get('admin/Viewdetails?eventId='+$routeParams.eventId).success(function(event) {
+	$http.get('admin/Viewdetails?eventId='+$routeParams.eventId+'&&type='+"web").success(function(event) {
 		$scope.event=event;
 			});
 });
