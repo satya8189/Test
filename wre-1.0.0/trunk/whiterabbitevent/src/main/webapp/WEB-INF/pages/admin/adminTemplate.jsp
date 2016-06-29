@@ -125,9 +125,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       
       <ul class="nav navbar-nav">
-        <li class="head-date"><i class="fa fa-calendar" aria-hidden="true"></i> &nbsp;&nbsp;White Rabbit Events</li>
-    
-        
+       <a href="#/eventView"><li class="head-date"><i class="fa fa-calendar" aria-hidden="true"></i>  &nbsp;White Rabbit Events</li></a>    
       </ul>
       <ul class="nav navbar-nav navbar-right">
        <li class="head-date"> <i class="glyphicon glyphicon-search"></i></li>
