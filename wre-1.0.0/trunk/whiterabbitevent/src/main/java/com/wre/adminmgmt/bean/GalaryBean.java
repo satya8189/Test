@@ -18,9 +18,8 @@ public class GalaryBean
     private Long eventId;
     private String url;
     private String fileName;
-  private String  encodeString;
-  private Long participantId ;
-    
+    private String  encodeString;
+    private Long participantId ;
     
 	public String getUrl() {
 		return url;
@@ -85,8 +84,5 @@ public class GalaryBean
 		this.participantId = participantId;
 	}
 	
-	
-	
-    
 
 }

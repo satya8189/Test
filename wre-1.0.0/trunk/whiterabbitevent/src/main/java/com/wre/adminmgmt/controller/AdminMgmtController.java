@@ -396,7 +396,7 @@ public class AdminMgmtController {
 	@RequestMapping(value = "admin/Viewdetails", method = RequestMethod.GET)
 	public @ResponseBody
 	EventBean detailsView(@RequestParam("eventId") Long eventId,@RequestParam("type") String type) {
-		EventBean eventBean = adminMgmtService.detailsView(eventId,type);
+		EventBean eventBean= adminMgmtService.detailsView(eventId,type);
 		return eventBean;
 
 	}
@@ -783,13 +783,16 @@ public class AdminMgmtController {
 	}
 
 	@RequestMapping(value = "admin/getEventImages", method = RequestMethod.GET)
-	public @ResponseBody
+	public @ResponseBody 
 	List<GalaryBean> getEventImages(@RequestParam("eventId") Long eventId,
 			@RequestParam("type") String type) {
+		//to get the event name by passing eventId
+		
 		List<GalaryBean> eventImages = new ArrayList<GalaryBean>();
 		String path = WREConstants.RESOURCE_PATH + eventId + "/" + type;
 		File folder = new File(path);
 		File[] listOfFiles = folder.listFiles();
+		if(listOfFiles!=null){
 		for (File file : listOfFiles) {
 			GalaryBean galaryBean = new GalaryBean();
 			galaryBean.setName(file.getName());
@@ -798,8 +801,9 @@ public class AdminMgmtController {
 			galaryBean.setUrl("/Resources/wre/" + eventId + "/" + type + "/"
 					+ file.getName());
 			eventImages.add(galaryBean);
+			}
+			log.info(eventImages.size());
 		}
-		log.info(eventImages.size());
 		return eventImages;
 	}
 
