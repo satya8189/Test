@@ -3,6 +3,7 @@ package com.wre.yin.whiterabbiteventapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -21,7 +22,7 @@ import java.util.List;
 
 public class GalleryNewActivity extends AppCompatActivity {
     private GridView mGridView;
-    private String eventId;
+    private String eventId,name;
     private ArrayList<GridItem> mGridData;
     private NewGalleryAdapter mGridAdapter;
 
@@ -30,8 +31,12 @@ public class GalleryNewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gallery_new);
         eventId = getIntent().getExtras().getString("eventId");
+        name = getIntent().getExtras().getString("name");
+
         mGridView = (GridView) findViewById(R.id.new_gridView);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(name);
 
         new MyAsyncTask(Constants.FILES_LIST + eventId + "&type=image", null, GalleryNewActivity.this, new Callback() {
             @Override
@@ -75,5 +80,15 @@ public class GalleryNewActivity extends AppCompatActivity {
 
             }
         }).execute();
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

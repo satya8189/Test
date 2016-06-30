@@ -8,6 +8,7 @@ import android.net.NetworkInfo;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -95,11 +96,13 @@ public class Constants {
 
         final AlertDialog alertD = new AlertDialog.Builder(context).create();
         alertD.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+        alertD.getWindow().getAttributes().windowAnimations=R.style.DialogAnimation;
         WindowManager.LayoutParams wmlp = alertD.getWindow().getAttributes();
         wmlp.gravity = Gravity.CENTER | Gravity.CENTER_HORIZONTAL;
 
 
-        LinearLayout llover = (LinearLayout) promptView.findViewById(R.id.llover);
+        CardView llover = (CardView) promptView.findViewById(R.id.llover);
         ImageView matter = (ImageView) promptView.findViewById(R.id.error_img);
         TextView alertmsg = (TextView) promptView.findViewById(R.id.error_txt);
         if (type.matches("success")) {
@@ -107,7 +110,7 @@ public class Constants {
             llover.setBackgroundColor(context.getResources().getColor(R.color.successmsg));
         } else {
             matter.setImageResource(R.drawable.cross_red);
-            llover.setBackgroundResource(R.drawable.rectangle_shape_alert_box);
+          //  llover.setBackgroundResource(R.drawable.rectangle_shape_alert_box);
         }
         alertmsg.setText(text);
         alertD.setView(promptView);
@@ -118,6 +121,7 @@ public class Constants {
         // d.show();
         alertD.getWindow().setAttributes(lp);
         alertD.show();
+
     }
 
     // Check Permissions for Marshmallow start
