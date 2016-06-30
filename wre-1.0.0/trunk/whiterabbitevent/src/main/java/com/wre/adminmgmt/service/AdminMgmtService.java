@@ -20,6 +20,7 @@ import com.wre.adminmgmt.bean.SocialMediaBean;
 import com.wre.adminmgmt.bean.SpeakerBean;
 import com.wre.adminmgmt.bean.SponsorBean;
 import com.wre.adminmgmt.bean.SurveyQuestionAnswerBean;
+import com.wre.systemadminmgmt.bean.ClientBean;
 import com.wre.systemadminmgmt.bean.ParticipantBean;
 import com.wre.systemadminmgmt.bean.ParticipantEventBean;
 
@@ -166,6 +167,6 @@ public void profileUpload(Long participantId, String fileName);
 
 public String sendingOTP(ParticipantBean participantBean);
 
-
+//public ClientBean getClientDetails(Long eventId);
 
 }

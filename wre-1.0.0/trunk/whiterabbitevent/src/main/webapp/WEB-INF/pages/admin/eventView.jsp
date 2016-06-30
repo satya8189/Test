@@ -34,7 +34,6 @@ display:none;
 					     <th>EventDate</th>
 						 <th>Status</th>
 						 <th>Action</th>
-						
 				   </tr>
 				</thead>
 				<tr ng-show="filteredSize!=0" ng-repeat="event in eventList | filter: search | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit ">

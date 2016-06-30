@@ -7,6 +7,7 @@ import com.wre.common.dao.GenericDao;
 import com.wre.model.Agenda;
 import com.wre.model.AppIdentifier;
 import com.wre.model.ChatTopic;
+import com.wre.model.Client;
 import com.wre.model.ContactDetails;
 import com.wre.model.Event;
 import com.wre.model.EventServices;
@@ -117,6 +118,8 @@ public Participants getParticipantById(Long participantId);
  * @return
  */
 public Rating getRatingById(Long participantId);
+
+//public Object[] getClientDetails(Long eventId);
 
 
 }

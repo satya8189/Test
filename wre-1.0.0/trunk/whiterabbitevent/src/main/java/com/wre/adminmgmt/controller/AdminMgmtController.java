@@ -63,6 +63,7 @@ import com.wre.adminmgmt.bean.SponsorBean;
 import com.wre.adminmgmt.bean.SurveyQuestionAnswerBean;
 import com.wre.adminmgmt.service.AdminMgmtService;
 import com.wre.common.util.WREConstants;
+import com.wre.systemadminmgmt.bean.ClientBean;
 import com.wre.systemadminmgmt.bean.ParticipantBean;
 import com.wre.systemadminmgmt.bean.ParticipantEventBean;
 
@@ -1357,6 +1358,13 @@ public class AdminMgmtController {
 			 String s = adminMgmtService.sendingOTP(participantBean);
 			return s;
 		}
+		
+		/*//Get client details to display on the top of events List
+		@RequestMapping(value="admin/getClientDetails",method=RequestMethod.GET)
+		public @ResponseBody ClientBean getClientDetails(@RequestParam("eventId")Long eventId){
+			return adminMgmtService.getClientDetails(eventId);
+		}*/
+
 }
 
 

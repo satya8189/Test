@@ -15,6 +15,7 @@ import com.wre.common.dao.GenericDaoImpl;
 import com.wre.model.Agenda;
 import com.wre.model.AppIdentifier;
 import com.wre.model.ChatTopic;
+import com.wre.model.Client;
 import com.wre.model.ContactDetails;
 import com.wre.model.Event;
 import com.wre.model.EventServices;
@@ -560,6 +561,17 @@ public List<Object[]> getParticipantsList(Long eventId){
 				rating=(Rating) criteria.uniqueResult();
 				return rating;
 			}
+
+
+
+			/*@Override
+			public Object[] getClientDetails(Long eventId) {
+				
+				String query="select Client_Name,Address,Description,Staus from client c,event e where c.Client_ID=e.Client_ID and e.Event_ID= :eventId";
+				SQLQuery sqlQuery = sessionFactory.getCurrentSession().createSQLQuery(query);
+				sqlQuery.setParameter("eventId",eventId );
+				return	(Object[])sqlQuery.uniqueResult();
+				}*/
 
 }
 

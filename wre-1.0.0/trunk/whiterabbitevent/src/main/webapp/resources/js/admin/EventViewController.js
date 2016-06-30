@@ -1,11 +1,16 @@
-var EventViewController = function($scope,$routeParams,$http, $location) {
+var EventViewController = function($scope,$routeParams,$http, $location,$rootScope) {
 	
 	$scope.eventList={};
 	$scope.filteredSize;
 	
+	//alert("current location.."+$location.path());
+	if($location.path()=="/eventView")
+		{
+			$rootScope.eventName='';
+		}
+	
 	$scope.getEventList = function(userId){
-		
-		 $http.get('admin/eventList?userId='+userId).success(function(eventList){
+		$http.get('admin/eventList?userId='+userId).success(function(eventList){
 			
 			    $scope.eventList = eventList;
 			    //alert(eventList.length);
@@ -32,8 +37,9 @@ var EventViewController = function($scope,$routeParams,$http, $location) {
 					$scope.filteredSize=$scope.filtered.length;
 				}, true);		    
 			  	});
-	
+		 
 	};
+	
 	$scope.eventViewDetails = function(eventId){
 		location.href="#/eventViewDetails/"+eventId;
 	};

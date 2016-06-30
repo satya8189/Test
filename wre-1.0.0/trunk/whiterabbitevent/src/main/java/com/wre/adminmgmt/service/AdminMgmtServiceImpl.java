@@ -17,6 +17,9 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.wre.adminmgmt.bean.AgendaBean;
@@ -42,6 +45,7 @@ import com.wre.common.util.WREUtil;
 import com.wre.model.Agenda;
 import com.wre.model.AppIdentifier;
 import com.wre.model.ChatTopic;
+import com.wre.model.Client;
 import com.wre.model.ContactDetails;
 import com.wre.model.Event;
 import com.wre.model.EventParticipant;
@@ -56,8 +60,10 @@ import com.wre.model.Speaker;
 import com.wre.model.Sponcor;
 import com.wre.model.SurveyQuestion;
 import com.wre.model.SurveyQuestionAnswer;
+import com.wre.systemadminmgmt.bean.ClientBean;
 import com.wre.systemadminmgmt.bean.ParticipantBean;
 import com.wre.systemadminmgmt.bean.ParticipantEventBean;
+import com.wre.systemadminmgmt.dao.SystemAdminMgmtDaoImpl;
 
 @Service("AdminMgmtService")
 public class AdminMgmtServiceImpl implements AdminMgmtService {
@@ -1543,7 +1549,7 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 					               System.err.println(e);
 					               result="fail";
 					           }
-					           System.out.println("message send successfully");
+					           System.out.println("message sent successfully");
 					  }else{
 					   result="inavlidphoneno";
 					  }
@@ -1551,10 +1557,12 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 					  return result;
 			}
 			
-
-			
-
-
+			/*public ClientBean getClientDetails(Long eventId){
+				ClientBean clientBean=new ClientBean();
+				Object[] client =AdminMgmtDaoImpl.getClientDetails(eventId);
+				
+				return clientBean;
+			}*/
 }
 
 	

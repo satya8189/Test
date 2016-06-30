@@ -1,18 +1,23 @@
-var EventViewDetailsController = function($scope,$routeParams,$http,$location) {
+var EventViewDetailsController = function($scope,$routeParams,$http,$location,$rootScope) {
 	$scope.serviceList = {};
-
+	$rootScope.eventName;
 	$scope.$on("$routeChangeSuccess", function () {
-		$scope.eventId=$routeParams.eventId;
-		
+			$scope.eventId=$routeParams.eventId;
 			
-			 $http.get('admin/eventdetailsList?eventId='+$scope.eventId).success(function(serviceList){
-				
+			$http.get('admin/eventdetailsList?eventId='+$scope.eventId).success(function(serviceList){
 				    $scope.serviceList = serviceList;
-				    
-				   
-				    });
+				     });
+			 
+			 //admin/eventdetailsList...gettting the eventName into the rootScope
+			 $http.get('systemadmin/editEvent?eventId='+$scope.eventId).success(function(eventDetails){
+				 	//alert(eventDetails.eventName);
+				 	$scope.eventDetails = eventDetails;
+				    $rootScope.eventName=eventDetails.eventName;
+				 	
+				     });
 				 });
-
+			//--------
+	
 	$scope.serviceDetails = function(event){
 	
 		if(event.serviceId=="2"){
@@ -74,8 +79,6 @@ var EventViewDetailsController = function($scope,$routeParams,$http,$location) {
 		
 	    }else if(event.serviceId=="20"){
 			location.href="#/eventImageUpload/"+event.eventId;
-
-
 	};
 
 	};

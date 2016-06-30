@@ -30,9 +30,8 @@ width: 58px;
 
 </head>
 <body>
-
-<div class="row">
-	<div ng-repeat=" service in serviceList">
+<div class="row"><!-- <h3>{{eventName}}</h3> -->
+	<div ng-repeat="service in serviceList">
 						<div class="col-md-3 col-sm-6 col-xs-12" style="padding-top: 10px">
 						<a ng-click="serviceDetails(service)">
 							<div class="padashboard">

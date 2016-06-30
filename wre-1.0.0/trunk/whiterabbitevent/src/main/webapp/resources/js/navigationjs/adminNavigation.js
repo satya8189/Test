@@ -5,7 +5,7 @@ var whiterabbitevent = {};
 var App = angular.module('whiterabbitevent', [ 'ngRoute', 'wre.services','ui.bootstrap','ngMessages']);
 
 // / Declare app level module which depends on filters, and services
-App.config([ '$routeProvider', function($routeProvider, $Scope) {
+App.config([ '$routeProvider', function($routeProvider, $Scope , $rootScope) {
 
 	/* eventView */
 	$routeProvider.when('/eventView', {
@@ -366,6 +366,8 @@ App.directive('validFile',function(){
     }
   };
 });
+
+
 
 
 

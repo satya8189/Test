@@ -162,9 +162,6 @@ public class SystemAdminMgmtController{
           return "systemadmin/clientEventsView";
 		}
 		
-		
-		
-		
 		//Client Event List method
 				@RequestMapping(value="systemadmin/eventList",method=RequestMethod.GET)
 				public @ResponseBody List<EventBean> geteventList(@RequestParam("clientId") Long clientId ){

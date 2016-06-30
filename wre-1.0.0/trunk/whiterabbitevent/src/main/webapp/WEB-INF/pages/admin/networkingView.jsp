@@ -17,7 +17,7 @@ margin-bottom:0px !important;
 <div class="cal-md-12">
 	<form>
 	
-	<div class="header-none" align="center">EventsParticipant List</div>
+	<!-- <div class="header-none" align="center">EventsParticipant List</div> -->
 	<a ng-click="cancelNetworkingView(eventId)">
 		 <i class="fa fa-angle-left back"></i>
 	</a>
