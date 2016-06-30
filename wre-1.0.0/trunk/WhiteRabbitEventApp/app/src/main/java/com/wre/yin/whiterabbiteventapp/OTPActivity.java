@@ -22,7 +22,9 @@ public class OTPActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         otpTxt = (EditText) findViewById(R.id.otp_text);
         submitBtn = (Button) findViewById(R.id.submit_btn);
+        if (Constants.checkAndRequestPermissions(this)) {
 
+        }
 
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,17 +38,12 @@ public class OTPActivity extends AppCompatActivity {
                 }
             }
         });
-
-
     }
 
     public String recievedSms(String message) {
         try {
             System.out.println("message--->>>" + message);
-
-
             otpTxt.setText(message);
-
         } catch (Exception e) {
             e.printStackTrace();
         }

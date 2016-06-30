@@ -131,6 +131,7 @@ public class SponcersActivity extends AppCompatActivity {
                 HashMap<String, String> maps1 = mapsList.get(position);
                 Intent i = new Intent(SponcersActivity.this, SponcersProfileActivity.class);
                 i.putExtra("sponsorId", maps1.get("sponsorId"));
+                i.putExtra("sponsorName", maps1.get("sponsorName"));
                 i.putExtra("sponsorUrl", maps1.get("sponsorUrl"));
                 startActivity(i);
             }

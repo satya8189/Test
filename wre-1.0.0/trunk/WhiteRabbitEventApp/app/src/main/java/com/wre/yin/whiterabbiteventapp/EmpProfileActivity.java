@@ -45,7 +45,7 @@ public class EmpProfileActivity extends AppCompatActivity {
     private Button saveUpdateBtn, profilePic;
 
     private SharedPreferences prefs;
-    private String partiName, partId, encodedString, partMobile, partEmail, partAltNumber, partDesig, partOrg, eventId, imgPath, fileName, fileTpe;
+    private String partiName, partId, encodedString, partiMobile, partiMail, partAltNumber, partDesig, partOrg, eventId, imgPath, fileName, fileTpe;
     String layoutStatus = "gone";
     private LinearLayout camGalLayout;
     private CircleImageView camPick, gallPick;
@@ -69,14 +69,17 @@ public class EmpProfileActivity extends AppCompatActivity {
 
         prefs = getSharedPreferences("Chat", 0);
         partiName = prefs.getString("name", null);
+        partiMail = prefs.getString("mail", null);
+        partiMobile = prefs.getString("mobile", null);
+
         partId = prefs.getString("partId", null);
-        eventId= prefs.getString("eventId", null);
+        eventId = prefs.getString("eventId", null);
         prgDialog = new ProgressDialog(this);
         prgDialog.setCancelable(false);
         // eventId = getIntent().getExtras().getString("eventId");
         empProfilePic = (ImageView) findViewById(R.id.emp_profile_image);
 
-        Picasso.with(EmpProfileActivity.this).load("http://183.82.103.156:8080/Resources/wre/profile_pics/"+partId+"/profile.jpg").placeholder(R.drawable.user_icon).into(empProfilePic);
+        Picasso.with(EmpProfileActivity.this).load("http://183.82.103.156:8080/Resources/wre/profile_pics/" + partId + "/profile.jpg").placeholder(R.drawable.user_icon).into(empProfilePic);
 
         empName = (EditText) findViewById(R.id.emp_name);
         empMail = (EditText) findViewById(R.id.emp_mail);
@@ -93,6 +96,9 @@ public class EmpProfileActivity extends AppCompatActivity {
         gallPick = (CircleImageView) findViewById(R.id.profile_gallery_link);
 
         empName.setText(partiName);
+        empMail.setText(partiMail);
+        empMobile.setText(partiMobile);
+
 
         profilePic.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -352,11 +358,11 @@ public class EmpProfileActivity extends AppCompatActivity {
                         new MyAsyncTask(Constants.PROFILE_PIC_UPLOAD, Utils.getJson(uploadImgVid), EmpProfileActivity.this, new Callback() {
                             public void onResult(String result) {
 
-                                System.out.println("Result:"+result);
+                                System.out.println("Result:" + result);
                                 if (result != null) {
-                                    String res = Utils.getString("result",result);
+                                    String res = Utils.getString("result", result);
                                     if (res.equals("success")) {
-                                        Picasso.with(EmpProfileActivity.this).load("http://183.82.103.156:8080/Resources/wre/profile_pics/"+partId+"/profile.jpg").placeholder(R.drawable.user_icon).into(empProfilePic);
+                                        Picasso.with(EmpProfileActivity.this).load("http://183.82.103.156:8080/Resources/wre/profile_pics/" + partId + "/profile.jpg").placeholder(R.drawable.user_icon).into(empProfilePic);
                                     }
                                 }
                             }

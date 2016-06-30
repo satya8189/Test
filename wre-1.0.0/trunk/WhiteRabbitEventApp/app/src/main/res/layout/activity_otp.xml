@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#354A69"
     android:fillViewport="true"
     android:orientation="vertical"
@@ -22,6 +23,8 @@
             android:layout_height="100dp"
             android:layout_gravity="center"
             android:layout_margin="10dp"
+            app:civ_border_width="2dp"
+            app:civ_border_color="#fff"
             android:src="@drawable/wre_logo" />
 
         <TextView

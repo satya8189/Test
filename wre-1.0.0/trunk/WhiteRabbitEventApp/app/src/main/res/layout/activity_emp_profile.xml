@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#354A69"
     tools:context=".EmpProfileActivity">
 
@@ -28,6 +29,8 @@
                     android:layout_gravity="center"
                     android:src="@drawable/user_icon"
                     android:layout_alignParentTop="true"
+                    app:civ_border_width="2dp"
+                    app:civ_border_color="@color/white"
                     android:layout_centerHorizontal="true" />
                 <Button
                     android:layout_width="40dp"

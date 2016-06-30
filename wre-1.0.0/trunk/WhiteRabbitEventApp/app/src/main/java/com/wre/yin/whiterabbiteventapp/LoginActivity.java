@@ -58,7 +58,9 @@ public class LoginActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         prefs = getSharedPreferences("Chat", 0);
         editor = prefs.edit();
+        if (Constants.checkAndRequestPermissions(this)) {
 
+        }
         employeeId = (EditText) findViewById(R.id.employee_id);
         nextBtn = (Button) findViewById(R.id.next_btn);
 
@@ -77,8 +79,6 @@ public class LoginActivity extends AppCompatActivity {
                                 if (result != null) {
                                     pBean = Utils.getObject(result, ParticipantBean.class);
                                     if (mobileNum.equals(pBean.getPhoneNumber())) {
-
-
                                         editor.putString("name", pBean.getFirstName());
                                         editor.putString("partId", pBean.getParticipantId().toString());
 

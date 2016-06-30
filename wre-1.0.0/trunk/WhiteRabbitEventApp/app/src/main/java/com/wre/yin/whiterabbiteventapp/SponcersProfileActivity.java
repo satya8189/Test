@@ -22,17 +22,20 @@ public class SponcersProfileActivity extends AppCompatActivity {
     private TextView sponcersName, sponsorDesignation, aboutSponsor;
     private CircleImageView sponsorImage;
     private List<HashMap<String, String>> sponsorIndividualList;
-    private String sponsorId, spoUrl;
+    private String sponsorId, spoUrl, sponsorName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sponcers_profile);
 
+        sponsorName = getIntent().getExtras().getString("sponsorName");
         sponsorId = getIntent().getExtras().getString("sponsorId");
         spoUrl = getIntent().getExtras().getString("sponsorUrl");
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        // getSupportActionBar().setTitle(nameTxt);
+        getSupportActionBar().setTitle(sponsorName);
+
         sponcersName = (TextView) findViewById(R.id.sponcers_name_text);
         sponsorDesignation = (TextView) findViewById(R.id.sponcers_des_text);
         aboutSponsor = (TextView) findViewById(R.id.about_sponcer_txt);
