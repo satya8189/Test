@@ -48,17 +48,20 @@ public class QAActivity extends AppCompatActivity {
                     bean.setParticipantId(Long.parseLong(partId));
                     bean.setSpeakerId(Long.parseLong(spId));
                     bean.setQuery(questionString);
-                    new MyAsyncTask(Constants.SPEAKER_QUERY, Utils.getJson(bean), QAActivity.this, new Callback() {
-                        @Override
-                        public void onResult(String result) {
-                            if (result.equals("success")) {
-                                questionTxt.setText("");
-                                Constants.createDialogSend(QAActivity.this,"success","Your query submitted successfully");
+                    if (Constants.isNetworkAvailable(QAActivity.this)) {
+                        new MyAsyncTask(Constants.SPEAKER_QUERY, Utils.getJson(bean), QAActivity.this, new Callback() {
+                            @Override
+                            public void onResult(String result) {
+                                if (result.equals("success")) {
+                                    questionTxt.setText("");
+                                    Constants.createDialogSend(QAActivity.this, "success", "Your query submitted successfully");
+                                }
+
                             }
-
-                        }
-                    }).execute();
-
+                        }).execute();
+                    } else {
+                        Constants.createDialogSend(QAActivity.this, "error", "Please connect to internet");
+                    }
                 }
             }
         });

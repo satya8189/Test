@@ -62,7 +62,7 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
 
         partiName = prefs.getString("name", null);
         partId = prefs.getString("partId", null);
-        Picasso.with(getApplicationContext()).load("http://183.82.103.156:8080/Resources/wre/profile_pics/"+partId+"/profile.jpg").placeholder(R.drawable.user_icon).into(proFic);
+        Picasso.with(getApplicationContext()).load("http://183.82.103.156:8080/Resources/wre/profile_pics/" + partId + "/profile.jpg").placeholder(R.drawable.user_icon).into(proFic);
         partName.setText(partiName);
 
         if (Constants.checkAndRequestPermissions(HomeActivity.this)) ;
@@ -86,7 +86,7 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
                 Palette.generateAsync(bitmap, new Palette.PaletteAsyncListener() {
                     public void onGenerated(Palette palette) {
                         // iView.setImageBitmap(bitmap);
-                       // Picasso.with(getApplicationContext()).load("http://183.82.103.156:8080/Resources/wre/profile_pics/"+partId+"/profile.jpg").into(proFic);
+                        // Picasso.with(getApplicationContext()).load("http://183.82.103.156:8080/Resources/wre/profile_pics/"+partId+"/profile.jpg").into(proFic);
                         int defaultColor = getResources().getColor(android.R.color.black);
                         rl1.setBackgroundColor(palette.getVibrantColor(defaultColor));
                     }
@@ -169,19 +169,23 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
 
     @Override
     public void onSliderClick(BaseSliderView slider) {
-        // Toast.makeText(this, slider.getBundle().get("extra") + "", Toast.LENGTH_SHORT).show();
-        String eventName = slider.getBundle().get("extra").toString();
-        String date = slider.getBundle().get("date").toString();
-        Intent i = new Intent(HomeActivity.this, EventDashboardActivity.class);
-        editor.putString("eventId", eventName);
-        editor.putString("eventName",slider.getBundle().get("eventName").toString());
-        editor.putString("eventDate", date);
-        editor.commit();
-        i.putExtra("eventId", eventName);
-        i.putExtra("date", date);
-        i.putExtra("eventName", slider.getBundle().get("eventName").toString());
-        startActivity(i);
+        if (Constants.isNetworkAvailable(HomeActivity.this)) {
+            // Toast.makeText(this, slider.getBundle().get("extra") + "", Toast.LENGTH_SHORT).show();
+            String eventName = slider.getBundle().get("extra").toString();
+            String date = slider.getBundle().get("date").toString();
+            Intent i = new Intent(HomeActivity.this, EventDashboardActivity.class);
+            editor.putString("eventId", eventName);
+            editor.putString("eventName", slider.getBundle().get("eventName").toString());
+            editor.putString("eventDate", date);
+            editor.commit();
+            i.putExtra("eventId", eventName);
+            i.putExtra("date", date);
+            i.putExtra("eventName", slider.getBundle().get("eventName").toString());
+            startActivity(i);
+        } else {
+            Constants.createDialogSend(HomeActivity.this, "error", "Please connect to internet");
 
+        }
     }
 
 }

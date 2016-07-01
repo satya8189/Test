@@ -81,20 +81,23 @@ public class DetailsActivity extends AppCompatActivity {
         inviteTime = (TextView) findViewById(R.id.invite_time);
         inviteDate = (TextView) findViewById(R.id.invite_date);
         inviteAddress = (TextView) findViewById(R.id.invite_address_text);
-        qrCodeImage=(ImageView)findViewById(R.id.invite_qr_image);
+        qrCodeImage = (ImageView) findViewById(R.id.invite_qr_image);
+        if (Constants.isNetworkAvailable(DetailsActivity.this)) {
+            new MyAsyncTask(Constants.ABOUT_EVENT + eventId + "&type=app", null, DetailsActivity.this, new Callback() {
+                @Override
+                public void onResult(String result) {
 
-        new MyAsyncTask(Constants.ABOUT_EVENT + eventId+"&type=app", null, DetailsActivity.this, new Callback() {
-            @Override
-            public void onResult(String result) {
-
-                EventBean eventBean = Utils.getObject(result, EventBean.class);
-                if (eventBean != null) {
-                    inviteTime.setText(eventBean.getEventTime());
-                    inviteDate.setText(eventBean.getDate());
-                    inviteAddress.setText(eventBean.getEventAddress());
+                    EventBean eventBean = Utils.getObject(result, EventBean.class);
+                    if (eventBean != null) {
+                        inviteTime.setText(eventBean.getEventTime());
+                        inviteDate.setText(eventBean.getDate());
+                        inviteAddress.setText(eventBean.getEventAddress());
+                    }
                 }
-            }
-        }).execute();
+            }).execute();
+        } else {
+            Constants.createDialogSend(DetailsActivity.this, "error", "Please connect to internet");
+        }
 
         yesButton = (Button) findViewById(R.id.partStatusYes);
         noButton = (Button) findViewById(R.id.partStatusNo);
@@ -178,20 +181,24 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     public void saveStatus(String status) {
-        ParticipantEventBean participantEventBean = new ParticipantEventBean();
-        participantEventBean.setEventId(Long.parseLong(eventId));
-        participantEventBean.setParticipantId(Long.parseLong(partId));
-        participantEventBean.setStatus(status);
-        new MyAsyncTask(Constants.PARTICIPANT_EVENT_STATUS, Utils.getJson(participantEventBean), DetailsActivity.this, new Callback() {
-            @Override
-            public void onResult(String result) {
-                String res=Utils.getString("result",result);
-                if(res.equals("suucess")){
-                    Toast.makeText(DetailsActivity.this,"Your status has been submitted successfully...",Toast.LENGTH_LONG).show();
+        if (Constants.isNetworkAvailable(DetailsActivity.this)) {
+            ParticipantEventBean participantEventBean = new ParticipantEventBean();
+            participantEventBean.setEventId(Long.parseLong(eventId));
+            participantEventBean.setParticipantId(Long.parseLong(partId));
+            participantEventBean.setStatus(status);
+            new MyAsyncTask(Constants.PARTICIPANT_EVENT_STATUS, Utils.getJson(participantEventBean), DetailsActivity.this, new Callback() {
+                @Override
+                public void onResult(String result) {
+                    String res = Utils.getString("result", result);
+                    if (res.equals("suucess")) {
+                        Toast.makeText(DetailsActivity.this, "Your status has been submitted successfully...", Toast.LENGTH_LONG).show();
 
+                    }
                 }
-            }
-        }).execute();
+            }).execute();
+        } else {
+            Constants.createDialogSend(DetailsActivity.this, "error", "Please connect to internet");
+        }
     }
 
     private String getDirectionsUrl(LatLng origin, LatLng dest) {
@@ -263,7 +270,7 @@ public class DetailsActivity extends AppCompatActivity {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
                 onBackPressed();
-                Intent i=new Intent(DetailsActivity.this,EventDashboardActivity.class);
+                Intent i = new Intent(DetailsActivity.this, EventDashboardActivity.class);
                 startActivity(i);
                 return true;
         }

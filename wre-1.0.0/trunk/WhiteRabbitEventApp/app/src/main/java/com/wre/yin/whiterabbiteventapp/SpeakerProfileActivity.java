@@ -123,15 +123,19 @@ public class SpeakerProfileActivity extends AppCompatActivity {
         View.OnClickListener clickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SpeakersRecyclerViewHolders vHoder = (SpeakersRecyclerViewHolders) v.getTag();
-                int position = vHoder.getPosition();
-                HashMap<String, String> map1 = mapsList.get(position);
-                Intent i = new Intent(SpeakerProfileActivity.this, SpeakersProfileDetailsActivity.class);
-                i.putExtra("speakerId", map1.get("speakerId"));
-                i.putExtra("speakerName", map1.get("speakersName"));
-                i.putExtra("speakerUrl", map1.get("speakerUrl"));
-                i.putExtra("eventId",eventId);
-                startActivity(i);
+                if(Constants.isNetworkAvailable(SpeakerProfileActivity.this)) {
+                    SpeakersRecyclerViewHolders vHoder = (SpeakersRecyclerViewHolders) v.getTag();
+                    int position = vHoder.getPosition();
+                    HashMap<String, String> map1 = mapsList.get(position);
+                    Intent i = new Intent(SpeakerProfileActivity.this, SpeakersProfileDetailsActivity.class);
+                    i.putExtra("speakerId", map1.get("speakerId"));
+                    i.putExtra("speakerName", map1.get("speakersName"));
+                    i.putExtra("speakerUrl", map1.get("speakerUrl"));
+                    i.putExtra("eventId", eventId);
+                    startActivity(i);
+                }else {
+                    Constants.createDialogSend(SpeakerProfileActivity.this, "error", "Please connect to internet");
+                }
             }
         };
         private Context context;

@@ -353,7 +353,7 @@ public class CrowdPicsActivity extends AppCompatActivity {
                             public void onResult(String result) {
                             String res=Utils.getString("result",result);
                                 if(res.equals("success")){
-                                    Constants.createDialogSend(CrowdPicsActivity.this,"success","Your image has been upload successfully..");
+                                    Constants.createDialogSend(CrowdPicsActivity.this, "success", "Your image has been upload successfully.");
                                 }else{
                                     Constants.createDialogSend(CrowdPicsActivity.this,"fail","Something went wrong please try again..");
                                 }

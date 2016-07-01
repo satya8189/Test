@@ -46,25 +46,28 @@ public class NetworkingActivity extends AppCompatActivity {
         eventId = getIntent().getExtras().getString("eventId");
 
         partList = new ArrayList<>();
-        new MyAsyncTask(Constants.PARTICIPANT_LIST + "?eventId=" + eventId + "&status=ACTIVE", null, NetworkingActivity.this, new Callback() {
-            @Override
-            public void onResult(String result) {
-                List<ParticipantEventBean> participantEventBeanList = Utils.getList(result, ParticipantEventBean.class);
-                for (ParticipantEventBean bean : participantEventBeanList) {
-                    HashMap<String, String> partMap = new HashMap<String, String>();
-                    partMap.put("partId", bean.getParticipantId().toString());
-                    partMap.put("partName", bean.getFirstName() + " " + bean.getLastName());
-                    partMap.put("partPhone", bean.getMobile());
-                    partList.add(partMap);
+        if (Constants.isNetworkAvailable(NetworkingActivity.this)) {
+            new MyAsyncTask(Constants.PARTICIPANT_LIST + "?eventId=" + eventId + "&status=ACTIVE", null, NetworkingActivity.this, new Callback() {
+                @Override
+                public void onResult(String result) {
+                    List<ParticipantEventBean> participantEventBeanList = Utils.getList(result, ParticipantEventBean.class);
+                    for (ParticipantEventBean bean : participantEventBeanList) {
+                        HashMap<String, String> partMap = new HashMap<String, String>();
+                        partMap.put("partId", bean.getParticipantId().toString());
+                        partMap.put("partName", bean.getFirstName() + " " + bean.getLastName());
+                        partMap.put("partPhone", bean.getMobile());
+                        partList.add(partMap);
 
+                    }
+                    RecylerAdapter adapter = new RecylerAdapter(NetworkingActivity.this, (ArrayList<HashMap<String, String>>) partList);
+                    recyclerView.setAdapter(adapter);
+                    recyclerView.setHasFixedSize(true);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(NetworkingActivity.this));
                 }
-                RecylerAdapter adapter = new RecylerAdapter(NetworkingActivity.this, (ArrayList<HashMap<String, String>>) partList);
-                recyclerView.setAdapter(adapter);
-                recyclerView.setHasFixedSize(true);
-                recyclerView.setLayoutManager(new LinearLayoutManager(NetworkingActivity.this));
-            }
-        }).execute();
-
+            }).execute();
+        } else {
+            Constants.createDialogSend(NetworkingActivity.this, "error", "Please connect to internet");
+        }
     }
 
     @Override
@@ -114,7 +117,7 @@ public class NetworkingActivity extends AppCompatActivity {
             holder.partName.setText(partAdMap.get("partName"));
             holder.partPhone.setText(partAdMap.get("partPhone"));
             holder.cardView.setOnClickListener(clickListener);
-            Picasso.with(context).load("http://183.82.103.156:8080/Resources/wre/profile_pics/"+partAdMap.get("partId")+"/profile.jpg").placeholder(R.drawable.user_icon).into(holder.partProfileImg);
+            Picasso.with(context).load("http://183.82.103.156:8080/Resources/wre/profile_pics/" + partAdMap.get("partId") + "/profile.jpg").placeholder(R.drawable.user_icon).into(holder.partProfileImg);
             holder.cardView.setTag(holder);
         }
 

@@ -69,7 +69,7 @@ public class VideosActivity extends AppCompatActivity {
     private LinearLayout camGalLayout;
     private CircleImageView camPick, gallPick;
     private Uri fileUri;
-    private String vidPath, fileName, fileTpe, encodedString,eventName,partName,fName;
+    private String vidPath, fileName, fileTpe, encodedString, eventName, partName, fName;
     //flag for which one is used for images selection
     private GridView _gallery;
     private Cursor _cursor;
@@ -79,8 +79,6 @@ public class VideosActivity extends AppCompatActivity {
     private String eventId;
     private List<HashMap<String, String>> mGridData;
     private SharedPreferences prefs;
-
-
 
 
     @Override
@@ -94,8 +92,8 @@ public class VideosActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(nameTxt);
         eventId = getIntent().getExtras().getString("eventId");
         prefs = getSharedPreferences("Chat", 0);
-        partName=prefs.getString("name", null);
-        eventName=prefs.getString("eventName", null);
+        partName = prefs.getString("name", null);
+        eventName = prefs.getString("eventName", null);
 
         prgDialog = new ProgressDialog(this);
         prgDialog.setCancelable(false);
@@ -252,8 +250,8 @@ public class VideosActivity extends AppCompatActivity {
             @Override
             public void onResult(String result) {
                 mGridData = new ArrayList<HashMap<String, String>>();
-                List<GalaryBean> docBeanList= Utils.getList(result,GalaryBean.class);
-                if(docBeanList!=null) {
+                List<GalaryBean> docBeanList = Utils.getList(result, GalaryBean.class);
+                if (docBeanList != null) {
                     for (GalaryBean bean : docBeanList) {
                         HashMap<String, String> map = new HashMap<String, String>();
                         map.put("fileName", bean.getName());
@@ -261,20 +259,20 @@ public class VideosActivity extends AppCompatActivity {
                         mGridData.add(map);
                     }
                 }
-                CustomVideosGridAdaptor  videosAdapter = new CustomVideosGridAdaptor(VideosActivity.this, R.layout.videos_row_grid, (ArrayList<HashMap<String, String>>) mGridData);
+                CustomVideosGridAdaptor videosAdapter = new CustomVideosGridAdaptor(VideosActivity.this, R.layout.videos_row_grid, (ArrayList<HashMap<String, String>>) mGridData);
                 _gallery.setAdapter(videosAdapter);
 
-        _gallery.setAdapter(new VideoGalleryAdapter(_context, (ArrayList<HashMap<String, String>>) mGridData));
-        _gallery.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                HashMap<String,String> resMap=mGridData.get(i);
-                Intent videoPlay=new Intent(VideosActivity.this,VideoPlayerActivity.class);
-                videoPlay.putExtra("videoUrl",resMap.get("videoUrl"));
-                videoPlay.putExtra("fileName",resMap.get("fileName"));
-                startActivity(videoPlay);
-            }
-        });
+                _gallery.setAdapter(new VideoGalleryAdapter(_context, (ArrayList<HashMap<String, String>>) mGridData));
+                _gallery.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        HashMap<String, String> resMap = mGridData.get(i);
+                        Intent videoPlay = new Intent(VideosActivity.this, VideoPlayerActivity.class);
+                        videoPlay.putExtra("videoUrl", resMap.get("videoUrl"));
+                        videoPlay.putExtra("fileName", resMap.get("fileName"));
+                        startActivity(videoPlay);
+                    }
+                });
             }
         }).execute();
 
@@ -325,9 +323,9 @@ public class VideosActivity extends AppCompatActivity {
                     String fileNameSegments[] = vidPath.split("/");
                     fileName = fileNameSegments[fileNameSegments.length - 1];
                     // Put file name in Async Http Post Param which will used in Java web app
-                    String fileNameSeg[]=fileName.split("-");
+                    String fileNameSeg[] = fileName.split("-");
 
-                    fName=eventName+"-"+partName+"-"+fileNameSeg[1]+"-"+new SimpleDateFormat("HHmmss",
+                    fName = eventName + "-" + partName + "-" + fileNameSeg[1] + "-" + new SimpleDateFormat("HHmmss",
                             Locale.getDefault()).format(new Date());
                     uploadVideoFromCam();
                     System.out.println("Camara video path" + fileUri.getPath());
@@ -365,9 +363,9 @@ public class VideosActivity extends AppCompatActivity {
                     cursor.close();
                     String fileNameSegments[] = vidPath.split("/");
                     fileName = fileNameSegments[fileNameSegments.length - 1];
-                    String fileNameSeg[]=fileName.split("-");
+                    String fileNameSeg[] = fileName.split("-");
 
-                    fName=eventName+"-"+partName+"-"+fileNameSeg[1]+"-"+new SimpleDateFormat("HHmmss",
+                    fName = eventName + "-" + partName + "-" + fileNameSeg[1] + "-" + new SimpleDateFormat("HHmmss",
                             Locale.getDefault()).format(new Date());
                     uploadVideoFromCam();
 
@@ -438,17 +436,22 @@ public class VideosActivity extends AppCompatActivity {
                 uploadImgVid.setFileName(fileName);
                 uploadImgVid.setType(fileTpe);
                 uploadImgVid.setEventId(Long.parseLong(eventId));
+                if (Constants.isNetworkAvailable(VideosActivity.this)) {
+                    new MyAsyncTask(Constants.UPLOAD_IMAGE_VIDEO, Utils.getJson(uploadImgVid), VideosActivity.this, new Callback() {
+                        public void onResult(String result) {
 
-                new MyAsyncTask(Constants.UPLOAD_IMAGE_VIDEO, Utils.getJson(uploadImgVid), VideosActivity.this, new Callback() {
-                    public void onResult(String result) {
+                            Result res = Utils.getObject(result, Result.class);
 
-                        Result res = Utils.getObject(result, Result.class);
-                        if (res.getResult().equals("success")) {
-                            Toast.makeText(VideosActivity.this, "Video upload successfull..", Toast.LENGTH_LONG).show();
+                            if (res.getResult().equals("success")) {
+                                Constants.createDialogSend(VideosActivity.this, "success", "Video upload successfully");
+                            } else {
+                                Constants.createDialogSend(VideosActivity.this, "fail", "Something went wrong please try again.");
+                            }
                         }
-                    }
-                }).execute();
-
+                    }).execute();
+                } else {
+                    Constants.createDialogSend(VideosActivity.this, "error", "Please connect to internet");
+                }
             }
         }.execute(null, null, null);
     }

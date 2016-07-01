@@ -42,39 +42,36 @@ public class HelpActivity extends AppCompatActivity {
         helpSubmit.setOnClickListener(new View.OnClickListener() {
                                           @Override
                                           public void onClick(View v) {
-
                                               contactName = contact_Name.getText().toString();
                                               contactMobile = contact_Mobile.getText().toString();
                                               contactEmail = contact_Email.getText().toString();
                                               helpText = help_Text.getText().toString();
 
-                                              if (Constants.isNetworkAvailable(HelpActivity.this)) {
 
-                                                  if (contactName.equals("")) {
-                                                      contact_Name.setError("Enter Name");
-                                                      contact_Name.requestFocus();
-                                                  } else if (contactMobile.equals("")) {
-                                                      contact_Mobile.setError("Enter Mobile number");
-                                                      contact_Mobile.requestFocus();
-                                                  }
-                                                  else if (contactEmail.equals("")) {
-                                                      contact_Email.setError("Enter Email");
-                                                      contact_Email.requestFocus();
+                                              if (contactName.equals("")) {
+                                                  contact_Name.setError("Enter Name");
+                                                  contact_Name.requestFocus();
+                                              } else if (contactMobile.equals("")) {
+                                                  contact_Mobile.setError("Enter Mobile number");
+                                                  contact_Mobile.requestFocus();
+                                              } else if (contactEmail.equals("")) {
+                                                  contact_Email.setError("Enter Email");
+                                                  contact_Email.requestFocus();
 
-                                                  } else if (helpText.equals("")) {
-                                                      help_Text.setError("Enter Help text here");
-                                                      help_Text.requestFocus();
+                                              } else if (helpText.equals("")) {
+                                                  help_Text.setError("Enter Help text here");
+                                                  help_Text.requestFocus();
 
-                                                  } else {
-                                                      ContactDetailsBean contactBean = new ContactDetailsBean();
-                                                      contactBean.setContactName(contactName);
-                                                      contactBean.setContactEmail(contactEmail);
-                                                      contactBean.setContactMobile(contactMobile);
-                                                      contactBean.setParticipantId(Long.parseLong(partId));
-                                                      contactBean.setEventId(Long.parseLong(eventId));
-                                                      contactBean.setContactAlternateMobile("");
-                                                      contactBean.setHelpText(helpText);
-
+                                              } else {
+                                                  ContactDetailsBean contactBean = new ContactDetailsBean();
+                                                  contactBean.setContactName(contactName);
+                                                  contactBean.setContactEmail(contactEmail);
+                                                  contactBean.setContactMobile(contactMobile);
+                                                  contactBean.setParticipantId(Long.parseLong(partId));
+                                                  contactBean.setEventId(Long.parseLong(eventId));
+                                                  contactBean.setContactAlternateMobile("");
+                                                  contactBean.setHelpText(helpText);
+                                                  if (Constants.isNetworkAvailable(HelpActivity.this)) {
                                                       new MyAsyncTask(Constants.SAVE_HELP_DETAILS, Utils.getJson(contactBean), HelpActivity.this, new Callback() {
                                                           @Override
                                                           public void onResult(String result) {
@@ -84,12 +81,11 @@ public class HelpActivity extends AppCompatActivity {
 
                                                           }
                                                       }).execute();
+                                                  } else {
+                                                      Constants.createDialogSend(HelpActivity.this, "error", "Please connect to internet");
                                                   }
-                                              } else
-
-                                              {
-                                                  Constants.createDialogSend(HelpActivity.this, "error", "No internet...");
                                               }
+
                                           }
                                       }
 

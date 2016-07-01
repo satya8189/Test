@@ -135,31 +135,31 @@ public class EmpProfileActivity extends AppCompatActivity {
         saveUpdateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String updatePartiName = empName.getText().toString();
-                String upadatePartMobile = empMobile.getText().toString();
-                String updatePartEmail = empMail.getText().toString();
-                String partAltNumber = empAlterMobile.getText().toString();
+                if (Constants.isNetworkAvailable(EmpProfileActivity.this)) {
 
-                ParticipantBean partBean = new ParticipantBean();
-                partBean.setFirstName(updatePartiName);
-                partBean.setEmailId(updatePartEmail);
-                partBean.setPhoneNumber(upadatePartMobile);
-                partBean.setStatus("ACTIVE");
-                partBean.setLastName("Kumar");
+                    String updatePartiName = empName.getText().toString();
+                    String upadatePartMobile = empMobile.getText().toString();
+                    String updatePartEmail = empMail.getText().toString();
+                    String partAltNumber = empAlterMobile.getText().toString();
 
+                    ParticipantBean partBean = new ParticipantBean();
+                    partBean.setFirstName(updatePartiName);
+                    partBean.setEmailId(updatePartEmail);
+                    partBean.setPhoneNumber(upadatePartMobile);
+                    partBean.setStatus("ACTIVE");
+                   // partBean.setLastName("Kumar");
 
-                partBean.setParticipantId(Long.parseLong(partId));
+                    partBean.setParticipantId(Long.parseLong(partId));
 
-
-                new MyAsyncTask(Constants.PARTICIPANT_UPDATE, Utils.getJson(partBean), EmpProfileActivity.this, new Callback() {
-                    @Override
-                    public void onResult(String result) {
-
-                        System.out.println("update result" + result);
-
-                    }
-                }).execute();
-
+                    new MyAsyncTask(Constants.PARTICIPANT_UPDATE, Utils.getJson(partBean), EmpProfileActivity.this, new Callback() {
+                        @Override
+                        public void onResult(String result) {
+                            Constants.createDialogSend(EmpProfileActivity.this, "success", "Your details saved successfully");
+                        }
+                    }).execute();
+                } else {
+                    Constants.createDialogSend(EmpProfileActivity.this, "error", "Please connect to internet");
+                }
 
             }
         });

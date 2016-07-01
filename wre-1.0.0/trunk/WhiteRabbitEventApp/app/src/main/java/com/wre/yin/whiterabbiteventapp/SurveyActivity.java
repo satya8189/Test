@@ -59,12 +59,16 @@ public class SurveyActivity extends AppCompatActivity {
                 questionBean.setEventId(Long.parseLong(eventId));
                 questionBean.setParticipantId(Long.parseLong(partId));
                 questionBean.setqAList(qAndA);
-                new MyAsyncTask(Constants.QUESTIONS_ANSWER_SAVE, Utils.getJson(questionBean), SurveyActivity.this, new Callback() {
-                    @Override
-                    public void onResult(String result) {
-                        System.out.println("Result in text:" + result);
-                    }
-                }).execute();
+                if(Constants.isNetworkAvailable(SurveyActivity.this)) {
+                    new MyAsyncTask(Constants.QUESTIONS_ANSWER_SAVE, Utils.getJson(questionBean), SurveyActivity.this, new Callback() {
+                        @Override
+                        public void onResult(String result) {
+                            System.out.println("Result in text:" + result);
+                        }
+                    }).execute();
+                }else{
+                    Constants.createDialogSend(SurveyActivity.this, "error", "Please connect to internet");
+                }
 
             }
         });

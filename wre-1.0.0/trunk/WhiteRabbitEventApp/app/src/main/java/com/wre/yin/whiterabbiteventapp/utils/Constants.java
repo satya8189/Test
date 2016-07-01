@@ -3,6 +3,7 @@ package com.wre.yin.whiterabbiteventapp.utils;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v4.app.ActivityCompat;
@@ -14,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -105,15 +107,25 @@ public class Constants {
         CardView llover = (CardView) promptView.findViewById(R.id.llover);
         ImageView matter = (ImageView) promptView.findViewById(R.id.error_img);
         TextView alertmsg = (TextView) promptView.findViewById(R.id.error_txt);
+
+        Button okBtn=(Button)promptView.findViewById(R.id.ok_btn);
         if (type.matches("success")) {
-            matter.setImageResource(R.drawable.tick_button);
-            llover.setBackgroundColor(context.getResources().getColor(R.color.successmsg));
+            matter.setImageResource(R.drawable.correct_icon);
+            okBtn.setTextColor(ContextCompat.getColor(context, R.color.successmsg));
+            // llover.setBackgroundColor(context.getResources().getColor(R.color.successmsg));
         } else {
-            matter.setImageResource(R.drawable.cross_red);
+            matter.setImageResource(R.drawable.wrong_icon);
+            okBtn.setTextColor(ContextCompat.getColor(context, R.color.errormsg));
           //  llover.setBackgroundResource(R.drawable.rectangle_shape_alert_box);
         }
         alertmsg.setText(text);
         alertD.setView(promptView);
+        okBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertD.dismiss();
+            }
+        });
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
         lp.copyFrom(alertD.getWindow().getAttributes());
         lp.width = WindowManager.LayoutParams.MATCH_PARENT;

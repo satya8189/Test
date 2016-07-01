@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -60,26 +61,28 @@ public class DocShareActivity extends AppCompatActivity {
         excelGrid = (GridView) findViewById(R.id.excel_doc_grid);
         loadingText = (TextView) findViewById(R.id.downloading_file_text);
 
+        if (Constants.isNetworkAvailable(DocShareActivity.this)) {
+            new MyAsyncTask(Constants.FILES_LIST + eventId + "&type=document", null, DocShareActivity.this, new Callback() {
+                @Override
+                public void onResult(String result) {
+                    docList = new ArrayList<HashMap<String, String>>();
+                    List<GalaryBean> docBeanList = Utils.getList(result, GalaryBean.class);
+                    for (GalaryBean bean : docBeanList) {
+                        HashMap<String, String> docMap = new HashMap<String, String>();
+                        docMap.put("docName", bean.getName());
+                        docMap.put("docFileName", Constants.IMAGE_URL + eventId + "/document/" + bean.getFileName());
+                        docList.add(docMap);
+                    }
+                    pdfGrid.setAdapter(new CustomAdapter(DocShareActivity.this, (ArrayList<HashMap<String, String>>) docList));
+                    // excelGrid.setAdapter(new CustomAdapter(this, excelDocsNameList, excelDocImage));
 
-        new MyAsyncTask(Constants.FILES_LIST + eventId + "&type=document", null, DocShareActivity.this, new Callback() {
-            @Override
-            public void onResult(String result) {
-                docList = new ArrayList<HashMap<String, String>>();
-                List<GalaryBean> docBeanList = Utils.getList(result, GalaryBean.class);
-                for (GalaryBean bean : docBeanList) {
-                    HashMap<String, String> docMap = new HashMap<String, String>();
-                    docMap.put("docName", bean.getName());
-                    docMap.put("docFileName", Constants.IMAGE_URL + eventId + "/document/" + bean.getFileName());
-                    docList.add(docMap);
                 }
-                pdfGrid.setAdapter(new CustomAdapter(DocShareActivity.this, (ArrayList<HashMap<String, String>>) docList));
-                // excelGrid.setAdapter(new CustomAdapter(this, excelDocsNameList, excelDocImage));
+            }).execute();
 
-            }
-        }).execute();
-
-        // wordGrid.setAdapter(new CustomAdapter(this, wordDocsNameList, wordDocImage));
-
+            // wordGrid.setAdapter(new CustomAdapter(this, wordDocsNameList, wordDocImage));
+        } else {
+            Constants.createDialogSend(DocShareActivity.this, "error", "Please connect to internet");
+        }
 
     }
 
@@ -163,20 +166,40 @@ public class DocShareActivity extends AppCompatActivity {
                             // Do something with the selection
                             String itemName = (items[item]);
                             if (itemName == "Share") {
+/*
+
+                                Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+                                sharingIntent.setType("text/html");
+                                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, Html.fromHtml(result.get("docFileName")));
+                                startActivity(Intent.createChooser(sharingIntent,"Share using"));
+*/
+
+                                Intent sendIntent = new Intent();
+                                sendIntent.setAction(Intent.ACTION_SEND);
+                               // sendIntent.putExtra(Intent.EXTRA_TEXT, "Download document" + "'" + result.get("docFileName") + "'");
+                                sendIntent.putExtra(Intent.EXTRA_TEXT, "Download document " +Uri.parse(result.get("docFileName")));
+                                sendIntent.setType("text/plain");
+                                // sendIntent.putExtra(Intent.EXTRA_TEXT , ""+result.get("docFileName") );
+                                startActivity(sendIntent);
 
                             } else if (itemName == "View") {
                                 new Thread(new Runnable() {
                                     public void run() {
-                                        Uri path = Uri.fromFile(downloadFile(result.get("docFileName"), result.get("docName") + ".pdf"));
-                                        try {
-                                            Intent intent = new Intent(Intent.ACTION_VIEW);
-                                            intent.setDataAndType(path, "application/pdf");
-                                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                            context.startActivity(intent);
+                                        if (Constants.isNetworkAvailable(DocShareActivity.this)) {
+                                            Uri path = Uri.fromFile(downloadFile(result.get("docFileName"), result.get("docName") + ".pdf"));
+                                            try {
+                                                Intent intent = new Intent(Intent.ACTION_VIEW);
+                                                intent.setDataAndType(path, "application/pdf");
+                                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                context.startActivity(intent);
 
-                                        } catch (ActivityNotFoundException e) {
+                                            } catch (ActivityNotFoundException e) {
 
-                                            Toast.makeText(context, "PDF Reader application is not installed in your device", Toast.LENGTH_LONG).show();
+                                                Toast.makeText(context, "PDF Reader application is not installed in your device", Toast.LENGTH_LONG).show();
+                                            }
+                                        } else {
+                                            Constants.createDialogSend(DocShareActivity.this, "error", "Please connect to internet");
+
                                         }
                                     }
                                 }).start();
@@ -184,7 +207,12 @@ public class DocShareActivity extends AppCompatActivity {
                             } else if (itemName == "Download") {
                                 new Thread(new Runnable() {
                                     public void run() {
-                                        downloadFile(result.get("docFileName"), result.get("docName") + ".pdf");
+                                        if (Constants.isNetworkAvailable(DocShareActivity.this)) {
+                                            downloadFile(result.get("docFileName"), result.get("docName") + ".pdf");
+                                        } else {
+                                            Constants.createDialogSend(DocShareActivity.this, "error", "Please connect to internet");
+
+                                        }
                                     }
                                 }).start();
                             }
