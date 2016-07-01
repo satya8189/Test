@@ -35,19 +35,10 @@ border: 1px solid #588CC0;
                          		<span ng-if="orgCreateForm.$submitted" ng-messages="orgCreateForm.sponcorDesc.$error" ng-messages-include="errors" style="color:red">
 						</div>
 					</div>
-					
-				<!-- <div class="col-md-12">
-					<div class="form-group col-md-6" id="uploadDiv">
-						<label class="flot-left">Upload File </label> 
-						<input type="file"
-							class="form-control form-group" name="file" id="file"
-							onchange="angular.element(this).scope().setFiles(this)">
-					</div>
-				</div> -->
 				
 				<div class="form-group col-md-6 "	id="uploadDiv">
      		  				<label class="flot-left">Upload a Document </label>
-							<input class="input-text form-control" id="file" ng-model="filename" valid-file name="file" required type="file" accept="application/*"/>
+							<input class="input-text form-control" id="file" ng-model="filename" valid-file name="file" required type="file" accept="image/*"/>
 							<span style="color:red" ng-if="orgCreateForm.file.$invalid" ng-show="orgCreateForm.$submitted">Please select a file to upload</span>
 							<!-- <span ng-if="createEvent.file.$invalid" ng-messages="createEvent.file.$file" ng-messages-include="errors" style="color:red"></span> -->
 			  	</div>
