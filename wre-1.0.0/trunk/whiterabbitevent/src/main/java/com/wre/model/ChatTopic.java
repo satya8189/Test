@@ -21,8 +21,19 @@ public class ChatTopic  implements java.io.Serializable {
      private long topicId;
      private Event event;
      private String topic;
+     private String fileName;
+     
+    public String getFileName() {
+		return fileName;
+	}
 
-    public ChatTopic() {
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+
+	public ChatTopic() {
     }
 
 	
@@ -66,8 +77,6 @@ public class ChatTopic  implements java.io.Serializable {
     public void setTopic(String topic) {
         this.topic = topic;
     }
-
-
 
 
 }

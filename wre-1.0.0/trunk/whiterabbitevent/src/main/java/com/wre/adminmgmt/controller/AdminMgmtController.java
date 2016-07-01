@@ -941,10 +941,10 @@ public class AdminMgmtController {
 
 	// Chat_Topic save method
 	@RequestMapping(value = "admin/saveChatTopic", method = RequestMethod.POST)
-	public @ResponseBody
-	void saveChatTopic(@RequestBody ChatTopicBean chatTopicBean) {
-		log.info("we are in chatTopic save method");
-		adminMgmtService.saveChatTopic(chatTopicBean);
+	public @ResponseBody void saveChatTopic(@RequestParam(value = "file", required = true) MultipartFile file,
+			@RequestParam("eventId") Long eventId,@RequestParam("chatTopicName")String chatTopicName,@RequestParam("type")String type) {
+		log.info("we are in chatTopic save method"+file.getOriginalFilename());
+		adminMgmtService.saveChatTopic(eventId,file,chatTopicName,type);
 	}
 
 	// navigate to chatDetailsPage
@@ -969,6 +969,14 @@ public class AdminMgmtController {
 	void chatTopicUpdate(@RequestBody ChatTopicBean chatTopicBean) {
 		log.info("we are in chatTopicUpdate");
 		adminMgmtService.chatTopicUpdate(chatTopicBean);
+	}
+	
+	//update chatTopic details
+	@RequestMapping(value = "admin/updateChatTopic", method = RequestMethod.POST)
+	public @ResponseBody void updateChatTopic(@RequestParam("chatTopicId")Long chatTopicId, @RequestParam(value = "file", required = true) MultipartFile file,
+			@RequestParam("eventId") Long eventId,@RequestParam("chatTopicName")String chatTopicName,@RequestParam("type")String type) {
+		log.info("we are in chatTopic save method"+file.getOriginalFilename());
+		adminMgmtService.updateChatTopic(chatTopicId,eventId,file,chatTopicName,type);
 	}
 
 	// chat_topic Delete method

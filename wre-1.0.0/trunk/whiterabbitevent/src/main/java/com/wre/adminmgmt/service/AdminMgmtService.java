@@ -116,7 +116,7 @@ public String saveUserRating(RatingBean ratingBean);
 
 public List<ChatTopicBean> getChatTopicList(Long eventId);
 
-public void saveChatTopic(ChatTopicBean chatTopicBean);
+public void saveChatTopic(Long eventId,MultipartFile file,String chatTopicName,String type);
 
 public ChatTopicBean getChatTopicDetails(Long chatTopicId);
 
@@ -166,6 +166,9 @@ public String checkOTP(ParticipantBean participantBean);
 public void profileUpload(Long participantId, String fileName);
 
 public String sendingOTP(ParticipantBean participantBean);
+
+public void updateChatTopic(Long chatTopicId, Long eventId, MultipartFile file,
+		String chatTopicName, String type);
 
 //public ClientBean getClientDetails(Long eventId);
 

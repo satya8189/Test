@@ -1159,14 +1159,48 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 		
 		//chat_topic Save method
 		@Override
-		public void saveChatTopic(ChatTopicBean chatTopicBean) {
+		public void saveChatTopic(Long eventId,MultipartFile file,String chatTopicName,String type) {
+			log.info("Entered into saveChatTopic method");
+			
+			String filePath = WREConstants.RESOURCE_PATH + eventId + File.separator
+					+type+File.separator;
+
+				
+				if (file != null) {
+					try {
+						String name = file.getOriginalFilename();
+						byte[] bytes = file.getBytes();
+						// Creating the directory to store file
+						File dir = new File(filePath);
+
+						if (!dir.exists()) {
+							dir.mkdirs();
+							log.info(filePath+"----created");
+						}
+						// Create the file on server
+						File serverFile = new File(dir.getAbsolutePath() + WREConstants.FILE_SEPARATER
+								+name);
+						BufferedOutputStream stream = new BufferedOutputStream(
+								new FileOutputStream(serverFile));
+						stream.write(bytes);
+						stream.close();
+					} catch (Exception e) {
+						
+					}
+					}
+
 			ChatTopic chatTopic = new ChatTopic();
-			chatTopic.setTopic(chatTopicBean.getChatTopicName());
-			Event event = new Event();
-			event.setEventId(chatTopicBean.getEventId());
+			
+			chatTopic.setTopic(chatTopicName);
+			chatTopic.setFileName(file.getOriginalFilename());
+			Event  event= new Event();
+			event.setEventId(eventId);
 			chatTopic.setEvent(event);
+
 			AdminMgmtDaoImpl.save(chatTopic);
+			log.info("chatTopic saved successfully");
 		}
+		
 		//chat_topic getdetailsmethod
 		@Override
 		public ChatTopicBean getChatTopicDetails(Long chatTopicId) {
@@ -1197,7 +1231,47 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 			AdminMgmtDaoImpl.update(chatTopicObj);
 			
 		}
-	
+	//to update chat topic details with file
+		public void updateChatTopic(Long chatTopicId,Long eventId,MultipartFile file,String chatTopicName,String type)
+		{
+			log.info("Entered into updateChatTopic method");
+			
+			String filePath = WREConstants.RESOURCE_PATH + eventId + File.separator
+					+type+File.separator;
+				
+				if (file != null) {
+					try {
+						String name = file.getOriginalFilename();
+						byte[] bytes = file.getBytes();
+						// Creating the directory to store file
+						File dir = new File(filePath);
+
+						if (!dir.exists()) {
+							dir.mkdirs();
+							log.info(filePath+"----created");
+						}
+						// Create the file on server
+						File serverFile = new File(dir.getAbsolutePath() + WREConstants.FILE_SEPARATER
+								+name);
+						BufferedOutputStream stream = new BufferedOutputStream(
+								new FileOutputStream(serverFile));
+						stream.write(bytes);
+						stream.close();
+					} catch (Exception e) {
+						log.info("exception in updateChatTopic...."+e);
+						}
+					}
+			
+			AdminMgmtDaoImpl.getChatTopicDetails(chatTopicId);
+			
+			ChatTopic chatTopicObj = new ChatTopic();
+			chatTopicObj.setTopicId(chatTopicId);
+			chatTopicObj.setTopic(chatTopicName);
+					Event event = new Event();
+					event.setEventId(eventId);
+			chatTopicObj.setEvent(event);
+			AdminMgmtDaoImpl.update(chatTopicObj);
+		}
 		@Override
 		public void chatTopicDelete(Long chatTopicId) {
 			
