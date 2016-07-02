@@ -13,7 +13,7 @@
         android:id="@+id/about_event_image"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        app:civ_border_width="2dp"
+        app:civ_border_width="@dimen/circle_width"
         app:civ_border_color="#000"
         android:src="@drawable/event_image2" />
 

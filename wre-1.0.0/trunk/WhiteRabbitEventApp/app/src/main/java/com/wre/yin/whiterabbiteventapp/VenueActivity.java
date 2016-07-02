@@ -16,6 +16,7 @@ public class VenueActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        VenueActivity.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
         setContentView(R.layout.activity_venue);
 
         String nameTxt = getIntent().getExtras().getString("name");
@@ -25,7 +26,7 @@ public class VenueActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(nameTxt);
 
         eventId = getIntent().getExtras().getString("eventId");
-        Picasso.with(getApplicationContext()).load(Constants.IMAGE_URL +eventId + "/layout/layout.png").placeholder(R.drawable.user_icon).into(venueImage);
+        Picasso.with(getApplicationContext()).load(Constants.IMAGE_URL + eventId + "/layout/layout.png").placeholder(R.drawable.user_icon).into(venueImage);
 
     }
 
@@ -38,5 +39,12 @@ public class VenueActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        VenueActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
+
     }
 }

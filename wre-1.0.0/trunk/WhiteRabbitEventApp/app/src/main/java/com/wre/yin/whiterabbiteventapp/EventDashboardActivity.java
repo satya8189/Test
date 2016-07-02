@@ -59,6 +59,7 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EventDashboardActivity.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
         setContentView(R.layout.activity_event_dashboard);
 
 
@@ -436,9 +437,17 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
                 onBackPressed();
+                finish();
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        EventDashboardActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
+        finish();
     }
 
     @Override

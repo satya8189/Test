@@ -38,10 +38,11 @@ public class SpeakerProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SpeakerProfileActivity.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
         setContentView(R.layout.activity_speaker_profile);
 
         String nameTxt = getIntent().getExtras().getString("name");
-         eventId= getIntent().getExtras().getString("eventId");
+        eventId = getIntent().getExtras().getString("eventId");
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(nameTxt);
@@ -116,6 +117,13 @@ public class SpeakerProfileActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        SpeakerProfileActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
+
+    }
+
     private class RecyclerViewAdapter extends RecyclerView.Adapter<SpeakersRecyclerViewHolders> {
 
         List<HashMap<String, String>> mapsList;
@@ -123,7 +131,7 @@ public class SpeakerProfileActivity extends AppCompatActivity {
         View.OnClickListener clickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Constants.isNetworkAvailable(SpeakerProfileActivity.this)) {
+                if (Constants.isNetworkAvailable(SpeakerProfileActivity.this)) {
                     SpeakersRecyclerViewHolders vHoder = (SpeakersRecyclerViewHolders) v.getTag();
                     int position = vHoder.getPosition();
                     HashMap<String, String> map1 = mapsList.get(position);
@@ -133,7 +141,7 @@ public class SpeakerProfileActivity extends AppCompatActivity {
                     i.putExtra("speakerUrl", map1.get("speakerUrl"));
                     i.putExtra("eventId", eventId);
                     startActivity(i);
-                }else {
+                } else {
                     Constants.createDialogSend(SpeakerProfileActivity.this, "error", "Please connect to internet");
                 }
             }

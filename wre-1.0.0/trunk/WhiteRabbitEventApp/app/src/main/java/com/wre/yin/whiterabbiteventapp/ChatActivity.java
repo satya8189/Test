@@ -55,6 +55,9 @@ public class ChatActivity extends Activity {
             String str1 = intent.getStringExtra("fromname");
             String str2 = intent.getStringExtra("fromu");
             prefs = getSharedPreferences("Chat", 0);
+
+            String chatMsg = chat_msg.getText().toString();
+
             if ("onchat".equals(prefs.getString("current_status", ""))) {
 
                 TableRow tr1 = new TableRow(getApplicationContext());
@@ -74,6 +77,8 @@ public class ChatActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ChatActivity.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
+
         setContentView(R.layout.activity_chat);
         tab = (TableLayout) findViewById(R.id.tab);
 
@@ -131,6 +136,8 @@ public class ChatActivity extends Activity {
 
     @Override
     public void onBackPressed() {
+        ChatActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
+
         //System.out.println("in side back pressed");
         prefs = getSharedPreferences("Chat", 0);
         SharedPreferences.Editor edit = prefs.edit();
@@ -169,7 +176,7 @@ public class ChatActivity extends Activity {
                 JSONObject jObj = new JSONObject();
                 jObj.put("from", prefs.getString("mobile", ""));
                 jObj.put("fromn", prefs.getString("name", ""));
-                jObj.put("msg", chat_msg.getText().toString());
+                jObj.put("msg", chat_msg);
 
                 HttpPost post = new HttpPost("http://183.82.103.156:8080/whiterabbitevent/send");
                 post.setEntity(new StringEntity(jObj.toString()));

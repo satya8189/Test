@@ -61,6 +61,7 @@ public class EmpProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EmpProfileActivity.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
         setContentView(R.layout.activity_emp_profile);
         //getSupportActionBar().hide();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -147,7 +148,7 @@ public class EmpProfileActivity extends AppCompatActivity {
                     partBean.setEmailId(updatePartEmail);
                     partBean.setPhoneNumber(upadatePartMobile);
                     partBean.setStatus("ACTIVE");
-                   // partBean.setLastName("Kumar");
+                    // partBean.setLastName("Kumar");
 
                     partBean.setParticipantId(Long.parseLong(partId));
 
@@ -388,5 +389,12 @@ public class EmpProfileActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        EmpProfileActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
+        finish();
     }
 }

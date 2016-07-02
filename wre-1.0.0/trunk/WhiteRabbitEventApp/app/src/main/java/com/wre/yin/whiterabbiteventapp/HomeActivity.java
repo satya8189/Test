@@ -46,6 +46,7 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        HomeActivity.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
         setContentView(R.layout.activity_home);
 
         getSupportActionBar().hide();

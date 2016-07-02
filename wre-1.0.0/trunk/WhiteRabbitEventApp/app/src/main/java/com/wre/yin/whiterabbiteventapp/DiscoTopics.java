@@ -34,6 +34,8 @@ public class DiscoTopics extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        DiscoTopics.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
+
         setContentView(R.layout.activity_disco_topics);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -76,6 +78,13 @@ public class DiscoTopics extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        DiscoTopics.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
+
     }
 
     private class RecylerAdapter extends RecyclerView.Adapter<RecyclerViewHolderChatTopics> {

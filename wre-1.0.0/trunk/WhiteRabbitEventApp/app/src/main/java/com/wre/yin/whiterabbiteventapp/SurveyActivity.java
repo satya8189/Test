@@ -39,6 +39,7 @@ public class SurveyActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SurveyActivity.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
         setContentView(R.layout.activity_survey);
         String nameTxt = getIntent().getExtras().getString("name");
 
@@ -116,6 +117,13 @@ public class SurveyActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        SurveyActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
+
     }
 
     private class RecylerAdapter extends RecyclerView.Adapter<SurveyViewHolder> {

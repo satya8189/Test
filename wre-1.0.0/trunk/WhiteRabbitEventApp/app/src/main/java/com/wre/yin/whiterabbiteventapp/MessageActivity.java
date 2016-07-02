@@ -59,6 +59,7 @@ public class MessageActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MessageActivity.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
         setContentView(R.layout.activity_message);
 
         topicName = getIntent().getExtras().getString("name");
@@ -227,6 +228,8 @@ public class MessageActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        MessageActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
+
         LocalBroadcastManager.getInstance(MessageActivity.this).unregisterReceiver(onNotice);
         SharedPreferences.Editor edit = prefs.edit();
 

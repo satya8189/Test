@@ -39,6 +39,7 @@ public class SponcersActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SponcersActivity.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
         setContentView(R.layout.activity_sponcers);
 
         String nameTxt = getIntent().getExtras().getString("name");
@@ -116,6 +117,13 @@ public class SponcersActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        SponcersActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
+
     }
 
     private class RecyclerViewAdapter extends RecyclerView.Adapter<SponcersRecyclerViewHolders> {

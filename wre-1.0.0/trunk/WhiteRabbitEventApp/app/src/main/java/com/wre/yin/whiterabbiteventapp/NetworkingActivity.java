@@ -34,6 +34,7 @@ public class NetworkingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        NetworkingActivity.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
         setContentView(R.layout.activity_networking);
 
         String nameTxt = getIntent().getExtras().getString("name");
@@ -80,6 +81,13 @@ public class NetworkingActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        NetworkingActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
+
     }
 
     private class RecylerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
