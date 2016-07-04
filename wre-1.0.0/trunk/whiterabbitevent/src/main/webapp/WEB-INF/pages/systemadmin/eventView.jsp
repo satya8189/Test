@@ -21,19 +21,15 @@ border: 1px solid #588CC0;
 				<div class="row">
 					<div class="col-md-12 padding-35">
 
-					
 						<div class="col-md-12">
 							<label>Event Name: {{event.eventName}}</label>
 						</div>
-						
 						<div class="col-md-12">
 							<label>EventDesc: {{event.eventDesc}}</label>
 						</div>
-						
 						<div class="col-md-12">
 							<label>EventAgenda: {{event.eventAgenda}}</label>
 						</div>
-						
 						<div class="col-md-12">
 							<label>EventAddress: {{event.eventAddress}}</label>
 						</div>

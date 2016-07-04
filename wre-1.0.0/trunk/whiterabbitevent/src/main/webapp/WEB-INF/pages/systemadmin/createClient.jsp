@@ -19,7 +19,6 @@
 	</style>
 <div class="col-md-12">
 	
-
 	<div class="panel">
 		<div class="panel-heading text-center font-size-20 padding-15 bodyheadbg" >Create
 			Client</div>
@@ -29,7 +28,6 @@
 				<br/>
 				<div class="row">
 					<div class="col-md-12">
-
 						<div class="form-group col-md-6">
 							 <label>Client name </label>
 							<input type="text" class="input-text form-control "

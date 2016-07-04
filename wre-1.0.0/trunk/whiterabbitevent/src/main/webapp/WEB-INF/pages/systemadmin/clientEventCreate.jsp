@@ -221,8 +221,6 @@
 					</select>
 				</div>
 
-
-			
 			
 						
 					</div>
@@ -231,8 +229,6 @@
 				<span class="help-inline" id="uploadDivError" style="display: none;color:red;" >Select logo to upload</span> 
 			<span class="help-inline" id="extensionDivError" style="display: none;color: red;">only jpeg,png,gif formats are allowed</span>
 			</div>
-
-
 
 			<div class="form-group col-md-12 text-center">
 				<input type="submit" ng-click="submitted=true"

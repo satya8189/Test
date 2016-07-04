@@ -40,7 +40,7 @@ width: 58px;
 								<img src="resources/images/details.png" ng-if="service.serviceName=='Details'"/>
 								<img src="resources/images/gallery.png" ng-if="service.serviceName=='Gallery'"/>
 								<img src="resources/images/invite.png" ng-if="service.serviceName=='Invite'"/>
-								<img src="resources/images/layout.png" ng-if="service.serviceName=='Venue layout'"/>
+								 <img src="resources/images/layout.png" ng-if="service.serviceName=='Venue layout'"/>
 								<img src="resources/images/messageboard.png" ng-if="service.serviceName=='Message Board'"/>
 								<img src="resources/images/network.png" ng-if="service.serviceName=='Networking'"/>
 								<img src="resources/images/newsfeed.png" ng-if="service.serviceName=='NewsFeed'"/>
@@ -54,7 +54,7 @@ width: 58px;
 								<img src="resources/images/network.png" ng-if="service.serviceName=='Chat'"/>
 								<img src="resources/images/Q&A.png" ng-if="service.serviceName=='Help'"/>
 								<img src="resources/images/video.png" ng-if="service.serviceName=='Videos'"/>
-								<img src="resources/images/video.png" ng-if="service.serviceName=='EventImage'"/>
+								 <img src="resources/images/video.png" ng-if="service.serviceName=='EventImage'"/> 
 								
 								 <h4 class="f18" style="text-transform: capitalize;">{{service.serviceName}}</h4> 
 							 </div>

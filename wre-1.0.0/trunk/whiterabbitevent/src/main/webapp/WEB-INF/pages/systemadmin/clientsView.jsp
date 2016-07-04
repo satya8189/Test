@@ -41,12 +41,10 @@
 					<td >{{client.address}}</td>
 					<td >{{client.description}}</td>
 					<td >{{client.status}}</td>
-					
 					<td>
 					<a ng-click="navigateToEventView(client.clientId)" title="View Events">
 							<span class="glyphicon glyphicon-eye-open icons"> </span>
 						</a>		
-						
 						
 					</td>	
 				</tr>

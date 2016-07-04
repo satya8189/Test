@@ -39,6 +39,7 @@
    <!--   EventViewController -->
     <script src="resources/js/systemadmin/EventViewController.js"></script>
     <!-- To view the list of services -->
+    
     <script src="resources/js/systemadmin/ServiceViewController.js"></script>
 <!--  admin services ViewDetails starts     -->
     <script src="resources/js/admin/AgendoViewController.js"></script>

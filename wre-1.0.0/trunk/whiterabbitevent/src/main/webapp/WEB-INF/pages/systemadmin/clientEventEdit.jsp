@@ -118,10 +118,8 @@ border: 1px solid #588CC0;
 							<div ng-if="ipForm.$submitted" ng-messages="ipForm.eventDesc.$error" ng-messages-include="errors">
      						 </div>
      						 </div>
-     						
    	    						 
   <div class="form-group">
-  
   <label>EventAddress</label>
 						<input type="text" class="input-text form-control " id="eventAddress" placeholder="eventAddress" 
 							ng-model="event.eventAddress" name="eventAddress" required/>

@@ -25,7 +25,7 @@
 		
 			<div class="col-md-2 col-md-offset-9 text-left" ng-show="eventList.length > 0">
 				<input ng-model="search" class="form-control full-right" placeholder="Search"
-					ng-hide="eventList.length==0"></div>
+					></div>
 					<div class="col-md-1 padding-0 "> 	<button ng-click="navigateClientEventCreate()" class=" btn btn-primary pull-left"
 			>Create
 			Event</button></div>
@@ -49,14 +49,14 @@
 					<td>{{event.eventAddress}}</td>
 					<td>{{event.eventTime}}</td>
 					<td>
-					<a ng-click="navigatetoEventEdit(event.eventId)"title="eventEdit"> <span
+					<a ng-click="navigatetoEventEdit(event.eventId)"title="Edit"> <span
 							class="glyphicon glyphicon-pencil margin-2 icons"> </span></a>
 							
-							<a ng-click="eventView(event.eventId)"title="eventViewDetails">
+							<a ng-click="eventView(event.eventId)"title="ViewDetails">
 								<i class="fa fa-eye-slash icons"> </i>
 							</a>
 							
-							<a ng-click="serviceListView(event.eventId)" title="view service list">
+							<a ng-click="serviceListView(event.eventId)" title=" ServicesView">
 								<i class="glyphicon glyphicon-eye-open"> </i>
 							</a>
 				
