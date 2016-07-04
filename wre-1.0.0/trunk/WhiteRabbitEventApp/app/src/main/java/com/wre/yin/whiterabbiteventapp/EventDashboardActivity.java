@@ -5,20 +5,15 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,7 +45,6 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
     private ArrayList<Item> gridArray = new ArrayList<Item>();
     private CustomGridViewAdapter customGridAdapter;
     private SliderLayout mDemoSlider;
-    private ImageView backImg;
     public static TextView eventIdTxt, eventDateTime, noOfParticipanta, attendStatus;
     private String eventId, eventDate, eventName, partId;
     private boolean mPermissionDenied = false;
@@ -65,22 +59,12 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // EventDashboardActivity.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
+       // EventDashboardActivity.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
         setContentView(R.layout.activity_event_dashboard);
 
 
         mDemoSlider = (SliderLayout) findViewById(R.id.slider);
-        backImg = (ImageView) findViewById(R.id.back_imag);
-        backImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-        // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        // setSupportActionBar(toolbar);
         // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        // getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(android.R.color.transparent)));
         getSupportActionBar().hide();
         prefs = getSharedPreferences("Chat", 0);
         partId = prefs.getString("partId", null);
@@ -461,7 +445,7 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        //  EventDashboardActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
+      //  EventDashboardActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
         finish();
     }
 
@@ -508,7 +492,7 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
     @Override
     protected void onRestart() {
         super.onRestart();
-        //  EventDashboardActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
+      //  EventDashboardActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
         Intent refresh = new Intent(EventDashboardActivity.this, EventDashboardActivity.class);
 
         startActivity(refresh);

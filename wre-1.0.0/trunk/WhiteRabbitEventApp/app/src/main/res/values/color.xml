@@ -17,7 +17,7 @@
     <color name="background">#FEFCFF</color>
     <color name="dashboard_background">#ECEFF1</color>
 
-
+    <color name="heart">#FFC400</color>
     <color name="bright_pink">#FF007F</color>
     <color name="red">#FF8A65</color>
     <color name="orange">#FF7F00</color>

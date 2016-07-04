@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.squareup.picasso.Picasso;
 import com.wre.yin.whiterabbiteventapp.beans.EventBean;
 import com.wre.yin.whiterabbiteventapp.beans.ParticipantEventBean;
 import com.wre.yin.whiterabbiteventapp.utils.Callback;
@@ -50,8 +52,8 @@ public class DetailsActivity extends AppCompatActivity {
     GoogleMap map;
     Bundle b;
     ArrayList<LatLng> markerPoints;
-    double destLatitude = 18.320491;
-    double destLongitude = 80.241609;
+    double destLatitude ;
+    double destLongitude;
     double sourceLatitude, sourceLongitude;
     GPSTracker gpsTracker;
     private TextView inviteTime, inviteDate, inviteAddress;
@@ -66,8 +68,6 @@ public class DetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // DetailsActivity.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
-
         setContentView(R.layout.activity_details);
 
         String nameTxt = getIntent().getExtras().getString("name");
@@ -83,23 +83,94 @@ public class DetailsActivity extends AppCompatActivity {
         inviteTime = (TextView) findViewById(R.id.invite_time);
         inviteDate = (TextView) findViewById(R.id.invite_date);
         inviteAddress = (TextView) findViewById(R.id.invite_address_text);
-        qrCodeImage = (ImageView) findViewById(R.id.invite_qr_image);
-        if (Constants.isNetworkAvailable(DetailsActivity.this)) {
-            new MyAsyncTask(Constants.ABOUT_EVENT + eventId + "&type=app", null, DetailsActivity.this, new Callback() {
-                @Override
-                public void onResult(String result) {
+        qrCodeImage=(ImageView)findViewById(R.id.invite_qr_image);
 
-                    EventBean eventBean = Utils.getObject(result, EventBean.class);
-                    if (eventBean != null) {
-                        inviteTime.setText(eventBean.getEventTime());
-                        inviteDate.setText(eventBean.getDate());
-                        inviteAddress.setText(eventBean.getEventAddress());
+        new MyAsyncTask(Constants.ABOUT_EVENT + eventId+"&type=app", null, DetailsActivity.this, new Callback() {
+            @Override
+            public void onResult(String result) {
+
+                EventBean eventBean = Utils.getObject(result, EventBean.class);
+                if (eventBean != null) {
+                    inviteTime.setText(eventBean.getEventTime());
+                    inviteDate.setText(eventBean.getDate());
+                    inviteAddress.setText(eventBean.getEventAddress());
+
+                    SupportMapFragment fm = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map_fragment);
+
+
+                    gpsTracker = new GPSTracker(DetailsActivity.this);
+                    if (gpsTracker.isGPSEnabled) {
+                        Location loc = gpsTracker.getLocation();
+            /*sourceLatitude = gpsTracker.getLatitude();
+            sourceLongitude = gpsTracker.getLongitude();*/
+                        sourceLatitude = loc.getLatitude();
+                        sourceLongitude = loc.getLongitude();
+                    } else {
+                        gpsTracker.showSettingsAlert();
                     }
+
+                    Geocoder coder = new Geocoder(DetailsActivity.this);
+                    List<android.location.Address> addresses;
+                    try {
+                        addresses = coder.getFromLocationName(eventBean.getEventAddress(), 5);
+                        if (addresses == null) {
+                        }
+                        android.location.Address location = addresses.get(0);
+                        destLatitude = location.getLatitude();
+                        destLongitude= location.getLongitude();
+
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    map = fm.getMap();
+                    if (map != null) {
+
+                        // Getting Map for the SupportMapFragment
+
+
+                        // Enable MyLocation Button in the Map
+
+                        if (ActivityCompat.checkSelfPermission(DetailsActivity.this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(DetailsActivity.this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                            // TODO: Consider calling
+                            //    ActivityCompat#requestPermissions
+                            // here to request the missing permissions, and then overriding
+                            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                            //                                          int[] grantResults)
+                            // to handle the case where the user grants the permission. See the documentation
+                            // for ActivityCompat#requestPermissions for more details.
+                            return;
+                        }
+                        map.setMyLocationEnabled(true);
+                        LatLng destlatLan = new LatLng(destLatitude, destLongitude);
+                        MarkerOptions option = new MarkerOptions();
+                        option.position(destlatLan);
+                        option.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+                        //CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(latLan, 15);
+                        //map.animateCamera(yourLocation);
+                        map.addMarker(option);
+
+                        LatLng sourceLatLan = new LatLng(sourceLatitude, sourceLongitude);
+                        MarkerOptions sourceOption = new MarkerOptions();
+                        sourceOption.position(sourceLatLan);
+                        sourceOption.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+                        CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(sourceLatLan, 12);
+                        map.animateCamera(yourLocation);
+                        map.addMarker(sourceOption);
+
+                        String url = getDirectionsUrl(sourceLatLan, destlatLan);
+
+                        DownloadTask downloadTask = new DownloadTask();
+
+                        // Start downloading json data from Google Directions API
+                        downloadTask.execute(url);
+                    }
+
+
                 }
-            }).execute();
-        } else {
-            Constants.createDialogSend(DetailsActivity.this, "error", "Please connect to internet");
-        }
+            }
+        }).execute();
 
         yesButton = (Button) findViewById(R.id.partStatusYes);
         noButton = (Button) findViewById(R.id.partStatusNo);
@@ -109,98 +180,44 @@ public class DetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 saveStatus("Yes");
-                /*EventDashboardActivity.attendStatus.setText("I will attend");
-                EventDashboardActivity.attendStatus.setTextColor(Color.GREEN);*/
+                qrCodeImage.setVisibility(View.VISIBLE);
+                Picasso.with(DetailsActivity.this).load("http://183.82.103.156:8080/Resources/wre/" +eventId+"/"+ partId + "/QR.png").into(qrCodeImage);
+
             }
         });
         noButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 saveStatus("No");
+                qrCodeImage.setVisibility(View.GONE);
             }
         });
         maybeButtun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 saveStatus("MayBe");
+                qrCodeImage.setVisibility(View.GONE);
             }
         });
 
-        SupportMapFragment fm = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map_fragment);
 
-
-        gpsTracker = new GPSTracker(DetailsActivity.this);
-        if (gpsTracker.isGPSEnabled) {
-            Location loc = gpsTracker.getLocation();
-            sourceLatitude = gpsTracker.getLatitude();
-            sourceLongitude = gpsTracker.getLongitude();
-        } else {
-            gpsTracker.showSettingsAlert();
-        }
-
-        map = fm.getMap();
-        if (map != null) {
-
-            // Getting Map for the SupportMapFragment
-
-
-            // Enable MyLocation Button in the Map
-
-            if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-                return;
-            }
-            map.setMyLocationEnabled(true);
-            LatLng latLan = new LatLng(destLatitude, destLongitude);
-            MarkerOptions option = new MarkerOptions();
-            option.position(latLan);
-            option.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-            //CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(latLan, 15);
-            //map.animateCamera(yourLocation);
-            map.addMarker(option);
-
-            LatLng sourceLatLan = new LatLng(sourceLatitude, sourceLongitude);
-            MarkerOptions sourceOption = new MarkerOptions();
-            option.position(sourceLatLan);
-            option.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-            CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(sourceLatLan, 18);
-            map.animateCamera(yourLocation);
-            map.addMarker(option);
-
-            String url = getDirectionsUrl(sourceLatLan, latLan);
-
-            DownloadTask downloadTask = new DownloadTask();
-
-            // Start downloading json data from Google Directions API
-            downloadTask.execute(url);
-        }
     }
 
     public void saveStatus(String status) {
-        if (Constants.isNetworkAvailable(DetailsActivity.this)) {
-            ParticipantEventBean participantEventBean = new ParticipantEventBean();
-            participantEventBean.setEventId(Long.parseLong(eventId));
-            participantEventBean.setParticipantId(Long.parseLong(partId));
-            participantEventBean.setStatus(status);
-            new MyAsyncTask(Constants.PARTICIPANT_EVENT_STATUS, Utils.getJson(participantEventBean), DetailsActivity.this, new Callback() {
-                @Override
-                public void onResult(String result) {
-                    String res = Utils.getString("result", result);
-                    if (res.equals("suucess")) {
-                        Toast.makeText(DetailsActivity.this, "Your status has been submitted successfully...", Toast.LENGTH_LONG).show();
+        ParticipantEventBean participantEventBean = new ParticipantEventBean();
+        participantEventBean.setEventId(Long.parseLong(eventId));
+        participantEventBean.setParticipantId(Long.parseLong(partId));
+        participantEventBean.setStatus(status);
+        new MyAsyncTask(Constants.PARTICIPANT_EVENT_STATUS, Utils.getJson(participantEventBean), DetailsActivity.this, new Callback() {
+            @Override
+            public void onResult(String result) {
+                String res=Utils.getString("result",result);
+                if(res.equals("suucess")){
+                    Toast.makeText(DetailsActivity.this,"Your status has been submitted successfully...",Toast.LENGTH_LONG).show();
 
-                    }
                 }
-            }).execute();
-        } else {
-            Constants.createDialogSend(DetailsActivity.this, "error", "Please connect to internet");
-        }
+            }
+        }).execute();
     }
 
     private String getDirectionsUrl(LatLng origin, LatLng dest) {
@@ -272,8 +289,8 @@ public class DetailsActivity extends AppCompatActivity {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
                 onBackPressed();
-             //   DetailsActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
-                finish();
+                Intent i=new Intent(DetailsActivity.this,EventDashboardActivity.class);
+                startActivity(i);
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -282,7 +299,8 @@ public class DetailsActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-      //  DetailsActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
+        Intent i=new Intent(DetailsActivity.this,EventDashboardActivity.class);
+        startActivity(i);
     }
 
     // Fetches data from url passed
@@ -372,12 +390,13 @@ public class DetailsActivity extends AppCompatActivity {
                     // Adding all the points in the route to LineOptions
                     lineOptions.addAll(points);
                     lineOptions.width(4);
-                    lineOptions.color(Color.BLUE);
+                    lineOptions.color(Color.parseColor("#607D8B"));
+
 
                 }
 
                 // Drawing polyline in the Google Map for the i-th route
-                // map.addPolyline(lineOptions);
+                 map.addPolyline(lineOptions);
             } catch (Exception e) {
                 e.printStackTrace();
             }

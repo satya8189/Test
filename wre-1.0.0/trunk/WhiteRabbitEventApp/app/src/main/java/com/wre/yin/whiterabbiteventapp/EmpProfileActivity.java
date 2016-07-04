@@ -61,7 +61,6 @@ public class EmpProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // EmpProfileActivity.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
         setContentView(R.layout.activity_emp_profile);
         //getSupportActionBar().hide();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -136,31 +135,31 @@ public class EmpProfileActivity extends AppCompatActivity {
         saveUpdateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Constants.isNetworkAvailable(EmpProfileActivity.this)) {
+                String updatePartiName = empName.getText().toString();
+                String upadatePartMobile = empMobile.getText().toString();
+                String updatePartEmail = empMail.getText().toString();
+                String partAltNumber = empAlterMobile.getText().toString();
 
-                    String updatePartiName = empName.getText().toString();
-                    String upadatePartMobile = empMobile.getText().toString();
-                    String updatePartEmail = empMail.getText().toString();
-                    String partAltNumber = empAlterMobile.getText().toString();
+                ParticipantBean partBean = new ParticipantBean();
+                partBean.setFirstName(updatePartiName);
+                partBean.setEmailId(updatePartEmail);
+                partBean.setPhoneNumber(upadatePartMobile);
+                partBean.setStatus("ACTIVE");
+                partBean.setLastName("Kumar");
 
-                    ParticipantBean partBean = new ParticipantBean();
-                    partBean.setFirstName(updatePartiName);
-                    partBean.setEmailId(updatePartEmail);
-                    partBean.setPhoneNumber(upadatePartMobile);
-                    partBean.setStatus("ACTIVE");
-                    // partBean.setLastName("Kumar");
 
-                    partBean.setParticipantId(Long.parseLong(partId));
+                partBean.setParticipantId(Long.parseLong(partId));
 
-                    new MyAsyncTask(Constants.PARTICIPANT_UPDATE, Utils.getJson(partBean), EmpProfileActivity.this, new Callback() {
-                        @Override
-                        public void onResult(String result) {
-                            Constants.createDialogSend(EmpProfileActivity.this, "success", "Your details saved successfully");
-                        }
-                    }).execute();
-                } else {
-                    Constants.createDialogSend(EmpProfileActivity.this, "error", "Please connect to internet");
-                }
+
+                new MyAsyncTask(Constants.PARTICIPANT_UPDATE, Utils.getJson(partBean), EmpProfileActivity.this, new Callback() {
+                    @Override
+                    public void onResult(String result) {
+
+                        System.out.println("update result" + result);
+
+                    }
+                }).execute();
+
 
             }
         });
@@ -389,12 +388,5 @@ public class EmpProfileActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-     //   EmpProfileActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
-        finish();
     }
 }
