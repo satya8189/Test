@@ -29,7 +29,7 @@ public class GalleryNewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        GalleryNewActivity.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
+      //  GalleryNewActivity.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
         setContentView(R.layout.activity_gallery_new);
         eventId = getIntent().getExtras().getString("eventId");
         name = getIntent().getExtras().getString("name");
@@ -101,7 +101,7 @@ public class GalleryNewActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        GalleryNewActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
+      //  GalleryNewActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
 
     }
 }

@@ -66,7 +66,7 @@ public class DetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        DetailsActivity.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
+       // DetailsActivity.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
 
         setContentView(R.layout.activity_details);
 
@@ -272,9 +272,7 @@ public class DetailsActivity extends AppCompatActivity {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
                 onBackPressed();
-                DetailsActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
-                Intent i = new Intent(DetailsActivity.this, EventDashboardActivity.class);
-                startActivity(i);
+             //   DetailsActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
                 finish();
                 return true;
         }
@@ -284,10 +282,7 @@ public class DetailsActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        DetailsActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
-        Intent i = new Intent(DetailsActivity.this, EventDashboardActivity.class);
-        startActivity(i);
-        finish();
+      //  DetailsActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
     }
 
     // Fetches data from url passed

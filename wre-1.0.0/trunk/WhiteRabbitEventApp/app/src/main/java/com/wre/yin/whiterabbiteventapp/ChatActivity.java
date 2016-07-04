@@ -77,7 +77,7 @@ public class ChatActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ChatActivity.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
+      //  ChatActivity.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
 
         setContentView(R.layout.activity_chat);
         tab = (TableLayout) findViewById(R.id.tab);
@@ -136,7 +136,7 @@ public class ChatActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-        ChatActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
+       // ChatActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
 
         //System.out.println("in side back pressed");
         prefs = getSharedPreferences("Chat", 0);

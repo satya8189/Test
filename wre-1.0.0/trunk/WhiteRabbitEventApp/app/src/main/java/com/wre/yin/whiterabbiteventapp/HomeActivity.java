@@ -142,6 +142,7 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
 
                             mDemoSlider.addSlider(textSliderView);
                             mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Stack);
+
                         }
                     }
                 }

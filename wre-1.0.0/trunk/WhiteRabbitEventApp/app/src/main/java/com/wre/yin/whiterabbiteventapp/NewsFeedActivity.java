@@ -30,7 +30,7 @@ public class NewsFeedActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        NewsFeedActivity.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
+       // NewsFeedActivity.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
         setContentView(R.layout.activity_news_feed);
         String nameTxt = getIntent().getExtras().getString("name");
         String eventId = getIntent().getExtras().getString("eventId");
@@ -87,7 +87,7 @@ public class NewsFeedActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        NewsFeedActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
+       // NewsFeedActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
     }
 
     private class RecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerViewHolder> {

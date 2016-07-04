@@ -59,7 +59,7 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EventDashboardActivity.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
+       // EventDashboardActivity.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
         setContentView(R.layout.activity_event_dashboard);
 
 
@@ -72,7 +72,6 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
         eventDate = prefs.getString("eventDate", null);
         eventName = prefs.getString("eventName", null);
         if (Constants.checkAndRequestPermissions(this)) {
-
         }
         /*eventId = getIntent().getExtras().getString("eventId");
         eventDate = getIntent().getExtras().getString("date");
@@ -446,7 +445,7 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        EventDashboardActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
+      //  EventDashboardActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
         finish();
     }
 
@@ -493,6 +492,10 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
     @Override
     protected void onRestart() {
         super.onRestart();
+      //  EventDashboardActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
+        Intent refresh = new Intent(EventDashboardActivity.this, EventDashboardActivity.class);
 
+        startActivity(refresh);
+        this.finish();
     }
 }
