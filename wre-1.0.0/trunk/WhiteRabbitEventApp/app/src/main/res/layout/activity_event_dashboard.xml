@@ -11,8 +11,6 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-
         <com.daimajia.slider.library.SliderLayout
             android:id="@+id/slider"
             android:layout_width="match_parent"
@@ -51,12 +49,10 @@
         android:orientation="vertical"
         android:padding="10dp">
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-
             android:weightSum="2">
 
             <TextView
@@ -120,7 +116,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:gravity="end"
-                android:text="Attendance"
+                android:text="Attend"
                 android:textColor="#000" />
         </LinearLayout>
 
