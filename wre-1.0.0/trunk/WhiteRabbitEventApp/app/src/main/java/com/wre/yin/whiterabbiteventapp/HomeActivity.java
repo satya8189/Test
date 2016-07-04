@@ -51,6 +51,7 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
 
         getSupportActionBar().hide();
 
+
         prefs = getSharedPreferences("Chat", 0);
         editor = prefs.edit();
         mDemoSlider = (SliderLayout) findViewById(R.id.slider);

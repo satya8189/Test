@@ -144,7 +144,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".EmpProfileActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"/>
         <activity
             android:name=".LoginActivity"
             android:screenOrientation="portrait" />

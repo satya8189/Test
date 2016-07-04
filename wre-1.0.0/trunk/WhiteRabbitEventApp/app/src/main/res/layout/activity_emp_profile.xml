@@ -88,7 +88,9 @@
                 android:singleLine="true"
                 android:textColor="#fff"
                 android:textColorHint="@color/white"
-                android:textSize="16sp" />
+                android:textSize="16sp" >
+                <requestFocus/>
+            </EditText>
 
             <EditText
                 android:id="@+id/emp_mail"
