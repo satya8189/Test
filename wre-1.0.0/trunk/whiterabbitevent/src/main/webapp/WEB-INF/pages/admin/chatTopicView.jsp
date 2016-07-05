@@ -62,11 +62,10 @@ margin-bottom:0px !important;
 					
 					
 					<td>
-					<a ng-click="navigateToChatEdit(chat.chatTopicId)" title="EditChatTopicDetails" ng-hide="roleId==100">
+					<a ng-click="navigateToChatEdit(chat.chatTopicId)" title="edit" ng-hide="roleId==100">
 							<span class="glyphicon glyphicon-pencil margin-2 icons"> </span>
 						</a>
-					<a
-						title="DeleteChatTopic" ng-click="deleteChat(chat.chatTopicId)" ng-hide="roleId==100">
+					<a	title="delete" ng-click="deleteChat(chat.chatTopicId)"  ng-hide="roleId==100">
 							<span class="glyphicon glyphicon-trash margin-2 red"> </span>
 					</a>		
 					</td>	

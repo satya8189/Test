@@ -47,7 +47,7 @@ margin-bottom:0px !important;
 					
 			<td>
 					
-				<a ng-click="newsFeedEdit(news.newsFeedId)"title="newsFeedEdit" ng-hide="roleId==100">
+				<a ng-click="newsFeedEdit(news.newsFeedId)" title="edit" ng-hide="roleId==100">
 							<i class="glyphicon glyphicon-pencil"> </i>
 				</a>
 						

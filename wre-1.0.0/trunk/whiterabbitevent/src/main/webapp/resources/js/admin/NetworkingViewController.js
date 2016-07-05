@@ -1,7 +1,8 @@
-var NetworkingViewController = function($scope,$http,$routeParams,$location,filterFilter) {
-  	$scope.eventId={};
+var NetworkingViewController = function($scope,$http,$routeParams,$location,filterFilter,$rootScope,ngNotifier) {
+  		$scope.eventId={};
 		$scope.networkList={};
 		$scope.filteredSize;
+		
 		$scope.$on("$routeChangeSuccess", function () {
 		 $scope.eventId=$routeParams.eventId;
 	//	 alert("eventId-----------"+$routeParams.eventId);
@@ -51,6 +52,29 @@ var NetworkingViewController = function($scope,$http,$routeParams,$location,filt
 			$location.path("/eventViewDetails/"+eventId);
 		} ;
 		
+		//method for QR Code generation
+		$scope.generateQRCode = function(participant){
+			//alert(participant.eventId+"- -"+participant.participantId+"--"+participant.emailId+"--"+participant.status+"---working generateQRCode");
+			
+			$scope.inviteBean={};
+			$scope.inviteBean.eventId=participant.eventId;
+			$scope.inviteBean.participantId=participant.participantId;
+			$scope.inviteBean.firstName=participant.firstName;
+			$scope.inviteBean.lastName=participant.lastName;
+			$scope.inviteBean.eventName=$rootScope.eventName;
+			$scope.inviteBean.phone=participant.phone;
+			
+			//participant.eventName='cong';participantId
+			//alert($scope.inviteBean.eventName);
+			$http.post('admin/generateQRCode',$scope.inviteBean).success(function(data) {
+			    	//alert("QR success");
+			    	ngNotifier.notify("QR Code Generated  Successfully !");
+			    }).error(function(data) {
+			    	//alert("QR Fail");
+			    	ngNotifier.notifyError("Could not genarate QR Code !");
+			    });
+			
+		};
 };
 
 

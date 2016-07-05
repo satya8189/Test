@@ -39,7 +39,7 @@ margin-bottom:0px !important;
 					     <th>Mobile </th>
 						 <th>Email</th>
 						 <th>Status</th>
-						 <!-- <th>Action</th> -->
+						 <th>Action</th>
 				   </tr>
 				</thead>
 				
@@ -54,6 +54,11 @@ margin-bottom:0px !important;
 							<i class="fa fa-eye-slash icons"> </i>
 						</a>
 					</td> -->
+					<td>
+						<a ng-click="generateQRCode(event)" title="Generate QR Code">
+							<i class="fa fa-eye-slash icons"> </i>
+						</a>
+					</td>
 				</tr>
 				<tr ng-show="filteredSize==0">
 					<td colspan="6">

@@ -41,17 +41,13 @@ var SponsorCreateController = function($scope, $http, $location, $routeParams,ng
 
 	};
 
-			
-			
-
-		
 		$scope.cancelCreateSponcor= function(eventId){
 			$scope.eventId=eventId;
 			//alert("getting back to sponsorListVeiw..."+eventId);
 			$location.path("/sponsorPageView/"+eventId);
 		};
 
-}
+};
 
 
 	

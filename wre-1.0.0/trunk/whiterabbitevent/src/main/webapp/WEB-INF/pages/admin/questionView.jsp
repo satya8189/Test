@@ -56,7 +56,7 @@ position: relative;
 				    <td>{{question.optionD}}</td>
 				    <td>{{question.answer}}</td>
 					<td>
-						<a ng-click="questionEdit(question.questionId)"title="eventViewDetails" ng-hide="roleId==100">
+						<a ng-click="questionEdit(question.questionId)" title="edit" ng-hide="roleId==100">
 							<i class="glyphicon glyphicon-pencil"> </i>
 						</a>
 					</td>

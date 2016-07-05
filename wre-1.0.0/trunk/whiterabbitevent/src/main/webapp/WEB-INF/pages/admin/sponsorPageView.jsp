@@ -46,7 +46,7 @@ margin-bottom:0px !important;
 					<td>{{sp.sponcorName}}</td>
 					<td>{{sp.sponcorDesc}}</td>
 					<td>
-						<a ng-click="editSponsor(sp.sponcorId)" title="EditSponsor">
+						<a ng-click="editSponsor(sp.sponcorId)" title="edit">
 							<i class="glyphicon glyphicon-pencil" ng-hide="roleId==100"> </i>
 						</a>
 					</td>

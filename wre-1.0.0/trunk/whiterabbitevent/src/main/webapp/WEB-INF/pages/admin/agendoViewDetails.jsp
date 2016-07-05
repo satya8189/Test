@@ -51,7 +51,7 @@ margin-bottom:0px !important;
 					
 					<td>
 					
-				<a ng-click="agendoEdit(event.agenId)"title="agendoEdit" ng-hide="roleId==100">
+				<a ng-click="agendoEdit(event.agenId)" title="edit" ng-hide="roleId==100">
 							<i class="glyphicon glyphicon-pencil"> </i>
 				</a>
 					</td>

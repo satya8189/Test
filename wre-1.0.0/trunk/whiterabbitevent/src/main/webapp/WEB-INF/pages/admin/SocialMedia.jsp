@@ -48,11 +48,11 @@ margin-bottom:0px !important;
 					<td>{{sm.name}}</td>
 					<td>{{sm.url}}</td>
 					<td>
-						<a ng-click="editSocialMedia(sm.socialId)" title="EditSocialMedia" ng-hide="roleId==100">
+						<a ng-click="editSocialMedia(sm.socialId)" title="edit" ng-hide="roleId==100">
 							<i class="glyphicon glyphicon-pencil"> </i>
 						</a>
 						
-						<a ng-click="deleteSocialMedia(sm.socialId)" title="DeleteSocialMedia" ng-hide="roleId==100">
+						<a ng-click="deleteSocialMedia(sm.socialId)" title="delete" ng-hide="roleId==100">
 							<i class="glyphicon glyphicon-trash"> </i>
 						</a>
 					</td>

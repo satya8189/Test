@@ -1289,19 +1289,19 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 			List<ParticipantEventBean> participantEventBeanList=new ArrayList<ParticipantEventBean>();
 			for(Object[] eventParticipantOject:eventParticipantList){
 				ParticipantEventBean participantEventBeanOject=new ParticipantEventBean();
-				participantEventBeanOject.setEventId(((BigInteger)eventParticipantOject[0]).longValue());
-				participantEventBeanOject.setEventname((String)eventParticipantOject[1]);
-				participantEventBeanOject.setFirstName((String)eventParticipantOject[2]);
-				participantEventBeanOject.setLastName((String)eventParticipantOject[3]);
-				participantEventBeanOject.setMobile((String)eventParticipantOject[4]);
-				participantEventBeanOject.setEmailId((String)eventParticipantOject[5]);
-				participantEventBeanOject.setStatus((String)eventParticipantOject[6]);
-			    participantEventBeanOject.setParticipantId(((BigInteger)eventParticipantOject[7]).longValue());
-			    participantEventBeanOject.setParticipateEventId(((BigInteger)eventParticipantOject[8]).longValue());
-			    
+					participantEventBeanOject.setEventId(((BigInteger)eventParticipantOject[0]).longValue());
+					participantEventBeanOject.setEventname((String)eventParticipantOject[1]);
+					participantEventBeanOject.setFirstName((String)eventParticipantOject[2]);
+					participantEventBeanOject.setLastName((String)eventParticipantOject[3]);
+					participantEventBeanOject.setMobile((String)eventParticipantOject[4]);
+					participantEventBeanOject.setEmailId((String)eventParticipantOject[5]);
+					participantEventBeanOject.setStatus((String)eventParticipantOject[6]);
+				    participantEventBeanOject.setParticipantId(((BigInteger)eventParticipantOject[7]).longValue());
+				    participantEventBeanOject.setParticipateEventId(((BigInteger)eventParticipantOject[8]).longValue());
+				    
 		        participantEventBeanList.add(participantEventBeanOject);
 			}
-			log.info("eventParticipantList size is --+" + participantEventBeanList.size());
+			log.info("eventParticipantList size is --"+ participantEventBeanList.size());
 			return participantEventBeanList;
 		}
 		
@@ -1486,6 +1486,7 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 		@Override
 		public void updateParticipant(ParticipantBean participantBean) {
 			Participants participant=AdminMgmtDaoImpl.getParticipantById(participantBean.getParticipantId());
+			
 			
 			participant.setParticipantId(participantBean.getParticipantId());
 			participant.setEmail(participantBean.getEmailId());

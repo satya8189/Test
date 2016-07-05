@@ -373,10 +373,9 @@ public List<Object[]>  getParticipantEventBeanList(Long eventId,String status) {
 			+ " LEFT JOIN  wre_dev.event e ON e.Event_ID=ep.Event_ID "
 			+ " LEFT JOIN participants p ON p.Participant_ID=ep.Participant_ID WHERE ep.Event_ID=:id";
 
-	SQLQuery sqlQuery = sessionFactory.getCurrentSession().createSQLQuery(
-			query);
+	SQLQuery sqlQuery = sessionFactory.getCurrentSession().createSQLQuery(query);
 	sqlQuery.setParameter("id", eventId);
-	List<Object[]> eventParticipantList = (List<Object[]>) sqlQuery.list();
+	List<Object[]> eventParticipantList = (List<Object[]>)sqlQuery.list();
 	return eventParticipantList;
 	
 }

@@ -60,7 +60,7 @@ margin-bottom:0px !important;
 					<td>{{sp.description}}</td>
 					<td>{{sp.rating}}</td>
 					<td>
-						<a ng-click="editSpeaker(sp.speakerId)" title="EditSpeaker" ng-hide="roleId==100">
+						<a ng-click="editSpeaker(sp.speakerId)" title="edit" ng-hide="roleId==100">
 							<i class="glyphicon glyphicon-pencil"> </i>
 						</a>
 					</td>

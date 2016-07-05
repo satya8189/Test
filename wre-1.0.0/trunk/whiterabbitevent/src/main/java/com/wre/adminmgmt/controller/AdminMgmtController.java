@@ -1133,61 +1133,62 @@ public class AdminMgmtController {
 		adminMgmtService.deleteSocialMedia(socialId);
 	}
 
+	
 	// generate the QR CODE for paticipant
-	@RequestMapping(value = "admin/generateQRCode", method = RequestMethod.POST)
-	public @ResponseBody
-	void generateQRCode(@RequestBody InviteBean inviteBean) {
+		@RequestMapping(value="admin/generateQRCode", method = RequestMethod.POST)
+		public @ResponseBody void generateQRCode(@RequestBody InviteBean inviteBean) {
 
-		String myCodeText = inviteBean.getEventName() + ","
-				+ inviteBean.getPhone() + "," + inviteBean.getFirstName() + ""
-				+ inviteBean.getLastName();
-		String filePath = WREConstants.RESOURCE_PATH + inviteBean.getEventId()
-				+ WREConstants.FILE_SEPARATER + inviteBean.getParticipantId()
-				+ WREConstants.FILE_SEPARATER + "QR.png";
+			log.info("in generateQR Code..");
+			String myCodeText = inviteBean.getEventName() + ","
+					+ inviteBean.getPhone() + "," + inviteBean.getFirstName() + ""
+					+ inviteBean.getLastName();
+			String filePath = WREConstants.RESOURCE_PATH + inviteBean.getEventId()
+					+ WREConstants.FILE_SEPARATER + inviteBean.getParticipantId()
+					+ WREConstants.FILE_SEPARATER + "QR.png";
 
-		int size = 250;
-		String fileType = "png";
-		File myFile = new File(filePath);
-		try {
+			int size = 250;
+			String fileType = "png";
+			File myFile = new File(filePath);
+			try {
 
-			Map<EncodeHintType, Object> hintMap = new EnumMap<EncodeHintType, Object>(
-					EncodeHintType.class);
-			hintMap.put(EncodeHintType.CHARACTER_SET, "UTF-8");
+				Map<EncodeHintType, Object> hintMap = new EnumMap<EncodeHintType, Object>(
+						EncodeHintType.class);
+				hintMap.put(EncodeHintType.CHARACTER_SET, "UTF-8");
 
-			// Now with zxing version 3.2.1 you could change border size (white
-			// border size to just 1)
-			hintMap.put(EncodeHintType.MARGIN, 1); /* default = 4 */
-			hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
+				// Now with zxing version 3.2.1 you could change border size (white
+				// border size to just 1)
+				hintMap.put(EncodeHintType.MARGIN, 1);  /*default = 4*/ 
+				hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
 
-			QRCodeWriter qrCodeWriter = new QRCodeWriter();
-			BitMatrix byteMatrix = qrCodeWriter.encode(myCodeText,
-					BarcodeFormat.QR_CODE, size, size, hintMap);
-			int CrunchifyWidth = byteMatrix.getWidth();
-			BufferedImage image = new BufferedImage(CrunchifyWidth,
-					CrunchifyWidth, BufferedImage.TYPE_INT_RGB);
-			image.createGraphics();
+				QRCodeWriter qrCodeWriter = new QRCodeWriter();
+				BitMatrix byteMatrix = qrCodeWriter.encode(myCodeText,
+						BarcodeFormat.QR_CODE, size, size, hintMap);
+				int CrunchifyWidth = byteMatrix.getWidth();
+				BufferedImage image = new BufferedImage(CrunchifyWidth,
+						CrunchifyWidth, BufferedImage.TYPE_INT_RGB);
+				image.createGraphics();
 
-			Graphics2D graphics = (Graphics2D) image.getGraphics();
-			graphics.setColor(Color.WHITE);
-			graphics.fillRect(0, 0, CrunchifyWidth, CrunchifyWidth);
-			graphics.setColor(Color.BLACK);
+				Graphics2D graphics = (Graphics2D) image.getGraphics();
+				graphics.setColor(Color.WHITE);
+				graphics.fillRect(0, 0, CrunchifyWidth, CrunchifyWidth);
+				graphics.setColor(Color.BLACK);
 
-			for (int i = 0; i < CrunchifyWidth; i++) {
-				for (int j = 0; j < CrunchifyWidth; j++) {
-					if (byteMatrix.get(i, j)) {
-						graphics.fillRect(i, j, 1, 1);
+				for (int i = 0; i < CrunchifyWidth; i++) {
+					for (int j = 0; j < CrunchifyWidth; j++) {
+						if (byteMatrix.get(i, j)) {
+							graphics.fillRect(i, j, 1, 1);
+						}
 					}
 				}
+				ImageIO.write(image, fileType, myFile);
+			} catch (WriterException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-			ImageIO.write(image, fileType, myFile);
-		} catch (WriterException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println("\n\nYou have successfully created QR Code.");
 		}
-		System.out.println("\n\nYou have successfully created QR Code.");
-	}
-
+		
 	// ==========================================================
 
 	// admin/networkingView
@@ -1225,11 +1226,10 @@ public class AdminMgmtController {
 		adminMgmtService.updateParticipantDetails(participantBean);
 	}
 
-	// participantEventBean
+	// participantEventBean API
 	@RequestMapping(value = "admin/eventParticipantStatusSave", method = RequestMethod.POST)
 	public @ResponseBody
-	String eventParticipantStatusSave(
-			@RequestBody ParticipantEventBean participantEventBean) {
+	String eventParticipantStatusSave(@RequestBody ParticipantEventBean participantEventBean) {
 		log.info("in side save method");
 		adminMgmtService.eventParticipantStatusSave(participantEventBean);
 		String res = "suucess";
