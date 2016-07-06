@@ -5,6 +5,8 @@ package com.wre.model;
 import static javax.persistence.GenerationType.IDENTITY;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -35,11 +38,13 @@ public class Galary  implements java.io.Serializable {
      private String type;
      private String fileName;
      private Date createdDate;
+     private Set<GalaryLikes> galaryLikeses = new HashSet(0);
+     
 
     public Galary() {
     }
 
-    public Galary(Event event, Participants participants, String name, String path, String type,String fileName, Date createdDate) {
+    public Galary(Event event, Participants participants, String name, String path, String type,String fileName, Date createdDate,Set<GalaryLikes> galaryLikeses) {
        this.event = event;
        this.participants = participants;
        this.name = name;
@@ -47,6 +52,7 @@ public class Galary  implements java.io.Serializable {
        this.type = type;
        this.fileName=fileName;
        this.createdDate = createdDate;
+       this.galaryLikeses=galaryLikeses;
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
@@ -128,6 +134,15 @@ public class Galary  implements java.io.Serializable {
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
+
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="galary")
+    public Set<GalaryLikes> getGalaryLikeses() {
+        return this.galaryLikeses;
+    }
+    
+    public void setGalaryLikeses(Set<GalaryLikes> galaryLikeses) {
+        this.galaryLikeses = galaryLikeses;
+    }
 
 
 
