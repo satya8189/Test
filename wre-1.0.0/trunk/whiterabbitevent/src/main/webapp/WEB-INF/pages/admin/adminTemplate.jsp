@@ -128,9 +128,8 @@
        <a href="#/eventView"><li class="head-date"><i class="fa fa-calendar" aria-hidden="true"></i>  &nbsp;White Rabbit Events</li></a>    
       </ul>
       <ul class="nav navbar-nav navbar-right">
-       <li class="head-date"> <i class="glyphicon glyphicon-search"></i></li>
-           <li class="head-date"> <i class="glyphicon glyphicon-bell"></i></li>
-           <li class="head-date"> <span class="glyphicon glyphicon-user"><a class="logout-link" href="/whiterabbitevent/logout">
+       
+           <li class="head-date"> <span class="glyphicon glyphicon-user"><a class="logout-link " href="/whiterabbitevent/logout">
             Logout
             </a></span>
           </ul>
