@@ -51,9 +51,9 @@ border: 1px solid #588CC0;
 				<div>&nbsp;</div>
 	<div class="row">
 	<div class="col-md-12">
-	  <div class="form-group col-md-6 col-md-offset-3" >
+	  <div class="form-group col-md-6 col-md-offset-3" ng-hide="roleId==100" >
 	  				
-      <label class="flot-left">Mobile Number <span style="color:red;">*</span></label>
+      <label class="flot-left">Mobile Number <span style="color:red;" >*</span></label>
        <input type="text" class="input-text form-control" id="agendo_Name" placeholder="Mobile Number"  ng-model="invite.phone" ng-hide="roleId==100" 
       name="Mobile" title="Numbers only" onkeypress="this.value=this.value.replace(/[^\d,]/g,'')" required > 
       
