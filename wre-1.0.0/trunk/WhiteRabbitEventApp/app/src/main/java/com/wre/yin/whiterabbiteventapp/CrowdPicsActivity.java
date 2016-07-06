@@ -1,5 +1,6 @@
 package com.wre.yin.whiterabbiteventapp;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,8 +17,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.LinearLayout;
@@ -87,16 +92,54 @@ public class CrowdPicsActivity extends AppCompatActivity {
         uploadImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (layoutStatus.equals("gone")) {
+              /*  if (layoutStatus.equals("gone")) {
                     camGalLayout.setVisibility(View.VISIBLE);
                     layoutStatus = "visible";
                 } else {
                     camGalLayout.setVisibility(View.GONE);
                     layoutStatus = "gone";
-                }
+                }*/
+                LayoutInflater layoutInflater = LayoutInflater.from(CrowdPicsActivity.this);
+                View promptView = layoutInflater.inflate(R.layout.pick_one, null);
 
+                final AlertDialog alertD = new AlertDialog.Builder(CrowdPicsActivity.this).create();
+                alertD.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+                alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+                WindowManager.LayoutParams wmlp = alertD.getWindow().getAttributes();
+                wmlp.gravity = Gravity.CENTER | Gravity.CENTER_HORIZONTAL;
+
+                LinearLayout camLayout = (LinearLayout) promptView.findViewById(R.id.cam_layout);
+                LinearLayout galLayout = (LinearLayout) promptView.findViewById(R.id.gal_layout);
+
+                camLayout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        alertD.dismiss();
+                        captureImage();
+
+                    }
+                });
+                galLayout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        alertD.dismiss();
+                        loadImagefromGallery();
+                    }
+                });
+                alertD.setView(promptView);
+
+
+                WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+                lp.copyFrom(alertD.getWindow().getAttributes());
+                lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+                lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+                // d.show();
+                alertD.getWindow().setAttributes(lp);
+                alertD.show();
             }
         });
+
         camPick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

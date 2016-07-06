@@ -1,5 +1,6 @@
 package com.wre.yin.whiterabbiteventapp;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -18,10 +19,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -118,14 +122,52 @@ public class VideosActivity extends AppCompatActivity {
         uploadVideo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (layoutStatus.equals("gone")) {
+              /*  if (layoutStatus.equals("gone")) {
                     camGalLayout.setVisibility(View.VISIBLE);
                     layoutStatus = "visible";
                 } else {
                     camGalLayout.setVisibility(View.GONE);
                     layoutStatus = "gone";
-                }
+                }*/
+                LayoutInflater layoutInflater = LayoutInflater.from(VideosActivity.this);
+                View promptView = layoutInflater.inflate(R.layout.pick_one, null);
 
+                final AlertDialog alertD = new AlertDialog.Builder(VideosActivity.this).create();
+                alertD.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+                alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+                WindowManager.LayoutParams wmlp = alertD.getWindow().getAttributes();
+                wmlp.gravity = Gravity.CENTER | Gravity.CENTER_HORIZONTAL;
+
+                LinearLayout camLayout = (LinearLayout) promptView.findViewById(R.id.cam_layout);
+                LinearLayout galLayout = (LinearLayout) promptView.findViewById(R.id.gal_layout);
+
+                camLayout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        alertD.dismiss();
+                        recordVideo();
+
+                    }
+                });
+                galLayout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        alertD.dismiss();
+                        loadVideofromGallery();
+
+                    }
+                });
+                alertD.setView(promptView);
+
+
+                WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+                lp.copyFrom(alertD.getWindow().getAttributes());
+                lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+                lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+                // d.show();
+                alertD.getWindow().setAttributes(lp);
+                alertD.show();
             }
         });
         camPick.setOnClickListener(new View.OnClickListener() {
@@ -444,9 +486,9 @@ public class VideosActivity extends AppCompatActivity {
                     cursor.close();
                     String fileNameSegments[] = vidPath.split("/");
                     fileName = fileNameSegments[fileNameSegments.length - 1];
-                    String fileNameSeg[] = fileName.split("-");
+                    //String fileNameSeg[] = fileName.split("-");
 
-                    fName = eventName + "-" + partName + "-" + fileNameSeg[1] + "-" + new SimpleDateFormat("HHmmss",
+                    fName = eventName + "-" + partName + "-" + fileName + "-" + new SimpleDateFormat("HHmmss",
                             Locale.getDefault()).format(new Date());
                     uploadVideoFromCam();
 

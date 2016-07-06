@@ -32,7 +32,7 @@ public class SpeakersProfileDetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // SpeakersProfileDetailsActivity.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
+        // SpeakersProfileDetailsActivity.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
         setContentView(R.layout.activity_profile_details);
 
         spId = getIntent().getExtras().getString("speakerId");
@@ -72,6 +72,7 @@ public class SpeakersProfileDetailsActivity extends AppCompatActivity {
                             @Override
                             public void onResult(String result) {
                                 System.out.println(result);
+                                Constants.createDialogSend(SpeakersProfileDetailsActivity.this, "success", "Your rating submitted successfully");
                             }
                         }).execute();
                     } else {
@@ -122,7 +123,7 @@ public class SpeakersProfileDetailsActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-     //   SpeakersProfileDetailsActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
+        //   SpeakersProfileDetailsActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
 
     }
 }

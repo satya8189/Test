@@ -1,5 +1,6 @@
 package com.wre.yin.whiterabbiteventapp;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,8 +15,14 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -61,6 +68,7 @@ public class EmpProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // EmpProfileActivity.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
         setContentView(R.layout.activity_emp_profile);
         //getSupportActionBar().hide();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -103,14 +111,50 @@ public class EmpProfileActivity extends AppCompatActivity {
         profilePic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (layoutStatus.equals("gone")) {
+            /*    if (layoutStatus.equals("gone")) {
                     camGalLayout.setVisibility(View.VISIBLE);
                     layoutStatus = "visible";
                 } else {
                     camGalLayout.setVisibility(View.GONE);
                     layoutStatus = "gone";
-                }
+                }*/
 
+                LayoutInflater layoutInflater = LayoutInflater.from(EmpProfileActivity.this);
+                View promptView = layoutInflater.inflate(R.layout.pick_one, null);
+
+                final AlertDialog alertD = new AlertDialog.Builder(EmpProfileActivity.this).create();
+                alertD.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+                alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+                WindowManager.LayoutParams wmlp = alertD.getWindow().getAttributes();
+                wmlp.gravity = Gravity.CENTER | Gravity.CENTER_HORIZONTAL;
+
+                LinearLayout camLayout = (LinearLayout) promptView.findViewById(R.id.cam_layout);
+                LinearLayout galLayout = (LinearLayout) promptView.findViewById(R.id.gal_layout);
+
+                camLayout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        captureImage();
+
+                    }
+                });
+                galLayout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        loadImagefromGallery();
+                    }
+                });
+                alertD.setView(promptView);
+
+
+                WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+                lp.copyFrom(alertD.getWindow().getAttributes());
+                lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+                lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+                // d.show();
+                alertD.getWindow().setAttributes(lp);
+                alertD.show();
             }
         });
 
@@ -135,31 +179,31 @@ public class EmpProfileActivity extends AppCompatActivity {
         saveUpdateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String updatePartiName = empName.getText().toString();
-                String upadatePartMobile = empMobile.getText().toString();
-                String updatePartEmail = empMail.getText().toString();
-                String partAltNumber = empAlterMobile.getText().toString();
+                if (Constants.isNetworkAvailable(EmpProfileActivity.this)) {
 
-                ParticipantBean partBean = new ParticipantBean();
-                partBean.setFirstName(updatePartiName);
-                partBean.setEmailId(updatePartEmail);
-                partBean.setPhoneNumber(upadatePartMobile);
-                partBean.setStatus("ACTIVE");
-                partBean.setLastName("Kumar");
+                    String updatePartiName = empName.getText().toString();
+                    String upadatePartMobile = empMobile.getText().toString();
+                    String updatePartEmail = empMail.getText().toString();
+                    String partAltNumber = empAlterMobile.getText().toString();
 
+                    ParticipantBean partBean = new ParticipantBean();
+                    partBean.setFirstName(updatePartiName);
+                    partBean.setEmailId(updatePartEmail);
+                    partBean.setPhoneNumber(upadatePartMobile);
+                    partBean.setStatus("ACTIVE");
+                    // partBean.setLastName("Kumar");
 
-                partBean.setParticipantId(Long.parseLong(partId));
+                    partBean.setParticipantId(Long.parseLong(partId));
 
-
-                new MyAsyncTask(Constants.PARTICIPANT_UPDATE, Utils.getJson(partBean), EmpProfileActivity.this, new Callback() {
-                    @Override
-                    public void onResult(String result) {
-
-                        System.out.println("update result" + result);
-
-                    }
-                }).execute();
-
+                    new MyAsyncTask(Constants.PARTICIPANT_UPDATE, Utils.getJson(partBean), EmpProfileActivity.this, new Callback() {
+                        @Override
+                        public void onResult(String result) {
+                            Constants.createDialogSend(EmpProfileActivity.this, "success", "Your details saved successfully");
+                        }
+                    }).execute();
+                } else {
+                    Constants.createDialogSend(EmpProfileActivity.this, "error", "Please connect to internet");
+                }
 
             }
         });
@@ -385,8 +429,27 @@ public class EmpProfileActivity extends AppCompatActivity {
             case android.R.id.home:
                 onBackPressed();
                 finish();
+                break;
+
+            case R.id.action_settings:
+                Intent i = new Intent(EmpProfileActivity.this, NotificatonsettingsAct.class);
+                startActivity(i);
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        //   EmpProfileActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
+        finish();
     }
 }
