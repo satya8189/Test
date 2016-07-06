@@ -12,13 +12,14 @@ border: 1px solid #588CC0;
 <form name="createEvent" ng-submit="createEvent.$valid && saveNews(news)" novalidate>
 
 <div class="col-md-12">
+<h3 class="text-center">Create News</h3>
 	<a ng-click="navigateToNewsFeedView(news.eventId)">
 		 <i class="fa fa-angle-left back"></i>
 	</a>
-		<div>&nbsp;</div>
+		
 <div class="panel">
  <div class="panel-heading text-center font-size-20 padding-15 headbg">Create News</div>
-  <div class="panel-body text-center">
+  <div class="panel-body new-body">
   <div>&nbsp;</div>
     <div class="row">
 	<div class="col-md-12">
@@ -31,7 +32,7 @@ border: 1px solid #588CC0;
       </div>
      
 	  <div class="form-group col-md-6" >
-          <label class="flot-left">NewsDesc <span style="color:red;">*</span></label>
+          <label class="flot-left">News Desc <span style="color:red;">*</span></label>
       <input type="text" class="input-text form-control" id="newsDesc" placeholder="NewsDesc"  ng-model="news.newsDesc" 
       name="NewsDesc"   required>
       <span ng-if="createEvent.$submitted" ng-messages="createEvent.NewsDesc.$error" ng-messages-include="errors" style="color:red;">

@@ -7,13 +7,14 @@ border: 1px solid #588CC0;
 
 </style>
 <div class="col-md-12">
+<h3 class="text-center">Create Speaker</h3>
 	<a ng-click="cancelCreateSpeaker(speaker.eventId)">
 		 <i class="fa fa-angle-left back"></i>
 	</a>
 	<c:set var="userId" value="${user.userId}" scope="session" />
 	<div class="panel">
 		<div class="panel-heading text-center font-size-20 padding-5 headbg">Create Speaker</div>
-		<div class="panel-body text-center">
+		<div class="panel-body new-body">
 			<form name="spCreateForm" ng-submit="spCreateForm.$valid && saveSpeaker(speaker)"  enctype="multipart/form-data" novalidate>
 				<div class="row">
 					<div>&nbsp;</div>

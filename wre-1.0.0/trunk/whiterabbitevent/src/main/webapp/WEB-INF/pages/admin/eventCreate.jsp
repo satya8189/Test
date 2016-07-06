@@ -6,7 +6,7 @@
 
 <form name="createEvent" ng-submit="saveEvent(event,${userId})" novalidate>
 
-<div class="container">
+<div class="col-md-12">
 	<a href="#/eventView"> <i class="fa fa-angle-left back"></i>
 	</a>
 <div class="panel">

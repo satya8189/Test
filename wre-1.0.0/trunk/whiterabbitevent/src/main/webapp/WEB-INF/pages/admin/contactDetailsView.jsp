@@ -4,39 +4,33 @@
 .panel{
 border: 1px solid #588CC0;
 }
-span{
-	color: red;
-}
+
 </style>
 <div class="col-md-12">
-
+<h3 class="text-center">Contact	Details</h3>
 	<a ng-click="navigateToEventViewDetails(contact.eventId)"> <i class="fa fa-angle-left back"></i>
 	</a>
 	<div class="panel">
 		<div class="panel-heading text-center font-size-20 padding-15 headbg">Contact	Details </div>
-		<div class="panel-body text-center"><!-- If empty  -->
+		<div class="panel-body new-body"><!-- If empty  -->
 			 
 			<div ng-show="!contactList.length" >
 			<form name="orgCreateForm" ng-submit="orgCreateForm.$valid && saveContactDetails(contact)" 
 				novalidate>
-					
+					<div>&nbsp;</div>
 					<div class="col-md-12">
-						<div class="col-md-2">
+						<div class="col-md-6 form-group">
 							<label>Contact Name</label>
-						</div>
-						<div class="col-md-2">
+						
 							<input type="text" class="input-text form-control" id="contactName"
 								placeholder="Contact Name" ng-model="contact.contactName" name="ContactName" required>
 								<span ng-if="orgCreateForm.$submitted" ng-messages="orgCreateForm.ContactName.$error" ng-messages-include="errors">
 		  						</span>
 						</div>
-					</div>
 					
-					<div class="col-md-12">
-						<div class="col-md-2">
+						<div class="col-md-6 form-group">
 							<label>Contact Eamil</label>
-						</div>
-						<div class="col-md-2">
+						
 							<input type="text" class="input-text form-control" id="contactEmail"
 								placeholder="Contact Email" ng-model="contact.contactEmail" name="contactEmail"
 								required>
@@ -48,22 +42,19 @@ span{
 					
 					<div class="col-md-12">
 
-						<div class="col-md-2">
+						<div class="col-md-6 form-group">
 							<label>Mobile Number:</label>
-						</div>
-						<div class="col-md-2">
+						
 							<input type="text" class="input-text form-control" id="contactMobile"
 								placeholder="Mobile Number" ng-model="contact.contactMobile" name="contactMobile"
 								required>
 							<span ng-if="orgCreateForm.$submitted" ng-messages="orgCreateForm.contactMobile.$error" ng-messages-include="errors">
 		  						</span>
 						</div>
-					</div>
-						<div class="col-md-12">
-						<div class="col-md-2">
+					
+						<div class="col-md-6 form-group">
 							<label>Alternate Mobile Nubmer:</label>
-						</div>
-						<div class="col-md-2">
+						
 							<input type="text" class="input-text form-control" id="contactAlternateMobile"
 								placeholder="Alternate Mobile Number" ng-model="contact.contactAlternateMobile" name="contactAlternateMobile"
 								required>
@@ -71,8 +62,10 @@ span{
 		  						</span>
 						</div>
 					</div>
-					
-					<button type="submit" class="btn button  save margin-2">Update</button>
+					<div class="text-center">
+					<button type="submit" class="btn button btn-primary save margin-2">Update</button>
+					</div>
+					<div>&nbsp;</div>
 			</form>
 		</div>
 		</div>

@@ -8,14 +8,17 @@ border: 1px solid #588CC0;
 </style>
 <toaster-container></toaster-container>
 <jsp:include page="error-messages.jsp"></jsp:include>
-<div class="container-fluid">
+
+<div class="col-md-12">
+<h3 class="text-center"> Create Gallary</h3>
 	<a ng-click="cancelGalleryCreate(gallery.eventId)">
 		 <i class="fa fa-angle-left back"></i>
 	</a>
+	
 <form name="createEvent" ng-submit="createEvent.$valid && createGallery(gallery)" enctype="multipart/form-data" novalidate>
 <div class="panel">
  <div class="panel-heading text-center font-size-20 padding-15 headbg">Create Gallery</div>
-  <div class="panel-body text-center">
+  <div class="panel-body panelbody-bg">
   <div>&nbsp;</div>
     <div class="row">
 	<div class="col-md-12">
@@ -34,7 +37,9 @@ border: 1px solid #588CC0;
 			  </div>
 					
     <div>&nbsp;</div>
+    <div class="text-center">
 <input type="submit" value="Save" class="btn button btn-primary save margin-2" ng-click="submitted=true"/>
+</div>
 <div>&nbsp;</div>
 </div>
 </div>

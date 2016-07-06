@@ -6,6 +6,7 @@ border: 1px solid #588CC0;
 
 </style>
 <div class="col-md-12">
+<h3 class="text-center">Edit News</h3>
 <c:set var="userId" value="${USER.userId}" scope="session" />
 	<a ng-click="navigateToNewsFeedView(news.eventId)">
 		 <i class="fa fa-angle-left back"></i>
@@ -15,7 +16,7 @@ border: 1px solid #588CC0;
 	<div class="panel">
 		<div class="panel-heading text-center font-size-20 padding-15 headbg">Edit
 			News</div>
-		<div class="panel-body text-center">
+		<div class="panel-body new-body">
 			<form name="nEditForm"
 				ng-submit="nEditForm.$valid && updateNews(news)" novalidate>
 				<div>&nbsp;</div>
@@ -37,10 +38,11 @@ border: 1px solid #588CC0;
 								 id="NName" ng-model="news.newsDesc" placeholder="NewsDesc" name="nName" required>
 								<span ng-if="nEditForm.$submitted" ng-messages="nEditForm.nName.$error" ng-messages-include="errors" style="color:red;"></span>
 							  						</div>
-							  					<div>&nbsp;</div>	
+							  					<div>&nbsp;</div>
+							  					<div class="text-center">	
 							<button type="submit" class="btn button btn-primary save margin-2"
 					 ng-click="validateHiddenFields()">Update</button>
-					 
+					 </div>
 			</form>
 			<div>&nbsp;</div>
 		</div>

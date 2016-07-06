@@ -7,14 +7,15 @@ border: 1px solid #588CC0;
 
 </style>
 <div class="col-md-12">
+<h3 class="text-center">Edit Details</h3>
 	<a ng-click="navigateToDetailsView(event.eventId)"> <i class="fa fa-angle-left back"></i>
 	</a>
-<div>&nbsp;</div>
+
 	<c:set var="eventId" value="${event.eventId}" scope="session" />
 	<div class="panel">
 		<div class="panel-heading text-center font-size-20 padding-15 headbg">
 			Details</div>
-		<div class="panel-body text-center">
+		<div class="panel-body new-body">
 			<form name="eventCreateForm"
 				ng-submit="eventCreateForm.$valid && updateEvent(event)"
 				novalidate>
@@ -32,7 +33,7 @@ border: 1px solid #588CC0;
 					
 
 						<div class="col-md-6 form-group">
-							<label>EventDesc :</label>
+							<label>Event Desc :</label>
 						
 							<input type="text" class="input-text form-control" id="eventDesc"
 								placeholder="EventDesc" ng-model="event.eventDesc" name="eventDesc"
@@ -43,7 +44,7 @@ border: 1px solid #588CC0;
 					
 					<div class="col-md-12">
 						<div class="col-md-6 form-group">
-							<label>EventAgenda :</label>
+							<label>Event Agenda :</label>
 						
 							<input type="text" class="input-text form-control" id="eventAgenda"
 								placeholder="eventAgenda" ng-model="event.eventAgenda" name="eventAgenda"
@@ -52,7 +53,7 @@ border: 1px solid #588CC0;
 						</div>
 				
 						<div class="col-md-6 form-group">
-							<label>EventAddress :</label>
+							<label>Event Address :</label>
 						
 							<input type="text" class="input-text form-control" id="eventAddress"
 								placeholder="EventAddress" ng-model="event.eventAddress" name="eventAddress"

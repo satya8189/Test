@@ -13,18 +13,22 @@ margin-bottom:0px !important;
 <toaster-container></toaster-container>
 
 <div class="col-md-12">
-<a ng-click="cancelInviteListView(eventId)">
-		 <i class="fa fa-angle-left back"></i>
-	</a>
+<h3 class="text-center">Invite List</h3>
+
 	<form>
-	<div class="header-none text-center">Invite List</div>
+	
 	<div class="panel">
 		<div class="panel-body">
-		 <div class="col-md-2 col-md-offset-10 padding-0">
+		<div class="col-md-2  padding-0">
+		<a ng-click="cancelInviteListView(eventId)">
+		 <i class="fa fa-angle-left back"></i>
+	</a>
+	</div>
+		 <div class="col-md-2 col-md-offset-8 padding-0">
 		 <input ng-model="search"  ng-show="inviteList.length!=0" class="form-control" placeholder="Search">
 			</div> 
-			<div class="col-md-12 space-hid">&nbsp;</div>
-			<table class="table" id="eventView">
+			
+			<table class="table table-bordered" id="eventView">
 				<thead class="headbg">
 					<tr>
 					     <th>FirstName</th>
@@ -46,13 +50,14 @@ margin-bottom:0px !important;
 				No records found..
 				</td>
 				</tr>
-				<tr ng-show="filteredSize!=0">
-					<td colspan="6" align="center">
+				</table>
+				<div ng-show="filteredSize!=0">
+					<div colspan="6" align="center">
 						<pagination page="currentPage" max-size="noOfPages" total-items="totalItems" 
 							items-per-page="entryLimit" class="pagination-sm" boundary-links="true"></pagination>
-					</td>
-				</tr>
-			</table>
+					</div>
+				</div>
+			
 			
 		</div>
 	</div>

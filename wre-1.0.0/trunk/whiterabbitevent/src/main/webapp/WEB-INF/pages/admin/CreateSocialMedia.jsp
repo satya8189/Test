@@ -6,12 +6,13 @@ border: 1px solid #588CC0;
 
 </style>
  <div class="col-md-12">
+ <h3 class="text-center">Create SocialMedia</h3>
 	<a ng-click="cancelCreateSocialMedia(sm.eventId)">
 		 <i class="fa fa-angle-left back"></i>
 	</a>
 	<div class="panel">
 		<div class="panel-heading text-center font-size-20 padding-5 headbg">Create SocialMedia</div>
-		<div class="panel-body text-center">
+		<div class="panel-body new-body">
 			<form name="orgCreateForm"	ng-submit="orgCreateForm.$valid && saveSocialMedia(sm)" novalidate>
 				<div>&nbsp;</div>
 				<div class="row">
@@ -52,7 +53,9 @@ border: 1px solid #588CC0;
 					</div>
 				</div>
 				<div>&nbsp;</div>
+				<div class="text-center">
 				<button type="submit" class="btn button btn-primary save margin-2">Save</button>
+				</div>
 			<div>&nbsp;</div>
 			</form>
 		</div>

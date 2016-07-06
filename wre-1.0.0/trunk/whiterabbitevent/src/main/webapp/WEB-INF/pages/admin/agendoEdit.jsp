@@ -6,15 +6,16 @@ border: 1px solid #588CC0;
 
 </style>
 <div class="col-md-12">
+<h3 class="text-center">Agendas Edit</h3>
 <jsp:include page="error-messages.jsp"></jsp:include>
 <c:set var="userId" value="${USER.userId}" scope="session" />
 	<a ng-click="cancelAgendaEdit(agendo.eventId)"> <i class="fa fa-angle-left back"></i>
  </a>
- <div>&nbsp;</div>
+
 	<div class="panel">
 		<div class="panel-heading text-center font-size-20 padding-15 headbg">Edit
 			Agenda</div>
-		<div class="panel-body text-center">
+		<div class="panel-body new-body">
 			<form name="agendaForm"
 				ng-submit="agendaForm.$valid && updateAgendo(agendo)" novalidate>
 				<div class="row">

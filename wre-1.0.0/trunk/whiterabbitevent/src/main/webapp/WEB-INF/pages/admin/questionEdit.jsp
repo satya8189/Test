@@ -10,14 +10,15 @@ border: 1px solid #588CC0;
 
 <form name="questionEditForm" ng-submit="questionEditForm.$valid && updateQuestion(question)"  ng-show="question.appIdentifierId!=201" novalidate>
 <div class="col-md-12">
+<h3 class="text-center">Edit Question Details</h3>
 		<a ng-click="cancelQuestionEdit(question.eventId)"> 
 			<i class="fa fa-angle-left back"></i>
 		</a>
 <div class="panel">
  <div class="panel-heading text-center font-size-20 padding-15 headbg">Edit Question Details</div>
-  <div class="panel-body text-center">
-     <div>
-	 <label >QuestionType <span style="color:red;">*</span></label> 
+  <div class="panel-body new-body">
+     <div class="text-center">
+	 <label> QuestionType <span style="color:red ;">*</span></label> 
       {{question.appIdentifierName}}
 	 </div> 
     <div>&nbsp;</div>

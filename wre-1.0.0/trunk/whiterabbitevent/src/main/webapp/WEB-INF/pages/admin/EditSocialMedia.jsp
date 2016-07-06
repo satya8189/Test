@@ -8,14 +8,14 @@ border: 1px solid #588CC0;
 
 </style>
 <div class="col-md-12">
-
+<h3 class="text-center">Agendas List</h3>
 	<a ng-click="cancelSocialMediaEdtit(eventId)">
 		 <i class="fa fa-angle-left back"></i>
 	</a>
 	<div class="panel">
 		<div class="panel-heading text-center font-size-20 padding-15 headbg">
 		Edit SocialMedia Details</div>
-		<div class="panel-body text-center">
+		<div class="panel-body new-body">
 			<form name="smEditForm" ng-submit="smEditForm.$valid && updateSocialMedia(sm)"	novalidate>
 					<div>&nbsp;</div>
 					<div class="col-md-12">
@@ -58,7 +58,7 @@ border: 1px solid #588CC0;
 						</div>
 						 -->
 					</div>
-					
+					<div>&nbsp;</div>
 					<div class="text-center">
 						<button type="submit" class="btn button btn-primary save margin-2">Update</button>
 			<div>&nbsp;</div>

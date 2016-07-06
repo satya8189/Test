@@ -11,14 +11,14 @@ border: 1px solid #588CC0;
 
 
 <form name="createEvent" ng-submit="createEvent.$valid && createDocument(document)" enctype="multipart/form-data" novalidate>
-
+<h3 class="text-center">Create Document</h3>
 <div class="col-md-12">
 	<a ng-click="cancelDocumentCreate(document.eventId)">
 		 <i class="fa fa-angle-left back"></i>
 	</a>
 <div class="panel">
  <div class="panel-heading text-center font-size-20 padding-15 headbg">Create Document</div>
-  <div class="panel-body text-center">
+  <div class="panel-body panelbody-bg">
    <div>&nbsp;</div>
     <div class="row">
 	<div class="col-md-12">
@@ -40,7 +40,10 @@ border: 1px solid #588CC0;
 					</div>
 	</div>
     <div>&nbsp;</div>
+    <div class="text-center">
 <input type="submit" value="Save" class="btn button btn-primary save margin-2" ng-click="submitted=true"/>
+ 
+ </div>
  <div>&nbsp;</div>
 </div>
 </div>

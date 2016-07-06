@@ -7,6 +7,7 @@ border: 1px solid #588CC0;
 </style>
 
 <div class="col-md-12">
+<h3 class="text-center">Edit Speaker Details</h3>
 	<a ng-click="cancelSpeakerEdtit(eventId)">
 		 <i class="fa fa-angle-left back"></i>
 	</a>
@@ -14,7 +15,7 @@ border: 1px solid #588CC0;
 		<div class="panel-heading text-center font-size-30 padding-15 headbg">
 			Edit Speaker Details
 		</div>
-		<div class="panel-body text-center">
+		<div class="panel-body new-body">
 			<form name="orgCreateForm" ng-submit="orgCreateForm.$valid && updateSpeaker(speaker)"	novalidate>
 				<div>&nbsp;</div>
 					
@@ -75,7 +76,9 @@ border: 1px solid #588CC0;
 							onchange="angular.element(this).scope().setFiles(this)">
 					</div>
 				</div>
+				<div class="text-center">
 				<button type="submit" class="btn button btn-primary save margin-2">Update</button>
+				</div>
 				<div>&nbsp;</div>
 			</form>
 			</div>

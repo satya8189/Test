@@ -8,13 +8,14 @@ border: 1px solid #588CC0;
 
 </style>
 <div class="col-md-12">
+<h3 class="text-center">Edit Sponsor	Details</h3>
 	<a ng-click="cancelSponsorEdtit(eventId)">
 		 <i class="fa fa-angle-left back"></i>
 	</a>
 	<div class="panel">
 		<div class="panel-heading text-center font-size-20 padding-15 headbg">
 		Edit Sponsor	Details</div>
-		<div class="panel-body text-center">
+		<div class="panel-body new-body">
 			<form name="sponcorEditForm" ng-submit="sponcorEditForm.$valid && updateSponsor(sponcor)"	novalidate>
 						<div>&nbsp;</div>
 					<div class="col-md-12">
@@ -47,7 +48,9 @@ border: 1px solid #588CC0;
 						<span ng-if="sponcorEditForm.$submitted"  style="color:red">Please Select file</span>
 					</div>
 				</div>
+				<div class="text-center">
 				<button type="submit" class="btn button btn-primary save margin-2">Update</button>
+				</div>
 				<div>&nbsp;</div>
 			</form>
 

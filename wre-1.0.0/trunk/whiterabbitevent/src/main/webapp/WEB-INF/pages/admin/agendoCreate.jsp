@@ -12,13 +12,14 @@ border: 1px solid #588CC0;
 <form name="agendaForm" ng-submit="agendaForm.$valid && saveAgendo(agendo)" novalidate>
 
 <div class="col-md-12">
+<h3 class="text-center">Agenda Create</h3>
 	<a ng-click="cancelCreateAgenda(agendo.eventId)">
 		 <i class="fa fa-angle-left back"></i>
 	</a>
-	<div>&nbsp;</div>
+	
 <div class="panel">
  <div class="panel-heading text-center font-size-20 padding-15 headbg">Create Agendo</div>
-  <div class="panel-body text-center">
+  <div class="panel-body new-body">
   <div>&nbsp;</div>
     <div class="row">
 	<div class="col-md-12">
