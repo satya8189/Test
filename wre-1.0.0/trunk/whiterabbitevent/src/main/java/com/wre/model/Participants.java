@@ -43,11 +43,12 @@ public class Participants  implements java.io.Serializable {
   private Set<ParticipantQuries> participantQurieses = new HashSet<ParticipantQuries>(0);
   private Set<QuestionAnswer> questionAnswers = new HashSet<QuestionAnswer>(0);
   private Set<Message> messages = new HashSet<Message>(0);
+  private Set<GalaryLikes> galaryLikeses = new HashSet(0);
 
  public Participants() {
  }
 
- public Participants(String email, String firstName, String lastName, String otp, String phone, String status, String regId,String profilePic, Set<Galary> galaries, Set<EventParticipant> eventParticipants, Set<SurveyQuestionAnswer> surveyQuestionAnswers, Set<ContactDetails> contactDetailses, Set<ParticipantQuries> participantQurieses, Set<QuestionAnswer> questionAnswers, Set<Message> messages) {
+ public Participants(String email, String firstName, String lastName, String otp, String phone, String status, String regId,String profilePic, Set<Galary> galaries, Set<EventParticipant> eventParticipants, Set<SurveyQuestionAnswer> surveyQuestionAnswers, Set<ContactDetails> contactDetailses, Set<ParticipantQuries> participantQurieses, Set<QuestionAnswer> questionAnswers, Set<Message> messages,Set<GalaryLikes> galaryLikeses) {
     this.email = email;
     this.firstName = firstName;
     this.lastName = lastName;
@@ -63,6 +64,7 @@ public class Participants  implements java.io.Serializable {
     this.participantQurieses = participantQurieses;
     this.questionAnswers = questionAnswers;
     this.messages = messages;
+    this.galaryLikeses=galaryLikeses;
  }
 
   @Id @GeneratedValue(strategy=IDENTITY)
@@ -219,6 +221,14 @@ public void setProfilePic(String profilePic) {
      this.messages = messages;
  }
 
+ @OneToMany(fetch=FetchType.LAZY, mappedBy="participants")
+ public Set<GalaryLikes> getGalaryLikeses() {
+     return this.galaryLikeses;
+ }
+ 
+ public void setGalaryLikeses(Set<GalaryLikes> galaryLikeses) {
+     this.galaryLikeses = galaryLikeses;
+ }
 
 
 
