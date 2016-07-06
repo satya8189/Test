@@ -72,6 +72,7 @@
 	        <value>com.wre.model.ContactDetails</value>
  			<value>com.wre.model.SocialMedia</value>
  			<value>com.wre.model.ParticipantQuries</value>
+ 				<value>com.wre.model.GalaryLikes</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
