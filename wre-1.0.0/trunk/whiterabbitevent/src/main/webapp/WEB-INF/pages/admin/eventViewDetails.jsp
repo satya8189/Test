@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">
 <style>
 
-.padashboard{
+/* .padashboard{
 padding:20px;
 text-align:center;
 background: #fff;
@@ -26,7 +26,38 @@ img{
 height: 58px;
 width: 58px;
 }
-</style>
+ */
+ 
+ .padashboard{
+text-align:center;
+background: #fff;
+border:1px solid #ccc;
+}
+.padashboard:hover {
+    -webkit-transform: scale(1.1); 
+    -moz-transform: scale(1.1); 
+    -ms-transform: scale(1.1); 
+    -o-transform: scale(1.1); 
+    transform:rotate scale(1.1); 
+    -webkit-transition: all 0.4s ease-in-out; 
+-moz-transition: all 0.4s ease-in-out; 
+-o-transition: all 0.4s ease-in-out;
+transition: all 0.4s ease-in-out;
+    }
+.padashboard h4{
+    text-transform: capitalize;
+    margin: 0px;
+    background: #65a8d5;
+    color: #fff;
+    padding: 5px;
+    
+}
+img{
+width: 58px;
+height:58px;
+margin: 8px;
+}
+ </style>
 
 </head>
 <body>

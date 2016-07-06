@@ -17,34 +17,32 @@ border: 1px solid #588CC0;
 	<div class="panel">
 		<div class="panel-heading text-center font-size-20 padding-15 headbg">
 			Details</div>
-		<div class="panel-body text-center">
+		<div class="panel-body new-body">
 		<div>&nbsp;</div>
 				<div class="row">
 					<div class="col-md-12">
-
-						<div class="col-md-3">
-							<label>Event Name: {{event.eventName}}</label>
+	
+						<div class="col-md-3 text-center">
+							<label class="margin-bottom-0"> {{event.eventName}}</label> <br/><span class="color-ccc">Event Name : </span>
 						</div>
 						
-						<div class="col-md-3">
-							<label>EventDesc: {{event.eventDesc}}</label>
-						</div>
-						
-						
-						<div class="col-md-3">
-							<label>EventAgenda: {{event.eventAgenda}}</label>
-						</div>
-						
-						<div class="col-md-3">
-							<label>EventAddress: {{event.eventAddress}}</label>
+						<div class="col-md-3 text-center">
+							<label class="margin-bottom-0">{{event.eventDesc}} </label><br/><span class="color-ccc">Event Desc :</span>
 						</div>
 						
 						
+						<div class="col-md-3 text-center">
+							<label class="margin-bottom-0">{{event.eventAgenda}} </label> <br/><span class="color-ccc">Event Agenda : </span>
+						</div>
+						
+						<div class="col-md-3 text-center">
+							<label class="margin-bottom-0">{{event.eventAddress}} </label><br/><span class="color-ccc">Event Address :</span>
+						</div>
 					</div>
-
 				</div>
 				<div>&nbsp;</div>
-	<form name="createEvent" ng-submit="saveInvite(invite)" novalidate>
+		<div class="text-center">
+		<form name="createEvent" ng-submit="saveInvite(invite)" novalidate>
 			<a ng-click="inviteList(event.eventId)"title="eventViewDetails" class="btn btn-primary">Invite List
 							<i class="fa fa-eye-slash icons"> </i>
 				</a>
@@ -63,17 +61,12 @@ border: 1px solid #588CC0;
       </div>
 	 </div>
 	 <div>&nbsp;</div>
-			<input type="submit" value="Submit" ng-click="submitted=true" ng-hide="roleId==100" class="btn btn-primary" />	
-			<div>&nbsp;</div>	
+			<div class="text-center">
+				<input type="submit" value="Submit" ng-click="submitted=true" class="btn btn-primary"/>	
+			</div>
+			<div>&nbsp;</div>
 	</form>
-
-						
-			
-
-				
-
-			
-
 		</div>
+	</div>
 	</div>
 

@@ -22,6 +22,7 @@ margin-bottom:0px !important;
 <c:set var="roleId" value="${USER.roleId}" scope="session" />
 <c:set var="eventId" value="${event.eventId}" scope="session" />
 <input type="hidden" ng-init="roleId='${USER.roleId}'" value="${USER.roleId}" ng-model="roleId">
+
 <div class="col-md-12">
 	<a ng-click="cancelSocialMediaView(eventId)">
 		 <i class="fa fa-angle-left back"></i>

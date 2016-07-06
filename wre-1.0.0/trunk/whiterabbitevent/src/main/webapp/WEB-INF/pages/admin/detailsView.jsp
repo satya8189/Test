@@ -25,7 +25,7 @@ border: 1px solid #588CC0;
 					<div class="col-md-12 padding-35">
 
 							
-						<div class="col-md-3">
+						<!-- <div class="col-md-3">
 							<label>Event Name: {{event.eventName}}</label>
 						</div>
 						<div class="col-md-3">
@@ -44,10 +44,29 @@ border: 1px solid #588CC0;
 						<div class="col-md-3">
 							<label>EventTime: {{event.eventTime}}</label>
 						</div>
-						
+						 -->
+						 
+						<div class="col-md-3 text-center">
+							<label class="margin-bottom-0">{{event.eventName}}</label> <br/><span class="color-ccc">Event Name </span>
+						</div>
+						<div class="col-md-3 text-center">
+							<label class="margin-bottom-0"> {{event.eventDesc}}</label><br/><span class="color-ccc">Event Desc : </span>
+						</div>
+						<div class="col-md-3 text-center">
+							<label class="margin-bottom-0"> {{event.eventAgenda}} </label> <br/><span class="color-ccc">Event Agenda : </span>
+						</div>
+						<div class="col-md-3 text-center">
+							<label class="margin-bottom-0">  {{event.eventAddress}}</label><br/><span class="color-ccc">Event Address : </span>
+						</div>
+						<hr>
+						<div class="col-md-3 text-center">
+							<label class="margin-bottom-0"> {{event.eventDate}}</label> <br/><span class="color-ccc">Event Date : </span>
+						</div>
+						<div class="col-md-3 text-center">
+							<label class="margin-bottom-0"> {{event.eventTime}} </label><br/><span class="color-ccc">Event Time : </span>
+						</div>
 						
 					</div>
-
 				</div>
 				
 				<div>&nbsp;</div>

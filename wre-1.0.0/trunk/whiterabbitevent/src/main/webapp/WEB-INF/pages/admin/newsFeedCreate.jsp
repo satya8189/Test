@@ -10,7 +10,6 @@ border: 1px solid #588CC0;
 <c:set var="userId" value="${USER.userId}" scope="session" />
 
 <form name="createEvent" ng-submit="createEvent.$valid && saveNews(news)" novalidate>
-
 <div class="col-md-12">
 <h3 class="text-center">Create News</h3>
 	<a ng-click="navigateToNewsFeedView(news.eventId)">

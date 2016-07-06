@@ -7,7 +7,7 @@ border: 1px solid #588CC0;
 }
 
 </style>
-<div class="col-md-12">
+<div class="col-md-12"><h3 class="text-center">Create Sponsor</h3>
 	<a ng-click="cancelCreateSponcor(sponsor.eventId)">
 		 <i class="fa fa-angle-left back"></i>
 	</a>

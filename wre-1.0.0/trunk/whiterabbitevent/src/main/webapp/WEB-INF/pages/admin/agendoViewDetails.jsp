@@ -33,12 +33,12 @@ margin-bottom:0px !important;
 			<table class="table table-bordered" id="eventView">
 				<thead class="headbg">
 					<tr>
-					     <th>AgendaTitle</th>
-					     <th>AgendaDescription </th>
-						 <th>AgendaStartTime</th>
-						  <th>AgendaEndTime</th>
-						 <th>AgendaBy</th>
-						  <th ng-hide="roleId==100" >Action</th>
+					     <th>Title</th>
+					     <th>Description </th>
+						 <th>Start Time</th>
+						  <th>End Time</th>
+						 <th>By</th>
+						  <th>Action</th>
 						
 				   </tr>
 				</thead>
