@@ -37,7 +37,7 @@ var SpeakerProfileViewController = function($scope, $http, $location, $routePara
 		
 		$scope.cancelSpeakerProfileView= function(eventId)
 		{
-			//alert("getting back to dashboard");
+			//alert("getting back to dashboard"+eventId);
 			$location.path("/eventViewDetails/"+eventId);
 		};
 		
