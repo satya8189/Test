@@ -22,7 +22,7 @@
         android:layout_alignParentBottom="true"
         android:background="#77000000"
         android:gravity="center_vertical"
-        android:minHeight="40dp"
+        android:minHeight="20dp"
         android:orientation="vertical"
         android:paddingLeft="10dp">
 
