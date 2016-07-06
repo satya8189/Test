@@ -176,28 +176,38 @@
 					<label class="flot-left">User Frist Name </label> <input
 						type="text" class="input-text form-control " id="userFristName"
 						placeholder="UserFristName" ng-model="event.userFristName"
-						name="userFristName" />
+						name="userFristName" 
+						ng-class="{'error':submitted &&ipForm.userFristName.$error.required}"
+						required
+						/>
+						<span class="help-inline" ng-show="submitted &&ipForm.userFristName.$error.required" style="color:red;"> Frist Name is required</span>
 				</div>
 				<div class="form-group col-md-3">
 					<label class="flot-left">User Last Name </label> <input type="text"
 						class="input-text form-control " id="userLastName"
 						placeholder="UserLastName" ng-model="event.userLastName"
-						name="UserLastName" />
+						name="UserLastName"
+						ng-class="{'error':submitted &&ipForm.UserLastName.$error.required}"
+						required />
+						<span class="help-inline" ng-show="submitted &&ipForm.UserLastName.$error.required" style="color:red;"> Last Name is required</span>
 				</div>
 				<div class="form-group col-md-3">
 					<label class="flot-left">User EmailId </label> <input type="text"
 						class="input-text form-control " id="userEmail"
 						placeholder="userEmail" ng-model="event.userEmail"
-						name="userEmail" />
+						name="userEmail" 
+						ng-class="{'error':submitted &&ipForm.userEmail.$error.required}"
+						required />
+						<span class="help-inline" ng-show="submitted &&ipForm.userEmail.$error.required" style="color:red;">User EmailId is required </span>
 				</div>
 				<div class="form-group col-md-3">
 					<label class="flot-left">User PhoneNo </label> <input type="text"
 						class="input-text form-control " id="phoneNumber"
 						placeholder="phoneNumber" ng-model="event.phoneNumber"
-						name="phoneNumber" />
-
-
-
+						name="phoneNumber" 
+						ng-class="{'error':submitted &&ipForm.phoneNumber.$error.required}"
+						required/>
+		<span class="help-inline" ng-show="submitted &&ipForm.phoneNumber.$error.required" style="color:red;">User PhoneNumber is required </span>
 
 				</div>
 
