@@ -90,8 +90,7 @@
         
       </ul>
       <ul class="nav navbar-nav navbar-right">
-       <li class="head-date"> <span class="glyphicon glyphicon-search"></span></li>
-           <li class="head-date"> <span class="glyphicon glyphicon-bell"></span></li>
+       
            <li class="head-date"> <span class="glyphicon glyphicon-user"><a class="logout-link" href="/whiterabbitevent/logout">
             Logout
             </a></span></li>
@@ -116,7 +115,7 @@
             </div>
           <div class="col-md-12">
            <div class="body-content">
-             <h3 style="text-align: -webkit-center;"> Invite people toEvents</h3>
+             
        
   <ng-view></ng-view>
          </div>
