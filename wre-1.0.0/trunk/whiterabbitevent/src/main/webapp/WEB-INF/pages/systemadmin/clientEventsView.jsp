@@ -7,29 +7,23 @@
 </style>
 <toaster-container></toaster-container>
 
-<div>
 
-	<div class="col-md-12 space-hid">&nbsp;</div>
-</div>
 	<form>
-	
+	<h3 class="text-center">ClientEventView</h3>
 	<div class="col-md-12">
 	
 	<div class="panel">
 		<div class="panel-body">
-			<div class="col-md-3">
-			<a ng-click="cancelClientEventView()"> <i
+		<div class="col-md-2  padding-0">
+		 <a ng-click="cancelClientEventView()"> <i
 		class="fa fa-angle-left back"></i>
-	</a> 
-		</div>	
-		
-			<div class="col-md-2 col-md-offset-9 text-left" ng-show="eventList.length > 0">
-				<input ng-model="search" class="form-control full-right" placeholder="Search"
-					></div>
-					<div class="col-md-1 padding-0 "> 	<button ng-click="navigateClientEventCreate()" class=" btn btn-primary pull-left"
-			>Create
-			Event</button></div>
-			<div class="col-md-12 space-hid">&nbsp;</div>
+		</a> 
+		<a ng-click="navigateClientEventCreate()" class="btn btn-primary button btn-color margin-b-8">Create Event</a>
+		</div>
+		 <div class="col-md-2 col-md-offset-8 padding-0">
+		<input ng-model="search" class="form-control full-right" placeholder="Search"></div>
+
+			
 			<table class="table table-bordered" id="eventView">
 				<thead class="headbg">
 					<tr>
@@ -56,11 +50,6 @@
 								<i class="fa fa-eye-slash icons"> </i>
 							</a>
 							
-							<a ng-click="serviceListView(event.eventId)" title=" ServicesView">
-								<i class="glyphicon glyphicon-eye-open"> </i>
-							</a>
-				
-					
 					</td>
 				</tr>
 				<tr ng-show="filteredSize==0">

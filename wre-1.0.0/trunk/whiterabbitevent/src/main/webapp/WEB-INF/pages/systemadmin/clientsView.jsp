@@ -14,18 +14,21 @@
 
 <div class="col-md-12">
 	<form>
-	
+	<h3 class="text-center">Agendas List</h3>
 		
 	
 	<div class="panel">
 		<div class="panel-body">
-		 
-			<div class="col-md-2 col-md-offset-9 text-left " >
-				<input ng-model="search" class="form-control" placeholder="Search" ng-show="clientList.length > 0"></div>
-					<div class="col-md-1 padding-0 "><a href="#/createClient"
-			class="btn  pull-left button btn btn-primary">Create
+		 <div class="col-md-2  padding-0">
+		
+	<a href="#/createClient"
+			class="btn  pull-left button btn btn-primary margin-b-8">Create
 			Client</a></div>
-					<div class="col-md-12 space-hid">&nbsp;</div>
+		 <div class="col-md-2 col-md-offset-8 padding-0">
+		<input ng-model="search" class="form-control" placeholder="Search" ng-show="clientList.length > 0"></div>
+		 	</div> 
+		
+				
 			<table class="table table-bordered" id="clientView">
 				<thead class="headbg">
 					<tr>
@@ -51,22 +54,21 @@
 				<tr ng-show="filteredSize==0">
 						<td colspan="8">No records found..</td>
 					</tr>
-				
-				<tr ng-show="filteredListSize!=0">
-										<td colspan="6" align="center">
+				</table>
+				<div ng-show="filteredListSize!=0">
+										<div colspan="6" align="center">
 										<pagination class="pagination-sm" page="currentPage" max-size="noOfPages"
 												total-items="totalItems" items-per-page="entryLimit"
-												 boundary-links="true"></pagination></td>
-									</tr>
+												 boundary-links="true"></pagination></div>
+									</div>
 				
-			</table>
 			
 			
+		
 		</div>
-	</div>
+	
 		</form>
 </div>
-
 
 
 	

@@ -2,27 +2,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="../error-messages.jsp"></jsp:include>
 <toaster-container></toaster-container>
-<a ng-click="cancelEvent()"> <i class="fa fa-angle-left back"></i>
-	</a>
-	<div>&nbsp;</div>
-	<style>
-	.bodyheadbg{
-	background-color: #265a88;
-	color:#fff;
-    border: 1px solid #265a88;
-	}
-	.panel{
-	background-color:#fff;
-	 border: 1px solid #265a88;
-	
-	}
-	</style>
+
+
 <div class="col-md-12">
-	
+	<a ng-click="cancelEvent()"> <i class="fa fa-angle-left back"></i>
+	</a>
 	<div class="panel">
-		<div class="panel-heading text-center font-size-20 padding-15 bodyheadbg" >Create
+		<div class="panel-heading text-center font-size-20 padding-15 headbg" >Create
 			Client</div>
-		<div class="panel-body">
+		<div class="panel-body new-body">
 			<form name="ClientCreateForm"
 				ng-submit="ClientCreateForm.$valid && saveClient(client)" novalidate>
 				<br/>

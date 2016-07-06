@@ -79,16 +79,17 @@
 </head>
 
 <body>
+	<h3 class="text-center">clientEventCreate</h3>
+	<div class="col-md-12">
 	<div>
 		<a ng-click="cancelClientEvent()"> <i
 			class="fa fa-angle-left back"></i>
 		</a>
 	</div>
-	<div class="col-md-12">
 <div class="panel">
 		<div class="panel-heading text-center font-size-20 padding-15 headbg" >Create
 			Event</div>
-		<div class="panel-body">
+		<div class="panel-body new-body">
 		<form name="ipForm" ng-submit="ipForm.$valid && saveEvent(event)"
 			novalidate>
 			<div class="form-group col-md-4">
@@ -212,6 +213,7 @@
 				</div>
 
 			</div>
+			<div class="col-md-12">
 <div class="form-group col-md-6 " 
 							id="uploadDiv">
 							<label class="flot-left">Upload Image </label> 
@@ -219,7 +221,7 @@
 							
 						</div>
 			<div ng-hide="rdboption=='demoone'" ng-init="rdboption=='demo'">
-			 <div class="col-md-12">
+			 
 				<div class="form-group col-md-6">
 					<label>User </label> 
 					<select id="userId"

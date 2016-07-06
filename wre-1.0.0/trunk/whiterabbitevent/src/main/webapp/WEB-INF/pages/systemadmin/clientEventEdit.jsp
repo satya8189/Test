@@ -7,11 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>ClientEventEdit</title>
-<style>
-.panel-body{
-background-color: #fff;
-}
-</style>
+
 <script type="text/javascript">
  	$(document).ready(function() {
 		$(".js-example-basic-multiple").select2({
@@ -67,14 +63,10 @@ background-color: #fff;
 		return $state;
 	};
 </script>
-<style>
-.panel{
-border: 1px solid #588CC0;
-}
 
-</style>
 </head>
 <body>
+<h3 class="text-center">ClientEventEdit</h3>
 <div class="col-md-12">
 	<a ng-click="cancelClientEventEdit(event)"> <i
 		class="fa fa-angle-left back"></i>
@@ -83,7 +75,7 @@ border: 1px solid #588CC0;
 	<div class="panel">
 		<div class="panel-heading text-center font-size-20 padding-15 headbg" >Create
 			Client</div>
-		<div class="panel-body">
+		<div class="panel-body new-body">
 <form name="ipForm" ng-submit="ipForm.$valid && updateEvent(event)" 
  novalidate >
 
