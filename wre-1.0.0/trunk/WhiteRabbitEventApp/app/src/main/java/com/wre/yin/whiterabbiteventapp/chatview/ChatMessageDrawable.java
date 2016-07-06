@@ -9,9 +9,6 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 
-/**
- * Created by himanshusoni on 06/09/15.
- */
 public class ChatMessageDrawable extends Drawable {
     private final Paint mPaint;
     private final RectF mBoundsF;

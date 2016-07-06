@@ -126,7 +126,6 @@ public class MSGService extends IntentService {
         chat.putExtra("INFO", args);
         notification = new NotificationCompat.Builder(this);
         notification.setContentTitle(name);
-        notification.setContentText("");
         notification.setTicker("New Message !");
         notification.setSmallIcon(R.drawable.notification_icon);
         notification.setStyle(inboxStyle);

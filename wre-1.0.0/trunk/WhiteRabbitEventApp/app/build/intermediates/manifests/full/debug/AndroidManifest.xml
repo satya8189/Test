@@ -38,7 +38,6 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="com.wre.yin.whiterabbiteventapp.permission.MAPS_RECEIVE" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -189,11 +188,21 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name="com.wre.yin.whiterabbiteventapp.HelpActivity" />
-        <activity android:name="com.wre.yin.whiterabbiteventapp.GalleryNewActivity" />
-        <activity android:name="com.wre.yin.whiterabbiteventapp.NewGalImageDetails" />
-        <activity android:name="com.wre.yin.whiterabbiteventapp.VideoPlayerActivity" />
-        <activity android:name="com.wre.yin.whiterabbiteventapp.DiscoTopics" />
+        <activity
+            android:name="com.wre.yin.whiterabbiteventapp.HelpActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.wre.yin.whiterabbiteventapp.GalleryNewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.wre.yin.whiterabbiteventapp.NewGalImageDetails"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.wre.yin.whiterabbiteventapp.VideoPlayerActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name="com.wre.yin.whiterabbiteventapp.DiscoTopics"
+            android:screenOrientation="portrait" />
         <!-- Include the AdActivity and InAppPurchaseActivity configChanges and themes. -->
         <activity
             android:name="com.google.android.gms.ads.AdActivity"
@@ -303,8 +312,7 @@ Service handling Google Sign-In user revocation. For apps that do not integrate 
 
         <activity
             android:name="com.google.android.gms.tagmanager.TagManagerPreviewActivity"
-            android:noHistory="true" >
- <!-- optional, removes the previewActivity from the activity stack. -->
+            android:noHistory="true" > <!-- optional, removes the previewActivity from the activity stack. -->
             <intent-filter>
                 <data android:scheme="tagmanager.c.com.wre.yin.whiterabbiteventapp" />
 

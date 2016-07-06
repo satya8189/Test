@@ -270,8 +270,8 @@ public class CrowdPicsActivity extends AppCompatActivity {
                     String fileNameSegments[] = imgPath.split("/");
                     fileName = fileNameSegments[fileNameSegments.length - 1];
 
-                    String fileNameSeg[]=fileName.split("-");
-                    fName=eventName+"-"+partName+"-"+fileNameSeg[1]+"-"+new SimpleDateFormat("HHmmss",
+                   // String fileNameSeg[]=fileName.split("-");
+                    fName=eventName+"-"+partName+"-"+fileName+"-"+new SimpleDateFormat("HHmmss",
                             Locale.getDefault()).format(new Date());
                     uploadImageFromCam();
                     // Put file name in Async Http Post Param which will used in Java web app

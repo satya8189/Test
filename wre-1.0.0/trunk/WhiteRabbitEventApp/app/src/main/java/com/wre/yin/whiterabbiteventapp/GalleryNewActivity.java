@@ -1,8 +1,12 @@
 package com.wre.yin.whiterabbiteventapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
 
 import com.wre.yin.whiterabbiteventapp.adapters.NewGalleryAdapter;
 import com.wre.yin.whiterabbiteventapp.beans.GalaryBean;
@@ -44,7 +48,7 @@ public class GalleryNewActivity extends AppCompatActivity {
                 mGridView.setAdapter(mGridAdapter);
 
                 //Grid view click event
-                /*mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                         //Get item at position
                         GridItem item = (GridItem) parent.getItemAtPosition(position);
@@ -66,7 +70,7 @@ public class GalleryNewActivity extends AppCompatActivity {
                         //Start details activity
                         startActivity(intent);
                     }
-                });*/
+                });
 
 
             }

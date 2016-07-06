@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/video_card_view"
+    android:layout_width="160dp"
+    android:layout_height="160dp"
+    android:layout_marginBottom="10dp"
+    card_view:cardCornerRadius="10dp"
+    card_view:cardUseCompatPadding="true">
+    <RelativeLayout
+        android:layout_width="160dp"
+        android:layout_height="160dp">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:id="@+id/video_list_item_imageview"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/wre_logo"/>
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/play"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+
+
+</android.support.v7.widget.CardView>

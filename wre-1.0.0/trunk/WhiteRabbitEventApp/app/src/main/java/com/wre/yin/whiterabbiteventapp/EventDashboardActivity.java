@@ -5,15 +5,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -222,6 +218,7 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
                                             detailsAct.putExtra("name", name);
                                             detailsAct.putExtra("eventId", eventId);
                                             startActivity(detailsAct);
+                                            finish();
                                         }
                                         break;
 
@@ -510,9 +507,9 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
     protected void onRestart() {
         super.onRestart();
         //  EventDashboardActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
-        Intent refresh = new Intent(EventDashboardActivity.this, EventDashboardActivity.class);
+        /*Intent refresh = new Intent(EventDashboardActivity.this, EventDashboardActivity.class);
 
         startActivity(refresh);
-        this.finish();
+        this.finish();*/
     }
 }

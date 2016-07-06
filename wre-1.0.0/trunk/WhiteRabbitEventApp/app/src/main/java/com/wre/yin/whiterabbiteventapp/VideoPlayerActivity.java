@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.MediaController;
 import android.widget.VideoView;
 
@@ -21,9 +22,11 @@ public class VideoPlayerActivity extends AppCompatActivity {
       //  VideoPlayerActivity.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
         setContentView(R.layout.activity_video_player);
         videoURL = getIntent().getExtras().getString("videoUrl");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         videoview = (VideoView) findViewById(R.id.videoPlayer);
         fileName = getIntent().getExtras().getString("fileName");
+        getSupportActionBar().setTitle(fileName);
         // Execute StreamVideo AsyncTask
 
         // Create a progressbar
@@ -60,5 +63,16 @@ public class VideoPlayerActivity extends AppCompatActivity {
                 videoview.start();
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -130,20 +130,7 @@ public class SponcersActivity extends AppCompatActivity {
 
         List<HashMap<String, String>> mapsList;
         HashMap<String, String> maps;
-        View.OnClickListener clickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SponcersRecyclerViewHolders vHoder = (SponcersRecyclerViewHolders) v.getTag();
-                int position = vHoder.getPosition();
-                System.out.println("position id" + maps.get("sponsorId"));
-                HashMap<String, String> maps1 = mapsList.get(position);
-                Intent i = new Intent(SponcersActivity.this, SponcersProfileActivity.class);
-                i.putExtra("sponsorId", maps1.get("sponsorId"));
-                i.putExtra("sponsorName", maps1.get("sponsorName"));
-                i.putExtra("sponsorUrl", maps1.get("sponsorUrl"));
-                startActivity(i);
-            }
-        };
+
         private Context context;
 
         public RecyclerViewAdapter(Context context, ArrayList<HashMap<String, String>> list) {
@@ -169,6 +156,20 @@ public class SponcersActivity extends AppCompatActivity {
             Picasso.with(context).load(maps.get("sponsorUrl")).into(holder.sponsorPhoto);
             holder.sponsorPhoto.setTag(holder);
         }
+        View.OnClickListener clickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SponcersRecyclerViewHolders vHoder = (SponcersRecyclerViewHolders) v.getTag();
+                int position = vHoder.getPosition();
+                System.out.println("position id" + maps.get("sponsorId"));
+                HashMap<String, String> maps1 = mapsList.get(position);
+                Intent i = new Intent(SponcersActivity.this, SponcersProfileActivity.class);
+                i.putExtra("sponsorId", maps1.get("sponsorId"));
+                i.putExtra("sponsorName", maps1.get("sponsorName"));
+                i.putExtra("sponsorUrl", maps1.get("sponsorUrl"));
+                startActivity(i);
+            }
+        };
 
         @Override
         public int getItemCount() {

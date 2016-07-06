@@ -33,7 +33,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="com.wre.yin.whiterabbiteventapp.permission.MAPS_RECEIVE" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
-    <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
@@ -180,11 +180,16 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".HelpActivity" />
-        <activity android:name=".GalleryNewActivity" />
-        <activity android:name=".NewGalImageDetails" />
-        <activity android:name=".VideoPlayerActivity" />
-        <activity android:name=".DiscoTopics"></activity>
+        <activity android:name=".HelpActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".GalleryNewActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".NewGalImageDetails"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".VideoPlayerActivity"
+            android:screenOrientation="landscape"/>
+        <activity android:name=".DiscoTopics"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

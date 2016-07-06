@@ -1,6 +1,7 @@
 package com.wre.yin.whiterabbiteventapp.adapters;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.media.MediaMetadataRetriever;
@@ -75,6 +76,7 @@ public class CustomVideosGridAdaptor extends ArrayAdapter<HashMap<String,String>
     }
     public  Bitmap retriveVideoFrameFromVideo(String videoPath)
             throws Throwable {
+        ProgressDialog dialog = ProgressDialog.show(context,"","", true);
         Bitmap bitmap = null;
         MediaMetadataRetriever mediaMetadataRetriever = null;
         try {
@@ -96,6 +98,7 @@ public class CustomVideosGridAdaptor extends ArrayAdapter<HashMap<String,String>
                 mediaMetadataRetriever.release();
             }
         }
+        dialog.dismiss();
         return bitmap;
     }
 }

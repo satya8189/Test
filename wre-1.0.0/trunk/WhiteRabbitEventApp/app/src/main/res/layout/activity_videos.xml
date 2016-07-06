@@ -42,14 +42,12 @@
             android:src="@drawable/gallery_pick" />
 
     </LinearLayout>
-
-    <GridView
-        android:id="@+id/upload_video_grid"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#fff"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/videos_grid_recycler_view"
         android:layout_below="@+id/upload_video_view"
-        android:gravity="center"
-        android:numColumns="2"
-        android:stretchMode="columnWidth"></GridView>
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
 </RelativeLayout>

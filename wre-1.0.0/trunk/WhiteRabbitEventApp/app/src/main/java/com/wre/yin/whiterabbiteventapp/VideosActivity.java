@@ -15,23 +15,19 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Base64;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.wre.yin.whiterabbiteventapp.adapters.CustomVideosGridAdaptor;
 import com.wre.yin.whiterabbiteventapp.beans.GalaryBean;
 import com.wre.yin.whiterabbiteventapp.beans.Result;
 import com.wre.yin.whiterabbiteventapp.utils.Callback;
@@ -39,11 +35,13 @@ import com.wre.yin.whiterabbiteventapp.utils.Constants;
 import com.wre.yin.whiterabbiteventapp.utils.MyAsyncTask;
 import com.wre.yin.whiterabbiteventapp.utils.Utils;
 
-import org.apache.commons.io.IOUtils;
+import org.apache.commons.codec.binary.Base64;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -71,7 +69,7 @@ public class VideosActivity extends AppCompatActivity {
     private Uri fileUri;
     private String vidPath, fileName, fileTpe, encodedString, eventName, partName, fName;
     //flag for which one is used for images selection
-    private GridView _gallery;
+
     private Cursor _cursor;
     private int _columnIndex;
     private int[] _videosId;
@@ -80,12 +78,14 @@ public class VideosActivity extends AppCompatActivity {
     private List<HashMap<String, String>> mGridData;
     private SharedPreferences prefs;
 
+    private GridLayoutManager gridLayout;
+    private RecyclerView rView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         _context = getApplicationContext();
-      //  VideosActivity.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
         setContentView(R.layout.activity_videos);
 
         String nameTxt = getIntent().getExtras().getString("name");
@@ -99,11 +99,17 @@ public class VideosActivity extends AppCompatActivity {
         prgDialog = new ProgressDialog(this);
         prgDialog.setCancelable(false);
 
-        _gallery = (GridView) findViewById(R.id.upload_video_grid);
+
         _contentUri = MEDIA_EXTERNAL_CONTENT_URI;
 
-        initVideosId();
+        gridLayout = new GridLayoutManager(VideosActivity.this, 2);
+
+        rView = (RecyclerView) findViewById(R.id.videos_grid_recycler_view);
+        rView.setHasFixedSize(true);
+        rView.setLayoutManager(gridLayout);
+
         setGalleryAdapter();
+        initVideosId();
 
         uploadVideo = (Button) findViewById(R.id.upload_video);
         camGalLayout = (LinearLayout) findViewById(R.id.upload_video_view);
@@ -260,22 +266,96 @@ public class VideosActivity extends AppCompatActivity {
                         mGridData.add(map);
                     }
                 }
-                CustomVideosGridAdaptor videosAdapter = new CustomVideosGridAdaptor(VideosActivity.this, R.layout.videos_row_grid, (ArrayList<HashMap<String, String>>) mGridData);
-                _gallery.setAdapter(videosAdapter);
+                rView.setAdapter(new VideoGalleryAdapter(VideosActivity.this, (ArrayList<HashMap<String, String>>) mGridData));
 
-                _gallery.setAdapter(new VideoGalleryAdapter(_context, (ArrayList<HashMap<String, String>>) mGridData));
-                _gallery.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        HashMap<String, String> resMap = mGridData.get(i);
-                        Intent videoPlay = new Intent(VideosActivity.this, VideoPlayerActivity.class);
-                        videoPlay.putExtra("videoUrl", resMap.get("videoUrl"));
-                        videoPlay.putExtra("fileName", resMap.get("fileName"));
-                        startActivity(videoPlay);
-                    }
-                });
             }
         }).execute();
+
+    }
+
+    private class VideoGalleryAdapter extends RecyclerView.Adapter<VideoRecyleHolder> {
+        List<HashMap<String, String>> mapsList;
+        HashMap<String, String> maps;
+        private Context mcontext;
+
+        public VideoGalleryAdapter(Context context, ArrayList<HashMap<String, String>> list) {
+            mapsList = list;
+            this.mcontext = context;
+        }
+
+        @Override
+        public VideoRecyleHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View layoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.videos_list_item, null);
+            VideoRecyleHolder rcv = new VideoRecyleHolder(layoutView);
+            return rcv;
+        }
+
+        @Override
+        public void onBindViewHolder(VideoRecyleHolder holder, int position) {
+            maps = mapsList.get(position);
+
+            // holder.sponsorPhoto.setImageResource(maps.get(position).getPhoto());
+            holder.videoPhoto.setOnClickListener(clickListener);
+            // Picasso.with(mcontext).load(maps.get("sponsorUrl")).into(holder.videoPhoto);
+            String videoUrl = maps.get("videoUrl");
+            try {
+                Bitmap thumb = retriveVideoFrameFromVideo(videoUrl);
+                holder.videoPhoto.setImageBitmap(thumb);
+            } catch (Exception e) {
+                e.printStackTrace();
+            } catch (Throwable throwable) {
+                throwable.printStackTrace();
+            }
+
+            holder.videoPhoto.setTag(holder);
+
+        }
+
+        View.OnClickListener clickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                VideoRecyleHolder vHoder = (VideoRecyleHolder) v.getTag();
+                int position = vHoder.getPosition();
+                System.out.println("position id" + maps.get("sponsorId"));
+                HashMap<String, String> resMap = mapsList.get(position);
+                Intent videoPlay = new Intent(VideosActivity.this, VideoPlayerActivity.class);
+                videoPlay.putExtra("videoUrl", resMap.get("videoUrl"));
+                videoPlay.putExtra("fileName", resMap.get("fileName"));
+                startActivity(videoPlay);
+            }
+        };
+
+        @Override
+        public int getItemCount() {
+            return this.mapsList.size();
+        }
+
+        public Bitmap retriveVideoFrameFromVideo(String videoPath)
+                throws Throwable {
+
+            Bitmap bitmap = null;
+            MediaMetadataRetriever mediaMetadataRetriever = null;
+            try {
+                mediaMetadataRetriever = new MediaMetadataRetriever();
+                if (Build.VERSION.SDK_INT >= 14)
+                    mediaMetadataRetriever.setDataSource(videoPath, new HashMap<String, String>());
+                else
+                    mediaMetadataRetriever.setDataSource(videoPath);
+                //   mediaMetadataRetriever.setDataSource(videoPath);
+                bitmap = mediaMetadataRetriever.getFrameAtTime();
+            } catch (Exception e) {
+                e.printStackTrace();
+                throw new Throwable(
+                        "Exception in retriveVideoFrameFromVideo(String videoPath)"
+                                + e.getMessage());
+
+            } finally {
+                if (mediaMetadataRetriever != null) {
+                    mediaMetadataRetriever.release();
+                }
+            }
+            return bitmap;
+        }
 
     }
 
@@ -407,19 +487,38 @@ public class VideosActivity extends AppCompatActivity {
 
             }
 
-            ;
 
             @Override
             protected String doInBackground(Void... params) {
 
                 if (fileTpe.equals("video")) {
                     FileInputStream is = null;
-                    try {
-                        is = new FileInputStream(vidPath);
+                    /*try {
+                        *//*is = new FileInputStream(vidPath);
 
                         byte[] byteArr = IOUtils.toByteArray(is);
-                        encodedString = Base64.encodeToString(byteArr, 0);
+                        encodedString = Base64.encodeToString(byteArr, 0);*//*
+
+                        File file = new File(vidPath);
+                        byte[] bytes = loadFile(file);
+                        byte[] encoded = Base64.encodeBase64S(bytes);
+                        encodedString = new String(encoded);
+
+
                     } catch (IOException ioe) {
+                    }*/
+
+                    File originalFile = new File(vidPath);
+                    String encodedBase64 = null;
+                    try {
+                        FileInputStream fileInputStreamReader = new FileInputStream(originalFile);
+                        byte[] bytes = new byte[(int) originalFile.length()];
+                        fileInputStreamReader.read(bytes);
+                        encodedString = new String(Base64.encodeBase64(bytes));
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
 
                 }
@@ -457,6 +556,30 @@ public class VideosActivity extends AppCompatActivity {
         }.execute(null, null, null);
     }
 
+    private static byte[] loadFile(File file) throws IOException {
+        InputStream is = new FileInputStream(file);
+
+        long length = file.length();
+        if (length > Integer.MAX_VALUE) {
+            // File is too large
+        }
+        byte[] bytes = new byte[(int) length];
+
+        int offset = 0;
+        int numRead = 0;
+        while (offset < bytes.length
+                && (numRead = is.read(bytes, offset, bytes.length - offset)) >= 0) {
+            offset += numRead;
+        }
+
+        if (offset < bytes.length) {
+            throw new IOException("Could not completely read file " + file.getName());
+        }
+
+        is.close();
+        return bytes;
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -471,119 +594,9 @@ public class VideosActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-      //  VideosActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
+        //  VideosActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
         finish();
     }
 
-    private class VideoGalleryAdapter extends BaseAdapter {
-        LayoutInflater inflater;
-        ArrayList<HashMap<String, String>> videoListThis;
 
-        public VideoGalleryAdapter(Context c, ArrayList<HashMap<String, String>> videoList) {
-            _context = c;
-            videoListThis = videoList;
-        }
-
-        public int getCount() {
-            return videoListThis.size();
-        }
-
-        public Object getItem(int position) {
-            return position;
-        }
-
-        public long getItemId(int position) {
-            return position;
-        }
-
-        public View getView(int position, View convertView, ViewGroup parent) {
-
-
-            RelativeLayout relativeLayout = new RelativeLayout(_context);
-            try {
-                if (convertView != null) {
-                    relativeLayout = (RelativeLayout) convertView;
-                }
-
-                ImageView imgVw = new ImageView(_context);
-                HashMap<String, String> resultMap = videoListThis.get(position);
-                String videoUrl = resultMap.get("videoUrl");
-                Bitmap thumb = retriveVideoFrameFromVideo(videoUrl);
-                imgVw.setImageBitmap(thumb);
-                imgVw.setLayoutParams(new GridView.LayoutParams(196, 196));
-                imgVw.setPadding(8, 8, 8, 8);
-                RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
-                        196, 196);
-                lp.addRule(RelativeLayout.CENTER_IN_PARENT);
-                imgVw.setLayoutParams(lp);
-
-                RelativeLayout.LayoutParams lp1 = new RelativeLayout.LayoutParams(
-                        66, 66);
-                lp1.addRule(RelativeLayout.CENTER_IN_PARENT);
-                ImageView imgVw1 = new ImageView(_context);
-                imgVw1.setBackgroundResource(R.drawable.play);
-
-                imgVw1.setLayoutParams(lp1);
-
-
-                relativeLayout.addView(imgVw);
-                relativeLayout.addView(imgVw1);
-
-
-            } catch (Exception ex) {
-                System.out.println("StartActivity:getView()-135: ex " + ex.getClass() + ", " + ex.getMessage());
-            } catch (Throwable throwable) {
-                throwable.printStackTrace();
-            }
-            return relativeLayout;
-
-            /*ImageView imgVw= new ImageView(_context);
-            try
-            {
-                if(convertView!=null)
-                {
-                    imgVw= (ImageView) convertView;
-                }
-                imgVw.setImageBitmap(getImage(_videosId[position]));
-                imgVw.setLayoutParams(new GridView.LayoutParams(196, 196));
-                //imgVw.setBackgroundResource(R.drawable.play_ico);
-
-                imgVw.setForeground();
-                imgVw.setPadding(8, 8, 8, 8);
-            }
-            catch(Exception ex)
-            {
-                System.out.println("StartActivity:getView()-135: ex " + ex.getClass() +", "+ ex.getMessage());
-            }
-            return imgVw;*/
-
-
-        }
-
-        public Bitmap retriveVideoFrameFromVideo(String videoPath)
-                throws Throwable {
-            Bitmap bitmap = null;
-            MediaMetadataRetriever mediaMetadataRetriever = null;
-            try {
-                mediaMetadataRetriever = new MediaMetadataRetriever();
-                if (Build.VERSION.SDK_INT >= 14)
-                    mediaMetadataRetriever.setDataSource(videoPath, new HashMap<String, String>());
-                else
-                    mediaMetadataRetriever.setDataSource(videoPath);
-                //   mediaMetadataRetriever.setDataSource(videoPath);
-                bitmap = mediaMetadataRetriever.getFrameAtTime();
-            } catch (Exception e) {
-                e.printStackTrace();
-                throw new Throwable(
-                        "Exception in retriveVideoFrameFromVideo(String videoPath)"
-                                + e.getMessage());
-
-            } finally {
-                if (mediaMetadataRetriever != null) {
-                    mediaMetadataRetriever.release();
-                }
-            }
-            return bitmap;
-        }
-    }
 }

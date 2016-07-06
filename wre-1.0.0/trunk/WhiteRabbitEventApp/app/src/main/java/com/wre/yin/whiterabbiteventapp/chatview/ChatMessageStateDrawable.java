@@ -2,9 +2,6 @@ package com.wre.yin.whiterabbiteventapp.chatview;
 
 import android.graphics.drawable.ColorDrawable;
 
-/**
- * Created by himanshusoni on 06/09/15.
- */
 
 public abstract class ChatMessageStateDrawable extends ColorDrawable {
 

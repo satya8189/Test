@@ -9,9 +9,7 @@ import android.graphics.LightingColorFilter;
 import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 
-/**
- * Created by himanshusoni on 06/09/15.
- */
+
 public final class TintedBitmapDrawable extends BitmapDrawable {
     private int tint;
     private int alpha;

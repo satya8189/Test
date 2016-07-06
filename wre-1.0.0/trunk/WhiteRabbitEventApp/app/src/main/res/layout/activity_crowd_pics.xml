@@ -21,8 +21,7 @@
         android:background="@android:color/transparent"
         android:gravity="center"
         android:orientation="horizontal"
-        android:visibility="gone"
-        >
+        android:visibility="gone">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/camara_link"
@@ -42,8 +41,8 @@
 
     <GridView
         android:id="@+id/upload_image_grid"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_below="@+id/upload_image_view"
         android:layout_marginTop="10dp"
         android:background="#fff"
