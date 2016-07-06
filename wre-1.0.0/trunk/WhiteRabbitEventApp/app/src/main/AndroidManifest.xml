@@ -24,7 +24,6 @@
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.SEND_SMS" />
-
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -33,7 +32,6 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="com.wre.yin.whiterabbiteventapp.permission.MAPS_RECEIVE" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
-
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
@@ -145,7 +143,7 @@
         <activity
             android:name=".EmpProfileActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"/>
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".LoginActivity"
             android:screenOrientation="portrait" />
@@ -180,15 +178,23 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".HelpActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".GalleryNewActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".NewGalImageDetails"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".VideoPlayerActivity"
-            android:screenOrientation="landscape"/>
-        <activity android:name=".DiscoTopics"
+        <activity
+            android:name=".HelpActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".GalleryNewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".NewGalImageDetails"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".VideoPlayerActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".DiscoTopics"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".NotificatonsettingsAct"
             android:screenOrientation="portrait"></activity>
     </application>
 
