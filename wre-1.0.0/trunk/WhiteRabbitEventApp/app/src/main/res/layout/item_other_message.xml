@@ -8,14 +8,15 @@
 
     <com.wre.yin.whiterabbiteventapp.chatview.ChatMessageView
         android:id="@+id/chatMessageView"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
         app:cmv_arrowGravity="start"
         app:cmv_arrowPosition="left"
-        app:cmv_backgroundColor="#F0F4C3"
+        app:cmv_backgroundColor="#ffffff"
         app:cmv_backgroundColorPressed="#B2EBF2"
-        app:cmv_cornerRadius="3dp"
         app:cmv_contentPadding="3dp"
+        app:cmv_cornerRadius="3dp"
         app:cmv_showArrow="true">
 
         <LinearLayout
@@ -27,8 +28,7 @@
                 android:id="@+id/msg_other_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
-
+                android:layout_marginLeft="2dp"
                 android:text="Name"
                 android:textSize="10sp" />
 
@@ -36,6 +36,11 @@
                 android:id="@+id/msg_other_msg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="16sp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:gravity="start"
                 android:text="Hello"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
@@ -43,12 +48,12 @@
                 android:id="@+id/msg_other_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_above="@+id/text"
                 android:layout_gravity="end"
+                android:layout_marginRight="2dp"
                 android:gravity="end"
                 android:text="Time"
                 android:textSize="10sp" />
         </LinearLayout>
-    </com.wre.yin.whiterabbiteventapp.chatview.ChatMessageView>
 
+    </com.wre.yin.whiterabbiteventapp.chatview.ChatMessageView>
 </LinearLayout>

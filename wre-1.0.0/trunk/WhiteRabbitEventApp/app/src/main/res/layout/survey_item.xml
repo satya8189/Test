@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/survey_card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="10dp"
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
+    android:layout_marginTop="10dp"
     android:background="@color/survey_item"
     android:foreground="?attr/selectableItemBackground"
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
     <LinearLayout
         android:id="@+id/networl_re_layout"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:background="@color/survey_item"
-
         android:layout_height="wrap_content"
-        android:paddingTop="4dp">
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding="5dp">
 
 
         <TextView
@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="16dp"
+            android:layout_margin="10dp"
             android:layout_toRightOf="@+id/list_avatar"
             android:text="Android "
             android:textAppearance="?attr/textAppearanceListItem"
@@ -36,51 +36,67 @@
             android:id="@+id/survey_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:visibility="gone"
-            android:textColor="@color/black"
-            android:padding="4dp"
+            android:layout_margin="5dp"
             android:background="@drawable/survery_item_edittext"
-            android:lines="2" />
+            android:lines="2"
+            android:padding="5dp"
+            android:textColor="@color/black"
+            android:visibility="gone" />
+
         <RadioGroup
+            android:id="@+id/sur_radio_grp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/sur_radio_grp"
-            android:visibility="gone"
-            android:orientation="vertical">
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <android.support.v7.widget.AppCompatRadioButton
                 android:id="@+id/sur_radio1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="True"
-                android:textColor="#000"/>
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:textColor="#000"
+                app:buttonTint="@color/b" />
+
+            <android.support.v7.widget.AppCompatRadioButton
                 android:id="@+id/sur_radio2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="False"
-                android:textColor="#000"/>
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:textColor="#000"
+
+                app:buttonTint="@color/b" />
+
+            <android.support.v7.widget.AppCompatRadioButton
                 android:id="@+id/sur_radio3"
-                android:text="Other"
-                android:textColor="#000"/>
-            <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/sur_radio4"
                 android:text="Other"
-                android:textColor="#000"/>
+                android:textColor="#000"
+
+                app:buttonTint="@color/b" />
+
+            <android.support.v7.widget.AppCompatRadioButton
+                android:id="@+id/sur_radio4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="Other"
+                android:textColor="#000"
+                app:buttonTint="@color/b" />
         </RadioGroup>
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/survey_submit_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
             android:layout_gravity="end"
+            android:layout_margin="5dp"
+            android:background="@drawable/survery_item_save"
             android:text="Save"
-            />
+            android:textColor="@color/b" />
 
     </LinearLayout>
 
