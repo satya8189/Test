@@ -29,6 +29,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.omg.PortableInterceptor.SUCCESSFUL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -1313,14 +1314,14 @@ public class AdminMgmtController {
 	            byte[] imageByteArray = Base64.decodeBase64(galaryBean.getEncodeString());
 	            FileOutputStream imageOutFile;
 	            // Write Image into File system - Make sure you update the path
-	            filePath=WREConstants.RESOURCE_PATH+galaryBean.getEventId()+WREConstants.FILE_SEPARATER+galaryBean.getParticipantId()+galaryBean+WREConstants.FILE_SEPARATER+galaryBean.getType();
+	            filePath=WREConstants.RESOURCE_PATH+galaryBean.getType()+WREConstants.FILE_SEPARATER+galaryBean.getParticipantId();
 	            File uploadfile=new File(filePath);
 	            String name = galaryBean.getFileName();
 	    			if (!uploadfile.exists()) {
 	    				uploadfile.mkdirs();
 	    			}
 	    			// Create the file on server
-	    			File serverFile = new File(uploadfile.getAbsolutePath() + File.separator
+	    			File serverFile = new File(uploadfile.getAbsolutePath()+File.separator
 	    					+ name);
 	            imageOutFile = new FileOutputStream(serverFile);
 
@@ -1372,7 +1373,34 @@ public class AdminMgmtController {
 		public @ResponseBody ClientBean getClientDetails(@RequestParam("eventId")Long eventId){
 			return adminMgmtService.getClientDetails(eventId);
 		}*/
+		
+   
+    
+ // admin/galleryList
+ 	@RequestMapping(value = "admin/galaryImageList")
+ 	public @ResponseBody
+ 	List<GalaryBean> galaryImageList(@RequestParam("eventId") Long eventId,@RequestParam("paticipantId") Long paticipantId,
+ 			@RequestParam("type") String type) {
+ 		log.info("in side galaryList method----" + eventId);
+ 		List<GalaryBean> galaryList = adminMgmtService
+ 				.galaryImageList(eventId, type,paticipantId);
+
+ 		return galaryList;
+ 	}
+ 	
+ 	@RequestMapping(value = "admin/galleryImageStatusSave", method = RequestMethod.POST)
+	public @ResponseBody void galleryImageStatusSave(@RequestBody GalaryBean galaryBean) {
+	adminMgmtService.galleryImageStatusSave(galaryBean);
+	}
+
 
 }
+		
+		
+
+		
+		
+
+
 
 
