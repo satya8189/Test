@@ -8,6 +8,7 @@ public class SponsorBean {
     private String sponcorDesc;
     private String sponcorName;
     private String fileName;
+    private String url;
 	public Long getSponcorId() {
 		return sponcorId;
 	}
@@ -46,6 +47,18 @@ public class SponsorBean {
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	@Override
+	public String toString() {
+		return "SponsorBean [sponcorId=" + sponcorId + ", eventId=" + eventId
+				+ ", eventName=" + eventName + ", sponcorDesc=" + sponcorDesc
+				+ ", sponcorName=" + sponcorName + ", fileName=" + fileName
+				+ ", url=" + url + "]";
+	}
 	
-
 }
