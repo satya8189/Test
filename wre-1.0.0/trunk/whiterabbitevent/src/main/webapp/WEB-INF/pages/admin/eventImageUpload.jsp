@@ -8,14 +8,13 @@ border: 1px solid #588CC0;
 
 </style>
 
-
 <form name="createEvent" ng-submit="createEvent.$valid && uploadImage()" enctype="multipart/form-data" novalidate>
 
 <div class="col-md-12">
 
-<a ng-click="cancelUploadLayout(eventId)"> <i
-		class="fa fa-angle-left back"></i>
-	</a> 
+<a ng-click="cancelUploadLayout(eventId)"> 
+	<i	class="fa fa-angle-left back"></i>
+</a> 
 	
 <div class="panel">
  <div class="panel-heading text-center font-size-20 padding-15 headbg">Event Images Upload</div>
@@ -30,7 +29,6 @@ border: 1px solid #588CC0;
 				<span style="color:red" ng-if="createEvent.file.$invalid" ng-show="createEvent.$submitted">Please select a file to upload</span>
 		</div>
 	 </div>
-	
     <div>&nbsp;</div>
     <div class="text-center">
 <input type="submit" value="Save" class="btn button btn-primary save margin-2" ng-click="submitted=true"/>
@@ -42,16 +40,15 @@ border: 1px solid #588CC0;
 </form>
 
 <div>&nbsp;</div>
-             <div class="col-md-10 col-md-offset-1">
+             	<div class="col-md-10 col-md-offset-1">
                  <div>&nbsp;</div>
-                   <div class="heading-with-icon"><h3>{{event.eventName}}</h3>&nbsp;&nbsp; Images</div>
+                   <div class="heading-with-icon"><!-- <h3>{{event.eventName}}</h3> -->&nbsp;&nbsp; Images</div>
                          <div>&nbsp;</div>
                          <div class="upload-image  col-md-3" ng-if="eventImages.length>0" ng-repeat="image in eventImages">
                                  <!-- URL: {{image.url}} -->
                                  <img src="{{image.url}}" class="img-responsive margin-auto"
                                          style="height: 150px; width:150px;"/> 
-                                         <a class="glyphicon glyphicon-trash upload"
-                                         ng-click="deleteGallery(image)"></a>
+                                 <a class="glyphicon glyphicon-trash upload" ng-click="deleteGallery(image)"></a>
                          </div>
                          <div ng-if="eventImages.length==0">
                          	<h4>No images uploaded yet.</h4>
