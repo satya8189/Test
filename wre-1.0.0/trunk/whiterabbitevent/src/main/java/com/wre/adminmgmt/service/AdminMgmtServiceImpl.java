@@ -17,9 +17,6 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.wre.adminmgmt.bean.AgendaBean;
@@ -45,12 +42,12 @@ import com.wre.common.util.WREUtil;
 import com.wre.model.Agenda;
 import com.wre.model.AppIdentifier;
 import com.wre.model.ChatTopic;
-import com.wre.model.Client;
 import com.wre.model.ContactDetails;
 import com.wre.model.Event;
 import com.wre.model.EventParticipant;
 import com.wre.model.EventServices;
 import com.wre.model.Galary;
+import com.wre.model.GalaryLikes;
 import com.wre.model.Newsfeed;
 import com.wre.model.ParticipantQuries;
 import com.wre.model.Participants;
@@ -60,10 +57,8 @@ import com.wre.model.Speaker;
 import com.wre.model.Sponcor;
 import com.wre.model.SurveyQuestion;
 import com.wre.model.SurveyQuestionAnswer;
-import com.wre.systemadminmgmt.bean.ClientBean;
 import com.wre.systemadminmgmt.bean.ParticipantBean;
 import com.wre.systemadminmgmt.bean.ParticipantEventBean;
-import com.wre.systemadminmgmt.dao.SystemAdminMgmtDaoImpl;
 
 @Service("AdminMgmtService")
 public class AdminMgmtServiceImpl implements AdminMgmtService {
@@ -1631,6 +1626,58 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 				 log.info(result);
 					  return result;
 			}
+
+			
+
+			@Override
+			public List<GalaryBean> galaryImageList(Long eventId, String type,
+					Long paticipantId) {
+
+
+					List<Galary> galaryList = AdminMgmtDaoImpl.galaryList(eventId, type);
+					List<GalaryBean> galaryBeanList = new ArrayList<GalaryBean>();
+					for (Galary galaryOject : galaryList) {
+						GalaryBean galaryBeanOject = new GalaryBean();
+						galaryBeanOject.setGlaryItemId(galaryOject.getGlaryItemId());
+						galaryBeanOject.setName(galaryOject.getName());
+						galaryBeanOject.setType(galaryOject.getType());
+						galaryBeanOject.setEventId(galaryOject.getEvent().getEventId());
+						galaryBeanOject.setFileName(galaryOject.getFileName());
+						
+						List<Object[]> objectList = AdminMgmtDaoImpl.galaryLikesCount(galaryOject.getGlaryItemId(),paticipantId);
+						if(objectList.get(0)!=null){
+							Object o=objectList.get(0);
+						galaryBeanOject.setLikeCount((String)o);
+						}
+						if(objectList.size()>1){
+							Object o1=objectList.get(1);
+						galaryBeanOject.setLikeStatus((String)o1);
+						}
+						galaryBeanList.add(galaryBeanOject);
+
+					}
+					log.info("list size is --" + galaryBeanList.size());
+					return galaryBeanList;
+
+
+			}
+
+			@Override
+			public void galleryImageStatusSave(GalaryBean galaryBean) {
+				
+				GalaryLikes galaryLikes=new GalaryLikes();
+				galaryLikes.setStatus("Active");
+				Galary galary=new Galary();
+				galary.setGlaryItemId(galaryBean.getGlaryItemId());
+				galaryLikes.setGalary(galary);
+				Participants participants=new Participants();
+				participants.setParticipantId(galaryBean.getParticipantId());
+				galaryLikes.setParticipants(participants);
+				AdminMgmtDaoImpl.save(galaryLikes);
+				
+			}
+			
+			
 			
 			/*public ClientBean getClientDetails(Long eventId){
 				ClientBean clientBean=new ClientBean();

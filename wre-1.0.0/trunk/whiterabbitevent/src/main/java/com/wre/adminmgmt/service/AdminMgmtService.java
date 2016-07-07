@@ -170,6 +170,11 @@ public String sendingOTP(ParticipantBean participantBean);
 public void updateChatTopic(Long chatTopicId, Long eventId, MultipartFile file,
 		String chatTopicName, String type);
 
+public List<GalaryBean> galaryImageList(Long eventId, String type,
+		Long paticipantId);
+
+public void galleryImageStatusSave(GalaryBean galaryBean);
+
 //public ClientBean getClientDetails(Long eventId);
 
 }
