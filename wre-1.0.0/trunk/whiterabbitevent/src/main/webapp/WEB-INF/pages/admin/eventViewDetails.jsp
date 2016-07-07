@@ -85,7 +85,7 @@ margin: 8px;
 								<img src="resources/images/Q&A.png" ng-if="service.serviceName=='Help'"/>
 								<img src="resources/images/video.png" ng-if="service.serviceName=='Videos'"/>
 								<img src="resources/images/video.png" ng-if="service.serviceName=='EventImage'"/>
-								
+								<img src="resources/images/video.png" ng-if="service.serviceName=='Crowd Pics'"/>
 								 <h4 class="f18" style="text-transform: capitalize;">{{service.serviceName}}</h4> 
 							 </div>
 							</div>
