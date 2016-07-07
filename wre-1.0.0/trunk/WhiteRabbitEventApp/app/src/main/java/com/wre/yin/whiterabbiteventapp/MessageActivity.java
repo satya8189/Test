@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
 import com.wre.yin.whiterabbiteventapp.adapters.ChatMessageAdapter;
 import com.wre.yin.whiterabbiteventapp.beans.ChatBean;
 import com.wre.yin.whiterabbiteventapp.beans.ChatMessage;
@@ -43,15 +44,15 @@ import java.util.List;
 
 public class MessageActivity extends AppCompatActivity {
     private ListView mListView;
-    private Button mButtonSend;
+    private ImageView mButtonSend;
     private EditText mEditTextMessage;
     private ImageView mImageView;
 
     SharedPreferences prefs;
     Bundle bundle;
 
-    private String message,eventId;
-    private String topicName;
+    private String message, eventId;
+    private String topicName, partId;
     private DBHelper dbHelper;
 
     private ChatMessageAdapter mAdapter;
@@ -59,12 +60,12 @@ public class MessageActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // MessageActivity.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
+        // MessageActivity.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
         setContentView(R.layout.activity_message);
 
         topicName = getIntent().getExtras().getString("name");
         mListView = (ListView) findViewById(R.id.listView);
-        mButtonSend = (Button) findViewById(R.id.btn_send);
+        mButtonSend = (ImageView) findViewById(R.id.btn_send);
         mEditTextMessage = (EditText) findViewById(R.id.et_message);
         mImageView = (ImageView) findViewById(R.id.iv_image);
         mAdapter = new ChatMessageAdapter(this, new ArrayList<ChatMessage>());
@@ -74,6 +75,11 @@ public class MessageActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(topicName);
         eventId = getIntent().getExtras().getString("eventId");
+
+        prefs = getSharedPreferences("Chat", 0);
+        partId = prefs.getString("partId", null);
+        Picasso.with(getApplicationContext()).load("http://183.82.103.156:8080/Resources/wre/profile_pics/" + partId + "/profile.jpg").placeholder(R.drawable.user_icon).into(mImageView);
+
         dbHelper = new DBHelper(getApplicationContext());
         List<ChatBean> chatBeanList = dbHelper.getAllNoty(topicName);
         for (ChatBean bean : chatBeanList) {
@@ -99,7 +105,6 @@ public class MessageActivity extends AppCompatActivity {
 
         // text.setText(nameTxt);
 
-        prefs = getSharedPreferences("Chat", 0);
         bundle = getIntent().getBundleExtra("INFO");
         SharedPreferences.Editor edit = prefs.edit();
 
@@ -152,7 +157,7 @@ public class MessageActivity extends AppCompatActivity {
         public void onReceive(Context context, Intent intent) {
             ChatBean cBean = new ChatBean();
             prefs = getSharedPreferences("Chat", 0);
-            if ("onchat".equals(prefs.getString("current_status", ""))&&topicName.equals(intent.getStringExtra("topic"))) {
+            if ("onchat".equals(prefs.getString("current_status", "")) && topicName.equals(intent.getStringExtra("topic"))) {
                 String str = intent.getStringExtra("msg");
                 String str1 = intent.getStringExtra("fromname");
                 String str2 = intent.getStringExtra("topic");
@@ -205,8 +210,8 @@ public class MessageActivity extends AppCompatActivity {
                 edit.putString("current_status", "");
                 edit.putString("current_topic", "");
                 edit.commit();
-                Intent i=new Intent(MessageActivity.this,DiscoTopics.class);
-                i.putExtra("eventId",eventId);
+                Intent i = new Intent(MessageActivity.this, DiscoTopics.class);
+                i.putExtra("eventId", eventId);
                 startActivity(i);
                 onBackPressed();
                 return true;
@@ -228,7 +233,7 @@ public class MessageActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-       // MessageActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
+        // MessageActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
 
         LocalBroadcastManager.getInstance(MessageActivity.this).unregisterReceiver(onNotice);
         SharedPreferences.Editor edit = prefs.edit();
@@ -236,8 +241,8 @@ public class MessageActivity extends AppCompatActivity {
         edit.putString("current_status", "");
         edit.putString("current_topic", "");
         edit.commit();
-        Intent i=new Intent(MessageActivity.this,DiscoTopics.class);
-        i.putExtra("eventId",eventId);
+        Intent i = new Intent(MessageActivity.this, DiscoTopics.class);
+        i.putExtra("eventId", eventId);
         startActivity(i);
     }
 

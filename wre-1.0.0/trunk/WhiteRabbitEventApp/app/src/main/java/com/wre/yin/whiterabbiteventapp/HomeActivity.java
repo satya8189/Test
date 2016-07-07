@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.util.Log;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -34,19 +35,19 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
 
     private SliderLayout mDemoSlider;
     private Target target;
-    private ImageView proFic, profDetails;
+    private ImageView proFic, profDetails, singleImageView;
     private RelativeLayout rl1;
     private SharedPreferences prefs;
-
+    private FrameLayout singleEventView;
     private String partiName, partId;
-    private TextView partName;
+    private TextView partName, singleEvent, singleEventDate;
     private List<HashMap<String, String>> list;
     SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // HomeActivity.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
+        // HomeActivity.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
         setContentView(R.layout.activity_home);
 
         getSupportActionBar().hide();
@@ -59,6 +60,11 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
         profDetails = (ImageView) findViewById(R.id.profile_details);
         proFic = (ImageView) findViewById(R.id.profile_home_pic);
         rl1 = (RelativeLayout) findViewById(R.id.rl1);
+
+        singleEventView = (FrameLayout) findViewById(R.id.ghost_view_workaround);
+        singleImageView = (ImageView) findViewById(R.id.single_image);
+        singleEvent = (TextView) findViewById(R.id.single_eventname);
+        singleEventDate = (TextView) findViewById(R.id.single_date);
 
         partName = (TextView) findViewById(R.id.profile_name);
 
@@ -123,27 +129,47 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
                             file_maps.put("eventImage", Constants.IMAGE_URL + bean.getEventId() + "/event_home/home.png");
                             list.add(file_maps);
                         }
-                        for (HashMap<String, String> map : list) {
-                            TextSliderView textSliderView = new TextSliderView(HomeActivity.this);
-                            // initialize a SliderLayout
-                            textSliderView.description(map.get("eventName"))
-                                    .image(map.get("eventImage"))
-                                    .setScaleType(BaseSliderView.ScaleType.Fit).dateTime(map.get("date"))
-                                    .setOnSliderClickListener(HomeActivity.this);
+                        for (final HashMap<String, String> map : list) {
+                            if (list.size() < 2) {
+                                singleEventView.setVisibility(View.VISIBLE);
+                                Picasso.with(getApplicationContext()).load(map.get("eventImage")).placeholder(R.drawable.user_icon).into(singleImageView);
+                                // ghostView_workaround.setBackgroundResource(map.get("eventImage"));
+                                singleEvent.setText(map.get("eventName"));
+                                singleEventDate.setText(map.get("date"));
+                                singleEventView.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        Intent i = new Intent(HomeActivity.this, EventDashboardActivity.class);
+                                        i.putExtra("eventId", map.get("eventId"));
+                                        i.putExtra("date", map.get("date"));
+                                        i.putExtra("eventName", map.get("eventName"));
+                                        startActivity(i);
+                                    }
+                                });
+
+                            } else {
+                                singleEventView.setVisibility(View.GONE);
+
+                                TextSliderView textSliderView = new TextSliderView(HomeActivity.this);
+                                // initialize a SliderLayout
+                                textSliderView.description(map.get("eventName"))
+                                        .image(map.get("eventImage"))
+                                        .setScaleType(BaseSliderView.ScaleType.Fit).dateTime(map.get("date"))
+                                        .setOnSliderClickListener(HomeActivity.this);
 
 
-                            //add your extra information
-                            textSliderView.bundle(new Bundle());
-                            textSliderView.getBundle()
-                                    .putString("extra", map.get("eventId"));
-                            textSliderView.getBundle()
-                                    .putString("eventName", map.get("eventName"));
-                            textSliderView.getBundle()
-                                    .putString("date", map.get("date"));
+                                //add your extra information
+                                textSliderView.bundle(new Bundle());
+                                textSliderView.getBundle()
+                                        .putString("extra", map.get("eventId"));
+                                textSliderView.getBundle()
+                                        .putString("eventName", map.get("eventName"));
+                                textSliderView.getBundle()
+                                        .putString("date", map.get("date"));
 
-                            mDemoSlider.addSlider(textSliderView);
-                            mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Stack);
-
+                                mDemoSlider.addSlider(textSliderView);
+                                mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Stack);
+                            }
                         }
                     }
                 }
