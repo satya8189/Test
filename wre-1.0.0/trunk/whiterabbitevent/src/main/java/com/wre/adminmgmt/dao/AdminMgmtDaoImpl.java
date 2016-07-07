@@ -563,6 +563,23 @@ public List<Object[]> getParticipantsList(Long eventId){
 
 
 
+			@Override
+			public List<Object[]> galaryLikesCount(Long glaryItemId, Long paticipantId) {
+			String query="SELECT COUNT(*) FROM galary_likes gl WHERE gl.Galary_Item_ID="+glaryItemId+" UNION  SELECT g.Status  FROM galary_likes g WHERE g.Paticipant_ID="+paticipantId+" and g.Galary_Item_ID="+glaryItemId;
+			SQLQuery sqlQuery = sessionFactory.getCurrentSession().createSQLQuery(
+					query);
+			
+			List<Object[]> list=(List<Object[]>)sqlQuery.list();
+
+
+
+
+	return list;
+
+			}
+
+
+
 			/*@Override
 			public Object[] getClientDetails(Long eventId) {
 				

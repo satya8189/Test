@@ -119,6 +119,9 @@ public Participants getParticipantById(Long participantId);
  */
 public Rating getRatingById(Long participantId);
 
+public List<Object[]> galaryLikesCount(Long glaryItemId, Long paticipantId);
+
+
 //public Object[] getClientDetails(Long eventId);
 
 
