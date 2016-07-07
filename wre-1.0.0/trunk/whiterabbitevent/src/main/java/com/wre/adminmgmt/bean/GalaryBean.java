@@ -20,6 +20,9 @@ public class GalaryBean
     private String fileName;
     private String  encodeString;
     private Long participantId ;
+    private String likeCount;
+    private String likeStatus;
+    
     
 	public String getUrl() {
 		return url;
@@ -82,6 +85,20 @@ public class GalaryBean
 	}
 	public void setParticipantId(Long participantId) {
 		this.participantId = participantId;
+	}
+
+
+	public String getLikeStatus() {
+		return likeStatus;
+	}
+	public void setLikeStatus(String likeStatus) {
+		this.likeStatus = likeStatus;
+	}
+	public String getLikeCount() {
+		return likeCount;
+	}
+	public void setLikeCount(String likeCount) {
+		this.likeCount = likeCount;
 	}
 	
 
