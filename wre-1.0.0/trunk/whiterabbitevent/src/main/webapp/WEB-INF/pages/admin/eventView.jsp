@@ -28,19 +28,19 @@ display:none;
 				<thead class="headbg">
 					<tr>
 					     <th>Event Name</th>
-						 <th>EventDesc</th>
-						 <th>EventAgenda </th>
-						 <th>EventAddress</th>
-					     <th>EventDate</th>
+					     <th>Event Address</th>
+						 <th>Event Desc</th>
+						 <th>Event Agenda </th>
+					     <th>Event Date</th>
 						 <th>Status</th>
 						 <th>Action</th>
 				   </tr>
 				</thead>
 				<tr ng-show="filteredSize!=0" ng-repeat="event in eventList | filter: search | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit ">
 					<td>{{event.eventName}}</td>
+					<td>{{event.eventAddress}}</td>
 					<td>{{event.eventDesc}}</td>
 				    <td>{{event.eventAgenda}}</td>
-					<td>{{event.eventAddress}}</td>
 				    <td>{{event.eventDate | date: 'yyyy-MM-dd'}}</td>
 					<td>{{event.status}}</td>
 					<td>
