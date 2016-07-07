@@ -240,7 +240,7 @@ public Sponcor getSponsorBySponsorId(Long sponcorId) {
 	Criteria criteria=sessionFactory.getCurrentSession().createCriteria(Sponcor.class);
     criteria.add(Restrictions.eq("sponcorId",sponcorId));
 	criteria.setFetchMode("sponcor", FetchMode.EAGER);
-  return (Sponcor) criteria.uniqueResult();
+  return (Sponcor)criteria.uniqueResult();
 	
 	//return null;
 }
