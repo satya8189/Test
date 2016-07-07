@@ -5,12 +5,12 @@ $scope.$on("$routeChangeSuccess", function() {
 	
 	//alert("navigated to SponsorEditCtrl.."+$scope.sponsorId);
 	
-	$http.get('admin/getSponsorDataonSponsorId?sponcorId='+$routeParams.sponcorId).success(function(sponcor) {
+	$http.get('admin/getSponsorDataonSponsorId?sponcorId='+$scope.sponsorId).success(function(sponcor) {
 		//alert("getting data for sponcor edit");
 		$scope.eventId=sponcor.eventId;
 		$scope.sponcor=sponcor;
 		//alert("sponcor edit data=="+sponcor.sponcorId+"--"+sponcor.sponcorName+"--"+sponcor.eventId+"--"+sponcor.sponcorDesc);		
-			
+		//alert("sponcor image path"+sponcor.url);	
 			});
 		});
 
@@ -52,8 +52,6 @@ $scope.$on("$routeChangeSuccess", function() {
 			    }).error(function() {
 					ngNotifier.notifyError("Please choose Required file !");
 				});
-
-			
-	};
+			  };
 
 };

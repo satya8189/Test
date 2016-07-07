@@ -176,6 +176,14 @@ App.config([ '$routeProvider', function($routeProvider, $Scope , $rootScope) {
 		templateUrl : 'admin/editSponsor',
 		controller : SponsorEditController
 	});
+	
+	//view sponsor details with image
+	// Edit Sponsor data
+	$routeProvider.when('/viewSponsorImage/:sponcorId', {
+		templateUrl : 'admin/viewSponsorImage',
+		controller : SponsorEditController
+	});
+	
 
 	/* sponsor ends here */
 

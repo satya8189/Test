@@ -9,8 +9,7 @@ var GalleryViewController = function($scope, $routeParams, $http, $location,ngNo
 
 		$scope.eventId = $routeParams.eventId;
 
-		$http.get(
-				'admin/galaryList?eventId=' + $routeParams.eventId
+		$http.get('admin/galaryList?eventId=' + $routeParams.eventId
 						+ "&type=image").success(function(galaryList) {
 
 			$scope.galaryList = galaryList;

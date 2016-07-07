@@ -589,6 +589,13 @@ public class AdminMgmtController {
 		return sb;
 	}
 
+	//view sponsor details with image....
+		@RequestMapping(value = "admin/viewSponsorImage")
+		public String viewSponsorImage() {
+			log.info("navigating to viewSponsor Image page");
+			return "admin/sponsorImageDataView";
+		}
+	
 	// updateSponsor
 	@RequestMapping(value = "admin/updateSponsor", method = RequestMethod.POST)
 	public @ResponseBody

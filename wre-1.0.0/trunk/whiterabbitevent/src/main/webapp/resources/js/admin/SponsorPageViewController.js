@@ -1,5 +1,4 @@
-var SponsorPageViewController = function($scope, $http, $location,
-		$routeParams, ngNotifier, filterFilter) {
+var SponsorPageViewController = function($scope, $http, $location,$routeParams, ngNotifier, filterFilter) {
 	
 	$scope.$on("$routeChangeSuccess", function() {
 		$scope.eventId = $routeParams.eventId;
@@ -64,9 +63,15 @@ var SponsorPageViewController = function($scope, $http, $location,
 	};
 
 	$scope.editSponsor = function(sponcorId) {
-		// alert("working=="+sponcorId);
+		//alert("working=="+sponcorId);
 		$location.path("/editSponsor/" + sponcorId);
-
+	};
+	
+	//to view sponsor image
+	$scope.viewSponsorDetails = function(sponcorId){
+		//alert("view sponsor image----"+sponcorId);
+		$location.path("/viewSponsorImage/"+ sponcorId);
+		//location.href = "#/viewSponsorImage/"+ sponcorId;
 	};
 
 };
