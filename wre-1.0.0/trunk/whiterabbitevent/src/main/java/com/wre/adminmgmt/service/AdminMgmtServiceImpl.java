@@ -640,6 +640,9 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 			sponsorBeanObject.setSponcorId(sponsorObject.getSponcorId());
 			sponsorBeanObject.setSponcorDesc(sponsorObject.getSponcorDesc());
 			sponsorBeanObject.setFileName(sponsorObject.getFileName());
+				String filePath = WREConstants.RESOURCE_PATH + sponsorObject.getEvent().getEventId() + "/"
+						+ "sponsor" + "/" + sponsorObject.getFileName();
+			sponsorBeanObject.setUrl(filePath);
 		}
 
 		return sponsorBeanObject;
@@ -650,7 +653,7 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 	/* Update the Sponsor Data */
 	public void updateSponsor(MultipartFile file,Long eventId,String type,String sponcorName,String sponcorDesc,Long sponcorId) {
 		
-		 log.info("Entered into createSponsor method");
+		 log.info("Entered into updateSponsor method");
 			
 			String filePath = WREConstants.RESOURCE_PATH + eventId + File.separator
 					+type+File.separator;
