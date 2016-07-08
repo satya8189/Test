@@ -1583,9 +1583,7 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 			public String generateOTP(ParticipantBean participantBean) {
 				String otp=WREUtil.generateRandomCode();
 				participantBean.setOTP(otp);
-				
 				AdminMgmtDaoImpl.updateOtp(participantBean);
-				
 				return otp;
 			}
 
