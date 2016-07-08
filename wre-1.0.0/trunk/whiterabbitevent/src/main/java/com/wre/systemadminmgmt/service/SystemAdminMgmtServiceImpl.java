@@ -178,10 +178,10 @@ public class SystemAdminMgmtServiceImpl implements SystemAdminMgmtService{
 		eventObj.setClient(client);
 		Long eventId=(Long)systemAdminMgmtDaoImpl.save(eventObj);
 		 eventBean.setEventId(eventId);
-		for(String serid:eventBean.getServices()){
+		for(long serid:eventBean.getServices()){
 			
 			Services service=new Services();
-			service.setServiceId(Long.parseLong(serid));
+			service.setServiceId(serid);
 			EventServices eventServices=new EventServices();
 			eventServices.setEvent(eventObj);
 			
@@ -228,7 +228,22 @@ public class SystemAdminMgmtServiceImpl implements SystemAdminMgmtService{
 			eventBean.setClientId(eventEntity.getClient().getClientId());
 			
 			eventBean.setEventDate(eventEntity.getEventDate());
+			List<EventServices> eventServices = systemAdminMgmtDaoImpl.getEventServicesList(eventId);
+			System.out.println("size--"+eventServices.size());
+			  long[] intArray=new long[eventServices.size()];
+			   int i=0;
+			   for(EventServices e:eventServices){
+				   
+				
+				   intArray[i]=e.getServices().getServiceId();
+				   i++;
+			   }
+			   
+
+
+			   eventBean.setServices(intArray);
 		}
+		
 		
 		return eventBean;
 	}
@@ -245,6 +260,7 @@ public class SystemAdminMgmtServiceImpl implements SystemAdminMgmtService{
 			eventServicesBean.setEventServiceId(eServices.getEventServiceId());
 			eventServicesBean.setServiceId(eServices.getServices().getServiceId());
 			eventServicesBean.setServiceName(eServices.getServices().getServiceName());
+			
 			eventServicesBeans.add(eventServicesBean);
 			
 		}
@@ -264,10 +280,10 @@ public class SystemAdminMgmtServiceImpl implements SystemAdminMgmtService{
 		systemAdminMgmtDaoImpl.update(event);
 		systemAdminMgmtDaoImpl.deleteServices(event.getEventId());
 		
-  for(String serid:eventBean.getServices()){
+  for(long serid:eventBean.getServices()){
 			
 			Services service=new Services();
-			service.setServiceId(Long.parseLong(serid));
+			service.setServiceId(serid);
 			EventServices eventServices=new EventServices();
 			eventServices.setEvent(event);
 			
