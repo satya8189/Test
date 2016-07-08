@@ -25,7 +25,7 @@ public class MSGService extends IntentService {
     SharedPreferences prefs1;
     NotificationCompat.Builder notification;
     NotificationManager manager;
-    private String message="";
+    private String message = "";
     DBHelper db;
 
 
@@ -38,7 +38,7 @@ public class MSGService extends IntentService {
     protected void onHandleIntent(Intent intent) {
         Bundle extras = intent.getExtras();
         GoogleCloudMessaging gcm = GoogleCloudMessaging.getInstance(this);
-        if(!Constants.isNetworkAvailable(MSGService.this)) {
+        if (!Constants.isNetworkAvailable(MSGService.this)) {
             this.startService(intent);
             return;
         }
@@ -67,8 +67,8 @@ public class MSGService extends IntentService {
                 }*/
                 Log.d("CurrentStatus--", prefs.getString("current_status", ""));
                 if (!prefs.getString("current_status", "").equals("onchat")) {
-                    db=new DBHelper(getApplicationContext());
-                    ChatBean chatBean=new ChatBean();
+                    db = new DBHelper(getApplicationContext());
+                    ChatBean chatBean = new ChatBean();
                     chatBean.setFromName(extras.getString("name"));
                     chatBean.setMsg(extras.getString("msg"));
                     chatBean.setMsgTime(extras.getString("date"));
@@ -77,18 +77,19 @@ public class MSGService extends IntentService {
 
                     db.insertNotyValues(chatBean);
 
-                    List<ChatBean> chatBeanList=db.getAllNoty();
+                    List<ChatBean> chatBeanList = db.getAllNoty();
                     NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
                     inboxStyle.setBigContentTitle(extras.getString("name"));
-                    for(ChatBean bean:chatBeanList){
+                    for (ChatBean bean : chatBeanList) {
                         //message=message+bean.getMsg()+" "+bean.getMsgTime()+"\n";
                         inboxStyle.addLine(bean.getMsg());
                     }
 
-                    sendNotification(message, extras.getString("fromu"), extras.getString("name"),extras.getString("eventId"),inboxStyle);
-                }else if (!prefs.getString("current_topic", "").equals(extras.getString("topic"))) {
-                    db=new DBHelper(getApplicationContext());
-                    ChatBean chatBean=new ChatBean();
+                    if (prefs.getBoolean("noty_status", false))
+                        sendNotification(message, extras.getString("fromu"), extras.getString("name"), extras.getString("eventId"), inboxStyle);
+                } else if (!prefs.getString("current_topic", "").equals(extras.getString("topic"))) {
+                    db = new DBHelper(getApplicationContext());
+                    ChatBean chatBean = new ChatBean();
                     chatBean.setFromName(extras.getString("name"));
                     chatBean.setMsg(extras.getString("msg"));
                     chatBean.setMsgTime(extras.getString("date"));
@@ -97,15 +98,15 @@ public class MSGService extends IntentService {
 
                     db.insertNotyValues(chatBean);
 
-                    List<ChatBean> chatBeanList=db.getAllNoty();
+                    List<ChatBean> chatBeanList = db.getAllNoty();
                     NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
                     inboxStyle.setBigContentTitle(extras.getString("name"));
-                    for(ChatBean bean:chatBeanList){
+                    for (ChatBean bean : chatBeanList) {
                         //message=message+bean.getMsg()+" "+bean.getMsgTime()+"\n";
                         inboxStyle.addLine(bean.getMsg());
                     }
-
-                    sendNotification(message, extras.getString("fromu"), extras.getString("name"),extras.getString("eventId"),inboxStyle);
+                    if (prefs.getBoolean("noty_status", false))
+                        sendNotification(message, extras.getString("fromu"), extras.getString("name"), extras.getString("eventId"), inboxStyle);
                 }
 
                 Log.i("TAG", "Received final: " + extras.getString("msg"));
@@ -115,14 +116,14 @@ public class MSGService extends IntentService {
     }
 
 
-    private void sendNotification(String msg, String mobno, String name,String eventId,NotificationCompat.InboxStyle inboxStyle) {
+    private void sendNotification(String msg, String mobno, String name, String eventId, NotificationCompat.InboxStyle inboxStyle) {
 
         Bundle args = new Bundle();
         args.putString("mobno", mobno);
         args.putString("name", name);
         args.putString("msg", msg);
         Intent chat = new Intent(this, DiscoTopics.class);
-        chat.putExtra("eventId",eventId);
+        chat.putExtra("eventId", eventId);
         chat.putExtra("INFO", args);
         notification = new NotificationCompat.Builder(this);
         notification.setContentTitle(name);

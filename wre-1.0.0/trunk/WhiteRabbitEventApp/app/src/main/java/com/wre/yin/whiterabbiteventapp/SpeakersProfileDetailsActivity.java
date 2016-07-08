@@ -96,11 +96,12 @@ public class SpeakersProfileDetailsActivity extends AppCompatActivity {
             new MyAsyncTask(Constants.INDIVIDUAL_SPEAKER + spId, null, SpeakersProfileDetailsActivity.this, new Callback() {
                 @Override
                 public void onResult(String result) {
-                    if (result != null) {
-                        SpeakerBean spBean = Utils.getObject(result, SpeakerBean.class);
+
+                    SpeakerBean spBean = Utils.getObject(result, SpeakerBean.class);
+                    if (spBean != null) {
                         spDesig.setText(spBean.getTitle());
                         spLocation.setText(spBean.getLocation());
-                        spDesc.setText("    "+spBean.getDescription());
+                        spDesc.setText("    " + spBean.getDescription());
                     }
                 }
             }).execute();

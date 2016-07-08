@@ -116,9 +116,9 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
             new MyAsyncTask(Constants.EVENT_LIST + "?participantId=" + partId, null, HomeActivity.this, new Callback() {
                 @Override
                 public void onResult(String result) {
-                    if (result != null) {
-                        List<ParticipantEventBean> eventList = Utils.getList(result, ParticipantEventBean.class);
 
+                    List<ParticipantEventBean> eventList = Utils.getList(result, ParticipantEventBean.class);
+                    if (eventList != null) {
                         list = new ArrayList<HashMap<String, String>>();
                         for (ParticipantEventBean bean : eventList) {
                             HashMap<String, String> file_maps = new HashMap<String, String>();

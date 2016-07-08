@@ -34,7 +34,7 @@ public class NetworkingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // NetworkingActivity.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
+        // NetworkingActivity.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
         setContentView(R.layout.activity_networking);
 
         String nameTxt = getIntent().getExtras().getString("name");
@@ -52,18 +52,20 @@ public class NetworkingActivity extends AppCompatActivity {
                 @Override
                 public void onResult(String result) {
                     List<ParticipantEventBean> participantEventBeanList = Utils.getList(result, ParticipantEventBean.class);
-                    for (ParticipantEventBean bean : participantEventBeanList) {
-                        HashMap<String, String> partMap = new HashMap<String, String>();
-                        partMap.put("partId", bean.getParticipantId().toString());
-                        partMap.put("partName", bean.getFirstName() + " " + bean.getLastName());
-                        partMap.put("partPhone", bean.getMobile());
-                        partList.add(partMap);
+                    if (participantEventBeanList != null) {
+                        for (ParticipantEventBean bean : participantEventBeanList) {
+                            HashMap<String, String> partMap = new HashMap<String, String>();
+                            partMap.put("partId", bean.getParticipantId().toString());
+                            partMap.put("partName", bean.getFirstName() + " " + bean.getLastName());
+                            partMap.put("partPhone", bean.getMobile());
+                            partList.add(partMap);
 
+                        }
+                        RecylerAdapter adapter = new RecylerAdapter(NetworkingActivity.this, (ArrayList<HashMap<String, String>>) partList);
+                        recyclerView.setAdapter(adapter);
+                        recyclerView.setHasFixedSize(true);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(NetworkingActivity.this));
                     }
-                    RecylerAdapter adapter = new RecylerAdapter(NetworkingActivity.this, (ArrayList<HashMap<String, String>>) partList);
-                    recyclerView.setAdapter(adapter);
-                    recyclerView.setHasFixedSize(true);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(NetworkingActivity.this));
                 }
             }).execute();
         } else {
@@ -86,7 +88,7 @@ public class NetworkingActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-       // NetworkingActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
+        // NetworkingActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
 
     }
 

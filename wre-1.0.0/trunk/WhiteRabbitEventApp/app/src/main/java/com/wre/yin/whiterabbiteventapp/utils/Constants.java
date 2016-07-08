@@ -51,6 +51,9 @@ public class Constants {
     public static final String BASE_URL = "http://183.82.103.156:8080";
 
 
+    public static final String SEND_MESSAGE_URL = "http://183.82.103.156:8080/whiterabbitevent/send";
+
+
     public static final String EVENT_SERVICES_LIST = URL + "eventServicesList?eventId=";
     public static final String AGENDA = URL + "agendoDetails";
     public static final String NEWS_LIST = URL + "newsList";
@@ -73,6 +76,8 @@ public class Constants {
     public static final String PROFILE_PIC_UPLOAD = URL + "profileUpload";
     public static final String SPEAKER_RATING = URL + "saveUserRating";
     public static final String CHAT_TOPICS_LIST = URL + "chatTopicList?eventId=";
+    public static final String IMAGE_LIST = URL + "galaryImageList?eventId=";
+    public static final String IMAGE_LIKE_SAVE = URL + "galleryImageStatusSave";
 
 
     //Image Gallery file path constansts
@@ -97,7 +102,7 @@ public class Constants {
         final AlertDialog alertD = new AlertDialog.Builder(context).create();
         alertD.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-        alertD.getWindow().getAttributes().windowAnimations=R.style.DialogAnimation;
+        alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         WindowManager.LayoutParams wmlp = alertD.getWindow().getAttributes();
         wmlp.gravity = Gravity.CENTER | Gravity.CENTER_HORIZONTAL;
 
@@ -106,7 +111,7 @@ public class Constants {
         ImageView matter = (ImageView) promptView.findViewById(R.id.error_img);
         TextView alertmsg = (TextView) promptView.findViewById(R.id.error_txt);
 
-        Button okBtn=(Button)promptView.findViewById(R.id.ok_btn);
+        Button okBtn = (Button) promptView.findViewById(R.id.ok_btn);
         if (type.matches("success")) {
             matter.setImageResource(R.drawable.correct_icon);
             okBtn.setTextColor(ContextCompat.getColor(context, R.color.successmsg));
@@ -114,7 +119,7 @@ public class Constants {
         } else {
             matter.setImageResource(R.drawable.wrong_icon);
             okBtn.setTextColor(ContextCompat.getColor(context, R.color.errormsg));
-          //  llover.setBackgroundResource(R.drawable.rectangle_shape_alert_box);
+            //  llover.setBackgroundResource(R.drawable.rectangle_shape_alert_box);
         }
         alertmsg.setText(text);
         alertD.setView(promptView);

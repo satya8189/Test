@@ -52,7 +52,7 @@ public class DetailsActivity extends AppCompatActivity {
     GoogleMap map;
     Bundle b;
     ArrayList<LatLng> markerPoints;
-    double destLatitude ;
+    double destLatitude;
     double destLongitude;
     double sourceLatitude, sourceLongitude;
     GPSTracker gpsTracker;
@@ -83,9 +83,9 @@ public class DetailsActivity extends AppCompatActivity {
         inviteTime = (TextView) findViewById(R.id.invite_time);
         inviteDate = (TextView) findViewById(R.id.invite_date);
         inviteAddress = (TextView) findViewById(R.id.invite_address_text);
-        qrCodeImage=(ImageView)findViewById(R.id.invite_qr_image);
+        qrCodeImage = (ImageView) findViewById(R.id.invite_qr_image);
 
-        new MyAsyncTask(Constants.ABOUT_EVENT + eventId+"&type=app", null, DetailsActivity.this, new Callback() {
+        new MyAsyncTask(Constants.ABOUT_EVENT + eventId + "&type=app", null, DetailsActivity.this, new Callback() {
             @Override
             public void onResult(String result) {
 
@@ -117,7 +117,7 @@ public class DetailsActivity extends AppCompatActivity {
                         }
                         android.location.Address location = addresses.get(0);
                         destLatitude = location.getLatitude();
-                        destLongitude= location.getLongitude();
+                        destLongitude = location.getLongitude();
 
 
                     } catch (IOException e) {
@@ -181,7 +181,7 @@ public class DetailsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 saveStatus("Yes");
                 qrCodeImage.setVisibility(View.VISIBLE);
-                Picasso.with(DetailsActivity.this).load("http://183.82.103.156:8080/Resources/wre/" +eventId+"/"+ partId + "/QR.png").into(qrCodeImage);
+                Picasso.with(DetailsActivity.this).load("http://183.82.103.156:8080/Resources/wre/" + eventId + "/" + partId + "/QR.png").into(qrCodeImage);
 
             }
         });
@@ -211,10 +211,14 @@ public class DetailsActivity extends AppCompatActivity {
         new MyAsyncTask(Constants.PARTICIPANT_EVENT_STATUS, Utils.getJson(participantEventBean), DetailsActivity.this, new Callback() {
             @Override
             public void onResult(String result) {
-                String res=Utils.getString("result",result);
-                if(res.equals("suucess")){
-                    Toast.makeText(DetailsActivity.this,"Your status has been submitted successfully...",Toast.LENGTH_LONG).show();
+                String res = Utils.getString("result", result);
+                if (res != null) {
+                    if (res.equals("suucess")) {
+                        Toast.makeText(DetailsActivity.this, "Your status has been submitted successfully...", Toast.LENGTH_LONG).show();
 
+                    } else {
+                        Toast.makeText(DetailsActivity.this, "Your status has been cancelled please try later", Toast.LENGTH_LONG).show();
+                    }
                 }
             }
         }).execute();
@@ -289,7 +293,7 @@ public class DetailsActivity extends AppCompatActivity {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
                 onBackPressed();
-                Intent i=new Intent(DetailsActivity.this,EventDashboardActivity.class);
+                Intent i = new Intent(DetailsActivity.this, EventDashboardActivity.class);
                 startActivity(i);
                 return true;
         }
@@ -299,7 +303,7 @@ public class DetailsActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent i=new Intent(DetailsActivity.this,EventDashboardActivity.class);
+        Intent i = new Intent(DetailsActivity.this, EventDashboardActivity.class);
         startActivity(i);
     }
 
@@ -396,7 +400,7 @@ public class DetailsActivity extends AppCompatActivity {
                 }
 
                 // Drawing polyline in the Google Map for the i-th route
-                 map.addPolyline(lineOptions);
+                map.addPolyline(lineOptions);
             } catch (Exception e) {
                 e.printStackTrace();
             }

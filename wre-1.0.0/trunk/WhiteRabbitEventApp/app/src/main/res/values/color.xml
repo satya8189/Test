@@ -18,19 +18,19 @@
     <color name="dashboard_background">#ECEFF1</color>
 
     <color name="heart">#FFC400</color>
-    <color name="bright_pink">#FF007F</color>
-    <color name="red">#FF8A65</color>
-    <color name="orange">#FF7F00</color>
-    <color name="spring_green">#A1887F</color>
-    <color name="azure">#FFB74D</color>
-    <color name="violet">#DCE775</color>
-    <color name="a">#AED581</color>
-    <color name="b">#81C784</color>
-    <color name="c">#4DB6AC</color>
-    <color name="d">#4DD0E1</color>
-    <color name="e">#4FC3F7</color>
-    <color name="f">#E57373</color>
-    <color name="g">#BA68C8</color>
+    <color name="bright_pink">#D32F2F</color>
+    <color name="red">#C2185B</color>
+    <color name="orange">#7B1FA2</color>
+    <color name="spring_green">#512DA8</color>
+    <color name="azure">#303F9F</color>
+    <color name="violet">#1976D2</color>
+    <color name="a">#0288D1</color>
+    <color name="b">#0097A7</color>
+    <color name="c">#00796B</color>
+    <color name="d">#388E3C</color>
+    <color name="e">#689F38</color>
+    <color name="f">#E64A19</color>
+    <color name="g">#5D4037</color>
 
 
     <array name="rainbow">

@@ -7,8 +7,6 @@ import java.util.Date;
  */
 public class GalaryBean {
     private Long glaryItemId;
-    private String likeCount;
-    private String likeStatus;
     private String name;
     private String path;
     private String type;
@@ -18,7 +16,8 @@ public class GalaryBean {
     private String fileName;
     private String encodeString;
     private Long participantId;
-
+    private String likeCount;
+    private String likeStatus;
 
     public String getLikeCount() {
         return likeCount;

@@ -43,7 +43,7 @@ public class ChatMessageAdapter extends ArrayAdapter<ChatMessage> {
     public View getView(int position, View convertView, ViewGroup parent) {
         int viewType = getItemViewType(position);
         if (viewType == MY_MESSAGE) {
-            TextView myName, message,myTime;
+            TextView myName, message, myTime;
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_mine_message, parent, false);
 
             message = (TextView) convertView.findViewById(R.id.msg_my);
@@ -55,12 +55,12 @@ public class ChatMessageAdapter extends ArrayAdapter<ChatMessage> {
             message.setText(getItem(position).getContent());
 
         } else if (viewType == OTHER_MESSAGE) {
-            TextView otherName, otherMessage,othetTime;
+            TextView otherName, otherMessage, othetTime;
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_other_message, parent, false);
 
             otherMessage = (TextView) convertView.findViewById(R.id.msg_other_msg);
             otherName = (TextView) convertView.findViewById(R.id.msg_other_name);
-            othetTime= (TextView) convertView.findViewById(R.id.msg_other_time);
+            othetTime = (TextView) convertView.findViewById(R.id.msg_other_time);
 
             othetTime.setText(getItem(position).getTime());
             otherName.setText(getItem(position).getName());
@@ -76,7 +76,7 @@ public class ChatMessageAdapter extends ArrayAdapter<ChatMessage> {
         convertView.findViewById(R.id.chatMessageView).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //  Toast.makeText(getContext(), "onClick", Toast.LENGTH_LONG).show();
+                //  Toast.makeText(getContext(), "onClick", Toast.LENGTH_LONG).show();
             }
         });
 

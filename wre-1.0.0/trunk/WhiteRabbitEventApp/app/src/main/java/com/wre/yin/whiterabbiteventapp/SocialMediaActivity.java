@@ -24,7 +24,7 @@ public class SocialMediaActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // SocialMediaActivity.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
+        // SocialMediaActivity.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
         setContentView(R.layout.activity_social_media);
 
         String nameTxt = getIntent().getExtras().getString("name");
@@ -43,27 +43,29 @@ public class SocialMediaActivity extends AppCompatActivity {
                 @Override
                 public void onResult(String result) {
                     List<SocialMediaBean> socialList = Utils.getList(result, SocialMediaBean.class);
-                    for (SocialMediaBean bean : socialList) {
-                        if (bean.getType().equals("Facebook")) {
-                            socialId = bean.getName();
-                            faceBook.setVisibility(View.VISIBLE);
-                        } else if (bean.getType().equals("Google+")) {
-                            socialId = bean.getName();
-                            gPlus.setVisibility(View.VISIBLE);
-                        } else if (bean.getType().equals("Twitter")) {
-                            socialId = bean.getName();
-                            twitterBtn.setVisibility(View.VISIBLE);
-                        } else if (bean.getType().equals("LinkedIn")) {
-                            socialId = bean.getName();
-                            linkedinBtn.setVisibility(View.VISIBLE);
-                        } else if (bean.getType().equals("Flickr")) {
-                            socialId = bean.getName();
-                            flickerBtn.setVisibility(View.VISIBLE);
-                        } else if (bean.getType().equals("Instagram")) {
-                            socialId = bean.getName();
-                            instagramBtn.setVisibility(View.VISIBLE);
-                        }
+                    if (socialList != null) {
+                        for (SocialMediaBean bean : socialList) {
+                            if (bean.getType().equals("Facebook")) {
+                                socialId = bean.getName();
+                                faceBook.setVisibility(View.VISIBLE);
+                            } else if (bean.getType().equals("Google+")) {
+                                socialId = bean.getName();
+                                gPlus.setVisibility(View.VISIBLE);
+                            } else if (bean.getType().equals("Twitter")) {
+                                socialId = bean.getName();
+                                twitterBtn.setVisibility(View.VISIBLE);
+                            } else if (bean.getType().equals("LinkedIn")) {
+                                socialId = bean.getName();
+                                linkedinBtn.setVisibility(View.VISIBLE);
+                            } else if (bean.getType().equals("Flickr")) {
+                                socialId = bean.getName();
+                                flickerBtn.setVisibility(View.VISIBLE);
+                            } else if (bean.getType().equals("Instagram")) {
+                                socialId = bean.getName();
+                                instagramBtn.setVisibility(View.VISIBLE);
+                            }
 
+                        }
                     }
 
                 }
@@ -174,7 +176,7 @@ public class SocialMediaActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-       // SocialMediaActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
+        // SocialMediaActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
 
     }
 }

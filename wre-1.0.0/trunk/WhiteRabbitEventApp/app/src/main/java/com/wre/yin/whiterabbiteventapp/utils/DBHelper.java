@@ -32,16 +32,16 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String CREATE_TABLE_NOTY_CHAT = "CREATE TABLE IF NOT EXISTS "
             + TABLE_NOTY_HISTORY + "(" + CHAT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL ," + FROM_NAME
             + " TEXT," + MESSAGE + " TEXT," + MSG_TIME
-            + " TEXT,"+EVENT_ID
-    + " TEXT," + CHAT_TOPIC
+            + " TEXT," + EVENT_ID
+            + " TEXT," + CHAT_TOPIC
             + " TEXT" + ")";
 
     private static final String CREATE_TABLE_CHAT_HISTORY = "CREATE TABLE IF NOT EXISTS "
             + TABLE_CHAT_HISTORY + "(" + CHAT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL ," + FROM_NAME
             + " TEXT," + TO_NAME + " TEXT," + MESSAGE
             + " TEXT," + MSG_TIME
-            + " TEXT," +EVENT_ID
-            + " TEXT,"+ CHAT_TOPIC + " TEXT)";
+            + " TEXT," + EVENT_ID
+            + " TEXT," + CHAT_TOPIC + " TEXT)";
 
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -88,11 +88,38 @@ public class DBHelper extends SQLiteOpenHelper {
         return re;
     }
 
-    public List<ChatBean> getAllNoty(){
+    public List<ChatBean> getAllNoty() {
         List<ChatBean> f = new ArrayList<ChatBean>();
         String selectQuery = "SELECT  * FROM " + TABLE_NOTY_HISTORY;
 
 
+        SQLiteDatabase db = this.getReadableDatabase();
+        try {
+            Cursor c = db.rawQuery(selectQuery, null);
+
+            // looping through all rows and adding to list
+            if (c.moveToFirst()) {
+                do {
+                    ChatBean td = new ChatBean();
+                    td.setFromName(c.getString(c.getColumnIndex(FROM_NAME)));
+                    td.setMsg((c.getString(c.getColumnIndex(MESSAGE))));
+                    td.setMsgTime((c.getString(c.getColumnIndex(MSG_TIME))));
+                    td.setEventId((c.getString(c.getColumnIndex(EVENT_ID))));
+                    td.setChatTopic((c.getString(c.getColumnIndex(CHAT_TOPIC))));
+                    f.add(td);
+                } while (c.moveToNext());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return f;
+    }
+
+    public List<ChatBean> getAllNoty(String topic) {
+        List<ChatBean> f = new ArrayList<ChatBean>();
+        String selectQuery = "SELECT  * FROM " + TABLE_NOTY_HISTORY + " where " + CHAT_TOPIC + "='" + topic + "'";
+
 
         SQLiteDatabase db = this.getReadableDatabase();
         try {
@@ -110,44 +137,16 @@ public class DBHelper extends SQLiteOpenHelper {
                     f.add(td);
                 } while (c.moveToNext());
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         return f;
     }
 
-    public List<ChatBean> getAllNoty(String topic){
+    public List<ChatBean> getAllChat(String topic) {
         List<ChatBean> f = new ArrayList<ChatBean>();
-        String selectQuery = "SELECT  * FROM " + TABLE_NOTY_HISTORY+" where "+CHAT_TOPIC+"='"+topic+"'";
-
-
-
-        SQLiteDatabase db = this.getReadableDatabase();
-        try {
-            Cursor c = db.rawQuery(selectQuery, null);
-
-            // looping through all rows and adding to list
-            if (c.moveToFirst()) {
-                do {
-                    ChatBean td = new ChatBean();
-                    td.setFromName(c.getString(c.getColumnIndex(FROM_NAME)));
-                    td.setMsg((c.getString(c.getColumnIndex(MESSAGE))));
-                    td.setMsgTime((c.getString(c.getColumnIndex(MSG_TIME))));
-                    td.setEventId((c.getString(c.getColumnIndex(EVENT_ID))));
-                    td.setChatTopic((c.getString(c.getColumnIndex(CHAT_TOPIC))));
-                    f.add(td);
-                } while (c.moveToNext());
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-        return f;
-    }
-    public List<ChatBean> getAllChat(String topic){
-        List<ChatBean> f = new ArrayList<ChatBean>();
-        String selectQuery = "SELECT  * FROM " + TABLE_CHAT_HISTORY+ " where "+CHAT_TOPIC+"='"+topic+"'";
+        String selectQuery = "SELECT  * FROM " + TABLE_CHAT_HISTORY + " where " + CHAT_TOPIC + "='" + topic + "'";
 
         SQLiteDatabase db = this.getReadableDatabase();
         try {
@@ -165,24 +164,20 @@ public class DBHelper extends SQLiteOpenHelper {
                     f.add(td);
                 } while (c.moveToNext());
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         return f;
     }
+
     public void deleteNotypAll(String topic) {
         SQLiteDatabase db = this.getWritableDatabase();
-        try
-        {
-            db.delete(TABLE_NOTY_HISTORY, CHAT_TOPIC+" = ?", new String[] { topic });
-        }
-        catch(Exception e)
-        {
+        try {
+            db.delete(TABLE_NOTY_HISTORY, CHAT_TOPIC + " = ?", new String[]{topic});
+        } catch (Exception e) {
             e.printStackTrace();
-        }
-        finally
-        {
+        } finally {
             db.close();
         }
     }

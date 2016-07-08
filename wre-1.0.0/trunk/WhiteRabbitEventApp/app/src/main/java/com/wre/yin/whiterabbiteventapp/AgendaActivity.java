@@ -30,7 +30,7 @@ public class AgendaActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-      //  AgendaActivity.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
+        //  AgendaActivity.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
         setContentView(R.layout.activity_agenda);
         String nameTxt = getIntent().getExtras().getString("name");
         String eventId = getIntent().getExtras().getString("eventId");
@@ -45,24 +45,25 @@ public class AgendaActivity extends AppCompatActivity {
             new MyAsyncTask(Constants.AGENDA + "?eventId=" + eventId, null, AgendaActivity.this, new Callback() {
                 @Override
                 public void onResult(String result) {
-                    if (result != null)
-                        agendaList = new ArrayList<HashMap<String, String>>();
+
+                    agendaList = new ArrayList<HashMap<String, String>>();
                     List<AgendaBean> agendaBeanList = Utils.getList(result, AgendaBean.class);
+                    if (agendaBeanList != null) {
+                        for (AgendaBean bean : agendaBeanList) {
+                            HashMap<String, String> map = new HashMap<String, String>();
+                            map.put("agenTitle", bean.getAgenTitle());
+                            map.put("agenDesc", bean.getAgenDesc());
+                            map.put("agenStartTime", bean.getAgenStartTime());
+                            map.put("agenEndTime", bean.getAgenEndTime());
+                            map.put("agenBy", bean.getAgenBy());
+                            agendaList.add(map);
 
-                    for (AgendaBean bean : agendaBeanList) {
-                        HashMap<String, String> map = new HashMap<String, String>();
-                        map.put("agenTitle", bean.getAgenTitle());
-                        map.put("agenDesc", bean.getAgenDesc());
-                        map.put("agenStartTime", bean.getAgenStartTime());
-                        map.put("agenEndTime", bean.getAgenEndTime());
-                        map.put("agenBy", bean.getAgenBy());
-                        agendaList.add(map);
-
+                        }
+                        RecylerAdapter adapter = new RecylerAdapter(AgendaActivity.this, (ArrayList<HashMap<String, String>>) agendaList);
+                        recyclerView.setAdapter(adapter);
+                        recyclerView.setHasFixedSize(true);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(AgendaActivity.this));
                     }
-                    RecylerAdapter adapter = new RecylerAdapter(AgendaActivity.this, (ArrayList<HashMap<String, String>>) agendaList);
-                    recyclerView.setAdapter(adapter);
-                    recyclerView.setHasFixedSize(true);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(AgendaActivity.this));
                 }
             }).execute();
         } else {
@@ -85,7 +86,7 @@ public class AgendaActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-      //  AgendaActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
+        //  AgendaActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
 
     }
 

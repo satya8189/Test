@@ -12,38 +12,14 @@
         android:text="UPLOAD"
         android:textColor="#fff" />
 
-    <LinearLayout
-        android:id="@+id/upload_image_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/upload_image"
-        android:layout_marginBottom="5dp"
-        android:background="@android:color/transparent"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:visibility="gone">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/camara_link"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:src="@drawable/cam_pic" />
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/gallery_link"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/gallery_pick" />
-
-    </LinearLayout>
 
 
     <GridView
         android:id="@+id/upload_image_grid"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/upload_image_view"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/upload_image"
         android:layout_marginTop="10dp"
         android:background="#fff"
         android:fastScrollEnabled="true"
