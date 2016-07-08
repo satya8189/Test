@@ -100,7 +100,7 @@ public class SpeakersProfileDetailsActivity extends AppCompatActivity {
                         SpeakerBean spBean = Utils.getObject(result, SpeakerBean.class);
                         spDesig.setText(spBean.getTitle());
                         spLocation.setText(spBean.getLocation());
-                        spDesc.setText(spBean.getDescription());
+                        spDesc.setText("    "+spBean.getDescription());
                     }
                 }
             }).execute();
