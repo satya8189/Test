@@ -1286,13 +1286,12 @@ public class AdminMgmtController {
 	    			}
 	    			// Create the file on server
 	    			File serverFile = new File(uploadfile.getAbsolutePath() + File.separator
-	    					+ name);
+	    					+name);
 	            imageOutFile = new FileOutputStream(serverFile);
 
 	            	    imageOutFile.write(imageByteArray);
 	            imageOutFile.close();
 	            adminMgmtService.saveGalary(galaryBean);
-	            
 	            result="success";
 	            System.out.println("Image Successfully Stored");
 	        } catch (FileNotFoundException fnfe) {
@@ -1312,30 +1311,32 @@ public class AdminMgmtController {
 		
 	}
 	
-     @RequestMapping(value = "admin/profileUpload", method = RequestMethod.POST)
-	 public @ResponseBody String profileUpload(@RequestBody GalaryBean galaryBean){
+     @RequestMapping(value = "admin/profilePicUpload", method = RequestMethod.POST)
+	 public @ResponseBody String profilePicUpload(@RequestBody GalaryBean galaryBean){
 	  String filePath;
 	  String result=null;
 	
 	  try {
-	            // Decode String using Base64 Class
-	            byte[] imageByteArray = Base64.decodeBase64(galaryBean.getEncodeString());
-	            FileOutputStream imageOutFile;
-	            // Write Image into File system - Make sure you update the path
-	            filePath=WREConstants.RESOURCE_PATH+galaryBean.getType()+WREConstants.FILE_SEPARATER+galaryBean.getParticipantId();
-	            File uploadfile=new File(filePath);
-	            String name = galaryBean.getFileName();
-	    			if (!uploadfile.exists()) {
-	    				uploadfile.mkdirs();
-	    			}
-	    			// Create the file on server
-	    			File serverFile = new File(uploadfile.getAbsolutePath()+File.separator
-	    					+ name);
-	            imageOutFile = new FileOutputStream(serverFile);
+	         
+		  
+		   byte[] imageByteArray = Base64.decodeBase64(galaryBean.getEncodeString());
+           FileOutputStream imageOutFile;
+           // Write Image into File system - Make sure you update the path
+           filePath=WREConstants.RESOURCE_PATH+galaryBean.getType()+WREConstants.FILE_SEPARATER+galaryBean.getParticipantId();
+           File uploadfile=new File(filePath);
+           String name = galaryBean.getFileName();
+   			if (!uploadfile.exists()) {
+   				uploadfile.mkdirs();
+   			}
+   			// Create the file on server
+   			File serverFile = new File(uploadfile.getAbsolutePath()+File.separator
+   					+"profile.jpg");
+           imageOutFile = new FileOutputStream(serverFile);
 
-	            	    imageOutFile.write(imageByteArray);
-	            imageOutFile.close();
-	            adminMgmtService.profileUpload(galaryBean.getParticipantId(),galaryBean.getFileName());
+           	    imageOutFile.write(imageByteArray);
+           imageOutFile.close();
+		  
+	          //  adminMgmtService.profileUpload(galaryBean.getParticipantId(),galaryBean.getFileName());
 	            
 	            result="success";
 	            System.out.println("Image Successfully Stored");
