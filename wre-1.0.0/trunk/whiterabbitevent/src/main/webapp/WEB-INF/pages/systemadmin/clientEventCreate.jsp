@@ -93,10 +93,14 @@
 
 
 			<div class="form-group col-md-4 col-md-offset-4 ">
-				<label class="flot-left">Services Provided </label>
-					<label ng-repeat="data in servicesList">
-  <input type="checkbox" checklist-model="event.services" checklist-value="data.serviceId"> {{data.serviceName}}
-</label>			
+				<label class="flot-left">Services Provided: </label>
+				<div>&nbsp;</div>
+				<ul style="list-style:none;height: 200px;overflow: scroll;">
+				<li ng-repeat="data in servicesList" >   {{data.serviceName}} <input type="checkbox" class="pull-right" checklist-model="event.services" checklist-value="data.serviceId"></li>
+				</ul>
+				
+				
+					
 							
 				
 			</div>
@@ -122,7 +126,6 @@
 						placeholder="UserFristName" ng-model="event.userFristName"
 						name="userFristName" 
 						ng-class="{'error':submitted &&ipForm.userFristName.$error.required}"
-						required
 						/>
 						<span class="help-inline" ng-show="submitted &&ipForm.userFristName.$error.required" style="color:red;"> Frist Name is required</span>
 				</div>
@@ -132,7 +135,7 @@
 						placeholder="UserLastName" ng-model="event.userLastName"
 						name="UserLastName"
 						ng-class="{'error':submitted &&ipForm.UserLastName.$error.required}"
-						required />
+						 />
 						<span class="help-inline" ng-show="submitted &&ipForm.UserLastName.$error.required" style="color:red;"> Last Name is required</span>
 				</div>
 				<div class="form-group col-md-3">
@@ -141,7 +144,7 @@
 						placeholder="userEmail" ng-model="event.userEmail"
 						name="userEmail" 
 						ng-class="{'error':submitted &&ipForm.userEmail.$error.required}"
-						required />
+						 />
 						<span class="help-inline" ng-show="submitted &&ipForm.userEmail.$error.required" style="color:red;">User EmailId is required </span>
 				</div>
 				<div class="form-group col-md-3">
@@ -150,21 +153,13 @@
 						placeholder="phoneNumber" ng-model="event.phoneNumber"
 						name="phoneNumber" 
 						ng-class="{'error':submitted &&ipForm.phoneNumber.$error.required}"
-						required/>
+						/>
 		<span class="help-inline" ng-show="submitted &&ipForm.phoneNumber.$error.required" style="color:red;">User PhoneNumber is required </span>
 
 				</div>
 
 			</div>
-			<div class="col-md-12">
-<div class="form-group col-md-6 " 
-							id="uploadDiv">
-							<label class="flot-left">Upload Image </label> 
-							<input type="file" class="form-control form-group" name="file" id="file" onchange="angular.element(this).scope().setFiles(this)">
-							
-						</div>
 			<div ng-hide="rdboption=='demoone'" ng-init="rdboption=='demo'">
-			 
 				<div class="form-group col-md-6">
 					<label>User </label> 
 					<select id="userId"
@@ -175,10 +170,15 @@
 						<option value="">Select User</option>
 					</select>
 				</div>
-
-			
-						
 					</div>
+			<div class="col-md-12">
+<div class="form-group col-md-6 " 
+							id="uploadDiv">
+							<label class="flot-left">Upload Image </label> 
+							<input type="file" class="form-control form-group" name="file" id="file" onchange="angular.element(this).scope().setFiles(this)">
+							
+						</div>
+			
 </div>
 			<div class="col-md-12">
 				<span class="help-inline" id="uploadDivError" style="display: none;color:red;" >Select logo to upload</span> 

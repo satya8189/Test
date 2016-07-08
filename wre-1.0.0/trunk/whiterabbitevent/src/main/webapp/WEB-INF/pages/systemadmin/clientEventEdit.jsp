@@ -30,13 +30,15 @@
 <div>&nbsp;</div>
 <div class="">
 <div class="form-group col-md-4 col-md-offset-4">
-<label >Services Provided </label>
-	
-							
-				<label ng-repeat="data in servicesList">
-  <input type="checkbox" checklist-model="event.services" checklist-value="data.serviceId"> {{data.serviceName}}
-</label>			
-							
+<label >Services Provided: </label>
+<div>&nbsp;</div>
+				<ul style="list-style:none;height: 200px;overflow: scroll;">
+				<li ng-repeat="data in servicesList" > {{data.serviceName}} <input type="checkbox" class="pull-right" checklist-model="event.services" 
+							checklist-value="data.serviceId" name="serviceProvided" ng-required="true"/></li>
+				</ul>
+			
+					<div ng-if="ipForm.$submitted" ng-messages="ipForm.serviceProvided.$error" ng-messages-include="errors">
+     						 </div>		
 
 						</div> 
 						<div class="col-md-6">
