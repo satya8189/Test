@@ -8,61 +8,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>ClientEventEdit</title>
 
-<script type="text/javascript">
- 	$(document).ready(function() {
-		$(".js-example-basic-multiple").select2({
-			closeOnSelect : false,
-			multiple : true,
-			placeholder : "Select Services",
-			templateResult : formatState,
 
-		});
-		var $eventSelect = $('#service');
 
-		$eventSelect.on("select2:select", function(e) {
-			var $remote = $('#service');
-			$(".otherService").hide();
-			$('input:checkbox').each(function() {
-				$(this).prop("checked", false);
-			});
-			var value = $remote.val();
 
-			var check = value.indexOf("other") > -1;
-			if (!check) {
-				for (var i = 0; i < value.length; i++) {
-					var id = "." + (value[i].split(" ").join(""));
-					$(id).prop("checked", true);
-				}
-			} else {
-
-				selectedValues = 'other';
-				$(".otherService").show();
-				$remote.val(other);
-				$(".js-example-basic-multiple").select2("close");
-				$remote.select2('val', '');
-				$remote.select2({
-					closeOnSelect : false,
-					multiple : true,
-					placeholder : "Other",
-					templateResult : formatState,
-				});
-				$(".other").prop("checked", true);
-			}
-		});
-
-	});
- 
-	function formatState(state) {
-		if (!state.id) {
-			return state.text;
-		}
-		var $state = $('<span>' + state.element.text
-				+ '<input type="checkbox" value="' + state.element.value
-				+ '" class="' + (state.element.value).split(" ").join("")
-				+ '" style="float: right !important;border:none;"/> </span>');
-		return $state;
-	};
-</script>
 
 </head>
 <body>
@@ -83,17 +31,13 @@
 <div class="">
 <div class="form-group col-md-4 col-md-offset-4">
 <label >Services Provided </label>
-			<select class="form-control js-example-basic-multiple"
-								data-ng-model="event.services" multiple
-								name="serviceProvided" id="service" required >
-								<option ng-repeat="event in servicesList"
-									value={{event.serviceId}}>{{event.serviceName}}</option>
-								
-							</select> 
-							<div ng-if="ipForm.$submitted"
-								ng-messages="ipForm.serviceProvided.$error"
-								ng-messages-include="errors"></div>
-						</div>
+	
+							
+				<label ng-repeat="data in servicesList">
+  <input type="checkbox" checklist-model="event.services" checklist-value="data.serviceId"> {{data.serviceName}}
+</label>			
+							
+
 						</div> 
 						<div class="col-md-6">
 						<div class="form-group">		
