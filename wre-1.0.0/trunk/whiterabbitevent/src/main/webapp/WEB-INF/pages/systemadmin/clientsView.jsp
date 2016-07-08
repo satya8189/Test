@@ -14,7 +14,7 @@
 
 <div class="col-md-12">
 	<form>
-	<h3 class="text-center">Agendas List</h3>
+	<h3 class="text-center">Clients List</h3>
 		
 	
 	<div class="panel">
