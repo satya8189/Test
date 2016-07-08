@@ -24,6 +24,7 @@ public class EventBean
     private String other;
     private int order;
     private String date;
+    private long[] services;
     
 	public int getOrder() {
 		return order;
@@ -31,8 +32,7 @@ public class EventBean
 	public void setOrder(int order) {
 		this.order = order;
 	}
-	private String[] services;
-    
+	
     
     
 	public String getOther() {
@@ -43,12 +43,8 @@ public class EventBean
 	}
     
     
-	public String[] getServices() {
-		return services;
-	}
-	public void setServices(String[] services) {
-		this.services = services;
-	}
+
+
 	public Long getServiceId() {
 		return serviceId;
 	}
@@ -162,11 +158,16 @@ public class EventBean
 	public void setDate(String date) {
 		this.date = date;
 	}
-	
-	
-	
-    
-    
-    
+	public long[] getServices() {
+		return services;
+	}
+	public void setServices(long[] services) {
+		this.services = services;
+	}
+
+
+
+
+
 
 }
