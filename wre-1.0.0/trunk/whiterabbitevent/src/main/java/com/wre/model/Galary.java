@@ -38,13 +38,11 @@ public class Galary  implements java.io.Serializable {
      private String type;
      private String fileName;
      private Date createdDate;
-     private Set<GalaryLikes> galaryLikeses = new HashSet(0);
      
-
     public Galary() {
     }
 
-    public Galary(Event event, Participants participants, String name, String path, String type,String fileName, Date createdDate,Set<GalaryLikes> galaryLikeses) {
+    public Galary(Event event, Participants participants, String name, String path, String type,String fileName, Date createdDate) {
        this.event = event;
        this.participants = participants;
        this.name = name;
@@ -52,7 +50,6 @@ public class Galary  implements java.io.Serializable {
        this.type = type;
        this.fileName=fileName;
        this.createdDate = createdDate;
-       this.galaryLikeses=galaryLikeses;
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
@@ -134,18 +131,6 @@ public class Galary  implements java.io.Serializable {
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
-
-	@OneToMany(fetch=FetchType.LAZY, mappedBy="galary")
-    public Set<GalaryLikes> getGalaryLikeses() {
-        return this.galaryLikeses;
-    }
-    
-    public void setGalaryLikeses(Set<GalaryLikes> galaryLikeses) {
-        this.galaryLikeses = galaryLikeses;
-    }
-
-
-
 
 }
 

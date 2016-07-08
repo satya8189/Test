@@ -40,15 +40,13 @@ public class Participants  implements java.io.Serializable {
   private Set<EventParticipant> eventParticipants = new HashSet<EventParticipant>(0);
   private Set<SurveyQuestionAnswer> surveyQuestionAnswers = new HashSet<SurveyQuestionAnswer>(0);
   private Set<ContactDetails> contactDetailses = new HashSet<ContactDetails>(0);
-  private Set<ParticipantQuries> participantQurieses = new HashSet<ParticipantQuries>(0);
   private Set<QuestionAnswer> questionAnswers = new HashSet<QuestionAnswer>(0);
   private Set<Message> messages = new HashSet<Message>(0);
-  private Set<GalaryLikes> galaryLikeses = new HashSet(0);
 
  public Participants() {
  }
 
- public Participants(String email, String firstName, String lastName, String otp, String phone, String status, String regId,String profilePic, Set<Galary> galaries, Set<EventParticipant> eventParticipants, Set<SurveyQuestionAnswer> surveyQuestionAnswers, Set<ContactDetails> contactDetailses, Set<ParticipantQuries> participantQurieses, Set<QuestionAnswer> questionAnswers, Set<Message> messages,Set<GalaryLikes> galaryLikeses) {
+ public Participants(String email, String firstName, String lastName, String otp, String phone, String status, String regId,String profilePic, Set<Galary> galaries, Set<EventParticipant> eventParticipants, Set<SurveyQuestionAnswer> surveyQuestionAnswers, Set<ContactDetails> contactDetailses, Set<QuestionAnswer> questionAnswers, Set<Message> messages) {
     this.email = email;
     this.firstName = firstName;
     this.lastName = lastName;
@@ -61,10 +59,8 @@ public class Participants  implements java.io.Serializable {
     this.eventParticipants = eventParticipants;
     this.surveyQuestionAnswers = surveyQuestionAnswers;
     this.contactDetailses = contactDetailses;
-    this.participantQurieses = participantQurieses;
     this.questionAnswers = questionAnswers;
     this.messages = messages;
-    this.galaryLikeses=galaryLikeses;
  }
 
   @Id @GeneratedValue(strategy=IDENTITY)
@@ -195,15 +191,6 @@ public void setProfilePic(String profilePic) {
  }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="participants")
- public Set<ParticipantQuries> getParticipantQurieses() {
-     return this.participantQurieses;
- }
- 
- public void setParticipantQurieses(Set<ParticipantQuries> participantQurieses) {
-     this.participantQurieses = participantQurieses;
- }
-
-@OneToMany(fetch=FetchType.LAZY, mappedBy="participants")
  public Set<QuestionAnswer> getQuestionAnswers() {
      return this.questionAnswers;
  }
@@ -220,16 +207,5 @@ public void setProfilePic(String profilePic) {
  public void setMessages(Set<Message> messages) {
      this.messages = messages;
  }
-
- @OneToMany(fetch=FetchType.LAZY, mappedBy="participants")
- public Set<GalaryLikes> getGalaryLikeses() {
-     return this.galaryLikeses;
- }
- 
- public void setGalaryLikeses(Set<GalaryLikes> galaryLikeses) {
-     this.galaryLikeses = galaryLikeses;
- }
-
-
 
 }

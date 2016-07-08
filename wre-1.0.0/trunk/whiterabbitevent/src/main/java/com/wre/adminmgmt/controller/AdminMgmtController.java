@@ -607,12 +607,12 @@ public class AdminMgmtController {
 			@RequestParam("sponcorName") String sponcorName,
 			@RequestParam("sponcorDesc") String sponcorDesc) {
 
-		log.info("in side speakerSave method");
+		log.info("in side updateSponsor method");
 
 		adminMgmtService.updateSponsor(file, eventId, type, sponcorName,
 				sponcorDesc, sponcorId);
 	}
-
+	
 	/* ============End of Sponsor======== */
 
 	/* ==========starting speaker =========== */
@@ -643,6 +643,7 @@ public class AdminMgmtController {
 		return "admin/speakerCreate";
 	}
 
+	//to save speaker data
 	@RequestMapping(value = "admin/speakerSave", method = RequestMethod.POST)
 	public @ResponseBody
 	void saveSpeaker(
@@ -675,6 +676,13 @@ public class AdminMgmtController {
 		return adminMgmtService.getSpeakerBySpeakerId(speakerId);
 
 	}
+	
+	//navigate to speaker image view page---admin/viewSpeakerImage
+		@RequestMapping(value= "admin/viewSpeakerImage")
+		public String viewSpeakerImage(){
+			log.info("in viewSpeakerImage--");
+			return "admin/speakerImageDataView";
+		}
 
 	// udpateSpeaker
 	@RequestMapping(value = "admin/updateSpeaker", method = RequestMethod.POST)
@@ -693,7 +701,7 @@ public class AdminMgmtController {
 
 		adminMgmtService.udpateSpeaker(file, eventId, type, speakerName,
 				location, title, description, rating, speakerId);
-	}
+			}
 
 	/* Speaker Ends Here* */
 
@@ -1259,17 +1267,6 @@ public class AdminMgmtController {
 
 	}
 
-	// participantQueriesSaveMethod
-	@RequestMapping(value = "admin/participantQueriesSave", method = RequestMethod.POST)
-	public @ResponseBody
-	String participantQueriesSave(
-			@RequestBody ParticipantQuriesBean participantQuriesBean) {
-		log.info("we are in participantQueriesSave method");
-		String result = adminMgmtService
-				.participantQueriesSave(participantQuriesBean);
-		return result;
-
-	}
 	
 	@RequestMapping(value = "admin/imageUpload", method = RequestMethod.POST)
 	 public @ResponseBody String imageUpload(@RequestBody GalaryBean galaryBean){
@@ -1399,12 +1396,7 @@ public class AdminMgmtController {
  		return galaryList;
  	}
  	
- 	@RequestMapping(value = "admin/galleryImageStatusSave", method = RequestMethod.POST)
-	public @ResponseBody void galleryImageStatusSave(@RequestBody GalaryBean galaryBean) {
-	adminMgmtService.galleryImageStatusSave(galaryBean);
-	}
-
-
+ 	
 }
 		
 		

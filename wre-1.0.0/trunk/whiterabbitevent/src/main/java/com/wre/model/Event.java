@@ -52,7 +52,6 @@ public class Event  implements java.io.Serializable {
   private Set<SurveyQuestionAnswer> surveyQuestionAnswers = new HashSet<SurveyQuestionAnswer>(0);
   private Set<Newsfeed> newsfeeds = new HashSet<Newsfeed>(0);
   private Set<Sponcor> sponcors = new HashSet<Sponcor>(0);
-  private Set<ParticipantQuries> participantQurieses = new HashSet<ParticipantQuries>(0);
   private Set<EventParticipant> eventParticipants = new HashSet<EventParticipant>(0);
   private Set<ChatTopic> chatTopics = new HashSet<ChatTopic>(0);
   private Set<Message> messages = new HashSet<Message>(0);
@@ -61,7 +60,7 @@ public class Event  implements java.io.Serializable {
  public Event() {
  }
 
- public Event(Client client, User user, String eventAddress, String eventAgenda, Date eventDate, String eventDesc, String eventName, String eventTime, String status, Set<Agenda> agendas, Set<EventServices> eventServiceses, Set<Galary> galaries, Set<SocialMedia> socialMedias, Set<ContactDetails> contactDetailses, Set<Speaker> speakers, Set<SurveyQuestion> surveyQuestions, Set<SurveyQuestionAnswer> surveyQuestionAnswers, Set<Newsfeed> newsfeeds, Set<Sponcor> sponcors, Set<ParticipantQuries> participantQurieses, Set<EventParticipant> eventParticipants, Set<ChatTopic> chatTopics, Set<Message> messages, Set<QuestionAnswer> questionAnswers) {
+ public Event(Client client, User user, String eventAddress, String eventAgenda, Date eventDate, String eventDesc, String eventName, String eventTime, String status, Set<Agenda> agendas, Set<EventServices> eventServiceses, Set<Galary> galaries, Set<SocialMedia> socialMedias, Set<ContactDetails> contactDetailses, Set<Speaker> speakers, Set<SurveyQuestion> surveyQuestions, Set<SurveyQuestionAnswer> surveyQuestionAnswers, Set<Newsfeed> newsfeeds, Set<Sponcor> sponcors, Set<EventParticipant> eventParticipants, Set<ChatTopic> chatTopics, Set<Message> messages, Set<QuestionAnswer> questionAnswers) {
     this.client = client;
     this.user = user;
     this.eventAddress = eventAddress;
@@ -81,7 +80,6 @@ public class Event  implements java.io.Serializable {
     this.surveyQuestionAnswers = surveyQuestionAnswers;
     this.newsfeeds = newsfeeds;
     this.sponcors = sponcors;
-    this.participantQurieses = participantQurieses;
     this.eventParticipants = eventParticipants;
     this.chatTopics = chatTopics;
     this.messages = messages;
@@ -278,15 +276,6 @@ public class Event  implements java.io.Serializable {
  
  public void setSponcors(Set<Sponcor> sponcors) {
      this.sponcors = sponcors;
- }
-
-@OneToMany(fetch=FetchType.LAZY, mappedBy="event")
- public Set<ParticipantQuries> getParticipantQurieses() {
-     return this.participantQurieses;
- }
- 
- public void setParticipantQurieses(Set<ParticipantQuries> participantQurieses) {
-     this.participantQurieses = participantQurieses;
  }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="event")

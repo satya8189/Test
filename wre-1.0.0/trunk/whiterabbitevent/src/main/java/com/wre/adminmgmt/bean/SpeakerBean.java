@@ -15,8 +15,8 @@ public class SpeakerBean {
     private String description;
     private String rating;
     private String type;
-   private String fileName;
-
+    private String fileName;
+    private String url;
     
 	public Long getSpeakerId() {
 		return speakerId;
@@ -75,7 +75,6 @@ public class SpeakerBean {
 		this.type = type;
 	}
 	
-
 	public void setDescription(String description) {
 		this.description = description;
 	}
@@ -85,6 +84,11 @@ public class SpeakerBean {
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
+	}
 	
-
 }
