@@ -187,7 +187,7 @@ public class DocShareActivity extends AppCompatActivity {
                                 sendIntent.setAction(Intent.ACTION_SEND);
                                 // sendIntent.putExtra(Intent.EXTRA_TEXT, "Download document" + "'" + result.get("docFileName") + "'");
                                 sendIntent.putExtra(Intent.EXTRA_TEXT,Uri.parse(result.get("docFileName")));
-                                sendIntent.setType("text/html");
+                                sendIntent.setType("text/plain");
                                 // sendIntent.putExtra(Intent.EXTRA_TEXT , ""+result.get("docFileName") );
                                 startActivity(sendIntent);
 
