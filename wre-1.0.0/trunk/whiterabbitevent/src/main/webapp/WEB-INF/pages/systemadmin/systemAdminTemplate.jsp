@@ -29,6 +29,7 @@
   <script src="resources/js/navigationjs/systemAdminNavigation.js"></script>
   <script src="resources/js/services.js"></script>
   <script src="resources/js/filters.js"></script>
+  <script src="resources/js/checklist-model.js"></script>
      
     <!-- Client -->
     <script src="resources/js/systemadmin/ClientsViewController.js"></script>
