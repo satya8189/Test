@@ -7,7 +7,7 @@
 var whiterabbitevent = {};
 
 
-var App = angular.module('whiterabbitevent',  ['ngRoute','wre.services','ngMessages','wre.filters','ui.bootstrap']);
+var App = angular.module('whiterabbitevent',  ['ngRoute','wre.services','ngMessages','wre.filters','ui.bootstrap','checklist-model']);
 
 /// Declare app level module which depends on filters, and services
 App.config(['$routeProvider', function ($routeProvider,$Scope) {
