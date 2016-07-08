@@ -60,9 +60,10 @@ public class DetailsActivity extends AppCompatActivity {
     private boolean mPermissionDenied = false;
 
     private Button yesButton, noButton, maybeButtun;
-    private String eventId, partId;
+    private String eventId, partId,status;
     private ImageView qrCodeImage;
     private SharedPreferences prefs;
+    SharedPreferences.Editor editor;
 
 
     @Override
@@ -73,17 +74,28 @@ public class DetailsActivity extends AppCompatActivity {
         String nameTxt = getIntent().getExtras().getString("name");
 
         markerPoints = new ArrayList<LatLng>();
-
+        qrCodeImage = (ImageView) findViewById(R.id.invite_qr_image);
+        inviteTime = (TextView) findViewById(R.id.invite_time);
+        inviteDate = (TextView) findViewById(R.id.invite_date);
+        inviteAddress = (TextView) findViewById(R.id.invite_address_text);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(nameTxt);
         eventId = getIntent().getExtras().getString("eventId");
         prefs = getSharedPreferences("Chat", 0);
         partId = prefs.getString("partId", null);
+        editor = prefs.edit();
+        status=prefs.getString("statusYes",null);
+        if(status!=null) {
+            if (status.equals("Yes")) {
+                qrCodeImage.setVisibility(View.VISIBLE);
+                Picasso.with(DetailsActivity.this).load("http://183.82.103.156:8080/Resources/wre/" + eventId + "/" + partId + "/QR.png").into(qrCodeImage);
+            } else {
+                qrCodeImage.setVisibility(View.GONE);
+            }
+        }
 
-        inviteTime = (TextView) findViewById(R.id.invite_time);
-        inviteDate = (TextView) findViewById(R.id.invite_date);
-        inviteAddress = (TextView) findViewById(R.id.invite_address_text);
-        qrCodeImage = (ImageView) findViewById(R.id.invite_qr_image);
+
+
 
         new MyAsyncTask(Constants.ABOUT_EVENT + eventId + "&type=app", null, DetailsActivity.this, new Callback() {
             @Override
@@ -126,20 +138,7 @@ public class DetailsActivity extends AppCompatActivity {
 
                     map = fm.getMap();
                     if (map != null) {
-
-                        // Getting Map for the SupportMapFragment
-
-
-                        // Enable MyLocation Button in the Map
-
                         if (ActivityCompat.checkSelfPermission(DetailsActivity.this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(DetailsActivity.this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                            // TODO: Consider calling
-                            //    ActivityCompat#requestPermissions
-                            // here to request the missing permissions, and then overriding
-                            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                            //                                          int[] grantResults)
-                            // to handle the case where the user grants the permission. See the documentation
-                            // for ActivityCompat#requestPermissions for more details.
                             return;
                         }
                         map.setMyLocationEnabled(true);
@@ -181,6 +180,8 @@ public class DetailsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 saveStatus("Yes");
                 qrCodeImage.setVisibility(View.VISIBLE);
+                editor.putString("statusYes","Yes");
+                editor.commit();
                 Picasso.with(DetailsActivity.this).load("http://183.82.103.156:8080/Resources/wre/" + eventId + "/" + partId + "/QR.png").into(qrCodeImage);
 
             }
@@ -189,6 +190,8 @@ public class DetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 saveStatus("No");
+                editor.putString("statusYes","no");
+                editor.commit();
                 qrCodeImage.setVisibility(View.GONE);
             }
         });
@@ -196,6 +199,8 @@ public class DetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 saveStatus("MayBe");
+                editor.putString("statusYes","may");
+                editor.commit();
                 qrCodeImage.setVisibility(View.GONE);
             }
         });

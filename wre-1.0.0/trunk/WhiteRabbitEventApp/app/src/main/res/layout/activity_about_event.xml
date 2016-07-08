@@ -25,7 +25,6 @@
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:background="@color/white"
-        android:text="jhfdkjljfkshj kjhfshfkjhsfjkshjfhsdjfsa jhakjshkjsahdjaksdhkajsdsa ddasjfhskhfshfjshfkj askdjsh djashkjahdkjahsdkjashdkjahshdushd  dsdhasdhkjashdk asdasdhashdas dasdhad a"
         android:layout_margin="10dp"
         android:gravity="left" />
     <!--<WebView

@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
@@ -39,6 +40,9 @@ public class GalleryNewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_gallery_new);
 
         //mGridView = (GridView) findViewById(R.id.new_gridView);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Gallery");
+
         prefs = getSharedPreferences("Chat", 0);
         partId = prefs.getString("partId", null);
         eventId = prefs.getString("eventId", null);
@@ -169,5 +173,15 @@ public class GalleryNewActivity extends AppCompatActivity {
         public int getItemViewType(int position) {
             return position;
         }
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -3,16 +3,16 @@ package com.wre.yin.whiterabbiteventapp;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.graphics.Palette;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.daimajia.slider.library.Indicators.PagerIndicator;
 import com.daimajia.slider.library.SliderLayout;
@@ -24,6 +24,8 @@ import com.squareup.picasso.Target;
 import com.wre.yin.whiterabbiteventapp.beans.ParticipantEventBean;
 import com.wre.yin.whiterabbiteventapp.utils.Callback;
 import com.wre.yin.whiterabbiteventapp.utils.Constants;
+import com.wre.yin.whiterabbiteventapp.utils.ImageCallBack;
+import com.wre.yin.whiterabbiteventapp.utils.LoadImage;
 import com.wre.yin.whiterabbiteventapp.utils.MyAsyncTask;
 import com.wre.yin.whiterabbiteventapp.utils.Utils;
 
@@ -31,11 +33,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class HomeActivity extends AppCompatActivity implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener {
 
     private SliderLayout mDemoSlider;
     private Target target;
-    private ImageView proFic, profDetails, singleImageView;
+    private ImageView profDetails, singleImageView;
     private RelativeLayout rl1;
     private SharedPreferences prefs;
     private FrameLayout singleEventView;
@@ -43,6 +47,7 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
     private TextView partName, singleEvent, singleEventDate;
     private List<HashMap<String, String>> list;
     SharedPreferences.Editor editor;
+    private CircleImageView proFic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +63,7 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
         mDemoSlider = (SliderLayout) findViewById(R.id.slider);
         mDemoSlider.setCustomIndicator((PagerIndicator) findViewById(R.id.custom_indicator));
         profDetails = (ImageView) findViewById(R.id.profile_details);
-        proFic = (ImageView) findViewById(R.id.profile_home_pic);
+        proFic = (CircleImageView) findViewById(R.id.profile_home_pic);
         rl1 = (RelativeLayout) findViewById(R.id.rl1);
 
         singleEventView = (FrameLayout) findViewById(R.id.ghost_view_workaround);
@@ -70,7 +75,17 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
 
         partiName = prefs.getString("name", null);
         partId = prefs.getString("partId", null);
-        Picasso.with(getApplicationContext()).load("http://183.82.103.156:8080/Resources/wre/profile_pics/" + partId + "/profile.jpg").placeholder(R.drawable.user_icon).into(proFic);
+
+        if(Constants.isNetworkAvailable(HomeActivity.this)) {
+
+            new LoadImage("http://183.82.103.156:8080/Resources/wre/profile_pics/" + partId + "/profile.jpg", HomeActivity.this, new ImageCallBack() {
+                @Override
+                public void onResult(Bitmap bitmap) {
+                    proFic.setImageBitmap(bitmap);
+                }
+            }).execute();
+        }
+       // Picasso.with(getApplicationContext()).load("http://183.82.103.156:8080/Resources/wre/profile_pics/" + partId + "/profile.jpg").placeholder(R.drawable.user_icon).into(proFic);
         partName.setText(partiName);
 
         if (Constants.checkAndRequestPermissions(HomeActivity.this)) ;
@@ -80,7 +95,9 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
                 if (Constants.isNetworkAvailable(HomeActivity.this)) {
 
                     Intent profDetailsAct = new Intent(HomeActivity.this, EmpProfileActivity.class);
+
                     startActivity(profDetailsAct);
+                    finish();
                 } else {
                     Constants.createDialogSend(HomeActivity.this, "error", "Please connect to internet");
 
@@ -88,29 +105,8 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
             }
         });
 
-        target = new Target() {
-            @Override
-            public void onBitmapLoaded(final Bitmap bitmap, Picasso.LoadedFrom from) {
-                Palette.generateAsync(bitmap, new Palette.PaletteAsyncListener() {
-                    public void onGenerated(Palette palette) {
-                        // iView.setImageBitmap(bitmap);
-                        // Picasso.with(getApplicationContext()).load("http://183.82.103.156:8080/Resources/wre/profile_pics/"+partId+"/profile.jpg").into(proFic);
-                        int defaultColor = getResources().getColor(android.R.color.black);
-                        rl1.setBackgroundColor(palette.getVibrantColor(defaultColor));
-                    }
-                });
-            }
 
-            @Override
-            public void onBitmapFailed(Drawable errorDrawable) {
 
-            }
-
-            @Override
-            public void onPrepareLoad(Drawable placeHolderDrawable) {
-
-            }
-        };
 
         if (Constants.isNetworkAvailable(HomeActivity.this)) {
             new MyAsyncTask(Constants.EVENT_LIST + "?participantId=" + partId, null, HomeActivity.this, new Callback() {
@@ -140,10 +136,12 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
                                     @Override
                                     public void onClick(View view) {
                                         Intent i = new Intent(HomeActivity.this, EventDashboardActivity.class);
-                                        i.putExtra("eventId", map.get("eventId"));
-                                        i.putExtra("date", map.get("date"));
-                                        i.putExtra("eventName", map.get("eventName"));
+                                        editor.putString("eventId", map.get("eventId"));
+                                        editor.putString("eventName", map.get("eventName"));
+                                        editor.putString("eventDate", map.get("date"));
+                                        editor.commit();
                                         startActivity(i);
+
                                     }
                                 });
 
@@ -211,10 +209,31 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
             i.putExtra("date", date);
             i.putExtra("eventName", slider.getBundle().get("eventName").toString());
             startActivity(i);
+
         } else {
             Constants.createDialogSend(HomeActivity.this, "error", "Please connect to internet");
 
         }
     }
+boolean doubleBackToExitPressedOnce=false;
+    @Override
+    public void onBackPressed() {
 
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Press again to exit", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
+
+    }
 }

@@ -29,11 +29,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.squareup.picasso.Picasso;
 import com.wre.yin.whiterabbiteventapp.beans.GalaryBean;
 import com.wre.yin.whiterabbiteventapp.beans.ParticipantBean;
 import com.wre.yin.whiterabbiteventapp.utils.Callback;
 import com.wre.yin.whiterabbiteventapp.utils.Constants;
+import com.wre.yin.whiterabbiteventapp.utils.ImageCallBack;
+import com.wre.yin.whiterabbiteventapp.utils.LoadImage;
 import com.wre.yin.whiterabbiteventapp.utils.MyAsyncTask;
 import com.wre.yin.whiterabbiteventapp.utils.Utils;
 
@@ -81,10 +82,19 @@ public class EmpProfileActivity extends AppCompatActivity {
         eventId = prefs.getString("eventId", null);
         prgDialog = new ProgressDialog(this);
         prgDialog.setCancelable(false);
-        // eventId = getIntent().getExtras().getString("eventId");
         empProfilePic = (ImageView) findViewById(R.id.emp_profile_image);
+        // eventId = getIntent().getExtras().getString("eventId");
+        if(Constants.isNetworkAvailable(EmpProfileActivity.this)) {
 
-        Picasso.with(EmpProfileActivity.this).load("http://183.82.103.156:8080/Resources/wre/profile_pics/" + partId + "/profile.jpg").placeholder(R.drawable.user_icon).into(empProfilePic);
+            new LoadImage("http://183.82.103.156:8080/Resources/wre/profile_pics/" + partId + "/profile.jpg", EmpProfileActivity.this, new ImageCallBack() {
+                @Override
+                public void onResult(Bitmap bitmap) {
+                    empProfilePic.setImageBitmap(bitmap);
+                }
+            }).execute();
+        }
+
+        //Picasso.with(EmpProfileActivity.this).load("http://183.82.103.156:8080/Resources/wre/profile_pics/" + partId + "/profile.jpg").placeholder(R.drawable.user_icon).into(empProfilePic);
 
         empName = (EditText) findViewById(R.id.emp_name);
         empMail = (EditText) findViewById(R.id.emp_mail);
@@ -129,6 +139,7 @@ public class EmpProfileActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         captureImage();
+                        alertD.dismiss();
 
                     }
                 });
@@ -136,6 +147,7 @@ public class EmpProfileActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         loadImagefromGallery();
+                        alertD.dismiss();
                     }
                 });
                 alertD.setView(promptView);
@@ -182,9 +194,8 @@ public class EmpProfileActivity extends AppCompatActivity {
                         new MyAsyncTask(Constants.PARTICIPANT_UPDATE, Utils.getJson(partBean), EmpProfileActivity.this, new Callback() {
                             @Override
                             public void onResult(String result) {
-                                String res = Utils.getString("result", result);
-                                if (res != null) {
-                                    if (res.equals("success")) {
+                                if (result != null) {
+                                    if (result.equals("success")) {
                                         Constants.createDialogSend(EmpProfileActivity.this, "success", "Your details saved successfully");
                                     } else {
                                         Constants.createDialogSend(EmpProfileActivity.this, "fail", "Please try again later..");
@@ -389,8 +400,9 @@ public class EmpProfileActivity extends AppCompatActivity {
                     uploadImgVid.setEncodeString(encodedString);
                     uploadImgVid.setName(fileName);
                     uploadImgVid.setType(fileTpe);
-                    uploadImgVid.setEventId(Long.parseLong(eventId));
                     uploadImgVid.setParticipantId(Long.parseLong(partId));
+                    uploadImgVid.setFileName(fileName);
+                    String url=Constants.URL1+"profileUpload";
                     if (Constants.isNetworkAvailable(EmpProfileActivity.this)) {
                         new MyAsyncTask(Constants.PROFILE_PIC_UPLOAD, Utils.getJson(uploadImgVid), EmpProfileActivity.this, new Callback() {
                             public void onResult(String result) {
@@ -400,7 +412,17 @@ public class EmpProfileActivity extends AppCompatActivity {
                                 String res = Utils.getString("result", result);
                                 if (res != null) {
                                     if (res.equals("success")) {
-                                        Picasso.with(EmpProfileActivity.this).load("http://183.82.103.156:8080/Resources/wre/profile_pics/" + partId + "/profile.jpg").placeholder(R.drawable.user_icon).into(empProfilePic);
+                                        new LoadImage("http://183.82.103.156:8080/Resources/wre/profile_pics/" + partId + "/profile.jpg", EmpProfileActivity.this, new ImageCallBack() {
+                                            @Override
+                                            public void onResult(Bitmap bitmap) {
+                                                empProfilePic.setImageBitmap(bitmap);
+                                            }
+                                        }).execute();
+                                        Intent i=new Intent(EmpProfileActivity.this,EmpProfileActivity.class);
+                                        startActivity(i);
+                                        finish();
+
+                                        //Picasso.with(EmpProfileActivity.this).load("http://183.82.103.156:8080/Resources/wre/profile_pics/" + partId + "/profile.jpg").placeholder(R.drawable.user_icon).into(empProfilePic);
                                     }
                                 }
                             }
@@ -422,6 +444,8 @@ public class EmpProfileActivity extends AppCompatActivity {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
                 onBackPressed();
+                Intent in=new Intent(EmpProfileActivity.this,HomeActivity.class);
+                startActivity(in);
                 finish();
                 break;
 
@@ -443,6 +467,8 @@ public class EmpProfileActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        Intent i=new Intent(EmpProfileActivity.this,HomeActivity.class);
+        startActivity(i);
         //   EmpProfileActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
         finish();
     }

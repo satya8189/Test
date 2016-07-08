@@ -10,6 +10,15 @@ public class SponsorBean {
     private String sponcorDesc;
     private String sponcorName;
     private String fileName;
+    private String url;
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
     public String getFileName() {
         return fileName;
