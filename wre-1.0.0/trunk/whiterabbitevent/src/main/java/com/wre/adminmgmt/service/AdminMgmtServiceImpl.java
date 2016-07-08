@@ -47,9 +47,7 @@ import com.wre.model.Event;
 import com.wre.model.EventParticipant;
 import com.wre.model.EventServices;
 import com.wre.model.Galary;
-import com.wre.model.GalaryLikes;
 import com.wre.model.Newsfeed;
-import com.wre.model.ParticipantQuries;
 import com.wre.model.Participants;
 import com.wre.model.Rating;
 import com.wre.model.SocialMedia;
@@ -703,7 +701,7 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 	public List<SpeakerBean> getSpeakersList(Long eventId) {
 
 		List<Speaker> sl = AdminMgmtDaoImpl.getSpeakersList(eventId);
-		log.info("----getSpeakersList servImpl---" + sl.size());
+		//log.info("----getSpeakersList servImpl---" + sl.size());
 		// SpeakerBean sb=new SpeakerBean();
 		List<SpeakerBean> speakerBeanList = new ArrayList<SpeakerBean>();
 
@@ -721,7 +719,7 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 			log.info(s.getDescription() + "speaker bean--" + sb.toString());
 			speakerBeanList.add(sb);
 		}
-		log.info("sp bean list size===" + speakerBeanList.size());
+		//log.info("sp bean list size===" + speakerBeanList.size());
 		return speakerBeanList;
 	}
 
@@ -769,8 +767,7 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 		speaker.setFileName(file.getOriginalFilename());
 		speaker.setRating(rating);
 
-		log.info("SerImpl...speaker bean saving....."
-				+ speaker.getDescription());
+		//log.info("SerImpl...speaker bean saving....."+ speaker.getDescription());
 		AdminMgmtDaoImpl.save(speaker);
 	}
 
@@ -781,7 +778,7 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 		SpeakerBean sp = new SpeakerBean();
 		Speaker speakerObject = AdminMgmtDaoImpl
 				.getSpeakerBySpeakerId(speakerId);
-		log.info("desc......." + speakerObject.getDescription());
+		//log.info("desc......." + speakerObject.getDescription());
 		if (speakerObject != null) {
 			sp.setEventId(speakerObject.getEvent().getEventId());
 			sp.setSpeakerId(speakerObject.getSpeakerId());
@@ -791,10 +788,11 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 			sp.setRating(speakerObject.getRating());
 			sp.setTitle(speakerObject.getTitle());
 			sp.setFileName(speakerObject.getFileName());
-
+					String filePath = WREConstants.RESOURCE_PATH + sp.getEventId() + "/"
+								+ "speaker" + "/" + sp.getFileName();
+			sp.setUrl(filePath);
 		}
-		log.info(speakerObject.getDescription() + "speaker for edit....."
-				+ sp.toString());
+		//log.info(speakerObject.getDescription() + "speaker for edit....."				+ sp.toString());
 		return sp;
 	}
 
@@ -841,8 +839,7 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 		if(file!=null){
 		speaker.setFileName(file.getOriginalFilename());
 		}
-		log.info("SerImpl...speaker bean saving....."
-				+ speaker.getDescription());
+		//log.info("SerImpl...speaker bean saving....."+ speaker.getDescription());
 		AdminMgmtDaoImpl.update(speaker);
 		
 	}
@@ -1544,30 +1541,6 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 			}
 			
 			@Override
-			public String participantQueriesSave(ParticipantQuriesBean participantQuriesBean) {
-				
-				ParticipantQuries participantQuries = new ParticipantQuries();
-				participantQuries.setQuery(participantQuriesBean.getQuery());
-				Event event = new Event();
-				event.setEventId(participantQuriesBean.getEventId());
-				participantQuries.setEvent(event);
-				Speaker speaker = new Speaker();
-				speaker.setSpeakerId(participantQuriesBean.getSpeakerId());
-				participantQuries.setSpeaker(speaker);
-				Participants participants = new Participants();
-				participants.setParticipantId(participantQuriesBean.getParticipantId());
-				participantQuries.setParticipants(participants);
-				long i=(Long)AdminMgmtDaoImpl.save(participantQuries);
-				
-				log.info("savePartcipantQueries--"+i);
-				String result="fail";
-				if(i>0){
-					result="success";
-				}
-				return result;
-			}
-
-			@Override
 			public void saveGalary(GalaryBean galaryBean) {
 				Galary galary = new Galary();
 				galary.setName(galaryBean.getName());
@@ -1662,30 +1635,7 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 
 
 			}
-
-			@Override
-			public void galleryImageStatusSave(GalaryBean galaryBean) {
-				
-				GalaryLikes galaryLikes=new GalaryLikes();
-				galaryLikes.setStatus("Active");
-				Galary galary=new Galary();
-				galary.setGlaryItemId(galaryBean.getGlaryItemId());
-				galaryLikes.setGalary(galary);
-				Participants participants=new Participants();
-				participants.setParticipantId(galaryBean.getParticipantId());
-				galaryLikes.setParticipants(participants);
-				AdminMgmtDaoImpl.save(galaryLikes);
-				
-			}
 			
-			
-			
-			/*public ClientBean getClientDetails(Long eventId){
-				ClientBean clientBean=new ClientBean();
-				Object[] client =AdminMgmtDaoImpl.getClientDetails(eventId);
-				
-				return clientBean;
-			}*/
 }
 
 	

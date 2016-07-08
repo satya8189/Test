@@ -155,7 +155,6 @@ public void updateParticipantDetails(ParticipantBean participantBean);
 public void eventParticipantStatusSave(ParticipantEventBean participantEventBean);
 
 public String getEventParticipantStatus(Long eventId, Long participantId);
-public String participantQueriesSave(ParticipantQuriesBean participantQuriesBean);
 
 public void saveGalary(GalaryBean galaryBean);
 
@@ -172,9 +171,5 @@ public void updateChatTopic(Long chatTopicId, Long eventId, MultipartFile file,
 
 public List<GalaryBean> galaryImageList(Long eventId, String type,
 		Long paticipantId);
-
-public void galleryImageStatusSave(GalaryBean galaryBean);
-
-//public ClientBean getClientDetails(Long eventId);
 
 }

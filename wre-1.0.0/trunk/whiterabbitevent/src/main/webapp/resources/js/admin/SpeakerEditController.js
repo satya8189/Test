@@ -10,6 +10,7 @@ var SpeakerEditController=function($scope,$http,$routeParams,$location,ngNotifie
 					$scope.eventId=sp.eventId;
 					$scope.speaker=sp;
 					//alert("got speaker by id--"+sp.speakerName);
+					alert("got speaker image..url.."+speaker.url);
 				}).error(function(){
 					ngNotifier.error("error in getting speaker by id");
 				});
@@ -24,14 +25,13 @@ var SpeakerEditController=function($scope,$http,$routeParams,$location,ngNotifie
 	
 	$scope.updateSpeaker = function(speaker)
 	{
-		alert("dfdsf");
+		//alert("dfdsf");
 		 var fd = new FormData();
 			//alert("video");
 
 			  // Take the first selected file
 			    fd.append("file", file.files[0]);
 			   
-
 			    fd.append("eventId",speaker.eventId);
 			    fd.append("speakerId",speaker.speakerId);
 			    fd.append("type","speaker");
@@ -43,7 +43,7 @@ var SpeakerEditController=function($scope,$http,$routeParams,$location,ngNotifie
 			    
 			    fd.append("rating",speaker.rating);
 			    
-			    alert("data--"+fd);
+			    //alert("data--"+fd);
 			    $http.post('admin/updateSpeaker',fd, {
 			     withCredentials : true,
 			     headers : {

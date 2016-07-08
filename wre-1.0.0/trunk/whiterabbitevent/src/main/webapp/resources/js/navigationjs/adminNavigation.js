@@ -206,7 +206,13 @@ App.config([ '$routeProvider', function($routeProvider, $Scope , $rootScope) {
 		templateUrl : 'admin/editSpeaker',
 		controller : SpeakerEditController
 	});
-
+	
+	//to view speaker image viewSpeakerImage
+	$routeProvider.when('/viewSpeakerImage/:speakerId', {
+		templateUrl : 'admin/viewSpeakerImage',
+		controller : SpeakerEditController
+	});
+	
 	/* Speaker ended here... */
 
 	// #/venueLayout/

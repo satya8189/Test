@@ -60,8 +60,11 @@ margin-bottom:0px !important;
 					<td>{{sp.description}}</td>
 					<td>{{sp.rating}}</td>
 					<td>
-						<a ng-click="editSpeaker(sp.speakerId)" title="EditSpeaker">
+						<a ng-click="editSpeaker(sp.speakerId)" title="edit">
 							<i class="glyphicon glyphicon-pencil"> </i>
+						</a>
+						<a ng-click="viewSpeakerImage(sp.speakerId)" title="view">
+							<i class="glyphicon glyphicon-eye-open"> </i>
 						</a>
 					</td>
 				</tr>

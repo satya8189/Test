@@ -53,4 +53,9 @@ var SpeakerProfileViewController = function($scope, $http, $location, $routePara
 				//alert("working speakerEdit..."+speakerId);
 			$location.path("/editSpeaker/"+speakerId);
 		};
+		
+		$scope.viewSpeakerImage = function(speakerId){
+			//alert("working viewSpeakerImage..."+speakerId);
+			$location.path("/viewSpeakerImage/"+speakerId);
+		};
 };	
