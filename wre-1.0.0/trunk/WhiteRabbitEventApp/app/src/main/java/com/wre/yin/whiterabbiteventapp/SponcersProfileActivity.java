@@ -55,7 +55,7 @@ public class SponcersProfileActivity extends AppCompatActivity {
                     SponsorBean indBean = Utils.getObject(result, SponsorBean.class);
 
                     sponcersName.setText(indBean.getSponcorName());
-                    aboutSponsor.setText(indBean.getSponcorDesc());
+                    aboutSponsor.setText("  "+indBean.getSponcorDesc());
 
 
                 }

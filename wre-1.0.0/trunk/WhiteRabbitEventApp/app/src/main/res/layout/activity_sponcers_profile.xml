@@ -1,59 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="16dp"
     tools:context="com.wre.yin.whiterabbiteventapp.SponcersProfileActivity">
 
-    <RelativeLayout
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_margin="10dp">
 
-        <LinearLayout
-            android:id="@+id/ll1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/sponsor_indi_pic"
-                android:layout_width="120dp"
-                app:civ_border_width="@dimen/circle_width"
-                app:civ_border_color="#000"
-                android:layout_height="120dp"
-                android:src="@drawable/user_icon" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_toRightOf="@+id/sponsor_indi_pic"
-                android:gravity="center_vertical"
-                android:orientation="vertical"
-                android:padding="10dp">
-
-                <TextView
-                    android:id="@+id/sponcers_name_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Sponcers Name" />
-
-                <TextView
-                    android:id="@+id/sponcers_des_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:text="Sponcers Desig" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/about_sponcer_txt"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/ll1"
-            android:layout_marginTop="20dp"
-            android:text="About Sponcers " />
-    </RelativeLayout>
+            android:padding="10dp">
+
+            <LinearLayout
+                android:id="@+id/ll1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/sponsor_indi_pic"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/user_icon"
+                    app:civ_border_color="#000"
+                    app:civ_border_width="@dimen/circle_width" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toRightOf="@+id/sponsor_indi_pic"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/sponcers_name_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sponcers Name" />
+
+                    <TextView
+                        android:id="@+id/sponcers_des_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="Sponcers Desig" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/about_sponcer_txt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/ll1"
+                android:gravity="left"
+                android:layout_marginTop="20dp"
+                android:text="About Sponcers " />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
 </ScrollView>

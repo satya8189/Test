@@ -38,7 +38,7 @@ public class AboutEventActivity extends AppCompatActivity {
             @Override
             public void onResult(String result) {
                 EventBean eventBean = Utils.getObject(result, EventBean.class);
-                descAboutEvent.setText(eventBean.getEventDesc());
+                descAboutEvent.setText("    "+eventBean.getEventDesc());
             }
         }).execute();
 
