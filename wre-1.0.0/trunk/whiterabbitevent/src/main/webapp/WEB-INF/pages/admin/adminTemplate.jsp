@@ -149,8 +149,9 @@
             </div>
           <div class="col-md-12">
            <div class="body-content">
-             <!-- <h3 style="text-align: -webkit-center;">Invite people toEvents</h3> -->
+         
             	<h3 align="center"><u>{{eventName}}</u></h3>
+ 			<!-- <h3 style="text-align: -webkit-center;"> {{event.eventName}}</h3> -->
  			<h3 id="eventName"></h3>
  			 <ng-view></ng-view>
          </div>
