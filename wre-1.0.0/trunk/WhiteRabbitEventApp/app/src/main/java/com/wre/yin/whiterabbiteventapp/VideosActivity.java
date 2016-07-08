@@ -506,21 +506,6 @@ public class VideosActivity extends AppCompatActivity {
 
                 if (fileTpe.equals("video")) {
                     FileInputStream is = null;
-                    /*try {
-                        *//*is = new FileInputStream(vidPath);
-
-                        byte[] byteArr = IOUtils.toByteArray(is);
-                        encodedString = Base64.encodeToString(byteArr, 0);*//*
-
-                        File file = new File(vidPath);
-                        byte[] bytes = loadFile(file);
-                        byte[] encoded = Base64.encodeBase64S(bytes);
-                        encodedString = new String(encoded);
-
-
-                    } catch (IOException ioe) {
-                    }*/
-
                     File originalFile = new File(vidPath);
                     String encodedBase64 = null;
                     try {
