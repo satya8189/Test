@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     >
 
-    <GridView
+    <!--<GridView
         android:id="@+id/new_gridView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -13,6 +13,12 @@
         android:horizontalSpacing="0dp"
         android:padding="5dp"
         android:stretchMode="columnWidth"
-        android:numColumns="2"/>
+        android:numColumns="2"/>-->
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/gallary_grid_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_height="match_parent"/>
 
 </FrameLayout>

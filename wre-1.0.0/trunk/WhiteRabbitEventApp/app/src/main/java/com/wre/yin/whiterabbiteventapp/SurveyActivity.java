@@ -33,13 +33,13 @@ public class SurveyActivity extends AppCompatActivity {
     private List<HashMap<String, String>> listQtns;
     private String partId, eventId;
     SharedPreferences prefs;
-    List<QuestionAnswer> qAndA=new ArrayList<>();
+    List<QuestionAnswer> qAndA = new ArrayList<>();
     private Button submitBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-      //  SurveyActivity.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
+        //  SurveyActivity.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
         setContentView(R.layout.activity_survey);
         String nameTxt = getIntent().getExtras().getString("name");
 
@@ -51,7 +51,7 @@ public class SurveyActivity extends AppCompatActivity {
         prefs = getSharedPreferences("Chat", 0);
         eventId = getIntent().getExtras().getString("eventId");
         partId = prefs.getString("partId", null);
-        submitBtn=(Button)findViewById(R.id.survey_total_submit);
+        submitBtn = (Button) findViewById(R.id.survey_total_submit);
 
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,14 +60,18 @@ public class SurveyActivity extends AppCompatActivity {
                 questionBean.setEventId(Long.parseLong(eventId));
                 questionBean.setParticipantId(Long.parseLong(partId));
                 questionBean.setqAList(qAndA);
-                if(Constants.isNetworkAvailable(SurveyActivity.this)) {
+                if (Constants.isNetworkAvailable(SurveyActivity.this)) {
                     new MyAsyncTask(Constants.QUESTIONS_ANSWER_SAVE, Utils.getJson(questionBean), SurveyActivity.this, new Callback() {
                         @Override
                         public void onResult(String result) {
-                            System.out.println("Result in text:" + result);
+                            String res = Utils.getString("success", result);
+                            if (res != null) {
+                                if (res.equals("success"))
+                                    Constants.createDialogSend(SurveyActivity.this, "success", "You are answers has been submitted successfully... Thank You");
+                            }
                         }
                     }).execute();
-                }else{
+                } else {
                     Constants.createDialogSend(SurveyActivity.this, "error", "Please connect to internet");
                 }
 
@@ -81,23 +85,25 @@ public class SurveyActivity extends AppCompatActivity {
                 public void onResult(String result) {
                     if (result != null) {
                         List<QuestionBean> qustBean = Utils.getList(result, QuestionBean.class);
-                        for (QuestionBean bean : qustBean) {
-                            HashMap<String, String> map1 = new HashMap<String, String>();
-                            map1.put("qtn", bean.getQuestion());
-                            map1.put("typ", bean.getAppIdentifierName());
-                            map1.put("opt1", bean.getOptionA());
-                            map1.put("opt2", bean.getOptionB());
-                            map1.put("opt3", bean.getOptionC());
-                            map1.put("opt4", bean.getOptionD());
-                            map1.put("qtnId", bean.getQuestionId().toString());
-                            listQtns.add(map1);
+                        if (qustBean != null) {
+                            for (QuestionBean bean : qustBean) {
+                                HashMap<String, String> map1 = new HashMap<String, String>();
+                                map1.put("qtn", bean.getQuestion());
+                                map1.put("typ", bean.getAppIdentifierName());
+                                map1.put("opt1", bean.getOptionA());
+                                map1.put("opt2", bean.getOptionB());
+                                map1.put("opt3", bean.getOptionC());
+                                map1.put("opt4", bean.getOptionD());
+                                map1.put("qtnId", bean.getQuestionId().toString());
+                                listQtns.add(map1);
+                            }
                         }
-                    }
-                    RecylerAdapter adapter = new RecylerAdapter(SurveyActivity.this, (ArrayList<HashMap<String, String>>) listQtns);
-                    recyclerView.setAdapter(adapter);
-                    recyclerView.setHasFixedSize(true);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(SurveyActivity.this));
+                        RecylerAdapter adapter = new RecylerAdapter(SurveyActivity.this, (ArrayList<HashMap<String, String>>) listQtns);
+                        recyclerView.setAdapter(adapter);
+                        recyclerView.setHasFixedSize(true);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(SurveyActivity.this));
 
+                    }
                 }
             }).execute();
         } else {
@@ -122,7 +128,7 @@ public class SurveyActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-      //  SurveyActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
+        //  SurveyActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
 
     }
 
@@ -144,7 +150,7 @@ public class SurveyActivity extends AppCompatActivity {
                         Toast.makeText(context, "Please give a answer.. ", Toast.LENGTH_LONG).show();
                     } else {
                         /**/
-                        QuestionAnswer qa=new QuestionAnswer();
+                        QuestionAnswer qa = new QuestionAnswer();
                         qa.setqId(Long.parseLong(map1.get("qtnId")));
                         qa.setAnswer(answer);
                         qAndA.add(qa);
@@ -175,7 +181,7 @@ public class SurveyActivity extends AppCompatActivity {
                             System.out.println("Result in radio:" + result);
                         }
                     }).execute();*/
-                    QuestionAnswer qa=new QuestionAnswer();
+                    QuestionAnswer qa = new QuestionAnswer();
                     qa.setqId(Long.parseLong(map1.get("qtnId")));
                     qa.setAnswer(answer);
                     qAndA.add(qa);

@@ -43,8 +43,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
 public class EmpProfileActivity extends AppCompatActivity {
 
     private ImageView empProfilePic;
@@ -55,7 +53,6 @@ public class EmpProfileActivity extends AppCompatActivity {
     private String partiName, partId, encodedString, partiMobile, partiMail, partAltNumber, partDesig, partOrg, eventId, imgPath, fileName, fileTpe;
     String layoutStatus = "gone";
     private LinearLayout camGalLayout;
-    private CircleImageView camPick, gallPick;
 
     private Uri fileUri;
     public static final int MEDIA_TYPE_IMAGE = 1;
@@ -98,10 +95,6 @@ public class EmpProfileActivity extends AppCompatActivity {
 
         saveUpdateBtn = (Button) findViewById(R.id.save_update_btn);
         profilePic = (Button) findViewById(R.id.edit_profile_pic);
-        camGalLayout = (LinearLayout) findViewById(R.id.upload_profile_image_view);
-
-        camPick = (CircleImageView) findViewById(R.id.profile_camara_link);
-        gallPick = (CircleImageView) findViewById(R.id.profile_gallery_link);
 
         empName.setText(partiName);
         empMail.setText(partiMail);
@@ -158,24 +151,6 @@ public class EmpProfileActivity extends AppCompatActivity {
             }
         });
 
-        camPick.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                captureImage();
-                camGalLayout.setVisibility(View.GONE);
-                layoutStatus = "gone";
-            }
-        });
-        gallPick.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loadImagefromGallery();
-                camGalLayout.setVisibility(View.GONE);
-                layoutStatus = "gone";
-            }
-        });
-
-
         saveUpdateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -192,15 +167,33 @@ public class EmpProfileActivity extends AppCompatActivity {
                     partBean.setPhoneNumber(upadatePartMobile);
                     partBean.setStatus("ACTIVE");
                     // partBean.setLastName("Kumar");
-
                     partBean.setParticipantId(Long.parseLong(partId));
 
-                    new MyAsyncTask(Constants.PARTICIPANT_UPDATE, Utils.getJson(partBean), EmpProfileActivity.this, new Callback() {
-                        @Override
-                        public void onResult(String result) {
-                            Constants.createDialogSend(EmpProfileActivity.this, "success", "Your details saved successfully");
-                        }
-                    }).execute();
+                    if (updatePartiName.equals("")) {
+                        empName.setError("Field cannot be empty");
+                        empName.requestFocus();
+                    } else if (upadatePartMobile.equals("")) {
+                        empMobile.setError("Field cannot be empty");
+                        empMobile.requestFocus();
+                    } else if (updatePartEmail.equals("")) {
+                        empMail.setError("Field cannot be empty");
+                        empMail.requestFocus();
+                    } else {
+                        new MyAsyncTask(Constants.PARTICIPANT_UPDATE, Utils.getJson(partBean), EmpProfileActivity.this, new Callback() {
+                            @Override
+                            public void onResult(String result) {
+                                String res = Utils.getString("result", result);
+                                if (res != null) {
+                                    if (res.equals("success")) {
+                                        Constants.createDialogSend(EmpProfileActivity.this, "success", "Your details saved successfully");
+                                    } else {
+                                        Constants.createDialogSend(EmpProfileActivity.this, "fail", "Please try again later..");
+                                    }
+                                }
+
+                            }
+                        }).execute();
+                    }
                 } else {
                     Constants.createDialogSend(EmpProfileActivity.this, "error", "Please connect to internet");
                 }
@@ -403,8 +396,9 @@ public class EmpProfileActivity extends AppCompatActivity {
                             public void onResult(String result) {
 
                                 System.out.println("Result:" + result);
-                                if (result != null) {
-                                    String res = Utils.getString("result", result);
+
+                                String res = Utils.getString("result", result);
+                                if (res != null) {
                                     if (res.equals("success")) {
                                         Picasso.with(EmpProfileActivity.this).load("http://183.82.103.156:8080/Resources/wre/profile_pics/" + partId + "/profile.jpg").placeholder(R.drawable.user_icon).into(empProfilePic);
                                     }

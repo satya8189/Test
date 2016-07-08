@@ -48,7 +48,7 @@ public class Utils {
     }
 
 
-    public static String getString(final String keyString,final String jsonString) {
+    public static String getString(final String keyString, final String jsonString) {
         JSONObject json = null;
         String res = null;
         try {

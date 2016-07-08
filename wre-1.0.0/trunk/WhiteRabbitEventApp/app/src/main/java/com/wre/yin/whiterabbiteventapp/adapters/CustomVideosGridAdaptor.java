@@ -20,10 +20,10 @@ import java.util.HashMap;
 /**
  * Created by root on 20/6/16.
  */
-public class CustomVideosGridAdaptor extends ArrayAdapter<HashMap<String,String>> {
+public class CustomVideosGridAdaptor extends ArrayAdapter<HashMap<String, String>> {
     Context context;
     int layoutResourceId;
-    ArrayList<HashMap<String,String>> data1 = new ArrayList<HashMap<String,String>>();
+    ArrayList<HashMap<String, String>> data1 = new ArrayList<HashMap<String, String>>();
 
     public CustomVideosGridAdaptor(Context context, int layoutResourceId,
                                    ArrayList<HashMap<String, String>> data) {
@@ -49,7 +49,7 @@ public class CustomVideosGridAdaptor extends ArrayAdapter<HashMap<String,String>
         } else {
             holder = (RecordHolder) row.getTag();
         }
-        HashMap<String,String> resultMap=data1.get(position);
+        HashMap<String, String> resultMap = data1.get(position);
         String videoUrl = resultMap.get("videoUrl");
         Bitmap thumb = null;
         try {
@@ -74,9 +74,10 @@ public class CustomVideosGridAdaptor extends ArrayAdapter<HashMap<String,String>
         ImageView imageItem;
 
     }
-    public  Bitmap retriveVideoFrameFromVideo(String videoPath)
+
+    public Bitmap retriveVideoFrameFromVideo(String videoPath)
             throws Throwable {
-        ProgressDialog dialog = ProgressDialog.show(context,"","", true);
+        ProgressDialog dialog = ProgressDialog.show(context, "", "", true);
         Bitmap bitmap = null;
         MediaMetadataRetriever mediaMetadataRetriever = null;
         try {

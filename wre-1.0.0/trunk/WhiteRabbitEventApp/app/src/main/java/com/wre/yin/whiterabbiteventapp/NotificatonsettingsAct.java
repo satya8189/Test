@@ -27,8 +27,8 @@ public class NotificatonsettingsAct extends AppCompatActivity {
 
         switchStatus = (Switch) findViewById(R.id.switch_status);
 
-        notifyPrefs = getSharedPreferences("notify_status", MODE_PRIVATE);
-        boolean switchState = notifyPrefs.getBoolean("service_status", false);
+        notifyPrefs = getSharedPreferences("Chat", 0);
+        boolean switchState = notifyPrefs.getBoolean("noty_status", true);
         // Toast.makeText(NotificatonsettingsAct.this, "" + switchState, Toast.LENGTH_SHORT).show();
 
         if (switchState) {
@@ -40,9 +40,8 @@ public class NotificatonsettingsAct extends AppCompatActivity {
         switchStatus.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                editor = getSharedPreferences("notify_status", MODE_PRIVATE).edit();
-                editor.putBoolean("service_status", switchStatus.isChecked());
-               // Toast.makeText(NotificatonsettingsAct.this, "" + switchStatus.isChecked(), Toast.LENGTH_SHORT).show();
+                editor = getSharedPreferences("Chat", 0).edit();
+                editor.putBoolean("noty_status", switchStatus.isChecked());
                 editor.commit();
 
                 if (switchStatus.isChecked()) {

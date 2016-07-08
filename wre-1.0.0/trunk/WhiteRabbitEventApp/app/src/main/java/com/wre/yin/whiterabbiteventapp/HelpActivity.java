@@ -25,7 +25,7 @@ public class HelpActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // HelpActivity.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
+        // HelpActivity.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
         setContentView(R.layout.activity_contact_help);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Help");
@@ -77,8 +77,15 @@ public class HelpActivity extends AppCompatActivity {
                                                           @Override
                                                           public void onResult(String result) {
                                                               //  ContactDetailsBean res = Utils.getObject(result, ContactDetailsBean.class);
+                                                              String res = Utils.getString("success", result);
+                                                              if (res != null) {
+                                                                  if (res.equals("success")) {
+                                                                      Constants.createDialogSend(HelpActivity.this, "success", "Your query has been posted successfully.");
+                                                                  } else {
+                                                                      Constants.createDialogSend(HelpActivity.this, "sds", "Please try later...");
+                                                                  }
+                                                              }
 
-                                                              System.out.println("update result" + result);
 
                                                           }
                                                       }).execute();
@@ -107,7 +114,7 @@ public class HelpActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-      //  HelpActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
+        //  HelpActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
 
     }
 }

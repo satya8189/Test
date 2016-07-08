@@ -12,7 +12,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -22,6 +21,7 @@ import com.squareup.picasso.Picasso;
 import com.wre.yin.whiterabbiteventapp.adapters.ChatMessageAdapter;
 import com.wre.yin.whiterabbiteventapp.beans.ChatBean;
 import com.wre.yin.whiterabbiteventapp.beans.ChatMessage;
+import com.wre.yin.whiterabbiteventapp.utils.Constants;
 import com.wre.yin.whiterabbiteventapp.utils.DBHelper;
 import com.wre.yin.whiterabbiteventapp.utils.Utils;
 
@@ -279,7 +279,7 @@ public class MessageActivity extends AppCompatActivity {
                 jObj.put("topic", topicName);
                 jObj.put("eventId", eventId);
 
-                HttpPost post = new HttpPost("http://183.82.103.156:8080/whiterabbitevent/send");
+                HttpPost post = new HttpPost(Constants.SEND_MESSAGE_URL);
                 post.setEntity(new StringEntity(jObj.toString()));
                 httpclient = new DefaultHttpClient();
                 post.setHeader("Accept", "application/json");

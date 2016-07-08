@@ -53,8 +53,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
 public class VideosActivity extends AppCompatActivity {
 
     public static final int MEDIA_TYPE_VIDEO = 1;
@@ -69,7 +67,6 @@ public class VideosActivity extends AppCompatActivity {
     private TextView text;
     private Button uploadVideo;
     private LinearLayout camGalLayout;
-    private CircleImageView camPick, gallPick;
     private Uri fileUri;
     private String vidPath, fileName, fileTpe, encodedString, eventName, partName, fName;
     //flag for which one is used for images selection
@@ -116,19 +113,11 @@ public class VideosActivity extends AppCompatActivity {
         initVideosId();
 
         uploadVideo = (Button) findViewById(R.id.upload_video);
-        camGalLayout = (LinearLayout) findViewById(R.id.upload_video_view);
-        camPick = (CircleImageView) findViewById(R.id.video_camara_link);
-        gallPick = (CircleImageView) findViewById(R.id.video_gallery_link);
+
         uploadVideo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              /*  if (layoutStatus.equals("gone")) {
-                    camGalLayout.setVisibility(View.VISIBLE);
-                    layoutStatus = "visible";
-                } else {
-                    camGalLayout.setVisibility(View.GONE);
-                    layoutStatus = "gone";
-                }*/
+
                 LayoutInflater layoutInflater = LayoutInflater.from(VideosActivity.this);
                 View promptView = layoutInflater.inflate(R.layout.pick_one, null);
 
@@ -170,24 +159,6 @@ public class VideosActivity extends AppCompatActivity {
                 alertD.show();
             }
         });
-        camPick.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                recordVideo();
-                camGalLayout.setVisibility(View.GONE);
-                layoutStatus = "gone";
-            }
-        });
-        gallPick.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loadVideofromGallery();
-                camGalLayout.setVisibility(View.GONE);
-                layoutStatus = "gone";
-            }
-        });
-
-
     }
 
     private AdapterView.OnItemClickListener _itemClickLis = new AdapterView.OnItemClickListener() {

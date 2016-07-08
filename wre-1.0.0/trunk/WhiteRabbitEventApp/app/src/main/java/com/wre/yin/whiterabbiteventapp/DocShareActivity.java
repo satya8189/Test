@@ -68,15 +68,16 @@ public class DocShareActivity extends AppCompatActivity {
                 public void onResult(String result) {
                     docList = new ArrayList<HashMap<String, String>>();
                     List<GalaryBean> docBeanList = Utils.getList(result, GalaryBean.class);
-                    for (GalaryBean bean : docBeanList) {
-                        HashMap<String, String> docMap = new HashMap<String, String>();
-                        docMap.put("docName", bean.getName());
-                        docMap.put("docFileName", Constants.IMAGE_URL + eventId + "/document/" + bean.getFileName());
-                        docList.add(docMap);
+                    if (docBeanList != null) {
+                        for (GalaryBean bean : docBeanList) {
+                            HashMap<String, String> docMap = new HashMap<String, String>();
+                            docMap.put("docName", bean.getName());
+                            docMap.put("docFileName", Constants.IMAGE_URL + eventId + "/document/" + bean.getFileName());
+                            docList.add(docMap);
+                        }
+                        pdfGrid.setAdapter(new CustomAdapter(DocShareActivity.this, (ArrayList<HashMap<String, String>>) docList));
+                        // excelGrid.setAdapter(new CustomAdapter(this, excelDocsNameList, excelDocImage));
                     }
-                    pdfGrid.setAdapter(new CustomAdapter(DocShareActivity.this, (ArrayList<HashMap<String, String>>) docList));
-                    // excelGrid.setAdapter(new CustomAdapter(this, excelDocsNameList, excelDocImage));
-
                 }
             }).execute();
 
@@ -169,7 +170,7 @@ public class DocShareActivity extends AppCompatActivity {
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
                     result = docList1.get(position);
                     builder.setTitle(result.get("docName"));
-                   // builder.setView(R.layout.view_share_down_layout);
+                    // builder.setView(R.layout.view_share_down_layout);
                     builder.setItems(items, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int item) {
                             // Do something with the selection
@@ -186,7 +187,7 @@ public class DocShareActivity extends AppCompatActivity {
                                 Intent sendIntent = new Intent();
                                 sendIntent.setAction(Intent.ACTION_SEND);
                                 // sendIntent.putExtra(Intent.EXTRA_TEXT, "Download document" + "'" + result.get("docFileName") + "'");
-                                sendIntent.putExtra(Intent.EXTRA_TEXT,Uri.parse(result.get("docFileName")));
+                                sendIntent.putExtra(Intent.EXTRA_TEXT, Uri.parse(result.get("docFileName")));
                                 sendIntent.setType("text/plain");
                                 // sendIntent.putExtra(Intent.EXTRA_TEXT , ""+result.get("docFileName") );
                                 startActivity(sendIntent);

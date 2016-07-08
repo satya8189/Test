@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // LoginActivity.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
+        // LoginActivity.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
         setContentView(R.layout.activity_login);
         context = getApplicationContext();
 
@@ -77,8 +77,9 @@ public class LoginActivity extends AppCompatActivity {
                         new MyAsyncTask(Constants.PARTICIPENT_LOGIN, Utils.getJson(participantBean), LoginActivity.this, new Callback() {
                             @Override
                             public void onResult(String result) {
-                                if (result != null) {
-                                    pBean = Utils.getObject(result, ParticipantBean.class);
+
+                                pBean = Utils.getObject(result, ParticipantBean.class);
+                                if (pBean != null) {
                                     if (mobileNum.equals(pBean.getPhoneNumber())) {
                                         editor.putString("name", pBean.getFirstName());
                                         editor.putString("partId", pBean.getParticipantId().toString());

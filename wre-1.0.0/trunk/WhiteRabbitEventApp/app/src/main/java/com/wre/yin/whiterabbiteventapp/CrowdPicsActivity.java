@@ -44,8 +44,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
 public class CrowdPicsActivity extends AppCompatActivity {
 
     public static final int MEDIA_TYPE_IMAGE = 1;
@@ -57,9 +55,8 @@ public class CrowdPicsActivity extends AppCompatActivity {
     private TextView text;
     private Button uploadImage;
     private LinearLayout camGalLayout;
-    private CircleImageView camPick, gallPick;
     private Uri fileUri;
-    private String eventId,imgPath, fileName, fileTpe, encodedString,eventName,partName,fName;
+    private String eventId, imgPath, fileName, fileTpe, encodedString, eventName, partName, fName;
     private GalleryUtils utils;
     private ArrayList<String> imagePaths = new ArrayList<String>();
     private GridViewImageAdapter adapter;
@@ -69,36 +66,27 @@ public class CrowdPicsActivity extends AppCompatActivity {
     private SharedPreferences prefs;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // CrowdPicsActivity.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
+        // CrowdPicsActivity.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
 
         setContentView(R.layout.activity_crowd_pics);
 
         String nameTxt = getIntent().getExtras().getString("name");
         prefs = getSharedPreferences("Chat", 0);
-        partName=prefs.getString("name", null);
-        eventName=prefs.getString("eventName", null);
+        partName = prefs.getString("name", null);
+        eventName = prefs.getString("eventName", null);
 
         prgDialog = new ProgressDialog(this);
         prgDialog.setCancelable(false);
         eventId = getIntent().getExtras().getString("eventId");
         uploadImage = (Button) findViewById(R.id.upload_image);
-        camGalLayout = (LinearLayout) findViewById(R.id.upload_image_view);
-        camPick = (CircleImageView) findViewById(R.id.camara_link);
-        gallPick = (CircleImageView) findViewById(R.id.gallery_link);
+
         uploadImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              /*  if (layoutStatus.equals("gone")) {
-                    camGalLayout.setVisibility(View.VISIBLE);
-                    layoutStatus = "visible";
-                } else {
-                    camGalLayout.setVisibility(View.GONE);
-                    layoutStatus = "gone";
-                }*/
+
                 LayoutInflater layoutInflater = LayoutInflater.from(CrowdPicsActivity.this);
                 View promptView = layoutInflater.inflate(R.layout.pick_one, null);
 
@@ -140,22 +128,6 @@ public class CrowdPicsActivity extends AppCompatActivity {
             }
         });
 
-        camPick.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                captureImage();
-                camGalLayout.setVisibility(View.GONE);
-                layoutStatus = "gone";
-            }
-        });
-        gallPick.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loadImagefromGallery();
-                camGalLayout.setVisibility(View.GONE);
-                layoutStatus = "gone";
-            }
-        });
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(nameTxt);
@@ -263,9 +235,9 @@ public class CrowdPicsActivity extends AppCompatActivity {
                     imgPath = fileUri.getPath();
                     String fileNameSegments[] = imgPath.split("/");
                     fileName = fileNameSegments[fileNameSegments.length - 1];
-                    String fileNameSeg[]=fileName.split("-");
+                    String fileNameSeg[] = fileName.split("-");
 
-                    fName=eventName+"-"+partName+"-"+fileNameSeg[1]+"-"+new SimpleDateFormat("HHmmss",
+                    fName = eventName + "-" + partName + "-" + fileNameSeg[1] + "-" + new SimpleDateFormat("HHmmss",
                             Locale.getDefault()).format(new Date());
                     // Put file name in Async Http Post Param which will used in Java web app
                     //params.put("filename", fileName);
@@ -313,8 +285,8 @@ public class CrowdPicsActivity extends AppCompatActivity {
                     String fileNameSegments[] = imgPath.split("/");
                     fileName = fileNameSegments[fileNameSegments.length - 1];
 
-                   // String fileNameSeg[]=fileName.split("-");
-                    fName=eventName+"-"+partName+"-"+fileName+"-"+new SimpleDateFormat("HHmmss",
+                    // String fileNameSeg[]=fileName.split("-");
+                    fName = eventName + "-" + partName + "-" + fileName + "-" + new SimpleDateFormat("HHmmss",
                             Locale.getDefault()).format(new Date());
                     uploadImageFromCam();
                     // Put file name in Async Http Post Param which will used in Java web app
@@ -396,11 +368,13 @@ public class CrowdPicsActivity extends AppCompatActivity {
                     if (Constants.isNetworkAvailable(CrowdPicsActivity.this)) {
                         new MyAsyncTask(Constants.UPLOAD_IMAGE_VIDEO, Utils.getJson(uploadImgVid), CrowdPicsActivity.this, new Callback() {
                             public void onResult(String result) {
-                            String res=Utils.getString("result",result);
-                                if(res.equals("success")){
-                                    Constants.createDialogSend(CrowdPicsActivity.this, "success", "Your image has been upload successfully.");
-                                }else{
-                                    Constants.createDialogSend(CrowdPicsActivity.this,"fail","Something went wrong please try again..");
+                                String res = Utils.getString("result", result);
+                                if (res != null) {
+                                    if (res.equals("success")) {
+                                        Constants.createDialogSend(CrowdPicsActivity.this, "success", "Your image has been upload successfully.");
+                                    } else {
+                                        Constants.createDialogSend(CrowdPicsActivity.this, "fail", "Something went wrong please try again..");
+                                    }
                                 }
                             }
                         }).execute();
@@ -429,7 +403,7 @@ public class CrowdPicsActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-     //   CrowdPicsActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
+        //   CrowdPicsActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
 
     }
 }

@@ -39,7 +39,7 @@ public class SponcersActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-      //  SponcersActivity.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
+        //  SponcersActivity.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
         setContentView(R.layout.activity_sponcers);
 
         String nameTxt = getIntent().getExtras().getString("name");
@@ -65,19 +65,20 @@ public class SponcersActivity extends AppCompatActivity {
                     if (result != null)
                         sponsorList = new ArrayList<HashMap<String, String>>();
                     List<SponsorBean> sponsorBeanList = Utils.getList(result, SponsorBean.class);
+                    if (sponsorBeanList != null) {
+                        for (SponsorBean bean : sponsorBeanList) {
+                            HashMap<String, String> map = new HashMap<String, String>();
+                            map.put("sponsorName", bean.getSponcorName());
+                            map.put("sponsorId", bean.getSponcorId().toString());
+                            map.put("sponsorUrl", Constants.IMAGE_URL + eventId + "/sponsor/" + bean.getFileName());
 
-                    for (SponsorBean bean : sponsorBeanList) {
-                        HashMap<String, String> map = new HashMap<String, String>();
-                        map.put("sponsorName", bean.getSponcorName());
-                        map.put("sponsorId", bean.getSponcorId().toString());
-                        map.put("sponsorUrl", Constants.IMAGE_URL + eventId + "/sponsor/" + bean.getFileName());
+                            sponsorList.add(map);
 
-                        sponsorList.add(map);
+                        }
+                        rcAdapter = new RecyclerViewAdapter(SponcersActivity.this, (ArrayList<HashMap<String, String>>) sponsorList);
 
+                        rView.setAdapter(rcAdapter);
                     }
-                    rcAdapter = new RecyclerViewAdapter(SponcersActivity.this, (ArrayList<HashMap<String, String>>) sponsorList);
-
-                    rView.setAdapter(rcAdapter);
                 }
             }).execute();
         } else {
@@ -85,6 +86,7 @@ public class SponcersActivity extends AppCompatActivity {
         }
 
     }
+
     ItemTouchHelper.Callback _ithCallback = new ItemTouchHelper.Callback() {
 
         public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
@@ -108,6 +110,7 @@ public class SponcersActivity extends AppCompatActivity {
         }
     };
     private RecyclerView rView;
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -122,7 +125,7 @@ public class SponcersActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-       // SponcersActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
+        // SponcersActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
 
     }
 
@@ -156,6 +159,7 @@ public class SponcersActivity extends AppCompatActivity {
             Picasso.with(context).load(maps.get("sponsorUrl")).into(holder.sponsorPhoto);
             holder.sponsorPhoto.setTag(holder);
         }
+
         View.OnClickListener clickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {

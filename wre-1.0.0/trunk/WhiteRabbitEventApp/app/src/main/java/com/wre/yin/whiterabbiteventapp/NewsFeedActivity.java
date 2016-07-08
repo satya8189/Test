@@ -30,7 +30,7 @@ public class NewsFeedActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // NewsFeedActivity.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
+        // NewsFeedActivity.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
         setContentView(R.layout.activity_news_feed);
         String nameTxt = getIntent().getExtras().getString("name");
         String eventId = getIntent().getExtras().getString("eventId");
@@ -44,27 +44,28 @@ public class NewsFeedActivity extends AppCompatActivity {
             new MyAsyncTask(Constants.NEWS_LIST + "?eventId=" + eventId, null, NewsFeedActivity.this, new Callback() {
                 @Override
                 public void onResult(String result) {
-                    if (result != null)
-                        newsList = new ArrayList<HashMap<String, String>>();
+
+                    newsList = new ArrayList<HashMap<String, String>>();
                     List<NewsFeedBean> newsBeanList = Utils.getList(result, NewsFeedBean.class);
-
-                    for (NewsFeedBean bean : newsBeanList) {
-                        HashMap<String, String> map = new HashMap<String, String>();
-                        map.put("newsTitle", bean.getNewsTitle());
-                        map.put("newsDesc", bean.getNewsDesc());
-
-
-                        String newsDate = Utils.getDateFromJson(bean.getNewsDate(), "full");
-                        map.put("newsDate", newsDate);
+                    if (newsBeanList != null) {
+                        for (NewsFeedBean bean : newsBeanList) {
+                            HashMap<String, String> map = new HashMap<String, String>();
+                            map.put("newsTitle", bean.getNewsTitle());
+                            map.put("newsDesc", bean.getNewsDesc());
 
 
-                        newsList.add(map);
+                            String newsDate = Utils.getDateFromJson(bean.getNewsDate(), "full");
+                            map.put("newsDate", newsDate);
 
+
+                            newsList.add(map);
+
+                        }
+                        RecyclerAdapter adapter = new RecyclerAdapter(NewsFeedActivity.this, (ArrayList<HashMap<String, String>>) newsList);
+                        recyclerView.setAdapter(adapter);
+                        recyclerView.setHasFixedSize(true);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(NewsFeedActivity.this));
                     }
-                    RecyclerAdapter adapter = new RecyclerAdapter(NewsFeedActivity.this, (ArrayList<HashMap<String, String>>) newsList);
-                    recyclerView.setAdapter(adapter);
-                    recyclerView.setHasFixedSize(true);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(NewsFeedActivity.this));
                 }
             }).execute();
         } else {
@@ -87,7 +88,7 @@ public class NewsFeedActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-       // NewsFeedActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
+        // NewsFeedActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
     }
 
     private class RecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerViewHolder> {

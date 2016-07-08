@@ -49,6 +49,9 @@ public class NewGalleryAdapter extends ArrayAdapter<GridItem> {
     public View getView(final int position, View convertView, ViewGroup parent) {
         View row = convertView;
         final ViewHolder holder;
+        TextView titleTextView;
+        ResizableImageView imageView;
+        ImageView likeImage;
 
         if (row == null) {
             LayoutInflater inflater = ((Activity) mContext).getLayoutInflater();
@@ -56,13 +59,18 @@ public class NewGalleryAdapter extends ArrayAdapter<GridItem> {
             holder = new ViewHolder();
             holder.titleTextView = (TextView) row.findViewById(R.id.gall_like_count);
             holder.imageView = (ResizableImageView) row.findViewById(R.id.grid_item_image);
-            holder.likeImage=(ImageView)row.findViewById(R.id.gall_like_heart);
+            holder.likeImage = (ImageView) row.findViewById(R.id.gall_like_heart);
             row.setTag(holder);
         } else {
             holder = (ViewHolder) row.getTag();
         }
 
         GridItem item = mGridData.get(position);
+        holder.titleTextView.setText(item.getLikeCount());
+        if (item.getLikeStatus() != null) {
+            holder.likeImage.setImageResource(R.drawable.full);
+            holder.titleTextView.setTextColor(Color.parseColor("#FFC400"));
+        }
         //holder.titleTextView.setText(Html.fromHtml(item.getTitle()));
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +78,7 @@ public class NewGalleryAdapter extends ArrayAdapter<GridItem> {
                 GridItem item = mGridData.get(position);
                 holder.likeImage.setImageResource(R.drawable.full);
                 holder.titleTextView.setTextColor(Color.parseColor("#FFC400"));
+                holder.titleTextView.setText(item.getLikeCount());
 
             }
         });

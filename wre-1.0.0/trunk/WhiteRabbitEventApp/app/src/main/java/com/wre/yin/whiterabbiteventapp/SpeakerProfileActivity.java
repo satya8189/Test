@@ -38,7 +38,7 @@ public class SpeakerProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // SpeakerProfileActivity.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
+        // SpeakerProfileActivity.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
         setContentView(R.layout.activity_speaker_profile);
 
         String nameTxt = getIntent().getExtras().getString("name");
@@ -60,22 +60,23 @@ public class SpeakerProfileActivity extends AppCompatActivity {
             new MyAsyncTask(Constants.SPEAKERS_LIST + "?eventId=" + eventId, null, SpeakerProfileActivity.this, new Callback() {
                 @Override
                 public void onResult(String result) {
-                    if (result != null)
-                        speakersList = new ArrayList<HashMap<String, String>>();
+
+                    speakersList = new ArrayList<HashMap<String, String>>();
                     List<SpeakerBean> speakerBeenList = Utils.getList(result, SpeakerBean.class);
+                    if (speakerBeenList != null) {
+                        for (SpeakerBean bean : speakerBeenList) {
+                            HashMap<String, String> map = new HashMap<String, String>();
+                            map.put("speakersName", bean.getSpeakerName());
+                            map.put("speakerId", bean.getSpeakerId().toString());
+                            map.put("speakerUrl", Constants.IMAGE_URL + eventId + "/speaker/" + bean.getFileName());
 
-                    for (SpeakerBean bean : speakerBeenList) {
-                        HashMap<String, String> map = new HashMap<String, String>();
-                        map.put("speakersName", bean.getSpeakerName());
-                        map.put("speakerId", bean.getSpeakerId().toString());
-                        map.put("speakerUrl", Constants.IMAGE_URL + eventId + "/speaker/" + bean.getFileName());
+                            speakersList.add(map);
 
-                        speakersList.add(map);
+                        }
+                        rcAdapter = new RecyclerViewAdapter(SpeakerProfileActivity.this, (ArrayList<HashMap<String, String>>) speakersList);
 
+                        rView.setAdapter(rcAdapter);
                     }
-                    rcAdapter = new RecyclerViewAdapter(SpeakerProfileActivity.this, (ArrayList<HashMap<String, String>>) speakersList);
-
-                    rView.setAdapter(rcAdapter);
                 }
             }).execute();
         } else {
@@ -120,7 +121,7 @@ public class SpeakerProfileActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-     //   SpeakerProfileActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
+        //   SpeakerProfileActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
 
     }
 

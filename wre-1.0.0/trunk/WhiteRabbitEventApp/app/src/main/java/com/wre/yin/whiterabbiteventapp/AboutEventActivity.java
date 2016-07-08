@@ -22,23 +22,24 @@ public class AboutEventActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // AboutEventActivity.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
+        // AboutEventActivity.this.overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
         setContentView(R.layout.activity_about_event);
 
         String nameTxt = getIntent().getExtras().getString("name");
         descAboutEvent = (TextView) findViewById(R.id.event_details_text);
-        imageView=(ImageView)findViewById(R.id.about_event_image) ;
+        imageView = (ImageView) findViewById(R.id.about_event_image);
         eventId = getIntent().getExtras().getString("eventId");
-        Picasso.with(getApplicationContext()).load(Constants.IMAGE_URL +eventId + "/event_home/home.png").placeholder(R.drawable.user_icon).into(imageView);
+        Picasso.with(getApplicationContext()).load(Constants.IMAGE_URL + eventId + "/event_home/home.png").placeholder(R.drawable.user_icon).into(imageView);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(nameTxt);
 
-        new MyAsyncTask(Constants.ABOUT_EVENT + eventId+"&type=app", null, AboutEventActivity.this, new Callback() {
+        new MyAsyncTask(Constants.ABOUT_EVENT + eventId + "&type=app", null, AboutEventActivity.this, new Callback() {
             @Override
             public void onResult(String result) {
                 EventBean eventBean = Utils.getObject(result, EventBean.class);
-                descAboutEvent.setText("    "+eventBean.getEventDesc());
+                if (eventBean != null)
+                    descAboutEvent.setText("    " + eventBean.getEventDesc());
             }
         }).execute();
 
@@ -68,7 +69,7 @@ public class AboutEventActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-      //  AboutEventActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
+        //  AboutEventActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
 
     }
 }
