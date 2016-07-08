@@ -77,9 +77,9 @@ public class HelpActivity extends AppCompatActivity {
                                                           @Override
                                                           public void onResult(String result) {
                                                               //  ContactDetailsBean res = Utils.getObject(result, ContactDetailsBean.class);
-                                                              String res = Utils.getString("success", result);
-                                                              if (res != null) {
-                                                                  if (res.equals("success")) {
+
+                                                              if (result != null) {
+                                                                  if (result.equals("success")) {
                                                                       Constants.createDialogSend(HelpActivity.this, "success", "Your query has been posted successfully.");
                                                                   } else {
                                                                       Constants.createDialogSend(HelpActivity.this, "sds", "Please try later...");

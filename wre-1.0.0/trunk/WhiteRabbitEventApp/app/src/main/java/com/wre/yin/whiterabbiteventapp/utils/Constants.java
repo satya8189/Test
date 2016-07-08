@@ -73,7 +73,7 @@ public class Constants {
     public static final String ATTENDENCE_STATUS = URL + "getEventParticipantStatus?eventId=";
     public static final String SPEAKER_QUERY = URL + "participantQueriesSave";
     public static final String SOCIAL_MEDIA_IDS = URL + "getSocialMediaList?eventId=";
-    public static final String PROFILE_PIC_UPLOAD = URL + "profileUpload";
+    public static final String PROFILE_PIC_UPLOAD = URL + "profilePicUpload";
     public static final String SPEAKER_RATING = URL + "saveUserRating";
     public static final String CHAT_TOPICS_LIST = URL + "chatTopicList?eventId=";
     public static final String IMAGE_LIST = URL + "galaryImageList?eventId=";

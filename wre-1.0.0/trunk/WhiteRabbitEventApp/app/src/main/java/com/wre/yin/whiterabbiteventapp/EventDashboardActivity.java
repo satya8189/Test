@@ -56,6 +56,7 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
 
     private List<String> galleryList;
     private SharedPreferences prefs;
+    SharedPreferences.Editor editor;
 
 
     @Override
@@ -84,6 +85,7 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
         eventId = prefs.getString("eventId", null);
         eventDate = prefs.getString("eventDate", null);
         eventName = prefs.getString("eventName", null);
+        editor = prefs.edit();
         if (Constants.checkAndRequestPermissions(this)) {
         }
         /*eventId = getIntent().getExtras().getString("eventId");
@@ -98,6 +100,16 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
         eventIdTxt.setText(eventName);
         eventDateTime = (TextView) findViewById(R.id.event_time_date);
         eventDateTime.setText(eventDate);
+        attendStatus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent detailsAct = new Intent(EventDashboardActivity.this, DetailsActivity.class);
+                detailsAct.putExtra("name", "Invite");
+                detailsAct.putExtra("eventId", eventId);
+                startActivity(detailsAct);
+                finish();
+            }
+        });
         if (Constants.isNetworkAvailable(EventDashboardActivity.this)) {
             new MyAsyncTask(Constants.ATTENDENCE_STATUS + eventId + "&participantId=" + partId, null, EventDashboardActivity.this, new Callback() {
                 @Override
@@ -106,6 +118,8 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
                     if (result != null)
                         if (result.equals("Yes")) {
                             attendStatus.setText("I will attend");
+                            editor.putString("statusYes","Yes");
+                            editor.commit();
                             attendStatus.setTextColor(Color.BLUE);
                         } else if (result.equals("No")) {
                             attendStatus.setText("I will not attend");
@@ -130,7 +144,9 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
                 public void onResult(String result) {
 
                     List<ParticipantEventBean> participantEventBeanList = Utils.getList(result, ParticipantEventBean.class);
-                    noOfParticipanta.setText("Users " + participantEventBeanList.size());
+                    if(participantEventBeanList!=null) {
+                        noOfParticipanta.setText("Users " + participantEventBeanList.size());
+                    }
 
                 }
             }).execute();

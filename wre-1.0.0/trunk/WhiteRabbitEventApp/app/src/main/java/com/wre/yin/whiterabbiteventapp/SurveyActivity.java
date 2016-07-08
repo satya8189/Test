@@ -64,9 +64,9 @@ public class SurveyActivity extends AppCompatActivity {
                     new MyAsyncTask(Constants.QUESTIONS_ANSWER_SAVE, Utils.getJson(questionBean), SurveyActivity.this, new Callback() {
                         @Override
                         public void onResult(String result) {
-                            String res = Utils.getString("success", result);
-                            if (res != null) {
-                                if (res.equals("success"))
+
+                            if (result != null) {
+                                if (result.equals("success"))
                                     Constants.createDialogSend(SurveyActivity.this, "success", "You are answers has been submitted successfully... Thank You");
                             }
                         }
@@ -154,7 +154,7 @@ public class SurveyActivity extends AppCompatActivity {
                         qa.setqId(Long.parseLong(map1.get("qtnId")));
                         qa.setAnswer(answer);
                         qAndA.add(qa);
-
+                        Toast.makeText(context,"Save",Toast.LENGTH_LONG).show();
                     }
                 } else {
                     int index = vholder.rdGrp.getCheckedRadioButtonId();
@@ -185,6 +185,7 @@ public class SurveyActivity extends AppCompatActivity {
                     qa.setqId(Long.parseLong(map1.get("qtnId")));
                     qa.setAnswer(answer);
                     qAndA.add(qa);
+                    Toast.makeText(context,"Save",Toast.LENGTH_LONG).show();
                 }
 
             }
