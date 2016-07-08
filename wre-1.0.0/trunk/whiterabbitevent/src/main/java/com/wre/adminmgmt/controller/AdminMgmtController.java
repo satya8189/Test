@@ -1148,12 +1148,16 @@ public class AdminMgmtController {
 
 			log.info("in generateQR Code..");
 			String myCodeText = inviteBean.getEventName() + ","
-					+ inviteBean.getPhone() + "," + inviteBean.getFirstName() + ""
+					+ inviteBean.getPhone()+","+inviteBean.getFirstName() + ""
 					+ inviteBean.getLastName();
 			String filePath = WREConstants.RESOURCE_PATH + inviteBean.getEventId()
-					+ WREConstants.FILE_SEPARATER + inviteBean.getParticipantId()
-					+ WREConstants.FILE_SEPARATER + "QR.png";
-
+					+ WREConstants.FILE_SEPARATER + inviteBean.getParticipantId();
+					
+			 File uploadfile=new File(filePath);
+			if (!uploadfile.exists()) {
+				uploadfile.mkdirs();
+			}
+			filePath=filePath+WREConstants.FILE_SEPARATER+"QR.png";
 			int size = 250;
 			String fileType = "png";
 			File myFile = new File(filePath);
