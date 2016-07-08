@@ -24,6 +24,7 @@ var ClientEventCreateController = function($scope, $http, $routeParams,$location
 	
 	
 	$scope.saveEvent = function(event){
+	
 		var type='event_home';
 		$scope.disabled=true;
 		$("#uploadDivError").hide();

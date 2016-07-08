@@ -3,15 +3,19 @@
  */
  var ClientEventEditController = function($scope,$routeParams,$http,$location,ngNotifier){
 	 $scope.servicesList = {};
+	 $scope.array = [];
 	 $scope.eventId =$routeParams.eventId; 
 	$scope.$on('$routeChangeSuccess', function() {
 		
 	 $http.get('systemadmin/servicesList').success(function(servicesList){
 			$scope.servicesList = servicesList ;
+
 		});
 	 
 	 $http.get('systemadmin/editEvent?eventId='+$routeParams.eventId).success(function(event) {
 		   $scope.event=event;
+		 
+		   
 		    });
 	 
 	 $scope.updateEvent = function(event){
