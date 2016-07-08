@@ -1,8 +1,12 @@
 package com.wre.systemadminmgmt.controller;
 import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -285,14 +289,19 @@ public class SystemAdminMgmtController{
 			
 			@RequestMapping(value="/participantlogin",method=RequestMethod.POST)
 			public @ResponseBody ParticipantBean participantLogin(@RequestBody ParticipantBean participantBean){
-				ParticipantBean bean=systemAdminMgmtService.getParticipantDetails(participantBean);
-				log.info("we are in getParticipantDetails");
-				if(bean.getParticipantId()!=null){
-					adminMgmtService.generateOTP(bean);
-				 adminMgmtService.sendingOTP(participantBean);
+				ParticipantBean pbean=null;
+				 pbean=systemAdminMgmtService.getParticipantDetails(participantBean);
+				/*log.info("we are in getParticipantDetails");
+				if(pbean!=null){
+				String otp	=adminMgmtService.generateOTP(pbean);
+				pbean.setOTP(otp);
+				 adminMgmtService.sendingOTP(pbean);
 					log.info("we are in generateOTP");
-				}
-				return bean;
+
+				}*/
+				
+			
+				return pbean;
 				
 			}
 			
@@ -302,6 +311,30 @@ public class SystemAdminMgmtController{
 				return "systemadmin/serviceView";
 				
 			}
+
+		
+			@RequestMapping(value="systemadmin/sendSMS")
+		    public  String sendSMS(@RequestParam("message") String message,@RequestParam("mobileNumber") String mobileNumber,@RequestParam("sender") String sender) {
+		      String res="success";
+		      String messagedata;
+		    	String s[]=message.split(",");
+		    	  messagedata="Dear";
+		    System.out.println("message--"+messagedata);
+		     
+		    	  String sms_url="http://bulksmsapps.com/apisms.aspx?user=surenganne&password=Ganne@2013&genkey=758742187&sender="+sender+"&message="+messagedata+"&number="+mobileNumber;
+		          URL url;
+		          try {
+		              url = new URL(sms_url);
+		              InputStream is = url.openConnection().getInputStream();
+		              BufferedReader reader = new BufferedReader( new InputStreamReader( is )  );
+		              reader.close();
+		          } catch (Exception e) {
+		              System.err.println(e);
+		             res="fail";
+		          }
+		          System.out.println("message send successfully");
+		          return "{\"result\":\"" + res + "\"}";
+		    }
 			
 			
 }
