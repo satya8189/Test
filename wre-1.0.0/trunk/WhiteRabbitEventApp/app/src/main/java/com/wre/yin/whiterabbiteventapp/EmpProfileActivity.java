@@ -52,7 +52,7 @@ public class EmpProfileActivity extends AppCompatActivity {
 
     private SharedPreferences prefs;
     private String partiName, partId, encodedString, partiMobile, partiMail, partAltNumber, partDesig, partOrg, eventId, imgPath, fileName, fileTpe;
-    String layoutStatus = "gone";
+    String layoutStatus = "gone",homeAct,backEvent;
     private LinearLayout camGalLayout;
 
     private Uri fileUri;
@@ -61,7 +61,6 @@ public class EmpProfileActivity extends AppCompatActivity {
     private static int RESULT_LOAD_IMG = 1;
     ProgressDialog prgDialog;
     Bitmap bitmap;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,9 +79,12 @@ public class EmpProfileActivity extends AppCompatActivity {
 
         partId = prefs.getString("partId", null);
         eventId = prefs.getString("eventId", null);
+        backEvent=prefs.getString("back",null);
         prgDialog = new ProgressDialog(this);
         prgDialog.setCancelable(false);
         empProfilePic = (ImageView) findViewById(R.id.emp_profile_image);
+
+//         homeAct=getIntent().getExtras().getString("home");
         // eventId = getIntent().getExtras().getString("eventId");
         if(Constants.isNetworkAvailable(EmpProfileActivity.this)) {
 
@@ -444,9 +446,6 @@ public class EmpProfileActivity extends AppCompatActivity {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
                 onBackPressed();
-                Intent in=new Intent(EmpProfileActivity.this,HomeActivity.class);
-                startActivity(in);
-                finish();
                 break;
 
             case R.id.action_settings:
@@ -467,9 +466,18 @@ public class EmpProfileActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent i=new Intent(EmpProfileActivity.this,HomeActivity.class);
-        startActivity(i);
+        if(backEvent.equals("home")) {
+            Intent i = new Intent(EmpProfileActivity.this, HomeActivity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(i);
+            finish();
+        }else{
+            Intent i = new Intent(EmpProfileActivity.this, EventDashboardActivity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(i);
+            finish();
+        }
         //   EmpProfileActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
-        finish();
+
     }
 }

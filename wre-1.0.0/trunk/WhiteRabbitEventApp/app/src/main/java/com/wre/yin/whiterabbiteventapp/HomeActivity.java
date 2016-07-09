@@ -1,5 +1,7 @@
 package com.wre.yin.whiterabbiteventapp;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -95,7 +97,9 @@ public class HomeActivity extends AppCompatActivity implements BaseSliderView.On
                 if (Constants.isNetworkAvailable(HomeActivity.this)) {
 
                     Intent profDetailsAct = new Intent(HomeActivity.this, EmpProfileActivity.class);
-
+                   // profDetailsAct.putExtra("home","home");
+                    editor.putString("back","home");
+                    editor.commit();
                     startActivity(profDetailsAct);
                     finish();
                 } else {
@@ -219,7 +223,7 @@ boolean doubleBackToExitPressedOnce=false;
     @Override
     public void onBackPressed() {
 
-        if (doubleBackToExitPressedOnce) {
+       /* if (doubleBackToExitPressedOnce) {
             super.onBackPressed();
             return;
         }
@@ -233,7 +237,16 @@ boolean doubleBackToExitPressedOnce=false;
             public void run() {
                 doubleBackToExitPressedOnce=false;
             }
-        }, 2000);
+        }, 2000);*/
+        new AlertDialog.Builder(this)
+                .setTitle("Really Exit?")
+                .setMessage("Are you sure you want to exit?")
+                .setNegativeButton(android.R.string.no, null)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        HomeActivity.super.onBackPressed();
+                    }
+                }).create().show();
     }
 }

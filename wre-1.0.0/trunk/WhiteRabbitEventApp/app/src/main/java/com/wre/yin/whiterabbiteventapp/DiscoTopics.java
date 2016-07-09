@@ -78,7 +78,6 @@ public class DiscoTopics extends AppCompatActivity {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
                 onBackPressed();
-                finish();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -87,6 +86,9 @@ public class DiscoTopics extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        Intent i=new Intent(DiscoTopics.this,EventDashboardActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(i);
         finish();
         //  DiscoTopics.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
 

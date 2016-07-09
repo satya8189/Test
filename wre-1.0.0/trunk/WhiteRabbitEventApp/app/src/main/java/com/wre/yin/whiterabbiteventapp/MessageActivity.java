@@ -205,14 +205,14 @@ public class MessageActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
-                LocalBroadcastManager.getInstance(MessageActivity.this).unregisterReceiver(onNotice);
+            /*    LocalBroadcastManager.getInstance(MessageActivity.this).unregisterReceiver(onNotice);
                 SharedPreferences.Editor edit = prefs.edit();
                 edit.putString("current_status", "");
                 edit.putString("current_topic", "");
                 edit.commit();
                 Intent i = new Intent(MessageActivity.this, DiscoTopics.class);
                 i.putExtra("eventId", eventId);
-                startActivity(i);
+                startActivity(i);*/
                 onBackPressed();
                 return true;
         }
@@ -244,6 +244,7 @@ public class MessageActivity extends AppCompatActivity {
         Intent i = new Intent(MessageActivity.this, DiscoTopics.class);
         i.putExtra("eventId", eventId);
         startActivity(i);
+        finish();
     }
 
     private StringBuilder inputStreamToString(InputStream is) {

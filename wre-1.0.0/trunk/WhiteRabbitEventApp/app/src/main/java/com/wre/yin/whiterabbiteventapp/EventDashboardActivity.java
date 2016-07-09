@@ -295,6 +295,9 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
                                             Intent qaAct = new Intent(EventDashboardActivity.this, EmpProfileActivity.class);
                                             qaAct.putExtra("name", name);
                                             qaAct.putExtra("eventId", eventId);
+                                           // qaAct.putExtra("home","dash");
+                                            editor.putString("back","dash");
+                                            editor.commit();
                                             startActivity(qaAct);
                                             break;
                                         case 8:
@@ -470,7 +473,6 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
                 onBackPressed();
-                finish();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -479,6 +481,9 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        Intent i=new Intent(EventDashboardActivity.this,HomeActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(i);
         //  EventDashboardActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
         finish();
     }
@@ -521,15 +526,5 @@ public class EventDashboardActivity extends AppCompatActivity implements BaseSli
         );
         AppIndex.AppIndexApi.end(client, viewAction);
         client.disconnect();
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        //  EventDashboardActivity.this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
-        /*Intent refresh = new Intent(EventDashboardActivity.this, EventDashboardActivity.class);
-
-        startActivity(refresh);
-        this.finish();*/
     }
 }
