@@ -298,8 +298,6 @@ public class DetailsActivity extends AppCompatActivity {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
                 onBackPressed();
-                Intent i = new Intent(DetailsActivity.this, EventDashboardActivity.class);
-                startActivity(i);
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -309,7 +307,9 @@ public class DetailsActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         Intent i = new Intent(DetailsActivity.this, EventDashboardActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
+        finish();
     }
 
     // Fetches data from url passed
