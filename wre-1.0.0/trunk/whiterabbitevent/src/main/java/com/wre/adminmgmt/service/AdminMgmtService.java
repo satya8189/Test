@@ -172,4 +172,6 @@ public void updateChatTopic(Long chatTopicId, Long eventId, MultipartFile file,
 public List<GalaryBean> galaryImageList(Long eventId, String type,
 		Long paticipantId);
 
+public void galleryImageStatusSave(GalaryBean galaryBean);
+
 }
