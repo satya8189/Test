@@ -1396,6 +1396,11 @@ public class AdminMgmtController {
 
  		return galaryList;
  	}
+ 	@RequestMapping(value = "admin/galleryImageStatusSave", method = RequestMethod.POST)
+	public @ResponseBody void galleryImageStatusSave(@RequestBody GalaryBean galaryBean) {
+	adminMgmtService.galleryImageStatusSave(galaryBean);
+	}
+
  	
  	
 }
