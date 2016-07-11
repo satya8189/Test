@@ -34,7 +34,7 @@
 <div>&nbsp;</div>
 				<ul style="list-style:none;height: 200px;overflow: scroll;">
 				<li ng-repeat="data in servicesList" > {{data.serviceName}} <input type="checkbox" class="pull-right" checklist-model="event.services" 
-							checklist-value="data.serviceId" name="serviceProvided" ng-required="true"/></li>
+							checklist-value="data.serviceId" name="serviceProvided" /></li>
 				</ul>
 			
 					<div ng-if="ipForm.$submitted" ng-messages="ipForm.serviceProvided.$error" ng-messages-include="errors">
@@ -79,9 +79,10 @@
   
   <div class="form-group">
  <label> EventTime</label>
-						<input type="text" class="input-text form-control" id="eventTime" placeholder="eventTime" 
-							ng-model="event.eventTime" name="eventTime" required/>
+						<input type="text" class="input-text form-control" id="eventTime" placeholder="00:00 am/pm" 
+							ng-model="event.eventTime" name="eventTime" ng-pattern="/^([0-1]?[0-9]|2[0-3]):[0-5][0-9] [APap][mM]$/" required/>
 							<div ng-if="ipForm.$submitted" ng-messages="ipForm.eventTime.$error" ng-messages-include="errors">
+							<ng-message when="pattern" style="color:red;">Enter Valid time as 00:00 am or pm</ng-message>
      						 </div>
 						</div> 
 						
