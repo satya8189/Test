@@ -28,7 +28,6 @@ import com.wre.adminmgmt.bean.EventBean;
 import com.wre.adminmgmt.bean.GalaryBean;
 import com.wre.adminmgmt.bean.InviteBean;
 import com.wre.adminmgmt.bean.NewsFeedBean;
-import com.wre.adminmgmt.bean.ParticipantQuriesBean;
 import com.wre.adminmgmt.bean.QuestionAnswerBean;
 import com.wre.adminmgmt.bean.QuestionBean;
 import com.wre.adminmgmt.bean.RatingBean;
@@ -47,6 +46,7 @@ import com.wre.model.Event;
 import com.wre.model.EventParticipant;
 import com.wre.model.EventServices;
 import com.wre.model.Galary;
+import com.wre.model.GalaryLikes;
 import com.wre.model.Newsfeed;
 import com.wre.model.Participants;
 import com.wre.model.Rating;
@@ -1635,6 +1635,23 @@ public class AdminMgmtServiceImpl implements AdminMgmtService {
 
 
 			}
+			
+			@Override
+			public void galleryImageStatusSave(GalaryBean galaryBean) {
+				
+				GalaryLikes galaryLikes=new GalaryLikes();
+				galaryLikes.setStatus("Active");
+				Galary galary=new Galary();
+				galary.setGlaryItemId(galaryBean.getGlaryItemId());
+				galaryLikes.setGalary(galary);
+				Participants participants=new Participants();
+				participants.setParticipantId(galaryBean.getParticipantId());
+				galaryLikes.setParticipants(participants);
+				
+				AdminMgmtDaoImpl.save(galaryLikes);
+				
+			}
+			
 			
 }
 
