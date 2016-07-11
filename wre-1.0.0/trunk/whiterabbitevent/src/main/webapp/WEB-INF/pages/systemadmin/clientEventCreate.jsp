@@ -77,10 +77,13 @@
 			<div class="form-group col-md-4">
 				<label class="flot-left">EventTime</label> <input type="text"
 					class="input-text form-control" id="eventAgenda"
-					placeholder="eventTime" ng-model="event.eventTime" name="eventTime"
+					placeholder="00:00 AM/PM" ng-model="event.eventTime" name="eventTime"
+					ng-pattern="/^([0-1]?[0-9]|2[0-3]):[0-5][0-9] [APap][mM]$/"
 					required />
 				<div ng-if="ipForm.$submitted" ng-messages="ipForm.eventTime.$error"
-					ng-messages-include="errors"></div>
+					ng-messages-include="errors">
+					<ng-message when="pattern">Enter Valid time as 00:00 am or pm</ng-message>
+					</div>
 			</div>
 			<div class="form-group col-md-4">
 				<label class="flot-left">EventDate</label> <input type="date"
@@ -126,8 +129,9 @@
 						placeholder="UserFristName" ng-model="event.userFristName"
 						name="userFristName" 
 						ng-class="{'error':submitted &&ipForm.userFristName.$error.required}"
+						ng-required="rdboption !=demo"
 						/>
-						<span class="help-inline" ng-show="submitted &&ipForm.userFristName.$error.required" style="color:red;"> Frist Name is required</span>
+						<span class="help-inline" ng-show="submitted &&ipForm.userFristName.$error.required" style="color:red; " ng-messages-include="errors"> Frist Name is required</span>
 				</div>
 				<div class="form-group col-md-3">
 					<label class="flot-left">User Last Name </label> <input type="text"
@@ -135,8 +139,9 @@
 						placeholder="UserLastName" ng-model="event.userLastName"
 						name="UserLastName"
 						ng-class="{'error':submitted &&ipForm.UserLastName.$error.required}"
+						ng-required="rdboption !=demo"
 						 />
-						<span class="help-inline" ng-show="submitted &&ipForm.UserLastName.$error.required" style="color:red;"> Last Name is required</span>
+						<span class="help-inline" ng-show="submitted &&ipForm.UserLastName.$error.required" style="color:red;" ng-messages-include="errors"> Last Name is required</span>
 				</div>
 				<div class="form-group col-md-3">
 					<label class="flot-left">User EmailId </label> <input type="text"
@@ -144,8 +149,9 @@
 						placeholder="userEmail" ng-model="event.userEmail"
 						name="userEmail" 
 						ng-class="{'error':submitted &&ipForm.userEmail.$error.required}"
+						ng-required="rdboption !=demo"
 						 />
-						<span class="help-inline" ng-show="submitted &&ipForm.userEmail.$error.required" style="color:red;">User EmailId is required </span>
+						<span class="help-inline" ng-show="submitted &&ipForm.userEmail.$error.required" style="color:red;" ng-messages-include="errors">User EmailId is required </span>
 				</div>
 				<div class="form-group col-md-3">
 					<label class="flot-left">User PhoneNo </label> <input type="text"
@@ -153,8 +159,9 @@
 						placeholder="phoneNumber" ng-model="event.phoneNumber"
 						name="phoneNumber" 
 						ng-class="{'error':submitted &&ipForm.phoneNumber.$error.required}"
+						ng-required="rdboption !=demo"
 						/>
-		<span class="help-inline" ng-show="submitted &&ipForm.phoneNumber.$error.required" style="color:red;">User PhoneNumber is required </span>
+		<span class="help-inline" ng-show="submitted &&ipForm.phoneNumber.$error.required" style="color:red;" ng-messages-include="errors">User PhoneNumber is required </span>
 
 				</div>
 
