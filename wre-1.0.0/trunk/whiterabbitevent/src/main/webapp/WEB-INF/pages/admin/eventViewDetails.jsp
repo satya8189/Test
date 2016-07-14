@@ -77,7 +77,7 @@ margin: 8px;
 								<img src="resources/images/Q&A.png" ng-if="service.serviceName=='Q&A'"/>
 								<img src="resources/images/QR.png" ng-if="service.serviceName=='QR Code'"/>
 								<img src="resources/images/social.png" ng-if="service.serviceName=='Social Media'"/>
-								<img src="resources/images/documentsharing.png" ng-if="service.serviceName=='Document'"/>
+								<img src="resources/images/documentsharing.png" ng-if="service.serviceName=='Documents'"/>
 								<img src="resources/images/speaker.png" ng-if="service.serviceName=='Speaker profile'"/>
 								<img src="resources/images/sponcers.png" ng-if="service.serviceName=='Sponsor page'"/>
 								<img src="resources/images/surveys.png" ng-if="service.serviceName=='Surveys'"/>
