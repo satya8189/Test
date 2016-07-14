@@ -1,10 +1,9 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@include file="error-messages.jsp" %>
-<div class="col-md-12">
-	<a ng-click="cancelUpdateChat(chat)">
-		 <i class="fa fa-angle-left back"></i>
+
+<div class="col-md-8 col-md-offset-2 margin-top-5">
+	<a ng-click="cancelUpdateChat(chat)" class="btn btn-primary backbtn">
+Back
 	</a>
-	 </div>
+	
 <form name="chatEditForm" ng-submit="chatEditForm.$valid && updateChat(chat)" enctype="multipart/form-data" novalidate>
 <div class="panel">	
  <div class="panel-heading text-center font-size-20 padding-15 headbg">Edit ChatTopic</div>	

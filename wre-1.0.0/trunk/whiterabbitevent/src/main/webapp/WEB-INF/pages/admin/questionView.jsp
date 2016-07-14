@@ -1,39 +1,25 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
-<script>
-	$(".link-active").removeClass("link-active");
-	$("#event").addClass("link-active");	
-</script>
-<style>
-.panel{
-margin-bottom:0px !important;
-}
-.buttonbg1{
-position: relative;
-    top: 30px;
-}
-</style>
+
 <toaster-container></toaster-container>
  <c:set var="userId" value="${USER.userId}" scope="session" />
 <c:set var="roleId" value="${USER.roleId}" scope="session" />
 <c:set var="eventId" value="${event.eventId}" scope="session" />
 <input type="hidden" ng-init="roleId='${USER.roleId}'" value="${USER.roleId}" ng-model="roleId">
-<div class="col-md-12">
-	  <a ng-click="cancelQuestionsView(eventId)"> <i
-		class="fa fa-angle-left back"></i>
-	</a> 
+<h3 class="text-center">Question List</h3>
+<div class="container">
+
 	<form>
-	
+			 <div class="col-md-4 padding-0">
+			 	  <a ng-click="cancelQuestionsView(eventId)" class="btn btn-primary backbtn"> 
+Back
+	</a> 
 		<a ng-click="questionCreate(eventId)"title="eventViewDetails" class="btn btn-primary buttonbg1" ng-hide="roleId==100">Question Create
-				<i class="fa fa-eye-slash icons "> </i>			 
+		 
 				</a>
-	
-	<div class="header-none text-center">Question List</div>
-	<div class="panel">
-		<div class="panel-body">
-		 <div class="col-md-2 col-md-offset-10 padding-0">
+</div>
+		 <div class="col-md-2 col-md-offset-6 padding-0">
 		 <input ng-model="search"  ng-show="questionList.length!=0" class="form-control" placeholder="Search">
 			</div> 
-			<div class="col-md-12 space-hid">&nbsp;</div>
+
 			<table class="table table-bordered" id="eventView">
 				<thead class="headbg">
 					<tr>

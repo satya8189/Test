@@ -1,17 +1,10 @@
-<style>
-.panel{
-border: 1px solid #588CC0;
-}
 
-</style>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<toaster-container></toaster-container>
 <jsp:include page="error-messages.jsp"></jsp:include>
 <c:set var="userId" value="${USER.userId}" scope="session" />
 
 <form name="agendaForm" ng-submit="agendaForm.$valid && saveAgendo(agendo)" novalidate>
 
-<div class="col-md-12 margin-top-5">
+<div class="col-md-8 col-md-offset-2 margin-top-5">
 
 	<a ng-click="cancelCreateAgenda(agendo.eventId)"
 		 class="btn btn-primary backbtn"> Back

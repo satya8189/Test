@@ -1,15 +1,8 @@
-<%@include file="error-messages.jsp"%>
- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<style>
-.panel{
-border: 1px solid #588CC0;
-}
 
-</style>
-<div class="col-md-12">
-<h3 class="text-center">Create Speaker</h3>
-	<a ng-click="cancelCreateSpeaker(speaker.eventId)">
-		 <i class="fa fa-angle-left back"></i>
+<div class="col-md-offset-2 col-md-8 margin-top-5">
+
+	<a ng-click="cancelCreateSpeaker(speaker.eventId)" class="btn btn-primary backbtn">Back
+		
 	</a>
 	<c:set var="userId" value="${user.userId}" scope="session" />
 	<div class="panel">

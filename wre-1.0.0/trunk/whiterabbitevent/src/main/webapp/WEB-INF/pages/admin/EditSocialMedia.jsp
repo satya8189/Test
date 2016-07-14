@@ -7,10 +7,10 @@ border: 1px solid #588CC0;
 }
 
 </style>
-<div class="col-md-12">
-<h3 class="text-center">Agendas List</h3>
-	<a ng-click="cancelSocialMediaEdtit(eventId)">
-		 <i class="fa fa-angle-left back"></i>
+<div class="col-md-8 col-md-offset-2 margin-top-5">
+
+	<a ng-click="cancelSocialMediaEdtit(eventId)" class="btn btn-primary backbtn">Back
+		 
 	</a>
 	<div class="panel">
 		<div class="panel-heading text-center font-size-20 padding-15 headbg">

@@ -1,42 +1,23 @@
-<!-- <h3>SocialMedia</h3> -->
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
-<script>
-	$(".link-active").removeClass("link-active");
-	$("#sponcor").addClass("link-active");	
-</script>
-<style>
-.panel{
-margin-bottom:0px !important;
-}
-.panel-body {
-  /*padding: 10px 30px ;*/
-}
-.buttontop{
-	position: relative;
-    top: 10px;
-	}
-</style>
  <body>
   <c:set var="userId" value="${USER.userId}" scope="session" />
 <c:set var="roleId" value="${USER.roleId}" scope="session" />
 <c:set var="eventId" value="${event.eventId}" scope="session" />
 <input type="hidden" ng-init="roleId='${USER.roleId}'" value="${USER.roleId}" ng-model="roleId">
 
-<div class="col-md-12">
-	<a ng-click="cancelSocialMediaView(eventId)">
-		 <i class="fa fa-angle-left back"></i>
+<div class="container margin-top-5">
+ <div class="col-md-4 padding-0">
+	<a ng-click="cancelSocialMediaView(eventId)" class="btn btn-primary backbtn">Back
+		
 	</a>
-	<!-- {{4+5}} --> 
-	<div class="panel">
-	<form>
-	<a ng-click="createSocialMedia(eventId)" class="btn btn-primary pull-left button btn-color buttonbg" ng-hide="roleId==100">Create SocialMedia</a>
-	</form>
-		<div class="panel-body">
-		 <div class="col-md-2 col-md-offset-10 padding-0">
+	
+	
+	<a ng-click="createSocialMedia(eventId)" class="btn btn-primary  button btn-color buttonbg" ng-hide="roleId==100">Create SocialMedia</a>
+	</div>
+		 <div class="col-md-2 col-md-offset-6 padding-0">
 		 <input ng-model="search"  ng-show="sponsorsList.length!=0" class="form-control" placeholder="Search">
 			</div> 
-			<div class="col-md-12 space-hid">&nbsp;</div>
+			
 			<table class="table table-bordered" id="viewSocialMedia">
 				<thead class="headbg">
 					<tr>

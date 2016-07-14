@@ -127,6 +127,7 @@
       <ul class="nav navbar-nav">
        <a href="#/eventView"><li class="head-date">White Rabbit Events</li></a>    
       </ul>
+      <span class="spanstyle">            	{{eventName}}</span>
       <ul class="nav navbar-nav navbar-right">
        
            <li > <a class="logout-link " href="/whiterabbitevent/logout"><i class="fa fa-sign-out logout" aria-hidden="true"></i>
@@ -150,7 +151,7 @@
           <div class="col-md-12">
            <div class="body-content">
          
-            	<h3 align="center"><u>{{eventName}}</u></h3>
+
  			<!-- <h3 style="text-align: -webkit-center;"> {{event.eventName}}</h3> -->
  			<h3 id="eventName"></h3>
  			 <ng-view></ng-view>

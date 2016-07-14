@@ -5,10 +5,10 @@ border: 1px solid #588CC0;
 }
 
 </style>
- <div class="col-md-12">
- <h3 class="text-center">Create SocialMedia</h3>
-	<a ng-click="cancelCreateSocialMedia(sm.eventId)">
-		 <i class="fa fa-angle-left back"></i>
+ <div class="col-md-8 col-md-offset-2 margin-top-5">
+
+	<a ng-click="cancelCreateSocialMedia(sm.eventId)" class="btn btn-primary backbtn">
+Back		
 	</a>
 	<div class="panel">
 		<div class="panel-heading text-center font-size-20 padding-5 headbg">Create SocialMedia</div>

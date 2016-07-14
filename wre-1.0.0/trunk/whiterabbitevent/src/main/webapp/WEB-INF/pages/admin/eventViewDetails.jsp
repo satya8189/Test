@@ -61,7 +61,7 @@ div .newdashboard{
 
 </head>
 <body>
-<div class="container">
+<div class="container margin-top-5">
 	
 	
 	
@@ -70,7 +70,7 @@ div .newdashboard{
 	
 	<div ng-repeat="service in serviceList">
 	<div class="col-md-2 ">
-							<a ng-click="serviceDetails(service)">
+	<a ng-click="serviceDetails(service)">
 	<div class="to-right newdashboard" 	><span class="to-right ">{{service.serviceName}}</span></div></a>
 	</div>
 
