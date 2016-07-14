@@ -1,35 +1,23 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
-<script>
-	$(".link-active").removeClass("link-active");
-	$("#event").addClass("link-active");	
-</script>
-<style>
-.panel{
-margin-bottom:0px !important;
-}
-.panel-body {
-  /* padding: 13px 50px ; */
-}
-</style>
+
 <toaster-container></toaster-container>
 <c:set var="userId" value="${USER.userId}" scope="session" />
 <c:set var="roleId" value="${USER.roleId}" scope="session" />
 <input type="hidden" ng-init="roleId='${USER.roleId}'" value="${USER.roleId}" ng-model="roleId">
 
-<div class="container-fluid">
- <a ng-click="cancelAgendoView(eventId)"> <i
-		class="fa fa-angle-left back"></i>
-	</a> 
-<form>
-	<a ng-click="navigateagendoCreate(eventId)" class="btn btn-primary pull-left button btn-color buttonbg" ng-hide="roleId==100">Create Agenda</a>
+<div class="container margin-top-5">
 	
-	<div class="header-center" align="center">Agendas List</div>
-	<div class="panel">
-		<div class="panel-body">
-		 <div class="col-md-2 col-md-offset-10 padding-0">
+<form>
+		 <div class="col-md-4 padding-0">
+ <a ng-click="cancelAgendoView(eventId)" class="btn btn-primary backbtn"> Back
+	</a> 
+	<a ng-click="navigateagendoCreate(eventId)" class="btn btn-primary" ng-hide="roleId==100">Create Agenda</a>
+	</div>
+
+		 <div class="col-md-3 col-md-offset-5 padding-0">
 		 <input ng-model="search"  ng-show="agendoList.length!=0" class="form-control" placeholder="Search"">
 		 	</div> 
-			<div class="col-md-12 space-hid">&nbsp;</div>
+
 			<table class="table table-bordered" id="eventView">
 				<thead class="headbg">
 					<tr>
@@ -67,8 +55,7 @@ margin-bottom:0px !important;
 						<pagination page="currentPage" max-size="noOfPages" total-items="totalItems" 
 							items-per-page="entryLimit" class="pagination-sm" boundary-links="true"></pagination>
 					</div>
-				</div>
-			</div>
+
 	</div>
 	</form>
 </div>

@@ -6,12 +6,12 @@ border: 1px solid #588CC0;
 }
 
 </style>
-<div class="col-md-12">
-<h3 class="text-center">Edit Details</h3>
-	<a ng-click="navigateToDetailsView(event.eventId)"> <i class="fa fa-angle-left back"></i>
+<div class="col-md-12 margin-top-5">
+
+	<a ng-click="navigateToDetailsView(event.eventId)" class="btn btn-primary backbtn"> Back
 	</a>
 
-	<c:set var="eventId" value="${event.eventId}" scope="session" />
+	
 	<div class="panel">
 		<div class="panel-heading text-center font-size-20 padding-15 headbg">
 			Details</div>
