@@ -146,7 +146,7 @@ public class Event  implements java.io.Serializable {
 	return eventDate;
 }
 
-public void setEventDate(Date eventStartDate) {
+public void setEventDate(Date eventDate) {
 	this.eventDate = eventDate;
 }
 
