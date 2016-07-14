@@ -38,6 +38,7 @@ public class Event  implements java.io.Serializable {
   private String eventAddress;
   private String eventAgenda;
   private Date eventDate;
+  private Date eventEndDate;
   private String eventDesc;
   private String eventName;
   private String eventTime;
@@ -60,12 +61,13 @@ public class Event  implements java.io.Serializable {
  public Event() {
  }
 
- public Event(Client client, User user, String eventAddress, String eventAgenda, Date eventDate, String eventDesc, String eventName, String eventTime, String status, Set<Agenda> agendas, Set<EventServices> eventServiceses, Set<Galary> galaries, Set<SocialMedia> socialMedias, Set<ContactDetails> contactDetailses, Set<Speaker> speakers, Set<SurveyQuestion> surveyQuestions, Set<SurveyQuestionAnswer> surveyQuestionAnswers, Set<Newsfeed> newsfeeds, Set<Sponcor> sponcors, Set<EventParticipant> eventParticipants, Set<ChatTopic> chatTopics, Set<Message> messages, Set<QuestionAnswer> questionAnswers) {
+ public Event(Client client, User user, String eventAddress, String eventAgenda, Date eventDate,Date eventEndDate, String eventDesc, String eventName, String eventTime, String status, Set<Agenda> agendas, Set<EventServices> eventServiceses, Set<Galary> galaries, Set<SocialMedia> socialMedias, Set<ContactDetails> contactDetailses, Set<Speaker> speakers, Set<SurveyQuestion> surveyQuestions, Set<SurveyQuestionAnswer> surveyQuestionAnswers, Set<Newsfeed> newsfeeds, Set<Sponcor> sponcors, Set<EventParticipant> eventParticipants, Set<ChatTopic> chatTopics, Set<Message> messages, Set<QuestionAnswer> questionAnswers) {
     this.client = client;
     this.user = user;
     this.eventAddress = eventAddress;
     this.eventAgenda = eventAgenda;
     this.eventDate = eventDate;
+    this.eventEndDate = eventEndDate;
     this.eventDesc = eventDesc;
     this.eventName = eventName;
     this.eventTime = eventTime;
@@ -141,12 +143,13 @@ public class Event  implements java.io.Serializable {
  @Temporal(TemporalType.DATE)
  @Column(name="Event_Date", length=10)
  public Date getEventDate() {
-     return this.eventDate;
- }
- 
- public void setEventDate(Date eventDate) {
-     this.eventDate = eventDate;
- }
+	return eventDate;
+}
+
+public void setEventDate(Date eventStartDate) {
+	this.eventDate = eventDate;
+}
+
 
  
  @Column(name="Event_Desc")
@@ -154,7 +157,17 @@ public class Event  implements java.io.Serializable {
      return this.eventDesc;
  }
  
- public void setEventDesc(String eventDesc) {
+ @Temporal(TemporalType.DATE)
+ @Column(name="Event_End_Date", length=10)
+public Date getEventEndDate() {
+	return eventEndDate;
+}
+
+public void setEventEndDate(Date eventEndDate) {
+	this.eventEndDate = eventEndDate;
+}
+
+public void setEventDesc(String eventDesc) {
      this.eventDesc = eventDesc;
  }
 
