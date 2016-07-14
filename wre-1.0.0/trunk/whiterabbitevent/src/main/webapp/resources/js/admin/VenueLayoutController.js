@@ -7,10 +7,10 @@ var VenueLayoutController=function($scope,$location,$http,$routeParams,ngNotifie
 		//$scope.eventId=$routeParams.eventId;
 		//get the image to show before new image upload
 	    $http.get('admin/getVenueLayoutImage?eventId='+$scope.upload.eventId+"&&type=layout").success(function(image){
-	    	alert("image success"+image.url);
+	    	//alert("image success"+image.url);
 	    	$scope.image=image;
 	    }).error(function(){
-	    	alert("gettting image errror");
+	    	//alert("gettting image errror");
 	    });
 		
 	});

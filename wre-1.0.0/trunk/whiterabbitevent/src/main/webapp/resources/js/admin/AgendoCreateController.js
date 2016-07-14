@@ -16,9 +16,8 @@ var AgendoCreateController = function($scope, $http, $location, $routeParams,ngN
 	
 };
 
-$scope.cancelAgendoView = function() {
-	
-	$location.path("/agendoDetails/"+agendo.eventId);
+  $scope.cancelAgendoView = function() {
+   $location.path("/agendoDetails/"+agendo.eventId);
 	};
 	
 
