@@ -36,6 +36,8 @@ public class Participants  implements java.io.Serializable {
   private String status;
   private String regId;
   private String profilePic;
+  private String designation;
+  private String company;
   private Set<Galary> galaries = new HashSet<Galary>(0);
   private Set<EventParticipant> eventParticipants = new HashSet<EventParticipant>(0);
   private Set<SurveyQuestionAnswer> surveyQuestionAnswers = new HashSet<SurveyQuestionAnswer>(0);
@@ -46,7 +48,7 @@ public class Participants  implements java.io.Serializable {
  public Participants() {
  }
 
- public Participants(String email, String firstName, String lastName, String otp, String phone, String status, String regId,String profilePic, Set<Galary> galaries, Set<EventParticipant> eventParticipants, Set<SurveyQuestionAnswer> surveyQuestionAnswers, Set<ContactDetails> contactDetailses, Set<QuestionAnswer> questionAnswers, Set<Message> messages) {
+ public Participants(String email, String firstName, String lastName, String otp, String phone, String status, String regId,String profilePic,String designation,String company, Set<Galary> galaries, Set<EventParticipant> eventParticipants, Set<SurveyQuestionAnswer> surveyQuestionAnswers, Set<ContactDetails> contactDetailses, Set<QuestionAnswer> questionAnswers, Set<Message> messages) {
     this.email = email;
     this.firstName = firstName;
     this.lastName = lastName;
@@ -55,6 +57,8 @@ public class Participants  implements java.io.Serializable {
     this.status = status;
     this.regId = regId;
     this.profilePic=profilePic;
+    this.designation=designation;
+    this.company=company;
     this.galaries = galaries;
     this.eventParticipants = eventParticipants;
     this.surveyQuestionAnswers = surveyQuestionAnswers;
@@ -207,5 +211,22 @@ public void setProfilePic(String profilePic) {
  public void setMessages(Set<Message> messages) {
      this.messages = messages;
  }
+ @Column(name="Designation", length=100)
+public String getDesignation() {
+	return designation;
+}
+
+public void setDesignation(String designation) {
+	this.designation = designation;
+}
+@Column(name="Company", length=200)
+public String getCompany() {
+	return company;
+}
+
+public void setCompany(String company) {
+	this.company = company;
+}
+ 
 
 }
