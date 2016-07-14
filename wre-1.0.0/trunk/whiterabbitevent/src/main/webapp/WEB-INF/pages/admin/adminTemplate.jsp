@@ -125,12 +125,12 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       
       <ul class="nav navbar-nav">
-       <a href="#/eventView"><li class="head-date"><i class="fa fa-calendar" aria-hidden="true"></i>  &nbsp;White Rabbit Events</li></a>    
+       <a href="#/eventView"><li class="head-date">White Rabbit Events</li></a>    
       </ul>
       <ul class="nav navbar-nav navbar-right">
        
-           <li class="head-date"> <span class="glyphicon glyphicon-user"><a class="logout-link " href="/whiterabbitevent/logout">
-            Logout
+           <li > <a class="logout-link " href="/whiterabbitevent/logout"><i class="fa fa-sign-out logout" aria-hidden="true"></i>
+    
             </a></span>
           </ul>
         

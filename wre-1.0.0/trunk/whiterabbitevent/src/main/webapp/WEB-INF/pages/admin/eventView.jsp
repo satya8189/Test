@@ -1,29 +1,13 @@
-	
-<script>
-	$(".link-active").removeClass("link-active");
-	$("#event").addClass("link-active");	
-</script>
-<style>
-.panel{
-margin-bottom:0px !important;
-}
-.panel-body {
-  padding: 13px 50px ;
-}
-#none{
-display:none;
-}
-</style>
 
-<div class="cal-md-12" ng-init="getEventList('${userId}');">
+<div class="container" ng-init="getEventList('${userId}');">
+<h3 class="text-center">Events List</h3>
 	<form>
-	<div class="header-none" align="center">Events List</div>
-	<div class="panel">
-		<div class="panel-body">
-		 <div class="col-md-2 col-md-offset-10 padding-0">
+
+
+		 <div class="col-md-2 col-md-offset-10 padding-0" style="margin-bottom: 5px;">
 		 <input ng-model="search"  ng-show="eventList.length!=0" class="form-control" placeholder="Search">
 			</div> 
-			<div class="col-md-12 space-hid">&nbsp;</div>
+
 			<table class="table table-bordered" id="eventView">
 				<thead class="headbg">
 					<tr>
@@ -63,7 +47,6 @@ display:none;
 					</div>
 				</div>
 			
-		</div>
-	</div>
+
 	</form>
 </div>
