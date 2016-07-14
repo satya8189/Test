@@ -33,9 +33,9 @@ margin-bottom:0px !important;
 			<table class="table table-bordered" id="eventView">
 				<thead class="headbg">
 					<tr>
-					     <th>NewsTitle</th>
-					     <th>NewsDesc </th>
-						 <th>NewsDate</th>
+					     <th>News Title</th>
+					     <th>News Descriptin </th>
+						 <th>News Date</th>
 						  <th ng-hide="roleId==100">Action</th>
 						
 				   </tr>
