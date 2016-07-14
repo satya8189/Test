@@ -5,7 +5,7 @@ border: 1px solid #588CC0;
 }
 
 </style>
-<div class="col-md-12 margin-top-5">
+<div class="col-md-8 col-md-offset-2 margin-top-5">
 	<a ng-click="navigateToEventViewDetails(eventId)" class="btn btn-primary backbtn"> Back
 	</a>
 <c:set var="userId" value="${USER.userId}" scope="session" />

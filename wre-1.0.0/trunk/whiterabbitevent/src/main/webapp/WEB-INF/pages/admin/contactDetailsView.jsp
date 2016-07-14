@@ -1,14 +1,7 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@include file="error-messages.jsp" %>
-<style>
-.panel{
-border: 1px solid #588CC0;
-}
 
-</style>
-<div class="col-md-12">
-<h3 class="text-center">Contact	Details</h3>
-	<a ng-click="navigateToEventViewDetails(contact.eventId)"> <i class="fa fa-angle-left back"></i>
+<div class="col-md-8 col-md-offset-2">
+
+	<a ng-click="navigateToEventViewDetails(contact.eventId)" class="btn btn-primary backbtn margin-top-5"> Back
 	</a>
 	<div class="panel">
 		<div class="panel-heading text-center font-size-20 padding-15 headbg">Contact	Details </div>

@@ -7,10 +7,10 @@ border: 1px solid #588CC0;
 <toaster-container></toaster-container>
 <form name="createEvent" ng-submit="uploadLayout()" enctype="multipart/form-data" novalidate>
 
-<div class="col-md-12">
-<h3 class="text-center">Upload VenuLayout</h3>
-<a ng-click="cancelUploadLayout(upload.eventId)"> <i
-		class="fa fa-angle-left back"></i>
+<div class="container">
+
+<a ng-click="cancelUploadLayout(upload.eventId)" class="btn btn-primary backbtn"> Back
+		
 	</a>
 <div class="panel">
  <div class="panel-heading text-center font-size-20 padding-15 headbg">Upload VenuLayout</div>

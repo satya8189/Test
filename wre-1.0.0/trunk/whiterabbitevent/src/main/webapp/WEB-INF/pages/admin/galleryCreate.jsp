@@ -1,18 +1,9 @@
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<style>
-.panel{
-border: 1px solid #588CC0;
-}
 
-</style>
-<toaster-container></toaster-container>
-<jsp:include page="error-messages.jsp"></jsp:include>
+<div class="col-md-8 col-md-offset-2 margin-top-5">
 
-<div class="col-md-12">
-<h3 class="text-center"> Create Gallary</h3>
-	<a ng-click="cancelGalleryCreate(gallery.eventId)">
-		 <i class="fa fa-angle-left back"></i>
+	<a ng-click="cancelGalleryCreate(gallery.eventId)" class="btn btn-primary backbtn">
+		Back
 	</a>
 	
 <form name="createEvent" ng-submit="createEvent.$valid && createGallery(gallery)" enctype="multipart/form-data" novalidate>

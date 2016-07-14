@@ -1,35 +1,24 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
-<script>
-	$(".link-active").removeClass("link-active");
-	$("#event").addClass("link-active");	
-</script>
-<style>
-.panel{
-margin-bottom:0px !important;
-}
 
-</style>
-<toaster-container></toaster-container>
 <c:set var="userId" value="${USER.userId}" scope="session" />
 <c:set var="roleId" value="${USER.roleId}" scope="session" />
 <c:set var="eventId" value="${event.eventId}" scope="session" />
 <input type="hidden" ng-init="roleId='${USER.roleId}'" value="${USER.roleId}" ng-model="roleId">
 
-<div class="col-md-12">
+<div class="container margin-top-5">
+	<h3 class="text-center">News Feed List </h3>
 	
-	<a ng-click="cancelNewsFeedView(eventId)">
-		 <i class="fa fa-angle-left back"></i>
-	</a>
 	 
 	<form>
-	<div class="panel">
-	<a ng-click="newsFeedCreate(eventId)" class="btn btn-primary pull-left button btn-color buttonbg" ng-hide="roleId==100">Create NewsFeed</a>
-		<div class="panel-body">
-			<div class="header-none" align="center">News List</div>
-		 <div class="col-md-2 col-md-offset-10 padding-0">
+	<div class="col-md-4  padding-0">
+	<a ng-click="cancelNewsFeedView(eventId)" class="btn btn-primary backbtn">Back
+		
+	</a>
+	<a ng-click="newsFeedCreate(eventId)" class="btn btn-primary button btn-color buttonbg" ng-hide="roleId==100">Create NewsFeed</a>
+		</div>
+		 <div class="col-md-2 col-md-offset-6 padding-0">
 		 <input ng-model="search"  ng-show="newsList.length!=0" class="form-control" placeholder="Search">
 			</div> 
-			<div class="col-md-12 space-hid">&nbsp;</div>
+			
 			<table class="table table-bordered" id="eventView">
 				<thead class="headbg">
 					<tr>

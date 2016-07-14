@@ -1,23 +1,10 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
-<script>
-	$(".link-active").removeClass("link-active");
-	$("#event").addClass("link-active");	
-</script>
-<style>
-.panel{
-margin-bottom:0px !important;
-}
-.panel-body {
-  /* padding: 13px 50px ; */
-}
-</style>
+
 <toaster-container></toaster-container>
 <c:set var="userId" value="${USER.userId}" scope="session" />
 <c:set var="roleId" value="${USER.roleId}" scope="session" />
 <c:set var="eventId" value="${event.eventId}" scope="session" />
 <input type="hidden" ng-init="roleId='${USER.roleId}'" value="${USER.roleId}" ng-model="roleId">
-<a ng-click="navigateToEventViewDetails(eventId)"> <i class="fa fa-angle-left back"></i>
-	</a>
+<div class="container margin-top-5">
 	
 <form>
 <div class="alert-bg" ng-show="alert">
@@ -37,15 +24,17 @@ margin-bottom:0px !important;
 	
 	
 	 
-	 			
-	
-	<div class="panel">
-		<div class="panel-body">
-		 <div class="col-md-2 col-md-offset-10 padding-0">
+
+
+		 			 <div class="col-md-4 padding-0">
+		 	<a ng-click="navigateToEventViewDetails(eventId)" class="btn btn-primary backbtn">Back
+	</a>
+	<a ng-click="navigateChatTopicCreate(eventId)" class="btn btn-primary " ng-hide="roleId==100">CreateChatTopic</a></div>
+			 <div class="col-md-2 col-md-offset-6 padding-0">
 		 <input ng-model="search"  ng-show="chatList.length!=0" ng-show="chatList.length > 0" class="form-control" placeholder="Search">
 		 	</div> 
-		 	<a ng-click="navigateChatTopicCreate(eventId)" class="btn btn-primary pull-left button  btn-color" ng-hide="roleId==100">CreateChatTopic</a>
-			<div class="col-md-12 space-hid">&nbsp;</div>
+		 	
+
 			<table class="table table-bordered" id="eventView">
 				<thead class="headbg">
 					<tr>
@@ -72,7 +61,7 @@ margin-bottom:0px !important;
 					
 				</tr>	
 					<tr ng-show="filteredSize==0">
-				<td colspan="6">
+				<td>
 				No records found..
 				</td>
 				</tr>
@@ -84,8 +73,7 @@ margin-bottom:0px !important;
 					</div>
 				</div>
 			
-				
-		</div>
-	</div>
+
 	</form>
 
+</div>

@@ -1,19 +1,11 @@
-<style>
-.panel{
-border: 1px solid #588CC0;
-}
 
-</style>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<toaster-container></toaster-container>
-<jsp:include page="error-messages.jsp"></jsp:include> 
 <c:set var="userId" value="${USER.userId}" scope="session" />
 
 <form name="createEvent" ng-submit="createEvent.$valid && saveNews(news)" novalidate>
-<div class="col-md-12">
-<h3 class="text-center">Create News</h3>
-	<a ng-click="navigateToNewsFeedView(news.eventId)">
-		 <i class="fa fa-angle-left back"></i>
+<div class="col-md-offset-2 col-md-8 margin-top-5">
+
+	<a ng-click="navigateToNewsFeedView(news.eventId)" class="btn btn-primary backbtn">Back
+		
 	</a>
 		
 <div class="panel">

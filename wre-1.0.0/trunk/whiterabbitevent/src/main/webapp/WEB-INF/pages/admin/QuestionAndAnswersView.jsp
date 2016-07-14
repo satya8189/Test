@@ -1,30 +1,16 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>		
-<script>
-	$(".link-active").removeClass("link-active");
-	$("#sponcor").addClass("link-active");	
-</script>
-<style>
-.panel{
-margin-bottom:0px !important;
-}
-.panel-body {
-  /*padding: 10px 30px ;*/
-}
-</style>
 
- <body>
+
 
   <c:set var="userId" value="${USER.userId}" scope="session" />
 <c:set var="roleId" value="${USER.roleId}" scope="session" />
 <c:set var="eventId" value="${event.eventId}" scope="session" />
 <input type="hidden" ng-init="roleId='${USER.roleId}'" value="${USER.roleId}" ng-model="roleId">
-<div class="col-md-12">
-	<h3 class="text-center">Question And Answers View</h3>
-	<div class="panel">
-		<div class="panel-body">
+<div class="container">
+	<h3 class="text-center margin-top-5">Question And Answers View</h3>
+
 		<div class="col-md-2  padding-0">
-		<a ng-click="cancelQuestionAndAnswerView(eventId)">
-		 <i class="fa fa-angle-left back"></i>
+		<a ng-click="cancelQuestionAndAnswerView(eventId)" class="btn btn-primary backbtn">
+		 Back
 	</a>
 	</div>
 		 <div class="col-md-2 col-md-offset-8 padding-0">
@@ -63,16 +49,9 @@ margin-bottom:0px !important;
 					</div>
 						
 				</div> 
-			
-			
-			
-			
- 		<div  class="res-table" ng-show="filteredSize==0">
-				No records found..
-			</div>
+
 		</div>
- </div>
-</div>
+
 
 
  

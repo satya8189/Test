@@ -1,30 +1,18 @@
-	
-<script>
-	$(".link-active").removeClass("link-active");
-	$("#event").addClass("link-active");	
-</script>
-<style>
-.panel{
-margin-bottom:0px !important;
-}
 
-
-</style>
 <toaster-container></toaster-container>
 
-<div class="col-md-12">
+<div class="container">
 <h3 class="text-center">Invite List</h3>
 
 	<form>
 	
-	<div class="panel">
-		<div class="panel-body">
-		<div class="col-md-2  padding-0">
-		<a ng-click="cancelInviteListView(eventId)">
-		 <i class="fa fa-angle-left back"></i>
+
+		<div class="col-md-4  padding-0">
+		<a ng-click="cancelInviteListView(eventId)" class="btn btn-primary backbtn">
+Back
 	</a>
-	</div>
-		 <div class="col-md-2 col-md-offset-8 padding-0">
+</div>
+		 <div class="col-md-2 col-md-offset-6 padding-0">
 		 <input ng-model="search"  ng-show="inviteList.length!=0" class="form-control" placeholder="Search">
 			</div> 
 			
