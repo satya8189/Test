@@ -122,6 +122,13 @@ border-radius: 55%;
 border: 1px solid #ccc;
 color: #ccc;
 }
+.viewheadingunderline{
+    border-bottom: 2px solid;
+    padding-bottom: 9px;
+    font-size: 26px !important;	
+	
+}
+
 .dashboard
 {
     background: #e8ebf0;
@@ -248,6 +255,13 @@ table,td{
 	text-align:center;
 	background: #fff !important;
 }
+.viewheading{
+font-size: 20px;
+color: #0098CD;
+	
+	
+}
+.headingspan{    border-bottom: 2px solid;    padding-right: 27px;padding-bottom: 10px;}
 th{
 	text-align:center;
 }
@@ -260,7 +274,7 @@ th{
 	    margin-bottom: 8px;
 }
 .panel{
-border-color:#ccc !important;	
+border:1px solid #ccc !important;	
 }
 label
 {
@@ -481,4 +495,10 @@ font-weight: normal;
 }
 .table{
 margin-bottom: -13px;	
+}
+.spanstyle{
+    font-size: 20px;
+    position: relative;
+    top: 11px;
+    left: 24%;	
 }
