@@ -5,9 +5,8 @@ border: 1px solid #588CC0;
 }
 
 </style>
-<h3 class="text-center">EventView</h3>
-<div class="col-md-12">
-	<a ng-click="navigateToEventViewDetails(event)"> <i class="fa fa-angle-left back"></i>
+<div class="col-md-8 col-md-offset-2 margin-top-5">
+	<a ng-click="navigateToEventViewDetails(event)" class="btn btn-primary backbtn">Back 
 	</a>
 
 	<c:set var="eventId" value="${event.eventId}" scope="session" />
@@ -23,16 +22,16 @@ border: 1px solid #588CC0;
 					<div class="col-md-12 padding-35">
 
 						<div class="col-md-3 text-center">
-							<label> {{event.eventName}}</label><br/><span class="color-ccc">Event Name: </span>
+							<label class="margin-bottom-0"> {{event.eventName}}</label><br/><span class="color-ccc">Event Name: </span>
 						</div>
 						<div class="col-md-3 text-center">
-							<label> {{event.eventDesc}}</label><br/><span class="color-ccc">EventDesc:</span>
+							<label class="margin-bottom-0"> {{event.eventDesc}}</label><br/><span class="color-ccc">EventDesc:</span>
 						</div>
 						<div class="col-md-3 text-center">
-							<label> {{event.eventAgenda}}</label><br/><span class="color-ccc">EventAgenda:</span>
+							<label class="margin-bottom-0"> {{event.eventAgenda}}</label><br/><span class="color-ccc">EventAgenda:</span>
 						</div>
 						<div class="col-md-3 text-center">
-							<label> {{event.eventAddress}}</label><br/><span class="color-ccc">EventAddress:</span>
+							<label class="margin-bottom-0"> {{event.eventAddress}}</label><br/><span class="color-ccc">EventAddress:</span>
 						</div>
 						</div>
 					</div>

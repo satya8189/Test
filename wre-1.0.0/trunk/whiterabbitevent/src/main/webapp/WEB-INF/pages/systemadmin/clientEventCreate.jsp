@@ -1,38 +1,13 @@
 
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<jsp:include page="../error-messages.jsp"></jsp:include>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<toaster-container></toaster-container>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Client Event Create</title>
-<style>
-.transprant {
-	background: transparent;
-	border: none;
-}
-.panel{
-	background-color:#fff;
-	 border: 1px solid #588CC0;
+
+
+
+	<div class="col-md-8 col-md-offset-2 margin-top-5">
 	
-	}
-</style>
-
-
-
-
-</head>
-
-<body>
-	<h3 class="text-center">clientEventCreate</h3>
-	<div class="col-md-12">
-	<div>
-		<a ng-click="cancelClientEvent()"> <i
-			class="fa fa-angle-left back"></i>
+		<a ng-click="cancelClientEvent()" class="btn btn-primary backbtn">Back 
+			
 		</a>
-	</div>
+	
 <div class="panel">
 		<div class="panel-heading text-center font-size-20 padding-15 headbg" >Create
 			Event</div>
@@ -96,7 +71,7 @@
 
 
 			<div class="form-group col-md-4 col-md-offset-4 ">
-				<label class="flot-left">Services Provided: </label>
+				<label class="flot-left viewheading">Services Provided: </label>
 				<div>&nbsp;</div>
 				<ul style="list-style:none;height: 200px;overflow: scroll;">
 				<li ng-repeat="data in servicesList" >   {{data.serviceName}} <input type="checkbox" class="pull-right" checklist-model="event.services" checklist-value="data.serviceId"></li>
@@ -177,8 +152,8 @@
 						<option value="">Select User</option>
 					</select>
 				</div>
-					</div>
-			<div class="col-md-12">
+				
+			
 <div class="form-group col-md-6 " 
 							id="uploadDiv">
 							<label class="flot-left">Upload Image </label> 
