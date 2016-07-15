@@ -1,15 +1,7 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<style>
-.panel{
-border: 1px solid #588CC0;
-}
-
-</style>
-<div class="col-md-12">
-<h3 class="text-center">Edit News</h3>
+<div class="col-md-8 col-md-offset-2 margin-top-5">
 <c:set var="userId" value="${USER.userId}" scope="session" />
-	<a ng-click="navigateToNewsFeedView(news.eventId)">
-		 <i class="fa fa-angle-left back"></i>
+	<a ng-click="navigateToNewsFeedView(news.eventId)" class="btn btn-primary backbtn">Back
+		
 	</a>
 	 
  <jsp:include page="error-messages.jsp"></jsp:include>

@@ -7,7 +7,7 @@ border: 1px solid #588CC0;
 <toaster-container></toaster-container>
 <form name="createEvent" ng-submit="uploadLayout()" enctype="multipart/form-data" novalidate>
 
-<div class="container">
+<div class="col-md-8 col-md-offset-2 margin-top-5">
 
 <a ng-click="cancelUploadLayout(upload.eventId)" class="btn btn-primary backbtn"> Back
 		

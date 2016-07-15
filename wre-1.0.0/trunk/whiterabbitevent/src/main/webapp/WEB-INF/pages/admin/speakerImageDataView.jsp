@@ -5,8 +5,8 @@ border: 1px solid #588CC0;
 }
 
 </style>
-<div class="col-md-12">
-	<a ng-click="cancelSpeakerEdtit(eventId)"> <i class="fa fa-angle-left back"></i>
+<div class="col-md-8 col-md-offset-2 margin-top-5">
+	<a ng-click="cancelSpeakerEdtit(eventId)" class="btn btn-primary backbtn">Back
 	</a>
 <c:set var="userId" value="${USER.userId}" scope="session" />
 <c:set var="roleId" value="${USER.roleId}" scope="session" />
@@ -27,7 +27,7 @@ border: 1px solid #588CC0;
 							<img src="{{speaker.url}}" width="200" height="200"/><br/>
 							<!-- {{speaker.url}} -->
 						</div>
-						
+						<div>&nbsp;</div>
 						<div class="col-md-3 text-center">
 							<label class="margin-bottom-0">{{speaker.speakerName}}</label> <br/><span class="color-ccc">Speaker Name </span>
 						</div>

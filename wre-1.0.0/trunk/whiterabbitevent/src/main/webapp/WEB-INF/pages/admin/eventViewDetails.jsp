@@ -65,7 +65,7 @@ div .newdashboard{
 	
 	
 	
-	
+
 	
 	
 	<div ng-repeat="service in serviceList">
