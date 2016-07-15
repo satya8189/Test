@@ -10,17 +10,16 @@
 
 	<form>
 	<h3 class="text-center">ClientEventView</h3>
-	<div class="col-md-12">
+	<div class="container">
 	
-	<div class="panel">
-		<div class="panel-body">
-		<div class="col-md-2  padding-0">
-		 <a ng-click="cancelClientEventView()"> <i
-		class="fa fa-angle-left back"></i>
+	
+		<div class="col-md-4  padding-0">
+		 <a ng-click="cancelClientEventView()" class="btn btn-primary backbtn">Back 
+		
 		</a> 
 		<a ng-click="navigateClientEventCreate()" class="btn btn-primary button btn-color margin-b-8">Create Event</a>
 		</div>
-		 <div class="col-md-2 col-md-offset-8 padding-0">
+		 <div class="col-md-2 col-md-offset-6 padding-0">
 		<input ng-model="search" class="form-control full-right" placeholder="Search"></div>
 
 			

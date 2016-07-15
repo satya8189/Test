@@ -4,8 +4,8 @@
 <toaster-container></toaster-container>
 
 
-<div class="col-md-12">
-	<a ng-click="cancelEvent()"> <i class="fa fa-angle-left back"></i>
+<div class="col-md-8 col-md-offset-2 margin-top-5">
+	<a ng-click="cancelEvent()" class="btn btn-primary backbtn">Back 
 	</a>
 	<div class="panel">
 		<div class="panel-heading text-center font-size-20 padding-15 headbg" >Create

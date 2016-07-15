@@ -12,13 +12,12 @@
 </style>
 
 
-<div class="col-md-12">
+<div class="container">
 	<form>
 	<h3 class="text-center">Clients List</h3>
 		
 	
-	<div class="panel">
-		<div class="panel-body">
+	
 		 <div class="col-md-2  padding-0">
 		
 	<a href="#/createClient"
@@ -26,7 +25,7 @@
 			Client</a></div>
 		 <div class="col-md-2 col-md-offset-8 padding-0">
 		<input ng-model="search" class="form-control" placeholder="Search" ng-show="clientList.length > 0"></div>
-		 	</div> 
+		 	
 		
 				
 			<table class="table table-bordered" id="clientView">
