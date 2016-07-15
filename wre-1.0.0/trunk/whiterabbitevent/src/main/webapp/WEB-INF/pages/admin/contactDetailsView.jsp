@@ -1,11 +1,11 @@
 
-<div class="col-md-8 col-md-offset-2">
+<div class="col-md-8 col-md-offset-2 margin-top-5">
 
 	<a ng-click="navigateToEventViewDetails(contact.eventId)" class="btn btn-primary backbtn margin-top-5"> Back
 	</a>
 	<div class="panel">
 		<div class="panel-heading text-center font-size-20 padding-15 headbg">Contact	Details </div>
-		<div class="panel-body new-body"><!-- If empty  -->
+		<div class="panel-body panelbody-bg"><!-- If empty  -->
 			 
 			<div ng-show="!contactList.length" >
 			<form name="orgCreateForm" ng-submit="orgCreateForm.$valid && saveContactDetails(contact)" 
@@ -63,7 +63,7 @@
 		</div>
 		</div>
 		
-		<div class="panel-body text-center">  <!-- Not empty -->
+		<div class="panel-body panelbody-bg">  <!-- Not empty -->
 			<!-- <form name="orgCreateForm" ng-submit="orgCreateForm.$valid && updateContactDetails(contact)"	novalidate> -->
 			<div ng-repeat="contact in filtered =  contactList" ng-show="filteredSize!=0"><!-- labels  {{5+4}} -->
 			<div class="row">

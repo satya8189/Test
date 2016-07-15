@@ -11,7 +11,7 @@
 		 <div class="col-md-4 padding-0">
  <a ng-click="cancelAgendoView(eventId)" class="btn btn-primary backbtn"> Back
 	</a> 
-	<a ng-click="navigateagendoCreate(eventId)" class="btn btn-primary" ng-hide="roleId==100">Create Agenda</a>
+	<a ng-click="navigateagendoCreate(eventId)" class="btn btn-primary" ng-hide="roleId==100">Create </a>
 	</div>
 
 		 <div class="col-md-3 col-md-offset-5 padding-0">
