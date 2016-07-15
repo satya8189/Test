@@ -144,16 +144,6 @@ public class Event  implements java.io.Serializable {
      this.eventAgenda = eventAgenda;
  }
 
- @Temporal(TemporalType.DATE)
- @Column(name="Event_Date", length=10)
- public Date getEventDate() {
-     return this.eventDate;
- }
- 
- public void setEventDate(Date eventDate) {
-     this.eventDate = eventDate;
- }
-
  
  @Column(name="Event_Desc")
  public String getEventDesc() {
@@ -346,5 +336,15 @@ public class Event  implements java.io.Serializable {
    public void setEventDate(Date eventDate) {
    	this.eventDate = eventDate;
    }
+   @Temporal(TemporalType.DATE)
+   @Column(name="Event_End_Date", length=10)
+public Date getEventEndDate() {
+	return eventEndDate;
+}
+
+public void setEventEndDate(Date eventEndDate) {
+	this.eventEndDate = eventEndDate;
+}
+   
 
 }
