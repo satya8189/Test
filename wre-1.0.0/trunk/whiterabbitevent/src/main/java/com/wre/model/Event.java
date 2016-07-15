@@ -57,17 +57,19 @@ public class Event  implements java.io.Serializable {
   private Set<ChatTopic> chatTopics = new HashSet<ChatTopic>(0);
   private Set<Message> messages = new HashSet<Message>(0);
   private Set<QuestionAnswer> questionAnswers = new HashSet<QuestionAnswer>(0);
+  private Set<Help> helps = new HashSet(0);
+  private Set<ParticipantQuries> participantQurieses = new HashSet(0);
 
  public Event() {
  }
 
- public Event(Client client, User user, String eventAddress, String eventAgenda, Date eventDate,Date eventEndDate, String eventDesc, String eventName, String eventTime, String status, Set<Agenda> agendas, Set<EventServices> eventServiceses, Set<Galary> galaries, Set<SocialMedia> socialMedias, Set<ContactDetails> contactDetailses, Set<Speaker> speakers, Set<SurveyQuestion> surveyQuestions, Set<SurveyQuestionAnswer> surveyQuestionAnswers, Set<Newsfeed> newsfeeds, Set<Sponcor> sponcors, Set<EventParticipant> eventParticipants, Set<ChatTopic> chatTopics, Set<Message> messages, Set<QuestionAnswer> questionAnswers) {
+ public Event(Client client, User user, String eventAddress, String eventAgenda, Date eventDate,Date eventEndDate, String eventDesc, String eventName, String eventTime, String status, Set<Agenda> agendas, Set<EventServices> eventServiceses, Set<Galary> galaries, Set<SocialMedia> socialMedias, Set<ContactDetails> contactDetailses, Set<Speaker> speakers, Set<SurveyQuestion> surveyQuestions, Set<SurveyQuestionAnswer> surveyQuestionAnswers, Set<Newsfeed> newsfeeds, Set<Sponcor> sponcors, Set<EventParticipant> eventParticipants, Set<ChatTopic> chatTopics, Set<Message> messages, Set<QuestionAnswer> questionAnswers,Set<Help> helps,Set<ParticipantQuries> participantQurieses) {
     this.client = client;
     this.user = user;
     this.eventAddress = eventAddress;
     this.eventAgenda = eventAgenda;
     this.eventDate = eventDate;
-    this.eventEndDate = eventEndDate;
+    this.eventEndDate=eventEndDate;
     this.eventDesc = eventDesc;
     this.eventName = eventName;
     this.eventTime = eventTime;
@@ -86,6 +88,8 @@ public class Event  implements java.io.Serializable {
     this.chatTopics = chatTopics;
     this.messages = messages;
     this.questionAnswers = questionAnswers;
+    this.helps=helps;
+    this.participantQurieses=participantQurieses;
  }
 
   @Id @GeneratedValue(strategy=IDENTITY)
@@ -143,13 +147,12 @@ public class Event  implements java.io.Serializable {
  @Temporal(TemporalType.DATE)
  @Column(name="Event_Date", length=10)
  public Date getEventDate() {
-	return eventDate;
-}
-
-public void setEventDate(Date eventDate) {
-	this.eventDate = eventDate;
-}
-
+     return this.eventDate;
+ }
+ 
+ public void setEventDate(Date eventDate) {
+     this.eventDate = eventDate;
+ }
 
  
  @Column(name="Event_Desc")
@@ -157,17 +160,7 @@ public void setEventDate(Date eventDate) {
      return this.eventDesc;
  }
  
- @Temporal(TemporalType.DATE)
- @Column(name="Event_End_Date", length=10)
-public Date getEventEndDate() {
-	return eventEndDate;
-}
-
-public void setEventEndDate(Date eventEndDate) {
-	this.eventEndDate = eventEndDate;
-}
-
-public void setEventDesc(String eventDesc) {
+ public void setEventDesc(String eventDesc) {
      this.eventDesc = eventDesc;
  }
 
@@ -326,5 +319,32 @@ public void setEventDesc(String eventDesc) {
  public void setQuestionAnswers(Set<QuestionAnswer> questionAnswers) {
      this.questionAnswers = questionAnswers;
  }
+ @OneToMany(fetch=FetchType.LAZY, mappedBy="event")
+ public Set<Help> getHelps() {
+     return this.helps;
+ }
+ 
+ public void setHelps(Set<Help> helps) {
+     this.helps = helps;
+ }
+
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="event")
+    public Set<ParticipantQuries> getParticipantQurieses() {
+        return this.participantQurieses;
+    }
+    
+    public void setParticipantQurieses(Set<ParticipantQuries> participantQurieses) {
+        this.participantQurieses = participantQurieses;
+    }
+    @Temporal(TemporalType.DATE)
+    @Column(name="Event_Date", length=10)
+    public Date getEventDate() {
+   	return eventDate;
+   }
+
+   public void setEventDate(Date eventDate) {
+   	this.eventDate = eventDate;
+   }
 
 }
