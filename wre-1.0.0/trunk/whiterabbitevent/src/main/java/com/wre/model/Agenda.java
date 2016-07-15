@@ -27,6 +27,7 @@ public class Agenda  implements java.io.Serializable {
 
      private Long agenId;
      private Event event;
+     private Speaker speaker;
      private String agenTitle;
      private String agenDesc;
      private String agenStartTime;
@@ -36,8 +37,9 @@ public class Agenda  implements java.io.Serializable {
     public Agenda() {
     }
 
-    public Agenda(Event event, String agenTitle, String agenDesc, String agenStartTime, String agenEndTime, String agenBy) {
+    public Agenda(Event event,  Speaker speake,String agenTitle, String agenDesc, String agenStartTime, String agenEndTime, String agenBy) {
        this.event = event;
+       this.speaker=speaker;
        this.agenTitle = agenTitle;
        this.agenDesc = agenDesc;
        this.agenStartTime = agenStartTime;
@@ -118,6 +120,16 @@ public class Agenda  implements java.io.Serializable {
     }
 
 
+
+@ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="Speaker_ID")
+    public Speaker getSpeaker() {
+        return this.speaker;
+    }
+    
+    public void setSpeaker(Speaker speaker) {
+        this.speaker = speaker;
+    }
 
 
 }

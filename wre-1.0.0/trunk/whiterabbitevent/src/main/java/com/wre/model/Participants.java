@@ -44,11 +44,13 @@ public class Participants  implements java.io.Serializable {
   private Set<ContactDetails> contactDetailses = new HashSet<ContactDetails>(0);
   private Set<QuestionAnswer> questionAnswers = new HashSet<QuestionAnswer>(0);
   private Set<Message> messages = new HashSet<Message>(0);
+  private Set<Help> helps = new HashSet(0);
+  private Set<ParticipantQuries> participantQurieses = new HashSet(0);
 
  public Participants() {
  }
 
- public Participants(String email, String firstName, String lastName, String otp, String phone, String status, String regId,String profilePic,String designation,String company, Set<Galary> galaries, Set<EventParticipant> eventParticipants, Set<SurveyQuestionAnswer> surveyQuestionAnswers, Set<ContactDetails> contactDetailses, Set<QuestionAnswer> questionAnswers, Set<Message> messages) {
+ public Participants(String email, String firstName, String lastName, String otp, String phone, String status, String regId,String profilePic,String designation,String company, Set<Galary> galaries, Set<EventParticipant> eventParticipants, Set<SurveyQuestionAnswer> surveyQuestionAnswers, Set<ContactDetails> contactDetailses, Set<QuestionAnswer> questionAnswers, Set<Message> messages,Set<Help> helps,Set<ParticipantQuries> participantQurieses ) {
     this.email = email;
     this.firstName = firstName;
     this.lastName = lastName;
@@ -65,6 +67,8 @@ public class Participants  implements java.io.Serializable {
     this.contactDetailses = contactDetailses;
     this.questionAnswers = questionAnswers;
     this.messages = messages;
+    this.helps=helps;
+    this.participantQurieses=participantQurieses;
  }
 
   @Id @GeneratedValue(strategy=IDENTITY)
@@ -228,5 +232,23 @@ public void setCompany(String company) {
 	this.company = company;
 }
  
+@OneToMany(fetch=FetchType.LAZY, mappedBy="participants")
+public Set<Help> getHelps() {
+    return this.helps;
+}
+
+public void setHelps(Set<Help> helps) {
+    this.helps = helps;
+}
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="participants")
+    public Set<ParticipantQuries> getParticipantQurieses() {
+        return this.participantQurieses;
+    }
+    
+    public void setParticipantQurieses(Set<ParticipantQuries> participantQurieses) {
+        this.participantQurieses = participantQurieses;
+    }
+
 
 }
