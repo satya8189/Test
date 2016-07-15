@@ -37,11 +37,15 @@ public class Speaker  implements java.io.Serializable {
   private String rating;
   private String description;
   private String fileName;
+  private Set<Agenda> agendas = new HashSet(0);
+  private Set<ParticipantQuries> participantQurieses = new HashSet(0);
+
+
 
  public Speaker() {
  }
 
- public Speaker(Event event, String speakerName, String location, String title, String rating, String description, String fileName) {
+ public Speaker(Event event, String speakerName, String location, String title, String rating, String description, String fileName,Set<Agenda> agendas,Set<ParticipantQuries> participantQurieses) {
     this.event = event;
     this.speakerName = speakerName;
     this.location = location;
@@ -49,6 +53,8 @@ public class Speaker  implements java.io.Serializable {
     this.rating = rating;
     this.description = description;
     this.fileName = fileName;
+    this.agendas=agendas;
+    this.participantQurieses=participantQurieses;
  }
 
   @Id @GeneratedValue(strategy=IDENTITY)
@@ -132,6 +138,24 @@ public class Speaker  implements java.io.Serializable {
  public void setFileName(String fileName) {
      this.fileName = fileName;
  }
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="speaker")
+    public Set<Agenda> getAgendas() {
+        return this.agendas;
+    }
+    
+    public void setAgendas(Set<Agenda> agendas) {
+        this.agendas = agendas;
+    }
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="speaker")
+    public Set<ParticipantQuries> getParticipantQurieses() {
+        return this.participantQurieses;
+    }
+    
+    public void setParticipantQurieses(Set<ParticipantQuries> participantQurieses) {
+        this.participantQurieses = participantQurieses;
+    }
 
 }
 
